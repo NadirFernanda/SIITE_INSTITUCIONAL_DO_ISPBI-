@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	/* Cores institucionais ISPBié */
+	.bg-ispbie-orange { background-color: #F05A28; }
+	.text-ispbie-orange { color: #F05A28; }
+	.bg-ispbie-blue { background-color: #2C4A5E; }
+	.text-ispbie-blue { color: #2C4A5E; }
+	.bg-ispbie-teal { background-color: #0E8F81; }
+	.text-ispbie-teal { color: #0E8F81; }
+	.bg-ispbie-green { background-color: #39C28A; }
+	.text-ispbie-green { color: #39C28A; }
+	.bg-ispbie-gold { background-color: #FFD700; }
+	.text-ispbie-gold { color: #FFD700; }
+	.bg-ispbie-footer { background-color: #1a1a1a; }
+	.text-ispbie-footer { color: #1a1a1a; }
+
+	/* Botão institucional padrão */
+	.btn-ispbie {
+		@apply text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors duration-200;
+		background-color: #F05A28;
+	}
+	.btn-ispbie:hover {
+		background-color: #2C4A5E;
+	}
+}

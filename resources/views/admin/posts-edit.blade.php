@@ -1,0 +1,26 @@
+@extends('layouts.admin')
+
+@section('content')
+<h1>Editar Post</h1>
+<form action="/admin/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data" style="max-width: 500px;">
+    @csrf
+    @method('PUT')
+    <div style="margin-bottom: 16px;">
+        <label for="titulo" style="display:block; font-weight:bold;">Título</label>
+        <input type="text" name="titulo" id="titulo" class="form-control" required style="width:100%;padding:8px;" value="{{ $post->titulo }}">
+    </div>
+    <div style="margin-bottom: 16px;">
+        <label for="imagem" style="display:block; font-weight:bold;">Imagem de Destaque</label>
+        @if($post->imagem)
+            <img src="{{ asset('storage/' . $post->imagem) }}" alt="Imagem" style="max-width:120px; max-height:80px; display:block; margin-bottom:8px;">
+        @endif
+        <input type="file" name="imagem" id="imagem" class="form-control" accept="image/*" style="width:100%;padding:8px;">
+    </div>
+    <div style="margin-bottom: 16px;">
+        <label for="conteudo" style="display:block; font-weight:bold;">Conteúdo</label>
+        <textarea name="conteudo" id="conteudo" class="form-control" rows="5" style="width:100%;padding:8px;">{{ $post->conteudo }}</textarea>
+    </div>
+    <button type="submit" style="background:#343a40;color:#fff;padding:10px 20px;border:none;border-radius:4px;font-weight:bold;">Salvar</button>
+    <a href="/admin/posts" style="margin-left:10px;">Cancelar</a>
+</form>
+@endsection

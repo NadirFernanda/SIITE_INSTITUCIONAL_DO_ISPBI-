@@ -1,0 +1,478 @@
+﻿@extends('layouts.site')
+
+
+@section('hero')
+    @include('partials.hero', [
+        'title' => 'Institucional',
+        'subtitle' => 'Conheça o Instituto Superior Politécnico do Bié'
+    ])
+@endsection
+
+@section('content')
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <nav class="text-sm opacity-75 mb-8">
+        <a href="/" class="hover:underline">Início</a> \ Institucional
+      </nav>
+
+  <!-- História -->
+  <section class="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-[#2563eb] mb-4">Nossa Trajetória</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          Uma história de mais de uma década dedicada ao desenvolvimento do ensino superior na província do Bié
+        </p>
+      </div>
+
+      <div class="relative">
+        <!-- Linha do tempo vertical -->
+        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-[#2563eb] via-[#2563eb] to-[#2563eb]"></div>
+
+        <div class="space-y-12">
+          
+          <!-- 2007 -->
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div class="md:text-right">
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                <div class="inline-block bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white px-4 py-2 rounded-full font-bold mb-4">2007</div>
+                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Comissões Instaladoras</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  O Governo da província do Bié cria as comissões instaladoras para instalação do Ensino Superior, 
+                  dispensando as instalações da Escola Média de Agronomia coordenada pela República Checa na Rua Padre Fidalgo. 
+                  Beneficiada com equipamento de laboratório de ensino de enfermagem.
+                </p>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="w-12 h-12 bg-[#2563eb] rounded-full border-4 border-white shadow-lg mx-auto"></div>
+            </div>
+          </div>
+
+          <!-- 2008 -->
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div class="hidden md:block">
+              <div class="w-12 h-12 bg-[#3B82F6] rounded-full border-4 border-white shadow-lg mx-auto"></div>
+            </div>
+            <div>
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                <div class="inline-block bg-gradient-to-r from-[#3B82F6] to-[#2563eb] text-white px-4 py-2 rounded-full font-bold mb-4">2008</div>
+                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Edifício da UNTA</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Cedido ao Ensino Superior o edifício da UNTA (Confederação Sindical) localizado na Avenida Joaquim Kapango. 
+                  Pertencia à coordenação da extensão do ISCED-Huambo, ministrando os cursos de 
+                  <strong>Matemática</strong> e <strong>Psicologia</strong>, gerida pelo orçamento da Escola Superior de Ciência e Tecnologia.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2009 -->
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div class="md:text-right">
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                <div class="inline-block bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white px-4 py-2 rounded-full font-bold mb-4">2009</div>
+                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Escola Superior Politécnica do Bié</h3>
+                <p class="text-gray-700 leading-relaxed mb-3">
+                  Criada por <strong>Decreto Presidencial</strong>, a Escola Superior Politécnica do Bié, adstrita à 
+                  <strong>Universidade José Eduardo dos Santos (UJES)</strong>, enquadrada na 5ª Região Académica 
+                  (Huambo, Bié e Moxico) ao abrigo do <strong>Decreto 7/09 de 12 de Maio</strong>.
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-3">
+                  <strong>Direção empossada:</strong><br>
+                  • Director Geral: Gerson Palhares<br>
+                  • Director Adjunto (Assuntos Académicos): Enoque de Oliveira Chivala (in memoriam)<br>
+                  • Director Adjunto (Assuntos Científicos): Mário Carlos Fátima Francisco
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                  Chegada do primeiro contingente de <strong>6 professores cubanos</strong> para ministrar aulas no 
+                  <strong>curso de Enfermagem</strong>. Início das atividades letivas em <strong>18 de Maio</strong> com 
+                  matrícula de <strong>80 estudantes</strong>.
+                </p>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="w-12 h-12 bg-[#2563eb] rounded-full border-4 border-white shadow-lg mx-auto"></div>
+            </div>
+          </div>
+
+          <!-- 2010 -->
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div class="hidden md:block">
+              <div class="w-12 h-12 bg-[#3B82F6] rounded-full border-4 border-white shadow-lg mx-auto"></div>
+            </div>
+            <div>
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                <div class="inline-block bg-gradient-to-r from-[#3B82F6] to-[#3B82F6] text-white px-4 py-2 rounded-full font-bold mb-4">2010</div>
+                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Expansão das Instalações</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Governo da província dispensa edifício com características de rés-do-chão e primeiro piso, 
+                  onde funcionava a Escola Dr. António Agostinho Neto "Manguxi" (5ª e 6ª classe) e a Escola Média Comercial e Industrial. 
+                  Abertura do <strong>primeiro concurso público de docentes</strong> inseridos noutras unidades orgânicas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2011 -->
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div class="md:text-right">
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                <div class="inline-block bg-gradient-to-r from-[#3B82F6] to-[#2563eb] text-white px-4 py-2 rounded-full font-bold mb-4">2011</div>
+                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Curso de Contabilidade e Administração</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Criado o <strong>curso de Contabilidade e Administração</strong> em memorando com a Faculdade de Economia da UJES, 
+                  contando com mais <strong>3 docentes cubanos</strong> no efetivo.
+                </p>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="w-12 h-12 bg-[#3B82F6] rounded-full border-4 border-white shadow-lg mx-auto"></div>
+            </div>
+          </div>
+
+          <!-- 2012 -->
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div class="hidden md:block">
+              <div class="w-12 h-12 bg-[#9C27B0] rounded-full border-4 border-white shadow-lg mx-auto"></div>
+            </div>
+            <div>
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                <div class="inline-block bg-gradient-to-r from-[#9C27B0] to-[#673AB7] text-white px-4 py-2 rounded-full font-bold mb-4">2012</div>
+                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Ensino Pós-Laboral</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Abertura da <strong>modalidade de ensino pós-laboral</strong> com docentes nacionais e expatriados. 
+                  Inicialmente no curso de <strong>Contabilidade e Administração</strong>, expandindo posteriormente para 
+                  <strong>Comunicação Social</strong> e <strong>Psicologia</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Engenharia Recursos Hídricos -->
+          <div class="relative grid md:grid-cols-2 gap-8 items-center">
+            <div class="md:text-right">
+              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                <div class="inline-block bg-gradient-to-r from-[#3B82F6] to-[#2563eb] text-white px-4 py-2 rounded-full font-bold mb-4">Convênio Internacional</div>
+                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Engenharia em Recursos Hídricos</h3>
+                <p class="text-gray-700 leading-relaxed">
+                  Criado o <strong>curso de Engenharia em Recursos Hídricos</strong> por iniciativa da Reitoria da UJES 
+                  em convênio com a <strong>Universidade Nacional do Litoral (UNL)</strong>, Santa Fé, República da Argentina. 
+                  Enviados <strong>6 docentes</strong> com perfil de Engenharia Agronómica para pós-graduação profissionalizante 
+                  de 2 anos.
+                </p>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="w-12 h-12 bg-[#3B82F6] rounded-full border-4 border-white shadow-lg mx-auto"></div>
+            </div>
+          </div>
+
+          <!-- 2020 - Criação do ISP-Bié -->
+          <div class="relative">
+            <div class="bg-gradient-to-r from-[#2563eb] via-[#3B82F6] to-[#2563eb] p-8 md:p-12 rounded-2xl text-white shadow-2xl">
+              <div class="text-center">
+                <div class="inline-block bg-white text-[#2563eb] px-6 py-3 rounded-full font-bold text-2xl mb-6">29 OUTUBRO 2020</div>
+                <h3 class="text-3xl md:text-4xl font-bold mb-4">Instituto Superior Politécnico do Bié</h3>
+                <p class="text-xl mb-6 opacity-95">
+                  Criado pelo <strong>Decreto Presidencial nº 285/20</strong>
+                </p>
+                <p class="text-lg max-w-3xl mx-auto opacity-90">
+                  O ISP-Bié surge como instituição autónoma de ensino superior, consolidando mais de uma década de 
+                  história de formação académica na província do Bié, com o compromisso de formar profissionais 
+                  altamente qualificados para o desenvolvimento sustentável da região e do país.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apresentação -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Sobre o ISP-Bié</h2>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            O <strong>Instituto Superior Politécnico do Bié</strong> foi criado pelo 
+            <strong>Decreto Presidencial nº 285/20 de 29 de Outubro de 2020</strong>, 
+            com o objetivo de formar profissionais altamente qualificados para atender 
+            as demandas de desenvolvimento da região e do país.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed mb-4">
+            Como instituição de ensino superior de excelência, o ISP-Bié dedica-se à 
+            formação integral de profissionais capacitados, promoção da pesquisa científica 
+            e extensão universitária que contribuem para o desenvolvimento sustentável da 
+            província do Bié e de Angola.
+          </p>
+          <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-6 rounded-lg text-white mt-6">
+            <p class="font-semibold mb-2">📋 NIF: 5000308765</p>
+            <p class="text-sm opacity-90">Instituição de Ensino Superior regulamentada pelo MESCTI</p>
+          </div>
+        </div>
+        <div>
+          <div class="bg-gradient-to-br from-[#2563eb] to-[#2563eb] p-8 rounded-2xl text-white shadow-xl">
+            <h3 class="text-2xl font-bold mb-6">Em Números</h3>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-white/20 pb-3">
+                <span class="text-lg">Cursos de Graduação</span>
+                <span class="text-3xl font-bold">6</span>
+              </div>
+              <div class="flex items-center justify-between border-b border-white/20 pb-3">
+                <span class="text-lg">Vagas por Curso</span>
+                <span class="text-3xl font-bold">40</span>
+              </div>
+              <div class="flex items-center justify-between border-b border-white/20 pb-3">
+                <span class="text-lg">Vice-Presidências</span>
+                <span class="text-3xl font-bold">5</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-lg">Ano de Fundação</span>
+                <span class="text-3xl font-bold">2020</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pilares Institucionais -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#2563eb] mb-12">Pilares Institucionais</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Missão -->
+        <a href="/missao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+          <div class="w-16 h-16 bg-gradient-to-br from-[#3B82F6] to-[#2563eb] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-[#2563eb] mb-3 group-hover:text-[#2563eb] transition-colors">Missão</h3>
+          <p class="text-gray-600">
+            Formar profissionais qualificados e promover o desenvolvimento científico, 
+            tecnológico e cultural da região do Bié e de Angola.
+          </p>
+        </a>
+
+        <!-- Visão -->
+        <a href="/visao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-[#2563eb] mb-3 group-hover:text-[#2563eb] transition-colors">Visão</h3>
+          <p class="text-gray-600">
+            Ser referência nacional em ensino superior politécnico, reconhecido pela 
+            excelência académica e contribuição para o desenvolvimento sustentável.
+          </p>
+        </a>
+
+        <!-- Valores -->
+        <a href="/valores" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-[#2563eb] mb-3 group-hover:text-[#2563eb] transition-colors">Valores</h3>
+          <p class="text-gray-600">
+            Excelência, ética, inovação, inclusão social, responsabilidade 
+            e compromisso com o desenvolvimento sustentável.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Áreas de Atuação -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#2563eb] mb-12">Áreas de Atuação</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <a href="/cursos" class="group">
+          <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all">
+            <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+            </svg>
+            <h3 class="text-xl font-bold mb-2">Ensino</h3>
+            <p class="text-sm opacity-90">6 cursos de graduação com 40 vagas cada</p>
+          </div>
+        </a>
+
+        <a href="/investigacao" class="group">
+          <div class="bg-gradient-to-br from-[#9C27B0] to-[#673AB7] p-6 rounded-lg text-white hover:shadow-xl transition-all">
+            <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z" clip-rule="evenodd"/>
+            </svg>
+            <h3 class="text-xl font-bold mb-2">Pesquisa</h3>
+            <p class="text-sm opacity-90">Investigação científica e inovação tecnológica</p>
+          </div>
+        </a>
+
+        <a href="/cultura" class="group">
+          <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all">
+            <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+              <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+            </svg>
+            <h3 class="text-xl font-bold mb-2">Cultura</h3>
+            <p class="text-sm opacity-90">Extensão e integração com a comunidade</p>
+          </div>
+        </a>
+
+        <a href="/inclusao" class="group">
+          <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all">
+            <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+            </svg>
+            <h3 class="text-xl font-bold mb-2">Inclusão</h3>
+            <p class="text-sm opacity-90">Diversidade, equidade e acessibilidade</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Governança -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#2563eb] mb-12">Estrutura Institucional</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        
+        <a href="/presidencia" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+          <div class="flex items-start">
+            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-[#2563eb] mb-2 group-hover:text-[#2563eb] transition-colors">Presidência</h3>
+              <p class="text-gray-600 mb-3">Órgão executivo máximo do Instituto</p>
+              <ul class="text-sm text-gray-500 space-y-1">
+                <li>• Presidente</li>
+                <li>• Gabinete do Presidente</li>
+                <li>• 5 Vice-Presidências</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+
+        <a href="/gestao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+          <div class="flex items-start">
+            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-lg flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-[#2563eb] mb-2 group-hover:text-[#2563eb] transition-colors">Gestão e Governança</h3>
+              <p class="text-gray-600 mb-3">Órgãos colegiados e executivos</p>
+              <ul class="text-sm text-gray-500 space-y-1">
+                <li>• Conselho Superior</li>
+                <li>• Conselhos Académicos</li>
+                <li>• Órgãos de Apoio</li>
+              </ul>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Localização -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-[#2563eb] mb-12">Nossa Localização</h2>
+      
+      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-8 md:p-12 text-white">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div class="flex items-start mb-6">
+              <svg class="w-8 h-8 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Endereço</h3>
+                <p class="text-lg opacity-90">
+                  Rua Padre Fidalgo entre Artur de Paiva e<br>
+                  Francisco de Leite Cardoso S/N<br>
+                  Cidade do Cuito, Bié<br>
+                  Angola
+                </p>
+              </div>
+            </div>
+            
+            <div class="flex items-start mb-6">
+              <svg class="w-8 h-8 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Telefone</h3>
+                <p class="text-lg opacity-90">(244) 922 408 061</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <svg class="w-8 h-8 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+              <div>
+                <h3 class="text-xl font-bold mb-2">Email</h3>
+                <p class="text-lg opacity-90">geral@ispbie.ao</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white/10 backdrop-blur rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-4">Horário de Atendimento</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center border-b border-white/20 pb-2">
+                <span>Segunda a Sexta</span>
+                <span class="font-semibold">8h00 - 17h00</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Sábado e Domingo</span>
+                <span class="font-semibold">Fechado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4">Faça Parte do ISP-Bié</h2>
+      <p class="text-xl mb-8 opacity-90">
+        Junte-se a nós na construção do futuro de Angola através da educação de excelência
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/candidaturas" class="bg-white text-[#2563eb] px-8 py-3 rounded-full font-semibold hover:bg-[#2563eb] hover:text-white transition-colors">
+          Candidaturas
+        </a>
+        <a href="/contactos" class="bg-[#2563eb] text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-[#2563eb] transition-colors">
+          Entre em Contacto
+        </a>
+      </div>
+    </div>
+  </section>
+
+@endsection
+
