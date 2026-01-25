@@ -34,9 +34,16 @@
             </svg>
             <h2 class="text-3xl font-bold text-gray-900 mb-4">Acesso ao Email Institucional</h2>
             <p class="text-gray-600 mb-8">Acesse seu email @ispbie.ao através do webmail</p>
-            <button class="bg-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors">
+            <a href="https://webmail.ispbie.ao" target="_blank" rel="noopener" class="bg-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors inline-block">
                 Acessar Webmail
-            </button>
+            </a>
+            <script>
+                // Atualiza o link para o padrão do cPanel
+                document.addEventListener('DOMContentLoaded', function() {
+                    var btn = document.querySelector('a.bg-teal-600');
+                    if(btn) btn.href = 'https://ispbie.ao/webmail';
+                });
+            </script>
         </div>
     </div>
 

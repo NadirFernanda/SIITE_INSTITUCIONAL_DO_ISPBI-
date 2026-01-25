@@ -94,5 +94,6 @@
 
 
 </body>
+    @include('partials.footer')
 </html>
 

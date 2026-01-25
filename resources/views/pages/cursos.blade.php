@@ -10,9 +10,11 @@
 
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-      <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Cursos de Graduação
-      </nav>
+      <div class="flex">
+        <nav class="text-sm opacity-75 mb-8 text-left">
+          <a href="/" class="hover:underline">Início</a> \ Cursos de Graduação
+        </nav>
+      </div>
 
   <!-- Conteúdo Principal -->
   <section class="py-16 bg-gray-50">
@@ -22,16 +24,16 @@
         <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Estrutura Acadêmica do ISPBIÉ</h2>
         <div class="grid md:grid-cols-3 gap-6">
           <a href="#engenharias" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform">
-            <h3 class="text-xl font-bold mb-2 text-black">Engenharias e Inovação Tecnológica</h3>
-            <p class="opacity-90 text-sm text-black">Formação de profissionais inovadores para atuar em áreas tecnológicas, engenharia, infraestrutura e transformação digital.</p>
+            <h3 class="text-xl font-bold mb-2 text-white">Engenharias e Inovação Tecnológica</h3>
+            <p class="text-sm text-white">Formação de profissionais inovadores para atuar em áreas tecnológicas, engenharia, infraestrutura e transformação digital.</p>
           </a>
           <a href="#sociais" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform">
-            <h3 class="text-xl font-bold mb-2 text-black">Ciências Sociais, Humanas e Económicas</h3>
-            <p class="opacity-90 text-sm text-black">Gestão, comunicação, ciências humanas e sociais, preparando líderes e agentes de transformação social.</p>
+            <h3 class="text-xl font-bold mb-2 text-white">Ciências Sociais, Humanas e Económicas</h3>
+            <p class="text-sm text-white">Gestão, comunicação, ciências humanas e sociais, preparando líderes e agentes de transformação social.</p>
           </a>
           <a href="#saude" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform">
-            <h3 class="text-xl font-bold mb-2 text-black">Ciências da Saúde</h3>
-            <p class="opacity-90 text-sm text-black">Promoção, prevenção e recuperação da saúde, com ênfase no cuidado humanizado e na gestão em saúde.</p>
+            <h3 class="text-xl font-bold mb-2 text-white">Ciências da Saúde</h3>
+            <p class="text-sm text-white">Promoção, prevenção e recuperação da saúde, com ênfase no cuidado humanizado e na gestão em saúde.</p>
           </a>
         </div>
       </div>
@@ -58,9 +60,9 @@
       <div class="space-y-8 mb-12">
         
         <!-- Contabilidade e Administração -->
-        <div id="contabilidade" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-          <div class="bg-gradient-to-r from-yellow-500 to-yellow-400 p-6">
-            <div class="flex items-center justify-between">
+        <div id="contabilidade" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+          <div class="bg-gradient-to-r from-yellow-500 to-yellow-400 p-6 w-full max-w-full overflow-x-hidden">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
                 <div class="bg-white p-3 rounded-full">
                   <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
@@ -69,14 +71,14 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-bold text-white">Contabilidade e Administração</h3>
+                  <h3 class="text-lg md:text-2xl font-bold text-white">Contabilidade e Administração</h3>
                   <p class="text-white opacity-90">Licenciatura</p>
                 </div>
               </div>
-              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold">4 Anos</span>
+              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">4 Anos</span>
             </div>
           </div>
-          <div class="p-6">
+          <div class="bg-white p-6 w-full max-w-full overflow-x-hidden">
             <p class="text-gray-700 mb-4 leading-relaxed">
               Forma profissionais capacitados para atuar nas áreas de contabilidade, gestão empresarial, auditoria, 
               finanças e administração, desenvolvendo competências para a tomada de decisões estratégicas em organizações 
@@ -117,9 +119,9 @@
         </div>
 
         <!-- Engenharia Informática -->
-        <div id="informatica" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-          <div class="p-6" style="background: linear-gradient(to right, #1d4ed8, #3b82f6) !important;">
-            <div class="flex items-center justify-between">
+        <div id="informatica" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+          <div class="p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #1d4ed8, #3b82f6) !important;">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
                 <div class="bg-white p-3 rounded-full">
                   <svg class="w-8 h-8 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
@@ -127,14 +129,14 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">Engenharia Informática</h3>
+                  <h3 class="text-lg md:text-2xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">Engenharia Informática</h3>
                   <p class="text-white opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">Licenciatura</p>
                 </div>
               </div>
-              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold">5 Anos</span>
+              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">5 Anos</span>
             </div>
           </div>
-          <div class="p-6">
+          <div class="bg-white p-6 w-full max-w-full overflow-x-hidden">
             <p class="text-gray-700 mb-4 leading-relaxed">
               Prepara profissionais para desenvolver soluções tecnológicas inovadoras, sistemas de informação, aplicações 
               de software, redes de computadores e infraestrutura de TI, atendendo Í s demandas da transformação digital.
@@ -179,9 +181,9 @@
           <!-- Ciências Sociais, Humanas e Económicas -->
           <h2 id="sociais" class="text-2xl font-bold text-[#2563eb] mt-12 mb-4">Ciências Sociais, Humanas e Económicas</h2>
           <div class="space-y-8 mb-12">
-        <div id="hidricos" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-          <div class="p-6" style="background: linear-gradient(to right, #38bdf8, #60a5fa) !important;">
-            <div class="flex items-center justify-between">
+        <div id="hidricos" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+          <div class="p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #38bdf8, #60a5fa) !important;">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
                 <div class="bg-white p-3 rounded-full">
                   <svg class="w-8 h-8 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
@@ -189,14 +191,14 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-bold text-white">Engenharia em Recursos Hídricos</h3>
+                  <h3 class="text-lg md:text-2xl font-bold text-white">Engenharia em Recursos Hídricos</h3>
                   <p class="text-white opacity-90">Licenciatura</p>
                 </div>
               </div>
-              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold">6 Anos</span>
+              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">6 Anos</span>
             </div>
           </div>
-          <div class="p-6">
+          <div class="bg-white p-6 w-full max-w-full overflow-x-hidden">
             <p class="text-gray-700 mb-4 leading-relaxed">
               Forma engenheiros especializados na gestão sustentável dos recursos hídricos, desenvolvimento de 
               infraestruturas hidráulicas, tratamento de água e saneamento básico, essenciais para o desenvolvimento regional.
@@ -236,9 +238,9 @@
         </div>
 
         <!-- Comunicação Social -->
-        <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+        <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
           <div class="bg-gradient-to-r from-orange-500 to-orange-400 p-6">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
                 <div class="bg-white p-3 rounded-full">
                   <svg class="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
@@ -246,14 +248,14 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-bold text-white">Comunicação Social</h3>
+                  <h3 class="text-lg md:text-2xl font-bold text-white">Comunicação Social</h3>
                   <p class="text-white opacity-90">Licenciatura</p>
                 </div>
               </div>
-              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold">4 Anos</span>
+              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">4 Anos</span>
             </div>
           </div>
-          <div class="p-6">
+          <div class="p-6 w-full max-w-full overflow-x-hidden">
             <p class="text-gray-700 mb-4 leading-relaxed">
               Capacita profissionais para atuar nas áreas de jornalismo, relações públicas, publicidade, comunicação 
               organizacional e produção de conteúdo para meios de comunicação tradicionais e digitais.
@@ -300,9 +302,10 @@
                   <div class="space-y-8 mb-12">
                 <!-- Enfermagem Geral -->
                   </div>
-                <div id="enfermagem" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                  <div class="p-6" style="background: linear-gradient(to right, #22c55e, #4ade80) !important;">
+                <div id="enfermagem" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+                  <div class="bg-gradient-to-r from-green-700 to-green-500 p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #22c55e, #4ade80) !important;">
                     <div class="flex items-center justify-between">
+                      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                       <div class="flex items-center space-x-4">
                         <div class="bg-white p-3 rounded-full">
                           <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
@@ -310,14 +313,14 @@
                           </svg>
                         </div>
                         <div>
-                          <h3 class="text-2xl font-bold text-white">Enfermagem Geral</h3>
+                          <h3 class="text-lg md:text-2xl font-bold text-white">Enfermagem Geral</h3>
                           <p class="text-white opacity-90">Licenciatura</p>
                         </div>
                       </div>
-                      <span class="bg-white text-[#22c55e] px-4 py-2 rounded-full font-semibold">5 Anos</span>
+                        <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">5 Anos</span>
                     </div>
                   </div>
-                  <div class="p-6">
+                  <div class="bg-white p-6 w-full max-w-full overflow-x-hidden">
                     <p class="text-gray-700 mb-4 leading-relaxed">
                       Forma profissionais aptos a atuar na promoção, prevenção, recuperação e reabilitação da saúde, em hospitais, clínicas e comunidades, com foco no cuidado humanizado e na gestão em saúde.
                     </p>
@@ -354,9 +357,10 @@
                     </div>
                   </div>
                 </div>
-        <div id="psicologia" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+              <div class="mb-8"></div>
+              <div id="psicologia" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
           <div class="bg-gradient-to-r from-red-600 to-red-400 p-6">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
                 <div class="bg-white p-3 rounded-full">
                   <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
@@ -364,14 +368,14 @@
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-bold text-white">Psicologia Clínica</h3>
+                  <h3 class="text-lg md:text-2xl font-bold text-white">Psicologia Clínica</h3>
                   <p class="text-white opacity-90">Licenciatura</p>
                 </div>
               </div>
-              <span class="bg-white text-[#3B82F6] px-4 py-2 rounded-full font-semibold">5 Anos</span>
+              <span class="bg-white text-[#3B82F6] px-4 py-2 rounded-full font-semibold w-max md:ml-4">5 Anos</span>
             </div>
           </div>
-          <div class="p-6">
+          <div class="p-6 w-full max-w-full overflow-x-hidden">
             <p class="text-gray-700 mb-4 leading-relaxed">
               Forma psicólogos aptos a atuar na promoção da saúde mental, diagnóstico, intervenção terapêutica e 
               acompanhamento psicológico em diversos contextos, contribuindo para o bem-estar individual e coletivo.
@@ -433,6 +437,17 @@
         </div>
       </div>
 
+
+      <!-- Cursos Acreditados -->
+      <section class="mt-16 bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-[#2563eb] mb-4">Cursos Acreditados</h2>
+        <p class="text-lg text-gray-700 mb-4">
+          Nossos cursos de graduação são reconhecidos e acreditados pelos órgãos reguladores nacionais, garantindo excelência acadêmica, infraestrutura de qualidade e corpo docente altamente qualificado. A acreditação atesta que nossos programas atendem aos mais elevados padrões de ensino superior, promovendo a formação de profissionais preparados para os desafios do mercado de trabalho e para contribuir com a sociedade.
+        </p>
+        <p class="text-lg text-gray-700">
+          A cada ciclo avaliativo, os cursos passam por rigorosos processos de avaliação, assegurando atualização constante das matrizes curriculares, metodologias inovadoras de ensino e compromisso com a ética e a responsabilidade social. Estudar em um curso acreditado é a certeza de receber uma formação sólida, reconhecida nacional e internacionalmente.
+        </p>
+      </section>
     </div>
   </section>
 

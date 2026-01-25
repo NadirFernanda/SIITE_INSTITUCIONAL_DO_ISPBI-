@@ -1,63 +1,7 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-  <!-- Hero Carousel -->
-
-  <div class="relative" x-data="{ currentSlide: 0 }" x-init="setInterval(() => { currentSlide = (currentSlide + 1) % 3 }, 5000)">
-    <div class="relative h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden">
-      <!-- Slide 1 -->
-      <div x-show="currentSlide === 0" x-cloak class="absolute inset-0 transition-opacity duration-700">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/images/campus-hero.jpg');"></div>
-        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div class="relative h-full flex items-center justify-center">
-          <div class="text-center text-white px-4 max-w-4xl">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4">EXCELÊNCIA EM EDUCAÇÃO</h2>
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-6">Formando profissionais para o futuro</p>
-            <a href="/cursos" class="inline-block bg-[#2563eb] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#d94b1f] transition-colors">
-              CONHEÇA NOSSOS CURSOS
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Slide 2 -->
-      <div x-show="currentSlide === 1" x-cloak class="absolute inset-0 transition-opacity duration-700">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/images/investigacao.jpg');"></div>
-        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div class="relative h-full flex items-center justify-center">
-          <div class="text-center text-white px-4 max-w-4xl">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4">INOVAÇÃO E PESQUISA</h2>
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-6">Conhecimento que transforma vidas</p>
-            <a href="/pesquisa" class="inline-block bg-[#2563eb] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#d94b1f] transition-colors">
-              SAIBA MAIS
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Slide 3 -->
-      <div x-show="currentSlide === 2" x-cloak class="absolute inset-0 transition-opacity duration-700">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/images/extensao.jpg');"></div>
-        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div class="relative h-full flex items-center justify-center">
-          <div class="text-center text-white px-4 max-w-4xl">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4">INCLUSÃO E DIVERSIDADE</h2>
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-4 sm:mb-6">Construindo um futuro para todos</p>
-            <a href="/inclusao" class="inline-block bg-[#2563eb] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#d94b1f] transition-colors">
-              INCLUA-SE
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Setas de navegação -->
-      <button @click="currentSlide = (currentSlide + 2) % 3" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow focus:outline-none z-20">
-        <svg class="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button @click="currentSlide = (currentSlide + 1) % 3" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow focus:outline-none z-20">
-        <svg class="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+  @include('components.carrossel')
       <!-- Indicadores do carrossel -->
       <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
         <template x-for="i in 3" :key="i">
@@ -73,21 +17,21 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex flex-wrap items-end justify-between mb-8">
         <div class="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0">
-          <div class="flex flex-col items-center">
-            <a href="/missao" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
-            <a href="/missao" title="Ver Missão">
+          <div class="flex flex-col items-center justify-center w-full">
+            <a href="/missao" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors text-center w-full">Missão</a>
+            <a href="/missao" title="Ver Missão" class="flex justify-center w-full">
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#0E8F81"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
           <div class="flex flex-col items-center">
-            <a href="/visao" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors">Visão</a>
-            <a href="/visao" title="Ver Visão">
+            <a href="/visao" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors text-center w-full">Visão</a>
+            <a href="/visao" title="Ver Visão" class="flex justify-center w-full">
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#2C4A5E"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
           <div class="flex flex-col items-center">
-            <a href="/valores" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors">Valores</a>
-            <a href="/valores" title="Ver Valores">
+            <a href="/valores" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors text-center w-full">Valores</a>
+            <a href="/valores" title="Ver Valores" class="flex justify-center w-full">
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#F05A28"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
@@ -135,7 +79,7 @@
       <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
         <div class="flex items-center gap-8 text-white text-3xl justify-center w-full md:w-auto">
           <span class="font-bold text-lg md:text-xl">SIGA-NOS</span>
-          <a href="https://facebook.com" target="_blank" class="hover:opacity-80 transition-opacity" aria-label="Facebook">
+          <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" target="_blank" class="hover:opacity-80 transition-opacity" aria-label="Facebook">
             <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
           <a href="https://twitter.com" target="_blank" class="hover:opacity-80 transition-opacity" aria-label="Twitter">
@@ -167,81 +111,43 @@
   </section>
 
 
-  <!-- Seção Institucional -->
-  <section class="py-16 bg-gray-100">
+
+
+
+  <!-- Seção Notícias Institucionais -->
+  <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-4xl font-bold text-gray-900 mb-12">Institucional</h2>
-      
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-4xl font-bold text-gray-900">Notícias Institucionais</h2>
+        <a href="/noticias" class="text-[#2563eb] text-lg font-semibold flex items-center gap-1 hover:underline">Ver todas <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      @php
+        $noticiasInstitucionais = \App\Models\Noticia::where('institucional', 1)->where('publicada', 1)->orderByDesc('data')->take(4)->get();
+      @endphp
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Card 1 -->
-        <a href="/imprensa#inauguracao" class="group">
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
-            <div class="h-48 bg-gradient-to-br from-[#3B82F6] to-[#2563eb] flex items-center justify-center overflow-hidden">
-              <img src="/images/campus-hero.jpg" alt="Campus ISP-Bié" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-500">
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-semibold text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-                ISP-Bié inaugura novo campus e reforça compromisso com educação de qualidade
-              </h3>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 2 -->
-        <a href="/imprensa#laboratorio" class="group">
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
-            <div class="h-48 bg-gradient-to-br from-[#9C27B0] to-[#673AB7] flex items-center justify-center overflow-hidden">
-              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-700 to-gray-900">
-                <svg class="w-24 h-24 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
+        @forelse($noticiasInstitucionais as $noticia)
+          <a href="/noticias/{{ $noticia->id }}" class="group">
+            <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
+              <div class="h-48 flex items-center justify-center overflow-hidden bg-gray-200">
+                @if($noticia->imagem)
+                  <img src="{{ asset('storage/' . $noticia->imagem) }}" alt="{{ $noticia->titulo }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                @else
+                  <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4z" />
+                  </svg>
+                @endif
+              </div>
+              <div class="p-6">
+                <span class="block text-xs text-gray-500 mb-1">{{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}</span>
+                <h3 class="text-lg font-semibold text-[#2563eb] group-hover:text-[#2563eb] transition-colors mb-2">{{ $noticia->titulo }}</h3>
+                <p class="text-gray-700 text-sm mb-2">{{ Str::limit($noticia->texto, 80) }}</p>
+                <span class="text-[#2563eb] font-semibold text-sm group-hover:underline">Ver mais →</span>
               </div>
             </div>
-            <div class="p-6">
-              <h3 class="text-lg font-semibold text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-                Novo laboratório de Engenharia Informática equipado com tecnologia de ponta
-              </h3>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 3 -->
-        <a href="/institucional#memoria" class="group">
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
-            <div class="h-48 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center overflow-hidden">
-              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-500 to-gray-700">
-                <svg class="w-24 h-24 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                </svg>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-semibold text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-                ISP-Bié homenageia estudantes que contribuíram para o desenvolvimento de Angola
-              </h3>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 4 -->
-        <a href="/imprensa#graduacao" class="group">
-          <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
-            <div class="h-48 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] flex items-center justify-center overflow-hidden">
-              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-600 to-orange-700">
-                <svg class="w-24 h-24 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
-                </svg>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-semibold text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-                Cerimónia de graduação celebra conquistas académicas de 2025
-              </h3>
-            </div>
-          </div>
-        </a>
-
+          </a>
+        @empty
+          <div class="col-span-4 text-center text-gray-500 py-12">Nenhuma notícia institucional encontrada.</div>
+        @endforelse
       </div>
     </div>
   </section>
@@ -253,6 +159,7 @@
       
       <!-- Primeira linha -->
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 mb-8">
+        <!-- ...existing code... -->
         
         <a href="/portal" class="flex flex-col items-center group">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
@@ -263,14 +170,6 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Portal ISP-Bié</span>
         </a>
 
-        <a href="/transparencia" class="flex flex-col items-center group">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-            </svg>
-          </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Transparência</span>
-        </a>
 
         <a href="/ouvidoria" class="flex flex-col items-center group">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
@@ -325,11 +224,6 @@
           </div>
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Repositório Académico</span>
         </a>
-      </div>
-
-      <!-- Segunda linha -->
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
-        
         <a href="/busca-pessoas" class="flex flex-col items-center group">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -339,11 +233,14 @@
           </div>
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Busca Pessoas</span>
         </a>
+      </div>
 
+      <!-- Segunda linha -->
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
         <a href="/busca-biblioteca" class="flex flex-col items-center group">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/>
+              <path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5 0.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/>
             </svg>
           </div>
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Busca Biblioteca</span>
@@ -421,7 +318,7 @@
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between mb-8">
-        <h2 class="text-3xl font-bold text-gray-900">Êltimas Notícias</h2>
+        <h2 class="text-3xl font-bold text-gray-900">Últimas Notícias</h2>
         <a href="/imprensa" class="text-[#2563eb] hover:text-[#2563eb] font-semibold flex items-center gap-2">
           Ver todas
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -431,78 +328,51 @@
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {{-- Mockados (mantidos para apresentação) --}}
-        @include('partials.noticias-mockadas')
-          </div>
-        </article>
+        @php
+          $noticiasNaoInstitucionais = \App\Models\Noticia::where('institucional', 0)->where('publicada', 1)->orderByDesc('data')->take(3)->get();
+        @endphp
+        @forelse($noticiasNaoInstitucionais as $noticia)
+          <article class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col">
+            @if($noticia->imagem)
+              <div class="h-48 flex items-center justify-center bg-cover bg-center" style="background-image:url('{{ asset('storage/' . $noticia->imagem) }}')"></div>
+            @else
+              <div class="h-48 flex items-center justify-center bg-gray-200">
+                <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4z" />
+                </svg>
+              </div>
+            @endif
+            <div class="p-6 flex-1 flex flex-col">
+              <h2 class="text-xl font-bold mb-2">{{ $noticia->titulo }}</h2>
+              <p class="text-gray-600 mb-4">{{ Str::limit($noticia->texto, 100) }}</p>
+              <a href="/noticias/{{ $noticia->id }}" class="text-blue-600 hover:underline font-semibold mt-auto">Ler mais →</a>
+            </div>
+          </article>
+        @empty
+          <div class="col-span-3 text-center text-gray-500 py-12">Nenhuma notícia encontrada.</div>
+        @endforelse
       </div>
     </div>
   </section>
 
-  <!-- Seção ISP-Bié em números -->
+  <!-- Seção ISP-Bié em números (dinâmica) -->
+  @php
+    $estatisticas = \App\Models\Estatistica::orderBy('ordem')->get();
+  @endphp
   <section class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
       <p class="text-lg mb-12 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
-      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <!-- Estatística 1 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">2.450</div>
-          <div class="text-lg mb-4">Alunos matriculados<br>(graduação, pós-graduação e mestrado)</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
-        <!-- Estatística 2 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">5</div>
-          <div class="text-lg mb-4">Cursos de Graduação</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
-        <!-- Estatística 3 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">180</div>
-          <div class="text-lg mb-4">Docentes</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
-        <!-- Estatística 4 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">450</div>
-          <div class="text-lg mb-4">Participantes em atividades de cultura e extensão</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
-        <!-- Estatística 5 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">85</div>
-          <div class="text-lg mb-4">Técnicos-administrativos</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
-        <!-- Estatística 6 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">120</div>
-          <div class="text-lg mb-4">Trabalhos de pesquisa publicados</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
-        <!-- Estatística 7 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">8.500+</div>
-          <div class="text-lg mb-4">Livros na Biblioteca</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
-        <!-- Estatística 8 -->
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-3">45</div>
-          <div class="text-lg mb-4">Prémios e outras distinções recebidas<br>por docentes e servidores</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
-        </div>
-
+        @forelse($estatisticas as $estatistica)
+          <div class="text-center">
+            <div class="text-5xl font-bold mb-3">{{ $estatistica->valor }}</div>
+            <div class="text-lg mb-4">{!! nl2br(e($estatistica->descricao)) !!}</div>
+            <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
+          </div>
+        @empty
+          <div class="col-span-3 text-center text-white py-12">Nenhuma estatística cadastrada.</div>
+        @endforelse
       </div>
     </div>
   </section>
@@ -516,107 +386,29 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Testemunho 1 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              AM
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Ana Mateus</h4>
-              <p class="text-sm text-gray-600">Estudante de Enfermagem</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"O ISP-Bié proporcionou-me uma formação sólida e prática. Os laboratórios modernos e os docentes qualificados fazem toda a diferença na minha preparação profissional."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
-
-        <!-- Testemunho 2 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              JC
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">João Carlos</h4>
-              <p class="text-sm text-gray-600">Estudante de Engenharia Civil</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"Amei estar no ISP-Bié! A instituição investe muito na qualidade do ensino e oferece oportunidades únicas de estágio e pesquisa que nos preparam para o mercado de trabalho."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
-
-        <!-- Testemunho 3 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              MF
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Dr. Manuel Francisco</h4>
-              <p class="text-sm text-gray-600">Docente de Engenharia</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"Í‰ gratificante fazer parte de uma instituição que valoriza a inovação e a investigação. O ISP-Bié está a formar profissionais de excelência para Angola."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
-
-        <!-- Testemunho 4 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              PS
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Paula Silva</h4>
-              <p class="text-sm text-gray-600">Estudante de Psicologia</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"O ambiente académico do ISP-Bié é acolhedor e desafiante. Aprendi não só a teoria, mas também a aplicar conhecimentos em situações reais através dos estágios."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
-
-        <!-- Testemunho 5 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#3B82F6] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              CA
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Carlos Alberto</h4>
-              <p class="text-sm text-gray-600">Estudante de Contabilidade</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"O ISP-Bié oferece uma formação completa em gestão e contabilidade. Os professores são dedicados e sempre disponíveis para ajudar no nosso desenvolvimento académico."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
-
-        <!-- Testemunho 6 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              LN
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Profa. Luísa Neto</h4>
-              <p class="text-sm text-gray-600">Docente de Comunicação Social</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"Trabalhar no ISP-Bié é uma experiência enriquecedora. A instituição promove a liberdade académica e incentiva a investigação aplicada ao desenvolvimento do Bié."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
+        @php
+          $testemunhos = \App\Models\Alumnus::where('testemunho', true)->orderByDesc('created_at')->get();
+        @endphp
+        @if($testemunhos->isEmpty())
+            <div class="col-span-3 text-center text-gray-500 py-12">Nenhum testemunho publicado ainda.</div>
+        @else
+            @foreach($testemunhos as $alumnus)
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                      {{ strtoupper(mb_substr($alumnus->nome, 0, 1)) }}{{ mb_substr($alumnus->nome, strpos($alumnus->nome, ' ')+1, 1) }}
+                    </div>
+                    <div class="ml-4">
+                      <h4 class="font-bold text-gray-900">{{ $alumnus->nome }}</h4>
+                      <p class="text-sm text-gray-600">{{ $alumnus->curso }}{{ $alumnus->cargo ? ' • ' . $alumnus->cargo : '' }}</p>
+                    </div>
+                  </div>
+                  @if($alumnus->satisfacao)
+                    <p class="text-gray-700 italic mb-4">"{{ $alumnus->satisfacao }}"</p>
+                  @endif
+                </div>
+            @endforeach
+        @endif
       </div>
     </div>
   </section>

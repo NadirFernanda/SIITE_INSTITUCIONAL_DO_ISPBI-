@@ -152,7 +152,7 @@
                     <div class="text-sm text-gray-500 mb-4">
                         <span class="font-semibold">Vagas:</span> 40
                     </div>
-                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes â†’</a>
+                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -161,7 +161,7 @@
                     <div class="text-sm text-gray-500 mb-4">
                         <span class="font-semibold">Vagas:</span> 40
                     </div>
-                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes â†’</a>
+                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -170,7 +170,7 @@
                     <div class="text-sm text-gray-500 mb-4">
                         <span class="font-semibold">Vagas:</span> 40
                     </div>
-                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes â†’</a>
+                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -179,7 +179,7 @@
                     <div class="text-sm text-gray-500 mb-4">
                         <span class="font-semibold">Vagas:</span> 40
                     </div>
-                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes â†’</a>
+                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -188,7 +188,7 @@
                     <div class="text-sm text-gray-500 mb-4">
                         <span class="font-semibold">Vagas:</span> 40
                     </div>
-                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes â†’</a>
+                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -197,7 +197,7 @@
                     <div class="text-sm text-gray-500 mb-4">
                         <span class="font-semibold">Vagas:</span> 40
                     </div>
-                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes â†’</a>
+                    <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
             </div>
         </section>
@@ -207,18 +207,127 @@
             <h2 class="text-3xl font-bold mb-4">Pronto para Candidatar-se?</h2>
             <p class="text-xl text-orange-100 mb-8">Inicie sua candidatura online agora mesmo</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <button class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors">
+                <button id="openFormBtn" class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors">
                     Candidatar-se Online
                 </button>
                 <a href="/contactos" class="bg-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors">
-                    Fale Connosco
+                    Fale Conosco
                 </a>
+            </div>
+
+            <!-- Modal Formulário de Candidatura -->
+            <div id="formModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+                <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-8 relative max-h-[90vh] overflow-auto">
+                    <button id="closeFormBtn" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+                    <h2 class="text-2xl font-bold mb-6 text-[#2563eb]">Formulário de Candidatura</h2>
+                    <form class="space-y-4 text-left">
+                                            <div>
+                                                <label class="block font-semibold mb-1">Gênero</label>
+                                                <select class="w-full border rounded px-3 py-2" required>
+                                                    <option value="">Selecione...</option>
+                                                    <option>Masculino</option>
+                                                    <option>Feminino</option>
+                                                    <option>Outro</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block font-semibold mb-1">Nacionalidade</label>
+                                                <input type="text" class="w-full border rounded px-3 py-2" required>
+                                            </div>
+                                            <div>
+                                                <label class="block font-semibold mb-1">Nome do Encarregado</label>
+                                                <input type="text" class="w-full border rounded px-3 py-2">
+                                            </div>
+                                            <div>
+                                                <label class="block font-semibold mb-1">Telefone do Encarregado</label>
+                                                <input type="tel" class="w-full border rounded px-3 py-2">
+                                            </div>
+                                            <div>
+                                                <label class="block font-semibold mb-1">Escola de Origem</label>
+                                                <input type="text" class="w-full border rounded px-3 py-2">
+                                            </div>
+                                            <div>
+                                                <label class="block font-semibold mb-1">Ano de Conclusão</label>
+                                                <input type="number" min="1900" max="2100" class="w-full border rounded px-3 py-2">
+                                            </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Nome Completo</label>
+                            <input type="text" class="w-full border rounded px-3 py-2" required>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Email</label>
+                            <input type="email" class="w-full border rounded px-3 py-2" required>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Telefone</label>
+                            <input type="tel" class="w-full border rounded px-3 py-2" required>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Curso Pretendido</label>
+                            <select class="w-full border rounded px-3 py-2" required>
+                                <option value="">Selecione...</option>
+                                <option>Contabilidade e Administração</option>
+                                <option>Engenharia Informática</option>
+                                <option>Eng. Recursos Hídricos</option>
+                                <option>Comunicação Social</option>
+                                <option>Psicologia Clínica</option>
+                                <option>Engenharia Civil</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Bilhete de Identidade</label>
+                            <input type="text" class="w-full border rounded px-3 py-2" required>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Data de Nascimento</label>
+                            <input type="date" class="w-full border rounded px-3 py-2" required>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Endereço</label>
+                            <input type="text" class="w-full border rounded px-3 py-2" required>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Anexar Documentos (PDF, JPG, PNG)</label>
+                            <input type="file" class="w-full" multiple accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+                        <div class="text-right">
+                                                <div>
+                                                    <label class="block font-semibold mb-1">Observações</label>
+                                                    <textarea class="w-full border rounded px-3 py-2" rows="2"></textarea>
+                                                </div>
+                            <button type="submit" class="bg-[#2563eb] text-white px-6 py-2 rounded font-semibold hover:bg-[#174ea6]">Enviar Candidatura</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             </div>
         </section>
     </div>
 
 
 </body>
+    <script>
+        // Modal open/close logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const openBtn = document.getElementById('openFormBtn');
+            const closeBtn = document.getElementById('closeFormBtn');
+            const modal = document.getElementById('formModal');
+            if (openBtn && closeBtn && modal) {
+                openBtn.addEventListener('click', function() {
+                    modal.classList.remove('hidden');
+                });
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.add('hidden');
+                });
+                // Fechar ao clicar fora do modal
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
     @include('partials.footer')
 </html>
 

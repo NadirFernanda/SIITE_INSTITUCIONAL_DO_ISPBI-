@@ -18,12 +18,16 @@ class CarrosselController extends Controller
         $request->validate([
             'imagem' => 'required|image|max:4096',
             'titulo' => 'nullable',
+            'subtitulo' => 'nullable',
+            'texto_botao' => 'nullable',
             'link' => 'nullable',
             'ordem' => 'nullable|integer',
         ]);
         $path = $request->file('imagem')->store('carrossel', 'public');
         Carrossel::create([
             'titulo' => $request->titulo,
+            'subtitulo' => $request->subtitulo,
+            'texto_botao' => $request->texto_botao,
             'imagem' => $path,
             'link' => $request->link,
             'ordem' => $request->ordem ?? 0,
@@ -37,5 +41,13 @@ class CarrosselController extends Controller
         \Storage::disk('public')->delete($item->imagem);
         $item->delete();
         return redirect('/admin/carrossel')->with('success', 'Imagem removida do carrossel!');
+    }
+
+    public function togglePublicar($id)
+    {
+        $carrossel = Carrossel::findOrFail($id);
+        $carrossel->publicado = !$carrossel->publicado;
+        $carrossel->save();
+        return redirect()->back()->with('success', 'Status de publicação alterado!');
     }
 }

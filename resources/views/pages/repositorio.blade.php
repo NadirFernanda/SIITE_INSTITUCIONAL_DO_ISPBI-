@@ -39,37 +39,37 @@
                 <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Contabilidade e Administração</h3>
                     <p class="text-gray-600 mb-2">45 trabalhos</p>
-                    <span class="text-teal-600 font-medium">Ver todos â†’</span>
+                        <span class="text-teal-600 font-medium">Ver todos →</span>
                 </a>
 
                 <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Engenharia Informática</h3>
                     <p class="text-gray-600 mb-2">38 trabalhos</p>
-                    <span class="text-teal-600 font-medium">Ver todos â†’</span>
+                        <span class="text-teal-600 font-medium">Ver todos →</span>
                 </a>
 
                 <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Eng. Recursos Hídricos</h3>
                     <p class="text-gray-600 mb-2">32 trabalhos</p>
-                    <span class="text-teal-600 font-medium">Ver todos â†’</span>
+                        <span class="text-teal-600 font-medium">Ver todos →</span>
                 </a>
 
                 <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Comunicação Social</h3>
                     <p class="text-gray-600 mb-2">28 trabalhos</p>
-                    <span class="text-teal-600 font-medium">Ver todos â†’</span>
+                        <span class="text-teal-600 font-medium">Ver todos →</span>
                 </a>
 
                 <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Psicologia Clínica</h3>
                     <p class="text-gray-600 mb-2">25 trabalhos</p>
-                    <span class="text-teal-600 font-medium">Ver todos â†’</span>
+                        <span class="text-teal-600 font-medium">Ver todos →</span>
                 </a>
 
                 <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Engenharia Civil</h3>
                     <p class="text-gray-600 mb-2">30 trabalhos</p>
-                    <span class="text-teal-600 font-medium">Ver todos â†’</span>
+                        <span class="text-teal-600 font-medium">Ver todos →</span>
                 </a>
             </div>
         </section>
@@ -85,5 +85,6 @@
 
 
 </body>
+    @include('partials.footer')
 </html>
 

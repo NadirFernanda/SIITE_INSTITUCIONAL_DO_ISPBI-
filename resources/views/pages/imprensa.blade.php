@@ -3,15 +3,15 @@
 
 @section('hero')
     @include('partials.hero', [
-        'title' => 'Sala de Imprensa',
-        'subtitle' => 'Notícias, comunicados e contacto com a imprensa'
+        'title' => 'Notícias',
+        'subtitle' => 'Notícias, comunicados e contacto com as notícias'
     ])
 @endsection
 
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Imprensa
+        <a href="/" class="hover:underline">Início</a> \ Notícias
       </nav>
 
   <!-- Notícias Recentes -->
@@ -30,7 +30,7 @@
             <p class="text-gray-600 mb-4">
               Processo de candidatura está aberto com 240 vagas distribuídas pelos 6 cursos de graduação.
             </p>
-            <a href="#" class="text-[#2563eb] font-semibold hover:underline">Ler mais â†’</a>
+            <a href="#" class="text-[#2563eb] font-semibold hover:underline">Ler mais →</a>
           </div>
         </article>
 
@@ -41,7 +41,7 @@
             <div class="text-sm text-gray-500 mb-2">10 de Dezembro de 2025</div>
             <h3 class="text-xl font-bold text-[#2563eb] mb-3">Convênio com Universidade Argentina</h3>
             <p class="text-gray-600 mb-4">
-              ISP-Bié assina protocolo de cooperação para intercâmbio académico e científico.
+              ISP-Bié assina protocolo de cooperação para intercâmbio acadêmico e científico.
             </p>
             <a href="#" class="text-[#2563eb] font-semibold hover:underline">Ler mais â†’</a>
           </div>
@@ -79,10 +79,10 @@
                 <span class="text-sm text-gray-500">12 de Dezembro de 2025</span>
               </div>
               <h3 class="text-xl font-bold text-[#2563eb] mb-2">
-                Calendário Académico 2026 - Retificação de Datas
+                Calendário Acadêmico 2026 - Retificação de Datas
               </h3>
               <p class="text-gray-600">
-                A Presidência do ISP-Bié informa sobre alteração nas datas de início do ano lectivo 2026.
+                A Presidência do ISP-Bié informa sobre alteração nas datas de início do ano letivo 2026.
               </p>
             </div>
             <a href="#" class="ml-4 bg-[#2563eb] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1a2f3d] transition-colors whitespace-nowrap">
@@ -99,10 +99,10 @@
                 <span class="text-sm text-gray-500">8 de Dezembro de 2025</span>
               </div>
               <h3 class="text-xl font-bold text-[#2563eb] mb-2">
-                Período de Matrícula - 2Âª Fase
+                Período de Matrícula - 2ª Fase
               </h3>
               <p class="text-gray-600">
-                Abertura da segunda fase de matrículas para o ano lectivo 2026. Consulte os prazos e procedimentos.
+                Abertura da segunda fase de matrículas para o ano letivo 2026. Consulte os prazos e procedimentos.
               </p>
             </div>
             <a href="#" class="ml-4 bg-[#2563eb] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1a2f3d] transition-colors whitespace-nowrap">
@@ -115,7 +115,7 @@
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <div class="flex items-center mb-2">
-                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold mr-3">INFORMAÇÍO</span>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold mr-3">INFORMAÇÃO</span>
                 <span class="text-sm text-gray-500">1 de Dezembro de 2025</span>
               </div>
               <h3 class="text-xl font-bold text-[#2563eb] mb-2">
@@ -135,10 +135,10 @@
     </div>
   </section>
 
-  <!-- Kit de Imprensa -->
+  <!-- Kit de Notícias -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Kit de Imprensa</h2>
+      <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Kit de Notícias</h2>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         
@@ -179,17 +179,17 @@
     </div>
   </section>
 
-  <!-- Contacto com a Imprensa -->
+  <!-- Contacto com as Notícias -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-12 text-white">
         <div class="grid md:grid-cols-2 gap-12">
           
           <div>
-            <h2 class="text-3xl font-bold mb-6">Contacto para a Imprensa</h2>
+            <h2 class="text-3xl font-bold mb-6">Contacto para as Notícias</h2>
             <p class="text-lg opacity-90 mb-8">
               Para entrevistas, esclarecimentos ou solicitação de informações, contacte o nosso 
-              Gabinete de Comunicação e Imprensa.
+              Gabinete de Comunicação e Notícias.
             </p>
             
             <div class="space-y-4">
@@ -200,7 +200,7 @@
                 </svg>
                 <div>
                   <p class="font-semibold">Email</p>
-                  <a href="mailto:imprensa@ispbie.ao" class="opacity-90 hover:opacity-100">imprensa@ispbie.ao</a>
+                  <a href="mailto:noticias@ispbie.ao" class="opacity-90 hover:opacity-100">noticias@ispbie.ao</a>
                 </div>
               </div>
 
@@ -233,7 +233,7 @@
                 <input type="text" placeholder="Nome do Jornalista" required class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/60 text-white focus:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50">
               </div>
               <div>
-                <input type="text" placeholder="Í“rgão de Comunicação" required class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/60 text-white focus:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50">
+                <input type="text" placeholder="Órgão de Comunicação" required class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/60 text-white focus:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50">
               </div>
               <div>
                 <input type="email" placeholder="Email" required class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/60 text-white focus:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50">

@@ -7,16 +7,16 @@
 ![Vite](https://img.shields.io/badge/Vite-4.5.14-646cff?style=flat&logo=vite)
 ![PHP](https://img.shields.io/badge/PHP-8.4.13-777bb4?style=flat&logo=php)
 
-Website institucional oficial do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ, desenvolvido com Laravel e Tailwind CSS, inspirado nas melhores práticas de design e arquitetura de informação de universidades de referência mundial.
+Website institucional oficial do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ, desenvolvido com Laravel e Tailwind CSS, inspirado nas melhores práticas de design e arquitetura da informação de universidades de referência mundial.
 
 ## 🎯 Sobre o Projeto
 
-Este projeto é o website oficial do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ, criado para oferecer uma experiência moderna, acessível e informativa para estudantes, docentes, funcionários e público geral. O site apresenta informação completa sobre a instituição, cursos, serviços e oportunidades.
+Este projeto é o website oficial do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ, criado para oferecer uma experiência moderna, acessível e informativa para estudantes, docentes, funcionários e público em geral. O site apresenta informações completas sobre a instituição, cursos, serviços e oportunidades.
 
 **Instituição:** INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ  
-**Criação:** Decreto Presidencial nº 285/20 de 29 de Outubro de 2020  
+**Criação:** Decreto Presidencial nº 285/20 de 29 de outubro de 2020  
 **NIF:** 5000308765  
-**Localização:** Rua Padre Fidalgo entre Artur de Paiva e Francisco de Leite Cardoso S/N, Cuito/Bié - Angola
+**Localização:** Rua Padre Fidalgo, entre Artur de Paiva e Francisco de Leite Cardoso S/N, Cuito/Bié - Angola
 
 ## 🎨 Inspirações de Design
 
@@ -31,7 +31,7 @@ O design do website foi desenvolvido com base nas melhores práticas de universi
 
 ### Outras Referências
 - Organização de conteúdo institucional inspirada em universidades politécnicas europeias
-- Arquitectura de informação baseada em padrões de usabilidade web moderna
+- Arquitetura da informação baseada em padrões de usabilidade web moderna
 - Design responsivo seguindo padrões mobile-first
 
 ## 🏗️ Arquitetura e Tecnologias
@@ -175,7 +175,7 @@ npm run build
 
 6. **Inicie o servidor**
 ```bash
-php artisan serve
+Inclusão e Pertencimento
 ```
 
 O site estará disponível em `http://127.0.0.1:8000`

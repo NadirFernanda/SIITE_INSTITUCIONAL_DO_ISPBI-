@@ -397,9 +397,6 @@
           <a href="/contactos" class="bg-white text-[#3B82F6] px-8 py-3 rounded-full font-semibold hover:bg-[#3B82F6] hover:text-[#2563eb] transition-colors">
             Entre em Contacto
           </a>
-          <a href="/apoio-estudantil" class="bg-[#3B82F6] text-[#2563eb] px-8 py-3 rounded-full font-semibold hover:bg-white transition-colors">
-            Apoio Estudantil
-          </a>
         </div>
       </div>
 

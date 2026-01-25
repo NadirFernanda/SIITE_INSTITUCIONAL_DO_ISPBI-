@@ -1,35 +1,41 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}" class="flex flex-col gap-6 mt-4 p-6 bg-white rounded-xl shadow-lg">
-        @csrf
-
-        <!-- Usuário -->
-        <input id="email" name="email" type="email" required autofocus autocomplete="username"
-            placeholder="Usuário" value="{{ old('email') }}"
-            class="w-full px-4 py-2 border-2 border-gray-300 rounded-xl text-base placeholder-gray-400 shadow-sm focus:outline-none focus:border-ispbie-orange focus:ring-2 focus:ring-ispbie-orange transition-all duration-200"
-            oninvalid="this.setCustomValidity('Por favor, preencha o campo Usuário.')"
-            oninput="this.setCustomValidity('')"
-        />
-        <x-input-error :messages="$errors->get('email')" class="mt-1" />
-
-        <!-- Senha -->
-        <input id="password" name="password" type="password" required autocomplete="current-password"
-            placeholder="Senha"
-            class="w-full px-4 py-2 border-2 border-gray-300 rounded-xl text-base placeholder-gray-400 shadow-sm focus:outline-none focus:border-ispbie-orange focus:ring-2 focus:ring-ispbie-orange transition-all duration-200"
-            oninvalid="this.setCustomValidity('Por favor, preencha o campo Senha.')"
-            oninput="this.setCustomValidity('')"
-        />
-        <x-input-error :messages="$errors->get('password')" class="mt-1" />
-
-        <div class="flex flex-col sm:flex-row items-center justify-between mt-4 gap-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-ispbie-blue hover:text-ispbie-orange rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ispbie-orange" href="{{ route('password.request') }}">
-                    Esqueceu a sua palavra-passe?
-                </a>
-            @endif
-            <button type="submit" class="btn-ispbie w-full sm:w-auto text-lg py-3 px-8 rounded-xl shadow-md">Entrar</button>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f4f8fb;">
+    <div style="width:100%;max-width:410px;margin:auto;">
+        <div style="text-align:center;margin-bottom:18px;">
+            <img src="/images/logo.png" alt="Logo" style="max-width:110px;margin-bottom:10px;">
+            <h2 style="font-size:2rem;font-weight:700;color:#1565c0;margin-bottom:2px;">Painel administrativo do site</h2>
         </div>
-    </form>
-</x-guest-layout>
+        <form method="POST" action="{{ route('login') }}" style="background:#fff;padding:32px 28px 24px 28px;border-radius:18px;box-shadow:0 4px 24px rgba(21,101,192,0.10);display:flex;flex-direction:column;gap:18px;">
+            @csrf
+            <!-- Session Status -->
+            <x-auth-session-status class="mb-2" :status="session('status')" />
+            @if(session('errors'))
+                <div style="color:#e3342f;background:#fff0f0;padding:8px 14px;border-radius:8px;font-size:1rem;text-align:center;">{{ $errors->first() }}</div>
+            @endif
+            <input id="email" name="email" type="email" required autofocus autocomplete="username"
+                placeholder="E-mail"
+                value="{{ old('email') }}"
+                style="width:100%;padding:13px 16px;border:2px solid #dbeafe;border-radius:10px;font-size:1.08rem;background:#f8fafc;transition:border .2s;outline:none;"
+                onfocus="this.style.borderColor='#1565c0'"
+                onblur="this.style.borderColor='#dbeafe'"
+                oninvalid="this.setCustomValidity('Por favor, preencha o campo E-mail.')"
+                oninput="this.setCustomValidity('')"
+            />
+            <x-input-error :messages="$errors->get('email')" class="mt-1" />
+            <input id="password" name="password" type="password" required autocomplete="current-password"
+                placeholder="Senha"
+                style="width:100%;padding:13px 16px;border:2px solid #dbeafe;border-radius:10px;font-size:1.08rem;background:#f8fafc;transition:border .2s;outline:none;"
+                onfocus="this.style.borderColor='#1565c0'"
+                onblur="this.style.borderColor='#dbeafe'"
+                oninvalid="this.setCustomValidity('Por favor, preencha o campo Senha.')"
+                oninput="this.setCustomValidity('')"
+            />
+            <x-input-error :messages="$errors->get('password')" class="mt-1" />
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" style="font-size:0.98rem;color:#1565c0;text-decoration:underline;">Esqueceu a sua palavra-passe?</a>
+                @endif
+                <button type="submit" style="background:#1565c0;color:#fff;padding:12px 32px;border:none;border-radius:10px;font-weight:700;font-size:1.1rem;box-shadow:0 2px 8px rgba(21,101,192,0.10);transition:background 0.2s;cursor:pointer;">Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>

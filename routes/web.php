@@ -1,9 +1,44 @@
-Route::view('/inovacao', 'pages.inovacao')->name('inovacao');
-
 <?php
 
 
-use Illuminate\Support\Facades\Route;
+
+// Rotas do painel administrativo protegidas por autenticação
+Route::middleware('auth')->group(function () {
+    Route::resource('/admin/estatisticas', App\Http\Controllers\Admin\EstatisticaController::class)->names('admin.estatisticas');
+            Route::get('/admin/noticias/{id}/edit', [App\Http\Controllers\AdminNoticiaController::class, 'edit'])->name('admin.noticias.edit');
+            Route::put('/admin/noticias/{id}', [App\Http\Controllers\AdminNoticiaController::class, 'update'])->name('admin.noticias.update');
+            Route::delete('/admin/noticias/{id}', [App\Http\Controllers\AdminNoticiaController::class, 'destroy'])->name('admin.noticias.destroy');
+        Route::post('/admin/noticias/{id}/toggle-publicar', [App\Http\Controllers\AdminNoticiaController::class, 'togglePublicar'])->name('admin.noticias.toggle-publicar');
+        Route::get('/admin/noticias', [App\Http\Controllers\AdminNoticiaController::class, 'index'])->name('admin.noticias');
+        Route::get('/admin/noticias/create', [App\Http\Controllers\AdminNoticiaController::class, 'create'])->name('admin.noticias.create');
+        Route::post('/admin/noticias', [App\Http\Controllers\AdminNoticiaController::class, 'store'])->name('admin.noticias.store');
+    Route::view('/admin', 'admin.dashboard')->name('admin');
+    Route::get('/admin/paginas', function () {
+        // Exemplo: buscar páginas do banco se existir o model Pagina
+        // $paginas = App\Models\Pagina::all();
+        $paginas = [];
+        return view('admin.paginas', compact('paginas'));
+    })->name('admin.paginas');
+    Route::get('/admin/midia', function () {
+        $midias = [];
+        return view('admin.midia', compact('midias'));
+    })->name('admin.midia');
+    Route::resource('/admin/carrossel', App\Http\Controllers\Admin\CarrosselController::class)->names('admin.carrossel');
+    Route::post('/admin/carrossel/{id}/toggle-publicar', [App\Http\Controllers\Admin\CarrosselController::class, 'togglePublicar'])->name('admin.carrossel.toggle-publicar');
+    Route::get('/admin/alumni', [App\Http\Controllers\AdminAlumniController::class, 'index'])->name('admin.alumni');
+    Route::post('/admin/alumni/{id}/toggle-publicar', [App\Http\Controllers\AdminAlumniController::class, 'togglePublicar'])->name('admin.alumni.toggle-publicar');
+    Route::post('/admin/alumni/{id}/toggle-testemunho', [App\Http\Controllers\AdminAlumniController::class, 'toggleTestemunho'])->name('admin.alumni.toggle-testemunho');
+    Route::get('/admin/usuarios', function () {
+        $usuarios = [];
+        return view('admin.usuarios', compact('usuarios'));
+    })->name('admin.usuarios');
+    Route::get('/admin/configuracoes', function () {
+        $configuracoes = [];
+        return view('admin.configuracoes', compact('configuracoes'));
+    })->name('admin.configuracoes');
+});
+
+
 
 
 Route::get('/', function () {
@@ -14,13 +49,12 @@ Route::get('/', function () {
 Route::view('/sobre', 'pages.sobre')->name('sobre');
 Route::view('/cursos', 'pages.cursos')->name('cursos');
 Route::view('/pos-graduacao', 'pages.pos-graduacao')->name('pos-graduacao');
-Route::view('/investigacao', 'pages.pesquisa-pessoas')->name('investigacao');
+Route::view('/investigacao', 'pages.investigacao')->name('investigacao');
 Route::view('/vida-academica', 'pages.vida')->name('vida');
 Route::view('/noticias', 'pages.noticias')->name('noticias');
 Route::view('/contactos', 'pages.contactos')->name('contactos');
 
 Route::view('/valores', 'pages.valores')->name('valores');
-Route::view('/transparencia', 'pages.transparencia')->name('transparencia');
 Route::view('/visao', 'pages.visao')->name('visao');
 Route::view('/trabalhe-conosco', 'pages.trabalhe-conosco')->name('trabalhe-conosco');
 Route::view('/sistemas', 'pages.sistemas')->name('sistemas');
@@ -32,9 +66,9 @@ Route::view('/missao', 'pages.missao')->name('missao');
 Route::view('/mestrado', 'pages.mestrado')->name('mestrado');
 Route::view('/linguas', 'pages.linguas')->name('linguas');
 Route::view('/jornadas', 'pages.jornadas')->name('jornadas');
-Route::view('/institucional', 'pages.institucional')->name('institucional');
+Route::get('/institucional', [App\Http\Controllers\InstitucionalController::class, 'index'])->name('institucional');
 Route::view('/inclusao', 'pages.inclusao')->name('inclusao');
-Route::view('/imprensa', 'pages.imprensa')->name('imprensa');
+Route::view('/noticias', 'pages.noticias')->name('noticias');
 Route::view('/guia-estudante', 'pages.guia-estudante')->name('guia-estudante');
 Route::view('/gestao', 'pages.gestao')->name('gestao');
 Route::view('/eventos', 'pages.eventos')->name('eventos');
@@ -44,7 +78,11 @@ Route::view('/cultura', 'pages.cultura')->name('cultura');
 Route::view('/calendario-academico', 'pages.calendario-academico')->name('calendario-academico');
 
 Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
-Route::view('/alumni', 'pages.alumni')->name('alumni');
+Route::get('/alumni', function () {
+    $alumni = App\Models\Alumnus::where('publicado', true)->orderByDesc('created_at')->get();
+    return view('pages.alumni', compact('alumni'));
+})->name('alumni');
+Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store');
 
 // Webmail
 Route::view('/webmail', 'pages.webmail')->name('webmail');
@@ -55,5 +93,11 @@ Route::view('/ouvidoria', 'pages.ouvidoria')->name('ouvidoria');
 Route::view('/revista', 'pages.revista')->name('revista');
 Route::view('/biblioteca', 'pages.biblioteca')->name('biblioteca');
 Route::view('/repositorio', 'pages.repositorio')->name('repositorio');
+
 Route::view('/busca-pessoas', 'pages.pesquisa-pessoas')->name('busca-pessoas');
 Route::view('/busca-biblioteca', 'pages.busca-biblioteca')->name('busca-biblioteca');
+// Rota para exibir notícia individual
+Route::get('/noticias/{id}', [App\Http\Controllers\NoticiaController::class, 'show']);
+Route::view('/servicos', 'pages.servicos')->name('servicos');
+
+require __DIR__.'/auth.php';

@@ -40,7 +40,7 @@
       
       <!-- Índice Rápido -->
       <div class="bg-white rounded-lg shadow-md p-6 mb-12">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Índice</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Índice</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <a href="#matricula" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
             <span class="font-semibold">1. Matrícula e Inscrição</span>
@@ -84,7 +84,7 @@
               <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
               </svg>
-              <span>Certificado de Habilitações (12Âª Classe)</span>
+              <span>Certificado de Habilitações (12ª Classe)</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -103,8 +103,7 @@
           <h4 class="font-bold text-lg text-gray-900 mb-3">Comparticipações 2025/2026</h4>
           <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-4">
             <p class="text-sm text-blue-800">
-              <strong>Nota:</strong> O ISP-Bié, sendo uma instituição pública, não cobra propinas. 
-              Os estudantes pagam apenas uma comparticipação mensal de acordo com o período.
+              <strong>Nota:</strong> A frequência no ISP-Bié implica a comparticipação financeira dos estudantes por via do pagamento de propinas e emolumentos.
             </p>
           </div>
           <div class="bg-gray-50 p-4 rounded-lg">
@@ -134,7 +133,7 @@
           <div class="border-l-4 border-[#2563eb] pl-4">
             <h4 class="font-bold text-gray-900 mb-2">Portal do Estudante</h4>
             <p class="text-gray-600 mb-2">Acesse notas, horários, documentos e serviços online.</p>
-            <a href="/portal" class="text-[#2563eb] hover:underline font-semibold">portal.ispbie.ao â†’</a>
+            <a href="https://portal.ispbie.ao" class="text-[#2563eb] hover:underline font-semibold" target="_blank" rel="noopener">portal.ispbie.ao &rarr;</a>
           </div>
           <div class="border-l-4 border-[#3B82F6] pl-4">
             <h4 class="font-bold text-gray-900 mb-2">Emissão de Documentos</h4>
@@ -167,11 +166,11 @@
             <h4 class="font-bold text-lg text-gray-900 mb-3">Métodos de Avaliação</h4>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="bg-purple-50 p-4 rounded-lg">
-                <h5 class="font-bold text-purple-900 mb-2">1Âª Parcelar</h5>
+                <h5 class="font-bold text-purple-900 mb-2">1ª Parcial</h5>
                 <p class="text-sm text-gray-700">Avaliação no meio do semestre</p>
               </div>
               <div class="bg-indigo-50 p-4 rounded-lg">
-                <h5 class="font-bold text-indigo-900 mb-2">2Âª Parcelar</h5>
+                <h5 class="font-bold text-indigo-900 mb-2">2ª Parcial</h5>
                 <p class="text-sm text-gray-700">Avaliação antes do exame final</p>
               </div>
               <div class="bg-blue-50 p-4 rounded-lg">
@@ -274,8 +273,8 @@
         </p>
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
           <p class="font-semibold text-gray-900 mb-2">Centro de Gestão de Estágios</p>
-          <p class="text-gray-700 mb-2">Contacte o CGE para orientação sobre vagas e procedimentos.</p>
-          <a href="/estagios" class="text-[#3B82F6] hover:underline font-semibold">Mais informações â†’</a>
+          <p class="text-gray-700 mb-2">Contate o CGE para orientação sobre vagas e procedimentos.</p>
+          <a href="/estagios" class="text-[#3B82F6] hover:underline font-semibold">Mais informações →</a>
         </div>
       </div>
 
@@ -307,7 +306,7 @@
                 <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
-                <span class="text-gray-700">Participação em actividades culturais e desportivas</span>
+                <span class="text-gray-700">Participação em atividades culturais e desportivas</span>
               </li>
               <li class="flex items-start">
                 <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">

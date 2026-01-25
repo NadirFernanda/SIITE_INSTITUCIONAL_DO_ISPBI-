@@ -50,7 +50,7 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Sistema Acadêmico</h3>
                     <p class="text-gray-600 mb-4">Gestão de matrículas, notas e documentos</p>
-                    <a href="#" class="text-orange-600 hover:text-orange-700 font-medium">Acessar â†’</a>
+                    <a href="#" class="text-orange-600 hover:text-orange-700 font-medium">Acessar →</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -60,8 +60,8 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Portal do Estudante</h3>
-                    <p class="text-gray-600 mb-4">Írea exclusiva para estudantes</p>
-                    <a href="#" class="text-orange-600 hover:text-orange-700 font-medium">Acessar â†’</a>
+                    <p class="text-gray-600 mb-4">Área exclusiva para estudantes</p>
+                    <a href="#" class="text-orange-600 hover:text-orange-700 font-medium">Acessar →</a>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -71,8 +71,8 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Portal do Docente</h3>
-                    <p class="text-gray-600 mb-4">Írea exclusiva para professores</p>
-                    <a href="#" class="text-orange-600 hover:text-orange-700 font-medium">Acessar â†’</a>
+                    <p class="text-gray-600 mb-4">Área exclusiva para professores</p>
+                    <a href="#" class="text-orange-600 hover:text-orange-700 font-medium">Acessar →</a>
                 </div>
             </div>
         </section>
@@ -142,5 +142,6 @@
 
 
 </body>
+    @include('partials.footer')
 </html>
 

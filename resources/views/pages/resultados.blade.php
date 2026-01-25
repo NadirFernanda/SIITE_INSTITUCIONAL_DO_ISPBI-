@@ -45,17 +45,18 @@
           Faça login com as suas credenciais do Portal do Estudante para consultar os resultados.
         </p>
 
+
         <form class="space-y-6">
-          <!-- Número de Estudante -->
+          <!-- Email -->
           <div>
-            <label for="numero" class="block text-sm font-semibold text-gray-700 mb-2">
-              Número de Estudante
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+              Email
             </label>
             <input 
-              type="text" 
-              id="numero" 
-              name="numero" 
-              placeholder="Ex: 20250001"
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="Digite o seu email"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
               required
             >
@@ -76,41 +77,6 @@
             >
           </div>
 
-          <!-- Ano Lectivo -->
-          <div>
-            <label for="ano" class="block text-sm font-semibold text-gray-700 mb-2">
-              Ano Lectivo
-            </label>
-            <select 
-              id="ano" 
-              name="ano" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
-              required
-            >
-              <option value="">Selecione o ano lectivo</option>
-              <option value="2025-2026">2025/2026</option>
-              <option value="2024-2025">2024/2025</option>
-              <option value="2023-2024">2023/2024</option>
-            </select>
-          </div>
-
-          <!-- Semestre -->
-          <div>
-            <label for="semestre" class="block text-sm font-semibold text-gray-700 mb-2">
-              Semestre
-            </label>
-            <select 
-              id="semestre" 
-              name="semestre" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
-              required
-            >
-              <option value="">Selecione o semestre</option>
-              <option value="1">1Âº Semestre</option>
-              <option value="2">2Âº Semestre</option>
-            </select>
-          </div>
-
           <!-- Botão -->
           <button 
             type="submit" 
@@ -119,7 +85,7 @@
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
             </svg>
-            Consultar Resultados
+            Entrar no Portal
           </button>
         </form>
 
@@ -143,8 +109,8 @@
             <thead>
               <tr class="bg-gray-100 border-b-2 border-gray-300">
                 <th class="text-left py-3 px-4 font-semibold text-gray-700">Disciplina</th>
-                <th class="text-center py-3 px-4 font-semibold text-gray-700">1Âª Parcelar</th>
-                <th class="text-center py-3 px-4 font-semibold text-gray-700">2Âª Parcelar</th>
+                <th class="text-center py-3 px-4 font-semibold text-gray-700">1ª Parcial</th>
+                <th class="text-center py-3 px-4 font-semibold text-gray-700">2ª Parcial</th>
                 <th class="text-center py-3 px-4 font-semibold text-gray-700">Exame</th>
                 <th class="text-center py-3 px-4 font-semibold text-gray-700">Estado</th>
               </tr>

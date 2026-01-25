@@ -52,7 +52,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Írea do Conhecimento</label>
+                        <label class="block text-gray-700 font-semibold mb-2">Área do Conhecimento</label>
                         <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option>Todas</option>
                             <option>Engenharia</option>
@@ -131,5 +131,6 @@
 
 
 </body>
+    @include('partials.footer')
 </html>
 

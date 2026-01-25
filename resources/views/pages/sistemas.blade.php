@@ -36,141 +36,111 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         <!-- Portal do Estudante -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all">
-          <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-6">
-            <div class="flex items-center justify-between text-white">
-              <div>
-                <h3 class="text-xl font-bold">Portal do Estudante</h3>
-                <p class="text-sm opacity-90 mt-1">Sistema Académico Online</p>
-              </div>
-              <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
-              </svg>
-            </div>
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200">
+          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
+            <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
+            </svg>
+            <h3 class="text-2xl font-bold text-white mb-1">Portal do Estudante</h3>
+            <p class="text-white text-sm opacity-90 mb-2">Sistema Académico Online</p>
           </div>
-          <div class="p-6">
+          <div class="flex-1 flex flex-col justify-between p-6">
             <ul class="space-y-3 text-gray-700 mb-6">
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Consulta de notas e frequências</span>
+              <li class="flex items-center gap-2">
+                   <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Consulta de notas e frequências
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Matrícula e inscrição em disciplinas</span>
+              <li class="flex items-center gap-2">
+                   <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Matrícula e inscrição em disciplinas
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Histórico académico</span>
+              <li class="flex items-center gap-2">
+                   <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Histórico académico
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Horários e calendário académico</span>
+              <li class="flex items-center gap-2">
+                 <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Horários e calendário académico
               </li>
             </ul>
-            <a href="#" class="block w-full text-center bg-[#3B82F6] text-white py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
-              Aceder ao Portal
-            </a>
+            <div class="mt-auto">
+              <a href="#" class="w-[220px] mx-auto block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors">
+                Aceder ao Portal
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Sistema de Biblioteca -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all">
-          <div class="bg-gradient-to-r from-[#9C27B0] to-[#673AB7] p-6">
-            <div class="flex items-center justify-between text-white">
-              <div>
-                <h3 class="text-xl font-bold">Biblioteca Digital</h3>
-                <p class="text-sm opacity-90 mt-1">Acervo Online</p>
-              </div>
-              <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
-              </svg>
-            </div>
+        <!-- Biblioteca Digital -->
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200">
+          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
+            <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+            </svg>
+            <h3 class="text-2xl font-bold text-white mb-1">Biblioteca Digital</h3>
+            <p class="text-white text-sm opacity-90 mb-2">Acervo Online</p>
           </div>
-          <div class="p-6">
+          <div class="flex-1 flex flex-col justify-between p-6">
             <ul class="space-y-3 text-gray-700 mb-6">
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Catálogo online de livros</span>
+              <li class="flex items-center gap-2">
+                 <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Catálogo online de livros
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Reserva e renovação de empréstimos</span>
+              <li class="flex items-center gap-2">
+                 <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Reserva e renovação de empréstimos
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Acesso a periódicos e artigos</span>
+              <li class="flex items-center gap-2">
+                 <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Acesso a periódicos e artigos
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-purple-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>E-books e recursos digitais</span>
+              <li class="flex items-center gap-2">
+                 <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                E-books e recursos digitais
               </li>
             </ul>
-            <a href="/biblioteca" class="block w-full text-center bg-[#9C27B0] text-white py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
-              Aceder Í  Biblioteca
-            </a>
+            <div class="mt-auto">
+              <a href="/biblioteca" class="w-[220px] mx-auto block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors">
+                Aceder à Biblioteca
+              </a>
+            </div>
           </div>
         </div>
 
         <!-- Repositório Institucional -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all">
-          <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-6">
-            <div class="flex items-center justify-between text-white">
-              <div>
-                <h3 class="text-xl font-bold">Repositório</h3>
-                <p class="text-sm opacity-90 mt-1">Produção Científica</p>
-              </div>
-              <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z"/>
-                <path fill-rule="evenodd" d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd"/>
-              </svg>
-            </div>
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200">
+          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
+            <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z"/>
+              <path fill-rule="evenodd" d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd"/>
+            </svg>
+            <h3 class="text-2xl font-bold text-white mb-1">Repositório</h3>
+            <p class="text-white text-sm opacity-90 mb-2">Produção Científica</p>
           </div>
-          <div class="p-6">
+          <div class="flex-1 flex flex-col justify-between p-6">
             <ul class="space-y-3 text-gray-700 mb-6">
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-orange-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Trabalhos de conclusão de curso</span>
+              <li class="flex items-center gap-2">
+                <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Trabalhos de conclusão de curso
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-orange-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Dissertações de mestrado</span>
+              <li class="flex items-center gap-2">
+                <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Dissertações de mestrado
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-orange-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Publicações científicas</span>
+              <li class="flex items-center gap-2">
+                <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Publicações científicas
               </li>
-              <li class="flex items-start">
-                <svg class="w-5 h-5 text-orange-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span>Material didático</span>
+              <li class="flex items-center gap-2">
+                <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                Material didático
               </li>
             </ul>
-            <a href="/repositorio" class="block w-full text-center bg-[#2563eb] text-white py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
-              Aceder ao Repositório
-            </a>
+            <div class="mt-auto">
+              <a href="/repositorio" class="w-[220px] mx-auto block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors">
+                Aceder ao Repositório
+              </a>
+            </div>
           </div>
         </div>
 
@@ -196,9 +166,9 @@
             </div>
           </div>
           <h3 class="font-bold text-gray-800 mb-2">Webmail Institucional</h3>
-          <p class="text-sm text-gray-600 mb-4">Email @ispbie.ao para estudantes e funcionários</p>
+          <p class="text-sm text-gray-600 mb-4">E-mail institucional @ispbie.ao para estudantes e funcionários</p>
           <a href="/webmail" class="text-[#2563eb] hover:text-[#2563eb] font-semibold text-sm">
-            Aceder â†’
+            Aceder
           </a>
         </div>
 
@@ -215,7 +185,7 @@
           <h3 class="font-bold text-gray-800 mb-2">Portal Financeiro</h3>
           <p class="text-sm text-gray-600 mb-4">Consulta de propinas e pagamentos</p>
           <a href="#" class="text-[#3B82F6] hover:text-[#2563eb] font-semibold text-sm">
-            Aceder â†’
+            Aceder
           </a>
         </div>
 
@@ -231,7 +201,7 @@
           <h3 class="font-bold text-gray-800 mb-2">Sistema de RH</h3>
           <p class="text-sm text-gray-600 mb-4">Gestão de recursos humanos</p>
           <a href="#" class="text-[#2563eb] hover:text-[#2563eb] font-semibold text-sm">
-            Aceder â†’
+            Aceder
           </a>
         </div>
 
@@ -247,9 +217,9 @@
             </div>
           </div>
           <h3 class="font-bold text-gray-800 mb-2">E-Learning</h3>
-          <p class="text-sm text-gray-600 mb-4">Plataforma de educação Í  distância</p>
+          <p class="text-sm text-gray-600 mb-4">Plataforma de educação à distância</p>
           <a href="#" class="text-[#3B82F6] hover:text-[#2563eb] font-semibold text-sm">
-            Aceder â†’
+            Aceder
           </a>
         </div>
 
@@ -275,19 +245,19 @@
           <div class="p-6">
             <ul class="space-y-3 text-gray-700 mb-6">
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-7 h-7 text-[#2563eb] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 <span>Acesso rápido a serviços</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-7 h-7 text-[#2563eb] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 <span>Notificações em tempo real</span>
               </li>
               <li class="flex items-start">
-                <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-7 h-7 text-[#2563eb] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 <span>Carteira digital do estudante</span>

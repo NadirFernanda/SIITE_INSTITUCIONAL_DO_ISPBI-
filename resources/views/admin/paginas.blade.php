@@ -1,30 +1,32 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="display: flex; justify-content: space-between; align-items: center;">
-	<h1>Páginas</h1>
-	<a href="/admin/paginas/create" style="background: #343a40; color: #fff; padding: 8px 18px; border-radius: 4px; text-decoration: none; font-weight: bold;">Nova Página</a>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+	<h1 style="font-size: 2.6rem; color: #1565c0; font-weight: 800; letter-spacing: -1px; margin: 0;">Páginas</h1>
+	<a href="/admin/paginas/create" style="background: #1565c0; color: #fff; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.1rem; box-shadow: 0 2px 8px rgba(21,101,192,0.10); transition: background 0.2s; border: none; outline: none;">Nova Página</a>
 </div>
-<table class="table table-striped">
+<div style="overflow-x:auto;">
+<table style="width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(21,101,192,0.06);">
 	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Título</th>
-			<th>Conteúdo</th>
+		<tr style="background:#e3f0fb; color:#1565c0; font-size:1.08rem;">
+			<th style="padding:14px 18px; text-align:left; border-top-left-radius:12px;">ID</th>
+			<th style="padding:14px 18px; text-align:left;">Título</th>
+			<th style="padding:14px 18px; text-align:left; border-top-right-radius:12px;">Conteúdo</th>
 		</tr>
 	</thead>
 	<tbody>
 		@forelse($paginas as $pagina)
-			<tr>
-				<td>{{ $pagina->id }}</td>
-				<td>{{ $pagina->titulo }}</td>
-				<td>{{ $pagina->conteudo }}</td>
+			<tr style="border-bottom:1px solid #f0f4f8;">
+				<td style="padding:12px 18px;">{{ $pagina->id }}</td>
+				<td style="padding:12px 18px;">{{ $pagina->titulo }}</td>
+				<td style="padding:12px 18px;">{{ $pagina->conteudo }}</td>
 			</tr>
 		@empty
 			<tr>
-				<td colspan="3">Nenhuma página cadastrada.</td>
+				<td colspan="3" style="padding:18px; color:#888; text-align:center;">Nenhuma página cadastrada.</td>
 			</tr>
 		@endforelse
 	</tbody>
 </table>
+</div>
 @endsection

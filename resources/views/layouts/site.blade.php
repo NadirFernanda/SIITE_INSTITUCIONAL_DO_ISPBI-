@@ -34,8 +34,11 @@
     @php
         $jsFile = $manifest['resources/js/app.js']['file'] ?? null;
     @endphp
+
     @if($jsFile)
         <script type="module" src="{{ asset('build/' . $jsFile) }}"></script>
     @endif
+    <!-- Alpine.js para interatividade do menu mobile -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 </html>

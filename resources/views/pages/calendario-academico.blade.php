@@ -43,7 +43,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
           <div class="flex items-center mb-6">
             <div class="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
-              1Âº
+              1º
             </div>
             <h3 class="text-2xl font-bold text-gray-900">Primeiro Semestre</h3>
           </div>
@@ -83,7 +83,7 @@
 
             <div class="border-l-4 border-orange-500 pl-4">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="font-bold text-gray-900">Exames 1Âª Í‰poca</h4>
+                <h4 class="font-bold text-gray-900">Exames 1ª Época</h4>
                 <span class="text-sm text-gray-600">23 Jun - 11 Jul 2025</span>
               </div>
               <p class="text-sm text-gray-600">Período de avaliação final</p>
@@ -91,7 +91,7 @@
 
             <div class="border-l-4 border-red-500 pl-4">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="font-bold text-gray-900">Exames 2Âª Í‰poca</h4>
+                <h4 class="font-bold text-gray-900">Exames 2ª Época</h4>
                 <span class="text-sm text-gray-600">14 - 25 Jul 2025</span>
               </div>
               <p class="text-sm text-gray-600">Recurso e melhoria</p>
@@ -111,7 +111,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
           <div class="flex items-center mb-6">
             <div class="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
-              2Âº
+              2º
             </div>
             <h3 class="text-2xl font-bold text-gray-900">Segundo Semestre</h3>
           </div>
@@ -122,7 +122,7 @@
                 <h4 class="font-bold text-gray-900">Início das Aulas</h4>
                 <span class="text-sm text-gray-600">01 Set 2025</span>
               </div>
-              <p class="text-sm text-gray-600">Primeiro dia de aulas do 2Âº semestre</p>
+              <p class="text-sm text-gray-600">Primeiro dia de aulas do 2º semestre</p>
             </div>
 
             <div class="border-l-4 border-blue-500 pl-4">
@@ -146,12 +146,12 @@
                 <h4 class="font-bold text-gray-900">Fim das Aulas</h4>
                 <span class="text-sm text-gray-600">12 Jun 2026</span>
               </div>
-              <p class="text-sm text-gray-600">Êltimo dia de aulas regulares</p>
+              <p class="text-sm text-gray-600">Último dia de aulas regulares</p>
             </div>
 
             <div class="border-l-4 border-orange-500 pl-4">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="font-bold text-gray-900">Exames 1Âª Í‰poca</h4>
+                <h4 class="font-bold text-gray-900">Exames 1ª Época</h4>
                 <span class="text-sm text-gray-600">15 Jun - 03 Jul 2026</span>
               </div>
               <p class="text-sm text-gray-600">Período de avaliação final</p>
@@ -159,7 +159,7 @@
 
             <div class="border-l-4 border-red-500 pl-4">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="font-bold text-gray-900">Exames 2Âª Í‰poca</h4>
+                <h4 class="font-bold text-gray-900">Exames 2ª Época</h4>
                 <span class="text-sm text-gray-600">06 - 17 Jul 2026</span>
               </div>
               <p class="text-sm text-gray-600">Recurso e melhoria</p>
@@ -254,19 +254,19 @@
             <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
             </svg>
-            <span>A presença Í s aulas é obrigatória. Estudantes com mais de 25% de faltas não poderão realizar exames.</span>
+            <span>A presença às aulas é obrigatória. Estudantes com mais de 25% de faltas não poderão realizar exames.</span>
           </li>
           <li class="flex items-start">
             <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
             </svg>
-            <span>As datas podem sofrer alterações. Consulte regularmente o portal do estudante.</span>
+            <span>As datas podem sofrer alterações. Consulte regularmente o Portal do Estudante.</span>
           </li>
           <li class="flex items-start">
             <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
             </svg>
-            <span>A inscrição em exames é obrigatória e deve ser feita no prazo estabelecido.</span>
+            <span>A inscrição nos exames é obrigatória e deve ser feita dentro do prazo estabelecido.</span>
           </li>
           <li class="flex items-start">
             <svg class="w-5 h-5 text-yellow-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">

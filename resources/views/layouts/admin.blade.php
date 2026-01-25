@@ -17,55 +17,63 @@
             }
             .sidebar {
                 width: 240px;
-                background: #2C4A5E;
+                background: #1565c0; /* azul principal */
                 color: #fff;
                 height: 100vh;
                 position: fixed;
                 top: 0;
                 left: 0;
                 padding-top: 20px;
-                box-shadow: 2px 0 16px rgba(44,74,94,0.08);
-                border-radius: 0 16px 16px 0;
+                box-shadow: 2px 0 16px rgba(21,101,192,0.10);
+                border-radius: 0 18px 18px 0;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
             }
             .sidebar h2 {
-                margin-left: 20px;
-                margin-bottom: 30px;
+                margin-left: 24px;
+                margin-bottom: 32px;
                 font-size: 2em;
                 font-weight: 700;
                 letter-spacing: 1px;
+                color: #fff;
             }
             .sidebar a {
                 color: #fff;
                 text-decoration: none;
-                display: block;
-                padding: 12px 30px;
-                font-size: 1.1em;
-                border-radius: 8px;
-                margin: 2px 12px;
-                transition: background 0.2s, color 0.2s;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 12px 28px;
+                font-size: 1.08em;
+                border-radius: 10px;
+                margin: 2px 14px;
+                transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+                font-weight: 500;
             }
             .sidebar a:hover, .sidebar a.active {
-                background: #F05A28;
+                background: #0d47a1;
                 color: #fff;
+                box-shadow: 0 2px 8px rgba(21,101,192,0.10);
             }
             .main-content {
                 margin-left: 240px;
-                padding: 40px;
+                padding: 40px 32px;
                 background: #f8fafc;
                 min-height: calc(100vh - 80px);
-                border-radius: 16px;
-                box-shadow: 0 2px 16px rgba(44,74,94,0.06);
+                border-radius: 18px;
+                box-shadow: 0 2px 16px rgba(21,101,192,0.06);
             }
             .header {
-                background: #fff;
-                padding: 20px 40px;
-                border-bottom: 2px solid #F05A28;
+                background: #1565c0;
+                padding: 22px 40px;
+                border-bottom: 3px solid #0d47a1;
                 margin-left: 240px;
                 font-size: 1.5em;
                 font-weight: 600;
-                color: #2C4A5E;
-                border-radius: 0 0 16px 16px;
-                box-shadow: 0 2px 8px rgba(44,74,94,0.04);
+                color: #fff;
+                border-radius: 0 0 18px 18px;
+                box-shadow: 0 2px 8px rgba(21,101,192,0.08);
             }
             @media (max-width: 900px) {
                 .sidebar {
@@ -74,10 +82,10 @@
                     position: relative;
                     border-radius: 0;
                     box-shadow: none;
-                    display: flex;
                     flex-direction: row;
                     align-items: center;
                     padding: 0;
+                    gap: 0;
                 }
                 .sidebar h2 { display: none; }
                 .sidebar a {
@@ -91,53 +99,63 @@
                     padding: 16px;
                     border-radius: 0;
                 }
+                .header {
+                    background: #1565c0;
+                    color: #fff;
+                    border-bottom: 2px solid #0d47a1;
+                }
             }
         </style>
-        <div class="sidebar">
+        <div class="sidebar" style="display:flex;flex-direction:column;height:100vh;">
             <h2>Painel</h2>
-            <a href="/admin/paginas">
-                <span style="vertical-align:middle;margin-right:8px;">
-                    <!-- Icone moderno: Páginas (documento) -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="4" stroke="#F05A28" stroke-width="2" fill="#fff"/><path d="M8 7h8M8 11h8M8 15h5" stroke="#2C4A5E" stroke-width="2" stroke-linecap="round"/></svg>
-                </span>Páginas
-            </a>
-            <a href="/admin/midia">
-                <span style="vertical-align:middle;margin-right:8px;">
-                    <!-- Icone moderno: Mídia (imagem) -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#0E8F81" stroke-width="2" fill="#fff"/><circle cx="8" cy="10" r="2" fill="#F05A28"/><path d="M5 17l4-4a2 2 0 0 1 3 0l5 5" stroke="#39C28A" stroke-width="2" stroke-linecap="round"/></svg>
-                </span>Mídia
-            </a>
-            <a href="/admin/carrossel">
-                <span style="vertical-align:middle;margin-right:8px;">
-                    <!-- Icone moderno: Carrossel (slides) -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#39C28A" stroke-width="2" fill="#fff"/><rect x="7" y="10" width="4" height="4" rx="1" fill="#F05A28"/><rect x="13" y="10" width="4" height="4" rx="1" fill="#FFD700"/></svg>
-                </span>Carrossel
-            </a>
-            <a href="/admin/usuarios">
-                <span style="vertical-align:middle;margin-right:8px;">
-                    <!-- Ícone de usuários: três pessoas -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="8" r="3" stroke="#2C4A5E" stroke-width="2" fill="#fff"/>
-                        <circle cx="5.5" cy="11.5" r="2.5" stroke="#2C4A5E" stroke-width="2" fill="#fff"/>
-                        <circle cx="18.5" cy="11.5" r="2.5" stroke="#2C4A5E" stroke-width="2" fill="#fff"/>
-                        <path d="M2 20c0-2.5 3-4 5-4s5 1.5 5 4" stroke="#2C4A5E" stroke-width="2" fill="none"/>
-                        <path d="M12 20c0-2.5 3-4 5-4s5 1.5 5 4" stroke="#2C4A5E" stroke-width="2" fill="none"/>
-                        <path d="M7 20c0-2 2.5-3 5-3s5 1 5 3" stroke="#0E8F81" stroke-width="2" fill="none"/>
-                    </svg>
-                </span>Usuários
-            </a>
-            <a href="/admin/configuracoes">
-                <span style="vertical-align:middle;margin-right:8px;">
-                    <!-- Ícone engrenagem preenchida, círculo azul -->
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                            <path d="M19.4 13.5c.04-.32.1-.65.1-1s-.03-.68-.1-1l1.7-1.33a1 1 0 0 0 .24-1.28l-1.6-2.77a1 1 0 0 0-1.18-.48l-2 .8a7.1 7.1 0 0 0-1.7-.98l-.3-2.1A1 1 0 0 0 13 2h-2a1 1 0 0 0-1 .84l-.3 2.1a7.1 7.1 0 0 0-1.7.98l-2-.8a1 1 0 0 0-1.18.48l-1.6 2.77a1 1 0 0 0 .24 1.28l1.7 1.33c-.07.32-.1.65-.1 1s.03.68.1 1l-1.7 1.33a1 1 0 0 0-.24 1.28l1.6 2.77a1 1 0 0 0 1.18.48l2-.8c.52.38 1.09.71 1.7.98l.3 2.1A1 1 0 0 0 11 22h2a1 1 0 0 0 1-.84l.3-2.1c.61-.27 1.18-.6 1.7-.98l2 .8a1 1 0 0 0 1.18-.48l1.6-2.77a1 1 0 0 0-.24-1.28l-1.7-1.33z" fill="#7B8A99"/>
-                            <circle cx="12" cy="12" r="4" fill="#fff"/>
-                            <circle cx="12" cy="12" r="2.2" fill="#1565c0"/>
-                        </g>
-                    </svg>
-                </span>Configurações
-            </a>
+            <div style="flex:1 1 auto;display:flex;flex-direction:column;">
+                <a href="/admin/paginas">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Páginas (documento) -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="4" stroke="#fff" stroke-width="2" fill="none"/><path d="M8 7h8M8 11h8M8 15h5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>Páginas
+                </a>
+                <a href="/admin/noticias">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Notícias (jornal) -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" fill="#fff"/><rect x="6" y="8" width="6" height="2" rx="1" fill="#1565c0"/><rect x="6" y="12" width="12" height="2" rx="1" fill="#1565c0"/></svg>
+                    </span>Notícias
+                </a>
+                <a href="/admin/estatisticas">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Estatísticas (gráfico de barras) -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="13" width="4" height="8" rx="1" fill="#fff"/><rect x="9" y="9" width="4" height="12" rx="1" fill="#fff"/><rect x="15" y="5" width="4" height="16" rx="1" fill="#fff"/></svg>
+                    </span>Estatísticas
+                </a>
+                <a href="/admin/carrossel">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Carrossel (slides) -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#fff" stroke-width="2" fill="none"/><rect x="7" y="10" width="4" height="4" rx="1" fill="#fff"/><rect x="13" y="10" width="4" height="4" rx="1" fill="#fff"/></svg>
+                    </span>Carrossel
+                </a>
+                <a href="/admin/alumni">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Alumni (chapéu de formando) -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M2 7l10-4 10 4-10 4-10-4z" stroke="#fff" stroke-width="2" fill="none"/><path d="M6 10v4c0 2 4 4 6 4s6-2 6-4v-4" stroke="#fff" stroke-width="2" fill="none"/></svg>
+                    </span>Alumni
+                </a>
+                <a href="/admin/usuarios">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Usuários -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="#fff" stroke-width="2" fill="none"/><path d="M6 19c0-2.2 3-3.5 6-3.5s6 1.3 6 3.5" stroke="#fff" stroke-width="2" fill="none"/></svg>
+                    </span>Usuários
+                </a>
+                <a href="/admin/configuracoes">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Configurações -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="2" fill="none"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>Configurações
+                </a>
+            </div>
+            <form method="POST" action="{{ route('logout') }}" style="margin: 18px;">
+                @csrf
+                <button type="submit" style="width:100%;background:#fff;color:#1565c0;font-weight:700;padding:10px 0;border:none;border-radius:8px;box-shadow:0 1px 4px rgba(21,101,192,0.08);margin-bottom:8px;cursor:pointer;transition:background 0.2s;">Sair</button>
+            </form>
         </div>
     <div class="header">
         <h2>Instituto Superior Politécnico do Bié</h2>

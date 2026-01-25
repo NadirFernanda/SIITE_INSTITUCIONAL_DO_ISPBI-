@@ -76,7 +76,7 @@
         <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#2563eb]">
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-2xl mr-4">
-              ðŸ“š
+              📚
             </div>
             <h3 class="text-2xl font-bold text-gray-900">Estágio Curricular Obrigatório</h3>
           </div>
@@ -110,7 +110,7 @@
         <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#3B82F6]">
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 bg-[#3B82F6] rounded-lg flex items-center justify-center text-gray-900 text-2xl mr-4">
-              â­
+              ⭐
             </div>
             <h3 class="text-2xl font-bold text-gray-900">Estágio Extracurricular</h3>
           </div>
@@ -151,35 +151,35 @@
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ›ï¸</div>
+          <div class="text-3xl mb-2">🏛️</div>
           <h4 class="font-bold text-gray-900 text-sm">Governo Provincial do Bié</h4>
         </div>
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ¥</div>
+          <div class="text-3xl mb-2">🏥</div>
           <h4 class="font-bold text-gray-900 text-sm">Hospital Provincial do Bié</h4>
         </div>
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ—ï¸</div>
+          <div class="text-3xl mb-2">🏗️</div>
           <h4 class="font-bold text-gray-900 text-sm">Empresas de Construção Civil</h4>
         </div>
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ’¼</div>
+          <div class="text-3xl mb-2">💼</div>
           <h4 class="font-bold text-gray-900 text-sm">Bancos e Seguradoras</h4>
         </div>
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ“¡</div>
+          <div class="text-3xl mb-2">💡</div>
           <h4 class="font-bold text-gray-900 text-sm">Empresas de Telecomunicações</h4>
         </div>
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ’§</div>
+          <div class="text-3xl mb-2">💧</div>
           <h4 class="font-bold text-gray-900 text-sm">MINEA - Recursos Hídricos</h4>
         </div>
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ“°</div>
-          <h4 class="font-bold text-gray-900 text-sm">Í“rgãos de Comunicação Social</h4>
+          <div class="text-3xl mb-2">📰</div>
+          <h4 class="font-bold text-gray-900 text-sm">Órgãos de Comunicação Social</h4>
         </div>
         <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
-          <div class="text-3xl mb-2">ðŸ¤</div>
+          <div class="text-3xl mb-2">🙏</div>
           <h4 class="font-bold text-gray-900 text-sm">ONGs e Organizações Sociais</h4>
         </div>
       </div>
@@ -234,10 +234,10 @@
       </p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
         <a href="mailto:estagios@ispbie.ao" class="inline-block bg-[#2563eb] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#d94d20] transition-colors">
-          ðŸ“§ estagios@ispbie.ao
+          📧 estagios@ispbie.ao
         </a>
         <a href="tel:+244922408061" class="inline-block bg-[#3B82F6] text-gray-900 px-8 py-3 rounded-lg font-semibold hover:bg-[#e6c200] transition-colors">
-          ðŸ“ž (244) 922 408 061
+          📞 (244) 922 408 061
         </a>
       </div>
       <p class="text-sm text-gray-500 mt-4">Horário de Atendimento: Segunda a Sexta, 08h00 - 17h00</p>

@@ -1,8 +1,28 @@
+html, body {
+	overflow-x: hidden !important;
+	max-width: 100vw;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
+	}
+
+	@layer utilities {
+		@keyframes slide-in-right {
+			0% {
+				transform: translateX(100%);
+				opacity: 0.2;
+			}
+			100% {
+				transform: translateX(0);
+				opacity: 1;
+			}
+		}
+		.animate-slide-in-right {
+			animation: slide-in-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+		}
 	/* Cores institucionais ISPBié */
 	.bg-ispbie-orange { background-color: #F05A28; }
 	.text-ispbie-orange { color: #F05A28; }

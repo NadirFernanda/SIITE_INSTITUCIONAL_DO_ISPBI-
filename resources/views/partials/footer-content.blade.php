@@ -7,7 +7,7 @@
           <h3 class="text-[#FFD700] font-bold text-lg mb-4">Educação</h3>
           <ul class="space-y-2">
             <li><a href="/cursos" class="hover:text-[#FFD700] transition-colors">Cursos de Graduação</a></li>
-            <li><a href="/pos-graduacao" class="hover:text-[#FFD700] transition-colors">Pós-Graduação</a></li>
+            <li><a href="/pos-graduacao" class="hover:text-[#FFD700] transition-colors">Cursos de Pós-Graduação</a></li>
             <li><a href="/candidaturas" class="hover:text-[#FFD700] transition-colors">Como Estudar no ISP-Bié</a></li>
             <li><a href="/cursos-online" class="hover:text-[#FFD700] transition-colors">Cursos Online</a></li>
           </ul>
@@ -35,13 +35,12 @@
             <li><a href="/valores" class="hover:text-[#FFD700] transition-colors">Valores</a></li>
             <li><a href="/presidencia" class="hover:text-[#FFD700] transition-colors">Presidência</a></li>
             <li><a href="/estatisticas" class="hover:text-[#FFD700] transition-colors">Estatísticas</a></li>
-            <li><a href="/transparencia" class="hover:text-[#FFD700] transition-colors">Transparência</a></li>
           </ul>
         </div>
 
-        <!-- Parceiros -->
+        <!-- Parcerias -->
         <div>
-          <h3 class="text-[#FFD700] font-bold text-lg mb-4">Parceiros</h3>
+          <h3 class="text-[#FFD700] font-bold text-lg mb-4">Parcerias</h3>
           <ul class="space-y-2">
             <li><a href="https://governo.gov.ao" target="_blank" class="hover:text-[#FFD700] transition-colors">Governo de Angola</a></li>
           </ul>
@@ -54,7 +53,7 @@
             <li><a href="/contactos" class="hover:text-[#FFD700] transition-colors">Contactos</a></li>
             <li><a href="/ouvidoria" class="hover:text-[#FFD700] transition-colors">Ouvidoria</a></li>
             <li><a href="/trabalhe-conosco" class="hover:text-[#FFD700] transition-colors">Trabalhe Connosco</a></li>
-            <li><a href="/imprensa" class="hover:text-[#FFD700] transition-colors">Imprensa</a></li>
+            <li><a href="/noticias" class="hover:text-[#FFD700] transition-colors">Notícias</a></li>
           </ul>
           
           <div class="mb-4">
@@ -70,7 +69,7 @@
           </div>
           
           <div class="flex gap-3 mt-4">
-            <a href="https://facebook.com" target="_blank" class="text-gray-400 hover:text-[#3B82F6] transition-colors">
+            <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" target="_blank" class="text-gray-400 hover:text-[#3B82F6] transition-colors">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
             <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-[#3B82F6] transition-colors">
@@ -124,7 +123,7 @@
             <h3 class="text-[#FFD700] font-bold text-xl mb-3">Siga-nos nas Redes Sociais</h3>
             <p class="text-gray-400 mb-4">Acompanhe as últimas novidades e eventos do ISP-Bié.</p>
             <div class="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
-              <a href="https://facebook.com/ispbie" target="_blank" 
+              <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" target="_blank" 
                  class="flex items-center justify-center gap-2 px-3 py-2 bg-[#1877f2] hover:bg-[#166fe5] text-white rounded-lg transition-all hover:scale-105 text-xs sm:text-sm">
                 <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 <span class="font-semibold">Facebook</span>
@@ -171,7 +170,6 @@
         </div>
       </div>
     </div>
-    <!-- Barra amarela institucional no rodapé -->
-    <div class="w-full h-2 bg-[#FFD700] mt-8"></div>
+    <!-- ...barra amarela removida para evitar bloco branco extra... -->
   </footer>
 
