@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // Placeholder routes for later scaffolding
 Route::view('/sobre', 'pages.sobre')->name('sobre');

@@ -42,11 +42,12 @@
       <div class="bg-white p-8 rounded-lg shadow-md mb-12">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Formação de Excelência</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
-          O Instituto Superior Politécnico do Bié oferece cursos de graduação em seis domínios de formação, 
-          distribuídos em cinco Departamentos de Ensino e Investigação, com foco na formação técnica, científica 
-          e humanística de profissionais qualificados para atender Í s demandas do mercado de trabalho angolano.
+          O Instituto Superior Politécnico do Bié (ISP-Bié) é uma instituição de ensino superior pública, superintendida pelo Ministério do Ensino Superior, Ciência, Tecnologia e Inovação. Foi criado à luz da reorganização da rede de instituições de ensino superior, nos termos da alínea a) do artigo 18º do Decreto Presidencial nº 285/20 de 29 de outubro, e localiza-se na Rua Padre Fidalgo, entre Artur de Paiva e Francisco de Leite Cardoso, s/n, na cidade do Cuito/Bié, com o número de identificação fiscal 5000308765. Ministra atualmente seis (6) cursos de graduação em seis domínios de formação: Humanidades e Artes; Ciências Sociais, Jornalismo e Informação; Administração, Negócios e Direito; Ciências Médicas e da Saúde; Engenharias e Inovação Tecnológica; Ciências Humanas, Sociais e Económicas; e Ciências da Saúde.
         </p>
       </div>
+
+      <!-- Carrossel de Notícias Institucionais -->
+      @include('partials.carousel')
 
       <!-- Departamentos -->
       <div class="mb-12">
@@ -438,15 +439,37 @@
       </div>
 
 
-      <!-- Cursos Acreditados -->
-      <section class="mt-16 bg-white p-8 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-[#2563eb] mb-4">Cursos Acreditados</h2>
-        <p class="text-lg text-gray-700 mb-4">
-          Nossos cursos de graduação são reconhecidos e acreditados pelos órgãos reguladores nacionais, garantindo excelência acadêmica, infraestrutura de qualidade e corpo docente altamente qualificado. A acreditação atesta que nossos programas atendem aos mais elevados padrões de ensino superior, promovendo a formação de profissionais preparados para os desafios do mercado de trabalho e para contribuir com a sociedade.
-        </p>
-        <p class="text-lg text-gray-700">
-          A cada ciclo avaliativo, os cursos passam por rigorosos processos de avaliação, assegurando atualização constante das matrizes curriculares, metodologias inovadoras de ensino e compromisso com a ética e a responsabilidade social. Estudar em um curso acreditado é a certeza de receber uma formação sólida, reconhecida nacional e internacionalmente.
-        </p>
+      <!-- Divisor visual forte entre seções -->
+      <div class="flex justify-center items-center" style="margin-top:7rem; margin-bottom:7rem;">
+        <div class="w-full max-w-2xl border-t-8 border-dashed border-[#FFD700] opacity-90"></div>
+      </div>
+      <!-- Cursos Acreditados - Moderno e Criativo -->
+      <section class="mt-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-10 rounded-2xl shadow-xl text-white">
+        <h2 class="text-3xl font-extrabold mb-6 text-center drop-shadow-lg">Acreditação dos Cursos</h2>
+        <p class="text-lg mb-10 text-center opacity-90">Durante a fase de avaliação externa, ocorrida de Junho de 2023 à Junho de 2025, no ISP-Bié foram avaliados 5 cursos de graduação tendo obtido as seguintes percentagens:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div class="rounded-xl p-6 flex flex-col items-center shadow-lg hover:scale-105 transition-transform bg-gradient-to-b from-white/10 to-white/0 border border-white/20">
+            <span class="text-5xl font-bold text-yellow-200 mb-2 drop-shadow">65,94%</span>
+            <span class="text-xl font-semibold text-white">Enfermagem</span>
+          </div>
+          <div class="rounded-xl p-6 flex flex-col items-center shadow-lg hover:scale-105 transition-transform bg-gradient-to-b from-white/10 to-white/0 border border-white/20">
+            <span class="text-5xl font-bold text-pink-200 mb-2 drop-shadow">67,8%</span>
+            <span class="text-xl font-semibold text-white">Psicologia</span>
+          </div>
+          <div class="rounded-xl p-6 flex flex-col items-center shadow-lg hover:scale-105 transition-transform bg-gradient-to-b from-white/10 to-white/0 border border-white/20">
+            <span class="text-5xl font-bold text-green-200 mb-2 drop-shadow">68,60%</span>
+            <span class="text-xl font-semibold text-white">Engenharia Informática</span>
+          </div>
+          <div class="rounded-xl p-6 flex flex-col items-center shadow-lg hover:scale-105 transition-transform bg-gradient-to-b from-white/10 to-white/0 border border-white/20">
+            <span class="text-5xl font-bold text-blue-200 mb-2 drop-shadow">73,63%</span>
+            <span class="text-xl font-semibold text-white">Comunicação Social</span>
+          </div>
+          <div class="rounded-xl p-6 flex flex-col items-center shadow-lg hover:scale-105 transition-transform bg-gradient-to-b from-white/10 to-white/0 border border-white/20">
+            <span class="text-5xl font-bold text-purple-200 mb-2 drop-shadow">73,23%</span>
+            <span class="text-xl font-semibold text-white">Contabilidade</span>
+          </div>
+        </div>
+        <p class="mt-10 text-center text-white text-opacity-80 text-base">Esses resultados refletem o compromisso do ISP-Bié com a qualidade, inovação e excelência no ensino superior.</p>
       </section>
     </div>
   </section>

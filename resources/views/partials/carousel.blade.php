@@ -12,8 +12,8 @@
                 <a href="{{ $item->link }}" class="mt-4 inline-block link-brand">Ler mais →</a>
               @endif
             </div>
-            <div class="h-48 md:h-40 bg-gray-100 rounded-lg flex items-center justify-center">
-              <img src="{{ asset('storage/' . $item->imagem) }}" alt="{{ $item->titulo }}" class="object-cover h-full w-full rounded-lg" onerror="this.style.display='none'">
+            <div class="max-h-40 h-40 md:h-40 bg-gray-100 rounded-lg flex items-center justify-center">
+              <img src="{{ asset('storage/' . $item->imagem) }}" alt="{{ $item->titulo }}" class="object-cover max-h-40 w-full rounded-lg" style="height:160px;" onerror="this.style.display='none'">
             </div>
           </div>
         </div>
@@ -60,8 +60,8 @@
     </div>
 
     <!-- Controls -->
-    <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow hover:bg-white">â—€</button>
-    <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow hover:bg-white">â–¶</button>
+    <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow hover:bg-white">&#x25C0;</button>
+    <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow hover:bg-white">&#x25B6;</button>
 
     <!-- Indicators -->
     <div class="carousel-indicators absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2"></div>

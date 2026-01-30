@@ -1,0 +1,38 @@
+@php
+    $noticiasRecentes = \App\Models\Noticia::where('publicada', 1)->orderByDesc('data')->take(6)->get();
+@endphp
+<div class="relative w-full max-w-5xl mx-auto my-12" x-data="{ current: 0, total: {{ $noticiasRecentes->count() }} }" x-init="setInterval(() => { current = (current + 1) % total }, 6000)">
+    <div class="overflow-hidden rounded-2xl shadow-lg bg-white">
+        <div class="flex transition-transform duration-700" :style="'transform: translateX(-' + (current * 100) + '%)'">
+            @foreach($noticiasRecentes as $noticia)
+                <div class="min-w-full flex flex-col md:flex-row">
+                    @if($noticia->imagem)
+                        <div class="md:w-1/2 h-64 md:h-80 bg-cover bg-center" style="background-image:url('{{ asset('storage/' . $noticia->imagem) }}')"></div>
+                    @else
+                        <div class="md:w-1/2 h-64 md:h-80 bg-gray-200 flex items-center justify-center">
+                            <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4z" />
+                            </svg>
+                        </div>
+                    @endif
+                    <div class="flex-1 p-8 flex flex-col justify-between">
+                        <div>
+                            <span class="block text-xs text-gray-500 mb-1">{{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}</span>
+                            <h3 class="text-2xl font-bold text-[#2563eb] mb-2">{{ $noticia->titulo }}</h3>
+                            <p class="text-gray-700 text-base mb-4">{{ Str::limit($noticia->texto, 180) }}</p>
+                        </div>
+                        <div class="flex justify-end">
+                            <a href="/noticias/{{ $noticia->id }}" class="inline-block bg-[#2563eb] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#d94b1f] transition-colors">Ler mais</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <!-- Navegação -->
+    <div class="flex justify-center mt-4 space-x-2">
+        <template x-for="i in total" :key="i">
+            <button @click="current = i - 1" :class="{'bg-[#2563eb]': current === (i-1), 'bg-gray-300': current !== (i-1)}" class="w-3 h-3 rounded-full focus:outline-none"></button>
+        </template>
+    </div>
+</div>

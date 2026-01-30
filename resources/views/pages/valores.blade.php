@@ -6,6 +6,7 @@
         'title' => 'Valores',
         'subtitle' => 'Instituto Superior Politécnico do Bié'
     ])
+
 @endsection
 
 @section('content')
@@ -118,6 +119,7 @@
     </div>
   </section>
 
+</div> {{-- FECHA o div aberto no início do content --}}
 
 @endsection
 
