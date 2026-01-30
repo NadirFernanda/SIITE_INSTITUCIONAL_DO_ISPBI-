@@ -31,44 +31,46 @@
             </a>
           </div>
         </div>
-        <div class="flex flex-wrap items-center justify-center gap-4 mt-8 md:mt-0">
-          <div class="flex flex-col items-center w-full">
-            <span class="text-2xl font-bold text-gray-700 mb-4">Pilares Estratégicos</span>
-            <div class="flex flex-col sm:flex-row sm:justify-center sm:space-x-8 gap-6 w-full">
-              <!-- Primeira linha: Ensino e Investigação -->
-              <div class="flex flex-row justify-center gap-6 w-full">
-                <!-- Ensino -->
-                <div class="flex flex-col items-center flex-1">
-                  <a href="/pilares#ensino" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Ensino">
-                    <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">E</span>
-                  </a>
-                  <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors text-center block w-full">Ensino</a>
-                </div>
-                <!-- Investigação -->
-                <div class="flex flex-col items-center flex-1">
-                  <a href="/pilares#investigacao" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Investigação">
-                    <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">I</span>
-                  </a>
-                  <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors text-center block w-full">Investigação</a>
-                </div>
-              </div>
-              <!-- Segunda linha: Extensão Universitária e EIU -->
-              <div class="flex flex-row justify-center gap-6 w-full">
-                <!-- Extensão Universitária -->
-                <div class="flex flex-col items-center flex-1">
-                  <a href="/pilares#extensao-universitaria" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Extensão Universitária">
-                    <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">EU</span>
-                  </a>
-                  <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors text-center block w-full">Extensão Universitária</a>
-                </div>
-                <!-- Empreendedorismo e Inovação na Universidade -->
-                <div class="flex flex-col items-center flex-1">
-                  <a href="/pilares#empreendedorismo-inovacao" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
-                    <span class="text-white font-bold text-sm flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">EIU</span>
-                  </a>
-                  <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base mt-1 text-center hover:text-[#2563eb] transition-colors block w-full">Empreendedorismo e Inovação<br>na Universidade</a>
-                </div>
-              </div>
+
+        <!-- Pilares Estratégicos -->
+        <div class="flex flex-col items-center w-full mt-12">
+          <!-- Título -->
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mb-8 text-center">Pilares Estratégicos</h2>
+
+          <!-- Cards dos pilares -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-6xl">
+            <!-- Ensino -->
+            <div class="flex flex-col items-center text-center">
+              <a href="/pilares#ensino" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Ensino">
+                <span class="text-white font-bold text-base md:text-lg">E</span>
+              </a>
+              <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">Ensino</a>
+            </div>
+
+            <!-- Investigação -->
+            <div class="flex flex-col items-center text-center">
+              <a href="/pilares#investigacao" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Investigação">
+                <span class="text-white font-bold text-base md:text-lg">I</span>
+              </a>
+              <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">Investigação</a>
+            </div>
+
+            <!-- Extensão Universitária -->
+            <div class="flex flex-col items-center text-center">
+              <a href="/pilares#extensao-universitaria" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Extensão Universitária">
+                <span class="text-white font-bold text-base md:text-lg">EU</span>
+              </a>
+              <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">Extensão Universitária</a>
+            </div>
+
+            <!-- Empreendedorismo e Inovação na Universidade -->
+            <div class="flex flex-col items-center text-center">
+              <a href="/pilares#empreendedorismo-inovacao" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
+                <span class="text-white font-bold text-sm md:text-base">EIU</span>
+              </a>
+              <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">
+                Empreendedorismo e Inovação<br>na Universidade
+              </a>
             </div>
           </div>
         </div>
