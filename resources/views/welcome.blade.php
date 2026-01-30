@@ -233,13 +233,13 @@
         <!-- Serviço 1: Apoio Psicológico -->
         <a href="/inclusao#apoio" class="group">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-[#3b82f6] transition-all">
-            <div class="w-16 h-16" style="background:#bcd0fa;" class="rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform" style="background:#bcd0fa;">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
               </svg>
             </div>
             <h3 class="text-xl font-bold mb-2">Apoio Psicológico</h3>
-            <p class="text-sm opacity-90">Gabinete de apoio Í  saúde mental e bem-estar estudantil</p>
+            <p class="text-sm opacity-90">Gabinete de apoio à saúde mental e bem-estar estudantil</p>
           </div>
         </a>
 
@@ -308,168 +308,98 @@
     </div>
   </section>
 
+  <!-- Testemunhos - Carrossel Alpine.js -->
   <!-- Testemunhos -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Testemunhos</h2>
-        <p class="text-xl text-gray-600">Saiba o que os nossos estudantes e professores dizem sobre nós</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          Testemunhos
+        </h2>
+        <p class="text-xl text-gray-600">
+          Saiba o que os nossos estudantes dizem sobre nós
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Testemunho 1 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              AM
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Ana Mateus</h4>
-              <p class="text-sm text-gray-600">Estudante de Enfermagem</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"O ISP-Bié proporcionou-me uma formação sólida e prática. Os laboratórios modernos e os docentes qualificados fazem toda a diferença na minha preparação profissional."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
+      {{-- Enviar dados reais do admin para o JS --}}
+      <script>
+        window.TESTEMUNHOS = @json($testemunhos);
+      </script>
 
-        <!-- Testemunho 2 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              JC
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">João Carlos</h4>
-              <p class="text-sm text-gray-600">Estudante de Engenharia Civil</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"Amei estar no ISP-Bié! A instituição investe muito na qualidade do ensino e oferece oportunidades únicas de estágio e pesquisa que nos preparam para o mercado de trabalho."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
+      <div
+        x-data="{
+          current: 0,
+          testimonials: window.TESTEMUNHOS,
+          next() { this.current = (this.current + 1) % this.testimonials.length },
+          prev() { this.current = (this.current - 1 + this.testimonials.length) % this.testimonials.length },
+          autoplay: null,
+          startAutoplay() {
+            this.autoplay = setInterval(() => {
+              this.next();
+            }, 6000);
+          },
+          stopAutoplay() {
+            if (this.autoplay) clearInterval(this.autoplay);
+          }
+        }"
+        x-init="testimonials.length === 0 && console.warn('Sem testemunhos publicados'); startAutoplay()"
+        @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
+        class="relative flex items-center justify-center min-h-[420px]"
+      >
 
-        <!-- Testemunho 3 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              MF
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Dr. Manuel Francisco</h4>
-              <p class="text-sm text-gray-600">Docente de Engenharia</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"Í‰ gratificante fazer parte de uma instituição que valoriza a inovação e a investigação. O ISP-Bié está a formar profissionais de excelência para Angola."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
+        <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
+          <div
+            x-show="current === idx"
+            x-transition
+            class="bg-white rounded-lg shadow-md p-8 hover:shadow-xl transition-shadow w-full max-w-2xl mx-auto"
+            style="min-height: 220px;"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6]
+                       rounded-full flex items-center justify-center text-white
+                       text-xl font-bold"
+                x-text="item.nome.substring(0,2).toUpperCase()">
+              </div>
 
-        <!-- Testemunho 4 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              PS
+              <div class="ml-4">
+                <h4 class="font-bold text-gray-900" x-text="item.nome"></h4>
+                <p class="text-sm text-gray-600"
+                   x-text="item.curso ?? 'Ex-Estudante'"></p>
+              </div>
             </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Paula Silva</h4>
-              <p class="text-sm text-gray-600">Estudante de Psicologia</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"O ambiente académico do ISP-Bié é acolhedor e desafiante. Aprendi não só a teoria, mas também a aplicar conhecimentos em situações reais através dos estágios."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
 
-        <!-- Testemunho 5 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#3B82F6] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              CA
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Carlos Alberto</h4>
-              <p class="text-sm text-gray-600">Estudante de Contabilidade</p>
-            </div>
-          </div>
-          <p class="text-gray-700 italic mb-4">"O ISP-Bié oferece uma formação completa em gestão e contabilidade. Os professores são dedicados e sempre disponíveis para ajudar no nosso desenvolvimento académico."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
+            <p class="text-gray-700 italic mb-4"
+               x-text="item.trabalha
+                 ? (item.satisfacao || 'Sem mensagem informada.')
+                 : 'Procurando emprego.'">
+            </p>
 
-        <!-- Testemunho 6 -->
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-          <div class="flex items-center mb-4">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-              LN
-            </div>
-            <div class="ml-4">
-              <h4 class="font-bold text-gray-900">Profa. Luísa Neto</h4>
-              <p class="text-sm text-gray-600">Docente de Comunicação Social</p>
-            </div>
+            <div class="flex text-[#3B82F6]">★★★★★</div>
           </div>
-          <p class="text-gray-700 italic mb-4">"Trabalhar no ISP-Bié é uma experiência enriquecedora. A instituição promove a liberdade académica e incentiva a investigação aplicada ao desenvolvimento do Bié."</p>
-          <div class="flex text-[#3B82F6]">
-            <span>â­</span><span>â­</span><span>â­</span><span>â­</span><span>â­</span>
-          </div>
-        </div>
+        </template>
+
+        <!-- Botões -->
+        <button @click="prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow px-4 py-2 rounded border border-gray-200 hover:bg-gray-100 transition">
+          ‹
+        </button>
+
+        <button @click="next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow px-4 py-2 rounded border border-gray-200 hover:bg-gray-100 transition">
+          ›
+        </button>
+
+      </div>
+
+      <!-- Botão Ver mais testemunhos -->
+      <div class="flex justify-center mt-10">
+        <a href="/alumni" class="inline-block px-8 py-3 bg-[#2563eb] text-white font-semibold rounded shadow hover:bg-[#1d4ed8] transition-colors text-lg">
+          Ver mais testemunhos
+        </a>
       </div>
     </div>
   </section>
-
-  <!-- Banner Informativo Internacional -->
-  <section class="py-16 bg-gradient-to-r from-[#1e3a5f] to-[#2c4a5e] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <div class="mb-6">
-            <h2 class="text-3xl font-bold mb-4">Instituto Superior Politécnico do Bié</h2>
-            <p class="text-lg leading-relaxed opacity-90">
-              O Instituto Superior Politécnico do Bié (ISP-Bié) é uma instituição de ensino superior 
-              público superintendida pelo Ministério do Ensino Superior, Ciência, Tecnologia e Inovação. 
-              Foi criado Í  luz da reorganização da rede de instituições de ensino superior nos termos 
-              da alínea a) do artigo 18Âº, do Decreto Presidencial nÂº 285/20 de 29 de Outubro e localiza-se 
-              na Rua Padre Fidalgo entre Artur de Paiva e Francisco de Leite Cardoso S/N na Cidade do 
-              Cuito/Bié, com o número de identificação fiscal 5000308765. Ministra actualmente seis (6) 
-              cursos de graduação em seis domínios de formação (Humanidades e Arte; Ciências Sociais, 
-              Jornalismo e Informação; Administração, Negócios e Direito; Ciências Médicas e da Saúde; 
-              e Engenharias e Inovação Tecnológica, Ciências Humanas, Sociais e Económicas, e Ciências da Saúde).
-            </p>
-          </div>
-        </div>
-        <div class="relative">
-          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8 border border-white/20">
-            <h3 class="text-xl font-bold mb-4 text-[#3B82F6]">Compromisso com a Excelência</h3>
-            <ul class="space-y-3">
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                </svg>
-                <span>Formação técnica e científica de qualidade</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                </svg>
-                <span>Desenvolvimento regional sustentável</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                </svg>
-                <span>Inovação e pesquisa aplicada</span>
-              </li>
-              <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                </svg>
-                <span>Inclusão e responsabilidade social</span>
-              </li>
             </ul>
           </div>
         </div>

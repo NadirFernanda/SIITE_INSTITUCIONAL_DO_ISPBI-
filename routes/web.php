@@ -41,8 +41,15 @@ Route::middleware('auth')->group(function () {
 
 
 
+use App\Models\Alumnus;
+
 Route::get('/', function () {
-    return view('welcome');
+    $testemunhos = Alumnus::where('publicado', true)
+        ->where('testemunho', true)
+        ->orderByDesc('created_at')
+        ->take(6)
+        ->get();
+    return view('welcome', compact('testemunhos'));
 })->name('welcome');
 
 // Placeholder routes for later scaffolding
