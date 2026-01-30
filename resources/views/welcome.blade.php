@@ -11,57 +11,63 @@
   <section class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex flex-wrap items-end justify-between mb-8">
-        <div class="flex flex-col md:flex-row md:space-x-12 space-y-6 md:space-y-0">
-          <div class="flex flex-col items-center">
-            <a href="/missao" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
+        <div class="flex flex-row space-x-3 md:space-x-12 items-end justify-between w-full">
+          <div class="flex flex-col items-center flex-1">
+            <a href="/missao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
             <a href="/missao" title="Ver Missão">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#0E8F81"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
+              <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#0E8F81"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
-          <div class="flex flex-col items-center">
-            <a href="/visao" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors">Visão</a>
+          <div class="flex flex-col items-center flex-1">
+            <a href="/visao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors">Visão</a>
             <a href="/visao" title="Ver Visão">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#2C4A5E"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
+              <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#2C4A5E"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
-          <div class="flex flex-col items-center">
-            <a href="/valores" class="text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors">Valores</a>
+          <div class="flex flex-col items-center flex-1">
+            <a href="/valores" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors">Valores</a>
             <a href="/valores" title="Ver Valores">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="16" fill="#F05A28"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
+              <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#F05A28"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
         </div>
         <div class="flex flex-wrap items-center justify-center gap-4 mt-8 md:mt-0">
           <div class="flex flex-col items-center w-full">
             <span class="text-2xl font-bold text-gray-700 mb-4">Pilares Estratégicos</span>
-            <div class="flex flex-wrap justify-center gap-8">
-              <!-- Ensino -->
-              <div class="flex flex-col items-center">
-                <a href="/pilares#ensino" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Ensino">
-                  <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">E</span>
-                </a>
-                <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors">Ensino</a>
+            <div class="flex flex-col sm:flex-row sm:justify-center sm:space-x-8 gap-6 w-full">
+              <!-- Primeira linha: Ensino e Investigação -->
+              <div class="flex flex-row justify-center gap-6 w-full">
+                <!-- Ensino -->
+                <div class="flex flex-col items-center flex-1">
+                  <a href="/pilares#ensino" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Ensino">
+                    <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">E</span>
+                  </a>
+                  <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors text-center block w-full">Ensino</a>
+                </div>
+                <!-- Investigação -->
+                <div class="flex flex-col items-center flex-1">
+                  <a href="/pilares#investigacao" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Investigação">
+                    <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">I</span>
+                  </a>
+                  <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors text-center block w-full">Investigação</a>
+                </div>
               </div>
-              <!-- Investigação -->
-              <div class="flex flex-col items-center">
-                <a href="/pilares#investigacao" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Investigação">
-                  <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">I</span>
-                </a>
-                <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors">Investigação</a>
-              </div>
-              <!-- Extensão Universitária -->
-              <div class="flex flex-col items-center">
-                <a href="/pilares#extensao-universitaria" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Extensão Universitária">
-                  <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">EU</span>
-                </a>
-                <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors">Extensão Universitária</a>
-              </div>
-              <!-- Empreendedorismo e Inovação na Universidade -->
-              <div class="flex flex-col items-center">
-                <a href="/pilares#empreendedorismo-inovacao" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
-                  <span class="text-white font-bold text-sm flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">EIU</span>
-                </a>
-                <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base mt-1 text-center hover:text-[#2563eb] transition-colors">Empreendedorismo e Inovação<br>na Universidade</a>
+              <!-- Segunda linha: Extensão Universitária e EIU -->
+              <div class="flex flex-row justify-center gap-6 w-full">
+                <!-- Extensão Universitária -->
+                <div class="flex flex-col items-center flex-1">
+                  <a href="/pilares#extensao-universitaria" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Extensão Universitária">
+                    <span class="text-white font-bold text-base flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">EU</span>
+                  </a>
+                  <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base mt-1 hover:text-[#2563eb] transition-colors text-center block w-full">Extensão Universitária</a>
+                </div>
+                <!-- Empreendedorismo e Inovação na Universidade -->
+                <div class="flex flex-col items-center flex-1">
+                  <a href="/pilares#empreendedorismo-inovacao" class="w-14 h-14 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-2 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
+                    <span class="text-white font-bold text-sm flex items-center justify-center w-10 h-10 min-w-[2.5rem] min-h-[2.5rem] text-center">EIU</span>
+                  </a>
+                  <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base mt-1 text-center hover:text-[#2563eb] transition-colors block w-full">Empreendedorismo e Inovação<br>na Universidade</a>
+                </div>
               </div>
             </div>
           </div>
@@ -310,8 +316,8 @@
 
   <!-- Testemunhos - Carrossel Alpine.js -->
   <!-- Testemunhos -->
-  <section class="py-20 bg-[#e0e7ff]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+  <section class="py-16 pb-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
           Testemunhos
@@ -332,27 +338,27 @@
           testimonials: window.TESTEMUNHOS,
           next() { this.current = (this.current + 1) % this.testimonials.length },
           prev() { this.current = (this.current - 1 + this.testimonials.length) % this.testimonials.length },
+          verMais() {
+            console.log('Ver mais testemunhos')
+          },
           autoplay: null,
           startAutoplay() {
-            this.autoplay = setInterval(() => {
-              this.next();
-            }, 6000);
+            this.autoplay = setInterval(() => { this.next() }, 2500);
           },
           stopAutoplay() {
             if (this.autoplay) clearInterval(this.autoplay);
           }
         }"
-        x-init="testimonials.length === 0 && console.warn('Sem testemunhos publicados'); startAutoplay()"
+        x-init="startAutoplay()"
         @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
-        class="relative flex items-center justify-center min-h-[420px]"
+        class="relative flex flex-col items-center"
       >
 
         <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
           <div
             x-show="current === idx"
             x-transition
-            class="bg-white rounded-lg shadow-md p-8 hover:shadow-xl transition-shadow w-full max-w-2xl mx-auto"
-            style="min-height: 220px;"
+            class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow w-full max-w-xl relative"
           >
             <div class="flex items-center mb-4">
               <div
@@ -361,45 +367,55 @@
                        text-xl font-bold"
                 x-text="item.nome.substring(0,2).toUpperCase()">
               </div>
-
               <div class="ml-4">
                 <h4 class="font-bold text-gray-900" x-text="item.nome"></h4>
                 <p class="text-sm text-gray-600"
-                   x-text="item.curso ?? 'Ex-Estudante'"></p>
+                   x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
               </div>
             </div>
-
             <p class="text-gray-700 italic mb-4"
                x-text="item.trabalha
                  ? (item.satisfacao || 'Sem mensagem informada.')
                  : 'Procurando emprego.'">
             </p>
-
             <div class="flex text-[#3B82F6]">★★★★★</div>
+          </div>
           </div>
         </template>
 
         <!-- Botões -->
-        <button @click="prev"
-          class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow px-4 py-2 rounded border border-gray-200 hover:bg-gray-100 transition">
-          ‹
-        </button>
+        <div class="flex w-full max-w-xl justify-between mt-4 mb-2">
+          <button @click="prev"
+            class="bg-white shadow px-4 py-2 rounded flex items-center justify-center" style="height:40px;">
+            ‹
+          </button>
+          <button @click="next"
+            class="bg-white shadow px-4 py-2 rounded flex items-center justify-center" style="height:40px;">
+            ›
+          </button>
+        </div>
+        <div class="flex justify-center mt-6 space-x-2">
+          <template x-for="(item, idx) in testimonials" :key="idx">
+            <button
+              @click="current = idx"
+              class="w-3 h-3 rounded-full transition"
+              :class="current === idx ? 'bg-[#3B82F6]' : 'bg-gray-300'"
+            ></button>
+          </template>
+        </div>
+        <div class="flex justify-center mt-8">
+          <button
+            @click="verMais()"
+            class="px-6 py-3 bg-[#3B82F6] text-white font-semibold rounded-lg hover:bg-[#2563eb] transition"
+          >
+            Ver mais testemunhos
+          </button>
+        </div>
 
-        <button @click="next"
-          class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow px-4 py-2 rounded border border-gray-200 hover:bg-gray-100 transition">
-          ›
-        </button>
-
-      </div>
-
-      <!-- Botão Ver mais testemunhos -->
-      <div class="flex justify-center mt-10">
-        <a href="/alumni" class="inline-block px-8 py-3 bg-[#2563eb] text-white font-semibold rounded shadow hover:bg-[#1d4ed8] transition-colors text-lg">
-          Ver mais testemunhos
-        </a>
       </div>
     </div>
   </section>
+              
             </ul>
           </div>
         </div>

@@ -33,7 +33,7 @@
             <li><a href="/missao" class="hover:text-[#FFD700] transition-colors">Missão</a></li>
             <li><a href="/visao" class="hover:text-[#FFD700] transition-colors">Visão</a></li>
             <li><a href="/valores" class="hover:text-[#FFD700] transition-colors">Valores</a></li>
-            <li><a href="/presidencia" class="hover:text-[#FFD700] transition-colors">Presidência</a></li>
+            <!-- <li><a href="/presidencia" class="hover:text-[#FFD700] transition-colors">Presidência</a></li> -->
             <li><a href="/estatisticas" class="hover:text-[#FFD700] transition-colors">Estatísticas</a></li>
           </ul>
         </div>

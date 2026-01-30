@@ -26,7 +26,7 @@
     <a href="/servicos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🗞️</span> Serviços</a>
   </div>
   <div class="flex flex-wrap items-center gap-4">
-    <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgão de Gestão</a>
+    <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgão de Gestão</a> -->
     <a href="/cursos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🦉</span> Cursos</a>
     <a href="/sistemas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>⚙️</span> Infraestrutura Digital</a>
     <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]">
@@ -35,9 +35,10 @@
   </div>
 </div>
 
-<!-- Bloco institucional com navbar - Desktop e Mobile -->
-<div x-data="{ mobileMenuOpen: false }" class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;">
-  <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-3 sm:px-4 py-2">
+<!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
+<div x-data="{ mobileMenuOpen: false }">
+  <div class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;">
+    <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-3 sm:px-4 py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
       <img src="/images/logo.png" alt="ISP-Bié" class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
@@ -77,13 +78,13 @@
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
                   <a href="/institucional" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
                   <a href="/missao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
-                  <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
+                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
                   <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-                  <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Presidência</a>
-                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
+                  <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Órgão de gestão</a>
+                  <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
                 </div>
                 <div class="mt-8 border-t border-gray-700 pt-6 text-center">
-                  <a href="/estatisticas" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white font-semibold">Estatísticas</a>
+
                 </div>
         </div>
       </div>
@@ -109,135 +110,135 @@
       </div>
     </nav>
   </div>
-</div>
 
-<!-- Menu Mobile (off-canvas) -->
-<div x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 flex lg:hidden overflow-x-hidden w-full max-w-full">
-  <!-- Fundo escuro -->
-  <div class="absolute inset-0 bg-black bg-opacity-60" @click="mobileMenuOpen = false"></div>
-  <!-- Painel lateral -->
-  <div class="relative ml-auto w-full max-w-xs h-full bg-white shadow-xl flex flex-col py-6 px-4 space-y-2 overflow-y-auto animate-slide-in-right">
-    <button @click="mobileMenuOpen = false" class="self-end text-gray-700 p-2 hover:bg-gray-100 rounded-lg mb-2" aria-label="Fechar menu">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
-    <!-- Links principais -->
-    <a href="/cursos" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
-      <span>🎓</span>
-      <span>Ensino</span>
-    </a>
-    <a href="/investigacao" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
-      <span>🔬</span>
-      <span>Pesquisa e Inovação</span>
-    </a>
-    <!-- Dropdown Extensão Universitária - Mobile -->
-    <div x-data="{ openExtMobile: false }" class="relative lg:hidden mt-2">
-      <button @click="openExtMobile = !openExtMobile"
-              class="flex items-center gap-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800 w-full">
-        <span>🎭</span>
-        <span>Extensão Universitária</span>
-        <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-        </svg>
+  <!-- Menu Mobile (off-canvas) -->
+  <div x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 flex lg:hidden overflow-x-hidden w-full max-w-full">
+    <!-- Fundo escuro institucional com gradiente -->
+    <div class="absolute inset-0" style="background: linear-gradient(180deg, #2563eb 0%, #ffffff 100%); opacity: 0.96; backdrop-filter: blur(12px);" @click="mobileMenuOpen = false"></div>
+    <!-- Painel lateral com efeito glassmorphism, sombra e detalhes dourados -->
+    <div class="relative ml-auto w-full max-w-xs h-full bg-white/70 shadow-2xl flex flex-col py-8 px-5 space-y-2 overflow-y-auto animate-slide-in-right border-l-4 border-[#FFD700] rounded-l-2xl" style="backdrop-filter: blur(12px);">
+      <button @click="mobileMenuOpen = false" class="self-end text-gray-700 p-2 hover:bg-gray-100 rounded-lg mb-2" aria-label="Fechar menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
-      <div x-show="openExtMobile" @click.away="openExtMobile = false" x-cloak
-           class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
-        <a href="/cultura" class="block px-3 py-2 rounded hover:bg-gray-100 font-bold">Extensão Universitária</a>
-        <a href="/alumni" class="block px-3 py-2 rounded hover:bg-gray-100">Alumni</a>
-      </div>
-    </div>
-    <a href="/noticias" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
-      <span>📰</span>
-      <span>Comunicação</span>
-    </a>
-
-    <!-- Links extras -->
-    <div class="border-t border-gray-200 pt-4 mt-4">
-      <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Links Rápidos</h3>
-      <a href="/contactos" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>📷</span>
-        <span>Contacto</span>
+      <!-- Links principais -->
+      <a href="/cursos" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
+        <span><svg class="w-5 h-5" fill="none" stroke="#FFD700" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
+        <span>Ensino</span>
       </a>
-      <a href="/webmail" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>✉️</span>
-        <span>Webmail</span>
+      <a href="/investigacao" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
+        <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 9v3l2 2" stroke="#2563eb"/></svg></span>
+        <span>Pesquisa e Inovação</span>
       </a>
-      <a href="/servicos" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>🗞️</span>
-        <span>Serviços</span>
-      </a>
-      <a href="/presidencia" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>🏛️</span>
-        <span>Órgão de Gestão</span>
-      </a>
-      <!-- Dropdown Institucional - Desktop -->
-      <div x-data="{ open: false }" class="relative">
-        <button @click="open = !open" @keydown.escape="open = false"
-                class="flex items-center gap-1 text-white hover:text-[#FFD700] font-semibold uppercase tracking-wide"
-                :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true">
-          <span>🏢</span> Institucional
-          <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </button>
-
-        <!-- Dropdown Menu -->
-           <div x-show="open" @click.away="open = false" x-cloak
-             class="absolute left-0 mt-8 w-96 bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 z-50 p-4">
-          <div class="grid grid-cols-2 gap-2">
-            <a href="/institucional" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
-            <a href="/missao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
-            <a href="/visao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
-            <a href="/valores" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-            <a href="/presidencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgão de Gestão</a>
-            <a href="/estatisticas" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
-            <a href="/transparencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white col-span-2 text-center">Transparência</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dropdown Institucional - Mobile -->
-      <div x-data="{ openMobile: false }" class="relative lg:hidden mt-2">
-        <button @click="openMobile = !openMobile"
-                class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
-          <span>🏢</span>
-          <span>Institucional</span>
+      <!-- Dropdown Extensão Universitária - Mobile -->
+      <div x-data="{ openExtMobile: false }" class="relative lg:hidden mt-2">
+        <button @click="openExtMobile = !openExtMobile"
+                class="flex items-center gap-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800 w-full">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
+          <span>Extensão Universitária</span>
           <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-
-        <div x-show="openMobile" @click.away="openMobile = false" x-cloak
-             class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-4 grid grid-cols-2 gap-2">
-          <a href="/institucional" class="block px-3 py-2 rounded hover:bg-gray-100">Sobre o ISP-Bié</a>
-          <a href="/missao" class="block px-3 py-2 rounded hover:bg-gray-100">Missão</a>
-          <a href="/visao" class="block px-3 py-2 rounded hover:bg-gray-100">Visão</a>
-          <a href="/valores" class="block px-3 py-2 rounded hover:bg-gray-100">Valores</a>
-          <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-gray-100">Órgão de Gestão</a>
-          <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-gray-100">Estatísticas</a>
-          <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-gray-100">Transparência</a>
+        <div x-show="openExtMobile" @click.away="openExtMobile = false" x-cloak
+             class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
+          <a href="/cultura" class="block px-3 py-2 rounded hover:bg-gray-100 font-bold">Extensão Universitária</a>
+          <a href="/alumni" class="block px-3 py-2 rounded hover:bg-gray-100">Alumni</a>
         </div>
       </div>
-      <a href="/sistemas" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>⚙️</span>
-        <span>Infraestrutura Digital</span>
+      <a href="/noticias" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
+        <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#2563eb"/><path d="M7 9h10M7 13h6" stroke="#2563eb"/></svg></span>
+        <span>Comunicação</span>
       </a>
-    </div>
-    
-    <!-- Calendário e Guias -->
-    <div class="border-t border-gray-200 pt-4 mt-4">
-      <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Estudantes</h3>
-      <a href="/calendario-academico" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>📅</span>
-        <span>Calendário Académico</span>
-      </a>
-      <a href="/guia-estudante" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>📚</span>
-        <span>Guia do Estudante</span>
-      </a>
-      <a href="/resultados" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-        <span>📋</span>
-        <span>Resultados de Exames</span>
-      </a>
+
+      <!-- Links extras -->
+      <div class="border-t border-gray-200 pt-4 mt-4">
+        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Links Rápidos</h3>
+        <a href="/contactos" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="#2563eb"/><rect x="9" y="10" width="6" height="4" rx="1" stroke="#2563eb"/></svg></span>
+          <span>Contacto</span>
+        </a>
+        <a href="/webmail" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#2563eb"/><path d="M4 6l8 7 8-7" stroke="#2563eb"/></svg></span>
+          <span>Webmail</span>
+        </a>
+        <a href="/servicos" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="2" stroke="#2563eb"/><path d="M8 11h8" stroke="#2563eb"/></svg></span>
+          <span>Serviços</span>
+        </a>
+        <a href="/presidencia" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="2" stroke="#2563eb"/><path d="M12 4v4" stroke="#2563eb"/></svg></span>
+          <span>Órgão de Gestão</span>
+        </a>
+        <!-- Dropdown Institucional - Desktop -->
+        <div x-data="{ open: false }" class="relative">
+          <button @click="open = !open" @keydown.escape="open = false"
+                  class="flex items-center gap-1 text-white hover:text-[#FFD700] font-semibold uppercase tracking-wide"
+                  :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true">
+            <span>🏢</span> Institucional
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+             <div x-show="open" @click.away="open = false" x-cloak
+               class="absolute left-0 mt-8 w-96 bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 z-50 p-4">
+            <div class="grid grid-cols-2 gap-2">
+              <a href="/institucional" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
+              <a href="/missao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
+              <a href="/visao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
+              <a href="/valores" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
+              <!-- <a href="/presidencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgão de Gestão</a> -->
+              <a href="/estatisticas" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
+              <a href="/transparencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white col-span-2 text-center">Transparência</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dropdown Institucional - Mobile -->
+        <div x-data="{ openMobile: false }" class="relative lg:hidden mt-2">
+          <button @click="openMobile = !openMobile"
+                  class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
+            <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
+            <span>Institucional</span>
+            <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          <div x-show="openMobile" @click.away="openMobile = false" x-cloak
+               class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-4 grid grid-cols-2 gap-2">
+            <a href="/institucional" class="block px-3 py-2 rounded hover:bg-gray-100">Sobre o ISP-Bié</a>
+            <a href="/missao" class="block px-3 py-2 rounded hover:bg-gray-100">Missão</a>
+            <a href="/visao" class="block px-3 py-2 rounded hover:bg-gray-100">Visão</a>
+            <a href="/valores" class="block px-3 py-2 rounded hover:bg-gray-100">Valores</a>
+            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-gray-100">Órgão de Gestão</a> -->
+            <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-gray-100">Estatísticas</a>
+            <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-gray-100">Transparência</a>
+          </div>
+        </div>
+        <a href="/sistemas" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 8v4l3 3" stroke="#2563eb"/></svg></span>
+          <span>Infraestrutura Digital</span>
+        </a>
+      </div>
+      
+      <!-- Calendário e Guias -->
+      <div class="border-t border-gray-200 pt-4 mt-4">
+        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Estudantes</h3>
+        <a href="/calendario-academico" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#2563eb"/><path d="M7 9h10M7 13h6" stroke="#2563eb"/></svg></span>
+          <span>Calendário Académico</span>
+        </a>
+        <a href="/guia-estudante" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#2563eb"/><path d="M8 10h8M8 14h6" stroke="#2563eb"/></svg></span>
+          <span>Guia do Estudante</span>
+        </a>
+        <a href="/resultados" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="2" stroke="#2563eb"/><path d="M8 11h8" stroke="#2563eb"/></svg></span>
+          <span>Resultados de Exames</span>
+        </a>
+      </div>
     </div>
   </div>
 </div>
