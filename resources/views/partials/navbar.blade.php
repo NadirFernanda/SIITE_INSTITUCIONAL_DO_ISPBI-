@@ -73,13 +73,13 @@
           </svg>
         </button>
               <div x-show="open" @click.away="open = false" x-cloak
-                   class="absolute left-0 mt-8 w-[54rem] bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 z-50 px-12 py-8">
+                   class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 z-50 px-12 py-8 overflow-x-auto">
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
                   <a href="/institucional" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
                   <a href="/missao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
                   <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
                   <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-                  <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Presidência</a>
+                  <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Órgão de Gestão</a>
                   <a href="/estatisticas" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
                   <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
                 </div>
@@ -186,7 +186,7 @@
             <a href="/missao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
             <a href="/visao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
             <a href="/valores" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-            <a href="/presidencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Presidência</a>
+            <a href="/presidencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgão de Gestão</a>
             <a href="/estatisticas" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
             <a href="/transparencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white col-span-2 text-center">Transparência</a>
           </div>
@@ -210,7 +210,7 @@
           <a href="/missao" class="block px-3 py-2 rounded hover:bg-gray-100">Missão</a>
           <a href="/visao" class="block px-3 py-2 rounded hover:bg-gray-100">Visão</a>
           <a href="/valores" class="block px-3 py-2 rounded hover:bg-gray-100">Valores</a>
-          <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-gray-100">Presidência</a>
+          <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-gray-100">Órgão de Gestão</a>
           <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-gray-100">Estatísticas</a>
           <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-gray-100">Transparência</a>
         </div>
@@ -241,6 +241,17 @@
 </div>
 
 <style>
+    /* Prevent dropdown from being cut off at the screen edge */
+    @media (max-width: 1200px) {
+      .navbar-dropdown-large {
+        max-width: 95vw !important;
+        width: 95vw !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+    }
   [x-cloak] { display: none !important; }
   
   .homepage-nav {
