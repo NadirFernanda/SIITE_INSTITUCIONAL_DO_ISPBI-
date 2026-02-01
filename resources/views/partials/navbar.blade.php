@@ -28,7 +28,27 @@
   <div class="flex flex-wrap items-center gap-4">
     <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgãos de gestão</a> -->
     <a href="/cursos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🦉</span> Cursos</a>
-    <a href="/sistemas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>⚙️</span> Infraestrutura Digital</a>
+
+    <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
+    <div x-data="{ openInfra: false }" class="relative">
+      <button @click="openInfra = !openInfra" @keydown.escape="openInfra = false"
+              class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"
+              :aria-expanded="openInfra ? 'true' : 'false'" aria-haspopup="true">
+        <span>⚙️</span> Infraestrutura Digital
+        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div x-show="openInfra" @click.away="openInfra = false" x-cloak
+           class="absolute right-0 mt-2 w-64 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-sm">
+        <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-gray-100 font-semibold">Página de Sistemas</a>
+        <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener"
+           class="block px-3 py-2 rounded hover:bg-gray-100">
+          Sistema de Gestão de Facturas (SGF)
+        </a>
+      </div>
+    </div>
+
     <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]">
       <span>📝</span> Candidaturas
     </a>
@@ -217,10 +237,25 @@
             <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-gray-100">Transparência</a>
           </div>
         </div>
-        <a href="/sistemas" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
-          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 8v4l3 3" stroke="#2563eb"/></svg></span>
-          <span>Infraestrutura Digital</span>
-        </a>
+
+        <!-- Dropdown Infraestrutura Digital - Mobile -->
+        <div x-data="{ openInfraMobile: false }" class="relative lg:hidden mt-2">
+          <button @click="openInfraMobile = !openInfraMobile"
+                  class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
+            <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 8v4l3 3" stroke="#2563eb"/></svg></span>
+            <span>Infraestrutura Digital</span>
+            <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div x-show="openInfraMobile" @click.away="openInfraMobile = false" x-cloak
+               class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 text-sm">
+            <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-gray-100 font-semibold">Página de Sistemas</a>
+            <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener" class="block px-3 py-2 rounded hover:bg-gray-100">
+              Sistema de Gestão de Facturas (SGF)
+            </a>
+          </div>
+        </div>
       </div>
       
       <!-- Calendário e Guias -->
