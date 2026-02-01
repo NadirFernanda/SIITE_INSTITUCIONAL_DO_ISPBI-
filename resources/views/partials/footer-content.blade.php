@@ -28,7 +28,7 @@
         <div>
           <h3 class="text-[#FFD700] font-bold text-lg mb-4">Institucional</h3>
           <ul class="space-y-2">
-            <li><a href="/institucional" class="hover:text-[#FFD700] transition-colors">Sobre o ISP-Bié</a></li>
+            <li><a href="/sobre-ispbie" class="hover:text-[#FFD700] transition-colors">Sobre o ISP-Bié</a></li>
             <li><a href="/missao" class="hover:text-[#FFD700] transition-colors">Missão</a></li>
             <li><a href="/visao" class="hover:text-[#FFD700] transition-colors">Visão</a></li>
             <li><a href="/valores" class="hover:text-[#FFD700] transition-colors">Valores</a></li>

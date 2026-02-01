@@ -96,7 +96,7 @@
               <div x-show="open" @click.away="open = false" x-cloak
                    class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 z-50 px-12 py-8 overflow-x-auto">
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
-                  <a href="/institucional" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
+                  <a href="/sobre-ispbie" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
                   <a href="/missao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
                   <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
                   <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
@@ -204,7 +204,7 @@
              <div x-show="open" @click.away="open = false" x-cloak
                class="absolute left-0 mt-8 w-96 bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 z-50 p-4">
             <div class="grid grid-cols-2 gap-2">
-              <a href="/institucional" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
+              <a href="/sobre-ispbie" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
               <a href="/missao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
               <a href="/visao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
               <a href="/valores" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
@@ -228,7 +228,7 @@
 
           <div x-show="openMobile" @click.away="openMobile = false" x-cloak
                class="mt-2 w-full bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 p-4 grid grid-cols-2 gap-2">
-            <a href="/institucional" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
+            <a href="/sobre-ispbie" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
             <a href="/missao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
             <a href="/visao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
             <a href="/valores" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>

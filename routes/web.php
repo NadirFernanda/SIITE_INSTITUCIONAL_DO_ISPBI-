@@ -73,7 +73,7 @@ Route::view('/missao', 'pages.missao')->name('missao');
 Route::view('/mestrado', 'pages.mestrado')->name('mestrado');
 Route::view('/linguas', 'pages.linguas')->name('linguas');
 Route::view('/jornadas', 'pages.jornadas')->name('jornadas');
-Route::get('/institucional', [App\Http\Controllers\InstitucionalController::class, 'index'])->name('institucional');
+Route::get('/sobre-ispbie', [App\Http\Controllers\InstitucionalController::class, 'index'])->name('institucional');
 Route::view('/inclusao', 'pages.inclusao')->name('inclusao');
 Route::view('/noticias', 'pages.noticias')->name('noticias');
 Route::view('/guia-estudante', 'pages.guia-estudante')->name('guia-estudante');
