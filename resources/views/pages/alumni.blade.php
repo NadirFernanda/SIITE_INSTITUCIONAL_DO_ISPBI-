@@ -55,11 +55,21 @@
                 @endif
               </div>
               @php
-                $satisfacao = trim($alumnus->satisfacao);
+                $satisfacao = trim((string) $alumnus->satisfacao);
                 $hasDepoimento = $satisfacao && !preg_match('/^\d+$/', $satisfacao);
               @endphp
               @if($hasDepoimento)
-                <div class="text-gray-700 italic text-lg">"{{ $satisfacao }}"</div>
+                <div class="text-gray-700 italic text-lg">
+                  "{{ Str::limit($satisfacao, 260) }}"
+                  @if(Str::length($satisfacao) > 260)
+                    <a
+                      href="{{ route('alumni.show', $alumnus->id) }}"
+                      class="ml-2 text-sm text-[#2563eb] font-semibold hover:text-[#1d4ed8] underline"
+                    >
+                      Ler mais
+                    </a>
+                  @endif
+                </div>
               @else
                 <div class="text-gray-700 italic text-lg">"Procurando emprego..."</div>
               @endif
