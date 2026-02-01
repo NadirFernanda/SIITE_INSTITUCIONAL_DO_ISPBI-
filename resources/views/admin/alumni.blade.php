@@ -18,6 +18,7 @@
                         <th class="py-2 px-3">Trabalha?</th>
                         <th class="py-2 px-3">Empresa</th>
                         <th class="py-2 px-3">Cargo</th>
+                        <th class="py-2 px-3">Testemunho</th>
                         <th class="py-2 px-3">Publicado</th>
                         <th class="py-2 px-3">Ações</th>
                     </tr>
@@ -32,6 +33,22 @@
                             <td class="py-2 px-3">{{ $alumnus->trabalha ? 'Sim' : 'Não' }}</td>
                             <td class="py-2 px-3">{{ $alumnus->empresa }}</td>
                             <td class="py-2 px-3">{{ $alumnus->cargo }}</td>
+                            <td class="py-2 px-3 max-w-xs align-top">
+                                @php
+                                    $satisfacao = trim((string) $alumnus->satisfacao);
+                                    $hasDepoimento = $satisfacao && !preg_match('/^\d+$/', $satisfacao);
+                                @endphp
+                                @if($hasDepoimento)
+                                    <details class="text-xs text-gray-700 space-y-1">
+                                        <summary class="cursor-pointer text-blue-600 hover:underline font-semibold">
+                                            Ver testemunho
+                                        </summary>
+                                        <p class="mt-1 leading-snug">"{{ $satisfacao }}"</p>
+                                    </details>
+                                @else
+                                    <span class="text-gray-400 text-xs italic">Sem texto / procurando emprego</span>
+                                @endif
+                            </td>
                             <td class="py-2 px-3">
                                 @if($alumnus->publicado)
                                     <span class="inline-block px-2 py-1 bg-green-200 text-green-800 rounded text-xs">Sim</span>
