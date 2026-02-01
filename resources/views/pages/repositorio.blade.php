@@ -9,10 +9,11 @@
 <body class="bg-gray-50">
     @include('partials.navbar')
 
-    <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-16">
-        <div class="container mx-auto px-6">
-            <h1 class="text-5xl font-bold mb-4">Repositório Académico</h1>
-            <p class="text-xl text-indigo-100">Trabalhos de conclusão e produção científica</p>
+    <!-- Cabeçalho em card -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h1 class="text-3xl font-bold text-[#2563eb] mb-2">Repositório Académico</h1>
+            <p class="text-gray-600">Trabalhos de conclusão e produção científica.</p>
         </div>
     </div>
 

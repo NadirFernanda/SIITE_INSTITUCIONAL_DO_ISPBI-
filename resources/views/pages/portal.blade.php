@@ -9,18 +9,18 @@
 <body class="bg-gray-50">
     @include('partials.navbar')
 
-    <!-- Banner -->
-    <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center mb-4">
-                <svg class="w-12 h-12 mr-4" fill="currentColor" viewBox="0 0 20 20">
+    <!-- Cabeçalho em card -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-8 flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center text-[#2563eb] mt-1">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
                 </svg>
-                <h1 class="text-5xl font-bold">Portal ISP-Bié</h1>
             </div>
-            <p class="text-xl text-blue-100 max-w-3xl">
-                Acesso centralizado a todos os sistemas e serviços institucionais
-            </p>
+            <div>
+                <h1 class="text-3xl font-bold text-[#2563eb] mb-2">Portal ISP-Bié</h1>
+                <p class="text-gray-600 max-w-3xl">Acesso centralizado a todos os sistemas e serviços institucionais.</p>
+            </div>
         </div>
     </div>
 

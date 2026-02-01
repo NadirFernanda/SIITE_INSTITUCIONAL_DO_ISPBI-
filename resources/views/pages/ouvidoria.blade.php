@@ -9,18 +9,18 @@
 <body class="bg-gray-50">
     @include('partials.navbar')
 
-    <!-- Banner -->
-    <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center mb-4">
-                <svg class="w-12 h-12 mr-4" fill="currentColor" viewBox="0 0 20 20">
+    <!-- Cabeçalho em card -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6">
+        <div class="bg-white rounded-lg shadow-md p-8 flex items-start gap-4">
+            <div class="w-12 h-12 flex items-center justify-center text-[#2563eb] mt-1">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"/>
                 </svg>
-                <h1 class="text-5xl font-bold">Ouvidoria</h1>
             </div>
-            <p class="text-xl text-green-100 max-w-3xl">
-                Canal de comunicação direto com a comunidade acadêmica
-            </p>
+            <div>
+                <h1 class="text-3xl font-bold text-[#2563eb] mb-2">Ouvidoria</h1>
+                <p class="text-gray-600 max-w-3xl">Canal de comunicação direto com a comunidade académica.</p>
+            </div>
         </div>
     </div>
 
