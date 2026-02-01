@@ -43,6 +43,10 @@ Route::middleware('auth')->group(function () {
 
 use App\Models\Alumnus;
 
+Route::get('/busca', function () {
+    return view('pages.busca');
+})->name('busca');
+
 Route::get('/', function () {
     $testemunhos = Alumnus::where('publicado', true)
         ->where('testemunho', true)

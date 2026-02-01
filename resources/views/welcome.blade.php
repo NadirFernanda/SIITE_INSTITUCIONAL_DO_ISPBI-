@@ -323,7 +323,7 @@
           },
           autoplay: null,
           startAutoplay() {
-            this.autoplay = setInterval(() => { this.next() }, 2500);
+            this.autoplay = setInterval(() => { this.next() }, 4000);
           },
           stopAutoplay() {
             if (this.autoplay) clearInterval(this.autoplay);
@@ -334,11 +334,17 @@
         class="relative flex flex-col items-center"
       >
 
+        <div class="relative w-full max-w-xl min-h-[220px]">
         <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
           <div
             x-show="current === idx"
-            x-transition
-            class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow w-full max-w-xl relative"
+            x-transition:enter="transform transition ease-out duration-500"
+            x-transition:enter-start="translate-x-full opacity-0"
+            x-transition:enter-end="translate-x-0 opacity-100"
+            x-transition:leave="transform transition ease-in duration-500"
+            x-transition:leave-start="translate-x-0 opacity-100"
+            x-transition:leave-end="-translate-x-full opacity-0"
+            class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow w-full max-w-xl absolute inset-0"
           >
             <div class="flex items-center mb-4">
               <div
@@ -361,6 +367,7 @@
             <div class="flex text-[#3B82F6]">★★★★★</div>
           </div>
         </template>
+        </div>
 
         <!-- Botões -->
         <div class="flex w-full max-w-xl justify-between mt-4 mb-2">

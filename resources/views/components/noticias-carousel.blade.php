@@ -1,9 +1,28 @@
 @php
     $noticiasRecentes = \App\Models\Noticia::where('publicada', 1)->orderByDesc('data')->take(6)->get();
 @endphp
-<div class="relative w-full max-w-5xl mx-auto my-12" x-data="{ current: 0, total: {{ $noticiasRecentes->count() }} }" x-init="setInterval(() => { current = (current + 1) % total }, 6000)">
+<div
+    class="relative w-full max-w-5xl mx-auto my-12"
+    x-data="{
+        current: 0,
+        total: {{ $noticiasRecentes->count() }},
+        autoplay: null,
+        next() { this.current = (this.current + 1) % this.total },
+        goTo(i) { this.current = i },
+        startAutoplay() {
+            if (this.total > 1) {
+                this.autoplay = setInterval(() => { this.next() }, 6000);
+            }
+        },
+        stopAutoplay() {
+            if (this.autoplay) clearInterval(this.autoplay);
+        }
+    }"
+    x-init="startAutoplay()"
+    @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
+>
     <div class="overflow-hidden rounded-2xl shadow-lg bg-white">
-        <div class="flex transition-transform duration-700" :style="'transform: translateX(-' + (current * 100) + '%)'">
+        <div class="flex transition-transform duration-700 ease-out" :style="'transform: translateX(-' + (current * 100) + '%)'">
             @foreach($noticiasRecentes as $noticia)
                 <div class="min-w-full flex flex-col md:flex-row">
                     @if($noticia->imagem)
@@ -32,7 +51,11 @@
     <!-- Navegação -->
     <div class="flex justify-center mt-4 space-x-2">
         <template x-for="i in total" :key="i">
-            <button @click="current = i - 1" :class="{'bg-[#2563eb]': current === (i-1), 'bg-gray-300': current !== (i-1)}" class="w-3 h-3 rounded-full focus:outline-none"></button>
+            <button
+                @click="goTo(i - 1)"
+                :class="{'bg-[#2563eb]': current === (i-1), 'bg-gray-300': current !== (i-1)}"
+                class="w-3 h-3 rounded-full focus:outline-none"
+            ></button>
         </template>
     </div>
 </div>
