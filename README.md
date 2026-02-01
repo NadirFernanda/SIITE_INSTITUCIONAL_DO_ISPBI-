@@ -89,7 +89,7 @@ O design do website foi desenvolvido com base nas melhores práticas de universi
 11. **Portal institucional (/portal)** - Acesso centralizado aos sistemas institucionais
 12. **Transparência (/transparencia)** - Gestão financeira, orçamentos e prestação de contas
 13. **Ouvidoria (/ouvidoria)** - Canal de manifestações, reclamações e sugestões
-14. **Webmail (/webmail)** - Acesso ao email institucional @ispbie.ao
+14. **Webmail (https://isp-bie.ao/webmail)** - Acesso ao email institucional @ispbie.ao
 15. **Alumni (/alumni)** - Rede de ex-alunos, networking e oportunidades
 16. **Revista Científica (/revista)** - Publicações científicas da instituição
 17. **Biblioteca Digital (/biblioteca)** - Acervo digital (2.500+ livros, 1.200+ artigos)

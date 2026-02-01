@@ -96,9 +96,6 @@ Route::get('/alumni', function () {
 Route::get('/alumni/{id}', [App\Http\Controllers\AlumniController::class, 'show'])->name('alumni.show');
 Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store');
 
-// Webmail
-Route::view('/webmail', 'pages.webmail')->name('webmail');
-
 // Rotas para Acesso Rápido
 Route::view('/portal', 'pages.portal')->name('portal');
 Route::view('/ouvidoria', 'pages.ouvidoria')->name('ouvidoria');
