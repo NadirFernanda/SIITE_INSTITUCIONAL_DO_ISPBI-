@@ -1,13 +1,6 @@
 ﻿@extends('layouts.site')
 
 
-@section('hero')
-    @include('partials.hero', [
-        'title' => 'Calendário Académico 2025/2026',
-        'subtitle' => 'Planeie o seu ano lectivo'
-    ])
-@endsection
-
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       <nav class="text-sm mb-8">
@@ -15,6 +8,11 @@
         <span class="mx-2">/</span>
         <span>Calendário Académico</span>
       </nav>
+
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Calendário Académico 2025/2026</h1>
+        <p class="text-lg text-gray-700">Planeie o seu ano lectivo</p>
+      </div>
 
   <!-- Download -->
   <section class="py-8 bg-white border-b">

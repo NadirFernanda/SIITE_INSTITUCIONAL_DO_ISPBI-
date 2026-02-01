@@ -1,13 +1,6 @@
 ﻿@extends('layouts.site')
 
 
-@section('hero')
-    @include('partials.hero', [
-        'title' => 'Contactos',
-        'subtitle' => 'Fale connosco'
-    ])
-@endsection
-
 @section('content')
 
     <div class="bg-white border-b">
@@ -17,6 +10,13 @@
                 <span class="mx-2">/</span>
                 <span class="text-gray-900">Contactos</span>
             </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-6 mt-8">
+        <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Contactos</h1>
+            <p class="text-lg text-gray-700">Fale connosco</p>
         </div>
     </div>
 

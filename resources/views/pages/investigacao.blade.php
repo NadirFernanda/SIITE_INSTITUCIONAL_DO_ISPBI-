@@ -1,14 +1,12 @@
 @extends('layouts.site')
 
-@section('hero')
-    @include('partials.hero', [
-        'title' => 'Investigação, Inovação e Empreendedorismo',
-        'subtitle' => 'Conheça os projetos, publicações e iniciativas do ISP-Bié'
-    ])
-@endsection
-
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Investigação, Inovação e Empreendedorismo</h1>
+        <p class="text-lg text-gray-700">Conheça os projetos, publicações e iniciativas do ISP-Bié</p>
+    </div>
     <!-- Centro de Inovação e Empreendedorismo -->
     <section class="mb-16">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">

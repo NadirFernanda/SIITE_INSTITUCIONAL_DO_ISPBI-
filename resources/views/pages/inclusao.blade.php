@@ -1,18 +1,15 @@
 ﻿@extends('layouts.site')
 
 
-@section('hero')
-  @include('partials.hero', [
-    'title' => 'Inclusão e Pertencimento',
-    'subtitle' => 'Instituto Superior Politécnico do Bié'
-  ])
-@endsection
-
 @section('content')
 
   <!-- Conteúdo Principal -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Inclusão e Pertencimento</h1>
+        <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
+      </div>
       
       <!-- Introdução -->
       <div class="bg-white p-8 rounded-lg shadow-md mb-12">

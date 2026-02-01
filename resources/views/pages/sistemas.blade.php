@@ -1,18 +1,16 @@
 ﻿@extends('layouts.site')
 
 
-@section('hero')
-    @include('partials.hero', [
-        'title' => 'Sistemas Institucionais',
-        'subtitle' => 'Plataformas e Serviços Digitais do ISP-Bié'
-    ])
-@endsection
-
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       <nav class="text-sm opacity-75 mb-8">
         <a href="/" class="hover:underline">Início</a> \ Sistemas
       </nav>
+
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Sistemas Institucionais</h1>
+        <p class="text-lg text-gray-700">Plataformas e Serviços Digitais do ISP-Bié</p>
+      </div>
 
   <!-- Introdução -->
   <section class="py-16 bg-white">

@@ -1,13 +1,6 @@
 ﻿@extends('layouts.site')
 
 
-@section('hero')
-    @include('partials.hero', [
-        'title' => 'Resultados de Exames',
-        'subtitle' => 'Consulte as suas notas online'
-    ])
-@endsection
-
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       <nav class="text-sm mb-8">
@@ -15,6 +8,11 @@
         <span class="mx-2">/</span>
         <span>Resultados de Exames</span>
       </nav>
+
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Resultados de Exames</h1>
+        <p class="text-lg text-gray-700">Consulte as suas notas online</p>
+      </div>
 
   <!-- Informação -->
   <section class="py-8 bg-yellow-50 border-b">

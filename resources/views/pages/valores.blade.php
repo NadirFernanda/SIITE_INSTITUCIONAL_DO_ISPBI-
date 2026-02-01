@@ -1,19 +1,16 @@
 ﻿@extends('layouts.site')
 
 
-@section('hero')
-    @include('partials.hero', [
-        'title' => 'Valores',
-        'subtitle' => 'Instituto Superior Politécnico do Bié'
-    ])
-
-@endsection
-
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       <nav class="text-sm opacity-75 mb-8">
         <a href="/" class="hover:underline">Início</a> \ Valores
       </nav>
+
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Valores</h1>
+        <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
+      </div>
 
   <!-- Conteúdo Principal -->
   <section class="py-16 bg-white">

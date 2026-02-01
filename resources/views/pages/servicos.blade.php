@@ -1,14 +1,12 @@
 ﻿@extends('layouts.site')
 
-@section('hero')
-	@include('partials.hero', [
-		'title' => 'Carta de Serviços',
-		'subtitle' => 'Compromissos e prazos dos serviços institucionais'
-	])
-@endsection
-
 @section('content')
 	<div class="container mx-auto px-6 py-12">
+		<div class="bg-white rounded-lg shadow-md p-8 mb-10">
+			<h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Carta de Serviços</h1>
+			<p class="text-lg text-gray-700">Compromissos e prazos dos serviços institucionais</p>
+		</div>
+
 		<section class="mb-16">
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Serviços Acadêmicos</h2>
 			<div class="space-y-4">
