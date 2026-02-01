@@ -5,7 +5,7 @@
 <div class="hidden md:flex" style="background:#f3f4f6;color:#183153;font-size:0.85rem;padding:2px 8px;align-items:center;justify-content:space-between;width:100%;">
   <div class="flex flex-wrap items-center gap-2">
     <a href="/contactos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>📷</span> Contacto</a>
-    <a href="https://ispbie.ao/webmail" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
+    <a href="https://isp-bie.ao/webmail" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
     <a href="/servicos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🗞️</span> Serviços</a>
   </div>
   <div class="flex flex-wrap items-center gap-2">
