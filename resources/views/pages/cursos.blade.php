@@ -49,7 +49,7 @@
 
       <!-- Departamentos -->
       <div class="mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Oferta Formativa por Departamento</h2>
+        <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Oferta Formativa por Departamento</h2>
         <!-- ...os cards de departamentos foram removidos conforme solicitado... -->
       </div>
 
