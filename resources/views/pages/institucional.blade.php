@@ -4,7 +4,7 @@
 @section('hero')
     @include('partials.hero', [
         'title' => 'Institucional',
-        'subtitle' => 'Conheça o Instituto Superior Politécnico do Bié'
+    'subtitle' => 'Conheça o Instituto Superior Politécnico do Bié para trajectória Institucional'
     ])
 @endsection
 
