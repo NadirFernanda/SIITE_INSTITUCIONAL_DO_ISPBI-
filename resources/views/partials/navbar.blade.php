@@ -1,38 +1,19 @@
 ﻿<!-- Barra de links importantes (azul escuro elegante) - Desktop apenas -->
 <div class="hidden md:block" style="background:#183153;border-bottom:1px solid #1e293b;">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-end py-2 text-xs overflow-x-auto">
-      <!-- Dropdown Estudantes (segundo nível) -->
-      <div x-data="{ openEstudantes: false }" class="relative">
-        <button @click="openEstudantes = !openEstudantes" @keydown.escape="openEstudantes = false"
-                class="flex items-center space-x-1 text-gray-100 hover:text-[#60a5fa] transition-colors whitespace-nowrap">
-          <span class="inline-block align-middle">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2a2 2 0 00-2 2v1.528A6.002 6.002 0 004 11v1a1 1 0 001 1h1v2a1 1 0 001 1h6a1 1 0 001-1v-2h1a1 1 0 001-1v-1a6.002 6.002 0 00-4-5.472V4a2 2 0 00-2-2h-2z" />
-            </svg>
-          </span>
-          <span>Estudantes</span>
-          <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        <div x-show="openEstudantes" @click.away="openEstudantes = false" x-cloak
-             class="absolute right-0 mt-2 w-64 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-xs">
-          <a href="/calendario-academico" class="flex items-center space-x-2 px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
-            <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg></span>
-            <span>Calendário Académico</span>
-          </a>
-          <a href="/guia-estudante" class="flex items-center space-x-2 px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
-            <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg></span>
-            <span>Guia do Estudante</span>
-          </a>
-          <a href="/resultados" class="flex items-center space-x-2 px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
-            <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg></span>
-            <span>Resultados de Exames</span>
-          </a>
-        </div>
-      </div>
+    <div class="flex items-center justify-end py-2 space-x-4 text-xs overflow-x-auto">
+      <a href="/calendario-academico" class="flex items-center space-x-1 text-gray-100 hover:text-[#60a5fa] transition-colors whitespace-nowrap">
+        <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg></span>
+        <span>Calendário Académico</span>
+      </a>
+      <a href="/guia-estudante" class="flex items-center space-x-1 text-gray-100 hover:text-[#60a5fa] transition-colors whitespace-nowrap">
+        <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg></span>
+        <span>Guia do Estudante</span>
+      </a>
+      <a href="/resultados" class="flex items-center space-x-1 text-gray-100 hover:text-[#60a5fa] transition-colors whitespace-nowrap">
+        <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg></span>
+        <span>Resultados de Exames</span>
+      </a>
     </div>
   </div>
 </div>
@@ -277,34 +258,21 @@
         </div>
       </div>
       
-      <!-- Estudantes (segundo nível - Mobile) -->
+      <!-- Calendário e Guias - Mobile, mesmo nível -->
       <div class="border-t border-gray-200 pt-4 mt-4">
-        <div x-data="{ openEstMobile: false }" class="relative lg:hidden">
-          <button @click="openEstMobile = !openEstMobile"
-                  class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
-            <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 8v4l3 3" stroke="#2563eb"/></svg></span>
-            <span>Estudantes</span>
-            <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          <div x-show="openEstMobile" @click.away="openEstMobile = false" x-cloak
-               class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 text-sm">
-            <a href="/calendario-academico" class="flex items-center space-x-3 py-2 px-3 text-gray-700 hover:text-white hover:bg-[#2563eb] rounded">
-              <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#2563eb"/><path d="M7 9h10M7 13h6" stroke="#2563eb"/></svg></span>
-              <span>Calendário Académico</span>
-            </a>
-            <a href="/guia-estudante" class="flex items-center space-x-3 py-2 px-3 text-gray-700 hover:text-white hover:bg-[#2563eb] rounded">
-              <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#2563eb"/><path d="M8 10h8M8 14h6" stroke="#2563eb"/></svg></span>
-              <span>Guia do Estudante</span>
-            </a>
-            <a href="/resultados" class="flex items-center space-x-3 py-2 px-3 text-gray-700 hover:text-white hover:bg-[#2563eb] rounded">
-              <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="2" stroke="#2563eb"/><path d="M8 11h8" stroke="#2563eb"/></svg></span>
-              <span>Resultados de Exames</span>
-            </a>
-          </div>
-        </div>
+        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Estudantes</h3>
+        <a href="/calendario-academico" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#2563eb"/><path d="M7 9h10M7 13h6" stroke="#2563eb"/></svg></span>
+          <span>Calendário Académico</span>
+        </a>
+        <a href="/guia-estudante" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#2563eb"/><path d="M8 10h8M8 14h6" stroke="#2563eb"/></svg></span>
+          <span>Guia do Estudante</span>
+        </a>
+        <a href="/resultados" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+          <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="2" stroke="#2563eb"/><path d="M8 11h8" stroke="#2563eb"/></svg></span>
+          <span>Resultados de Exames</span>
+        </a>
       </div>
     </div>
   </div>
