@@ -3,8 +3,8 @@
 
 @section('hero')
     @include('partials.hero', [
-        'title' => 'Institucional',
-    'subtitle' => 'Conheça o Instituto Superior Politécnico do Bié para trajectória Institucional'
+      'title' => 'Institucional',
+    'subtitle' => 'Conheça o Instituto Superior Politécnico do Bié e a sua trajectória institucional'
     ])
 @endsection
 
@@ -111,14 +111,14 @@
           <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Sobre o ISP-Bié</h2>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
             O <strong>Instituto Superior Politécnico do Bié</strong> foi criado pelo 
-            <strong>Decreto Presidencial nº 285/20 de 29 de Outubro de 2020</strong>, 
-            com o objetivo de formar profissionais altamente qualificados para atender 
-            as demandas de desenvolvimento da região e do país.
+            <strong>Decreto Presidencial n.º 285/20, de 29 de outubro de 2020</strong>, 
+            com o objetivo de formar profissionais altamente qualificados para responder 
+            às necessidades de desenvolvimento da região e do país.
           </p>
           <p class="text-lg text-gray-700 leading-relaxed mb-4">
             Como instituição de ensino superior de excelência, o ISP-Bié dedica-se à 
-            formação integral de profissionais capacitados, promoção da pesquisa científica 
-            e extensão universitária que contribuem para o desenvolvimento sustentável da 
+            formação integral de profissionais capacitados, à promoção da investigação científica 
+            e à extensão universitária, que contribuem para o desenvolvimento sustentável da 
             província do Bié e de Angola.
           </p>
           <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-6 rounded-lg text-white mt-6">
@@ -139,7 +139,7 @@
                 <span class="text-3xl font-bold">Variável</span>
               </div>
               <div class="flex items-center justify-between border-b border-white/20 pb-3">
-                <span class="text-lg">Vice-Órgãos de gestão</span>
+                <span class="text-lg">Órgãos de gestão</span>
                 <span class="text-3xl font-bold">2</span>
               </div>
               <div class="flex items-center justify-between">
@@ -168,7 +168,7 @@
           </div>
           <h3 class="text-2xl font-bold text-[#2563eb] mb-3 group-hover:text-[#2563eb] transition-colors">Missão</h3>
           <p class="text-gray-600">
-            Desenvolver actividades de formação acadêmica e profissional de excelência, da investigação científica e da extensão universitária nas áreas de Engenharias, tecnologias, Ciências Sociais, Administração e Negócios.
+            Desenvolver actividades de formação académica e profissional de excelência, da investigação científica e da extensão universitária nas áreas de Engenharias, Tecnologias, Ciências Sociais, Administração e Negócios.
           </p>
         </a>
 
