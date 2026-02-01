@@ -46,9 +46,6 @@
         </p>
       </div>
 
-      <!-- Carrossel de Notícias Institucionais -->
-      @include('partials.carousel')
-
       <!-- Departamentos -->
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Oferta Formativa por Departamento</h2>

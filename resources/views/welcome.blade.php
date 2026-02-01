@@ -382,7 +382,6 @@
             </p>
             <div class="flex text-[#3B82F6]">★★★★★</div>
           </div>
-          </div>
         </template>
 
         <!-- Botões -->
@@ -417,13 +416,4 @@
       </div>
     </div>
   </section>
-              
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
 @endsection

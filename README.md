@@ -172,9 +172,9 @@ php artisan key:generate
 npm run build
 ```
 
-6. **Inicie o servidor**
+6. **Inicie o servidor de desenvolvimento**
 ```bash
-Inclusão e Pertencimento
+php artisan serve
 ```
 
 O site estará disponível em `http://127.0.0.1:8000`
@@ -194,11 +194,20 @@ php artisan config:clear
 php artisan route:clear
 ```
 
+## 🔐 Acesso ao Servidor (Produção)
+
+- Tipo: VPS Linux (produção)
+- SSH (substituir `usuario` pelo utilizador autorizado, por exemplo `deploy`):
+
+```bash
+ssh usuario@isp-bie
+```
+
+- Diretório do projeto em produção: `/var/www/isp-bie.ao`
+
+Caso ainda não tenhas acesso, pede à infraestrutura para adicionar a tua chave SSH ao servidor.
+
 ## 🚀 Deploy em Produção (VPS)
-
-Servidor de produção (VPS) configurado em:
-
-- Diretório do projeto: `/var/www/isp-bie.ao`
 
 Passos básicos de deploy após um `git push` neste repositório:
 
