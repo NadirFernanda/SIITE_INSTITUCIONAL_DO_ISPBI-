@@ -39,8 +39,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         </svg>
       </button>
-        <div x-show="openInfra" @click.away="openInfra = false" x-cloak
-          class="absolute right-0 mt-2 w-64 bg-gradient-to-b from-white to-[#e5edff] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-sm">
+          <div x-show="openInfra" @click.away="openInfra = false" x-cloak
+            class="absolute right-0 mt-2 w-64 bg-gradient-to-b from-white to-[#f9fafb] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-sm">
         <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-semibold">Página de Sistemas</a>
         <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener"
           class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
@@ -93,8 +93,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-                  <div x-show="open" @click.away="open = false" x-cloak
-                    class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-gradient-to-b from-white to-[#e5edff] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 px-12 py-8 overflow-x-auto">
+                      <div x-show="open" @click.away="open = false" x-cloak
+                        class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-gradient-to-b from-white to-[#f9fafb] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 px-12 py-8 overflow-x-auto">
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
                   <a href="/sobre-ispbie" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
                   <a href="/missao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
@@ -119,8 +119,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-           <div x-show="openExt" @click.away="openExt = false" x-cloak
-             class="absolute left-0 mt-2 w-64 bg-gradient-to-b from-white to-[#e5edff] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2">
+             <div x-show="openExt" @click.away="openExt = false" x-cloak
+               class="absolute left-0 mt-2 w-64 bg-gradient-to-b from-white to-[#f9fafb] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2">
           <div class="grid grid-cols-1 gap-2">
             <a href="/cultura" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Extensão Universitária</a>
             <a href="/estagios" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estágios</a>
@@ -159,8 +159,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-           <div x-show="openExtMobile" @click.away="openExtMobile = false" x-cloak
-             class="mt-2 w-full bg-gradient-to-b from-white to-[#e5edff] text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
+             <div x-show="openExtMobile" @click.away="openExtMobile = false" x-cloak
+               class="mt-2 w-full bg-gradient-to-b from-white to-[#f9fafb] text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
           <a href="/cultura" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-bold">Extensão Universitária</a>
           <a href="/alumni" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
         </div>
@@ -202,7 +202,7 @@
 
           <!-- Dropdown Menu -->
              <div x-show="open" @click.away="open = false" x-cloak
-               class="absolute left-0 mt-8 w-96 bg-gradient-to-b from-white to-[#e5edff] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-4">
+               class="absolute left-0 mt-8 w-96 bg-gradient-to-b from-white to-[#f9fafb] text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-4">
             <div class="grid grid-cols-2 gap-2">
               <a href="/sobre-ispbie" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
               <a href="/missao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
@@ -227,7 +227,7 @@
           </button>
 
           <div x-show="openMobile" @click.away="openMobile = false" x-cloak
-            class="mt-2 w-full bg-gradient-to-b from-white to-[#e5edff] text-[#183153] rounded-lg shadow-lg border border-gray-200 p-4 grid grid-cols-2 gap-2">
+            class="mt-2 w-full bg-gradient-to-b from-white to-[#f9fafb] text-[#183153] rounded-lg shadow-lg border border-gray-200 p-4 grid grid-cols-2 gap-2">
             <a href="/sobre-ispbie" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
             <a href="/missao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
             <a href="/visao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
@@ -249,7 +249,7 @@
             </svg>
           </button>
           <div x-show="openInfraMobile" @click.away="openInfraMobile = false" x-cloak
-            class="mt-2 w-full bg-gradient-to-b from-white to-[#e5edff] text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 text-sm">
+            class="mt-2 w-full bg-gradient-to-b from-white to-[#f9fafb] text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 text-sm">
             <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-semibold">Página de Sistemas</a>
             <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
               Sistema de Gestão de Facturas (SGF)
