@@ -195,11 +195,6 @@
           </div>
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Repositório Académico</span>
         </a>
-      </div>
-
-      <!-- Segunda linha -->
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6">
-        
         <a href="/busca-pessoas" class="flex flex-col items-center group">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
@@ -209,7 +204,6 @@
           </div>
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Busca Pessoas</span>
         </a>
-
       </div>
     </div>
   </section>
