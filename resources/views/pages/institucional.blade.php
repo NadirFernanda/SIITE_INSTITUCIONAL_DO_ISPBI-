@@ -15,54 +15,88 @@
     </nav>
 
     <h2 class="text-3xl font-bold text-[#2563eb] mb-10">História</h2>
-
-                <div class="inline-block bg-gradient-to-r from-[#9C27B0] to-[#673AB7] text-white px-4 py-2 rounded-full font-bold mb-4">2012</div>
-                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Ensino Pós-Laboral</h3>
-                <p class="text-gray-700 leading-relaxed">
-                  Abertura da <strong>modalidade de ensino pós-laboral</strong> com docentes nacionais e expatriados. 
-                  Inicialmente no curso de <strong>Contabilidade e Administração</strong>, expandindo posteriormente para 
-                  <strong>Comunicação Social</strong> e <strong>Psicologia</strong>.
-                </p>
+    <div class="relative max-w-4xl mx-auto">
+      @php
+        $eventos = [
+          [
+            'ano' => '2007',
+            'titulo' => 'Comissões Instaladoras',
+            'descricao' => 'O governo da província do Bié cria as comissões instaladoras para instalação do Ensino Superior, dispensando as instalações da Escola média de Agronomia coordenada pela República Checa na rua Padre Fidalgo; na sequência é beneficiada com equipamento de laboratório de ensino de enfermagem.',
+            'cor' => 'from-[#9C27B0] to-[#673AB7]'
+          ],
+          [
+            'ano' => '2008',
+            'titulo' => 'Cessão do Edifício UNTA',
+            'descricao' => 'É cedido ao Ensino Superior o edifício da UNTA Confederação sindical localizada da avenida Joaquim Kapango, o qual pertencia à coordenação da extensão do ISCED-Huambo ministrando os Cursos de Matemática e Psicologia, gerida pelo orçamento da Escola Superior de Ciência e Tecnologia.',
+            'cor' => 'from-[#2563eb] to-[#3B82F6]'
+          ],
+          [
+            'ano' => '2009',
+            'titulo' => 'Criação da Escola Superior Politécnica',
+            'descricao' => 'Sob decreto presidencial é criada a Escola Superior Politécnica do Bié adstrita à Universidade José Eduardo dos Santos (UJES), enquadrada na 5ª Região Académica, integrando as províncias do Huambo, Bié e Moxico, com sede na Província do Huambo. No mesmo ano toma posse a Direção da instituição e das demais Unidades orgânicas. Chega o primeiro contingente de 6 professores cubanos para o curso de enfermagem, iniciando as atividades letivas em 18 de maio com 80 estudantes.',
+            'cor' => 'from-[#3B82F6] to-[#2563eb]'
+          ],
+          [
+            'ano' => '2010',
+            'titulo' => 'Novos Espaços e Concurso Público',
+            'descricao' => 'O Governo da província dispensa o edifício onde funcionava a Escola Dr. António Agostinho Neto “Manguxi” e a Escola Média Comercial e Industrial. É aberto o primeiro concurso público de docentes, integrando profissionais de outras unidades orgânicas.',
+            'cor' => 'from-[#9C27B0] to-[#673AB7]'
+          ],
+          [
+            'ano' => '2011',
+            'titulo' => 'Curso de Contabilidade e Administração',
+            'descricao' => 'Criado o curso de Contabilidade e Administração em parceria com a Faculdade de Economia da UJES, contando com mais 3 docentes cubanos.',
+            'cor' => 'from-[#2563eb] to-[#3B82F6]'
+          ],
+          [
+            'ano' => '2012',
+            'titulo' => 'Ensino Pós-Laboral',
+            'descricao' => 'Abertura da modalidade de ensino pós-laboral com docentes nacionais e expatriados, inicialmente no curso de Contabilidade e Administração, expandindo para Comunicação Social e Psicologia.',
+            'cor' => 'from-[#9C27B0] to-[#673AB7]'
+          ],
+          [
+            'ano' => '2013+',
+            'titulo' => 'Engenharia em Recursos Hídricos',
+            'descricao' => 'Curso criado por iniciativa da Reitoria da UJES em convênio com a Universidade Nacional do Litoral (UNL), Argentina. Seis docentes enviados para pós-graduação profissionalizante de 2 anos.',
+            'cor' => 'from-[#3B82F6] to-[#2563eb]'
+          ],
+          [
+            'ano' => '29 OUTUBRO 2020',
+            'titulo' => 'Instituto Superior Politécnico do Bié',
+            'descricao' => '<span class="text-xl mb-6 opacity-95">Criado pelo <strong>Decreto Presidencial nº 285/20</strong></span><br><span class="text-lg max-w-3xl ml-auto opacity-90">O ISP-Bié surge como instituição autónoma de ensino superior, consolidando mais de uma década de história de formação académica na província do Bié, com o compromisso de formar profissionais altamente qualificados para o desenvolvimento sustentável da região e do país.</span>',
+            'cor' => 'from-[#2563eb] via-[#3B82F6] to-[#2563eb]'
+          ],
+        ];
+      @endphp
+      <div class="relative space-y-16">
+        <!-- Linha vertical central -->
+        <div class="hidden md:block absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gray-200 z-0"></div>
+        @foreach($eventos as $index => $evento)
+          @if($loop->last)
+            <!-- Último card: destaque igual à imagem, largura aumentada -->
+            <div class="flex justify-center items-center w-full relative z-10">
+              <div class="w-full max-w-6xl bg-gradient-to-r from-[#2563eb] to-[#3B82F6] rounded-3xl shadow-2xl p-8 md:p-16 text-white text-center flex flex-col items-center">
+                <div class="inline-block bg-white text-[#2563eb] px-10 py-4 rounded-full font-bold text-2xl md:text-3xl mb-8 shadow">{!! $evento['ano'] !!}</div>
+                <h3 class="text-4xl md:text-5xl font-extrabold mb-6">{!! $evento['titulo'] !!}</h3>
+                <div class="text-xl md:text-2xl font-medium mb-4">{!! $evento['descricao'] !!}</div>
               </div>
             </div>
-          </div>
-
-          <!-- Engenharia Recursos Hídricos -->
-          <div class="relative grid md:grid-cols-2 gap-8 items-center">
-            <div class="md:text-right">
-              <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                <div class="inline-block bg-gradient-to-r from-[#3B82F6] to-[#2563eb] text-white px-4 py-2 rounded-full font-bold mb-4">Convênio Internacional</div>
-                <h3 class="text-xl font-bold text-[#2563eb] mb-3">Engenharia em Recursos Hídricos</h3>
-                <p class="text-gray-700 leading-relaxed">
-                  Criado o <strong>curso de Engenharia em Recursos Hídricos</strong> por iniciativa da Reitoria da UJES 
-                  em convênio com a <strong>Universidade Nacional do Litoral (UNL)</strong>, Santa Fé, República da Argentina. 
-                  Enviados <strong>6 docentes</strong> com perfil de Engenharia Agronómica para pós-graduação profissionalizante 
-                  de 2 anos.
-                </p>
+          @else
+            <div class="flex w-full relative z-10 {{ $index % 2 == 0 ? 'justify-start' : 'justify-end' }}">
+              <div class="w-full md:w-1/2 p-4 {{ $index % 2 == 0 ? 'text-left' : 'text-right' }} relative">
+                <!-- Linha vertical central dentro do card -->
+                <div class="hidden md:block absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gray-200 z-0"></div>
+                <div class="bg-white p-6 rounded-lg shadow-lg relative z-10">
+                  <div class="inline-block bg-gradient-to-r {{ $evento['cor'] }} text-white px-4 py-2 rounded-full font-bold mb-4">{!! $evento['ano'] !!}</div>
+                  <h3 class="text-xl font-bold text-[#2563eb] mb-3">{!! $evento['titulo'] !!}</h3>
+                  <p class="text-gray-700 leading-relaxed text-sm">{!! $evento['descricao'] !!}</p>
+                </div>
               </div>
             </div>
-            <div class="hidden md:block">
-              <div class="w-12 h-12 bg-[#3B82F6] rounded-full border-4 border-white shadow-lg mx-auto"></div>
-            </div>
-          </div>
-
-          <!-- 2020 - Criação do ISP-Bié -->
-          <div class="relative">
-            <div class="bg-gradient-to-r from-[#2563eb] via-[#3B82F6] to-[#2563eb] p-8 md:p-12 rounded-2xl text-white shadow-2xl">
-              <div class="text-center">
-                <div class="inline-block bg-white text-[#2563eb] px-6 py-3 rounded-full font-bold text-2xl mb-6">29 OUTUBRO 2020</div>
-                <h3 class="text-3xl md:text-4xl font-bold mb-4">Instituto Superior Politécnico do Bié</h3>
-                <p class="text-xl mb-6 opacity-95">
-                  Criado pelo <strong>Decreto Presidencial nº 285/20</strong>
-                </p>
-                <p class="text-lg max-w-3xl mx-auto opacity-90">
-                  O ISP-Bié surge como instituição autónoma de ensino superior, consolidando mais de uma década de 
-                  história de formação académica na província do Bié, com o compromisso de formar profissionais 
-                  altamente qualificados para o desenvolvimento sustentável da região e do país.
-                </p>
-              </div>
-            </div>
-          </div>
+          @endif
+        @endforeach
+      </div>
+    </div>
 
         </div>
       </div>
@@ -105,7 +139,7 @@
                 <span class="text-3xl font-bold">Variável</span>
               </div>
               <div class="flex items-center justify-between border-b border-white/20 pb-3">
-                <span class="text-lg">Vice-Presidências</span>
+                <span class="text-lg">Vice-Órgãos de gestão</span>
                 <span class="text-3xl font-bold">2</span>
               </div>
               <div class="flex items-center justify-between">
@@ -235,17 +269,18 @@
         <a href="/presidencia" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
           <div class="flex items-start">
             <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+              <!-- Ícone de pessoa -->
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
               </svg>
             </div>
             <div>
-              <h3 class="text-2xl font-bold text-[#2563eb] mb-2 group-hover:text-[#2563eb] transition-colors">Presidência</h3>
+              <h3 class="text-2xl font-bold text-[#2563eb] mb-2 group-hover:text-[#2563eb] transition-colors">Órgãos de gestão</h3>
               <p class="text-gray-600 mb-3">Órgão executivo máximo do Instituto</p>
               <ul class="text-sm text-gray-500 space-y-1">
                 <li>• Presidente</li>
                 <li>• Gabinete do Presidente</li>
-                <li>• 2 Vice-Presidências</li>
+                <li>• 2 Vice-Órgãos de gestão</li>
               </ul>
             </div>
           </div>
@@ -253,9 +288,10 @@
 
         <a href="/gestao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
           <div class="flex items-start">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-lg flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform">
+              <!-- Ícone de prédio -->
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/>
+                <path d="M3 19V6a1 1 0 01.553-.894l7-3.5a1 1 0 01.894 0l7 3.5A1 1 0 0120 6v13a1 1 0 01-1 1h-5a1 1 0 01-1-1v-4H8v4a1 1 0 01-1 1H2a1 1 0 01-1-1zM5 18v-2a1 1 0 011-1h2a1 1 0 011 1v2h2v-4a1 1 0 011-1h2a1 1 0 011 1v4h2V7.382l-6-3-6 3V18h2z"/>
               </svg>
             </div>
             <div>

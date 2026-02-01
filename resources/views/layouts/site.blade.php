@@ -32,13 +32,14 @@
     @include('partials.footer-content')
 
     @php
-        $jsFile = $manifest['resources/js/app.js']['file'] ?? null;
+        $jsFile = $manifest['resources/js/app.js']['file'] ?? 'resources/js/app.js';
+        $jsPath = public_path('build/' . $jsFile);
+        $jsVersion = file_exists($jsPath) ? filemtime($jsPath) : time();
     @endphp
-
-    @if($jsFile)
-        <script type="module" src="{{ asset('build/' . $jsFile) }}"></script>
-    @endif
+    <script type="module" src="{{ asset('build/' . $jsFile) }}?v={{ $jsVersion }}"></script>
     <!-- Alpine.js para interatividade do menu mobile -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    @stack('scripts')
 </body>
 </html>

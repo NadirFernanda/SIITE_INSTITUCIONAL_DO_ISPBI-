@@ -24,7 +24,7 @@
           </svg>
           <h2 class="text-4xl font-bold mb-4">Projeto em Implementação</h2>
           <p class="text-xl opacity-95 max-w-2xl mx-auto">
-            O ISP-Bié está a trabalhar na criação de uma plataforma de ensino Í  distância para 
+            O ISP-Bié está a trabalhar na criação de uma plataforma de ensino à distância para 
             democratizar o acesso ao ensino superior de qualidade na província do Bié e em toda Angola.
           </p>
         </div>
@@ -32,7 +32,7 @@
         <div class="prose prose-lg max-w-none text-gray-700">
           <p class="text-lg leading-relaxed mb-6">
             A modalidade de <strong>Ensino Online</strong> representa um passo estratégico na missão do ISP-Bié 
-            de expandir o acesso Í  educação superior. Estamos a desenvolver uma infraestrutura tecnológica 
+            de expandir o acesso à educação superior. Estamos a desenvolver uma infraestrutura tecnológica 
             robusta e a preparar conteúdos pedagógicos de excelência para oferecer cursos totalmente online 
             e semipresenciais.
           </p>
@@ -46,66 +46,84 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Fases de Implementação</h2>
       
-      <div class="grid md:grid-cols-4 gap-6">
+      <div class="overflow-x-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-10 xl:gap-16 min-w-[340px] md:min-w-0" id="fases-implementacao-cards">
         
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 w-[320px] md:w-auto mx-auto cursor-pointer fase-card" tabindex="0" style="margin-bottom: 1.5rem; max-width: 340px;">
           <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">1</span>
           </div>
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">Fase Atual</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Desenvolvimento da Plataforma</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>âœ“ Estudo de viabilidade concluído</li>
-            <li>âœ“ Aquisição de infraestrutura tecnológica</li>
-            <li>â³ Desenvolvimento da plataforma LMS</li>
-            <li>â³ Formação de tutores online</li>
+            <li>✔ Estudo de viabilidade concluído</li>
+            <li>✔ Aquisição de infraestrutura tecnológica</li>
+            <li>⏳ Desenvolvimento da plataforma LMS</li>
+            <li>⏳ Formação de tutores online</li>
           </ul>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 w-[320px] md:w-auto mx-auto cursor-pointer fase-card" tabindex="0" style="margin-bottom: 1.5rem; max-width: 340px;">
           <div class="w-16 h-16 bg-gradient-to-br from-[#9C27B0] to-[#673AB7] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">2</span>
           </div>
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">A Anunciar</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Criação de Conteúdos</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>ðŸ“š Produção de videoaulas</li>
-            <li>ðŸ“š Materiais didáticos digitais</li>
-            <li>ðŸ“š Atividades interativas</li>
-            <li>ðŸ“š Sistema de avaliação online</li>
+            <li>📚 Produção de videoaulas</li>
+            <li>📚 Materiais didáticos digitais</li>
+            <li>📚 Atividades interativas</li>
+            <li>📚 Sistema de avaliação online</li>
           </ul>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 w-[320px] md:w-auto mx-auto cursor-pointer fase-card" tabindex="0" style="margin-bottom: 1.5rem; max-width: 340px;">
           <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">3</span>
           </div>
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">A Anunciar</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Testes Piloto</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>ðŸ” Testes com grupo reduzido</li>
-            <li>ðŸ” Avaliação de usabilidade</li>
-            <li>ðŸ” Ajustes e melhorias</li>
-            <li>ðŸ” Validação pedagógica</li>
+            <li>🔍 Testes com grupo reduzido</li>
+            <li>🔍 Avaliação de usabilidade</li>
+            <li>🔍 Ajustes e melhorias</li>
+            <li>🔍 Validação pedagógica</li>
           </ul>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 w-[320px] md:w-auto mx-auto cursor-pointer fase-card" tabindex="0" style="margin-bottom: 1.5rem; max-width: 340px;">
           <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">4</span>
           </div>
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">A Anunciar</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Lançamento Oficial</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>ðŸš€ Abertura de matrículas</li>
-            <li>ðŸš€ Primeiras turmas online</li>
-            <li>ðŸš€ Suporte técnico dedicado</li>
-            <li>ðŸš€ Monitoramento contínuo</li>
+            <li>🚀 Abertura de matrículas</li>
+            <li>🚀 Primeiras turmas online</li>
+            <li>🚀 Suporte técnico dedicado</li>
+            <li>🚀 Monitoramento contínuo</li>
           </ul>
         </div>
 
       </div>
-    </div>
+        </div>
+      </div>
+    <script>
+      // Adiciona rolagem suave ao clicar em cada card das fases de implementação
+      document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.fase-card');
+        cards.forEach(card => {
+          card.addEventListener('click', function() {
+            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          card.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      });
+    </script>
   </section>
 
   <!-- Cursos Planejados -->

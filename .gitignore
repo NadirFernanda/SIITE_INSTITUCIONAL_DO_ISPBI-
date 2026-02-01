@@ -1,23 +1,50 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
+# Laravel .gitignore padrão
+/vendor/
+/node_modules/
 /public/storage
 /storage/*.key
-/storage/pail
-/vendor
 .env
-.env.backup
-.env.production
-.phpactor.json
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/auth.json
-/.fleet
-/.idea
-/.nova
-/.vscode
-/.zed
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Ignorar arquivos de build e cache
+/public/build
+/public/hot
+/storage/framework/
+/storage/logs/
+/storage/app/public
+
+# Ignorar arquivos do Composer
+composer.lock
+
+# Ignorar arquivos do Vite
+.vite
+
+# Ignorar arquivos do sistema
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Ignorar arquivos de debug
+*.log
+
+# Ignorar arquivos de configuração do editor
+*.sublime-workspace
+*.sublime-project
+
+# Ignorar arquivos de deploy
+.env.backup
+.env.production
+.env.staging
+.env.local
+.env.development
+.env.test
+.env.example

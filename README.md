@@ -1,4 +1,3 @@
-
 # INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ
 
 
@@ -195,6 +194,31 @@ php artisan config:clear
 php artisan route:clear
 ```
 
+## 🚀 Deploy em Produção (VPS)
+
+Servidor de produção (VPS) configurado em:
+
+- Diretório do projeto: `/var/www/isp-bie.ao`
+
+Passos básicos de deploy após um `git push` neste repositório:
+
+```bash
+ssh usuario@isp-bie
+cd /var/www/isp-bie.ao
+
+# Atualizar código
+git pull
+
+# Atualizar/compilar assets
+npm install        # ou npm ci, se já configurado
+npm run build
+
+# Limpar caches do Laravel
+php artisan view:clear
+php artisan cache:clear
+php artisan config:clear
+```
+
 ## 🎯 Roadmap Futuro
 
 ### Funcionalidades Pendentes
@@ -249,3 +273,25 @@ Este projeto é propriedade do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ.
 ---
 
 **Desenvolvido com ❤️ para o INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ** | Dezembro 2025
+
+## 🚀 Tecnologias Utilizadas
+
+O site institucional do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ foi desenvolvido utilizando as seguintes tecnologias:
+
+- **Laravel** (Backend, Framework PHP)
+- **Blade** (Sistema de templates do Laravel)
+- **Tailwind CSS** (Framework CSS utilitário para design responsivo e moderno)
+- **Vite** (Ferramenta de build e hot reload para assets front-end)
+- **PHP** (Linguagem principal do backend)
+- **JavaScript** (Scripts customizados para interatividade)
+- **HTML5** (Estrutura das páginas)
+- **CSS3** (Estilização customizada)
+- **postgres** (Banco de dados relacional, integração futura)
+- **Autenticação Laravel** (Login, painel administrativo)
+- **Favicon personalizado** (favicon.ico/png institucional)
+- **Imagens institucionais** (logo, fotos, ícones)
+- **Design responsivo** (Mobile-first, compatível com todos os dispositivos)
+- **Integração com rotas web** (routes/web.php)
+- **Estrutura modular de componentes** (partials, layouts, pages)
+
+Essas tecnologias garantem performance, segurança, escalabilidade e uma experiência moderna para todos os usuários do site.

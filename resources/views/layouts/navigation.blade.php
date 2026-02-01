@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <img src="/images/logo.png" alt="Instituto Superior Politécnico do Bié" class="block h-9 w-auto object-contain" style="background:none;border:none;box-shadow:none;padding:0;" />
                     </a>
                 </div>
 

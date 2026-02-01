@@ -2,25 +2,38 @@
 
 @section('hero')
     @include('partials.hero', [
-        'title' => 'Presidência',
+        'title' => 'Órgãos de gestão',
         'subtitle' => 'Instituto Superior Politécnico do Bié'
     ])
 @endsection
+
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
     <!-- Breadcrumb -->
     <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Presidência
+        <a href="/" class="hover:underline">Início</a> \ Órgãos de gestão
     </nav>
 
     <!-- Estrutura Organizacional -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <!-- Presidência -->
+            <!-- Organigrama Institucional -->
             <div class="mb-12">
-                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">PRESIDÊNCIA</h2>
+                <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Organigrama Institucional</h2>
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <img
+                        src="{{ asset('images/organigrama-ispbie.png') }}"
+                        alt="Organigrama do Instituto Superior Politécnico do Bié"
+                        class="w-full h-auto"
+                    >
+                </div>
+            </div>
+
+            <!-- Órgãos de gestão -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">ÓRGÃOS DE GESTÃO</h2>
                 <div class="grid md:grid-cols-2 gap-6">
 
                     <!-- Presidente -->
@@ -87,9 +100,9 @@
                 </div>
             </div>
 
-            <!-- Vice-Presidências -->
+            <!-- Vice-Órgãos de gestão -->
             <div class="mb-12">
-                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">VICE-PRESIDÊNCIAS</h2>
+                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">VICE-ÓRGÃOS DE GESTÃO</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Cada VP aqui mantém o mesmo padrão de código simplificado -->
                     <!-- Exemplo: VP Graduação -->
@@ -123,7 +136,7 @@
             <div class="bg-[#2563eb] rounded-2xl p-12 text-center text-white">
                 <h2 class="text-3xl font-bold mb-4">Governança</h2>
                 <p class="text-xl mb-8 opacity-90">
-                    Acompanhe as ações e decisões da Presidência do ISP-Bié
+                    Acompanhe as ações e decisões dos Órgãos de gestão do ISP-Bié
                 </p>
                 <div class="flex flex-wrap gap-4 justify-center">
                     <!-- Botão Portal da Transparência removido -->

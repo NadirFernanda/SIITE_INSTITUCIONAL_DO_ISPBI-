@@ -298,7 +298,7 @@
 
   <!-- Seção ISP-Bié em números -->
 
-  <section class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white">
+  <section id="estatisticas" class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
       <p class="text-lg mb-12 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>

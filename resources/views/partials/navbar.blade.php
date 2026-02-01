@@ -26,7 +26,7 @@
     <a href="/servicos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🗞️</span> Serviços</a>
   </div>
   <div class="flex flex-wrap items-center gap-4">
-    <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgão de Gestão</a> -->
+    <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgãos de gestão</a> -->
     <a href="/cursos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🦉</span> Cursos</a>
     <a href="/sistemas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>⚙️</span> Infraestrutura Digital</a>
     <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]">
@@ -78,10 +78,10 @@
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
                   <a href="/institucional" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
                   <a href="/missao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
-                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
+                  <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
                   <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-                  <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Órgão de gestão</a>
-                  <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
+                  <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a>
+                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
                 </div>
                 <div class="mt-8 border-t border-gray-700 pt-6 text-center">
 
@@ -167,7 +167,7 @@
         </a>
         <a href="/presidencia" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="2" stroke="#2563eb"/><path d="M12 4v4" stroke="#2563eb"/></svg></span>
-          <span>Órgão de Gestão</span>
+          <span>Órgãos de Gestão</span>
         </a>
         <!-- Dropdown Institucional - Desktop -->
         <div x-data="{ open: false }" class="relative">
@@ -188,7 +188,7 @@
               <a href="/missao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
               <a href="/visao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
               <a href="/valores" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-              <!-- <a href="/presidencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgão de Gestão</a> -->
+              <!-- <a href="/presidencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a> -->
               <a href="/estatisticas" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
               <a href="/transparencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white col-span-2 text-center">Transparência</a>
             </div>
@@ -212,7 +212,7 @@
             <a href="/missao" class="block px-3 py-2 rounded hover:bg-gray-100">Missão</a>
             <a href="/visao" class="block px-3 py-2 rounded hover:bg-gray-100">Visão</a>
             <a href="/valores" class="block px-3 py-2 rounded hover:bg-gray-100">Valores</a>
-            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-gray-100">Órgão de Gestão</a> -->
+            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-gray-100">Órgãos de gestão</a> -->
             <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-gray-100">Estatísticas</a>
             <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-gray-100">Transparência</a>
           </div>

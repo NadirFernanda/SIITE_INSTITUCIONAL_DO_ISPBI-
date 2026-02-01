@@ -82,7 +82,7 @@
                 Calendário Acadêmico 2026 - Retificação de Datas
               </h3>
               <p class="text-gray-600">
-                A Presidência do ISP-Bié informa sobre alteração nas datas de início do ano letivo 2026.
+                Os Órgãos de gestão do ISP-Bié informam sobre alteração nas datas de início do ano letivo 2026.
               </p>
             </div>
             <a href="#" class="ml-4 bg-[#2563eb] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1a2f3d] transition-colors whitespace-nowrap">

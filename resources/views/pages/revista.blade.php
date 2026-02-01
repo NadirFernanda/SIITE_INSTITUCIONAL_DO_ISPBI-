@@ -26,9 +26,10 @@
         </div>
     </div>
 
+
     <div class="container mx-auto px-6 py-12">
         <section class="mb-16">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Êltima Edição</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Última Edição</h2>
             <div class="bg-white p-8 rounded-lg shadow-md">
                 <div class="flex items-start gap-6">
                     <div class="w-48 h-64 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-lg flex items-center justify-center text-white">
@@ -36,7 +37,7 @@
                     </div>
                     <div class="flex-1">
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">Volume 1, Número 1 (2024)</h3>
-                        <p class="text-gray-600 mb-4">Edição inaugural da Revista Científica do ISP-Bié</p>
+                        <p class="text-gray-600 mb-4">Edição inaugural da Revista Científica do ISP-Bié.</p>
                         <button class="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700">Acessar Edição</button>
                     </div>
                 </div>
@@ -52,6 +53,7 @@
         </section>
     </div>
 
+    @include('partials.footer-content')
 
 </body>
 </html>

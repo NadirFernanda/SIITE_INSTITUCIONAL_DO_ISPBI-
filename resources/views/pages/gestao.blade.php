@@ -158,52 +158,92 @@
             </div>
           </div>
 
-          <!-- Presidência -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-            <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
-              <div class="flex items-center text-white">
-                <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                </svg>
-                <h3 class="text-xl font-bold">Presidência</h3>
+          <!-- Órgãos de gestão -->
+          <!-- Organograma Institucional -->
+          <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+            <h3 class="text-2xl font-bold text-[#2563eb] mb-6 text-center">Organograma Institucional</h3>
+            <div class="flex flex-col items-center">
+              <!-- Top Level -->
+              <div class="flex flex-col items-center mb-8">
+                <div class="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center mb-2 overflow-hidden">
+                  <img src="/images/placeholder-profile.png" alt="Fernando Maia" class="object-cover w-full h-full" />
+                </div>
+                <div class="text-center">
+                  <span class="block font-bold text-lg text-[#2563eb]">Presidente</span>
+                  <span class="block text-gray-700">Fernando Maia</span>
+                </div>
               </div>
-            </div>
-            <div class="p-6">
-              <p class="text-gray-700 mb-4">
-                Í“rgão executivo máximo responsável pela administração geral do Instituto, 
-                representação institucional e implementação das decisões dos órgãos colegiados.
-              </p>
-              <ul class="space-y-2 text-sm text-gray-600">
-                <li class="flex items-start">
-                  <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  Gestão administrativa
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  Representação institucional
-                </li>
-                <li class="flex items-start">
-                  <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  Coordenação geral
-                </li>
-              </ul>
+              <!-- Conselho Geral -->
+              <div class="flex flex-col items-center mb-8">
+                <span class="block font-bold text-[#2563eb]">Conselho Geral</span>
+              </div>
+              <!-- Vice-Presidentes -->
+              <div class="flex flex-wrap justify-center gap-8 mb-8">
+                <div class="flex flex-col items-center">
+                  <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mb-2 overflow-hidden">
+                    <img src="/images/placeholder-profile.png" alt="Gervásio Mendes Caluengue" class="object-cover w-full h-full" />
+                  </div>
+                  <span class="block font-bold text-[#2563eb] text-sm">Vice-Presidente Assuntos Académicos</span>
+                  <span class="block text-gray-700 text-sm">Gervásio Mendes Caluengue</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center mb-2 overflow-hidden">
+                    <img src="/images/placeholder-profile.png" alt="Vice Científico" class="object-cover w-full h-full" />
+                  </div>
+                  <span class="block font-bold text-[#2563eb] text-sm">Vice-Presidente Assuntos Científicos e Pós-graduação</span>
+                  <span class="block text-gray-700 text-sm">(Nome)</span>
+                </div>
+              </div>
+              <!-- Conselhos -->
+              <div class="flex flex-wrap justify-center gap-8 mb-8">
+                <div class="flex flex-col items-center">
+                  <span class="block font-bold text-[#2563eb]">Conselho de Direção</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <span class="block font-bold text-[#2563eb]">Conselho Científico</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <span class="block font-bold text-[#2563eb]">Conselho Pedagógico</span>
+                </div>
+              </div>
+              <!-- Departamentos e Serviços -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                <!-- Example Department -->
+                <div class="flex flex-col items-center">
+                  <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mb-2 overflow-hidden">
+                    <img src="/images/placeholder-profile.png" alt="Ernesto Muhongo" class="object-cover w-full h-full" />
+                  </div>
+                  <span class="block font-bold text-[#2563eb] text-sm">Departamento dos Assuntos Académicos</span>
+                  <span class="block text-gray-700 text-sm">Ernesto Muhongo</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mb-2 overflow-hidden">
+                    <img src="/images/placeholder-profile.png" alt="Zanilda Gonga" class="object-cover w-full h-full" />
+                  </div>
+                  <span class="block font-bold text-[#2563eb] text-sm">Departamento de Investigação Científica, Inovação...</span>
+                  <span class="block text-gray-700 text-sm">Zanilda Gonga</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mb-2 overflow-hidden">
+                    <img src="/images/placeholder-profile.png" alt="Neusa Eduardo" class="object-cover w-full h-full" />
+                  </div>
+                  <span class="block font-bold text-[#2563eb] text-sm">Departamento de Apoio à Direção Geral</span>
+                  <span class="block text-gray-700 text-sm">Neusa Eduardo</span>
+                </div>
+                <!-- Add more departments/services as needed, following the organogram -->
+              </div>
+              <!-- Add more sections for Secretaria, Recursos Humanos, Jurídico, etc. as per the organogram -->
             </div>
           </div>
 
-          <!-- Vice-Presidências -->
+          <!-- Vice-Órgãos de gestão -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
                 </svg>
-                <h3 class="text-xl font-bold">Vice-Presidências</h3>
+                <h3 class="text-xl font-bold">Vice-Órgãos de gestão</h3>
               </div>
             </div>
             <div class="p-6">
@@ -216,19 +256,19 @@
                   <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                   </svg>
-                  Vice-Presidência Académica
+                  Vice-Órgãos de gestão Académica
                 </li>
                 <li class="flex items-start">
                   <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                   </svg>
-                  Vice-Presidência Científica
+                  Vice-Órgãos de gestão Científica
                 </li>
                 <li class="flex items-start">
                   <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                   </svg>
-                  Vice-Presidência Administrativa
+                  Vice-Órgãos de gestão Administrativa
                 </li>
               </ul>
             </div>

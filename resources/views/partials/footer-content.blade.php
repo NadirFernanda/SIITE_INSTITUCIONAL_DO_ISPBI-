@@ -18,7 +18,6 @@
           <h3 class="text-[#FFD700] font-bold text-lg mb-4">Pesquisa</h3>
           <ul class="space-y-2">
             <li><a href="/investigacao" class="hover:text-[#FFD700] transition-colors">Pesquisa no ISP-Bié</a></li>
-            <li><a href="/inovacao" class="hover:text-[#FFD700] transition-colors">Inovação Tecnológica</a></li>
             <li><a href="/biblioteca" class="hover:text-[#FFD700] transition-colors">Biblioteca Digital</a></li>
             <li><a href="/repositorio" class="hover:text-[#FFD700] transition-colors">Repositório</a></li>
             <li><a href="/revista" class="hover:text-[#FFD700] transition-colors">Revista Científica</a></li>
@@ -33,8 +32,8 @@
             <li><a href="/missao" class="hover:text-[#FFD700] transition-colors">Missão</a></li>
             <li><a href="/visao" class="hover:text-[#FFD700] transition-colors">Visão</a></li>
             <li><a href="/valores" class="hover:text-[#FFD700] transition-colors">Valores</a></li>
-            <!-- <li><a href="/presidencia" class="hover:text-[#FFD700] transition-colors">Presidência</a></li> -->
-            <li><a href="/estatisticas" class="hover:text-[#FFD700] transition-colors">Estatísticas</a></li>
+            <!-- <li><a href="/presidencia" class="hover:text-[#FFD700] transition-colors">Órgãos de gestão</a></li> -->
+            <li><a href="/#estatisticas" class="hover:text-[#FFD700] transition-colors">Estatísticas</a></li>
           </ul>
         </div>
 
