@@ -93,6 +93,7 @@ Route::get('/alumni', function () {
     $alumni = App\Models\Alumnus::where('publicado', true)->orderByDesc('created_at')->get();
     return view('pages.alumni', compact('alumni'));
 })->name('alumni');
+Route::get('/alumni/{id}', [App\Http\Controllers\AlumniController::class, 'show'])->name('alumni.show');
 Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store');
 
 // Webmail

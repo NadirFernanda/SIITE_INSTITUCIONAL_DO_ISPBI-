@@ -315,14 +315,27 @@
       <div
         x-data="{
           current: 0,
-          testimonials: window.TESTEMUNHOS,
-          next() { this.current = (this.current + 1) % this.testimonials.length },
-          prev() { this.current = (this.current - 1 + this.testimonials.length) % this.testimonials.length },
+          testimonials: window.TESTEMUNHOS || [],
+          get total() { return this.testimonials.length },
+          next() {
+            if (this.total === 0) return;
+            this.current = (this.current + 1) % this.total;
+          },
+          prev() {
+            if (this.total === 0) return;
+            this.current = (this.current - 1 + this.total) % this.total;
+          },
           verMais() {
-            console.log('Ver mais testemunhos')
+            window.location.href = '/alumni';
+          },
+          short(text) {
+            if (!text) return 'Sem mensagem informada.';
+            const max = 360;
+            return text.length > max ? text.slice(0, max) + '…' : text;
           },
           autoplay: null,
           startAutoplay() {
+            if (this.total <= 1) return;
             this.autoplay = setInterval(() => { this.next() }, 4000);
           },
           stopAutoplay() {
@@ -333,40 +346,46 @@
         @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
         class="relative flex flex-col items-center"
       >
-
-        <div class="relative w-full max-w-xl min-h-[220px]">
-        <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
+        <div class="w-full max-w-xl overflow-hidden">
           <div
-            x-show="current === idx"
-            x-transition:enter="transform transition ease-out duration-500"
-            x-transition:enter-start="translate-x-full opacity-0"
-            x-transition:enter-end="translate-x-0 opacity-100"
-            x-transition:leave="transform transition ease-in duration-500"
-            x-transition:leave-start="translate-x-0 opacity-100"
-            x-transition:leave-end="-translate-x-full opacity-0"
-            class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow w-full max-w-xl absolute inset-0"
+            class="flex transition-transform duration-500 ease-out"
+            :style="'transform: translateX(-' + (current * 100) + '%)'"
           >
-            <div class="flex items-center mb-4">
-              <div
-                class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6]
-                       rounded-full flex items-center justify-center text-white
-                       text-xl font-bold"
-                x-text="item.nome.substring(0,2).toUpperCase()">
+            <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
+              <div class="w-full max-w-xl flex-shrink-0">
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
+                  <div class="flex items-center mb-4">
+                    <div
+                      class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6]
+                             rounded-full flex items-center justify-center text-white
+                             text-xl font-bold"
+                      x-text="item.nome.substring(0,2).toUpperCase()">
+                    </div>
+                    <div class="ml-4">
+                      <h4 class="font-bold text-gray-900" x-text="item.nome"></h4>
+                      <p class="text-sm text-gray-600"
+                         x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
+                    </div>
+                  </div>
+                  <p class="text-gray-700 italic mb-4"
+                     x-text="item.trabalha
+                       ? short(item.satisfacao || 'Sem mensagem informada.')
+                       : 'Procurando emprego.'">
+                  </p>
+                  <div class="flex items-center justify-between mt-2">
+                    <div class="flex text-[#3B82F6]">★★★★★</div>
+                    <a
+                      :href="'/alumni/' + (item.id ?? '')"
+                      class="text-sm text-[#2563eb] font-semibold hover:text-[#1d4ed8] underline"
+                      x-show="item.id"
+                    >
+                      Ler mais
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div class="ml-4">
-                <h4 class="font-bold text-gray-900" x-text="item.nome"></h4>
-                <p class="text-sm text-gray-600"
-                   x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
-              </div>
-            </div>
-            <p class="text-gray-700 italic mb-4"
-               x-text="item.trabalha
-                 ? (item.satisfacao || 'Sem mensagem informada.')
-                 : 'Procurando emprego.'">
-            </p>
-            <div class="flex text-[#3B82F6]">★★★★★</div>
+            </template>
           </div>
-        </template>
         </div>
 
         <!-- Botões -->

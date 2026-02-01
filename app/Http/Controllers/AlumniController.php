@@ -6,6 +6,16 @@ use App\Models\Alumnus;
 
 class AlumniController extends Controller
 {
+    public function show($id)
+    {
+        $alumnus = Alumnus::where('id', $id)
+            ->where('publicado', true)
+            ->where('testemunho', true)
+            ->firstOrFail();
+
+        return view('pages.alumni-show', compact('alumnus'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
