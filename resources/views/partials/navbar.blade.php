@@ -1,11 +1,5 @@
-﻿<!-- Barra de links importantes (azul escuro elegante) - Desktop apenas (agora sem links, apenas faixa visual) -->
-<div class="hidden md:block" style="background:#183153;border-bottom:1px solid #1e293b;">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-end py-2 text-xs overflow-x-hidden">
-      <!-- Faixa superior intencionalmente sem links -->
-    </div>
-  </div>
-</div>
+﻿<!-- Barra de links importantes (azul institucional) - Desktop apenas (linha fina) -->
+<div class="hidden md:block w-full" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;"></div>
 
 <!-- Barra inferior institucional em cinza claro - Desktop apenas -->
 <div class="hidden md:flex" style="background:#f3f4f6;color:#183153;font-size:0.85rem;padding:2px 8px;align-items:center;justify-content:space-between;width:100%;">
