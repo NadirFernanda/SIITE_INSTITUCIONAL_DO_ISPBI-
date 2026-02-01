@@ -1,19 +1,8 @@
-﻿<!-- Barra de links importantes (azul escuro elegante) - Desktop apenas -->
+﻿<!-- Barra de links importantes (azul escuro elegante) - Desktop apenas (agora sem links, apenas faixa visual) -->
 <div class="hidden md:block" style="background:#183153;border-bottom:1px solid #1e293b;">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-end py-2 space-x-4 text-xs overflow-x-auto">
-      <a href="/calendario-academico" class="flex items-center space-x-1 text-gray-100 hover:text-[#60a5fa] transition-colors whitespace-nowrap">
-        <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg></span>
-        <span>Calendário Académico</span>
-      </a>
-      <a href="/guia-estudante" class="flex items-center space-x-1 text-gray-100 hover:text-[#60a5fa] transition-colors whitespace-nowrap">
-        <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg></span>
-        <span>Guia do Estudante</span>
-      </a>
-      <a href="/resultados" class="flex items-center space-x-1 text-gray-100 hover:text-[#60a5fa] transition-colors whitespace-nowrap">
-        <span class="inline-block align-middle"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg></span>
-        <span>Resultados de Exames</span>
-      </a>
+    <div class="flex items-center justify-end py-2 text-xs overflow-x-hidden">
+      <!-- Faixa superior intencionalmente sem links -->
     </div>
   </div>
 </div>
@@ -51,6 +40,17 @@
 
     <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]">
       <span>📝</span> Candidaturas
+    </a>
+
+    <!-- Links de estudantes movidos para a barra inferior -->
+    <a href="/calendario-academico" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
+      <span>📅</span> Calendário Académico
+    </a>
+    <a href="/guia-estudante" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
+      <span>📖</span> Guia do Estudante
+    </a>
+    <a href="/resultados" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
+      <span>📊</span> Resultados de Exames
     </a>
   </div>
 </div>
