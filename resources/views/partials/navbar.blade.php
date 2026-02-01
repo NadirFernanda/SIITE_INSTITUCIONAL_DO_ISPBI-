@@ -40,10 +40,10 @@
         </svg>
       </button>
       <div x-show="openInfra" @click.away="openInfra = false" x-cloak
-           class="absolute right-0 mt-2 w-64 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-sm">
-        <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-gray-100 font-semibold">Página de Sistemas</a>
+          class="absolute right-0 mt-2 w-64 bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 z-50 p-2 text-sm">
+        <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-semibold">Página de Sistemas</a>
         <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener"
-           class="block px-3 py-2 rounded hover:bg-gray-100">
+          class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
           Sistema de Gestão de Facturas (SGF)
         </a>
       </div>
@@ -160,9 +160,9 @@
           </svg>
         </button>
         <div x-show="openExtMobile" @click.away="openExtMobile = false" x-cloak
-             class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
-          <a href="/cultura" class="block px-3 py-2 rounded hover:bg-gray-100 font-bold">Extensão Universitária</a>
-          <a href="/alumni" class="block px-3 py-2 rounded hover:bg-gray-100">Alumni</a>
+             class="mt-2 w-full bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 p-2 grid grid-cols-1 gap-2">
+          <a href="/cultura" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-bold">Extensão Universitária</a>
+          <a href="/alumni" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
         </div>
       </div>
       <a href="/noticias" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
@@ -227,14 +227,14 @@
           </button>
 
           <div x-show="openMobile" @click.away="openMobile = false" x-cloak
-               class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-4 grid grid-cols-2 gap-2">
-            <a href="/institucional" class="block px-3 py-2 rounded hover:bg-gray-100">Sobre o ISP-Bié</a>
-            <a href="/missao" class="block px-3 py-2 rounded hover:bg-gray-100">Missão</a>
-            <a href="/visao" class="block px-3 py-2 rounded hover:bg-gray-100">Visão</a>
-            <a href="/valores" class="block px-3 py-2 rounded hover:bg-gray-100">Valores</a>
-            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-gray-100">Órgãos de gestão</a> -->
-            <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-gray-100">Estatísticas</a>
-            <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-gray-100">Transparência</a>
+               class="mt-2 w-full bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 p-4 grid grid-cols-2 gap-2">
+            <a href="/institucional" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
+            <a href="/missao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
+            <a href="/visao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
+            <a href="/valores" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
+            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a> -->
+            <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
+            <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Transparência</a>
           </div>
         </div>
 
@@ -249,9 +249,9 @@
             </svg>
           </button>
           <div x-show="openInfraMobile" @click.away="openInfraMobile = false" x-cloak
-               class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 text-sm">
-            <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-gray-100 font-semibold">Página de Sistemas</a>
-            <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener" class="block px-3 py-2 rounded hover:bg-gray-100">
+               class="mt-2 w-full bg-[#183153] text-white rounded-lg shadow-lg border border-gray-700 p-2 grid grid-cols-1 gap-2 text-sm">
+            <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-semibold">Página de Sistemas</a>
+            <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
               Sistema de Gestão de Facturas (SGF)
             </a>
           </div>
