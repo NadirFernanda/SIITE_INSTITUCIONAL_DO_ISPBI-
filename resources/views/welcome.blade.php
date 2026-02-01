@@ -141,14 +141,6 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Portal ISP-Bié</span>
         </a>
 
-        <a href="/transparencia" class="flex flex-col items-center group">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-            </svg>
-          </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Transparência</span>
-        </a>
 
         <a href="/ouvidoria" class="flex flex-col items-center group">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
@@ -218,14 +210,6 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Busca Pessoas</span>
         </a>
 
-        <a href="/busca-biblioteca" class="flex flex-col items-center group">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/>
-            </svg>
-          </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Busca Biblioteca</span>
-        </a>
       </div>
     </div>
   </section>
