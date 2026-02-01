@@ -99,7 +99,7 @@
                     <h3 class="text-lg font-semibold text-gray-900">Repositório</h3>
                 </a>
 
-                <a href="/webmail" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center group">
+                <a href="https://webmail.ispbie.ao" target="_blank" rel="noopener" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center group">
                     <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4 mx-auto group-hover:bg-orange-200 transition-colors">
                         <svg class="w-6 h-6 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>

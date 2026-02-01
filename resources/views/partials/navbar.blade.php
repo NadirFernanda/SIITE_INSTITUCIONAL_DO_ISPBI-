@@ -5,7 +5,7 @@
 <div class="hidden md:flex" style="background:#f3f4f6;color:#183153;font-size:0.85rem;padding:2px 8px;align-items:center;justify-content:space-between;width:100%;">
   <div class="flex flex-wrap items-center gap-2">
     <a href="/contactos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>📷</span> Contacto</a>
-    <a href="/webmail" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
+    <a href="https://webmail.ispbie.ao" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
     <a href="/servicos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🗞️</span> Serviços</a>
   </div>
   <div class="flex flex-wrap items-center gap-2">
@@ -173,7 +173,7 @@
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="#2563eb"/><rect x="9" y="10" width="6" height="4" rx="1" stroke="#2563eb"/></svg></span>
           <span>Contacto</span>
         </a>
-        <a href="/webmail" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+        <a href="https://webmail.ispbie.ao" target="_blank" rel="noopener" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#2563eb"/><path d="M4 6l8 7 8-7" stroke="#2563eb"/></svg></span>
           <span>Webmail</span>
         </a>
