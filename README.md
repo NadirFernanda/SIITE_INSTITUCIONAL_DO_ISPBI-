@@ -227,8 +227,6 @@ Caso ainda não tenhas acesso, pede à infraestrutura para adicionar a tua chave
 Passos básicos de deploy após um `git push` neste repositório:
 
 ```bash
-# 1. Aceder ao servidor (substituir `usuario` pelo utilizador correto)
-ssh usuario@isp-bie
 
 # 2. Entrar no diretório do projeto
 cd /var/www/isp-bie.ao
