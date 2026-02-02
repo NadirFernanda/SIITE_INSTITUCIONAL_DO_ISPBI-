@@ -43,9 +43,9 @@
         </ul>
 
         <div class="mt-4 flex space-x-3">
-          <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" aria-label="Facebook" class="text-gray-500 hover:text-[var(--brand-dark)]">Facebook</a>
-          <a href="#" aria-label="Twitter" class="text-gray-500 hover:text-[var(--brand-dark)]">Twitter</a>
-          <a href="#" aria-label="Instagram" class="text-gray-500 hover:text-[var(--brand-dark)]">Instagram</a>
+          <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" aria-label="Facebook" class="text-gray-500 hover:text-[var(--brand-dark)]" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.linkedin.com/company/instituto-superior-polit%C3%A9cnico-do-bi%C3%A9" aria-label="LinkedIn" class="text-gray-500 hover:text-[var(--brand-dark)]" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.instagram.com/ispbie?igsh=MWpuaWVwMnYyN3c3OA==" aria-label="Instagram" class="text-gray-500 hover:text-[var(--brand-dark)]" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
     </div>
