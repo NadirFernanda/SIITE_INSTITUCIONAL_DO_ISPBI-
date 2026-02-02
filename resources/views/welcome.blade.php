@@ -280,29 +280,32 @@
         @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
         class="relative flex flex-col items-center"
       >
-        <div class="w-full max-w-xl overflow-hidden">
+        <div class="w-full max-w-2xl overflow-visible">
           <div
-            class="flex transition-transform duration-500 ease-out"
+            class="flex transition-all duration-700 ease-in-out"
             :style="'transform: translateX(-' + (current * 100) + '%)'"
           >
             <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
-              <div class="w-full max-w-xl flex-shrink-0">
-                <div class="bg-white rounded-full shadow-md p-4 hover:shadow-xl transition-shadow flex flex-col items-center justify-center mx-auto"
-                     :class="'h-40 w-40 md:h-32 md:w-32'">
-                  <div class="flex flex-col items-center justify-center">
-                    <div
-                      class="w-20 h-20 md:w-16 md:h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-xl font-bold mb-2"
-                      x-text="item.nome.substring(0,2).toUpperCase()">
+              <div class="w-full max-w-2xl flex-shrink-0 flex justify-center">
+                <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 flex flex-col items-center justify-between mx-auto min-h-[320px] max-w-xl w-full transition-shadow duration-300 hover:shadow-2xl">
+                  <div class="flex flex-col items-center">
+                    <div class="w-14 h-14 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-lg font-bold mb-4 shadow-md">
+                      <span x-text="item.nome.substring(0,2).toUpperCase()"></span>
                     </div>
-                    <h4 class="font-bold text-gray-900 text-center" x-text="item.nome"></h4>
-                    <p class="text-sm text-gray-600 text-center"
-                       x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
+                    <div class="relative w-full">
+                      <svg class="absolute -left-6 -top-2 w-8 h-8 text-[#2563eb] opacity-30" fill="currentColor" viewBox="0 0 24 24"><path d="M7.17 6.17A7 7 0 0 1 13 19h-2a5 5 0 0 0-5-5V6.17z"/></svg>
+                      <p class="text-lg md:text-xl text-gray-700 font-medium italic text-center px-4 leading-relaxed min-h-[72px]">
+                        <span x-text="item.trabalha ? short(item.satisfacao || 'Sem mensagem informada.') : 'Procurando emprego.'"></span>
+                      </p>
+                      <svg class="absolute -right-6 -bottom-2 w-8 h-8 text-[#2563eb] opacity-30" fill="currentColor" viewBox="0 0 24 24"><path d="M16.83 17.83A7 7 0 0 1 11 5h2a5 5 0 0 0 5 5v7.83z"/></svg>
+                    </div>
                   </div>
-                  <p class="text-gray-700 italic mt-2 text-center"
-                     x-text="item.trabalha ? short(item.satisfacao || 'Sem mensagem informada.') : 'Procurando emprego.'">
-                  </p>
-                  <div class="flex items-center justify-center mt-2">
-                    <div class="flex text-[#3B82F6]">★★★★★</div>
+                  <div class="mt-6 flex flex-col items-center w-full">
+                    <h4 class="font-bold text-gray-900 text-lg md:text-xl text-center" x-text="item.nome"></h4>
+                    <p class="text-sm md:text-base text-gray-500 text-center mt-1" x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
+                    <div class="flex items-center justify-center mt-3">
+                      <div class="flex text-[#2563eb] text-base md:text-lg">★★★★★</div>
+                    </div>
                   </div>
                 </div>
               </div>
