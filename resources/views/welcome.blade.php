@@ -10,7 +10,7 @@
 
 
   <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (estilo USP) -->
-  <section class="bg-white py-6 sm:py-8 lg:py-12 scroll-reveal">
+  <section class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex flex-wrap items-end justify-between mb-8">
         <div class="flex flex-row space-x-3 md:space-x-12 items-end justify-between w-full">
@@ -112,7 +112,7 @@
 
   <!-- Seção Institucional -->
 
-  <section class="py-16 bg-gray-100 scroll-reveal">
+  <section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-gray-900 mb-12">Notícias institucionais</h2>
       @component('components.noticias-carousel')
@@ -121,7 +121,7 @@
   </section>
 
   <!-- Seção Acesso Rápido -->
-  <section class="py-16 bg-white border-t border-gray-200 scroll-reveal">
+  <section class="py-16 bg-white border-t border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-gray-900 mb-12">Acesso rápido</h2>
       
@@ -205,7 +205,7 @@
   </section>
 
   <!-- Seção Serviços ao Estudante -->
-  <section class="py-16 scroll-reveal" style="background:#e0e7ff; color:#222;">
+  <section class="py-16" style="background:#e0e7ff; color:#222;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold mb-4">Serviços ao Estudante</h2>
       <p class="text-lg mb-12 opacity-90">O ISP-Bié ao seu serviço</p>
