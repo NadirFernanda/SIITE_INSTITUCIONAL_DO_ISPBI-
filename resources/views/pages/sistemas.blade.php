@@ -6,10 +6,10 @@
     <nav class="text-sm opacity-80 mb-10">
       <a href="/" class="hover:underline text-[#2563eb]">Início</a> <span class="mx-2 text-gray-400">/</span> <span class="font-semibold text-gray-700">Sistemas</span>
     </nav>
-    <div class="bg-white rounded-2xl shadow-xl p-10 mb-14 interactive-card border-t-8 border-[#2563eb]">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-[#2563eb] mb-3 tracking-tight">Sistemas Institucionais</h1>
-      <p class="text-xl text-gray-700 mb-2">Plataformas e Serviços Digitais do ISP-Bié</p>
-      <p class="text-base text-gray-500">Acesso centralizado aos principais sistemas acadêmicos, administrativos e de suporte.</p>
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
+      <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Sistemas Institucionais</h1>
+      <p class="text-lg text-gray-700">Plataformas e Serviços Digitais do ISP-Bié</p>
+      <p class="mt-3 text-gray-600 max-w-2xl">Acesso centralizado aos principais sistemas acadêmicos, administrativos e de suporte.</p>
     </div>
 
   <!-- Introdução -->
