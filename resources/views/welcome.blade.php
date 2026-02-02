@@ -46,41 +46,47 @@
         <div class="flex flex-col items-center w-full mt-12">
           <!-- Título -->
           <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mb-8 text-center">Pilares Estratégicos</h2>
-
-          <!-- Cards dos pilares -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-6xl">
+          <!-- Puzzle horizontal dos pilares -->
+          <div class="flex flex-row flex-wrap justify-center gap-4 md:gap-8 w-full max-w-6xl">
             <!-- Ensino -->
-            <div class="flex flex-col items-center text-center interactive-card">
-              <a href="/pilares#ensino" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Ensino">
-                <span class="text-white font-bold text-base md:text-lg">E</span>
+            <div class="flex flex-col items-center">
+              <a href="/pilares#ensino" class="group" title="Ver detalhes do pilar Ensino">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H20A10 10 0 0 1 10 60V40z" fill="#2563eb"/>
+                </svg>
+                <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">E</span>
               </a>
-              <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">Ensino</a>
+              <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Ensino</a>
             </div>
-
             <!-- Investigação -->
-            <div class="flex flex-col items-center text-center interactive-card">
-              <a href="/pilares#investigacao" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Investigação">
-                <span class="text-white font-bold text-base md:text-lg">I</span>
+            <div class="flex flex-col items-center">
+              <a href="/pilares#investigacao" class="group" title="Ver detalhes do pilar Investigação">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
+                </svg>
+                <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">I</span>
               </a>
-              <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">Investigação</a>
+              <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Investigação</a>
             </div>
-
             <!-- Extensão Universitária -->
-            <div class="flex flex-col items-center text-center interactive-card">
-              <a href="/pilares#extensao-universitaria" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Extensão Universitária">
-                <span class="text-white font-bold text-base md:text-lg">EU</span>
+            <div class="flex flex-col items-center">
+              <a href="/pilares#extensao-universitaria" class="group" title="Ver detalhes do pilar Extensão Universitária">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
+                </svg>
+                <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EU</span>
               </a>
-              <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">Extensão Universitária</a>
+              <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Extensão Universitária</a>
             </div>
-
             <!-- Empreendedorismo e Inovação na Universidade -->
-            <div class="flex flex-col items-center text-center interactive-card">
-              <a href="/pilares#empreendedorismo-inovacao" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
-                <span class="text-white font-bold text-sm md:text-base">EIU</span>
+            <div class="flex flex-col items-center">
+              <a href="/pilares#empreendedorismo-inovacao" class="group" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
+                </svg>
+                <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-base -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EIU</span>
               </a>
-              <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors">
-                Empreendedorismo e Inovação<br>na Universidade
-              </a>
+              <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Empreendedorismo e Inovação<br>na Universidade</a>
             </div>
           </div>
         </div>
