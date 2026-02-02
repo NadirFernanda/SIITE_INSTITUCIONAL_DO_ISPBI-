@@ -12,27 +12,35 @@
   <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (estilo USP) -->
   <section class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-      <div class="flex flex-wrap items-end justify-between mb-8">
-        <div class="flex flex-row space-x-3 md:space-x-12 items-end justify-between w-full">
-          <div class="flex flex-col items-center flex-1 interactive-card">
-            <a href="/missao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
-            <a href="/missao" title="Ver Missão">
-              <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#0E8F81"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
-            </a>
-          </div>
-          <div class="flex flex-col items-center flex-1 interactive-card">
-            <a href="/visao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors">Visão</a>
-            <a href="/visao" title="Ver Visão">
-              <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#2C4A5E"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
-            </a>
-          </div>
-          <div class="flex flex-col items-center flex-1 interactive-card">
-            <a href="/valores" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors">Valores</a>
-            <a href="/valores" title="Ver Valores">
-              <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#F05A28"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
-            </a>
-          </div>
+      <div class="flex flex-row items-end justify-center gap-8 md:gap-16 mb-8">
+        <!-- Missão -->
+        <div class="flex flex-col items-center">
+          <a href="/missao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
+          <a href="/missao" title="Ver Missão">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
+              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#0E8F81"/>
+            </svg>
+          </a>
         </div>
+        <!-- Visão -->
+        <div class="flex flex-col items-center">
+          <a href="/visao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors">Visão</a>
+          <a href="/visao" title="Ver Visão">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
+              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2CBCD4"/>
+            </svg>
+          </a>
+        </div>
+        <!-- Valores -->
+        <div class="flex flex-col items-center">
+          <a href="/valores" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors">Valores</a>
+          <a href="/valores" title="Ver Valores">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
+              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#FFD700"/>
+            </svg>
+          </a>
+        </div>
+      </div>
 
         <!-- Pilares Estratégicos -->
         <div class="flex flex-col items-center w-full mt-12">
