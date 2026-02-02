@@ -10,16 +10,16 @@
     @include('partials.navbar')
 
         <!-- Card Institucional padrão -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2">
             <div class="flex">
-                <nav class="text-sm opacity-75 mb-8 text-left">
+                <nav class="text-sm opacity-75 mb-6 text-left">
                     <a href="/" class="hover:underline">Início</a> \ Candidaturas
                 </nav>
             </div>
-            <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8 interactive-card">
                 <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Candidaturas</h1>
                 <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
-                <p class="mt-3 text-gray-600 max-w-2xl">Candidatura e ingresso no ISP-Bié. Veja abaixo o processo, requisitos e etapas para se tornar estudante.</p>
+                <p class="mt-2 text-gray-600 max-w-2xl">Candidatura e ingresso no ISP-Bié. Veja abaixo o processo, requisitos e etapas para se tornar estudante.</p>
             </div>
         </div>
 
