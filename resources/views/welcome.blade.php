@@ -12,7 +12,7 @@
   <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (estilo USP) -->
   <section class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-      <div class="flex flex-row items-end justify-center gap-8 md:gap-16 mb-8">
+      <div class="flex flex-row flex-nowrap items-end justify-center gap-8 md:gap-16 mb-8 overflow-x-auto">
         <!-- Missão -->
         <div class="flex flex-col items-center">
           <a href="/missao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
@@ -47,7 +47,7 @@
           <!-- Título -->
           <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mb-8 text-center">Pilares Estratégicos</h2>
           <!-- Puzzle horizontal dos pilares -->
-          <div class="flex flex-row flex-wrap justify-center gap-4 md:gap-8 w-full max-w-6xl">
+          <div class="flex flex-row flex-nowrap justify-center gap-4 md:gap-8 w-full max-w-6xl overflow-x-auto">
             <!-- Ensino -->
             <div class="flex flex-col items-center">
               <a href="/pilares#ensino" class="group" title="Ver detalhes do pilar Ensino">
