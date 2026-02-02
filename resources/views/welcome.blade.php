@@ -48,7 +48,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">E</span>
           </a>
-          <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Ensino</a>
+          <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center">Ensino</a>
         </div>
         <!-- Investigação -->
         <div class="flex flex-col items-center">
@@ -58,7 +58,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">I</span>
           </a>
-          <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Investigação</a>
+          <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center">Investigação</a>
         </div>
         <!-- Extensão Universitária -->
         <div class="flex flex-col items-center">
@@ -68,7 +68,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EU</span>
           </a>
-          <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Extensão Universitária</a>
+          <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center">Extensão Universitária</a>
         </div>
         <!-- Empreendedorismo e Inovação na Universidade -->
         <div class="flex flex-col items-center">
@@ -78,7 +78,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-base -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EIU</span>
           </a>
-          <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2">Empreendedorismo e Inovação<br>na Universidade</a>
+          <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center text-center">Empreendedorismo e Inovação<br>na Universidade</a>
         </div>
       </div>
       </div>
