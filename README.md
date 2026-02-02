@@ -128,6 +128,21 @@ O design do website foi desenvolvido com base nas melhores práticas de universi
 - **Acesso Rápido:** 16 ícones para serviços principais
 - **Estatísticas:** Números institucionais em destaque
 
+## ✨ Estratégia de Animações e UX
+
+O website adota uma abordagem de animação pensada para um contexto institucional: presente o suficiente para transmitir modernidade, mas discreta para não competir com o conteúdo.
+
+- **Animações de entrada pontuais:** apenas a _Hero Section_ e a secção de estatísticas **"ISP‑Bié em números"** utilizam animações de entrada ao rolar a página. São as áreas de maior destaque visual e estratégico, onde o movimento reforça a mensagem institucional e os indicadores-chave.
+- **Demais secções estáveis:** blocos como **Missão, Visão, Valores**, **Pilares**, **Notícias**, **Acesso Rápido** e **Serviços ao Estudante** são apresentados de forma estática, garantindo leitura imediata, previsível e sem distrações.
+- **Microinterações nos elementos-chave:** cards informativos, atalhos de acesso rápido, serviços ao estudante e ícones de redes sociais possuem efeitos de _hover_ e transições suaves, oferecendo feedback visual claro ao utilizador sem excesso de movimento.
+
+### Justificativa da escolha
+
+- **Priorizar a informação:** por ser um site institucional, a hierarquia de conteúdos (cursos, serviços, contactos, transparência) tem precedência sobre efeitos visuais. As animações são usadas como apoio à leitura, não como protagonista da interface.
+- **Experiência confortável e profissional:** limitar o número de elementos animados reduz a sensação de “site em constante movimento”, o que é especialmente importante para públicos que acessam o portal com frequência ou por longos períodos.
+- **Desempenho e acessibilidade:** menos elementos animados em simultâneo contribuem para tempos de carregamento mais estáveis, melhor desempenho em dispositivos modestos e maior conforto para utilizadores sensíveis a movimentos excessivos.
+- **Consistência de marca:** a combinação de animações pontuais com microinterações sutis ajuda a comunicar uma imagem de instituição moderna, séria e confiável, em alinhamento com o posicionamento do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ.
+
 ### Design Patterns
 - **Cards informativos:** Design consistente em todas as páginas
 - **Gradientes:** Banners com gradientes temáticos por seção

@@ -281,7 +281,7 @@
         @foreach($estatisticas as $estatistica)
         <div class="text-center stat-card">
           <div class="text-xl font-extrabold mb-2 text-white drop-shadow" style="letter-spacing:-1px;">{{ $estatistica->titulo }}</div>
-          <div class="text-5xl font-bold mb-3">{{ $estatistica->valor }}</div>
+          <div class="text-5xl font-bold mb-3" data-counter data-target="{{ $estatistica->valor }}">{{ $estatistica->valor }}</div>
           <div class="text-lg mb-4">{!! nl2br(e($estatistica->descricao)) !!}</div>
           <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
         </div>
