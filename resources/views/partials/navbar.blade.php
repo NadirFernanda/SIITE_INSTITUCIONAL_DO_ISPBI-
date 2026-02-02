@@ -1,8 +1,8 @@
 ﻿<!-- Barra de links importantes (azul institucional) - Desktop apenas (linha fina) -->
-<div class="hidden md:block w-full" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;"></div>
+<div class="hidden md:block w-full fixed left-0 top-0" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;z-index:50;"></div>
 
 <!-- Barra inferior institucional em cinza claro - Desktop apenas -->
-<div class="hidden md:flex" style="background:#f3f4f6;color:#183153;font-size:0.95rem;padding:4px 24px;align-items:center;justify-content:space-between;width:100%;max-width:1800px;margin:0 auto;">
+<div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:0.95rem;padding:4px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;">
   <div class="flex flex-wrap items-center gap-2">
     <a href="/contactos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>📷</span> Contacto</a>
     <a href="https://isp-bie.ao/webmail" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
@@ -50,8 +50,8 @@
 
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
 <div x-data="{ mobileMenuOpen: false }">
-  <div class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;">
-    <div class="max-w-7xl mx-auto flex flex-row items-center justify-between px-3 sm:px-4 py-2">
+  <div class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;min-width:100vw;">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
       <div class="flex items-center justify-center bg-white rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5">
@@ -131,7 +131,7 @@
     <!-- Fundo escuro institucional com gradiente -->
     <div class="absolute inset-0" style="background: linear-gradient(180deg, #2563eb 0%, #ffffff 100%); opacity: 0.96; backdrop-filter: blur(12px);" @click="mobileMenuOpen = false"></div>
     <!-- Painel lateral com efeito glassmorphism, sombra e detalhes dourados -->
-    <div class="relative ml-auto w-full max-w-xs h-full bg-white/70 shadow-2xl flex flex-col py-8 px-5 space-y-2 overflow-y-auto animate-slide-in-right border-l-4 border-[#FFD700] rounded-l-2xl" style="backdrop-filter: blur(12px);">
+    <div class="relative ml-auto w-full max-w-xs h-full bg-white/70 shadow-2xl flex flex-col py-10 px-6 space-y-3 overflow-y-auto animate-slide-in-right border-l-4 border-[#FFD700] rounded-l-2xl text-base sm:text-sm" style="backdrop-filter: blur(12px);">
       <button @click="mobileMenuOpen = false" class="self-end text-gray-700 p-2 hover:bg-gray-100 rounded-lg mb-2" aria-label="Fechar menu">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>

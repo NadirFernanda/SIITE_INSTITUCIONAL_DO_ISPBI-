@@ -1,11 +1,11 @@
 ﻿<footer class="bg-[#1a1a1a] text-gray-300">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
         
         <!-- Educação -->
         <div>
           <h3 class="text-[#FFD700] font-bold text-lg mb-4">Educação</h3>
-          <ul class="space-y-2">
+        <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12 py-8 sm:py-12">
             <li><a href="/cursos" class="hover:text-[#FFD700] transition-colors link-underline-soft">Cursos de Graduação</a></li>
             <li><a href="/pos-graduacao" class="hover:text-[#FFD700] transition-colors link-underline-soft">Cursos de Pós-Graduação</a></li>
             <li><a href="/candidaturas" class="hover:text-[#FFD700] transition-colors link-underline-soft">Como Estudar no ISP-Bié</a></li>

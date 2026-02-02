@@ -11,74 +11,74 @@
 
   <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (estilo USP) -->
   <section class="bg-white py-6 sm:py-8 lg:py-12">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-      <div class="flex flex-row flex-nowrap items-end justify-center gap-8 md:gap-16 mb-8 overflow-x-auto w-full">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
+      <div class="flex flex-row flex-nowrap items-end justify-center gap-6 md:gap-10 2xl:gap-20 mb-8 overflow-x-auto w-full">
         <!-- Missão -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
           <a href="/missao" title="Ver Missão" class="transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
             </svg>
           </a>
-          <span class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Missão</span>
+          <span class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Missão</span>
         </div>
         <!-- Visão -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
           <a href="/visao" title="Ver Visão" class="transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
             </svg>
           </a>
-          <span class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Visão</span>
+          <span class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Visão</span>
         </div>
         <!-- Valores -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
           <a href="/valores" title="Ver Valores" class="transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
             </svg>
           </a>
-          <span class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Valores</span>
+          <span class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Valores</span>
         </div>
         <!-- Ensino -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
           <a href="/pilares#ensino" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Ensino">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H20A10 10 0 0 1 10 60V40z" fill="#2563eb"/>
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">E</span>
           </a>
-          <a href="/pilares#ensino" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Ensino</a>
+          <a href="/pilares#ensino" class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Ensino</a>
         </div>
         <!-- Investigação -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
           <a href="/pilares#investigacao" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Investigação">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">I</span>
           </a>
-          <a href="/pilares#investigacao" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Investigação</a>
+          <a href="/pilares#investigacao" class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Investigação</a>
         </div>
         <!-- Extensão Universitária -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
           <a href="/pilares#extensao-universitaria" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Extensão Universitária">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EU</span>
           </a>
-          <a href="/pilares#extensao-universitaria" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Extensão Universitária</a>
+          <a href="/pilares#extensao-universitaria" class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Extensão Universitária</a>
         </div>
         <!-- Empreendedorismo e Inovação na Universidade -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
           <a href="/pilares#empreendedorismo-inovacao" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-base -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EIU</span>
           </a>
-          <a href="/pilares#empreendedorismo-inovacao" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Empreendedorismo e Inovação na Universidade</a>
+          <a href="/pilares#empreendedorismo-inovacao" class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Empreendedorismo e Inovação na Universidade</a>
         </div>
       </div>
       </div>
@@ -86,7 +86,7 @@
 
     <!-- Barra azul com redes sociais e busca (estilo USP, ícones grandes, centralizados, azul do site) -->
     <div class="bg-[#2563eb] py-8">
-      <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
         <div class="flex items-center gap-8 text-white text-3xl justify-center w-full md:w-auto">
           <span class="font-bold text-lg md:text-xl">SIGA-NOS</span>
           <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" target="_blank" rel="noopener" class="hover:opacity-80 transition-opacity transform transition-transform hover:scale-110" aria-label="Facebook">
@@ -102,7 +102,7 @@
             <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
         </div>
-        <form action="/busca" method="GET" class="w-full md:w-1/3 flex bg-white rounded">
+        <form action="/busca" method="GET" class="w-full max-w-md md:w-1/3 flex bg-white rounded mt-4 md:mt-0">
           <input type="text" name="q" placeholder="Busca" class="flex-1 px-4 py-2 rounded-l text-gray-800 focus:outline-none">
           <button type="submit" class="px-4 text-gray-600 hover:text-[#2563eb]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@
   <!-- Seção Institucional -->
 
   <section class="py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
       <h2 class="text-4xl font-bold text-gray-900 mb-12">Notícias institucionais</h2>
       @component('components.noticias-carousel')
       @endcomponent
@@ -127,11 +127,11 @@
 
   <!-- Seção Acesso Rápido -->
   <section class="py-16 bg-white border-t border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
       <h2 class="text-4xl font-bold text-gray-900 mb-12">Acesso rápido</h2>
       
       <!-- Primeira linha -->
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 mb-8">
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6 2xl:gap-8 mb-8">
         
         <a href="/portal" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
@@ -214,7 +214,7 @@
   <!-- Seção ISP-Bié em números -->
 
   <section id="estatisticas" class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
       <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
       <p class="text-lg mb-12 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
       @php($estatisticas = \App\Models\Estatistica::orderBy('ordem')->get())
@@ -234,7 +234,7 @@
   <!-- Testemunhos - Carrossel Alpine.js -->
   <!-- Testemunhos -->
   <section class="py-16 pb-24 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
           Testemunhos
