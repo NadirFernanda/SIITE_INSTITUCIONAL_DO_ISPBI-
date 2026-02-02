@@ -72,13 +72,13 @@
                     Responsabilidade Social
                   </h3>
                   <p class="text-gray-700">
-                    Formar cidadãos conscientes, críticos e comprometidos com os valores éticos, a justiça social, a inclusão e o respeito Í  diversidade, capazes de contribuir ativamente para a construção de uma sociedade mais justa e equitativa.
+                    Formar cidadãos conscientes, críticos e comprometidos com os valores éticos, a justiça social, a inclusão e o respeito à diversidade, capazes de contribuir ativamente para a construção de uma sociedade mais justa e equitativa.
                   </p>
                 </div>
               </div>
 
               <div class="mt-8 p-6 bg-[#2563eb] text-white rounded-lg">
-                <h3 class="font-bold text-xl mb-4 text-[#3B82F6]">Compromisso Institucional</h3>
+                <h3 class="font-bold text-2xl mb-4">Compromisso Institucional</h3>
                 <p class="leading-relaxed">
                   O Instituto Superior Politécnico do Bié compromete-se a cumprir sua missão através de práticas pedagógicas inovadoras, 
                   investimento contínuo na qualificação do corpo docente, infraestrutura adequada, parcerias estratégicas nacionais e 

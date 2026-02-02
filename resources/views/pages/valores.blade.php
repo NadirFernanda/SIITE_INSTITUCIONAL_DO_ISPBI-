@@ -33,7 +33,7 @@
                       <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
                     </svg>
                   </div>
-                  <h3 class="font-bold text-lg text-[#2563eb] mb-3 text-center">Respeito ao Próximo e Í  Vida Humana</h3>
+                  <h3 class="font-bold text-lg text-[#2563eb] mb-3 text-center">Respeito ao Próximo e à Vida Humana</h3>
                   <p class="text-gray-700 text-center">
                     Valorização da dignidade humana em todas as suas dimensões, promovendo o respeito mútuo e a preservação da vida.
                   </p>
@@ -101,7 +101,7 @@
               </div>
 
               <div class="mt-8 p-6 bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white rounded-lg">
-                <h3 class="font-bold text-xl mb-4 text-[#3B82F6]">Código de Conduta</h3>
+                <h3 class="font-bold text-2xl mb-4">Código de Conduta</h3>
                 <p class="leading-relaxed">
                   Estes valores fundamentam todas as decisões e ações do ISP-Bié, orientando o comportamento de estudantes, docentes, 
                   funcionários e gestores. Eles representam o alicerce da extensão universitária institucional e o compromisso com uma educação 
