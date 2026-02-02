@@ -15,30 +15,30 @@
       <div class="flex flex-row flex-nowrap items-end justify-center gap-8 md:gap-16 mb-8 overflow-x-auto w-full">
         <!-- Missão -->
         <div class="flex flex-col items-center">
-          <a href="/missao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
           <a href="/missao" title="Ver Missão">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
             </svg>
           </a>
+          <span class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Missão</span>
         </div>
         <!-- Visão -->
         <div class="flex flex-col items-center">
-          <a href="/visao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors">Visão</a>
           <a href="/visao" title="Ver Visão">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
             </svg>
           </a>
+          <span class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Visão</span>
         </div>
         <!-- Valores -->
         <div class="flex flex-col items-center">
-          <a href="/valores" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors">Valores</a>
           <a href="/valores" title="Ver Valores">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
             </svg>
           </a>
+          <span class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Valores</span>
         </div>
         <!-- Ensino -->
         <div class="flex flex-col items-center">
@@ -48,7 +48,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">E</span>
           </a>
-          <a href="/pilares#ensino" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center">Ensino</a>
+          <a href="/pilares#ensino" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Ensino</a>
         </div>
         <!-- Investigação -->
         <div class="flex flex-col items-center">
@@ -58,7 +58,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">I</span>
           </a>
-          <a href="/pilares#investigacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center">Investigação</a>
+          <a href="/pilares#investigacao" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Investigação</a>
         </div>
         <!-- Extensão Universitária -->
         <div class="flex flex-col items-center">
@@ -68,7 +68,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-lg -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EU</span>
           </a>
-          <a href="/pilares#extensao-universitaria" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center">Extensão Universitária</a>
+          <a href="/pilares#extensao-universitaria" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Extensão Universitária</a>
         </div>
         <!-- Empreendedorismo e Inovação na Universidade -->
         <div class="flex flex-col items-center">
@@ -78,7 +78,7 @@
             </svg>
             <span class="absolute w-80 h-80 flex items-center justify-center text-white font-bold text-base -mt-16 ml-0 group-hover:text-[#FFD700]" style="pointer-events:none;">EIU</span>
           </a>
-          <a href="/pilares#empreendedorismo-inovacao" class="text-gray-800 font-semibold text-base hover:text-[#2563eb] transition-colors mt-2 h-[56px] flex items-center justify-center text-center">Empreendedorismo e Inovação<br>na Universidade</a>
+          <a href="/pilares#empreendedorismo-inovacao" class="block mt-2 text-base md:text-lg font-semibold text-gray-800 text-center truncate w-40">Empreendedorismo e Inovação na Universidade</a>
         </div>
       </div>
       </div>
