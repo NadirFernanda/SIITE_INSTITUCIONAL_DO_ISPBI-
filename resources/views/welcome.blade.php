@@ -321,9 +321,6 @@
             if (this.total === 0) return;
             this.current = (this.current - 1 + this.total) % this.total;
           },
-          verMais() {
-            window.location.href = '/alumni';
-          },
           short(text) {
             if (!text) return 'Sem mensagem informada.';
             const max = 360;
@@ -349,34 +346,22 @@
           >
             <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
               <div class="w-full max-w-xl flex-shrink-0">
-                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-                  <div class="flex items-center mb-4">
+                <div class="bg-white rounded-full shadow-md p-4 hover:shadow-xl transition-shadow flex flex-col items-center justify-center mx-auto"
+                     :class="'h-40 w-40 md:h-32 md:w-32'">
+                  <div class="flex flex-col items-center justify-center">
                     <div
-                      class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6]
-                             rounded-full flex items-center justify-center text-white
-                             text-xl font-bold"
+                      class="w-20 h-20 md:w-16 md:h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-xl font-bold mb-2"
                       x-text="item.nome.substring(0,2).toUpperCase()">
                     </div>
-                    <div class="ml-4">
-                      <h4 class="font-bold text-gray-900" x-text="item.nome"></h4>
-                      <p class="text-sm text-gray-600"
-                         x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
-                    </div>
+                    <h4 class="font-bold text-gray-900 text-center" x-text="item.nome"></h4>
+                    <p class="text-sm text-gray-600 text-center"
+                       x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
                   </div>
-                  <p class="text-gray-700 italic mb-4"
-                     x-text="item.trabalha
-                       ? short(item.satisfacao || 'Sem mensagem informada.')
-                       : 'Procurando emprego.'">
+                  <p class="text-gray-700 italic mt-2 text-center"
+                     x-text="item.trabalha ? short(item.satisfacao || 'Sem mensagem informada.') : 'Procurando emprego.'">
                   </p>
-                  <div class="flex items-center justify-between mt-2">
+                  <div class="flex items-center justify-center mt-2">
                     <div class="flex text-[#3B82F6]">★★★★★</div>
-                    <a
-                      :href="'/alumni/' + (item.id ?? '')"
-                      class="text-sm text-[#2563eb] font-semibold hover:text-[#1d4ed8] underline"
-                      x-show="item.id"
-                    >
-                      Ler mais
-                    </a>
                   </div>
                 </div>
               </div>
@@ -384,35 +369,27 @@
           </div>
         </div>
 
-        <!-- Botões -->
-        <div class="flex w-full max-w-xl justify-between mt-4 mb-2">
-          <button @click="prev"
-            class="bg-white shadow px-4 py-2 rounded flex items-center justify-center" style="height:40px;">
-            ‹
-          </button>
-          <button @click="next"
-            class="bg-white shadow px-4 py-2 rounded flex items-center justify-center" style="height:40px;">
-            ›
-          </button>
-        </div>
+        <!-- Botões carrossel bolinha -->
         <div class="flex justify-center mt-6 space-x-2">
           <template x-for="(item, idx) in testimonials" :key="idx">
             <button
               @click="current = idx"
-              class="w-3 h-3 rounded-full transition"
-              :class="current === idx ? 'bg-[#3B82F6]' : 'bg-gray-300'"
+              class="w-4 h-4 rounded-full transition border-2 border-[#3B82F6]"
+              :class="current === idx ? 'bg-[#3B82F6]' : 'bg-gray-200'"
             ></button>
           </template>
         </div>
-        <div class="flex justify-center mt-8">
-          <button
-            @click="verMais()"
-            class="px-6 py-3 bg-[#3B82F6] text-white font-semibold rounded-lg hover:bg-[#2563eb] transition"
-          >
-            Ver mais testemunhos
+        <!-- Botões anterior/próximo -->
+        <div class="flex w-full max-w-xl justify-between mt-4 mb-2">
+          <button @click="prev"
+            class="bg-white shadow px-4 py-2 rounded-full flex items-center justify-center" style="height:32px;width:32px;">
+            ‹
+          </button>
+          <button @click="next"
+            class="bg-white shadow px-4 py-2 rounded-full flex items-center justify-center" style="height:32px;width:32px;">
+            ›
           </button>
         </div>
-
       </div>
     </div>
   </section>
