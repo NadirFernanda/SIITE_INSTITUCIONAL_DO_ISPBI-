@@ -212,6 +212,24 @@ Caso ainda não tenhas acesso, pede à infraestrutura para adicionar a tua chave
 Passos básicos de deploy após um `git push` neste repositório:
 
 ```bash
+# 1. Aceder ao servidor (substituir `usuario` pelo utilizador correto)
+ssh usuario@isp-bie
+
+# 2. Entrar no diretório do projeto
+cd /var/www/isp-bie.ao
+
+# 3. Atualizar o código e rotas
+git pull
+php artisan route:clear
+
+# 4. Atualizar dependências e compilar assets
+npm install
+npm run build
+
+# 5. Limpar caches do Laravel
+php artisan view:clear
+php artisan cache:clear
+php artisan config:clear
 ```
 
 ## 🎯 Roadmap Futuro
