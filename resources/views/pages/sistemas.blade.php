@@ -2,48 +2,48 @@
 
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Sistemas
-      </nav>
-
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Sistemas Institucionais</h1>
-        <p class="text-lg text-gray-700">Plataformas e Serviços Digitais do ISP-Bié</p>
-      </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+    <nav class="text-sm opacity-80 mb-10">
+      <a href="/" class="hover:underline text-[#2563eb]">Início</a> <span class="mx-2 text-gray-400">/</span> <span class="font-semibold text-gray-700">Sistemas</span>
+    </nav>
+    <div class="bg-white rounded-2xl shadow-xl p-10 mb-14 interactive-card border-t-8 border-[#2563eb]">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-[#2563eb] mb-3 tracking-tight">Sistemas Institucionais</h1>
+      <p class="text-xl text-gray-700 mb-2">Plataformas e Serviços Digitais do ISP-Bié</p>
+      <p class="text-base text-gray-500">Acesso centralizado aos principais sistemas acadêmicos, administrativos e de suporte.</p>
+    </div>
 
   <!-- Introdução -->
-  <section class="py-16 bg-white scroll-reveal">
+  <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center mb-12">
-        <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Infraestrutura Digital</h2>
-        <p class="text-lg text-gray-700 leading-relaxed">
-          O ISP-Bié disponibiliza uma série de sistemas e plataformas digitais para facilitar 
-          o acesso a serviços, informações e recursos académicos. Nossos sistemas são desenvolvidos 
-          com foco na eficiência, segurança e facilidade de uso.
+      <div class="max-w-3xl mx-auto text-center mb-14">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-5">Infraestrutura Digital</h2>
+        <p class="text-lg text-gray-700 leading-relaxed mb-2">
+          O ISP-Bié disponibiliza sistemas e plataformas digitais para facilitar o acesso a serviços, informações e recursos acadêmicos. Desenvolvidos com foco em eficiência, segurança e facilidade de uso.
         </p>
+      </div>
+      <div class="flex justify-center items-center mb-10">
+        <div class="w-full max-w-2xl border-t-4 border-dashed border-[#2563eb] opacity-40"></div>
       </div>
     </div>
   </section>
 
   <!-- Sistemas Académicos -->
-  <section class="py-16 bg-gray-50 scroll-reveal">
+  <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Sistemas Académicos</h2>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-14 text-center">Sistemas Académicos</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         
         <!-- Portal do Estudante -->
-        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200 interactive-card">
-          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-full hover:scale-[1.03] transition-transform duration-200 interactive-card">
+          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="min-height:180px; width:100%;">
             <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
             </svg>
-            <h3 class="text-2xl font-bold text-white mb-1">Portal do Estudante</h3>
+            <h3 class="text-2xl font-bold text-white mb-1 tracking-tight">Portal do Estudante</h3>
             <p class="text-white text-sm opacity-90 mb-2">Sistema Académico Online</p>
           </div>
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <ul class="space-y-3 text-gray-700 mb-6">
+          <div class="flex-1 flex flex-col justify-between p-7">
+            <ul class="space-y-3 text-gray-700 mb-7">
               <li class="flex items-center gap-2">
                    <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 Consulta de notas e frequências
@@ -62,7 +62,7 @@
               </li>
             </ul>
             <div class="mt-auto">
-              <a href="#" class="w-[220px] mx-auto block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors">
+              <a href="#" class="w-full block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563eb]" aria-label="Aceder ao Portal do Estudante">
                 Aceder ao Portal
               </a>
             </div>
@@ -70,16 +70,16 @@
         </div>
 
         <!-- Biblioteca Digital -->
-        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200 interactive-card">
-          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-full hover:scale-[1.03] transition-transform duration-200 interactive-card">
+          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="min-height:180px; width:100%;">
             <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
             </svg>
-            <h3 class="text-2xl font-bold text-white mb-1">Biblioteca Digital</h3>
+            <h3 class="text-2xl font-bold text-white mb-1 tracking-tight">Biblioteca Digital</h3>
             <p class="text-white text-sm opacity-90 mb-2">Acervo Online</p>
           </div>
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <ul class="space-y-3 text-gray-700 mb-6">
+          <div class="flex-1 flex flex-col justify-between p-7">
+            <ul class="space-y-3 text-gray-700 mb-7">
               <li class="flex items-center gap-2">
                  <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 Catálogo online de livros
@@ -98,7 +98,7 @@
               </li>
             </ul>
             <div class="mt-auto">
-              <a href="/biblioteca" class="w-[220px] mx-auto block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors">
+              <a href="/biblioteca" class="w-full block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563eb]" aria-label="Aceder à Biblioteca Digital">
                 Aceder à Biblioteca
               </a>
             </div>
@@ -106,17 +106,17 @@
         </div>
 
         <!-- Repositório Institucional -->
-        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200 interactive-card">
-          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-full hover:scale-[1.03] transition-transform duration-200 interactive-card">
+          <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="min-height:180px; width:100%;">
             <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z"/>
               <path fill-rule="evenodd" d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd"/>
             </svg>
-            <h3 class="text-2xl font-bold text-white mb-1">Repositório</h3>
+            <h3 class="text-2xl font-bold text-white mb-1 tracking-tight">Repositório</h3>
             <p class="text-white text-sm opacity-90 mb-2">Produção Científica</p>
           </div>
-          <div class="flex-1 flex flex-col justify-between p-6">
-            <ul class="space-y-3 text-gray-700 mb-6">
+          <div class="flex-1 flex flex-col justify-between p-7">
+            <ul class="space-y-3 text-gray-700 mb-7">
               <li class="flex items-center gap-2">
                 <svg class="w-7 h-7 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                 Trabalhos de conclusão de curso
@@ -135,7 +135,7 @@
               </li>
             </ul>
             <div class="mt-auto">
-              <a href="/repositorio" class="w-[220px] mx-auto block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors">
+              <a href="/repositorio" class="w-full block text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold shadow hover:bg-[#3B82F6] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563eb]" aria-label="Aceder ao Repositório Institucional">
                 Aceder ao Repositório
               </a>
             </div>
@@ -147,14 +147,13 @@
   </section>
 
   <!-- Sistemas Administrativos -->
-  <section class="py-16 bg-white scroll-reveal">
+  <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Sistemas Administrativos</h2>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-14 text-center">Sistemas Administrativos</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         
         <!-- Webmail -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#2563eb] interactive-card">
+        <div class="bg-white p-7 rounded-xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#2563eb] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
@@ -171,7 +170,7 @@
         </div>
 
         <!-- Portal Financeiro -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#3B82F6] interactive-card">
+        <div class="bg-white p-7 rounded-xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#3B82F6] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
@@ -188,7 +187,7 @@
         </div>
 
         <!-- Sistema RH -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#2563eb] interactive-card">
+        <div class="bg-white p-7 rounded-xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#2563eb] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
@@ -204,7 +203,7 @@
         </div>
 
         <!-- Plataforma de Aprendizagem -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#3B82F6] interactive-card">
+        <div class="bg-white p-7 rounded-xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#3B82F6] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
@@ -226,13 +225,12 @@
   </section>
 
   <!-- Aplicações Mobile -->
-  <section class="py-16 bg-gray-50 scroll-reveal">
+  <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Aplicações Mobile</h2>
-      
-      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-14 text-center">Aplicações Mobile</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
         
-        <div class="bg-white rounded-lg shadow-md overflow-hidden interactive-card">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden interactive-card">
           <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-8 text-white">
             <svg class="w-16 h-16 mb-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
@@ -240,7 +238,7 @@
             <h3 class="text-2xl font-bold mb-2">App ISP-Bié</h3>
             <p class="opacity-90">Disponível para Android e iOS</p>
           </div>
-          <div class="p-6">
+          <div class="p-7">
             <ul class="space-y-3 text-gray-700 mb-6">
               <li class="flex items-start">
                 <svg class="w-7 h-7 text-[#2563eb] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -272,7 +270,7 @@
           </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
           <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 text-white">
             <svg class="w-16 h-16 mb-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
@@ -280,7 +278,7 @@
             <h3 class="text-2xl font-bold mb-2">Suporte Técnico</h3>
             <p class="opacity-90">Central de Ajuda</p>
           </div>
-          <div class="p-6">
+          <div class="p-7">
             <div class="space-y-4 mb-6">
               <div class="flex items-start">
                 <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
@@ -318,7 +316,7 @@
                 </div>
               </div>
             </div>
-            <a href="/contactos" class="block w-full text-center bg-[#2563eb] text-white py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
+            <a href="/contactos" class="block w-full text-center bg-[#2563eb] text-white py-3 rounded-xl font-semibold hover:bg-[#3B82F6] transition-colors focus:outline-none focus:ring-2 focus:ring-[#2563eb]" aria-label="Contactar Suporte Técnico">
               Contactar Suporte
             </a>
           </div>
@@ -331,26 +329,25 @@
   <!-- Segurança e Privacidade -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-12 text-white">
+      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-14 text-white shadow-xl">
         <div class="max-w-3xl mx-auto text-center">
-          <svg class="w-16 h-16 mx-auto mb-6" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="w-16 h-16 mx-auto mb-7" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
           </svg>
-          <h2 class="text-3xl font-bold mb-4">Segurança e Privacidade</h2>
-          <p class="text-lg opacity-90 mb-6">
-            Todos os nossos sistemas utilizam protocolos de segurança avançados para proteger 
-            seus dados pessoais e garantir a privacidade das informações académicas.
+          <h2 class="text-3xl md:text-4xl font-bold mb-5">Segurança e Privacidade</h2>
+          <p class="text-lg opacity-90 mb-7">
+            Todos os nossos sistemas utilizam protocolos de segurança avançados para proteger seus dados pessoais e garantir a privacidade das informações acadêmicas.
           </p>
-          <div class="grid md:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white/10 backdrop-blur p-4 rounded-lg">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-xl">
               <p class="font-semibold mb-1">Criptografia SSL</p>
               <p class="text-sm opacity-80">Dados protegidos</p>
             </div>
-            <div class="bg-white/10 backdrop-blur p-4 rounded-lg">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-xl">
               <p class="font-semibold mb-1">Backup Diário</p>
               <p class="text-sm opacity-80">Segurança de dados</p>
             </div>
-            <div class="bg-white/10 backdrop-blur p-4 rounded-lg">
+            <div class="bg-white/10 backdrop-blur p-6 rounded-xl">
               <p class="font-semibold mb-1">Conformidade LGPD</p>
               <p class="text-sm opacity-80">Privacidade garantida</p>
             </div>
