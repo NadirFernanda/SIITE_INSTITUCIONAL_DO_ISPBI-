@@ -323,17 +323,7 @@
             ></button>
           </template>
         </div>
-        <!-- Botões anterior/próximo -->
-        <div class="flex w-full max-w-xl justify-between mt-4 mb-2">
-          <button @click="prev"
-            class="bg-white shadow px-4 py-2 rounded-full flex items-center justify-center" style="height:32px;width:32px;">
-            ‹
-          </button>
-          <button @click="next"
-            class="bg-white shadow px-4 py-2 rounded-full flex items-center justify-center" style="height:32px;width:32px;">
-            ›
-          </button>
-        </div>
+        <!-- Botões anterior/próximo removidos -->
       </div>
     </div>
   </section>
