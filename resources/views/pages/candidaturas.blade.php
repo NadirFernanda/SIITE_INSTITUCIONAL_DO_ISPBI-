@@ -133,9 +133,9 @@
 
         <!-- Cursos Disponíveis -->
         <section class="mb-16 scroll-reveal">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Cursos Disponíveis</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Cursos Disponíveis</h2>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-md">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Contabilidade e Administração</h3>
                     <p class="text-gray-600 mb-4">Duração: 4 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -144,7 +144,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-md">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Engenharia Informática</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -153,7 +153,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-md">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Eng. Recursos Hídricos</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -162,7 +162,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-md">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Comunicação Social</h3>
                     <p class="text-gray-600 mb-4">Duração: 4 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -171,7 +171,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-md">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Psicologia Clínica</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -180,7 +180,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-md">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Engenharia Civil</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
