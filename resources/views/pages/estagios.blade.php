@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- Banner -->
-  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-20">
+  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-20 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center space-x-4 mb-6">
         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -23,7 +23,7 @@
   </section>
 
   <!-- Sobre o Centro -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
         <div>
@@ -40,7 +40,7 @@
             para o mercado de trabalho.
           </p>
         </div>
-        <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg p-8 text-white">
+        <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg p-8 text-white interactive-card">
           <h3 class="text-2xl font-bold mb-6">Números do CGE</h3>
           <div class="space-y-4">
             <div class="flex items-center justify-between border-b border-white/20 pb-3">
@@ -66,14 +66,14 @@
   </section>
 
   <!-- Tipos de Estágio -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-4">Modalidades de Estágio</h2>
       <div class="h-1 w-24 bg-[#2563eb] mb-8"></div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Estágio Curricular -->
-        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#2563eb]">
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#2563eb] interactive-card">
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-2xl mr-4">
               📚
@@ -107,7 +107,7 @@
         </div>
 
         <!-- Estágio Extracurricular -->
-        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#3B82F6]">
+        <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-[#3B82F6] interactive-card">
           <div class="flex items-center mb-4">
             <div class="w-12 h-12 bg-[#3B82F6] rounded-lg flex items-center justify-center text-gray-900 text-2xl mr-4">
               ⭐
@@ -144,41 +144,41 @@
   </section>
 
   <!-- Empresas Parceiras -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-4">Empresas e Instituições Parceiras</h2>
       <div class="h-1 w-24 bg-[#2563eb] mb-8"></div>
 
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">🏛️</div>
           <h4 class="font-bold text-gray-900 text-sm">Governo Provincial do Bié</h4>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">🏥</div>
           <h4 class="font-bold text-gray-900 text-sm">Hospital Provincial do Bié</h4>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">🏗️</div>
           <h4 class="font-bold text-gray-900 text-sm">Empresas de Construção Civil</h4>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">💼</div>
           <h4 class="font-bold text-gray-900 text-sm">Bancos e Seguradoras</h4>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">💡</div>
           <h4 class="font-bold text-gray-900 text-sm">Empresas de Telecomunicações</h4>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">💧</div>
           <h4 class="font-bold text-gray-900 text-sm">MINEA - Recursos Hídricos</h4>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">📰</div>
           <h4 class="font-bold text-gray-900 text-sm">Órgãos de Comunicação Social</h4>
         </div>
-        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
+        <div class="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow interactive-card">
           <div class="text-3xl mb-2">🙏</div>
           <h4 class="font-bold text-gray-900 text-sm">ONGs e Organizações Sociais</h4>
         </div>
@@ -187,34 +187,34 @@
   </section>
 
   <!-- Processo de Candidatura -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-4">Como Candidatar-se a Estágio</h2>
       <div class="h-1 w-24 bg-[#2563eb] mb-8"></div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="text-center">
+        <div class="text-center interactive-card">
           <div class="w-16 h-16 bg-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
             1
           </div>
           <h4 class="font-bold text-gray-900 mb-2">Consulta de Vagas</h4>
           <p class="text-sm text-gray-600">Verifique as vagas disponíveis no portal do CGE ou no mural</p>
         </div>
-        <div class="text-center">
+        <div class="text-center interactive-card">
           <div class="w-16 h-16 bg-[#3B82F6] rounded-full flex items-center justify-center text-gray-900 text-2xl font-bold mx-auto mb-4">
             2
           </div>
           <h4 class="font-bold text-gray-900 mb-2">Submissão de CV</h4>
           <p class="text-sm text-gray-600">Envie CV e carta de motivação ao CGE</p>
         </div>
-        <div class="text-center">
+        <div class="text-center interactive-card">
           <div class="w-16 h-16 bg-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
             3
           </div>
           <h4 class="font-bold text-gray-900 mb-2">Entrevista</h4>
           <p class="text-sm text-gray-600">Participe da entrevista com a empresa parceira</p>
         </div>
-        <div class="text-center">
+        <div class="text-center interactive-card">
           <div class="w-16 h-16 bg-[#2563eb] rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
             4
           </div>
@@ -226,7 +226,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-gray-900 mb-4">Procura Oportunidade de Estágio?</h2>
       <p class="text-xl text-gray-600 mb-8">

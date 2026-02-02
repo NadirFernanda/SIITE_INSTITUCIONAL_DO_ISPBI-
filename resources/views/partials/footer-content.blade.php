@@ -6,10 +6,10 @@
         <div>
           <h3 class="text-[#FFD700] font-bold text-lg mb-4">Educação</h3>
           <ul class="space-y-2">
-            <li><a href="/cursos" class="hover:text-[#FFD700] transition-colors">Cursos de Graduação</a></li>
-            <li><a href="/pos-graduacao" class="hover:text-[#FFD700] transition-colors">Cursos de Pós-Graduação</a></li>
-            <li><a href="/candidaturas" class="hover:text-[#FFD700] transition-colors">Como Estudar no ISP-Bié</a></li>
-            <li><a href="/cursos-online" class="hover:text-[#FFD700] transition-colors">Cursos Online</a></li>
+            <li><a href="/cursos" class="hover:text-[#FFD700] transition-colors link-underline-soft">Cursos de Graduação</a></li>
+            <li><a href="/pos-graduacao" class="hover:text-[#FFD700] transition-colors link-underline-soft">Cursos de Pós-Graduação</a></li>
+            <li><a href="/candidaturas" class="hover:text-[#FFD700] transition-colors link-underline-soft">Como Estudar no ISP-Bié</a></li>
+            <li><a href="/cursos-online" class="hover:text-[#FFD700] transition-colors link-underline-soft">Cursos Online</a></li>
           </ul>
         </div>
 
@@ -17,10 +17,10 @@
         <div>
           <h3 class="text-[#FFD700] font-bold text-lg mb-4">Pesquisa</h3>
           <ul class="space-y-2">
-            <li><a href="/investigacao" class="hover:text-[#FFD700] transition-colors">Pesquisa no ISP-Bié</a></li>
-            <li><a href="/biblioteca" class="hover:text-[#FFD700] transition-colors">Biblioteca Digital</a></li>
-            <li><a href="/repositorio" class="hover:text-[#FFD700] transition-colors">Repositório</a></li>
-            <li><a href="/revista" class="hover:text-[#FFD700] transition-colors">Revista Científica</a></li>
+            <li><a href="/investigacao" class="hover:text-[#FFD700] transition-colors link-underline-soft">Pesquisa no ISP-Bié</a></li>
+            <li><a href="/biblioteca" class="hover:text-[#FFD700] transition-colors link-underline-soft">Biblioteca Digital</a></li>
+            <li><a href="/repositorio" class="hover:text-[#FFD700] transition-colors link-underline-soft">Repositório</a></li>
+            <li><a href="/revista" class="hover:text-[#FFD700] transition-colors link-underline-soft">Revista Científica</a></li>
           </ul>
         </div>
 
@@ -28,12 +28,12 @@
         <div>
           <h3 class="text-[#FFD700] font-bold text-lg mb-4">Institucional</h3>
           <ul class="space-y-2">
-            <li><a href="/sobre-ispbie" class="hover:text-[#FFD700] transition-colors">Sobre o ISP-Bié</a></li>
-            <li><a href="/missao" class="hover:text-[#FFD700] transition-colors">Missão</a></li>
-            <li><a href="/visao" class="hover:text-[#FFD700] transition-colors">Visão</a></li>
-            <li><a href="/valores" class="hover:text-[#FFD700] transition-colors">Valores</a></li>
+            <li><a href="/sobre-ispbie" class="hover:text-[#FFD700] transition-colors link-underline-soft">Sobre o ISP-Bié</a></li>
+            <li><a href="/missao" class="hover:text-[#FFD700] transition-colors link-underline-soft">Missão</a></li>
+            <li><a href="/visao" class="hover:text-[#FFD700] transition-colors link-underline-soft">Visão</a></li>
+            <li><a href="/valores" class="hover:text-[#FFD700] transition-colors link-underline-soft">Valores</a></li>
             <!-- <li><a href="/presidencia" class="hover:text-[#FFD700] transition-colors">Órgãos de gestão</a></li> -->
-            <li><a href="/#estatisticas" class="hover:text-[#FFD700] transition-colors">Estatísticas</a></li>
+            <li><a href="/#estatisticas" class="hover:text-[#FFD700] transition-colors link-underline-soft">Estatísticas</a></li>
           </ul>
         </div>
 

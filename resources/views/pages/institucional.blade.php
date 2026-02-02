@@ -2,18 +2,18 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
     <nav class="text-sm opacity-75 mb-8">
     <a href="/" class="hover:underline">Início</a> \ Institucional
     </nav>
 
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
       <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Institucional</h1>
       <p class="text-lg text-gray-700">Conheça o Instituto Superior Politécnico do Bié e a sua trajectória institucional</p>
     </div>
 
     <h2 class="text-3xl font-bold text-[#2563eb] mb-10">História</h2>
-    <div class="relative max-w-4xl mx-auto">
+    <div class="relative max-w-4xl mx-auto scroll-reveal">
       @php
         $eventos = [
           [
@@ -102,7 +102,7 @@
   </section>
 
   <!-- Apresentação -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -125,7 +125,7 @@
           </div>
         </div>
         <div>
-          <div class="bg-gradient-to-br from-[#2563eb] to-[#2563eb] p-8 rounded-2xl text-white shadow-xl">
+          <div class="bg-gradient-to-br from-[#2563eb] to-[#2563eb] p-8 rounded-2xl text-white shadow-xl interactive-card">
             <h3 class="text-2xl font-bold mb-6">Em Números</h3>
             <div class="space-y-4">
               <div class="flex items-center justify-between border-b border-white/20 pb-3">
@@ -152,13 +152,13 @@
   </section>
 
   <!-- Pilares Institucionais -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#2563eb] mb-12">Pilares Institucionais</h2>
       
       <div class="grid md:grid-cols-3 gap-8">
         <!-- Missão -->
-        <a href="/missao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+        <a href="/missao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group interactive-card">
           <div class="w-16 h-16 bg-gradient-to-br from-[#3B82F6] to-[#2563eb] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
@@ -171,7 +171,7 @@
         </a>
 
         <!-- Visão -->
-        <a href="/visao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+        <a href="/visao" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group interactive-card">
           <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -185,7 +185,7 @@
         </a>
 
         <!-- Valores -->
-        <a href="/valores" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group">
+        <a href="/valores" class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-all group interactive-card">
           <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
@@ -206,14 +206,14 @@
   </section>
 
   <!-- Áreas de Atuação -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-center text-[#2563eb] mb-12">Áreas de Atuação</h2>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <a href="/cursos" class="group">
-          <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between">
+          <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between interactive-card">
             <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
             </svg>
@@ -223,7 +223,7 @@
         </a>
 
         <a href="/investigacao" class="group">
-            <div class="bg-gradient-to-br from-[#9C27B0] to-[#673AB7] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between">
+          <div class="bg-gradient-to-br from-[#9C27B0] to-[#673AB7] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between interactive-card">
             <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z" clip-rule="evenodd"/>
             </svg>
@@ -233,7 +233,7 @@
         </a>
 
         <a href="/cultura" class="group">
-            <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between">
+          <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between interactive-card">
             <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
               <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
@@ -244,7 +244,7 @@
         </a>
 
         <a href="/inclusao" class="group">
-            <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between">
+          <div class="bg-gradient-to-br from-[#3B82F6] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all h-full min-h-[240px] flex flex-col justify-between interactive-card">
             <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
               <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
             </svg>

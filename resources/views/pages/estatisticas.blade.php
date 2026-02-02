@@ -9,14 +9,14 @@
 <body class="bg-gray-50">
     @include('partials.navbar')
 
-    <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16">
+    <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
         <div class="container mx-auto px-6">
             <h1 class="text-5xl font-bold mb-4">Estatísticas Institucionais</h1>
             <p class="text-xl text-blue-100">Dados e indicadores do ISP-Bié</p>
         </div>
     </div>
 
-    <div class="bg-white border-b">
+    <div class="bg-white border-b scroll-reveal">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center text-sm text-gray-600">
                 <a href="/" class="hover:text-teal-600">Início</a>
@@ -27,29 +27,29 @@
     </div>
 
     <div class="container mx-auto px-6 py-12">
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Dados Gerais 2024</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center stat-card">
                     <div class="text-4xl font-bold text-teal-600 mb-2">1,247</div>
                     <div class="text-gray-600">Estudantes</div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center stat-card">
                     <div class="text-4xl font-bold text-blue-600 mb-2">89</div>
                     <div class="text-gray-600">Docentes</div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center stat-card">
                     <div class="text-4xl font-bold text-green-600 mb-2">6</div>
                     <div class="text-gray-600">Cursos</div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center stat-card">
                     <div class="text-4xl font-bold text-orange-600 mb-2">245</div>
                     <div class="text-gray-600">Diplomados</div>
                 </div>
             </div>
         </section>
 
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Evolução de Matrículas</h2>
             <div class="bg-white p-8 rounded-lg shadow-md">
                 <div class="h-64 flex items-end justify-around">
@@ -77,7 +77,7 @@
             </div>
         </section>
 
-        <section>
+        <section class="scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Distribuição por Curso</h2>
             <div class="bg-white p-8 rounded-lg shadow-md">
                 <div class="space-y-4">

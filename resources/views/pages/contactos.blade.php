@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="bg-white border-b">
+    <div class="bg-white border-b scroll-reveal">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center text-sm text-gray-600">
                 <a href="/" class="hover:text-teal-600">Início</a>
@@ -13,14 +13,14 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-6 mt-8">
-        <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+    <div class="container mx-auto px-6 mt-8 scroll-reveal">
+        <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
             <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Contactos</h1>
             <p class="text-lg text-gray-700">Fale connosco</p>
         </div>
     </div>
 
-    <div class="container mx-auto px-6 py-12">
+    <div class="container mx-auto px-6 py-12 scroll-reveal">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
             <div>
                 <h2 class="text-3xl font-bold text-gray-900 mb-8">Informações de Contacto</h2>

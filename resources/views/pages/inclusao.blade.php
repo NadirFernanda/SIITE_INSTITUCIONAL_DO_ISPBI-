@@ -4,7 +4,7 @@
 @section('content')
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-lg shadow-md p-8 mb-10">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Inclusão e Pertencimento</h1>
@@ -28,13 +28,13 @@
       </div>
 
       <!-- Pilares da Inclusão -->
-      <div class="mb-12">
+      <div class="mb-12 scroll-reveal">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Pilares da Inclusão</h2>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <!-- Acessibilidade -->
-          <div id="acessibilidade" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="acessibilidade" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -68,7 +68,7 @@
           </div>
 
           <!-- Equidade de Género -->
-          <div id="genero" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="genero" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -102,7 +102,7 @@
           </div>
 
           <!-- Apoio Estudantil -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -136,7 +136,7 @@
           </div>
 
           <!-- Diversidade Cultural -->
-          <div id="diversidade" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="diversidade" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -170,7 +170,7 @@
           </div>
 
           <!-- Inclusão Socioeconómica -->
-          <div id="bolsas" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="bolsas" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -205,7 +205,7 @@
           </div>
 
           <!-- Saúde Mental -->
-          <div id="apoio" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="apoio" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -242,13 +242,13 @@
       </div>
 
       <!-- Programas e Iniciativas -->
-      <div class="mb-12">
+      <div class="mb-12 scroll-reveal">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Programas e Iniciativas</h2>
         
         <div class="grid md:grid-cols-2 gap-8">
           
           <!-- Programa 1 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden interactive-card">
             <div class="h-48 bg-gradient-to-br from-[#2563eb] to-[#2563eb] flex items-center justify-center">
               <svg class="w-24 h-24 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>

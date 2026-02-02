@@ -2,13 +2,13 @@
 
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
     <!-- Breadcrumb -->
     <nav class="text-sm opacity-75 mb-8">
         <a href="/" class="hover:underline">Início</a> \ Órgãos de gestão
     </nav>
 
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Órgãos de gestão</h1>
         <p class="text-lg text-gray-700 mb-4">Instituto Superior Politécnico do Bié</p>
         <div class="overflow-x-auto rounded-xl border border-gray-100 bg-white">
@@ -21,13 +21,13 @@
     </div>
 
     <!-- Estrutura Organizacional -->
-    <section class="py-16 bg-gray-50">
+    <section class="py-16 bg-gray-50 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Organigrama Institucional -->
-            <div class="mb-12">
+            <div class="mb-12 scroll-reveal">
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Organigrama Institucional</h2>
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden interactive-card">
                     <img
                         src="{{ asset('images/organigrama-ispbie.png') }}"
                         alt="Organigrama do Instituto Superior Politécnico do Bié"
@@ -37,12 +37,12 @@
             </div>
 
             <!-- Órgãos de gestão -->
-            <div class="mb-12">
+            <div class="mb-12 scroll-reveal">
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-8">ÓRGÃOS DE GESTÃO</h2>
                 <div class="grid md:grid-cols-2 gap-6">
 
                     <!-- Presidente -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
                         <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
                             <div class="flex items-center text-white">
                                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -80,7 +80,7 @@
                     </div>
 
                     <!-- Gabinete do Presidente -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
                         <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
                             <div class="flex items-center text-white">
                                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -106,12 +106,12 @@
             </div>
 
             <!-- Vice-Órgãos de gestão -->
-            <div class="mb-12">
+            <div class="mb-12 scroll-reveal">
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-8">VICE-ÓRGÃOS DE GESTÃO</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Cada VP aqui mantém o mesmo padrão de código simplificado -->
                     <!-- Exemplo: VP Graduação -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
                         <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
                             <div class="flex items-center text-white">
                                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -138,7 +138,7 @@
             </div>
 
             <!-- CTA de Transparência -->
-            <div class="bg-[#2563eb] rounded-2xl p-12 text-center text-white">
+            <div class="bg-[#2563eb] rounded-2xl p-12 text-center text-white scroll-reveal interactive-card">
                 <h2 class="text-3xl font-bold mb-4">Governança</h2>
                 <p class="text-xl mb-8 opacity-90">
                     Acompanhe as ações e decisões dos Órgãos de gestão do ISP-Bié

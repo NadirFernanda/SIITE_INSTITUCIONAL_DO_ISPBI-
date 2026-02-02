@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- Banner -->
-  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-20">
+  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-20 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center space-x-4 mb-6">
         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -22,7 +22,7 @@
   </section>
 
   <!-- Sobre o Centro -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
         <div>
@@ -38,7 +38,7 @@
             internacionais e para a comunicação eficaz em contextos académicos e profissionais.
           </p>
         </div>
-        <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg p-8 text-white">
+        <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg p-8 text-white interactive-card">
           <h3 class="text-2xl font-bold mb-6">Porquê Aprender no CEL?</h3>
           <ul class="space-y-4">
             <li class="flex items-start">
@@ -72,14 +72,14 @@
   </section>
 
   <!-- Idiomas Oferecidos -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-4">Idiomas Oferecidos</h2>
       <div class="h-1 w-24 bg-indigo-600 mb-8"></div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Inglês -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
           <div class="h-48 bg-gradient-to-br from-[#2563eb] to-[#2563eb] flex items-center justify-center">
             <div class="text-center text-white">
               <div class="text-6xl mb-2">ðŸ‡¬ðŸ‡§</div>
@@ -111,7 +111,7 @@
         </div>
 
         <!-- Francês -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
           <div class="h-48 bg-gradient-to-br from-blue-500 to-red-600 flex items-center justify-center">
             <div class="text-center text-white">
               <div class="text-6xl mb-2">ðŸ‡«ðŸ‡·</div>
@@ -143,7 +143,7 @@
         </div>
 
         <!-- Português (Estrangeiros) -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
           <div class="h-48 bg-gradient-to-br from-green-600 to-red-600 flex items-center justify-center">
             <div class="text-center text-white">
               <div class="text-6xl mb-2">ðŸ‡µðŸ‡¹</div>
@@ -175,7 +175,7 @@
         </div>
 
         <!-- Espanhol -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
           <div class="h-48 bg-gradient-to-br from-yellow-500 to-red-600 flex items-center justify-center">
             <div class="text-center text-white">
               <div class="text-6xl mb-2">ðŸ‡ªðŸ‡¸</div>
@@ -207,7 +207,7 @@
         </div>
 
         <!-- Mandarim -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
           <div class="h-48 bg-gradient-to-br from-red-600 to-yellow-500 flex items-center justify-center">
             <div class="text-center text-white">
               <div class="text-6xl mb-2">ðŸ‡¨ðŸ‡³</div>
@@ -239,7 +239,7 @@
         </div>
 
         <!-- Alemão -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
           <div class="h-48 bg-gradient-to-br from-black to-red-600 flex items-center justify-center">
             <div class="text-center text-white">
               <div class="text-6xl mb-2">ðŸ‡©ðŸ‡ª</div>

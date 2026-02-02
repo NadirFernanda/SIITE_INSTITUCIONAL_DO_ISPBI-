@@ -1,8 +1,8 @@
 @extends('layouts.site')
 
 @section('content')
-<div class="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-lg shadow">
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+<div class="max-w-4xl mx-auto mt-10 p-8 bg-white rounded-lg shadow scroll-reveal">
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Painel Administrativo</h1>
         <p class="text-lg text-gray-700">Bem-vindo ao dashboard de administração do ISP-Bié</p>
     </div>

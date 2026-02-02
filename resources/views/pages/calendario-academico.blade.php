@@ -2,20 +2,20 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <nav class="text-sm mb-8">
         <a href="/" class="hover:underline">Início</a>
         <span class="mx-2">/</span>
         <span>Calendário Académico</span>
       </nav>
 
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Calendário Académico 2025/2026</h1>
         <p class="text-lg text-gray-700">Planeie o seu ano lectivo</p>
       </div>
 
   <!-- Download -->
-  <section class="py-8 bg-white border-b">
+  <section class="py-8 bg-white border-b scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div>
@@ -33,12 +33,12 @@
   </section>
 
   <!-- Cronograma -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
-        <!-- Primeiro Semestre -->
-        <div class="bg-white rounded-lg shadow-md p-6">
+      <!-- Primeiro Semestre -->
+      <div class="bg-white rounded-lg shadow-md p-6 interactive-card">
           <div class="flex items-center mb-6">
             <div class="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
               1º
@@ -106,7 +106,7 @@
         </div>
 
         <!-- Segundo Semestre -->
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-lg shadow-md p-6 interactive-card">
           <div class="flex items-center mb-6">
             <div class="w-12 h-12 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
               2º
@@ -175,7 +175,7 @@
       </div>
 
       <!-- Feriados Nacionais -->
-      <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+      <div class="bg-white rounded-lg shadow-md p-6 mt-8 interactive-card">
         <h3 class="text-2xl font-bold text-gray-900 mb-6">Feriados Nacionais e Suspensão de Aulas</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div class="flex items-center p-3 bg-red-50 rounded-lg">
@@ -243,7 +243,7 @@
   </section>
 
   <!-- Observações -->
-  <section class="py-12 bg-white">
+  <section class="py-12 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h3 class="text-2xl font-bold text-gray-900 mb-6">Observações Importantes</h3>
       <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded">

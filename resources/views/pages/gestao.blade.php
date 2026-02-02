@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- Banner Institucional -->
-  <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16">
+  <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center space-x-4 mb-4">
         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -21,11 +21,11 @@
   </section>
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Introdução -->
-      <div class="bg-white p-8 rounded-lg shadow-md mb-12">
+      <div class="bg-white p-8 rounded-lg shadow-md mb-12 interactive-card">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Estrutura de Governança</h2>
         <p class="text-lg text-gray-700 leading-relaxed mb-4">
           O Instituto Superior Politécnico do Bié adota uma estrutura de governança baseada em 
@@ -39,13 +39,13 @@
       </div>
 
       <!-- Órgãos de Governança -->
-      <div class="mb-12">
+      <div class="mb-12 scroll-reveal">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Órgãos de Governança</h2>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <!-- Conselho Superior -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -83,7 +83,7 @@
           </div>
 
           <!-- Conselho Científico -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -121,7 +121,7 @@
           </div>
 
           <!-- Conselho Pedagógico -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -160,7 +160,7 @@
 
           <!-- Órgãos de gestão -->
           <!-- Organograma Institucional -->
-          <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+          <div class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
             <h3 class="text-2xl font-bold text-[#2563eb] mb-6 text-center">Organograma Institucional</h3>
             <div class="flex flex-col items-center">
               <!-- Top Level -->
@@ -237,7 +237,7 @@
           </div>
 
           <!-- Vice-Órgãos de gestão -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">

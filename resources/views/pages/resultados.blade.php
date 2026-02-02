@@ -2,20 +2,20 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <nav class="text-sm mb-8">
         <a href="/" class="hover:underline">Início</a>
         <span class="mx-2">/</span>
         <span>Resultados de Exames</span>
       </nav>
 
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Resultados de Exames</h1>
         <p class="text-lg text-gray-700">Consulte as suas notas online</p>
       </div>
 
   <!-- Informação -->
-  <section class="py-8 bg-yellow-50 border-b">
+  <section class="py-8 bg-yellow-50 border-b scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-start">
         <svg class="w-6 h-6 text-yellow-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -33,11 +33,11 @@
   </section>
 
   <!-- Sistema de Consulta -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Formulário de Acesso -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Acesso ao Portal de Resultados</h2>
         <p class="text-gray-600 mb-6">
           Faça login com as suas credenciais do Portal do Estudante para consultar os resultados.
@@ -100,7 +100,7 @@
       </div>
 
       <!-- Demonstração de Resultados -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Exemplo de Pauta de Notas</h2>
         <div class="overflow-x-auto">
           <table class="w-full">
@@ -182,7 +182,7 @@
       </div>
 
       <!-- Recurso de Prova -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <h2 class="text-2xl font-bold text-gray-900 mb-4">Recurso de Prova</h2>
         <p class="text-gray-700 mb-4">
           Se não concordar com a nota atribuída, pode solicitar a revisão da prova de exame seguindo os procedimentos:
@@ -230,29 +230,29 @@
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Perguntas Frequentes</h2>
       <div class="space-y-4">
-        <div class="border border-gray-200 rounded-lg p-6">
+        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
           <h4 class="font-semibold text-gray-900 mb-2">Quando são publicadas as notas?</h4>
           <p class="text-gray-600">
             As notas são publicadas até 7 dias úteis após a realização do exame final de cada disciplina.
           </p>
         </div>
-        <div class="border border-gray-200 rounded-lg p-6">
+        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
           <h4 class="font-semibold text-gray-900 mb-2">Como é calculada a nota final?</h4>
           <p class="text-gray-600">
             Os estudantes são avaliados através de duas parcelares (1Âª e 2Âª) e um exame final. A nota mínima de aprovação é 10 valores.
           </p>
         </div>
-        <div class="border border-gray-200 rounded-lg p-6">
+        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
           <h4 class="font-semibold text-gray-900 mb-2">Posso fazer exame de melhoria?</h4>
           <p class="text-gray-600">
             Contacte os Serviços Académicos para informações sobre exames de melhoria e época de recurso.
           </p>
         </div>
-        <div class="border border-gray-200 rounded-lg p-6">
+        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
           <h4 class="font-semibold text-gray-900 mb-2">O que acontece se reprovar em mais de 3 disciplinas?</h4>
           <p class="text-gray-600">
             O estudante deve repetir o ano lectivo, matriculando-se novamente nas disciplinas em falta.

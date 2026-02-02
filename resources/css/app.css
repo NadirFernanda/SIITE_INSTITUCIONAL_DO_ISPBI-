@@ -7,22 +7,93 @@ html, body {
 @tailwind utilities;
 
 @layer components {
+	/* Botão institucional padrão */
+	.btn-ispbie {
+		@apply text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors duration-200;
+		background-color: #F05A28;
+	}
+	.btn-ispbie:hover {
+		background-color: #2C4A5E;
 	}
 
-	@layer utilities {
-		@keyframes slide-in-right {
-			0% {
-				transform: translateX(100%);
-				opacity: 0.2;
-			}
-			100% {
-				transform: translateX(0);
-				opacity: 1;
-			}
+	/* Cards interativos reutilizáveis (hover leve) */
+	.interactive-card {
+		@apply transition-transform transition-shadow duration-200 ease-out;
+	}
+	.interactive-card:hover {
+		transform: translateY(-4px) scale(1.01);
+		box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+	}
+
+	/* Links com sublinhado suave ao passar o rato */
+	.link-underline-soft {
+		@apply relative inline-block transition-colors duration-150;
+	}
+	.link-underline-soft::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: -2px;
+		width: 0;
+		height: 2px;
+		background-color: currentColor;
+		transition: width 0.2s ease-out;
+	}
+	.link-underline-soft:hover::after {
+		width: 100%;
+	}
+
+	/* Cartões de estatísticas / destaques com efeito de foco */
+	.stat-card {
+		@apply transition-transform transition-shadow duration-200 ease-out;
+	}
+	.stat-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+	}
+}
+
+@layer utilities {
+	@keyframes slide-in-right {
+		0% {
+			transform: translateX(100%);
+			opacity: 0.2;
 		}
-		.animate-slide-in-right {
-			animation: slide-in-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+		100% {
+			transform: translateX(0);
+			opacity: 1;
 		}
+	}
+	.animate-slide-in-right {
+		animation: slide-in-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	/* Animação de fade-in para entrada suave nas secções */
+	@keyframes fade-in-up {
+		0% {
+			transform: translateY(12px);
+			opacity: 0;
+		}
+		100% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+	.fade-in-up {
+		animation: fade-in-up 0.45s ease-out forwards;
+	}
+
+	/* Estado inicial para elementos observados no scroll */
+	.scroll-reveal {
+		opacity: 0;
+		transform: translateY(16px);
+		transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+	}
+	.scroll-reveal.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
 	/* Cores institucionais ISPBié */
 	.bg-ispbie-orange { background-color: #F05A28; }
 	.text-ispbie-orange { color: #F05A28; }
@@ -36,13 +107,4 @@ html, body {
 	.text-ispbie-gold { color: #FFD700; }
 	.bg-ispbie-footer { background-color: #1a1a1a; }
 	.text-ispbie-footer { color: #1a1a1a; }
-
-	/* Botão institucional padrão */
-	.btn-ispbie {
-		@apply text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors duration-200;
-		background-color: #F05A28;
-	}
-	.btn-ispbie:hover {
-		background-color: #2C4A5E;
-	}
 }

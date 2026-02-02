@@ -10,8 +10,8 @@
     @include('partials.navbar')
 
     <!-- Cabeçalho em card -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6">
-        <div class="bg-white rounded-lg shadow-md p-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6 scroll-reveal">
+        <div class="bg-white rounded-lg shadow-md p-8 interactive-card">
             <h1 class="text-3xl font-bold text-[#2563eb] mb-2">Biblioteca Digital</h1>
             <p class="text-gray-600">Acervo digital e recursos bibliográficos.</p>
         </div>
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-6 py-12">
+    <div class="container mx-auto px-6 py-12 scroll-reveal">
         <div class="mb-8">
             <div class="max-w-2xl mx-auto">
                 <div class="relative">
@@ -39,10 +39,10 @@
             </div>
         </div>
 
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Coleções</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
                     <div class="w-16 h-16 bg-teal-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                         <svg class="w-8 h-8 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
@@ -52,7 +52,7 @@
                     <p class="text-2xl font-bold text-teal-600">2.500+</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
                     <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                         <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
@@ -62,7 +62,7 @@
                     <p class="text-2xl font-bold text-green-600">1.200+</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
                     <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                         <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
@@ -72,7 +72,7 @@
                     <p class="text-2xl font-bold text-blue-600">150+</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
                     <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                         <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
@@ -84,7 +84,7 @@
             </div>
         </section>
 
-        <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center">
+        <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center scroll-reveal">
             <h2 class="text-3xl font-bold mb-4">Acesso Restrito</h2>
             <p class="text-xl mb-8">Faça login com suas credenciais ISP-Bié para acessar todo o acervo</p>
             <button class="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-teal-50 transition-colors">

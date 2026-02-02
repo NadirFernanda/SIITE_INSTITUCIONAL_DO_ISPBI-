@@ -2,25 +2,25 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <nav class="text-sm opacity-75 mb-8">
         <a href="/" class="hover:underline">Início</a> \ Notícias
       </nav>
 
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Notícias</h1>
         <p class="text-lg text-gray-700">Notícias, comunicados e contacto com as notícias</p>
       </div>
 
   <!-- Notícias Recentes -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12">Notícias Recentes</h2>
       
       <div class="grid md:grid-cols-3 gap-8">
         
         <!-- Notícia 1 -->
-        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all">
+        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all interactive-card">
           <div class="h-48 bg-gradient-to-br from-[#2563eb] to-[#2563eb]"></div>
           <div class="p-6">
             <div class="text-sm text-gray-500 mb-2">14 de Dezembro de 2025</div>
@@ -33,7 +33,7 @@
         </article>
 
         <!-- Notícia 2 -->
-        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all">
+        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all interactive-card">
           <div class="h-48 bg-gradient-to-br from-[#9C27B0] to-[#673AB7]"></div>
           <div class="p-6">
             <div class="text-sm text-gray-500 mb-2">10 de Dezembro de 2025</div>
@@ -46,7 +46,7 @@
         </article>
 
         <!-- Notícia 3 -->
-        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all">
+        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all interactive-card">
           <div class="h-48 bg-gradient-to-br from-[#2563eb] to-[#3B82F6]"></div>
           <div class="p-6">
             <div class="text-sm text-gray-500 mb-2">5 de Dezembro de 2025</div>
@@ -63,13 +63,13 @@
   </section>
 
   <!-- Comunicados Oficiais -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12">Comunicados Oficiais</h2>
       
       <div class="space-y-4">
         
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all">
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all interactive-card">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <div class="flex items-center mb-2">
@@ -89,7 +89,7 @@
           </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all">
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all interactive-card">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <div class="flex items-center mb-2">
@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all">
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all interactive-card">
           <div class="flex items-start justify-between">
             <div class="flex-1">
               <div class="flex items-center mb-2">
@@ -134,13 +134,13 @@
   </section>
 
   <!-- Kit de Notícias -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Kit de Notícias</h2>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <a href="#" class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] p-6 rounded-lg text-white hover:shadow-xl transition-all group">
+        <a href="#" class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] p-6 rounded-lg text-white hover:shadow-xl transition-all group interactive-card">
           <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
           </svg>
@@ -148,7 +148,7 @@
           <p class="text-sm opacity-90">Versões oficiais em alta resolução</p>
         </a>
 
-        <a href="#" class="bg-gradient-to-br from-[#2563eb] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all group">
+        <a href="#" class="bg-gradient-to-br from-[#2563eb] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all group interactive-card">
           <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
             <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z"/>
             <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
@@ -157,7 +157,7 @@
           <p class="text-sm opacity-90">Estatutos, relatórios e publicações</p>
         </a>
 
-        <a href="#" class="bg-gradient-to-br from-[#9C27B0] to-[#673AB7] p-6 rounded-lg text-white hover:shadow-xl transition-all group">
+        <a href="#" class="bg-gradient-to-br from-[#9C27B0] to-[#673AB7] p-6 rounded-lg text-white hover:shadow-xl transition-all group interactive-card">
           <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm3 2h6v4H7V5zm8 8v2h1v-2h-1zm-2-2H7v4h6v-4zm2 0h1V9h-1v2zm1-4V5h-1v2h1zM5 5v2H4V5h1zm0 4H4v2h1V9zm-1 4h1v2H4v-2z" clip-rule="evenodd"/>
           </svg>
@@ -165,7 +165,7 @@
           <p class="text-sm opacity-90">Galeria de imagens institucionais</p>
         </a>
 
-        <a href="#" class="bg-gradient-to-br from-[#2563eb] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all group">
+        <a href="#" class="bg-gradient-to-br from-[#2563eb] to-[#2563eb] p-6 rounded-lg text-white hover:shadow-xl transition-all group interactive-card">
           <svg class="w-12 h-12 mb-4 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 20 20">
             <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/>
           </svg>
@@ -178,9 +178,9 @@
   </section>
 
   <!-- Contacto com as Notícias -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-12 text-white">
+      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-12 text-white interactive-card">
         <div class="grid md:grid-cols-2 gap-12">
           
           <div>

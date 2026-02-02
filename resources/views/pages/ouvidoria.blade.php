@@ -129,23 +129,23 @@
         </section>
 
         <!-- Estatísticas -->
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white">
                 <h2 class="text-3xl font-bold mb-8 text-center">Estatísticas 2024</h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="text-center">
+                    <div class="text-center stat-card">
                         <div class="text-4xl font-bold mb-2">342</div>
                         <div class="text-teal-100">Manifestações Recebidas</div>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center stat-card">
                         <div class="text-4xl font-bold mb-2">95%</div>
                         <div class="text-teal-100">Taxa de Resposta</div>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center stat-card">
                         <div class="text-4xl font-bold mb-2">12</div>
                         <div class="text-teal-100">Dias Média de Resposta</div>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center stat-card">
                         <div class="text-4xl font-bold mb-2">89%</div>
                         <div class="text-teal-100">Satisfação</div>
                     </div>

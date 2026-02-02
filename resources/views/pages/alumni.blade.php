@@ -82,7 +82,7 @@
     </div>
   </section>
   <!-- Comunidade Alumni -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Benefícios da Comunidade Alumni</h2>
@@ -90,25 +90,25 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center interactive-card">
           <div class="text-5xl mb-4">🤝</div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Networking</h3>
           <p class="text-gray-600">Conecte-se com ex-estudantes e amplie sua rede profissional em Angola e no mundo</p>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center interactive-card">
           <div class="text-5xl mb-4">💼</div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Oportunidades</h3>
           <p class="text-gray-600">Acesse vagas exclusivas de emprego e estágio divulgadas na rede alumni</p>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center interactive-card">
           <div class="text-5xl mb-4">🎓</div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Eventos</h3>
           <p class="text-gray-600">Participe de eventos, reencontros e conferências exclusivas para alumni</p>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow text-center interactive-card">
           <div class="text-5xl mb-4">📚</div>
           <h3 class="text-xl font-semibold text-gray-900 mb-2">Formação Contínua</h3>
           <p class="text-gray-600">Descontos em cursos de pós-graduação e formações especializadas</p>
@@ -117,22 +117,22 @@
       
 
       <!-- Estatísticas Alumni -->
-      <div class="bg-gradient-to-r from-[#3B82F6] to-[#FFA500] rounded-lg p-8 text-white">
+      <div class="bg-gradient-to-r from-[#3B82F6] to-[#FFA500] rounded-lg p-8 text-white scroll-reveal">
         <h3 class="text-2xl font-bold mb-6 text-center">Alumni em Números</h3>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-          <div>
+          <div class="stat-card">
             <div class="text-4xl font-bold mb-2">500+</div>
             <div class="text-sm opacity-90">Alumni Formados</div>
           </div>
-          <div>
+          <div class="stat-card">
             <div class="text-4xl font-bold mb-2">85%</div>
             <div class="text-sm opacity-90">Taxa de Empregabilidade</div>
           </div>
-          <div>
+          <div class="stat-card">
             <div class="text-4xl font-bold mb-2">12</div>
             <div class="text-sm opacity-90">Países onde trabalham</div>
           </div>
-          <div>
+          <div class="stat-card">
             <div class="text-4xl font-bold mb-2">30+</div>
             <div class="text-sm opacity-90">Empresas fundadas</div>
           </div>

@@ -9,7 +9,7 @@
 <body class="bg-gray-50">
     @include('partials.navbar')
 
-    <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-16">
+    <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-16 scroll-reveal">
         <div class="container mx-auto px-6">
             <h1 class="text-5xl font-bold mb-4">App ISP-Bié</h1>
             <p class="text-xl text-purple-100">Aplicativo móvel oficial</p>
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-6 py-12">
+    <div class="container mx-auto px-6 py-12 scroll-reveal">
         <div class="text-center mb-16">
             <div class="w-32 h-32 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-3xl mx-auto mb-6 flex items-center justify-center">
                 <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -57,10 +57,10 @@
             </div>
         </div>
 
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Funcionalidades</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
                     <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                         <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
@@ -71,7 +71,7 @@
                     <p class="text-gray-600">Acesse suas notas em tempo real</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
                     <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                         <svg class="w-8 h-8 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"/>
@@ -81,7 +81,7 @@
                     <p class="text-gray-600">Consulte seus horários de aulas</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
                     <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                         <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>

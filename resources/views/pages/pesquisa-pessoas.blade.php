@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="bg-white border-b">
+    <div class="bg-white border-b scroll-reveal">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center text-sm text-gray-600">
                 <a href="/" class="hover:text-teal-600">Início</a>
@@ -12,16 +12,16 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-6 mt-8">
-        <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+    <div class="container mx-auto px-6 mt-8 scroll-reveal">
+        <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
             <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Busca de Pessoas</h1>
             <p class="text-lg text-gray-700">Encontre docentes, funcionários e pesquisadores</p>
         </div>
     </div>
 
-    <div class="container mx-auto px-6 py-12">
+    <div class="container mx-auto px-6 py-12 scroll-reveal">
         <div class="max-w-3xl mx-auto mb-16">
-            <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="bg-white p-8 rounded-lg shadow-md interactive-card">
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Pesquisar</h2>
                 <div class="space-y-4">
                     <div>
@@ -54,10 +54,10 @@
             </div>
         </div>
 
-        <section>
+        <section class="scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Diretório por Departamento</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Engenharias</h3>
                     <ul class="space-y-2 text-gray-600">
                         <li>• Eng. Informática</li>
@@ -67,7 +67,7 @@
                     <button class="mt-4 text-teal-600 hover:text-teal-700 font-medium">Ver todos →</button>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Ciências Sociais</h3>
                     <ul class="space-y-2 text-gray-600">
                         <li>• Comunicação Social</li>
@@ -76,7 +76,7 @@
                     <button class="mt-4 text-teal-600 hover:text-teal-700 font-medium">Ver todos →</button>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Gestão</h3>
                     <ul class="space-y-2 text-gray-600">
                         <li>• Contabilidade</li>

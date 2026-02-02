@@ -2,18 +2,18 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <nav class="text-sm opacity-75 mb-8">
         <a href="/" class="hover:underline">Início</a> \ Sistemas
       </nav>
 
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Sistemas Institucionais</h1>
         <p class="text-lg text-gray-700">Plataformas e Serviços Digitais do ISP-Bié</p>
       </div>
 
   <!-- Introdução -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center mb-12">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Infraestrutura Digital</h2>
@@ -27,14 +27,14 @@
   </section>
 
   <!-- Sistemas Académicos -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Sistemas Académicos</h2>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         <!-- Portal do Estudante -->
-        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200">
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200 interactive-card">
           <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
             <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
@@ -70,7 +70,7 @@
         </div>
 
         <!-- Biblioteca Digital -->
-        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200">
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200 interactive-card">
           <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
             <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
@@ -106,7 +106,7 @@
         </div>
 
         <!-- Repositório Institucional -->
-        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200">
+        <div class="bg-white rounded-2xl shadow-lg flex flex-col h-full min-h-[420px] w-[370px] mx-auto hover:scale-[1.03] transition-transform duration-200 interactive-card">
           <div class="flex flex-col items-center justify-center bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 pb-4" style="height:180px; min-width:100%; width:100%;">
             <svg class="w-16 h-16 mb-2 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z"/>
@@ -147,14 +147,14 @@
   </section>
 
   <!-- Sistemas Administrativos -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Sistemas Administrativos</h2>
       
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Webmail -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#2563eb]">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#2563eb] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
@@ -171,7 +171,7 @@
         </div>
 
         <!-- Portal Financeiro -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#3B82F6]">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#3B82F6] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
@@ -188,7 +188,7 @@
         </div>
 
         <!-- Sistema RH -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#2563eb]">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#2563eb] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
@@ -204,7 +204,7 @@
         </div>
 
         <!-- Plataforma de Aprendizagem -->
-        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#3B82F6]">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all border-t-4 border-[#3B82F6] interactive-card">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
@@ -226,13 +226,13 @@
   </section>
 
   <!-- Aplicações Mobile -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Aplicações Mobile</h2>
       
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden interactive-card">
           <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-8 text-white">
             <svg class="w-16 h-16 mb-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>

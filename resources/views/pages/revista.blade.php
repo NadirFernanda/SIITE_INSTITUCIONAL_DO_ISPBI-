@@ -10,14 +10,14 @@
     @include('partials.navbar')
 
     <!-- Cabeçalho em card -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6">
-        <div class="bg-white rounded-lg shadow-md p-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6 scroll-reveal">
+        <div class="bg-white rounded-lg shadow-md p-8 interactive-card">
             <h1 class="text-3xl font-bold text-[#2563eb] mb-2">Revista Científica ISP-Bié</h1>
             <p class="text-gray-600">Publicações científicas e académicas.</p>
         </div>
     </div>
 
-    <div class="bg-white border-b">
+    <div class="bg-white border-b scroll-reveal">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center text-sm text-gray-600">
                 <a href="/" class="hover:text-teal-600">Início</a>
@@ -28,10 +28,10 @@
     </div>
 
 
-    <div class="container mx-auto px-6 py-12">
-        <section class="mb-16">
+    <div class="container mx-auto px-6 py-12 scroll-reveal">
+        <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Última Edição</h2>
-            <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="bg-white p-8 rounded-lg shadow-md interactive-card">
                 <div class="flex items-start gap-6">
                     <div class="w-48 h-64 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-lg flex items-center justify-center text-white">
                         <span class="text-6xl font-bold">Vol. 1</span>
@@ -45,9 +45,9 @@
             </div>
         </section>
 
-        <section>
+        <section class="scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Submissão de Artigos</h2>
-            <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="bg-white p-8 rounded-lg shadow-md interactive-card">
                 <p class="text-gray-600 mb-6">A Revista Científica do ISP-Bié aceita submissões de artigos nas áreas de Engenharia, Ciências Sociais, Gestão e áreas afins.</p>
                 <button class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Submeter Artigo</button>
             </div>

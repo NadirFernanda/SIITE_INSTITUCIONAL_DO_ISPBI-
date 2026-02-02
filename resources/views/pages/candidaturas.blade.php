@@ -10,7 +10,7 @@
     @include('partials.navbar')
 
     <!-- Banner -->
-    <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16">
+    <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
         <div class="container mx-auto px-6">
             <div class="flex items-center mb-4">
                 <svg class="w-12 h-12 mr-4" fill="currentColor" viewBox="0 0 20 20">
@@ -26,7 +26,7 @@
     </div>
 
     <!-- Breadcrumb -->
-    <div class="bg-white border-b">
+    <div class="bg-white border-b scroll-reveal">
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center text-sm text-gray-600">
                 <a href="/" class="hover:text-teal-600">Início</a>
@@ -39,7 +39,7 @@
     <!-- Conteúdo Principal -->
     <div class="container mx-auto px-6 py-12">
         <!-- Calendário -->
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <div class="bg-orange-50 border-l-4 border-orange-600 p-6 mb-8">
                 <div class="flex items-center">
                     <svg class="w-6 h-6 text-orange-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -54,7 +54,7 @@
 
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Processo de Candidatura</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
                     <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                         <span class="text-2xl font-bold text-orange-600">1</span>
                     </div>
@@ -62,7 +62,7 @@
                     <p class="text-sm text-gray-600">Prepare os documentos necessários</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
                     <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                         <span class="text-2xl font-bold text-orange-600">2</span>
                     </div>
@@ -70,7 +70,7 @@
                     <p class="text-sm text-gray-600">Preencha o formulário online</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
                     <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                         <span class="text-2xl font-bold text-orange-600">3</span>
                     </div>
@@ -78,7 +78,7 @@
                     <p class="text-sm text-gray-600">Efetue o pagamento da taxa</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
                     <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                         <span class="text-2xl font-bold text-orange-600">4</span>
                     </div>
@@ -89,7 +89,7 @@
         </section>
 
         <!-- Documentos Necessários -->
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Documentos Necessários</h2>
             <div class="bg-white p-8 rounded-lg shadow-md">
                 <ul class="space-y-4">
@@ -143,10 +143,10 @@
         </section>
 
         <!-- Cursos Disponíveis -->
-        <section class="mb-16">
+        <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Cursos Disponíveis</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Contabilidade e Administração</h3>
                     <p class="text-gray-600 mb-4">Duração: 4 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -155,7 +155,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Engenharia Informática</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -164,7 +164,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Eng. Recursos Hídricos</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -173,7 +173,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Comunicação Social</h3>
                     <p class="text-gray-600 mb-4">Duração: 4 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -182,7 +182,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Psicologia Clínica</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -191,7 +191,7 @@
                     <a href="/cursos" class="text-teal-600 hover:text-teal-700 font-medium">Ver detalhes →</a>
                 </div>
 
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Engenharia Civil</h3>
                     <p class="text-gray-600 mb-4">Duração: 5 anos</p>
                     <div class="text-sm text-gray-500 mb-4">
@@ -203,7 +203,7 @@
         </section>
 
         <!-- CTA -->
-        <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center">
+        <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center scroll-reveal">
             <h2 class="text-3xl font-bold mb-4">Pronto para Candidatar-se?</h2>
             <p class="text-xl text-orange-100 mb-8">Inicie sua candidatura online agora mesmo</p>
             <div class="flex flex-wrap justify-center gap-4">

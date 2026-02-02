@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <nav class="text-sm opacity-75 mb-8">
         <a href="/" class="hover:underline">Início</a> \ Cultura e Extensão
       </nav>
@@ -13,7 +13,7 @@
       </div>
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Introdução -->
@@ -31,7 +31,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <!-- Cultura e Identidade -->
-          <div id="artes" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="artes" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -66,7 +66,7 @@
           </div>
 
           <!-- Apoio à Comunidade -->
-          <div id="extensao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="extensao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -100,7 +100,7 @@
           </div>
 
           <!-- Educação Popular -->
-          <div id="eventos" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="eventos" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -134,7 +134,7 @@
           </div>
 
           <!-- Artes e Espetáculos -->
-          <div id="musica" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="musica" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -168,7 +168,7 @@
           </div>
 
           <!-- Desporto e Saúde -->
-          <div id="desporto" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="desporto" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -202,7 +202,7 @@
           </div>
 
           <!-- Meio Ambiente -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -241,7 +241,7 @@
 
 
       <!-- Call to Action -->
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white p-8 rounded-lg text-center">
+      <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white p-8 rounded-lg text-center scroll-reveal">
         <h3 class="text-2xl font-bold mb-4">Participe das Nossas Atividades de Extensão</h3>
         <p class="mb-6 text-lg opacity-90">
           Junte-se à comunidade ISP-Bié e contribua para o desenvolvimento social e cultural da província do Bié.

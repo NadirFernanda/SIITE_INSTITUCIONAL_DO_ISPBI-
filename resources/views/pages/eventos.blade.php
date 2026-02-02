@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- Banner -->
-  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-20">
+  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-20 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center space-x-4 mb-6">
         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -22,7 +22,7 @@
   </section>
 
   <!-- Eventos em Destaque -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Eventos em Destaque</h2>
@@ -31,7 +31,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
         <!-- Evento Principal -->
-        <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg overflow-hidden shadow-xl">
+        <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg overflow-hidden shadow-xl interactive-card">
           <div class="p-8 text-white">
             <span class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-semibold mb-4">EM DESTAQUE</span>
             <h3 class="text-3xl font-bold mb-4">Semana de Integração Académica 2026</h3>
@@ -74,7 +74,7 @@
         <!-- Grid de Eventos Destacados -->
         <div class="grid grid-cols-1 gap-6">
           <!-- Evento 2 -->
-          <div class="bg-white border-2 border-[#2563eb] rounded-lg p-6 hover:shadow-lg transition-shadow">
+          <div class="bg-white border-2 border-[#2563eb] rounded-lg p-6 hover:shadow-lg transition-shadow interactive-card">
             <div class="flex items-start justify-between mb-3">
               <span class="inline-block bg-[#2563eb] text-white px-3 py-1 rounded-full text-xs font-semibold">WORKSHOP</span>
               <span class="text-sm text-gray-600">ðŸ“… 28 Jan 2026</span>
@@ -88,7 +88,7 @@
           </div>
 
           <!-- Evento 3 -->
-          <div class="bg-white border-2 border-[#3B82F6] rounded-lg p-6 hover:shadow-lg transition-shadow">
+          <div class="bg-white border-2 border-[#3B82F6] rounded-lg p-6 hover:shadow-lg transition-shadow interactive-card">
             <div class="flex items-start justify-between mb-3">
               <span class="inline-block bg-[#3B82F6] text-white px-3 py-1 rounded-full text-xs font-semibold">PALESTRA</span>
               <span class="text-sm text-gray-600">ðŸ“… 05 Fev 2026</span>
@@ -104,13 +104,13 @@
       </div>
 
       <!-- Calendário de Eventos -->
-      <div class="mb-12">
+      <div class="mb-12 scroll-reveal">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Próximos Eventos</h2>
         <div class="h-1 w-24 bg-[#2563eb] mb-8"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Evento 4 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-[#2563eb] to-[#2563eb]"></div>
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">
@@ -137,7 +137,7 @@
           </div>
 
           <!-- Evento 5 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-[#2563eb] to-[#3B82F6]"></div>
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">
@@ -164,7 +164,7 @@
           </div>
 
           <!-- Evento 6 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-[#3B82F6] to-[#2563eb]"></div>
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">
@@ -191,7 +191,7 @@
           </div>
 
           <!-- Evento 7 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-purple-600 to-pink-500"></div>
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">
@@ -218,7 +218,7 @@
           </div>
 
           <!-- Evento 8 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-orange-500 to-red-600"></div>
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">
@@ -245,7 +245,7 @@
           </div>
 
           <!-- Evento 9 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-teal-500 to-cyan-600"></div>
             <div class="p-6">
               <div class="flex items-center justify-between mb-3">

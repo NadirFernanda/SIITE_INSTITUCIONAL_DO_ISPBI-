@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- Banner -->
-  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-20">
+  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-20 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center space-x-4 mb-6">
         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -22,7 +22,7 @@
   </section>
 
   <!-- Jornadas em Destaque -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Jornadas Científicas 2026</h2>
@@ -34,7 +34,7 @@
       </div>
 
       <!-- Jornada Principal -->
-      <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg overflow-hidden shadow-2xl mb-12">
+      <div class="bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-lg overflow-hidden shadow-2xl mb-12 interactive-card">
         <div class="grid grid-cols-1 lg:grid-cols-2">
           <div class="p-8 lg:p-12 text-white">
             <span class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-semibold mb-4">PRINCIPAL</span>
@@ -133,7 +133,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Edição 2025 -->
-          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-purple-600 hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-purple-600 hover:shadow-xl transition-shadow interactive-card">
             <h4 class="text-xl font-bold text-gray-900 mb-2">IV Jornadas - 2025</h4>
             <p class="text-gray-600 mb-4">Tema: "Inovação e Desenvolvimento Sustentável"</p>
             <div class="space-y-2 text-sm text-gray-500 mb-4">
@@ -154,7 +154,7 @@
           </div>
 
           <!-- Edição 2024 -->
-          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-indigo-600 hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-indigo-600 hover:shadow-xl transition-shadow interactive-card">
             <h4 class="text-xl font-bold text-gray-900 mb-2">III Jornadas - 2024</h4>
             <p class="text-gray-600 mb-4">Tema: "Saúde e Bem-Estar no Bié"</p>
             <div class="space-y-2 text-sm text-gray-500 mb-4">
@@ -175,7 +175,7 @@
           </div>
 
           <!-- Edição 2023 -->
-          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-pink-600 hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-pink-600 hover:shadow-xl transition-shadow interactive-card">
             <h4 class="text-xl font-bold text-gray-900 mb-2">II Jornadas - 2023</h4>
             <p class="text-gray-600 mb-4">Tema: "Engenharia para o Desenvolvimento"</p>
             <div class="space-y-2 text-sm text-gray-500 mb-4">
@@ -196,7 +196,7 @@
           </div>
 
           <!-- Edição 2022 -->
-          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-green-600 hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-green-600 hover:shadow-xl transition-shadow interactive-card">
             <h4 class="text-xl font-bold text-gray-900 mb-2">I Jornadas - 2022</h4>
             <p class="text-gray-600 mb-4">Tema: "Pesquisa e Inovação no ISP-Bié"</p>
             <div class="space-y-2 text-sm text-gray-500 mb-4">
@@ -219,13 +219,13 @@
       </div>
 
       <!-- Outras Jornadas Temáticas -->
-      <div class="mb-12">
+      <div class="mb-12 scroll-reveal">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Jornadas Temáticas</h2>
         <div class="h-1 w-24 bg-purple-600 mb-8"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Jornada 1 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-teal-500 to-cyan-600"></div>
             <div class="p-6">
               <span class="inline-block bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">ENGENHARIA</span>
@@ -243,7 +243,7 @@
           </div>
 
           <!-- Jornada 2 -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="h-48 bg-gradient-to-br from-red-500 to-pink-600"></div>
             <div class="p-6">
               <span class="inline-block bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">SAÊDE</span>

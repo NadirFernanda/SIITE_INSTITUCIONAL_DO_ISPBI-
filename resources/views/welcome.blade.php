@@ -3,12 +3,14 @@
 @section('content')
 
   <!-- Carrossel dinâmico do painel administrativo -->
-  @component('components.carrossel')
-  @endcomponent
+  <div class="scroll-reveal fade-in-up">
+    @component('components.carrossel')
+    @endcomponent
+  </div>
 
 
   <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (estilo USP) -->
-  <section class="bg-white py-6 sm:py-8 lg:py-12">
+  <section class="bg-white py-6 sm:py-8 lg:py-12 scroll-reveal">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex flex-wrap items-end justify-between mb-8">
         <div class="flex flex-row space-x-3 md:space-x-12 items-end justify-between w-full">
@@ -110,7 +112,7 @@
 
   <!-- Seção Institucional -->
 
-  <section class="py-16 bg-gray-100">
+  <section class="py-16 bg-gray-100 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-gray-900 mb-12">Notícias institucionais</h2>
       @component('components.noticias-carousel')
@@ -119,14 +121,14 @@
   </section>
 
   <!-- Seção Acesso Rápido -->
-  <section class="py-16 bg-white border-t border-gray-200">
+  <section class="py-16 bg-white border-t border-gray-200 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-gray-900 mb-12">Acesso rápido</h2>
       
       <!-- Primeira linha -->
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 mb-8">
         
-        <a href="/portal" class="flex flex-col items-center group">
+        <a href="/portal" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
@@ -136,7 +138,7 @@
         </a>
 
 
-        <a href="/ouvidoria" class="flex flex-col items-center group">
+        <a href="/ouvidoria" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
@@ -145,7 +147,7 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Ouvidoria</span>
         </a>
 
-        <a href="https://isp-bie.ao/webmail" target="_blank" rel="noopener" class="flex flex-col items-center group">
+        <a href="https://isp-bie.ao/webmail" target="_blank" rel="noopener" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -154,7 +156,7 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Webmail</span>
         </a>
 
-        <a href="/alumni" class="flex flex-col items-center group">
+        <a href="/alumni" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
@@ -163,7 +165,7 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Alumni</span>
         </a>
 
-        <a href="/revista" class="flex flex-col items-center group">
+        <a href="/revista" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
@@ -172,7 +174,7 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Revista Científica</span>
         </a>
 
-        <a href="/biblioteca" class="flex flex-col items-center group">
+        <a href="/biblioteca" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
@@ -181,7 +183,7 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Biblioteca Digital</span>
         </a>
 
-        <a href="/repositorio" class="flex flex-col items-center group">
+        <a href="/repositorio" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
@@ -189,7 +191,7 @@
           </div>
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Repositório Académico</span>
         </a>
-        <a href="/busca-pessoas" class="flex flex-col items-center group">
+        <a href="/busca-pessoas" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
@@ -203,7 +205,7 @@
   </section>
 
   <!-- Seção Serviços ao Estudante -->
-  <section class="py-16" style="background:#e0e7ff; color:#222;">
+  <section class="py-16 scroll-reveal" style="background:#e0e7ff; color:#222;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold mb-4">Serviços ao Estudante</h2>
       <p class="text-lg mb-12 opacity-90">O ISP-Bié ao seu serviço</p>
@@ -211,7 +213,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Serviço 1: Apoio Psicológico -->
-        <a href="/inclusao#apoio" class="group">
+        <a href="/inclusao#apoio" class="group interactive-card">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-[#3b82f6] transition-all">
             <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform" style="background:#bcd0fa;">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -224,7 +226,7 @@
         </a>
 
         <!-- Serviço 2: Bolsas de Estudo -->
-        <a href="/inclusao#bolsas" class="group">
+        <a href="/inclusao#bolsas" class="group interactive-card">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-[#3b82f6] transition-all">
             <div class="w-16 h-16" style="background:#bcd0fa;" class="rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -238,7 +240,7 @@
         </a>
 
         <!-- Serviço 3: Biblioteca -->
-        <a href="/biblioteca" class="group">
+        <a href="/biblioteca" class="group interactive-card">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-[#3b82f6] transition-all">
             <div class="w-16 h-16" style="background:#bcd0fa;" class="rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -251,7 +253,7 @@
         </a>
 
         <!-- Serviço 4: Portal do Estudante -->
-        <a href="/portal" class="group">
+        <a href="/portal" class="group interactive-card">
           <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-[#3b82f6] transition-all">
             <div class="w-16 h-16" style="background:#bcd0fa;" class="rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -270,14 +272,14 @@
 
   <!-- Seção ISP-Bié em números -->
 
-  <section id="estatisticas" class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white">
+  <section id="estatisticas" class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
       <p class="text-lg mb-12 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
       @php($estatisticas = \App\Models\Estatistica::orderBy('ordem')->get())
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($estatisticas as $estatistica)
-        <div class="text-center">
+        <div class="text-center stat-card">
           <div class="text-xl font-extrabold mb-2 text-white drop-shadow" style="letter-spacing:-1px;">{{ $estatistica->titulo }}</div>
           <div class="text-5xl font-bold mb-3">{{ $estatistica->valor }}</div>
           <div class="text-lg mb-4">{!! nl2br(e($estatistica->descricao)) !!}</div>

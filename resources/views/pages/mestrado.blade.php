@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- Banner Institucional -->
-  <section class="bg-gradient-to-r from-[#FF9800] to-[#2563eb] text-white py-16">
+  <section class="bg-gradient-to-r from-[#FF9800] to-[#2563eb] text-white py-16 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center space-x-4 mb-4">
         <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
@@ -21,11 +21,11 @@
   </section>
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Plano Futuro -->
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden interactive-card">
         <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-8 text-white text-center">
           <svg class="w-16 h-16 mx-auto mb-4 opacity-90" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>

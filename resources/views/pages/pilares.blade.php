@@ -1,22 +1,22 @@
 @extends('layouts.site')
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <nav class="text-sm opacity-75 mb-8">
         <a href="/" class="hover:underline">Início</a> \ Pilares Estratégicos
       </nav>
 
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Pilares Estratégicos</h1>
         <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
       </div>
 
 <!-- Conteúdo Principal -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-white scroll-reveal">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
       <div class="lg:col-span-3">
-        <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg prose max-w-2xl mx-auto">
+        <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg prose max-w-2xl mx-auto interactive-card">
       <h2 class="text-2xl font-bold text-[#2563eb] mb-6">Pilares Estratégicos</h2>
 
       <p class="mb-8">O Instituto Superior Politécnico do Bié (ISP-Bié) estrutura a sua actuação institucional com base em pilares estratégicos que orientam o cumprimento da sua missão académica, científica e social.<br><br>Estes pilares refletem o compromisso da instituição com a formação de qualidade, a produção de conhecimento, o desenvolvimento da comunidade e a promoção de soluções inovadoras para os desafios actuais.</p>

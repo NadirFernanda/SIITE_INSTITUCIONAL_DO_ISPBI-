@@ -24,9 +24,9 @@
   </section>
 
   <!-- Conteúdo do Testemunho -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100">
+      <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100 interactive-card">
         <div class="flex items-center gap-6 mb-6">
           <div class="w-20 h-20 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-3xl font-bold">
             {{ strtoupper(mb_substr($alumnus->nome, 0, 1)) }}{{ mb_strtoupper(mb_substr(explode(' ', $alumnus->nome)[count(explode(' ', $alumnus->nome))-1], 0, 1)) }}

@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- debug-cursos-blade-2026-02-01-1 -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <div class="flex">
         <nav class="text-sm opacity-75 mb-8 text-left">
           <a href="/" class="hover:underline">Início</a> \ Cursos de Graduação
@@ -16,21 +16,21 @@
       </div>
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Estrutura Acadêmica ISPBIÉ -->
       <div class="mb-12">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Estrutura Acadêmica do ISPBIÉ</h2>
         <div class="grid md:grid-cols-3 gap-6">
-          <a href="#engenharias" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform">
+          <a href="#engenharias" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform interactive-card">
             <h3 class="text-xl font-bold mb-2 text-white">Engenharias e Inovação Tecnológica</h3>
             <p class="text-sm text-white">Formação de profissionais inovadores para atuar em áreas tecnológicas, engenharia, infraestrutura e transformação digital.</p>
           </a>
-          <a href="#sociais" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform">
+          <a href="#sociais" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform interactive-card">
             <h3 class="text-xl font-bold mb-2 text-white">Ciências Sociais, Humanas e Económicas</h3>
             <p class="text-sm text-white">Gestão, comunicação, ciências humanas e sociais, preparando líderes e agentes de transformação social.</p>
           </a>
-          <a href="#saude" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform">
+          <a href="#saude" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform interactive-card">
             <h3 class="text-xl font-bold mb-2 text-white">Ciências da Saúde</h3>
             <p class="text-sm text-white">Promoção, prevenção e recuperação da saúde, com ênfase no cuidado humanizado e na gestão em saúde.</p>
           </a>

@@ -2,20 +2,20 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
       <nav class="text-sm mb-8">
         <a href="/" class="hover:underline">Início</a>
         <span class="mx-2">/</span>
         <span>Guia do Estudante</span>
       </nav>
 
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Guia do Estudante 2025/2026</h1>
         <p class="text-lg text-gray-700">Manual Completo para Estudantes do ISP-Bié</p>
       </div>
 
   <!-- Download -->
-  <section class="py-8 bg-white border-b">
+  <section class="py-8 bg-white border-b scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div>
@@ -33,11 +33,11 @@
   </section>
 
   <!-- Conteúdo -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Índice Rápido -->
-      <div class="bg-white rounded-lg shadow-md p-6 mb-12">
+      <div class="bg-white rounded-lg shadow-md p-6 mb-12 interactive-card">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Índice</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <a href="#matricula" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
@@ -62,7 +62,7 @@
       </div>
 
       <!-- 1. Matrícula -->
-      <div id="matricula" class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div id="matricula" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             1
@@ -120,7 +120,7 @@
       </div>
 
       <!-- 2. Serviços Académicos -->
-      <div id="servicos" class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div id="servicos" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             2
@@ -152,7 +152,7 @@
       </div>
 
       <!-- 3. Avaliação -->
-      <div id="avaliacao" class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div id="avaliacao" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             3
@@ -209,7 +209,7 @@
       </div>
 
       <!-- 4. Biblioteca -->
-      <div id="biblioteca" class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div id="biblioteca" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#3B82F6] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             4

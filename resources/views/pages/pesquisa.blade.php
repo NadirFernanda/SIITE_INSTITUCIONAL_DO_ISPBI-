@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- Banner Institucional -->
-  <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16">
+  <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center space-x-4 mb-4">
         <!-- Ícone de lupa (search) outline, sem fundo, harmônico com os demais -->
@@ -23,11 +23,11 @@
   </section>
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Introdução -->
-      <div class="bg-white p-8 rounded-lg shadow-md mb-12">
+      <div class="bg-white p-8 rounded-lg shadow-md mb-12 interactive-card">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Compromisso com a Investigação Científica</h2>
         <p class="text-lg text-gray-700 leading-relaxed mb-4">
           O Instituto Superior Politécnico do Bié promove a investigação científica como pilar fundamental 
@@ -38,7 +38,7 @@
           Através de parcerias estratégicas, infraestrutura adequada e apoio aos investigadores, o ISP-Bié 
           estimula a inovação tecnológica e a transferência de conhecimento para a sociedade.
         </p>
-        <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-6 rounded-lg mt-6">
+        <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-6 rounded-lg mt-6 interactive-card">
           <h3 class="text-xl font-bold text-white mb-3 flex items-center">
             <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
@@ -55,13 +55,13 @@
       </div>
 
       <!-- Íreas de Investigação -->
-      <div class="mb-12">
+      <div class="mb-12 scroll-reveal">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Íreas Prioritárias de Investigação</h2>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           
           <!-- Engenharias -->
-          <div id="software" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="software" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -95,7 +95,7 @@
           </div>
 
           <!-- Recursos Hídricos -->
-          <div id="hidricos" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="hidricos" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -129,7 +129,7 @@
           </div>
 
           <!-- Ciências Sociais -->
-          <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -163,7 +163,7 @@
           </div>
 
           <!-- Administração e Negócios -->
-          <div id="inovacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="inovacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -198,7 +198,7 @@
           </div>
 
           <!-- Saúde Mental -->
-          <div id="saude" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div id="saude" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -232,7 +232,7 @@
           </div>
 
           <!-- Inovação Educacional -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">

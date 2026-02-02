@@ -1,14 +1,14 @@
 @extends('layouts.site')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-reveal">
 
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Investigação, Inovação e Empreendedorismo</h1>
         <p class="text-lg text-gray-700">Conheça os projetos, publicações e iniciativas do ISP-Bié</p>
     </div>
     <!-- Centro de Inovação e Empreendedorismo -->
-    <section class="mb-16">
+    <section class="mb-16 scroll-reveal">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
             <div>
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-2">Centro de Inovação e Empreendedorismo</h2>
@@ -19,15 +19,15 @@
             <img src="/images/investigacao.jpg" alt="Centro de Inovação" class="w-48 md:w-60 lg:w-72 max-h-48 md:max-h-60 rounded-lg shadow-lg mt-8 md:mt-0 md:ml-12 object-cover" />
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center interactive-card">
                 <h3 class="font-bold text-xl text-[#2563eb] mb-2">Incubadora de Startups</h3>
                 <p class="text-gray-600">Apoio a projetos inovadores, mentorias, networking e acesso a investidores.</p>
             </div>
-            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center interactive-card">
                 <h3 class="font-bold text-xl text-[#2563eb] mb-2">Laboratórios de Prototipagem</h3>
                 <p class="text-gray-600">Espaços equipados para desenvolvimento de protótipos, testes e experimentação.</p>
             </div>
-            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center interactive-card">
                 <h3 class="font-bold text-xl text-[#2563eb] mb-2">Desafios e Hackathons</h3>
                 <p class="text-gray-600">Eventos para estimular soluções criativas e colaboração multidisciplinar.</p>
             </div>
@@ -35,7 +35,7 @@
     </section>
 
     <!-- Projetos em Curso -->
-    <section class="mb-16">
+    <section class="mb-16 scroll-reveal">
         <h2 class="text-2xl font-bold text-[#2563eb] mb-4">Projetos em Curso</h2>
         <ul class="list-disc pl-6 text-gray-700 space-y-2">
             <li><span class="font-semibold">AgroTech Bié:</span> Soluções digitais para agricultura sustentável na região.</li>
@@ -45,7 +45,7 @@
     </section>
 
     <!-- Projetos em Avaliação -->
-    <section class="mb-16">
+    <section class="mb-16 scroll-reveal">
         <h2 class="text-2xl font-bold text-[#2563eb] mb-4">Projetos em Avaliação</h2>
         <ul class="list-disc pl-6 text-gray-700 space-y-2">
             <li><span class="font-semibold">Energia Limpa Bié:</span> Pesquisa sobre microgeração solar em comunidades locais.</li>
@@ -54,7 +54,7 @@
     </section>
 
     <!-- Projetos Concluídos -->
-    <section class="mb-16">
+    <section class="mb-16 scroll-reveal">
         <h2 class="text-2xl font-bold text-[#2563eb] mb-4">Projetos Concluídos</h2>
         <ul class="list-disc pl-6 text-gray-700 space-y-2">
             <li><span class="font-semibold">Rede de Monitoramento Ambiental:</span> Instalação de sensores para análise da qualidade do ar e da água.</li>
@@ -63,7 +63,7 @@
     </section>
 
     <!-- Publicações e Artigos por Área de Conhecimento -->
-    <section>
+    <section class="scroll-reveal">
         <h2 class="text-2xl font-bold text-[#2563eb] mb-4">Publicações e Artigos por Área de Conhecimento</h2>
         <div class="grid md:grid-cols-2 gap-8">
             <div>
