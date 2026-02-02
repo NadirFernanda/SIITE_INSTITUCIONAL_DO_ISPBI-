@@ -10,9 +10,10 @@
       </div>
 
       <!-- Cabeçalho em formato de card em vez de hero -->
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
+      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Cursos de Graduação</h1>
         <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
+        <p class="mt-3 text-gray-600 max-w-2xl">Conheça a oferta formativa de graduação do ISP-Bié, organizada por áreas de conhecimento e alinhada às necessidades de desenvolvimento da região e do país.</p>
       </div>
 
   <!-- Conteúdo Principal -->
@@ -20,7 +21,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Estrutura Acadêmica ISPBIÉ -->
       <div class="mb-12">
-        <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Estrutura Acadêmica do ISPBIÉ</h2>
+        <h2 class="text-3xl font-bold text-[#2563eb] mb-2">Estrutura Acadêmica do ISPBIÉ</h2>
+        <p class="text-gray-600 mb-4 max-w-2xl">Os cursos estão organizados em grandes áreas – engenharias e inovação, ciências sociais e ciências da saúde – facilitando a navegação pelos interesses de cada candidato.</p>
         <div class="grid md:grid-cols-3 gap-6">
           <a href="#engenharias" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform interactive-card">
             <h3 class="text-xl font-bold mb-2 text-white">Engenharias e Inovação Tecnológica</h3>
@@ -38,7 +40,7 @@
       </div>
       
       <!-- Introdução -->
-      <div class="bg-white p-8 rounded-lg shadow-md mb-12">
+      <div class="bg-white p-8 rounded-lg shadow-md mb-12 interactive-card">
         <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Formação de Excelência</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
           O Instituto Superior Politécnico do Bié (ISP-Bié) é uma instituição de ensino superior pública, superintendida pelo Ministério do Ensino Superior, Ciência, Tecnologia e Inovação. Foi criado à luz da reorganização da rede de instituições de ensino superior, nos termos da alínea a) do artigo 18º do Decreto Órgãos de gestão nº 285/20 de 29 de outubro, e localiza-se na Rua Padre Fidalgo, entre Artur de Paiva e Francisco de Leite Cardoso, s/n, na cidade do Cuito/Bié, com o número de identificação fiscal 5000308765. Ministra atualmente seis (6) cursos de graduação em seis domínios de formação: Humanidades e Artes; Ciências Sociais, Jornalismo e Informação; Administração, Negócios e Direito; Ciências Médicas e da Saúde; Engenharias e Inovação Tecnológica; Ciências Humanas, Sociais e Económicas; e Ciências da Saúde.
@@ -57,7 +59,7 @@
       <div class="space-y-8 mb-12">
         
         <!-- Contabilidade e Administração -->
-        <div id="contabilidade" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+        <div id="contabilidade" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
           <div class="bg-gradient-to-r from-yellow-500 to-yellow-400 p-6 w-full max-w-full overflow-x-hidden">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
@@ -116,7 +118,7 @@
         </div>
 
         <!-- Engenharia Informática -->
-        <div id="informatica" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+        <div id="informatica" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
           <div class="p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #1d4ed8, #3b82f6) !important;">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
@@ -178,7 +180,7 @@
           <!-- Ciências Sociais, Humanas e Económicas -->
           <h2 id="sociais" class="text-2xl font-bold text-[#2563eb] mt-12 mb-4">Ciências Sociais, Humanas e Económicas</h2>
           <div class="space-y-8 mb-12">
-        <div id="hidricos" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+        <div id="hidricos" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
           <div class="p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #38bdf8, #60a5fa) !important;">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
@@ -235,7 +237,7 @@
         </div>
 
         <!-- Comunicação Social -->
-        <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+        <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
           <div class="bg-gradient-to-r from-orange-500 to-orange-400 p-6">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">
@@ -299,7 +301,7 @@
                   <div class="space-y-8 mb-12">
                 <!-- Enfermagem Geral -->
                   </div>
-                <div id="enfermagem" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+                <div id="enfermagem" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
                   <div class="bg-gradient-to-r from-green-700 to-green-500 p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #22c55e, #4ade80) !important;">
                     <div class="flex items-center justify-between">
                       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -355,7 +357,7 @@
                   </div>
                 </div>
               <div class="mb-8"></div>
-              <div id="psicologia" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full">
+              <div id="psicologia" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
           <div class="bg-gradient-to-r from-red-600 to-red-400 p-6">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
               <div class="flex items-center space-x-4">

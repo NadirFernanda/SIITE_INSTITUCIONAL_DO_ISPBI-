@@ -1,27 +1,20 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-  <!-- Banner Institucional -->
-  <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center space-x-4 mb-4">
-        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"/>
-        </svg>
-        <div>
-          <h1 class="text-4xl font-bold">Gestão e Governança</h1>
-          <p class="text-lg opacity-90">Instituto Superior Politécnico do Bié</p>
-        </div>
-      </div>
-      
-      <nav class="text-sm opacity-75">
-        <a href="/" class="hover:underline">Início</a> \ Gestão e Governança
-      </nav>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
+    <nav class="text-sm opacity-75 mb-8">
+      <a href="/" class="hover:underline">Início</a> \ Gestão e Governança
+    </nav>
+
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
+      <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Gestão e Governança</h1>
+      <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
+      <p class="mt-3 text-gray-600 max-w-2xl">Conheça a estrutura de gestão, os órgãos de decisão e os princípios de governança que garantem transparência, qualidade e responsabilidade institucional no ISP-Bié.</p>
     </div>
-  </section>
+  </div>
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50 scroll-reveal">
+  <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Introdução -->
@@ -275,7 +268,7 @@
           </div>
 
           <!-- Departamentos -->
-          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
             <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -322,7 +315,7 @@
         <div class="grid md:grid-cols-2 gap-8">
           
           <!-- Departamentos Administrativos -->
-          <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="bg-white rounded-lg shadow-md p-6 interactive-card">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-[#2563eb] rounded-full flex items-center justify-center mr-4">
                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -366,7 +359,7 @@
           </div>
 
           <!-- Unidades de Apoio -->
-          <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="bg-white rounded-lg shadow-md p-6 interactive-card">
             <div class="flex items-center mb-4">
               <div class="w-12 h-12 bg-[#2563eb] rounded-full flex items-center justify-center mr-4">
                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -460,7 +453,7 @@
       </div>
 
       <!-- Call to Action -->
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white p-8 rounded-lg text-center">
+      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white p-8 rounded-lg text-center interactive-card">
         <h3 class="text-2xl font-bold mb-4">Conheça Mais Sobre Nossa Gestão</h3>
         <p class="mb-6 text-lg opacity-90">
           Para mais informações sobre a estrutura de governança, documentos institucionais ou 
