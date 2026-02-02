@@ -18,7 +18,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
             <div>
-                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">Informações de Contacto</h2>
+                <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Informações de Contacto</h2>
+                <p class="text-gray-600 mb-8 max-w-xl">Canais oficiais para atendimento ao público, esclarecimento de dúvidas, envio de documentos e contacto institucional com o INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ.</p>
                 <div class="space-y-6">
                     <div class="flex items-start">
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0 bg-[#2563eb]/10">
@@ -40,7 +41,7 @@
                         </div>
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-1">Telefone</h3>
-                            <p class="text-gray-600">(244) 922 408 061</p>
+                            <p class="text-gray-900 font-semibold">+244 922 408 061</p>
                         </div>
                     </div>
 
@@ -86,7 +87,8 @@
                 </div>
 
             <div>
-                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">Envie uma Mensagem</h2>
+                <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Envie uma Mensagem</h2>
+                <p class="text-gray-600 mb-4 max-w-xl">Utilize o formulário para pedidos gerais de informação, dúvidas sobre cursos, serviços institucionais ou para estabelecer contacto formal com o ISP-Bié.</p>
                 <form class="space-y-4" novalidate>
                     <div>
                         <label for="contact-name" class="block text-gray-700 font-semibold mb-2">Nome Completo</label>
@@ -119,6 +121,7 @@
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+        <p class="text-xs text-gray-600 mt-2">Localização aproximada do campus do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ na cidade do Cuito, província do Bié.</p>
         </div>
     </section>
 @endsection
