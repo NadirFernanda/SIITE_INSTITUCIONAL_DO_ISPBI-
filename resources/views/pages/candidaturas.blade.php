@@ -9,21 +9,19 @@
 <body class="bg-gray-50">
     @include('partials.navbar')
 
-    <!-- Banner -->
-    <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center mb-4">
-                <svg class="w-12 h-12 mr-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                </svg>
-                <h1 class="text-5xl font-bold">Candidaturas</h1>
+        <!-- Card Institucional padrão -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+            <div class="flex">
+                <nav class="text-sm opacity-75 mb-8 text-left">
+                    <a href="/" class="hover:underline">Início</a> \ Candidaturas
+                </nav>
             </div>
-            <p class="text-xl text-orange-100 max-w-3xl">
-                Candidatura e ingresso no ISP-Bié
-            </p>
+            <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
+                <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Candidaturas</h1>
+                <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
+                <p class="mt-3 text-gray-600 max-w-2xl">Candidatura e ingresso no ISP-Bié. Veja abaixo o processo, requisitos e etapas para se tornar estudante.</p>
+            </div>
         </div>
-    </div>
 
     <!-- Breadcrumb -->
     <div class="bg-white border-b scroll-reveal">
