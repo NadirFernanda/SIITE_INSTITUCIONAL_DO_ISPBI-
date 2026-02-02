@@ -14,19 +14,19 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       <div class="flex flex-wrap items-end justify-between mb-8">
         <div class="flex flex-row space-x-3 md:space-x-12 items-end justify-between w-full">
-          <div class="flex flex-col items-center flex-1">
+          <div class="flex flex-col items-center flex-1 interactive-card">
             <a href="/missao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#0E8F81] transition-colors">Missão</a>
             <a href="/missao" title="Ver Missão">
               <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#0E8F81"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
-          <div class="flex flex-col items-center flex-1">
+          <div class="flex flex-col items-center flex-1 interactive-card">
             <a href="/visao" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#2C4A5E] transition-colors">Visão</a>
             <a href="/visao" title="Ver Visão">
               <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#2C4A5E"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
             </a>
           </div>
-          <div class="flex flex-col items-center flex-1">
+          <div class="flex flex-col items-center flex-1 interactive-card">
             <a href="/valores" class="text-lg md:text-2xl font-bold text-gray-700 mb-2 hover:text-[#F05A28] transition-colors">Valores</a>
             <a href="/valores" title="Ver Valores">
               <svg width="48" height="48" viewBox="0 0 80 80" fill="none" class="md:w-20 md:h-20"><rect width="80" height="80" rx="16" fill="#F05A28"/><path d="M20 40h40v8H20z" fill="#fff"/></svg>
@@ -42,7 +42,7 @@
           <!-- Cards dos pilares -->
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-6xl">
             <!-- Ensino -->
-            <div class="flex flex-col items-center text-center">
+            <div class="flex flex-col items-center text-center interactive-card">
               <a href="/pilares#ensino" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Ensino">
                 <span class="text-white font-bold text-base md:text-lg">E</span>
               </a>
@@ -50,7 +50,7 @@
             </div>
 
             <!-- Investigação -->
-            <div class="flex flex-col items-center text-center">
+            <div class="flex flex-col items-center text-center interactive-card">
               <a href="/pilares#investigacao" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Investigação">
                 <span class="text-white font-bold text-base md:text-lg">I</span>
               </a>
@@ -58,7 +58,7 @@
             </div>
 
             <!-- Extensão Universitária -->
-            <div class="flex flex-col items-center text-center">
+            <div class="flex flex-col items-center text-center interactive-card">
               <a href="/pilares#extensao-universitaria" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Extensão Universitária">
                 <span class="text-white font-bold text-base md:text-lg">EU</span>
               </a>
@@ -66,7 +66,7 @@
             </div>
 
             <!-- Empreendedorismo e Inovação na Universidade -->
-            <div class="flex flex-col items-center text-center">
+            <div class="flex flex-col items-center text-center interactive-card">
               <a href="/pilares#empreendedorismo-inovacao" class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#2563eb] flex items-center justify-center shadow-lg mb-4 hover:bg-blue-700 transition-colors" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
                 <span class="text-white font-bold text-sm md:text-base">EIU</span>
               </a>
