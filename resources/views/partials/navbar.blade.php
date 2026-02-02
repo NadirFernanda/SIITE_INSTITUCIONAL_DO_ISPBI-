@@ -10,7 +10,6 @@
   </div>
   <div class="flex flex-wrap items-center gap-2">
     <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgãos de gestão</a> -->
-    <a href="/cursos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🦉</span> Cursos</a>
 
     <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
     <div x-data="{ openInfra: false }" class="relative">
