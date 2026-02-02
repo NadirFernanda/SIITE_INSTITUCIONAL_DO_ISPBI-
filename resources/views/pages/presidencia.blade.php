@@ -11,11 +11,11 @@
     <div class="bg-white rounded-lg shadow-md p-8 mb-10">
         <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Órgãos de gestão</h1>
         <p class="text-lg text-gray-700 mb-4">Instituto Superior Politécnico do Bié</p>
-        <div class="overflow-hidden rounded-xl border border-gray-100">
+        <div class="overflow-x-auto rounded-xl border border-gray-100 bg-white">
             <img
                 src="{{ asset('images/organigrama.jpeg') }}"
                 alt="Organigrama institucional do Instituto Superior Politécnico do Bié"
-                class="w-full h-56 md:h-72 object-cover"
+                class="w-full h-auto object-contain"
             >
         </div>
     </div>
