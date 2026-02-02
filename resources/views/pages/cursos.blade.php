@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- debug-cursos-blade-2026-02-01-1 -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       <div class="flex">
         <nav class="text-sm opacity-75 mb-8 text-left">
           <a href="/" class="hover:underline">Início</a> \ Cursos de Graduação
@@ -17,7 +17,7 @@
       </div>
 
   <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50 scroll-reveal">
+  <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Estrutura Acadêmica ISPBIÉ -->
       <div class="mb-12">
