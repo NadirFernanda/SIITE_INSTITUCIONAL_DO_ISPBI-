@@ -38,9 +38,9 @@
         </p>
       </div>
 
-      <!-- Í“rgãos de Governança -->
+      <!-- Órgãos de Governança -->
       <div class="mb-12">
-        <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Í“rgãos de Governança</h2>
+        <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Órgãos de Governança</h2>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           
@@ -56,7 +56,7 @@
             </div>
             <div class="p-6">
               <p class="text-gray-700 mb-4">
-                Í“rgão máximo de deliberação e orientação estratégica do Instituto, responsável 
+                Órgão máximo de deliberação e orientação estratégica do Instituto, responsável 
                 pela definição de políticas institucionais e aprovação de planos estratégicos.
               </p>
               <ul class="space-y-2 text-sm text-gray-600">
@@ -132,7 +132,7 @@
             </div>
             <div class="p-6">
               <p class="text-gray-700 mb-4">
-                Í“rgão consultivo que acompanha e avalia as atividades pedagógicas, propondo 
+                Órgão consultivo que acompanha e avalia as atividades pedagógicas, propondo 
                 melhorias nos processos de ensino-aprendizagem.
               </p>
               <ul class="space-y-2 text-sm text-gray-600">
@@ -247,10 +247,10 @@
               </div>
             </div>
             <div class="p-6">
-              <p class="text-gray-700 mb-4">
-                Í“rgãos executivos que auxiliam o Presidente em áreas específicas da gestão 
-                institucional, garantindo eficiência e especialização.
-              </p>
+                <p class="text-gray-700 mb-4">
+                  Órgãos executivos que auxiliam o Presidente em áreas específicas da gestão 
+                  institucional, garantindo eficiência e especialização.
+                </p>
               <ul class="space-y-2 text-sm text-gray-600">
                 <li class="flex items-start">
                   <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
