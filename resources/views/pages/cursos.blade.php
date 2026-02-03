@@ -99,8 +99,8 @@
                     </svg>
                     Consultoria Financeira
                   </li>
-                </ul>
-              </div>
+        </div>
+      </section>
               <div>
                 <h4 class="font-bold text-[#2563eb] mb-2">Departamento:</h4>
                 <p class="text-gray-700">Ciências Humanas, Sociais e Económicas</p>
@@ -378,6 +378,7 @@
             <div class="grid md:grid-cols-2 gap-4">
               <div>
                 <h4 class="font-bold text-[#2563eb] mb-2">Íreas de Atuação:</h4>
+                  <h4 class="font-bold text-[#2563eb] mb-2">Áreas de Atuação:</h4>
                 <ul class="space-y-1 text-gray-700">
                   <li class="flex items-start">
                     <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
