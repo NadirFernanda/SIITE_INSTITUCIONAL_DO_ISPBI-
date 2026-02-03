@@ -165,6 +165,7 @@
                     <button id="closeFormBtn" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
                     <h2 class="text-2xl font-bold mb-6 text-[#2563eb]">Formulário de Candidatura</h2>
                     <form class="space-y-4 text-left">
+                        @csrf
                                             <div>
                                                 <label class="block font-semibold mb-1">Gênero</label>
                                                 <select class="w-full border rounded px-3 py-2" required>

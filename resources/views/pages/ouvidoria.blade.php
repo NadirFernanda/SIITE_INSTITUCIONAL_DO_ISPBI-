@@ -45,6 +45,7 @@
                 
                 <div class="bg-white p-8 rounded-lg shadow-md">
                     <form>
+                        @csrf
                         <div class="mb-6">
                             <label class="block text-gray-700 font-semibold mb-2">Tipo de Manifestação</label>
                             <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">

@@ -227,6 +227,7 @@
           <div class="bg-white/10 backdrop-blur rounded-lg p-8">
             <h3 class="text-2xl font-bold mb-6">Solicitar Entrevista</h3>
             <form class="space-y-4">
+              @csrf
               <div>
                 <input type="text" placeholder="Nome do Jornalista" required class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/60 text-white focus:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50">
               </div>

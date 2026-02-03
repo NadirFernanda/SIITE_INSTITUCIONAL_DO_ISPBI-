@@ -261,6 +261,7 @@
         </p>
 
         <form class="space-y-6">
+          @csrf
           <div class="grid md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-semibold mb-2">Nome Completo *</label>

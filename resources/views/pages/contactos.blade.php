@@ -90,6 +90,7 @@
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Envie uma Mensagem</h2>
                 <p class="text-gray-600 mb-4 max-w-xl">Utilize o formulário para pedidos gerais de informação, dúvidas sobre cursos, serviços institucionais ou para estabelecer contacto formal com o ISP-Bié.</p>
                 <form class="space-y-4" novalidate>
+                    @csrf
                     <div>
                         <label for="contact-name" class="block text-gray-700 font-semibold mb-2">Nome Completo</label>
                         <input id="contact-name" name="nome" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563eb]" aria-required="true">
