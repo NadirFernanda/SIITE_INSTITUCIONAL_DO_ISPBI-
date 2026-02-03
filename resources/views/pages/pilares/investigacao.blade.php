@@ -1,7 +1,7 @@
-@extends('layouts.base')
+@extends('layouts.site')
 @section('content')
-<div class="max-w-3xl mx-auto py-8">
-  <h1 class="section-title">Pilar: Investigação</h1>
-  <p class="section-subtitle">Descrição do pilar estratégico Investigação. Adicione aqui o conteúdo detalhado sobre o pilar.</p>
+<div class="container py-8">
+  <h1 class="text-3xl font-bold mb-4">Pilar: Investigação</h1>
+  <p>Descrição do pilar estratégico Investigação. Adicione aqui o conteúdo detalhado sobre o pilar.</p>
 </div>
 @endsection
