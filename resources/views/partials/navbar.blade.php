@@ -1,10 +1,11 @@
-﻿<div class="hidden md:block w-full fixed left-0 top-0" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;z-index:50;"></div>
+!-- Barra de links importantes (azul institucional) - Desktop apenas (linha fina) -->
+<div class="hidden md:block w-full fixed left-0 top-0" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;z-index:50;"></div>
 
 <!-- Barra inferior institucional em cinza claro - Desktop apenas -->
 <div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:0.95rem;padding:4px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;">
   <div class="flex flex-wrap items-center gap-2">
     <a href="/contactos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>📷</span> Contacto</a>
-    <a href="https://isp-bie.ao/webmail" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
+    <a href="https://isp-bine.ao/webmail" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
     <a href="/servicos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🗞️</span> Serviços</a>
   </div>
   <div class="flex flex-wrap items-center gap-2">
@@ -53,7 +54,7 @@
     <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
-      <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5">
+      <div class="flex items-center justify-center bg-white rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5">
         <img src="/images/logo.png" alt="ISP-Bié" class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
       <span class="text-white font-bold text-xs sm:text-sm md:text-base lg:text-xl tracking-tight truncate">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
@@ -95,7 +96,7 @@
                   <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
                   <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
                   <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a>
-                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Notícias</a>
+                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
                 </div>
                 <div class="mt-8 border-t border-gray-700 pt-6 text-center">
 
@@ -188,11 +189,7 @@
           <button @click="open = !open" @keydown.escape="open = false"
                   class="flex items-center gap-1 text-white hover:text-[#FFD700] font-semibold uppercase tracking-wide"
                   :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true">
-            <span>🏢</span> Institucional
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
+           
 
           <!-- Dropdown Menu -->
              <div x-show="open" @click.away="open = false" x-cloak
@@ -209,13 +206,13 @@
           </div>
         </div>
 
-        <!-- Dropdown Institucional - Mobile (único, padronizado) -->
+        <!-- Dropdown Institucional - Mobile -->
         <div x-data="{ openMobile: false }" class="relative lg:hidden mt-2">
           <button @click="openMobile = !openMobile"
                   class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
-            <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
+            <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
             <span>Institucional</span>
-            <svg class="w-4 h-4 ml-auto" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
@@ -226,6 +223,7 @@
             <a href="/missao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
             <a href="/visao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
             <a href="/valores" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
+            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a> -->
             <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
             <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Transparência</a>
           </div>
@@ -291,3 +289,4 @@
     -webkit-backdrop-filter: blur(12px) !important;
   }
 </style>
+
