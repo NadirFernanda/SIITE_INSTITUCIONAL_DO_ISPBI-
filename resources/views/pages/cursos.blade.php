@@ -109,8 +109,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
-        'gradientFromHex' => '#2563EB', // azul institucional igual à navbar
-        'gradientToHex' => '#60A5FA',   // azul claro
+            'gradientFromHex' => '#0EA5E9', // azul água (sky-500)
+            'gradientToHex' => '#38BDF8',   // azul claro (sky-400)
         'areas' => [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
