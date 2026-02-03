@@ -79,7 +79,7 @@
   </div>
       <div class="w-full py-6 bg-transparent">
           <div class="text-center text-white text-lg mb-2"> Copiright 2007 - 2026 • todos os direitos reservados • ISP-Bié </div>
-          <div class="text-center text-yellow-400 text-xl font-semibold">De Angola com amor</div>
+          <div class="text-center text-[#2C4A5E] text-xl font-semibold">De Angola com amor</div>
           <div class="text-center text-white text-lg mt-2">Desenvolvido por</div>
           <div class=" font-semibold text-center">Fernanda Gonçalves</div>
 
