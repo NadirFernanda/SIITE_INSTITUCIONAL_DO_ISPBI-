@@ -12,9 +12,9 @@
   <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (estilo USP) -->
   <section class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="flex flex-row flex-nowrap items-end justify-center gap-6 md:gap-10 2xl:gap-20 mb-8 overflow-x-auto w-full">
+      <div class="flex flex-row flex-wrap items-end justify-center gap-6 md:gap-10 2xl:gap-20 mb-8 w-full">
         <!-- Missão -->
-        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
+        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
           <a href="/missao" title="Ver Missão" class="transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
@@ -23,7 +23,7 @@
           <span class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Missão</span>
         </div>
         <!-- Visão -->
-        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
+        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
           <a href="/visao" title="Ver Visão" class="transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
@@ -32,7 +32,7 @@
           <span class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Visão</span>
         </div>
         <!-- Valores -->
-        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
+        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
           <a href="/valores" title="Ver Valores" class="transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl">
             <svg width="72" height="72" viewBox="0 0 72 72" fill="none" class="md:w-24 md:h-24">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
@@ -41,7 +41,7 @@
           <span class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Valores</span>
         </div>
         <!-- Ensino -->
-        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
+        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
           <a href="/pilares#ensino" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Ensino">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H20A10 10 0 0 1 10 60V40z" fill="#2563eb"/>
@@ -51,7 +51,7 @@
           <a href="/pilares#ensino" class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Ensino</a>
         </div>
         <!-- Investigação -->
-        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
+        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
           <a href="/pilares#investigacao" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Investigação">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
@@ -61,7 +61,7 @@
           <a href="/pilares#investigacao" class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Investigação</a>
         </div>
         <!-- Extensão Universitária -->
-        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
+        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
           <a href="/pilares#extensao-universitaria" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Extensão Universitária">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
@@ -71,7 +71,7 @@
           <a href="/pilares#extensao-universitaria" class="block mt-2 text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center truncate w-32 md:w-40 2xl:w-56">Extensão Universitária</a>
         </div>
         <!-- Empreendedorismo e Inovação na Universidade -->
-        <div class="flex flex-col items-center min-w-[120px] md:min-w-[140px] 2xl:min-w-[180px]">
+        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
           <a href="/pilares#empreendedorismo-inovacao" class="group transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl" title="Ver detalhes do pilar Empreendedorismo e Inovação na Universidade">
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
