@@ -4,7 +4,7 @@
     <nav class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8" aria-label="Links institucionais">
       <!-- Educação -->
       <div>
-        <h2 class="text-[#2C4A5E] font-bold text-lg mb-4" id="footer-educacao">Educação</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-educacao">Educação</h2>
         <ul class="space-y-2" aria-labelledby="footer-educacao">
            <li><a href="/cursos" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Cursos de Graduação</a></li>
            <li><a href="/pos-graduacao" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Cursos de Pós-Graduação</a></li>
@@ -14,7 +14,7 @@
       </div>
       <!-- Pesquisa -->
       <div>
-        <h2 class="text-[#2C4A5E] font-bold text-lg mb-4" id="footer-pesquisa">Pesquisa</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-pesquisa">Pesquisa</h2>
         <ul class="space-y-2" aria-labelledby="footer-pesquisa">
            <li><a href="/investigacao" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Pesquisa no ISP-Bié</a></li>
            <li><a href="/biblioteca" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Biblioteca Digital</a></li>
@@ -24,7 +24,7 @@
       </div>
       <!-- Institucional -->
       <div>
-        <h2 class="text-[#2C4A5E] font-bold text-lg mb-4" id="footer-institucional">Institucional</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-institucional">Institucional</h2>
         <ul class="space-y-2" aria-labelledby="footer-institucional">
            <li><a href="/sobre-ispbie" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Sobre o ISP-Bié</a></li>
            <li><a href="/missao" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Missão</a></li>
@@ -35,14 +35,14 @@
       </div>
       <!-- Parcerias -->
       <div>
-        <h2 class="text-[#2C4A5E] font-bold text-lg mb-4" id="footer-parcerias">Parcerias</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-parcerias">Parcerias</h2>
         <ul class="space-y-2" aria-labelledby="footer-parcerias">
            <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2C4A5E] transition-colors">Governo de Angola</a></li>
         </ul>
       </div>
       <!-- Fale com ISP-Bié -->
       <div>
-        <h2 class="text-[#2C4A5E] font-bold text-lg mb-4" id="footer-fale">Fale com ISP-Bié</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-fale">Fale com ISP-Bié</h2>
         <ul class="space-y-2 mb-4" aria-labelledby="footer-fale">
            <li><a href="/contactos" class="hover:text-[#2C4A5E] transition-colors">Contactos</a></li>
            <li><a href="/ouvidoria" class="hover:text-[#2C4A5E] transition-colors">Ouvidoria</a></li>
@@ -61,7 +61,7 @@
       </div>
       <!-- Ensino Superior em Angola -->
       <div>
-        <h2 class="text-[#2C4A5E] font-bold text-lg mb-4" id="footer-ensino">Ensino Superior em Angola</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-ensino">Ensino Superior em Angola</h2>
         <ul class="space-y-2 text-sm" aria-labelledby="footer-ensino">
            <li><a href="https://www.uan.ao" target="_blank" rel="noopener" class="hover:text-[#2C4A5E] transition-colors">Universidade Agostinho Neto</a></li>
            <li><a href="https://www.ucan.edu" target="_blank" rel="noopener" class="hover:text-[#2C4A5E] transition-colors">Universidade Católica de Angola</a></li>
@@ -79,7 +79,7 @@
   </div>
       <div class="w-full py-6 bg-transparent">
           <div class="text-center text-white text-lg mb-2"> Copiright 2007 - 2026 • todos os direitos reservados • ISP-Bié </div>
-          <div class="text-center text-[#2C4A5E] text-xl font-semibold">De Angola com amor</div>
+       <div class="text-center text-[#2979FF] text-xl font-semibold">De Angola com amor</div>
           <div class="text-center text-white text-lg mt-2">Desenvolvido por</div>
           <div class=" font-semibold text-center">Fernanda Gonçalves</div>
 
