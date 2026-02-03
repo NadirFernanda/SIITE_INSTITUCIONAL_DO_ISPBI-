@@ -134,28 +134,28 @@
       <button @click="mobileMenuOpen = false" class="self-end text-gray-700 p-2 hover:bg-gray-100 rounded-lg mb-2" aria-label="Fechar menu">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
-      <!-- Links principais -->
-      <a href="/cursos" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
-        <span><svg class="w-5 h-5" fill="none" stroke="#FFD700" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
+      <!-- Links principais padronizados -->
+      <a href="/cursos" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors">
+        <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
         <span>Ensino</span>
       </a>
-      <a href="/investigacao" class="flex items-center space-x-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800">
+      <a href="/investigacao" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors">
         <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 9v3l2 2" stroke="#2563eb"/></svg></span>
         <span>Pesquisa e Inovação</span>
       </a>
-      <!-- Dropdown Extensão Universitária - Mobile -->
-      <div x-data="{ openExtMobile: false }" class="relative lg:hidden mt-2">
+      <!-- Dropdown Extensão Universitária - Mobile (padronizado) -->
+      <div x-data="{ openExtMobile: false }" class="relative lg:hidden">
         <button @click="openExtMobile = !openExtMobile"
-                class="flex items-center gap-3 py-3 px-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-gray-800 w-full">
+                class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors w-full">
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
           <span>Extensão Universitária</span>
           <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-               <div x-show="openExtMobile" @click.away="openExtMobile = false" x-cloak
-                 class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
-          <a href="/cultura" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-bold">Extensão Universitária</a>
+        <div x-show="openExtMobile" @click.away="openExtMobile = false" x-cloak
+             class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
+          <a href="/cultura" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Extensão Universitária</a>
           <a href="/alumni" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
         </div>
       </div>
