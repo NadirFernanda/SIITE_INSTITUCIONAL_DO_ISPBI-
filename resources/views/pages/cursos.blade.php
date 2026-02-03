@@ -41,7 +41,7 @@ $cursos = [
             ['name' => 'Saúde Pública', 'icon' => 'users'],
             ['name' => 'Gestão em Saúde', 'icon' => 'clipboard-list'],
         ],
-        'link' => route('cursos.enfermagem')
+        'link' => 'cursos.enfermagem'
     ],
     [
         'title' => 'Psicologia Clínica',
@@ -56,7 +56,7 @@ $cursos = [
             ['name' => 'Saúde Mental Comunitária', 'icon' => 'users'],
             ['name' => 'Psicoterapia', 'icon' => 'chat-bubble-left'],
         ],
-        'link' => route('cursos.psicologia')
+        'link' => 'cursos.psicologia'
     ],
     [
         'title' => 'Comunicação Social',
@@ -71,7 +71,7 @@ $cursos = [
             ['name' => 'Relações Públicas', 'icon' => 'users'],
             ['name' => 'Comunicação Digital', 'icon' => 'computer-desktop'],
         ],
-        'link' => route('cursos.comunicacao')
+        'link' => 'cursos.comunicacao'
     ],
     [
         'title' => 'Contabilidade e Administração',
@@ -86,7 +86,7 @@ $cursos = [
             ['name' => 'Gestão Empresarial', 'icon' => 'briefcase'],
             ['name' => 'Consultoria Financeira', 'icon' => 'chart-bar'],
         ],
-        'link' => route('cursos.contabilidade')
+        'link' => 'cursos.contabilidade'
     ],
     [
         'title' => 'Engenharia Informática',
@@ -101,7 +101,7 @@ $cursos = [
             ['name' => 'Redes e Sistemas', 'icon' => 'server'],
             ['name' => 'Segurança da Informação', 'icon' => 'shield-check'],
         ],
-        'link' => route('cursos.informatica')
+        'link' => 'cursos.informatica'
     ],
     [
         'title' => 'Engenharia em Recursos Hídricos',
@@ -116,7 +116,7 @@ $cursos = [
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
             ['name' => 'Infraestruturas Hidráulicas', 'icon' => 'building'],
         ],
-        'link' => route('cursos.hidricos')
+        'link' => 'cursos.hidricos'
     ],
 ];
 @endphp
@@ -177,7 +177,7 @@ $cursos = [
 
             <!-- Botão Saiba Mais -->
             <div class="mt-auto">
-                <a href="{{ $curso['link'] ?? '#' }}" 
+                <a href="{{ route($curso['link']) }}" 
                    class="inline-block bg-white text-gray-800 font-semibold py-2 px-5 rounded-full text-center shadow transition-all duration-300 
                           hover:bg-yellow-100 hover:text-gray-900 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
                     Saiba Mais
