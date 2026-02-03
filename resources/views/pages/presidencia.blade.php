@@ -28,32 +28,6 @@
                 </div>
             </div>
 
-            <!-- Vice-Órgãos de gestão -->
-            <div class="mb-12 scroll-reveal">
-                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">VICE-ÓRGÃOS DE GESTÃO</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-                        <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
-                            <div class="flex items-center text-white">
-                                <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z"/>
-                                </svg>
-                                <h3 class="text-xl font-bold">Graduação</h3>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-sm text-gray-700 mb-3">
-                                Coordenação dos cursos de graduação e políticas de ensino.
-                            </p>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li>• Gestão curricular</li>
-                                <li>• Qualidade do ensino</li>
-                                <li>• Apoio pedagógico</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- CTA de Transparência -->
             <div class="bg-[#2563eb] rounded-2xl p-12 text-center text-white scroll-reveal interactive-card">
