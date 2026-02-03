@@ -1,6 +1,4 @@
-﻿<!-- Barra de links importantes (azul institucional) - Desktop apenas (linha fina) -->
-<div class="hidden md:block w-full fixed left-0 top-0" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;z-index:50;"></div>
-
+﻿
 <!-- Barra inferior institucional em cinza claro - Desktop apenas -->
 <div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:0.95rem;padding:4px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;">
   <div class="flex flex-wrap items-center gap-2">
@@ -96,7 +94,7 @@
                   <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
                   <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
                   <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a>
-                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
+                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Notícias</a>
                 </div>
                 <div class="mt-8 border-t border-gray-700 pt-6 text-center">
 
