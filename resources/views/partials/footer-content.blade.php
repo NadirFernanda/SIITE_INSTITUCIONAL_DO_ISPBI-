@@ -1,18 +1,6 @@
 ﻿
-<!-- Exemplo 1: Fundo transparente -->
-<footer class="bg-transparent text-gray-300" aria-label="Rodapé institucional">
+<footer class="bg-[#1a1a1a] text-gray-300" aria-label="Rodapé institucional">
    ...existing code...
-</footer>
-
-<!-- Exemplo 2: Fundo com imagem e camada escura -->
-<footer class="relative text-gray-300" aria-label="Rodapé institucional">
-   <div class="absolute inset-0">
-      <img src="/images/footer-bg.jpg" alt="Instituto Superior Politécnico do Bié" class="w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-   </div>
-   <div class="relative z-10">
-      ...existing code...
-   </div>
 </footer>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8" aria-label="Links institucionais">
@@ -76,22 +64,7 @@
            <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Governo de Angola</a></li>
         </ul>
       </div>
-         <!-- Ensino Superior em Angola -->
-         <div>
-         <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-ensino-superior">Ensino Superior em Angola</h2>
-            <ul class="space-y-2" aria-labelledby="footer-ensino-superior">
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Agostinho Neto</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Católica de Angola</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade José Eduardo dos Santos</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Katyavala Bwila</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Lueji A'Nkonde</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Mandume Ya Ndemufayo</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Kimpa Vita</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">ISPTEC</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Metodista de Angola</a></li>
-                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Outras Instituições</a></li>
-            </ul>
-         </div>
+         
       <div>
       <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-fale">Fale com ISP-Bié</h2>
         <ul class="space-y-2 mb-4" aria-labelledby="footer-fale">
