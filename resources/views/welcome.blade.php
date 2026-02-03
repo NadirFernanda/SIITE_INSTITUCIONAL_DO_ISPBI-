@@ -56,36 +56,37 @@
   </section>
 
   <!-- Seção de Ícones Institucionais: Missão, Visão, Valores, Pilares -->
-  <section class="py-14 md:py-16 bg-white border-b border-gray-200">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 text-center">
-        <a href="/missao" class="group flex flex-col items-center justify-center">
-          <div class="w-20 h-20 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-4">
-            <svg class="w-12 h-12 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-          </div>
-          <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Missão</span>
-        </a>
-        <a href="/visao" class="group flex flex-col items-center justify-center">
-          <div class="w-20 h-20 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-4">
-            <svg class="w-12 h-12 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a4 4 0 100 8 4 4 0 000-8z"/></svg>
-          </div>
-          <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Visão</span>
-        </a>
-        <a href="/valores" class="group flex flex-col items-center justify-center">
-          <div class="w-20 h-20 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-4">
-            <svg class="w-12 h-12 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c2.54 0 4.71 1.61 5.5 4.09C13.79 4.61 15.96 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          </div>
-          <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Valores</span>
-        </a>
-        <a href="/pilares" class="group flex flex-col items-center justify-center">
-          <div class="w-20 h-20 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-4">
-            <svg class="w-12 h-12 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M4 22h16V2H4v20zm2-2V4h12v16H6z"/></svg>
-          </div>
-          <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Pilares</span>
-        </a>
-      </div>
+<!-- Seção de Ícones Institucionais: Missão, Visão, Valores, Pilares -->
+<section class="py-12 bg-white border-b border-gray-200">
+  <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <a href="/missao" class="group flex flex-col items-center justify-center">
+        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-3">
+          <svg class="w-10 h-10 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        </div>
+        <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Missão</span>
+      </a>
+      <a href="/visao" class="group flex flex-col items-center justify-center">
+        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-3">
+          <svg class="w-10 h-10 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        </div>
+        <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Visão</span>
+      </a>
+      <a href="/valores" class="group flex flex-col items-center justify-center">
+        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-3">
+          <svg class="w-10 h-10 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c2.54 0 4.71 1.61 5.5 4.09C13.79 4.61 15.96 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Valores</span>
+      </a>
+      <a href="/pilares" class="group flex flex-col items-center justify-center">
+        <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-3">
+          <svg class="w-10 h-10 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M4 22h16V2H4v20zm2-2V4h12v16H6z"/></svg>
+        </div>
+        <span class="font-semibold text-lg text-gray-800 group-hover:text-[#2563eb]">Pilares</span>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
     <!-- Barra azul com redes sociais e busca (estilo USP, ícones grandes, centralizados, azul do site) -->
     <div x-data="{ dark: false }" :class="dark ? 'bg-[#1a237e]' : 'bg-[#2563eb]'" class="py-8 transition-colors duration-500">
