@@ -72,27 +72,14 @@
           <li><a href="https://www.unikiv.ao" target="_blank" rel="noopener" class="hover:text-[#3B82F6] transition-colors">Universidade Kimpa Vita</a></li>
           <li><a href="https://www.isptec.co.ao" target="_blank" rel="noopener" class="hover:text-[#3B82F6] transition-colors">ISPTEC</a></li>
           <li><a href="https://www.metodista.ao" target="_blank" rel="noopener" class="hover:text-[#3B82F6] transition-colors">Universidade Metodista de Angola</a></li>
-          <li><a href="https://www.imetro.ao" target="_blank" rel="noopener" class="hover:text-[#3B82F6] transition-colors">Instituto Médio Politécnico Privado</a></li>
           <li><a href="/outras-instituicoes" class="hover:text-[#3B82F6] transition-colors">Outras Instituições</a></li>
         </ul>
       </div>
     </nav>
   </div>
-</footer class="bg-[#2C4A5E]">
-    <div class="border-t border-gray-800 pt-6 pb-4 text-center text-sm text-gray-400">
-      <div class="mb-2">
-         <span class="font-semibold text-white">2026 Instituto Superior Politécnico do Bié</span> — todos os direitos reservados
+      <div class="w-full py-6 bg-[#1a1a1a]">
+          <div class="text-center text-white text-lg mb-2">— todos os direitos reservados</div>
+          <div class="text-center text-yellow-400 text-xl font-semibold">De Angola com amor</div>
+          <div class="text-center text-white text-lg mt-2">Desenvolvido por INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
       </div>
-      <div class="mb-2">
-         <span class="text-yellow-400">De Angola com amor</span>
-      </div>
-      <div>
-         Desenvolvido por <span class="font-semibold text-white">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
-      </div>
-    </div>
-     <div class="w-full py-6 bg-[#2C4A5E]">
-        <div class="text-center text-white text-lg mb-2">— todos os direitos reservados</div>
-        <div class="text-center text-yellow-400 text-xl font-semibold">De Angola com amor</div>
-        <div class="text-center text-white text-lg mt-2">Desenvolvido por INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-     </div>
 
