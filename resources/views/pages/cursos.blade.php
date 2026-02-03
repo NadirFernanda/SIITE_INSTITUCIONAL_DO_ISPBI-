@@ -117,56 +117,43 @@ $cursos = [
 }
 </style>
 
+
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
     @foreach ($cursos as $curso)
-    <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between animated-gradient"
+    <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between animated-gradient group"
          style="background-image: linear-gradient(90deg, var(--tw-gradient-from, theme('colors.{{ $curso['gradientFrom'] }}')), var(--tw-gradient-to, theme('colors.{{ $curso['gradientTo'] }}')));">
-        <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between animated-gradient group"
-            style="background-image: linear-gradient(90deg, var(--tw-gradient-from, theme('colors.{{ $curso['gradientFrom'] }}')), var(--tw-gradient-to, theme('colors.{{ $curso['gradientTo'] }}')));">
-        <div>
-            <!-- Ícones de áreas -->
-            <div class="flex gap-3 mb-4">
-                @foreach ($curso['areas'] as $area)
-                <div class="flex flex-col items-center text-white text-sm">
-                    <span class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-1 icon-animate">
-                        @if(View::exists('components.heroicon-o-' . ($area['icon'] ?? '')))
-                            <x-dynamic-component :component="'heroicon-o-' . $area['icon']" class="w-6 h-6" />
-                        @else
-                            <span class="w-6 h-6"></span>
-                        @endif
-                    </span>
-                    <span>{{ $area['name'] }}</span>
-                </div>
-                @endforeach
+        <!-- Ícones de áreas -->
+        <div class="flex gap-3 mb-4">
+            @foreach ($curso['areas'] as $area)
+            <div class="flex flex-col items-center text-white text-sm">
+                <span class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-1 icon-animate">
+                    @if(View::exists('components.heroicon-o-' . ($area['icon'] ?? '')))
+                        <x-dynamic-component :component="'heroicon-o-' . $area['icon']" class="w-6 h-6" />
+                    @else
+                        <span class="w-6 h-6"></span>
+                    @endif
+                </span>
+                <span>{{ $area['name'] }}</span>
             </div>
-
-            <!-- Título do curso -->
-                <h3 class="text-2xl font-bold text-white mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">{{ $curso['title'] }}</h3>
-
-            <!-- Departamento e domínio -->
-            <p class="text-white/90 mb-4">
-                <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
-            </p>
-
-            <!-- Descrição resumida -->
-            <p class="text-white/80 mb-6">{{ $curso['description'] }}</p>
+            @endforeach
         </div>
 
+        <!-- Título do curso -->
+        <h3 class="text-2xl font-bold text-white mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">{{ $curso['title'] }}</h3>
+
+        <!-- Departamento e domínio -->
+        <p class="text-white/90 mb-4">
+            <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
+        </p>
+
+        <!-- Descrição resumida -->
+        <p class="text-white/80 mb-6">{{ $curso['description'] }}</p>
+
         <!-- Botão Saiba Mais -->
-            <a href="{{ $curso['link'] ?? '#' }}" 
-               class="mt-auto inline-block bg-white text-gray-800 font-semibold py-2 px-5 rounded-full text-center shadow transition-all duration-300 hover:bg-yellow-100 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
-                Saiba Mais
-            </a>
-        .group:hover .group-hover\:scale-105 {
-            transform: scale(1.05);
-        }
-        .group:hover .group-hover\:text-yellow-100 {
-            color: #fef9c3;
-        }
-        .group:hover .group-hover\:drop-shadow-lg {
-            filter: drop-shadow(0 4px 16px rgba(0,0,0,0.18));
-        }
-    </style>
+        <a href="{{ $curso['link'] ?? '#' }}" 
+           class="mt-auto inline-block bg-white text-gray-800 font-semibold py-2 px-5 rounded-full text-center shadow transition-all duration-300 hover:bg-yellow-100 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
+            Saiba Mais
+        </a>
     </div>
     @endforeach
 </div>
