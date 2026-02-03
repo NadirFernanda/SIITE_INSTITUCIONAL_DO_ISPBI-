@@ -62,7 +62,22 @@
            <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Governo de Angola</a></li>
         </ul>
       </div>
-      <!-- Fale com ISP-Bié -->
+         <!-- Ensino Superior em Angola -->
+         <div>
+         <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-ensino-superior">Ensino Superior em Angola</h2>
+            <ul class="space-y-2" aria-labelledby="footer-ensino-superior">
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Agostinho Neto</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Católica de Angola</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade José Eduardo dos Santos</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Katyavala Bwila</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Lueji A'Nkonde</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Mandume Ya Ndemufayo</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Kimpa Vita</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">ISPTEC</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Universidade Metodista de Angola</a></li>
+                <li><a href="#" class="hover:text-[#2979FF] transition-colors">Outras Instituições</a></li>
+            </ul>
+         </div>
       <div>
       <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-fale">Fale com ISP-Bié</h2>
         <ul class="space-y-2 mb-4" aria-labelledby="footer-fale">
