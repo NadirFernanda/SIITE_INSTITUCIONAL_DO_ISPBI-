@@ -144,7 +144,7 @@ $cursos = [
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
     @foreach ($cursos as $curso)
-        <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[480px]"
+        <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[360px]"
             style="background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});">
 
         <div class="relative z-10 flex flex-col h-full">
