@@ -272,8 +272,12 @@
           },
           short(text) {
             if (!text) return 'Sem mensagem informada.';
-            const max = 360;
-            return text.length > max ? text.slice(0, max) + '…' : text;
+            const maxWords = 15;
+            const words = text.split(/\s+/);
+            if (words.length > maxWords) {
+              return words.slice(0, maxWords).join(' ') + '…';
+            }
+            return text;
           },
           autoplay: null,
           startAutoplay() {
