@@ -24,61 +24,6 @@
     <section class="py-16 bg-gray-50 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <!-- Organigrama Institucional -->
-            <div class="mb-12 scroll-reveal">
-                <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Organigrama Institucional</h2>
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden interactive-card">
-                    <img
-                        src="{{ asset('images/organigrama-ispbie.png') }}"
-                        alt="Organigrama do Instituto Superior Politécnico do Bié"
-                        class="w-full h-auto"
-                    >
-                </div>
-            </div>
-
-            <!-- Órgãos de gestão -->
-            <div class="mb-12 scroll-reveal">
-                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">ÓRGÃOS DE GESTÃO</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-
-                    <!-- Presidente -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-                        <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
-                            <div class="flex items-center text-white">
-                                <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                                </svg>
-                                <h3 class="text-xl font-bold">Presidente</h3>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-gray-700 mb-4">
-                                Órgão executivo máximo responsável pela administração geral do Instituto, 
-                                representação institucional e implementação das decisões dos órgãos colegiados.
-                            </p>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li class="flex items-start">
-                                    <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Representação legal do Instituto
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Gestão administrativa e financeira
-                                </li>
-                                <li class="flex items-start">
-                                    <svg class="w-4 h-4 text-[#3B82F6] mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                    Coordenação das políticas institucionais
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <!-- Gabinete do Presidente -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
                         <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
