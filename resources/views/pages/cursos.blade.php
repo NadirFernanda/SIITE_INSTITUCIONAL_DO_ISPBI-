@@ -109,7 +109,7 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
-        'gradientFromHex' => '#102542', // azul marinho bem descarregado
+        'gradientFromHex' => '#000080', // azul marinho puro
         'gradientToHex' => '#223A5E',   // azul marinho claro
         'areas' => [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
