@@ -209,13 +209,13 @@
           </div>
         </div>
 
-        <!-- Dropdown Institucional - Mobile -->
+        <!-- Dropdown Institucional - Mobile (único, padronizado) -->
         <div x-data="{ openMobile: false }" class="relative lg:hidden mt-2">
           <button @click="openMobile = !openMobile"
                   class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
-            <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
+            <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
             <span>Institucional</span>
-            <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 ml-auto" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
@@ -226,7 +226,6 @@
             <a href="/missao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
             <a href="/visao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
             <a href="/valores" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a> -->
             <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
             <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Transparência</a>
           </div>
