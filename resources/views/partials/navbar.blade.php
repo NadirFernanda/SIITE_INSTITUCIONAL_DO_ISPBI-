@@ -53,7 +53,7 @@
     <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
-      <div class="flex items-center justify-center bg-white rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5">
+      <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5" style="background:transparent!important;">
         <img src="/images/logo.png" alt="ISP-Bié" class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
       <span class="text-white font-bold text-xs sm:text-sm md:text-base lg:text-xl tracking-tight truncate">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
@@ -95,7 +95,7 @@
                   <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
                   <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
                   <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a>
-                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Comunicação</a>
+                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Notícias</a>
                 </div>
                 <div class="mt-8 border-t border-gray-700 pt-6 text-center">
 
