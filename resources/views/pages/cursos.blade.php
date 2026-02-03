@@ -49,8 +49,8 @@ $cursos = [
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
-        'gradientFromHex' => '#A21CAF', // roxo institucional
-        'gradientToHex' => '#F472B6',   // rosa claro
+        'gradientFromHex' => '#D7263D', // vermelho institucional
+        'gradientToHex' => '#F05A28',   // laranja institucional
         'areas' => [
             ['name' => 'Psicologia Clínica', 'icon' => 'heart-pulse'],
             ['name' => 'Saúde Mental Comunitária', 'icon' => 'users'],
