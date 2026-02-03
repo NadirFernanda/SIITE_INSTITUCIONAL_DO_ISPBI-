@@ -94,7 +94,7 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '5 Anos',
-        'gradientFromHex' => '#2C4A5E', // azul institucional
+        'gradientFromHex' => '#2563EB', // azul navbar institucional
         'gradientToHex' => '#60A5FA',   // azul claro
         'areas' => [
             ['name' => 'Desenvolvimento de Software', 'icon' => 'code'],
