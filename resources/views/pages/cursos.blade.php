@@ -79,8 +79,8 @@ $cursos = [
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Administração, Negócios e Direito',
         'duration' => '4 Anos',
-        'gradientFromHex' => '#F59E42', // laranja institucional
-        'gradientToHex' => '#FDE68A',   // amarelo claro
+        'gradientFromHex' => '#FFD700', // amarelo institucional
+        'gradientToHex' => '#FFF9C4',   // amarelo claro
         'areas' => [
             ['name' => 'Contabilidade e Auditoria', 'icon' => 'calculator'],
             ['name' => 'Gestão Empresarial', 'icon' => 'briefcase'],
@@ -94,7 +94,7 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '5 Anos',
-        'gradientFromHex' => '#1877F2', // azul Facebook
+        'gradientFromHex' => '#2C4A5E', // azul institucional
         'gradientToHex' => '#60A5FA',   // azul claro
         'areas' => [
             ['name' => 'Desenvolvimento de Software', 'icon' => 'code'],
@@ -109,8 +109,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
-        'gradientFromHex' => '#0000FF', // azul puro
-        'gradientToHex' => '#223A5E',   // azul marinho claro
+        'gradientFromHex' => '#223A5E', // azul marinho escuro
+        'gradientToHex' => '#60A5FA',   // azul claro
         'areas' => [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
