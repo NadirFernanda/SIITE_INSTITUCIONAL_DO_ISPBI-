@@ -40,10 +40,17 @@ Route::middleware('auth')->group(function () {
 
 
 // Rotas individuais para páginas de cursos (otimizado)
-$cursos = ['informatica', 'hidricos', 'psicologia', 'comunicacao', 'contabilidade', 'enfermagem'];
+
+$cursos = ['informatica', 'hidricos', 'psicologia', 'comunicacao', 'contabilidade'];
 foreach ($cursos as $curso) {
     Route::view("/cursos/{$curso}", "pages.cursos.{$curso}")->name("cursos.{$curso}");
 }
+
+// Rota de enfermagem com closure para evitar erro 500
+Route::get('/cursos/enfermagem', function () {
+    // Passe variáveis necessárias para o layout aqui, se houver
+    return view('pages.cursos.enfermagem');
+})->name('cursos.enfermagem');
 
 
 use App\Models\Alumnus;
