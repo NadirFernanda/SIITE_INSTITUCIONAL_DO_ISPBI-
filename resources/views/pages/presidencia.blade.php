@@ -20,29 +20,20 @@
         </div>
     </div>
 
-    <!-- Estrutura Organizacional -->
-    <section class="py-16 bg-gray-50 scroll-reveal">
+    <!-- CTA de Governança -->
+    <section class="py-16 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-
-                </div>
-            </div>
-
-
-            <!-- CTA de Transparência -->
-            <div class="bg-[#2563eb] rounded-2xl p-12 text-center text-white scroll-reveal interactive-card">
+            <div class="bg-[#2563eb] rounded-2xl p-12 text-center text-white interactive-card">
                 <h2 class="text-3xl font-bold mb-4">Governança</h2>
                 <p class="text-xl mb-8 opacity-90">
                     Acompanhe as ações e decisões dos Órgãos de gestão do ISP-Bié
                 </p>
-                <div class="flex flex-wrap gap-4 justify-center">
-                    <!-- Botão Portal da Transparência removido -->
+                <div class="flex justify-center">
                     <a href="/contactos" class="bg-[#2563eb] text-white px-8 py-3 rounded-full font-semibold border border-white hover:bg-white hover:text-[#2563eb] transition-colors">
                         Entre em Contacto
                     </a>
                 </div>
             </div>
-
         </div>
     </section>
 </div>
