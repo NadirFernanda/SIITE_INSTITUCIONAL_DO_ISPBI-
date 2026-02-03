@@ -4,43 +4,46 @@
 
   <!-- Hero institucional moderno + carrossel contido -->
   <section class="relative w-full h-[75vh] md:h-[65vh] xl:h-[520px] overflow-hidden">
-    {{-- Carrossel (continua sendo o mesmo componente) --}}
-    @component('components.carrossel')
-    @endcomponent
-
-    {{-- Overlay elegante --}}
-    <div class="absolute inset-0 bg-black/40"></div>
-
-    {{-- Conteúdo --}}
-    <div class="absolute inset-0 flex items-center">
+    @php
+      $carrosselHero = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->first();
+    @endphp
+    @if($carrosselHero)
+      <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $carrosselHero->imagem) }}');"></div>
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 flex items-center">
         <div class="max-w-7xl mx-auto px-6 w-full">
-            <div class="max-w-xl text-white text-left">
-                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
-                    Instituto Superior Politécnico do Bié
-                </h1>
-                <p class="text-base md:text-lg opacity-90 mb-6">
-                    Formação superior orientada para a inovação, investigação
-                    científica e desenvolvimento sustentável.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#cursos"
-                       class="inline-flex items-center justify-center
-                              bg-blue-600 hover:bg-blue-700
-                              text-white font-semibold
-                              px-6 py-3 rounded-md transition">
-                        Cursos de Graduação
-                    </a>
-                    <a href="/institucional"
-                       class="inline-flex items-center justify-center
-                              border border-white/60 hover:border-white
-                              text-white
-                              px-6 py-3 rounded-md transition">
-                        Sobre a Instituição
-                    </a>
-                </div>
+          <div class="max-w-xl text-white text-left">
+            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+              {{ $carrosselHero->titulo }}
+            </h1>
+            @if($carrosselHero->subtitulo)
+            <p class="text-base md:text-lg opacity-90 mb-6">
+              {{ $carrosselHero->subtitulo }}
+            </p>
+            @endif
+            <div class="flex gap-4">
+              @if($carrosselHero->link && $carrosselHero->texto_botao)
+                <a href="{{ $carrosselHero->link }}"
+                   class="inline-flex items-center justify-center
+                          bg-blue-600 hover:bg-blue-700
+                          text-white font-semibold
+                          px-6 py-3 rounded-md transition">
+                  {{ $carrosselHero->texto_botao }}
+                </a>
+              @elseif($carrosselHero->link)
+                <a href="{{ $carrosselHero->link }}"
+                   class="inline-flex items-center justify-center
+                          bg-blue-600 hover:bg-blue-700
+                          text-white font-semibold
+                          px-6 py-3 rounded-md transition">
+                  CONHEÇA MAIS
+                </a>
+              @endif
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+    @endif
   </section>
 
     <!-- Barra azul com redes sociais e busca (estilo USP, ícones grandes, centralizados, azul do site) -->
