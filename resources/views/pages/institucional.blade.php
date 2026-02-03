@@ -20,7 +20,7 @@
             'ano' => '2007',
             'titulo' => 'Comissões Instaladoras',
             'descricao' => 'O governo da província do Bié cria as comissões instaladoras para instalação do Ensino Superior, dispensando as instalações da Escola média de Agronomia coordenada pela República Checa na rua Padre Fidalgo; na sequência é beneficiada com equipamento de laboratório de ensino de enfermagem.',
-            'cor' => 'from-[#9C27B0] to-[#673AB7]'
+            'cor' => 'from-[#2563eb] to-[#3B82F6]'
           ],
           [
             'ano' => '2008',
@@ -38,7 +38,7 @@
             'ano' => '2010',
             'titulo' => 'Novos Espaços e Concurso Público',
             'descricao' => 'O Governo da província dispensa o edifício onde funcionava a Escola Dr. António Agostinho Neto “Manguxi” e a Escola Média Comercial e Industrial. É aberto o primeiro concurso público de docentes, integrando profissionais de outras unidades orgânicas.',
-            'cor' => 'from-[#9C27B0] to-[#673AB7]'
+            'cor' => 'from-[#2563eb] to-[#3B82F6]'
           ],
           [
             'ano' => '2011',
@@ -50,7 +50,7 @@
             'ano' => '2012',
             'titulo' => 'Ensino Pós-Laboral',
             'descricao' => 'Abertura da modalidade de ensino pós-laboral com docentes nacionais e expatriados, inicialmente no curso de Contabilidade e Administração, expandindo para Comunicação Social e Psicologia.',
-            'cor' => 'from-[#9C27B0] to-[#673AB7]'
+            'cor' => 'from-[#2563eb] to-[#3B82F6]'
           ],
           [
             'ano' => '2013+',
