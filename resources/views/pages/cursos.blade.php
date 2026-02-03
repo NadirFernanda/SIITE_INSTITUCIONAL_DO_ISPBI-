@@ -175,14 +175,7 @@ $cursos = [
             <!-- Descrição resumida -->
             <p class="text-white/80 mb-6">{{ $curso['description'] }}</p>
 
-            <!-- Botão Saiba Mais -->
-            <div class="mt-auto">
-                <a href="{{ route($curso['link']) }}" 
-                   class="inline-block bg-white text-gray-800 font-semibold py-2 px-5 rounded-full text-center shadow transition-all duration-300 
-                          hover:bg-yellow-100 hover:text-gray-900 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
-                    Saiba Mais
-                </a>
-            </div>
+            <!-- Botão "Saiba mais" removido -->
         </div>
 
     </div>
