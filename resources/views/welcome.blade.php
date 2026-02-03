@@ -5,33 +5,41 @@
   <!-- Hero institucional moderno + carrossel contido -->
   <section class="relative w-full h-[75vh] md:h-[65vh] xl:h-[520px] overflow-hidden">
     @php
-      $carrosselHero = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->first();
+      $carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->take(5)->get();
+      $totalSlides = $carrosseis->count();
+      $hero = $carrosseis->first();
     @endphp
-    @if($carrosselHero)
-      <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $carrosselHero->imagem) }}');"></div>
-      <div class="absolute inset-0 bg-black/40"></div>
+    @if($totalSlides > 0)
+      <div x-data="{ current: 0, slides: {{ $totalSlides }}, images: [@foreach($carrosseis as $c)'{{ asset('storage/' . $c->imagem) }}'@if(!$loop->last),@endif @endforeach] }"
+           x-init="setInterval(() => { current = (current + 1) % slides }, 5000)"
+           class="absolute inset-0">
+        <template x-for="(img, idx) in images" :key="idx">
+          <div x-show="current === idx" x-transition:enter="transition-opacity duration-1000" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-1000" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 w-full h-full bg-cover bg-center" :style="'background-image: url(' + img + ')'"></div>
+        </template>
+        <div class="absolute inset-0 bg-black/40"></div>
+      </div>
       <div class="absolute inset-0 flex items-center">
         <div class="max-w-7xl mx-auto px-6 w-full">
           <div class="max-w-xl text-white text-left">
             <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              {{ $carrosselHero->titulo }}
+              {{ $hero->titulo }}
             </h1>
-            @if($carrosselHero->subtitulo)
+            @if($hero->subtitulo)
             <p class="text-base md:text-lg opacity-90 mb-6">
-              {{ $carrosselHero->subtitulo }}
+              {{ $hero->subtitulo }}
             </p>
             @endif
             <div class="flex gap-4">
-              @if($carrosselHero->link && $carrosselHero->texto_botao)
-                <a href="{{ $carrosselHero->link }}"
+              @if($hero->link && $hero->texto_botao)
+                <a href="{{ $hero->link }}"
                    class="inline-flex items-center justify-center
                           bg-blue-600 hover:bg-blue-700
                           text-white font-semibold
                           px-6 py-3 rounded-md transition">
-                  {{ $carrosselHero->texto_botao }}
+                  {{ $hero->texto_botao }}
                 </a>
-              @elseif($carrosselHero->link)
-                <a href="{{ $carrosselHero->link }}"
+              @elseif($hero->link)
+                <a href="{{ $hero->link }}"
                    class="inline-flex items-center justify-center
                           bg-blue-600 hover:bg-blue-700
                           text-white font-semibold
