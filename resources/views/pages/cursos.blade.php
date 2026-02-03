@@ -49,7 +49,7 @@ $cursos = [
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
-        'gradientFromHex' => '#D7263D', // vermelho institucional
+        'gradientFromHex' => '#C62828', // vermelho institucional
         'gradientToHex' => '#F05A28',   // laranja institucional
         'areas' => [
             ['name' => 'Psicologia Clínica', 'icon' => 'heart-pulse'],
@@ -109,8 +109,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
-        'gradientFromHex' => '#0EA5E9', // azul ciano
-        'gradientToHex' => '#60A5FA',   // azul claro
+        'gradientFromHex' => '#102542', // azul marinho bem descarregado
+        'gradientToHex' => '#223A5E',   // azul marinho claro
         'areas' => [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
@@ -144,8 +144,8 @@ $cursos = [
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
     @foreach ($cursos as $curso)
-        <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group"
-            style="background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }}); min-height: 480px;">
+        <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[480px]"
+            style="background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});">
 
         <div class="relative z-10 flex flex-col h-full">
             <!-- Ícones de áreas -->
