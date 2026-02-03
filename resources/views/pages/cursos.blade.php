@@ -1,27 +1,21 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-    <div class="flex">
-      <nav class="text-sm opacity-75 mb-8 text-left">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-reveal">
+    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
+      <nav class="text-sm opacity-75 mb-6 text-left">
         <a href="/" class="hover:underline">Início</a> \ Cursos de Graduação
       </nav>
-    </div>
-
-    <!-- Cabeçalho em formato de card em vez de hero -->
-    <div class="card mb-10">
-      <h1 class="section-title text-3xl md:text-4xl mb-2">Cursos de Graduação</h1>
-      <p class="section-subtitle text-lg">Instituto Superior Politécnico do Bié</p>
+      <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Cursos de Graduação</h1>
+      <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
       <p class="text-gray-600 max-w-2xl mt-3">Conheça a oferta formativa de graduação do ISP-Bié, organizada por áreas de conhecimento e alinhada às necessidades de desenvolvimento da região e do país.</p>
     </div>
-
-    <!-- Conteúdo Principal -->
-    <section class="py-16 bg-gray-50">
+    <section class="mb-16 scroll-reveal">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Estrutura Acadêmica ISPBIÉ -->
-        <div class="mb-12">
-          <h2 class="section-title text-3xl mb-2">Estrutura Acadêmica do ISPBIÉ</h2>
-          <p class="section-subtitle mb-4 max-w-2xl">Os cursos estão organizados em grandes áreas – engenharias e inovação, ciências sociais e ciências da saúde – facilitando a navegação pelos interesses de cada candidato.</p>
+        <div class="bg-white rounded-lg shadow-md p-8 mb-12 interactive-card">
+          <h2 class="text-3xl font-bold text-[#2563eb] mb-2">Estrutura Acadêmica do ISPBIÉ</h2>
+          <p class="text-lg text-gray-700 mb-4 max-w-2xl">Os cursos estão organizados em grandes áreas – engenharias e inovação, ciências sociais e ciências da saúde – facilitando a navegação pelos interesses de cada candidato.</p>
           <div class="grid md:grid-cols-3 gap-6">
             <a href="#engenharias" class="block rounded-lg border bg-gradient-to-r from-blue-700 to-blue-400 p-6 hover:scale-105 transition-transform interactive-card">
               <h3 class="text-xl font-bold mb-2 text-white">Engenharias e Inovação Tecnológica</h3>
@@ -39,23 +33,24 @@
         </div>
 
         <!-- Introdução -->
-        <div class="card mb-12">
-          <h2 class="section-title text-3xl mb-4">Formação de Excelência</h2>
-          <p class="section-subtitle text-lg leading-relaxed">
+        <div class="bg-white rounded-lg shadow-md p-8 mb-12 interactive-card">
+          <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Formação de Excelência</h2>
+          <p class="text-lg text-gray-700 leading-relaxed">
             O Instituto Superior Politécnico do Bié (ISP-Bié) é uma instituição de ensino superior pública, superintendida pelo Ministério do Ensino Superior, Ciência, Tecnologia e Inovação. Foi criado à luz da reorganização da rede de instituições de ensino superior, nos termos da alínea a) do artigo 18º do Decreto Órgãos de gestão nº 285/20 de 29 de outubro, e localiza-se na Rua Padre Fidalgo, entre Artur de Paiva e Francisco de Leite Cardoso, s/n, na cidade do Cuito/Bié, com o número de identificação fiscal 5000308765. Ministra atualmente seis (6) cursos de graduação em seis domínios de formação: Humanidades e Artes; Ciências Sociais, Jornalismo e Informação; Administração, Negócios e Direito; Ciências Médicas e da Saúde; Engenharias e Inovação Tecnológica; Ciências Humanas, Sociais e Económicas; e Ciências da Saúde.
           </p>
         </div>
 
         <!-- Departamentos -->
-        <div class="mb-12">
-          <h2 class="section-title text-3xl mb-6">Oferta Formativa por Departamento</h2>
+        <div class="bg-white rounded-lg shadow-md p-8 mb-12 interactive-card">
+          <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Oferta Formativa por Departamento</h2>
           <!-- ...os cards de departamentos foram removidos conforme solicitado... -->
         </div>
 
         <!-- Cursos -->
         <!-- Engenharias e Inovação Tecnológica -->
-        <h2 id="engenharias" class="section-title text-2xl mt-12 mb-4">Engenharias e Inovação Tecnológica</h2>
-        <div class="space-y-8 mb-12">
+        <div class="bg-white rounded-lg shadow-md p-8 mb-12 interactive-card">
+          <h2 id="engenharias" class="text-2xl font-bold text-[#2563eb] mt-0 mb-4">Engenharias e Inovação Tecnológica</h2>
+          <div class="space-y-8">
         
         <!-- Contabilidade e Administração -->
         <div id="contabilidade" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
@@ -177,8 +172,9 @@
           </div>
 
           <!-- Ciências Sociais, Humanas e Económicas -->
-          <h2 id="sociais" class="text-2xl font-bold text-[#2563eb] mt-12 mb-4">Ciências Sociais, Humanas e Económicas</h2>
-          <div class="space-y-8 mb-12">
+          <div class="bg-white rounded-lg shadow-md p-8 mb-12 interactive-card">
+            <h2 id="sociais" class="text-2xl font-bold text-[#2563eb] mt-0 mb-4">Ciências Sociais, Humanas e Económicas</h2>
+            <div class="space-y-8">
         <div id="hidricos" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
           <div class="p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #38bdf8, #60a5fa) !important;">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -296,8 +292,9 @@
                   </div>
 
                   <!-- Ciências da Saúde -->
-                  <h2 id="saude" class="text-2xl font-bold text-[#2563eb] mt-12 mb-4">Ciências da Saúde</h2>
-                  <div class="space-y-8 mb-12">
+                  <div class="bg-white rounded-lg shadow-md p-8 mb-12 interactive-card">
+                    <h2 id="saude" class="text-2xl font-bold text-[#2563eb] mt-0 mb-4">Ciências da Saúde</h2>
+                    <div class="space-y-8">
                 <!-- Enfermagem Geral -->
                   </div>
                 <div id="enfermagem" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
