@@ -56,9 +56,9 @@
   </section>
 
   <!-- Seção de Ícones Institucionais: Missão, Visão, Valores, Pilares -->
-  <section class="py-12 bg-white border-b border-gray-200">
+  <section class="py-14 md:py-16 bg-white border-b border-gray-200">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 text-center">
         <a href="/missao" class="group flex flex-col items-center justify-center">
           <div class="w-20 h-20 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-4">
             <svg class="w-12 h-12 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
