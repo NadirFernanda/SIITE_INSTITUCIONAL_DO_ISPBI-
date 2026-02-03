@@ -37,17 +37,17 @@
       <div>
       <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-parcerias">Parcerias</h2>
         <ul class="space-y-2" aria-labelledby="footer-parcerias">
-          <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Governo de Angola</a></li>
+          <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Governo de Angola</a></li>
         </ul>
       </div>
       <!-- Fale com ISP-Bié -->
       <div>
       <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-fale">Fale com ISP-Bié</h2>
         <ul class="space-y-2 mb-4" aria-labelledby="footer-fale">
-          <li><a href="/contactos" class="hover:text-[#2979FF] transition-colors">Contactos</a></li>
-          <li><a href="/ouvidoria" class="hover:text-[#2979FF] transition-colors">Ouvidoria</a></li>
-          <li><a href="/trabalhe-conosco" class="hover:text-[#2979FF] transition-colors">Trabalhe Connosco</a></li>
-          <li><a href="/noticias" class="hover:text-[#2979FF] transition-colors">Notícias</a></li>
+          <li><a href="/contactos" class="hover:text-[#2979FF] transition-colors link-underline-soft">Contactos</a></li>
+          <li><a href="/ouvidoria" class="hover:text-[#2979FF] transition-colors link-underline-soft">Ouvidoria</a></li>
+          <li><a href="/trabalhe-conosco" class="hover:text-[#2979FF] transition-colors link-underline-soft">Trabalhe Connosco</a></li>
+          <li><a href="/noticias" class="hover:text-[#2979FF] transition-colors link-underline-soft">Notícias</a></li>
         </ul>
         <address class="not-italic text-sm text-gray-400 leading-relaxed mb-2">
           <strong class="text-white">Localização:</strong><br>
@@ -63,16 +63,16 @@
       <div>
       <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-ensino">Ensino Superior em Angola</h2>
         <ul class="space-y-2 text-sm" aria-labelledby="footer-ensino">
-          <li><a href="https://www.uan.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade Agostinho Neto</a></li>
-          <li><a href="https://www.ucan.edu" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade Católica de Angola</a></li>
-          <li><a href="https://www.ujes.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade José Eduardo dos Santos</a></li>
-          <li><a href="https://ukb.ed.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade Katyavala Bwila</a></li>
-          <li><a href="https://www.ulan.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade Lueji A'Nkonde</a></li>
-          <li><a href="https://www.umn.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade Mandume Ya Ndemufayo</a></li>
-          <li><a href="https://www.unikiv.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade Kimpa Vita</a></li>
-          <li><a href="https://www.isptec.co.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">ISPTEC</a></li>
-          <li><a href="https://www.metodista.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Universidade Metodista de Angola</a></li>
-          <li><a href="/outras-instituicoes" class="hover:text-[#2979FF] transition-colors">Outras Instituições</a></li>
+          <li><a href="https://www.uan.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Agostinho Neto</a></li>
+          <li><a href="https://www.ucan.edu" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Católica de Angola</a></li>
+          <li><a href="https://www.ujes.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade José Eduardo dos Santos</a></li>
+          <li><a href="https://ukb.ed.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Katyavala Bwila</a></li>
+          <li><a href="https://www.ulan.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Lueji A'Nkonde</a></li>
+          <li><a href="https://www.umn.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Mandume Ya Ndemufayo</a></li>
+          <li><a href="https://www.unikiv.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Kimpa Vita</a></li>
+          <li><a href="https://www.isptec.co.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">ISPTEC</a></li>
+          <li><a href="https://www.metodista.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Metodista de Angola</a></li>
+          <li><a href="/outras-instituicoes" class="hover:text-[#2979FF] transition-colors link-underline-soft">Outras Instituições</a></li>
         </ul>
       </div>
     </nav>
