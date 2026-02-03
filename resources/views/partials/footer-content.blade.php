@@ -1,5 +1,19 @@
 ﻿
-<footer class="bg-[#1a1a1a] text-gray-300" aria-label="Rodapé institucional">
+<!-- Exemplo 1: Fundo transparente -->
+<footer class="bg-transparent text-gray-300" aria-label="Rodapé institucional">
+   ...existing code...
+</footer>
+
+<!-- Exemplo 2: Fundo com imagem e camada escura -->
+<footer class="relative text-gray-300" aria-label="Rodapé institucional">
+   <div class="absolute inset-0">
+      <img src="/images/footer-bg.jpg" alt="Instituto Superior Politécnico do Bié" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+   </div>
+   <div class="relative z-10">
+      ...existing code...
+   </div>
+</footer>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8" aria-label="Links institucionais">
       <!-- Educação -->
