@@ -241,7 +241,7 @@
 
   <!-- Testemunhos - Carrossel Alpine.js -->
   <!-- Testemunhos -->
-  <section class="py-16 pb-24 bg-gray-50">
+  <section class="py-16 bg-gray-50">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -289,7 +289,7 @@
         class="relative flex flex-col items-center"
       >
         <div class="w-full max-w-2xl overflow-visible">
-          <div class="relative w-full max-w-2xl mx-auto">
+          <div class="relative w-full max-w-2xl mx-auto min-h-[360px]">
             <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
               <div
                 x-show="current === idx"
@@ -299,7 +299,7 @@
                 x-transition:leave="transition-opacity duration-700"
                 x-transition:leave-start="opacity-100 translate-x-0"
                 x-transition:leave-end="opacity-0 -translate-x-8"
-                class="absolute inset-0 w-full flex justify-center"
+                class="absolute top-0 left-0 w-full flex justify-center"
                 style="min-height:320px;"
               >
                 <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 flex flex-col items-center justify-between mx-auto min-h-[320px] max-w-xl w-full transition-shadow duration-300 hover:shadow-2xl">
