@@ -33,6 +33,56 @@ O design do website foi desenvolvido com base nas melhores práticas de universi
 - Arquitetura da informação baseada em padrões de usabilidade web moderna
 - Design responsivo seguindo padrões mobile-first
 
+
+## 🎨 Design System ISP-Bié
+
+O projeto segue um mini Design System institucional, garantindo identidade visual, consistência e fácil manutenção.
+
+### 1️⃣ Design Tokens (tailwind.config.js)
+- Todas as cores, tipografia, breakpoints e animações institucionais são definidos em `tailwind.config.js`.
+- Exemplo de uso:
+
+```js
+colors: {
+    ispbie: {
+        orange: "#F05A28", // ação principal
+        blue: "#2C4A5E",   // institucional
+        teal: "#0E8F81",   // apoio
+        green: "#39C28A",  // sucesso
+        gold: "#FFD700",   // destaque
+        dark: "#1a1a1a",   // footer
+    },
+},
+```
+
+### 2️⃣ Componentes Oficiais (resources/css/app.css)
+- Botões, cards, títulos e utilitários visuais padronizados em `@layer components`.
+- Exemplos:
+
+```css
+.btn-primary { @apply bg-ispbie-orange text-white ... }
+.btn-secondary { @apply border border-ispbie-blue ... }
+.card { @apply rounded-2xl bg-white p-6 shadow-sm ... }
+.section-title { @apply text-title font-bold text-ispbie-blue ... }
+```
+
+### 3️⃣ Regras de Ouro
+- Nunca criar cores, fontes ou breakpoints fora do tailwind.config.js
+- Não criar botões, cards ou títulos fora dos componentes oficiais
+- Animações só com classes utilitárias (ex: animate-fade-in-up)
+- Nada de CSS fora dos @layer base/components/utilities
+- Se algo se repete 3 vezes, vira componente. Se define identidade, vira token.
+
+### 4️⃣ Como usar
+
+```html
+<a class="btn-primary">Candidatar-se</a>
+<div class="card animate-fade-in-up">...</div>
+<h2 class="section-title">Título</h2>
+```
+
+---
+
 ## 🏗️ Arquitetura e Tecnologias
 
 ### Stack Principal

@@ -1,123 +1,72 @@
-html, body {
-	overflow-x: hidden !important;
-	max-width: 100vw;
-	min-width: 0;
-	background: #fff;
-}
 
-@media (min-width: 1800px) {
-	.2xl\:max-w-screen-2xl {
-		max-width: 1800px !important;
-	}
-}
-
-@media (max-width: 640px) {
-	.sm\:px-2 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
-	.sm\:text-xs { font-size: 0.75rem !important; }
-	.sm\:leading-tight { line-height: 1.2 !important; }
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-	/* Botão institucional padrão */
-	.btn-ispbie {
-		@apply text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors duration-200;
-		background-color: #F05A28;
-	}
-	.btn-ispbie:hover {
-		background-color: #2C4A5E;
-	}
-
-	/* Cards interativos reutilizáveis (hover leve) */
-	.interactive-card {
-		@apply transition-transform transition-shadow duration-200 ease-out;
-	}
-	.interactive-card:hover {
-		transform: translateY(-4px) scale(1.01);
-		box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
-	}
-
-	/* Links com sublinhado suave ao passar o rato */
-	.link-underline-soft {
-		@apply relative inline-block transition-colors duration-150;
-	}
-	.link-underline-soft::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		bottom: -2px;
-		width: 0;
-		height: 2px;
-		background-color: currentColor;
-		transition: width 0.2s ease-out;
-	}
-	.link-underline-soft:hover::after {
-		width: 100%;
-	}
-
-	/* Cartões de estatísticas / destaques com efeito de foco */
-	.stat-card {
-		@apply transition-transform transition-shadow duration-200 ease-out;
-	}
-	.stat-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
-	}
+/* =========================
+   BASE
+========================= */
+@layer base {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    background-color: #fff;
+  }
 }
 
+/* =========================
+   COMPONENTES
+========================= */
+@layer components {
+
+  .btn-ispbie {
+    @apply text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors duration-200;
+    @apply bg-ispbie-orange hover:bg-ispbie-blue;
+  }
+
+  .interactive-card {
+    @apply transition-transform transition-shadow duration-200 ease-out;
+  }
+  .interactive-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+  }
+
+  .link-underline-soft {
+    @apply relative inline-block transition-colors duration-150;
+  }
+  .link-underline-soft::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: currentColor;
+    transition: width 0.2s ease-out;
+  }
+  .link-underline-soft:hover::after {
+    width: 100%;
+  }
+
+  .stat-card {
+    @apply transition-transform transition-shadow duration-200 ease-out;
+  }
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+  }
+}
+
+/* =========================
+   UTILITIES
+========================= */
 @layer utilities {
-	@keyframes slide-in-right {
-		0% {
-			transform: translateX(100%);
-			opacity: 0.2;
-		}
-		100% {
-			transform: translateX(0);
-			opacity: 1;
-		}
-	}
-	.animate-slide-in-right {
-		animation: slide-in-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-	}
 
-	/* Animação de fade-in para entrada suave nas secções */
-	@keyframes fade-in-up {
-		0% {
-			transform: translateY(12px);
-			opacity: 0;
-		}
-		100% {
-			transform: translateY(0);
-			opacity: 1;
-		}
-	}
-	.fade-in-up {
-		animation: fade-in-up 0.45s ease-out forwards;
-	}
-
-	/* Estado inicial para elementos observados no scroll */
-	.scroll-reveal {
-		/* Mantém o conteúdo visível mesmo se o JS falhar */
-		transform: translateY(8px);
-		transition: transform 0.35s ease-out;
-	}
-	.scroll-reveal.is-visible {
-		transform: translateY(0);
-	}
-
-	/* Cores institucionais ISPBié */
-	.bg-ispbie-orange { background-color: #F05A28; }
-	.text-ispbie-orange { color: #F05A28; }
-	.bg-ispbie-blue { background-color: #2C4A5E; }
-	.text-ispbie-blue { color: #2C4A5E; }
-	.bg-ispbie-teal { background-color: #0E8F81; }
-	.text-ispbie-teal { color: #0E8F81; }
-	.bg-ispbie-green { background-color: #39C28A; }
-	.text-ispbie-green { color: #39C28A; }
-	.bg-ispbie-gold { background-color: #FFD700; }
-	.text-ispbie-gold { color: #FFD700; }
-	.bg-ispbie-footer { background-color: #1a1a1a; }
-	.text-ispbie-footer { color: #1a1a1a; }
+  .scroll-reveal {
+    @apply translate-y-2 opacity-0 transition-all duration-300;
+  }
+  .scroll-reveal.is-visible {
+    @apply translate-y-0 opacity-100;
+  }
 }
