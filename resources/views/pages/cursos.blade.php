@@ -155,23 +155,6 @@ $cursos = [
                         <span class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-1 icon-animate">
                             @if(View::exists('components.heroicon-o-' . ($area['icon'] ?? '')))
                                 <x-dynamic-component :component="'heroicon-o-' . $area['icon']" class="w-6 h-6" />
-                            [
-                                'title' => 'Engenharia Civil',
-                                'description' => 'Forma engenheiros para projetar, construir e gerenciar obras de infraestrutura urbana, rodoviária e predial.',
-                                'department' => 'Engenharias',
-                                'domain' => 'Engenharias e Telecomunicações',
-                                'duration' => '5 Anos',
-                                // Azul mais claro/descarregado
-                                'gradientFrom' => '[#4B6A88]',
-                                'gradientTo' => '[#B0C4DE]',
-                                'areas' => [
-                                    ['name' => 'Estruturas', 'icon' => 'cube-transparent'],
-                                    ['name' => 'Geotecnia', 'icon' => 'globe-alt'],
-                                    ['name' => 'Transportes', 'icon' => 'truck'],
-                                    ['name' => 'Construção Civil', 'icon' => 'building-office-2'],
-                                ],
-                                'link' => '#civil'
-                            ],
             </h3>
 
             <!-- Departamento e domínio -->
