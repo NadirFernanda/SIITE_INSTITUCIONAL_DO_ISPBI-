@@ -32,8 +32,6 @@
             <div class="mb-12 scroll-reveal">
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-8">VICE-ÓRGÃOS DE GESTÃO</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Cada VP aqui mantém o mesmo padrão de código simplificado -->
-                    <!-- Exemplo: VP Graduação -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
                         <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
                             <div class="flex items-center text-white">
@@ -54,9 +52,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Adicione os outros VPs de forma similar... -->
-
                 </div>
             </div>
 
