@@ -94,6 +94,17 @@
         </div>
       </div>
     </section>
+    <div class="border-t border-gray-800 pt-6 pb-4 text-center text-sm text-gray-400">
+      <div class="mb-2">
+        <span class="font-semibold text-white">2026 Instituto Superior Politécnico do Bié</span> — todos os direitos reservados
+      </div>
+      <div class="mb-2">
+        <span class="text-[#FFD700]">De Angola com amor</span>
+      </div>
+      <div>
+        Desenvolvido por <span class="font-semibold text-white">Fernanda Gonçalves</span>
+      </div>
+    </div>
   </div>
 </footer>
 
