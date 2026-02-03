@@ -76,35 +76,6 @@
         </ul>
       </div>
     </nav>
-    <section class="border-t border-gray-700 mt-12 pt-8" aria-label="Newsletter">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        <!-- Newsletter -->
-        <div>
-          <h2 class="text-[#FFD700] font-bold text-xl mb-3" id="footer-newsletter">Newsletter ISP-Bié</h2>
-          <p class="text-gray-400 mb-4">Receba notícias, eventos e novidades do ISP-Bié directamente no seu e-mail.</p>
-          <form class="flex flex-col sm:flex-row gap-2" aria-labelledby="footer-newsletter">
-            <label for="newsletter-email" class="sr-only">E-mail</label>
-            <input id="newsletter-email" type="email" placeholder="O seu e-mail" required autocomplete="email"
-                   class="flex-1 px-4 py-2 bg-gray-800 text-white border border-gray-600 rounded-lg focus:outline-none focus:border-[#3B82F6] transition-colors" aria-label="E-mail">
-            <button type="submit"
-                    class="px-6 py-2 bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white font-semibold rounded-lg hover:shadow-lg transition-all whitespace-nowrap">
-              Subscrever
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-    <div class="border-t border-gray-800 pt-6 pb-4 text-center text-sm text-gray-400">
-      <div class="mb-2">
-        <span class="font-semibold text-white">2026 Instituto Superior Politécnico do Bié</span> — todos os direitos reservados
-      </div>
-      <div class="mb-2">
-        <span class="text-[#FFD700]">De Angola com amor</span>
-      </div>
-      <div>
-        Desenvolvido por <span class="font-semibold text-white">Fernanda Gonçalves</span>
-      </div>
-    </div>
   </div>
 </footer>
 
