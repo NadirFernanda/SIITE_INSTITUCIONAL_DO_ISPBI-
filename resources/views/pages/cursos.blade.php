@@ -34,8 +34,8 @@ $cursos = [
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
-        'gradientFrom' => 'green-700',
-        'gradientTo' => 'green-500',
+        'gradientFromHex' => '#166534',
+        'gradientToHex' => '#4ADE80',
         'areas' => [
             ['name' => 'Enfermagem Hospitalar', 'icon' => 'heart'],
             ['name' => 'Saúde Pública', 'icon' => 'users'],
@@ -49,8 +49,8 @@ $cursos = [
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
-        'gradientFrom' => 'red-600',
-        'gradientTo' => 'red-400',
+        'gradientFromHex' => '#DC2626',
+        'gradientToHex' => '#F87171',
         'areas' => [
             ['name' => 'Psicologia Clínica', 'icon' => 'heart-pulse'],
             ['name' => 'Saúde Mental Comunitária', 'icon' => 'users'],
@@ -64,8 +64,8 @@ $cursos = [
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Ciências Sociais, Jornalismo e Informação',
         'duration' => '4 Anos',
-        'gradientFrom' => 'orange-500',
-        'gradientTo' => 'orange-400',
+        'gradientFromHex' => '#F59E42',
+        'gradientToHex' => '#FBBF24',
         'areas' => [
             ['name' => 'Jornalismo', 'icon' => 'newspaper'],
             ['name' => 'Relações Públicas', 'icon' => 'users'],
@@ -79,8 +79,8 @@ $cursos = [
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Administração, Negócios e Direito',
         'duration' => '4 Anos',
-        'gradientFrom' => 'yellow-500',
-        'gradientTo' => 'yellow-400',
+        'gradientFromHex' => '#FACC15',
+        'gradientToHex' => '#FDE68A',
         'areas' => [
             ['name' => 'Contabilidade e Auditoria', 'icon' => 'calculator'],
             ['name' => 'Gestão Empresarial', 'icon' => 'briefcase'],
@@ -94,9 +94,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '5 Anos',
-        // Azul lapiseira institucional
-        'gradientFrom' => '[#2C4A5E]',
-        'gradientTo' => '[#0E8F81]',
+        'gradientFromHex' => '#2C4A5E',
+        'gradientToHex' => '#0E8F81',
         'areas' => [
             ['name' => 'Desenvolvimento de Software', 'icon' => 'code'],
             ['name' => 'Redes e Sistemas', 'icon' => 'server'],
@@ -110,8 +109,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
-        'gradientFrom' => 'cyan-500',
-        'gradientTo' => 'blue-400',
+        'gradientFromHex' => '#0EA5E9',
+        'gradientToHex' => '#3B82F6',
         'areas' => [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
@@ -145,8 +144,8 @@ $cursos = [
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
     @foreach ($cursos as $curso)
-    <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between min-h-[520px]
-                bg-gradient-to-r from-{{ $curso['gradientFrom'] == 'green-700' ? 'green-800' : $curso['gradientFrom'] }} to-{{ $curso['gradientTo'] == 'green-500' ? 'green-600' : $curso['gradientTo'] }} animated-gradient group">
+        <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group"
+            style="background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }}); min-height: 480px;">
 
         <div class="relative z-10 flex flex-col h-full">
             <!-- Ícones de áreas -->
