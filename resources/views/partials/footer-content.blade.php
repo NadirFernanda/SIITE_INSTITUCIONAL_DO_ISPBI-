@@ -11,6 +11,12 @@
            <li><a href="/candidaturas" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Como Estudar no ISP-Bié</a></li>
            <li><a href="/cursos-online" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Cursos Online</a></li>
         </ul>
+        <ul class="space-y-2" aria-labelledby="footer-educacao">
+           <li><a href="/cursos" class="hover:text-[#2979FF] transition-colors link-underline-soft">Cursos de Graduação</a></li>
+           <li><a href="/pos-graduacao" class="hover:text-[#2979FF] transition-colors link-underline-soft">Cursos de Pós-Graduação</a></li>
+           <li><a href="/candidaturas" class="hover:text-[#2979FF] transition-colors link-underline-soft">Como Estudar no ISP-Bié</a></li>
+           <li><a href="/cursos-online" class="hover:text-[#2979FF] transition-colors link-underline-soft">Cursos Online</a></li>
+        </ul>
       </div>
       <!-- Pesquisa -->
       <div>
@@ -20,6 +26,12 @@
            <li><a href="/biblioteca" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Biblioteca Digital</a></li>
            <li><a href="/repositorio" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Repositório</a></li>
            <li><a href="/revista" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Revista Científica</a></li>
+        </ul>
+        <ul class="space-y-2" aria-labelledby="footer-pesquisa">
+           <li><a href="/investigacao" class="hover:text-[#2979FF] transition-colors link-underline-soft">Pesquisa no ISP-Bié</a></li>
+           <li><a href="/biblioteca" class="hover:text-[#2979FF] transition-colors link-underline-soft">Biblioteca Digital</a></li>
+           <li><a href="/repositorio" class="hover:text-[#2979FF] transition-colors link-underline-soft">Repositório</a></li>
+           <li><a href="/revista" class="hover:text-[#2979FF] transition-colors link-underline-soft">Revista Científica</a></li>
         </ul>
       </div>
       <!-- Institucional -->
@@ -32,12 +44,22 @@
            <li><a href="/valores" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Valores</a></li>
            <li><a href="/#estatisticas" class="hover:text-[#2C4A5E] transition-colors link-underline-soft">Estatísticas</a></li>
         </ul>
+        <ul class="space-y-2" aria-labelledby="footer-institucional">
+           <li><a href="/sobre-ispbie" class="hover:text-[#2979FF] transition-colors link-underline-soft">Sobre o ISP-Bié</a></li>
+           <li><a href="/missao" class="hover:text-[#2979FF] transition-colors link-underline-soft">Missão</a></li>
+           <li><a href="/visao" class="hover:text-[#2979FF] transition-colors link-underline-soft">Visão</a></li>
+           <li><a href="/valores" class="hover:text-[#2979FF] transition-colors link-underline-soft">Valores</a></li>
+           <li><a href="/#estatisticas" class="hover:text-[#2979FF] transition-colors link-underline-soft">Estatísticas</a></li>
+        </ul>
       </div>
       <!-- Parcerias -->
       <div>
       <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-parcerias">Parcerias</h2>
         <ul class="space-y-2" aria-labelledby="footer-parcerias">
            <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2C4A5E] transition-colors">Governo de Angola</a></li>
+        </ul>
+        <ul class="space-y-2" aria-labelledby="footer-parcerias">
+           <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors">Governo de Angola</a></li>
         </ul>
       </div>
       <!-- Fale com ISP-Bié -->
@@ -48,6 +70,12 @@
            <li><a href="/ouvidoria" class="hover:text-[#2C4A5E] transition-colors">Ouvidoria</a></li>
            <li><a href="/trabalhe-conosco" class="hover:text-[#2C4A5E] transition-colors">Trabalhe Connosco</a></li>
            <li><a href="/noticias" class="hover:text-[#2C4A5E] transition-colors">Notícias</a></li>
+        </ul>
+        <ul class="space-y-2 mb-4" aria-labelledby="footer-fale">
+           <li><a href="/contactos" class="hover:text-[#2979FF] transition-colors">Contactos</a></li>
+           <li><a href="/ouvidoria" class="hover:text-[#2979FF] transition-colors">Ouvidoria</a></li>
+           <li><a href="/trabalhe-conosco" class="hover:text-[#2979FF] transition-colors">Trabalhe Connosco</a></li>
+           <li><a href="/noticias" class="hover:text-[#2979FF] transition-colors">Notícias</a></li>
         </ul>
         <address class="not-italic text-sm text-gray-400 leading-relaxed mb-2">
           <strong class="text-white">Localização:</strong><br>
