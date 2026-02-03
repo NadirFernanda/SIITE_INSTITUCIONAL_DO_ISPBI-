@@ -78,7 +78,7 @@
       </div>
     </nav>
   </div>
-</footer>
+</footer class="bg-[#2C4A5E]">
     <div class="border-t border-gray-800 pt-6 pb-4 text-center text-sm text-gray-400">
       <div class="mb-2">
          <span class="font-semibold text-white">2026 Instituto Superior Politécnico do Bié</span> — todos os direitos reservados
