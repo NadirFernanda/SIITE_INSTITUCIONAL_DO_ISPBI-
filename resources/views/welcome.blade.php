@@ -2,81 +2,44 @@
 
 @section('content')
 
-  <!-- Carrossel dinâmico do painel administrativo -->
-  <div class="scroll-reveal fade-in-up">
+  <!-- Hero institucional moderno + carrossel contido -->
+  <section class="relative w-full h-[75vh] md:h-[65vh] xl:h-[520px] overflow-hidden">
+    {{-- Carrossel (continua sendo o mesmo componente) --}}
     @component('components.carrossel')
     @endcomponent
-  </div>
 
+    {{-- Overlay elegante --}}
+    <div class="absolute inset-0 bg-black/40"></div>
 
-  <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (versão elegante e moderna) -->
-  <section class="bg-white py-8 lg:py-14">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-4 md:gap-8 2xl:gap-12 mb-8">
-        <!-- Missão -->
-        <a href="/missao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
-          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
-            <svg width="48" height="48" viewBox="0 0 72 72" fill="none">
-              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
-            </svg>
-          </div>
-          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Missão</span>
-        </a>
-        <!-- Visão -->
-        <a href="/visao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
-          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
-            <svg width="48" height="48" viewBox="0 0 72 72" fill="none">
-              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
-            </svg>
-          </div>
-          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Visão</span>
-        </a>
-        <!-- Valores -->
-        <a href="/valores" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
-          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
-            <svg width="48" height="48" viewBox="0 0 72 72" fill="none">
-              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
-            </svg>
-          </div>
-          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Valores</span>
-        </a>
-        <!-- Ensino -->
-        <a href="/pilares#ensino" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
-          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
-            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
-              <path d="M10 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H20A10 10 0 0 1 10 60V40z" fill="#2563eb"/>
-            </svg>
-          </div>
-          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Ensino</span>
-        </a>
-        <!-- Investigação -->
-        <a href="/pilares#investigacao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
-          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
-            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
-              <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
-            </svg>
-          </div>
-          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Investigação</span>
-        </a>
-        <!-- Extensão Universitária -->
-        <a href="/pilares#extensao-universitaria" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
-          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
-            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
-              <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
-            </svg>
-          </div>
-          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Extensão Universitária</span>
-        </a>
-        <!-- Empreendedorismo e Inovação na Universidade -->
-        <a href="/pilares#empreendedorismo-inovacao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
-          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
-            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
-              <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
-            </svg>
-          </div>
-          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Empreendedorismo e Inovação na Universidade</span>
-        </a>
-      </div>
+    {{-- Conteúdo --}}
+    <div class="absolute inset-0 flex items-center">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="max-w-xl text-white text-left">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+                    Instituto Superior Politécnico do Bié
+                </h1>
+                <p class="text-base md:text-lg opacity-90 mb-6">
+                    Formação superior orientada para a inovação, investigação
+                    científica e desenvolvimento sustentável.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#cursos"
+                       class="inline-flex items-center justify-center
+                              bg-blue-600 hover:bg-blue-700
+                              text-white font-semibold
+                              px-6 py-3 rounded-md transition">
+                        Cursos de Graduação
+                    </a>
+                    <a href="/institucional"
+                       class="inline-flex items-center justify-center
+                              border border-white/60 hover:border-white
+                              text-white
+                              px-6 py-3 rounded-md transition">
+                        Sobre a Instituição
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
   </section>
 
