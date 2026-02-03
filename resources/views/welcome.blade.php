@@ -289,12 +289,19 @@
         class="relative flex flex-col items-center"
       >
         <div class="w-full max-w-2xl overflow-visible">
-          <div
-            class="flex transition-all duration-700 ease-in-out"
-            :style="'transform: translateX(-' + (current * 100) + '%)'"
-          >
+          <div class="relative w-full max-w-2xl mx-auto">
             <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
-              <div class="w-full max-w-2xl flex-shrink-0 flex justify-center">
+              <div
+                x-show="current === idx"
+                x-transition:enter="transition-opacity duration-700"
+                x-transition:enter-start="opacity-0 translate-x-8"
+                x-transition:enter-end="opacity-100 translate-x-0"
+                x-transition:leave="transition-opacity duration-700"
+                x-transition:leave-start="opacity-100 translate-x-0"
+                x-transition:leave-end="opacity-0 -translate-x-8"
+                class="absolute inset-0 w-full flex justify-center"
+                style="min-height:320px;"
+              >
                 <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 flex flex-col items-center justify-between mx-auto min-h-[320px] max-w-xl w-full transition-shadow duration-300 hover:shadow-2xl">
                   <div class="flex flex-col items-center">
                     <div class="w-14 h-14 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-lg font-bold mb-4 shadow-md">
@@ -321,13 +328,14 @@
           </div>
         </div>
 
-        <!-- Botões carrossel bolinha -->
+        <!-- Indicadores de página (dots) -->
         <div class="flex justify-center mt-6 space-x-2">
           <template x-for="(item, idx) in testimonials" :key="idx">
             <button
               @click="current = idx"
-              class="w-4 h-4 rounded-full transition border-2 border-[#3B82F6]"
-              :class="current === idx ? 'bg-[#3B82F6]' : 'bg-gray-200'"
+              class="w-4 h-4 rounded-full border-2 border-[#3B82F6] transition duration-300 focus:outline-none"
+              :class="current === idx ? 'bg-[#3B82F6] shadow-lg scale-110' : 'bg-gray-200 hover:bg-[#2563eb]/30'"
+              :aria-label="'Ir para testemunho ' + (idx + 1)"
             ></button>
           </template>
         </div>
