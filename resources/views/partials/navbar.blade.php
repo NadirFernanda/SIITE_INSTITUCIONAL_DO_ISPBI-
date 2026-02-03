@@ -1,4 +1,3 @@
-!-- Barra de links importantes (azul institucional) - Desktop apenas (linha fina) -->
 <div class="hidden md:block w-full fixed left-0 top-0" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;z-index:50;"></div>
 
 <!-- Barra inferior institucional em cinza claro - Desktop apenas -->
@@ -50,7 +49,7 @@
 
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
 <div x-data="{ mobileMenuOpen: false }">
-  <div class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;min-width:100vw;">
+  <div class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
@@ -189,7 +188,11 @@
           <button @click="open = !open" @keydown.escape="open = false"
                   class="flex items-center gap-1 text-white hover:text-[#FFD700] font-semibold uppercase tracking-wide"
                   :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true">
-           
+            <span>🏢</span> Institucional
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
 
           <!-- Dropdown Menu -->
              <div x-show="open" @click.away="open = false" x-cloak
