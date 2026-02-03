@@ -184,31 +184,7 @@
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="2" stroke="#2563eb"/><path d="M12 4v4" stroke="#2563eb"/></svg></span>
           <span>Órgãos de Gestão</span>
         </a>
-        <!-- Dropdown Institucional - Desktop -->
-        <div x-data="{ open: false }" class="relative">
-          <button @click="open = !open" @keydown.escape="open = false"
-                  class="flex items-center gap-1 text-white hover:text-[#FFD700] font-semibold uppercase tracking-wide"
-                  :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true">
-            <span>🏢</span> Institucional
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-
-          <!-- Dropdown Menu -->
-             <div x-show="open" @click.away="open = false" x-cloak
-               class="absolute left-0 mt-8 w-96 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-4">
-            <div class="grid grid-cols-2 gap-2">
-              <a href="/sobre-ispbie" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
-              <a href="/missao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
-              <a href="/visao" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
-              <a href="/valores" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-              <!-- <a href="/presidencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a> -->
-              <a href="/estatisticas" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
-              <a href="/transparencia" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white col-span-2 text-center">Transparência</a>
-            </div>
-          </div>
-        </div>
+        <!-- ...primeiro dropdown Institucional removido... -->
 
         <!-- Dropdown Institucional - Mobile -->
         <div x-data="{ openMobile: false }" class="relative lg:hidden mt-2">
