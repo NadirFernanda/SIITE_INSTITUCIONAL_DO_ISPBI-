@@ -142,19 +142,30 @@ $cursos = [
 </style>
 
 
+
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
     @foreach ($cursos as $curso)
     <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between min-h-[520px]
                 bg-gradient-to-r from-{{ $curso['gradientFrom'] == 'green-700' ? 'green-800' : $curso['gradientFrom'] }} to-{{ $curso['gradientTo'] == 'green-500' ? 'green-600' : $curso['gradientTo'] }} animated-gradient group">
-            <div class="relative z-10">
-                <!-- Ícones de áreas -->
-                @if(count($curso['areas']) > 0)
-                <div class="flex gap-3 mb-4 flex-wrap">
-                    @foreach ($curso['areas'] as $area)
-                    <div class="flex flex-col items-center text-white text-sm w-24">
-                        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-1 icon-animate">
-                            @if(View::exists('components.heroicon-o-' . ($area['icon'] ?? '')))
-                                <x-dynamic-component :component="'heroicon-o-' . $area['icon']" class="w-6 h-6" />
+
+        <div class="relative z-10 flex flex-col h-full">
+            <!-- Ícones de áreas -->
+            @if(count($curso['areas']) > 0)
+            <div class="flex gap-3 mb-4 flex-wrap">
+                @foreach ($curso['areas'] as $area)
+                <div class="flex flex-col items-center text-white text-sm w-24">
+                    <span class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-1 icon-animate">
+                        {!! heroicon($area['icon'] ?? '') !!}
+                    </span>
+                    <span class="text-center">{{ $area['name'] }}</span>
+                </div>
+                @endforeach
+            </div>
+            @endif
+
+            <!-- Título do curso -->
+            <h3 class="text-2xl font-bold text-white mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">
+                {{ $curso['title'] }}
             </h3>
 
             <!-- Departamento e domínio -->
@@ -166,7 +177,7 @@ $cursos = [
             <p class="text-white/80 mb-6">{{ $curso['description'] }}</p>
 
             <!-- Botão Saiba Mais -->
-            <div class="flex-1 flex flex-col justify-end">
+            <div class="mt-auto">
                 <a href="{{ $curso['link'] ?? '#' }}" 
                    class="inline-block bg-white text-gray-800 font-semibold py-2 px-5 rounded-full text-center shadow transition-all duration-300 
                           hover:bg-yellow-100 hover:text-gray-900 hover:scale-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
@@ -174,6 +185,7 @@ $cursos = [
                 </a>
             </div>
         </div>
+
     </div>
     @endforeach
 </div>
