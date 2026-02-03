@@ -29,8 +29,8 @@
                     Acompanhe as ações e decisões dos Órgãos de gestão do ISP-Bié
                 </p>
                 <div class="flex justify-center">
-                    <a href="/contactos" class="bg-[#2563eb] text-white px-8 py-3 rounded-full font-semibold border border-white hover:bg-white hover:text-[#2563eb] transition-colors">
-                        Entre em Contacto
+                    <a href="/noticias" class="bg-[#2563eb] text-white px-8 py-3 rounded-full font-semibold border border-white hover:bg-white hover:text-[#2563eb] transition-colors">
+                        Informe-se
                     </a>
                 </div>
             </div>
