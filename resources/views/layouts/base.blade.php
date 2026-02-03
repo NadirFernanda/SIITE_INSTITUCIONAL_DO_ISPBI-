@@ -5,7 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? 'ISP-Bié' }}</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    @php
+        $manifest = file_exists(public_path('build/manifest.json')) ? json_decode(file_get_contents(public_path('build/manifest.json')), true) : null;
+        $cssFile = $manifest['resources/css/app.css']['file'] ?? null;
+    @endphp
+    @if($cssFile)
+        <link rel="stylesheet" href="{{ asset('build/' . $cssFile) }}">
+    @endif
 </head>
 <body class="bg-white text-gray-900 min-h-screen flex flex-col">
     {{-- Header institucional --}}
