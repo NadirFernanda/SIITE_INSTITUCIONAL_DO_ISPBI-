@@ -9,50 +9,76 @@
   </div>
 
 
-  <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (estilo USP) -->
-  <section class="bg-white py-6 sm:py-8 lg:py-12">
+  <!-- Seção Missão, Visão, Valores e Pilares Estratégicos (versão elegante e moderna) -->
+  <section class="bg-white py-8 lg:py-14">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="flex flex-row flex-wrap items-end justify-center gap-6 md:gap-10 2xl:gap-20 mb-8 w-full">
-        {{-- Missão, Visão, Valores --}}
-        @foreach (['Missão', 'Visão', 'Valores'] as $item)
-        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
-          <a href="/{{ strtolower($item) }}" title="Ver {{ $item }}" class="relative w-24 h-24 md:w-32 md:h-32 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl flex items-center justify-center">
-            {{-- SVG genérico --}}
-            <svg viewBox="0 0 72 72" fill="none" class="w-full h-full">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-4 md:gap-8 2xl:gap-12 mb-8">
+        <!-- Missão -->
+        <a href="/missao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
+          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
+            <svg width="48" height="48" viewBox="0 0 72 72" fill="none">
               <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
             </svg>
-            {{-- Texto dentro do ícone, centralizado, clamp 3 linhas, padding, sem corte --}}
-            <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-[0.6rem] md:text-[0.8rem] 2xl:text-sm leading-tight px-2 break-words h-full w-full overflow-hidden [display:-webkit-box] [WebkitLineClamp:3] [WebkitBoxOrient:vertical]">
-              {{ $item }}
-            </span>
-          </a>
-        </div>
-        @endforeach
-
-        {{-- 4 Pilares Estratégicos --}}
-        @foreach ([
-          ['titulo' => 'Ensino', 'link' => '/pilares#ensino'],
-          ['titulo' => 'Investigação', 'link' => '/pilares#investigacao'],
-          ['titulo' => 'Extensão Universitária', 'link' => '/pilares#extensao-universitaria'],
-          ['titulo' => 'Empreendedorismo e Inovação na Universidade', 'link' => '/pilares#empreendedorismo-inovacao']
-        ] as $pilar)
-        <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
-          <a href="{{ $pilar['link'] }}" title="Ver {{ $pilar['titulo'] }}" class="relative w-24 h-24 md:w-32 md:h-32 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl flex items-center justify-center">
-            {{-- SVG do pilar --}}
-            <svg viewBox="0 0 80 80" fill="none" class="w-full h-full">
+          </div>
+          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Missão</span>
+        </a>
+        <!-- Visão -->
+        <a href="/visao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
+          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
+            <svg width="48" height="48" viewBox="0 0 72 72" fill="none">
+              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
+            </svg>
+          </div>
+          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Visão</span>
+        </a>
+        <!-- Valores -->
+        <a href="/valores" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
+          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
+            <svg width="48" height="48" viewBox="0 0 72 72" fill="none">
+              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
+            </svg>
+          </div>
+          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Valores</span>
+        </a>
+        <!-- Ensino -->
+        <a href="/pilares#ensino" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
+          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
+            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
+              <path d="M10 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H20A10 10 0 0 1 10 60V40z" fill="#2563eb"/>
+            </svg>
+          </div>
+          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Ensino</span>
+        </a>
+        <!-- Investigação -->
+        <a href="/pilares#investigacao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
+          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
+            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
               <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
             </svg>
-            {{-- Texto dentro do ícone, centralizado, clamp 3 linhas, padding, sem corte --}}
-            <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-[0.5rem] md:text-[0.7rem] 2xl:text-[0.85rem] leading-tight px-2 break-words h-full w-full overflow-hidden [display:-webkit-box] [WebkitLineClamp:3] [WebkitBoxOrient:vertical]">
-              {{ $pilar['titulo'] }}
-            </span>
-          </a>
-        </div>
-        @endforeach
-      </div>
-      </div>
+          </div>
+          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Investigação</span>
+        </a>
+        <!-- Extensão Universitária -->
+        <a href="/pilares#extensao-universitaria" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
+          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
+            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
+              <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
+            </svg>
+          </div>
+          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Extensão Universitária</span>
+        </a>
+        <!-- Empreendedorismo e Inovação na Universidade -->
+        <a href="/pilares#empreendedorismo-inovacao" class="group flex flex-col items-center rounded-xl bg-white shadow-sm hover:shadow-lg transition-all duration-300 p-4 md:p-6 2xl:p-8 border border-gray-100 hover:border-[#2563eb]">
+          <div class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 2xl:w-24 2xl:h-24 rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 mb-2">
+            <svg width="48" height="48" viewBox="0 0 80 80" fill="none">
+              <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
+            </svg>
+          </div>
+          <span class="block text-base md:text-lg 2xl:text-xl font-semibold text-gray-800 text-center group-hover:text-[#2563eb] line-clamp-2">Empreendedorismo e Inovação na Universidade</span>
+        </a>
       </div>
     </div>
+  </section>
 
     <!-- Barra azul com redes sociais e busca (estilo USP, ícones grandes, centralizados, azul do site) -->
     <div class="bg-[#2563eb] py-8">
