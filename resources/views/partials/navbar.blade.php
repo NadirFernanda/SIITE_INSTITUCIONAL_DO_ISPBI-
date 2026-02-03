@@ -203,9 +203,8 @@
             <a href="/missao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
             <a href="/visao" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Visão</a>
             <a href="/valores" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Valores</a>
-            <!-- <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a> -->
-            <a href="/estatisticas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estatísticas</a>
-            <a href="/transparencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Transparência</a>
+            <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Órgãos de gestão</a>
+            <a href="/noticias" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Notícias</a>
           </div>
         </div>
 
