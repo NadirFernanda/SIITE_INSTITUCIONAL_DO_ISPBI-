@@ -78,8 +78,12 @@
     </nav>
   </div>
       <div class="w-full py-6 bg-[#1a1a1a]">
-          <div class="text-center text-white text-lg mb-2">— todos os direitos reservados</div>
+          <div class="text-center text-white text-lg mb-2"> Copiright 2007 - 2026 • todos os direitos reservados • ISP-Bié </div>
           <div class="text-center text-yellow-400 text-xl font-semibold">De Angola com amor</div>
-          <div class="text-center text-white text-lg mt-2">Desenvolvido por INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
+          <div class="text-center text-white text-lg mt-2">Desenvolvido por</div>
+          <div class=" font-semibold text-center">Fernanda Gonçalves</div>
+
+
+  
       </div>
 
