@@ -16,37 +16,37 @@
         {{-- Missão, Visão, Valores --}}
         @foreach (['Missão', 'Visão', 'Valores'] as $item)
         <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
-            <a href="/{{ strtolower($item) }}" title="Ver {{ $item }}" class="relative w-24 h-24 md:w-32 md:h-32 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl flex items-center justify-center">
-                {{-- SVG genérico --}}
-                <svg viewBox="0 0 72 72" fill="none" class="w-full h-full">
-                    <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
-                </svg>
-                {{-- Texto dentro do ícone, quebra linhas automaticamente --}}
-                <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-[0.6rem] md:text-[0.8rem] 2xl:text-sm leading-tight px-2 break-words">
-                    {{ $item }}
-                </span>
-            </a>
+          <a href="/{{ strtolower($item) }}" title="Ver {{ $item }}" class="relative w-24 h-24 md:w-32 md:h-32 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl flex items-center justify-center">
+            {{-- SVG genérico --}}
+            <svg viewBox="0 0 72 72" fill="none" class="w-full h-full">
+              <path d="M16 28c0-4.418 3.582-8 8-8h8V12a4 4 0 1 1 8 0v8h8a8 8 0 0 1 8 8v8h8a4 4 0 1 1 0 8h-8v8a8 8 0 0 1-8 8h-8v8a4 4 0 1 1-8 0v-8h-8a8 8 0 0 1-8-8v-8H4a4 4 0 1 1 0-8h12v-8z" fill="#2563eb"/>
+            </svg>
+            {{-- Texto dentro do ícone, centralizado, clamp 3 linhas, padding, sem corte --}}
+            <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-[0.6rem] md:text-[0.8rem] 2xl:text-sm leading-tight px-2 break-words h-full w-full overflow-hidden [display:-webkit-box] [WebkitLineClamp:3] [WebkitBoxOrient:vertical]">
+              {{ $item }}
+            </span>
+          </a>
         </div>
         @endforeach
 
         {{-- 4 Pilares Estratégicos --}}
         @foreach ([
-            ['titulo' => 'Ensino', 'link' => '/pilares#ensino'],
-            ['titulo' => 'Investigação', 'link' => '/pilares#investigacao'],
-            ['titulo' => 'Extensão Universitária', 'link' => '/pilares#extensao-universitaria'],
-            ['titulo' => 'Empreendedorismo e Inovação na Universidade', 'link' => '/pilares#empreendedorismo-inovacao']
+          ['titulo' => 'Ensino', 'link' => '/pilares#ensino'],
+          ['titulo' => 'Investigação', 'link' => '/pilares#investigacao'],
+          ['titulo' => 'Extensão Universitária', 'link' => '/pilares#extensao-universitaria'],
+          ['titulo' => 'Empreendedorismo e Inovação na Universidade', 'link' => '/pilares#empreendedorismo-inovacao']
         ] as $pilar)
         <div class="flex flex-col items-center w-[120px] md:w-[140px] 2xl:w-[180px] min-w-0">
-            <a href="{{ $pilar['link'] }}" title="Ver {{ $pilar['titulo'] }}" class="relative w-24 h-24 md:w-32 md:h-32 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl flex items-center justify-center">
-                {{-- SVG do pilar --}}
-                <svg viewBox="0 0 80 80" fill="none" class="w-full h-full">
-                    <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
-                </svg>
-                {{-- Texto dentro do ícone, quebra linhas automaticamente --}}
-                <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-[0.5rem] md:text-[0.7rem] 2xl:text-[0.85rem] leading-tight px-2 break-words">
-                    {{ $pilar['titulo'] }}
-                </span>
-            </a>
+          <a href="{{ $pilar['link'] }}" title="Ver {{ $pilar['titulo'] }}" class="relative w-24 h-24 md:w-32 md:h-32 transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl flex items-center justify-center">
+            {{-- SVG do pilar --}}
+            <svg viewBox="0 0 80 80" fill="none" class="w-full h-full">
+              <path d="M0 40a10 10 0 0 1 10-10h10V20a10 10 0 1 1 20 0v10h10a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H10A10 10 0 0 1 0 60V40z" fill="#2563eb"/>
+            </svg>
+            {{-- Texto dentro do ícone, centralizado, clamp 3 linhas, padding, sem corte --}}
+            <span class="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-[0.5rem] md:text-[0.7rem] 2xl:text-[0.85rem] leading-tight px-2 break-words h-full w-full overflow-hidden [display:-webkit-box] [WebkitLineClamp:3] [WebkitBoxOrient:vertical]">
+              {{ $pilar['titulo'] }}
+            </span>
+          </a>
         </div>
         @endforeach
       </div>
