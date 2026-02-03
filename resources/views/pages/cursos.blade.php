@@ -41,7 +41,7 @@ $cursos = [
             ['name' => 'Saúde Pública', 'icon' => 'users'],
             ['name' => 'Gestão em Saúde', 'icon' => 'clipboard-list'],
         ],
-        'link' => '#enfermagem'
+        'link' => route('cursos.enfermagem')
     ],
     [
         'title' => 'Psicologia Clínica',
@@ -56,7 +56,7 @@ $cursos = [
             ['name' => 'Saúde Mental Comunitária', 'icon' => 'users'],
             ['name' => 'Psicoterapia', 'icon' => 'chat-bubble-left'],
         ],
-        'link' => '#psicologia'
+        'link' => route('cursos.psicologia')
     ],
     [
         'title' => 'Comunicação Social',
@@ -71,7 +71,7 @@ $cursos = [
             ['name' => 'Relações Públicas', 'icon' => 'users'],
             ['name' => 'Comunicação Digital', 'icon' => 'computer-desktop'],
         ],
-        'link' => '#comunicacao'
+        'link' => route('cursos.comunicacao')
     ],
     [
         'title' => 'Contabilidade e Administração',
@@ -86,7 +86,7 @@ $cursos = [
             ['name' => 'Gestão Empresarial', 'icon' => 'briefcase'],
             ['name' => 'Consultoria Financeira', 'icon' => 'chart-bar'],
         ],
-        'link' => '#contabilidade'
+        'link' => route('cursos.contabilidade')
     ],
     [
         'title' => 'Engenharia Informática',
@@ -101,7 +101,7 @@ $cursos = [
             ['name' => 'Redes e Sistemas', 'icon' => 'server'],
             ['name' => 'Segurança da Informação', 'icon' => 'shield-check'],
         ],
-        'link' => '#informatica'
+        'link' => route('cursos.informatica')
     ],
     [
         'title' => 'Engenharia em Recursos Hídricos',
@@ -116,7 +116,7 @@ $cursos = [
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
             ['name' => 'Infraestruturas Hidráulicas', 'icon' => 'building'],
         ],
-        'link' => '#hidricos'
+        'link' => route('cursos.hidricos')
     ],
 ];
 @endphp

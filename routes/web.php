@@ -1,3 +1,10 @@
+// Rotas individuais para páginas de cursos
+Route::view('/cursos/informatica', 'pages.cursos.informatica')->name('cursos.informatica');
+Route::view('/cursos/hidricos', 'pages.cursos.hidricos')->name('cursos.hidricos');
+Route::view('/cursos/psicologia', 'pages.cursos.psicologia')->name('cursos.psicologia');
+Route::view('/cursos/comunicacao', 'pages.cursos.comunicacao')->name('cursos.comunicacao');
+Route::view('/cursos/contabilidade', 'pages.cursos.contabilidade')->name('cursos.contabilidade');
+Route::view('/cursos/enfermagem', 'pages.cursos.enfermagem')->name('cursos.enfermagem');
 <?php
 
 
