@@ -112,21 +112,19 @@
         </div>
 
         <!-- Engenharia Informática -->
-        <div id="informatica" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
-          <div class="p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #1d4ed8, #3b82f6) !important;">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-              <div class="flex items-center space-x-4">
-                <div class="bg-white p-3 rounded-full">
-                  <svg class="w-8 h-8 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg md:text-2xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">Engenharia Informática</h3>
-                  <p class="text-white opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">Licenciatura</p>
-                </div>
+        <div id="informatica" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
+          <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-6 w-full max-w-full overflow-x-hidden">
+            <div class="flex items-center space-x-4">
+              <div class="bg-white p-3 rounded-full">
+                <svg class="w-8 h-8 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd"/>
+                </svg>
               </div>
-              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">5 Anos</span>
+              <div>
+                <h3 class="text-lg md:text-2xl font-bold text-white">Engenharia Informática</h3>
+                <p class="text-white opacity-90">Licenciatura</p>
+              </div>
+              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max ml-auto">5 Anos</span>
             </div>
           </div>
           <div class="bg-white p-6 w-full max-w-full overflow-x-hidden">
@@ -134,37 +132,31 @@
               Prepara profissionais para desenvolver soluções tecnológicas inovadoras, sistemas de informação, aplicações 
               de software, redes de computadores e infraestrutura de TI, atendendo às demandas da transformação digital.
             </p>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <h4 class="font-bold text-[#2563eb] mb-2">Áreas de Atuação:</h4>
-                <ul class="space-y-1 text-gray-700">
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Desenvolvimento de Software
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Redes e Sistemas
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Segurança da Informação
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold text-[#2563eb] mb-2">Departamento:</h4>
-                <p class="text-gray-700">Engenharias</p>
-                <h4 class="font-bold text-[#2563eb] mt-3 mb-2">Domínio:</h4>
-                <p class="text-gray-700">Engenharias e Telecomunicações</p>
-              </div>
-            </div>
+            <h4 class="font-bold text-[#2563eb] mb-2">Áreas de Atuação:</h4>
+            <ul class="space-y-1 text-gray-700 mb-4">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Desenvolvimento de Software
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Redes e Sistemas
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Segurança da Informação
+              </li>
+            </ul>
+            <h4 class="font-bold text-[#2563eb] mb-2">Departamento:</h4>
+            <p class="text-gray-700">Engenharias</p>
+            <h4 class="font-bold text-[#2563eb] mt-3 mb-2">Domínio:</h4>
+            <p class="text-gray-700">Engenharias e Telecomunicações</p>
           </div>
         </div>
 
@@ -175,116 +167,96 @@
           <div class="bg-white rounded-lg shadow-md p-8 mb-12 interactive-card">
             <h2 id="sociais" class="text-2xl font-bold text-[#2563eb] mt-0 mb-4">Ciências Sociais, Humanas e Económicas</h2>
             <div class="space-y-8">
-        <div id="hidricos" class="bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
-          <div class="p-6 w-full max-w-full overflow-x-hidden" style="background: linear-gradient(to right, #38bdf8, #60a5fa) !important;">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-              <div class="flex items-center space-x-4">
-                <div class="bg-white p-3 rounded-full">
-                  <svg class="w-8 h-8 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg md:text-2xl font-bold text-white">Engenharia em Recursos Hídricos</h3>
-                  <p class="text-white opacity-90">Licenciatura</p>
-                </div>
+        <div id="administracao" class="rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
+          <div class="bg-gradient-to-r from-green-700 to-green-500 p-6 w-full max-w-full overflow-x-hidden">
+            <div class="flex items-center space-x-4">
+              <div class="bg-white p-3 rounded-full">
+                <svg class="w-8 h-8 text-green-700" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 2a6 6 0 00-6 6v2a6 6 0 0012 0V8a6 6 0 00-6-6zm3 8a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
+                </svg>
               </div>
-              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">6 Anos</span>
+              <div>
+                <h3 class="text-lg md:text-2xl font-bold text-white">Administração</h3>
+                <p class="text-white opacity-90">Licenciatura</p>
+              </div>
+              <span class="bg-white text-[#15803d] px-4 py-2 rounded-full font-semibold w-max ml-auto">4 Anos</span>
             </div>
           </div>
           <div class="bg-white p-6 w-full max-w-full overflow-x-hidden">
             <p class="text-gray-700 mb-4 leading-relaxed">
-              Forma engenheiros especializados na gestão sustentável dos recursos hídricos, desenvolvimento de 
-              infraestruturas hidráulicas, tratamento de água e saneamento básico, essenciais para o desenvolvimento regional.
+              Forma profissionais para atuar na gestão de organizações, planejamento estratégico, finanças, marketing, recursos humanos e empreendedorismo, promovendo inovação e eficiência.
             </p>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <h4 class="font-bold text-[#2563eb] mb-2">Áreas de Atuação:</h4>
-                <ul class="space-y-1 text-gray-700">
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Gestão de Recursos Hídricos
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Saneamento e Tratamento de Água
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Infraestruturas Hidráulicas
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold text-[#2563eb] mb-2">Departamento:</h4>
-                <p class="text-gray-700">Engenharias</p>
-                <h4 class="font-bold text-[#2563eb] mt-3 mb-2">Domínio:</h4>
-                <p class="text-gray-700">Engenharias e Telecomunicações</p>
-              </div>
-            </div>
+            <h4 class="font-bold text-[#15803d] mb-2">Áreas de Atuação:</h4>
+            <ul class="space-y-1 text-gray-700 mb-4">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#22c55e] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Gestão Empresarial
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#22c55e] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Finanças e Controladoria
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#22c55e] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Marketing e Vendas
+              </li>
+            </ul>
+            <h4 class="font-bold text-[#15803d] mb-2">Departamento:</h4>
+            <p class="text-gray-700">Ciências Sociais Aplicadas</p>
+            <h4 class="font-bold text-[#15803d] mt-3 mb-2">Domínio:</h4>
+            <p class="text-gray-700">Gestão e Negócios</p>
           </div>
+        </div>
         </div>
 
         <!-- Comunicação Social -->
         <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-full interactive-card">
-          <div class="bg-gradient-to-r from-orange-500 to-orange-400 p-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-              <div class="flex items-center space-x-4">
-                <div class="bg-white p-3 rounded-full">
-                  <svg class="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg md:text-2xl font-bold text-white">Comunicação Social</h3>
-                  <p class="text-white opacity-90">Licenciatura</p>
-                </div>
-              </div>
-              <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max md:ml-4">4 Anos</span>
-            </div>
-          </div>
-          <div class="p-6 w-full max-w-full overflow-x-hidden">
-            <p class="text-gray-700 mb-4 leading-relaxed">
+                  <div class="bg-gradient-to-r from-green-700 to-green-500 p-6 w-full max-w-full overflow-x-hidden">
+                    <div class="flex items-center space-x-4">
+                      <div class="bg-white p-3 rounded-full">
+                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-1a1 1 0 112 0v1zm-1-9a7 7 0 110 14A7 7 0 019 4.07V5a1 1 0 102 0v-.93A7 7 0 0110 4z" clip-rule="evenodd"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 class="text-lg md:text-2xl font-bold text-white">Enfermagem Geral</h3>
+                        <p class="text-white opacity-90">Licenciatura</p>
+                      </div>
+                      <span class="bg-white text-[#2563eb] px-4 py-2 rounded-full font-semibold w-max ml-auto">5 Anos</span>
               Capacita profissionais para atuar nas áreas de jornalismo, relações públicas, publicidade, comunicação 
               organizacional e produção de conteúdo para meios de comunicação tradicionais e digitais.
             </p>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <h4 class="font-bold text-[#2563eb] mb-2">Áreas de Atuação:</h4>
-                <ul class="space-y-1 text-gray-700">
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Jornalismo e Produção de Conteúdo
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Relações Públicas
-                  </li>
-                  <li class="flex items-start">
-                    <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                    </svg>
-                    Comunicação Digital
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold text-[#2563eb] mb-2">Departamento:</h4>
-                <p class="text-gray-700">Ciências Humanas, Sociais e Económicas</p>
-                <h4 class="font-bold text-[#2563eb] mt-3 mb-2">Domínio:</h4>
-                <p class="text-gray-700">Ciências Sociais, Jornalismo e Informação</p>
-              </div>
-            </div>
+            <h4 class="font-bold text-[#2563eb] mb-2">Áreas de Atuação:</h4>
+            <ul class="space-y-1 text-gray-700 mb-4">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Jornalismo e Produção de Conteúdo
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Relações Públicas
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-[#3B82F6] mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Comunicação Digital
+              </li>
+            </ul>
+            <h4 class="font-bold text-[#2563eb] mb-2">Departamento:</h4>
+            <p class="text-gray-700">Ciências Humanas, Sociais e Económicas</p>
+            <h4 class="font-bold text-[#2563eb] mt-3 mb-2">Domínio:</h4>
+            <p class="text-gray-700">Ciências Sociais, Jornalismo e Informação</p>
           </div>
         </div>
 
