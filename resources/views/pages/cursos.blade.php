@@ -34,8 +34,8 @@ $cursos = [
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
-        'gradientFromHex' => '#166534',
-        'gradientToHex' => '#4ADE80',
+        'gradientFromHex' => '#16A34A', // verde institucional
+        'gradientToHex' => '#4ADE80',   // verde claro
         'areas' => [
             ['name' => 'Enfermagem Hospitalar', 'icon' => 'heart'],
             ['name' => 'Saúde Pública', 'icon' => 'users'],
@@ -49,8 +49,8 @@ $cursos = [
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
-        'gradientFromHex' => '#DC2626',
-        'gradientToHex' => '#F87171',
+        'gradientFromHex' => '#A21CAF', // roxo institucional
+        'gradientToHex' => '#F472B6',   // rosa claro
         'areas' => [
             ['name' => 'Psicologia Clínica', 'icon' => 'heart-pulse'],
             ['name' => 'Saúde Mental Comunitária', 'icon' => 'users'],
@@ -64,8 +64,8 @@ $cursos = [
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Ciências Sociais, Jornalismo e Informação',
         'duration' => '4 Anos',
-        'gradientFromHex' => '#F59E42',
-        'gradientToHex' => '#FBBF24',
+        'gradientFromHex' => '#F59E42', // laranja institucional
+        'gradientToHex' => '#FBBF24',   // laranja claro
         'areas' => [
             ['name' => 'Jornalismo', 'icon' => 'newspaper'],
             ['name' => 'Relações Públicas', 'icon' => 'users'],
@@ -79,8 +79,8 @@ $cursos = [
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Administração, Negócios e Direito',
         'duration' => '4 Anos',
-        'gradientFromHex' => '#FACC15',
-        'gradientToHex' => '#FDE68A',
+        'gradientFromHex' => '#F59E42', // laranja institucional
+        'gradientToHex' => '#FDE68A',   // amarelo claro
         'areas' => [
             ['name' => 'Contabilidade e Auditoria', 'icon' => 'calculator'],
             ['name' => 'Gestão Empresarial', 'icon' => 'briefcase'],
@@ -94,8 +94,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '5 Anos',
-        'gradientFromHex' => '#2C4A5E',
-        'gradientToHex' => '#0E8F81',
+        'gradientFromHex' => '#1877F2', // azul Facebook
+        'gradientToHex' => '#60A5FA',   // azul claro
         'areas' => [
             ['name' => 'Desenvolvimento de Software', 'icon' => 'code'],
             ['name' => 'Redes e Sistemas', 'icon' => 'server'],
@@ -109,8 +109,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
-        'gradientFromHex' => '#0EA5E9',
-        'gradientToHex' => '#3B82F6',
+        'gradientFromHex' => '#0EA5E9', // azul ciano
+        'gradientToHex' => '#60A5FA',   // azul claro
         'areas' => [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
