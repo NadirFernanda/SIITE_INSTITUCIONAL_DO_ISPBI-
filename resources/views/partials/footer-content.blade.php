@@ -1,4 +1,15 @@
-﻿<footer class="bg-[#1a1a1a] text-gray-300" aria-label="Rodapé institucional">
+﻿    <div class="border-t border-gray-800 pt-6 pb-4 text-center text-sm text-gray-400">
+      <div class="mb-2">
+        <span class="font-semibold text-white">2026 Instituto Superior Politécnico do Bié</span> — todos os direitos reservados
+      </div>
+      <div class="mb-2">
+        <span class="text-[#FFD700]">De Angola com amor</span>
+      </div>
+      <div>
+        Desenvolvido por <span class="font-semibold text-white">Fernanda Gonçalves</span>
+      </div>
+    </div>
+<footer class="bg-[#1a1a1a] text-gray-300" aria-label="Rodapé institucional">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8" aria-label="Links institucionais">
       <!-- Educação -->
