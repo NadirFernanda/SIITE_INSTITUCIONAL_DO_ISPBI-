@@ -7,6 +7,5 @@
     <div class="bg-green-50 rounded-xl p-6 text-green-900">
         <strong>Em breve:</strong> Conteúdo completo do curso de Enfermagem Geral.
     </div>
-    </div>
-@endsection
+</div>
 @endsection
