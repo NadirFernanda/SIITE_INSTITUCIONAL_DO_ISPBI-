@@ -48,7 +48,7 @@
 </div>
 
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
-<div x-data="{ mobileMenuOpen: false }">
+<div x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }">
   <div class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
     <!-- Logo e nome -->
@@ -148,7 +148,7 @@
         <span>Comunicação</span>
       </a>
       <!-- Dropdown Extensão Universitária - Mobile (padronizado) -->
-      <div x-data="{ openExtMobile: false }" class="relative lg:hidden">
+      <div class="relative lg:hidden">
         <button @click="openExtMobile = !openExtMobile"
                 class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors w-full">
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
@@ -187,7 +187,7 @@
         <!-- ...primeiro dropdown Institucional removido... -->
 
         <!-- Dropdown Institucional - Mobile -->
-        <div x-data="{ openMobile: false }" class="relative lg:hidden mt-2">
+        <div class="relative lg:hidden mt-2">
           <button @click="openMobile = !openMobile"
                   class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
             <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
@@ -209,7 +209,7 @@
         </div>
 
         <!-- Dropdown Infraestrutura Digital - Mobile -->
-        <div x-data="{ openInfraMobile: false }" class="relative lg:hidden mt-2">
+        <div class="relative lg:hidden mt-2">
           <button @click="openInfraMobile = !openInfraMobile"
                   class="flex items-center gap-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded w-full font-semibold">
             <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 8v4l3 3" stroke="#2563eb"/></svg></span>
