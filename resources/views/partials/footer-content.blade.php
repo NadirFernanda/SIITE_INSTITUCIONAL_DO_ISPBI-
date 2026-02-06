@@ -1,5 +1,5 @@
 ﻿
-<footer class="bg-[#1a1a1a] text-gray-300" aria-label="Rodapé institucional">
+<footer class="bg-[#1a1a1a]/80 text-gray-300" aria-label="Rodapé institucional">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6 md:gap-8" aria-label="Links institucionais">
       <!-- Educação -->
