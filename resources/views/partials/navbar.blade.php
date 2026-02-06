@@ -1,6 +1,6 @@
-<div class="hidden md:block w-full fixed left-0 top-0" style="background:#39C28A;height:3px;z-index:52;"></div>
-<div class="hidden md:block w-full fixed left-0 top-0" style="background:#F05A28;height:3px;top:3px;z-index:51;"></div>
-<div class="hidden md:block w-full fixed left-0 top-0" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:3px;top:6px;z-index:50;"></div>
+<div class="hidden md:block w-full fixed left-0 top-0" style="background:#39C28A;height:6px;z-index:52;"></div>
+<div class="hidden md:block w-full fixed left-0 top-0" style="background:#F05A28;height:6px;top:6px;z-index:51;"></div>
+<div class="hidden md:block w-full fixed left-0 top-0" style="background:#2563eb;border-bottom:1px solid #1d4ed8;height:6px;top:12px;z-index:50;"></div>
 
 <!-- Barra inferior institucional em cinza claro - Desktop apenas -->
 <div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:0.95rem;padding:4px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;">
