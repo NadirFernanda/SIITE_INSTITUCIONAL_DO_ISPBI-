@@ -2,7 +2,7 @@
 <div class="hidden md:block w-full fixed left-0 top-0" style="background:#F05A28;height:4px;top:4px;z-index:51;"></div>
 
 <!-- Barra inferior institucional em cinza claro - Desktop apenas -->
-<div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:0.95rem;padding:4px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;">
+<div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:1.05rem;padding:12px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;min-height:48px;">
   <div class="flex flex-wrap items-center gap-2">
     <a href="/contactos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>📷</span> Contacto</a>
     <a href="https://isp-bine.ao/webmail" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
