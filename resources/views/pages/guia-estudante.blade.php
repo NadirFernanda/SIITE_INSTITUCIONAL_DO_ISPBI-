@@ -154,7 +154,7 @@
       <!-- 3. Avaliação -->
       <div id="avaliacao" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
         <div class="flex items-center mb-6">
-          <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
+          <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             3
           </div>
           <h3 class="text-2xl font-bold text-gray-900">Avaliação e Exames</h3>
@@ -163,12 +163,12 @@
           <div>
             <h4 class="font-bold text-lg text-gray-900 mb-3">Métodos de Avaliação</h4>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="bg-purple-50 p-4 rounded-lg">
-                <h5 class="font-bold text-purple-900 mb-2">1ª Parcial</h5>
+              <div class="bg-[#e0e7ff] p-4 rounded-lg">
+                <h5 class="font-bold text-[#2563eb] mb-2">1ª Parcial</h5>
                 <p class="text-sm text-gray-700">Avaliação no meio do semestre</p>
               </div>
-              <div class="bg-indigo-50 p-4 rounded-lg">
-                <h5 class="font-bold text-indigo-900 mb-2">2ª Parcial</h5>
+              <div class="bg-[#fef3c7] p-4 rounded-lg">
+                <h5 class="font-bold text-[#F05A28] mb-2">2ª Parcial</h5>
                 <p class="text-sm text-gray-700">Avaliação antes do exame final</p>
               </div>
               <div class="bg-blue-50 p-4 rounded-lg">
@@ -199,7 +199,7 @@
                   <div class="text-gray-600">Muito Bom</div>
                 </div>
                 <div>
-                  <div class="font-bold text-purple-600">18-20</div>
+                  <div class="font-bold text-[#2563eb]">18-20</div>
                   <div class="text-gray-600">Excelente</div>
                 </div>
               </div>
