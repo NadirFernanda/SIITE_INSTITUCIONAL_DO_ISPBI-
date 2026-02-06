@@ -14,6 +14,11 @@
 </head>
 
 <body class="bg-white text-gray-900">
+        <style>
+            @media (min-width: 768px) {
+                body { padding-top: 8px; }
+            }
+        </style>
     <!-- Barra topo institucional (sempre fixa no topo) -->
     <div class="hidden md:block w-full fixed left-0 top-0 z-50" style="background:#0E8F81;height:4px;"></div>
     <div class="hidden md:block w-full fixed left-0 top-0 z-40" style="background:#F05A28;height:4px;top:4px;"></div>
