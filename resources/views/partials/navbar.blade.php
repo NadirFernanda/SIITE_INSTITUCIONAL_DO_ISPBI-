@@ -130,7 +130,7 @@
     <!-- Fundo escuro institucional com gradiente -->
     <div class="absolute inset-0" style="background: linear-gradient(180deg, #2563eb 0%, #ffffff 100%); opacity: 0.96; backdrop-filter: blur(12px);" @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;"></div>
     <!-- Painel lateral com efeito glassmorphism, sombra e detalhes dourados -->
-    <div class="relative ml-auto w-full max-w-xs h-full bg-white/70 shadow-2xl flex flex-col py-10 px-6 space-y-3 overflow-y-auto animate-slide-in-right border-l-4 border-[#FFD700] rounded-l-2xl text-base sm:text-sm z-10" style="backdrop-filter: blur(12px);">
+    <div class="relative ml-auto w-full max-w-xs h-full bg-white/70 shadow-2xl flex flex-col py-10 px-6 space-y-3 overflow-y-auto animate-slide-in-right border-l-4 border-[#FFD700] rounded-l-2xl text-base sm:text-sm z-[60]" style="backdrop-filter: blur(12px);">
       <button @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;" class="self-end text-gray-700 p-2 hover:bg-gray-100 rounded-lg mb-2" aria-label="Fechar menu">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
@@ -157,8 +157,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-        <div x-show="openExtMobile" x-cloak
-             class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2">
+           <div x-show="openExtMobile" x-cloak
+             class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 z-[70]" style="position:relative;">
           <a href="/cultura" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Extensão Universitária</a>
           <a href="/alumni" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
         </div>
