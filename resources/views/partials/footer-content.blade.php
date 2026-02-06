@@ -95,13 +95,24 @@
       </div>
     </nav>
   </div>
-      <div class="w-full py-6 bg-transparent">
-          <div class="text-center text-white text-lg mb-2"> Copiright 2007 - 2026 • todos os direitos reservados • ISP-Bié </div>
-       <div class="text-center text-[#2979FF] text-xl font-semibold">De Angola com amor</div>
+      <div class="w-full py-6 bg-transparent relative">
+        <div class="flex flex-col items-center">
+          <div class="text-center text-white text-lg mb-2">
+            Copiright 2007 - <span id="footer-year">2026</span> • todos os direitos reservados • ISP-Bié
+          </div>
+          <div class="text-center text-[#2979FF] text-xl font-semibold">De Angola com amor</div>
           <div class="text-center text-white text-lg mt-2">Desenvolvido por</div>
-          <div class=" font-semibold text-center">Fernanda Gonçalves</div>
-
-
-
+          <div class="font-semibold text-center">Fernanda Gonçalves</div>
+          <div class="mt-4 flex items-center gap-2">
+            <span class="inline-block bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">Acessível</span>
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+          </div>
+        </div>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 bg-[#2979FF] hover:bg-[#1a1a1a] text-white rounded-full shadow-lg p-3 transition-colors duration-300" aria-label="Voltar ao topo">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+        </button>
+        <script>
+          document.getElementById('footer-year').textContent = new Date().getFullYear();
+        </script>
       </div>
 
