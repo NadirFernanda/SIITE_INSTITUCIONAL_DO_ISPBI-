@@ -23,7 +23,7 @@
           <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg">
             <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Valores do ISP-Bié</h2>
             <div class="prose max-w-none text-gray-700 leading-relaxed space-y-4">
-              <p class="text-xl text-[#2563eb] font-semibold mb-6 leading-relaxed">
+              <p class="text-xl text-black mb-6 leading-relaxed">
                 O Instituto Superior Politécnico do Bié elege como seus principais valores e princípios norteadores das relações interpessoais e institucionais os seguintes:
               </p>
               
