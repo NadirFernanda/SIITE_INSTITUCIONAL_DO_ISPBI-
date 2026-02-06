@@ -154,7 +154,7 @@
                 <button id="openFormBtn" class="bg-white text-[#2563eb] border border-[#2563eb] px-8 py-3 rounded-lg font-semibold hover:bg-[#e0e7ff] transition-colors">
                     Candidatar-se Online
                 </button>
-                <a href="/contactos" class="bg-[#0E8F81] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0a6b5c] transition-colors">
+                <a href="/contactos" class="bg-[#F05A28] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#c94a1f] transition-colors">
                     Fale Conosco
                 </a>
             </div>
