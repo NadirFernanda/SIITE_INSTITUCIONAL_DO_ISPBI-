@@ -1,51 +1,14 @@
+
+<!-- Barras institucionais no topo -->
 <div class="hidden md:block w-full fixed left-0 top-0" style="background:#0E8F81;height:4px;z-index:52;"></div>
 <div class="hidden md:block w-full fixed left-0 top-0" style="background:#F05A28;height:4px;top:4px;z-index:51;"></div>
 
-<!-- Barra inferior institucional em cinza claro - Desktop apenas -->
-<div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:1.01rem;padding:7px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;min-height:36px;">
-  <div class="flex flex-wrap items-center gap-2">
-    <a href="/contactos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>📷</span> Contacto</a>
-    <a href="https://isp-bine.ao/webmail" target="_blank" rel="noopener" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>✉️</span> Webmail</a>
-    <a href="/servicos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🗞️</span> Serviços</a>
-  </div>
-  <div class="flex flex-wrap items-center gap-2">
-    <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgãos de gestão</a> -->
-
-    <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
-    <div x-data="{ openInfra: false }" class="relative">
-      <button @click="openInfra = !openInfra" @keydown.escape="openInfra = false"
-              class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"
-              :aria-expanded="openInfra ? 'true' : 'false'" aria-haspopup="true">
-        <span>⚙️</span> Infraestrutura Digital
-        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </button>
-            <div x-show="openInfra" @click.away="openInfra = false" x-cloak
-              class="absolute right-0 mt-2 w-64 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-sm">
-        <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white font-semibold">Página de Sistemas</a>
-        <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener"
-          class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">
-          Sistema de Gestão de Facturas (SGF)
-        </a>
-      </div>
+<!-- Navbar principal azul logo abaixo das barras institucionais -->
+<div class="w-full bg-[#2563eb]" style="margin-top:8px;z-index:50;">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
+        <!-- Logo e menu -->
+        ...existing code...
     </div>
-
-    <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]">
-      <span>📝</span> Candidaturas
-    </a>
-
-    <!-- Links de estudantes movidos para a barra inferior -->
-    <a href="/calendario-academico" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
-      <span>📅</span> Calendário Académico
-    </a>
-    <a href="/guia-estudante" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
-      <span>📖</span> Guia do Estudante
-    </a>
-    <a href="/resultados" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
-      <span>📊</span> Resultados de Exames
-    </a>
-  </div>
 </div>
 
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
