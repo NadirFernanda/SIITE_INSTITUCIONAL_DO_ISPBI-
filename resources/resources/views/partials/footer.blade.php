@@ -13,5 +13,17 @@
         <div class="mt-2 text-[10px] md:text-xs">© ISP-Bié</div>
       </div>
     </div>
+    <div class="flex justify-end gap-2 mt-6">
+      <!-- Botão Voltar ao Topo -->
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="Voltar ao topo" class="bg-[#2563eb] text-white px-3 py-2 rounded-full shadow hover:bg-[#174ea6] transition-colors flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+        Topo
+      </button>
+      <!-- Botão Ir para o Fim -->
+      <button onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});" aria-label="Ir para o fim" class="bg-[#F05A28] text-white px-3 py-2 rounded-full shadow hover:bg-[#c94a1f] transition-colors flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        Fim
+      </button>
+    </div>
   </div>
 </footer>
