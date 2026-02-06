@@ -109,9 +109,11 @@
 <script>
 function testemunhosCarousel() {
   return {
-    items: @json(\App\Models\Testemunho::select('nome','curso','iniciais','texto')->get()),
+    items: @json($testemunhos),
     currentIndex: 0,
-    total: @json(\App\Models\Testemunho::count()),
+    get total() {
+      return this.items.length;
+    },
     autoplay: null,
     get currentItem() {
       return this.items[this.currentIndex] || {};
@@ -120,10 +122,12 @@ function testemunhosCarousel() {
       this.startAutoplay();
     },
     startAutoplay() {
-      this.autoplay = setInterval(() => this.next(), 5000);
+      if (this.total > 1) {
+        this.autoplay = setInterval(() => this.next(), 5000);
+      }
     },
     stopAutoplay() {
-      clearInterval(this.autoplay);
+      if (this.autoplay) clearInterval(this.autoplay);
     },
     prev() {
       this.currentIndex = (this.currentIndex - 1 + this.total) % this.total;
