@@ -34,7 +34,7 @@
         O navbar é fixed, então o <main> precisa de padding-top para não ser coberto.
         Ajuste pt-20/md:pt-24 conforme a altura real do header/navbar.
     -->
-    <main @if($isHome) class="min-w-0 p-0 m-0 bg-white pt-20 md:pt-24" style="max-width:100vw;" @else class="max-w-4xl mx-auto py-12 px-4 pt-20 md:pt-24" @endif>
+    <main @if($isHome) class="min-w-0 p-0 m-0 bg-white pt-[calc(8px+36px+56px)] md:pt-[calc(8px+36px+56px)]" style="max-width:100vw;" @else class="max-w-4xl mx-auto py-12 px-4 pt-20 md:pt-24" @endif>
         @yield('content')
     </main>
 
