@@ -1,8 +1,8 @@
 ﻿<footer class="bg-white mt-12 border-t">
   <!-- Upper: larger block with columns similar to USP footer -->
   <div class="max-w-7xl mx-auto px-6 py-12 text-sm text-[var(--brand-dark)]">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div class="col-span-1">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="col-span-2 md:col-span-1">
         <div class="flex items-start space-x-3">
           <img src="/images/logo.png" alt="ISP-Bié" class="w-16 h-16 object-contain" onerror="this.src='/images/logo-placeholder.svg'">
           <div>
@@ -55,7 +55,7 @@
   <div class="bg-gray-50 border-t">
     <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between text-xs text-gray-600">
       <div class="flex items-center space-x-4">
-        <div>Â© Instituto Superior Politécnico do Bié â€¢ Todos os direitos reservados</div>
+        <div>© Instituto Superior Politécnico do Bié • Todos os direitos reservados</div>
         <a href="/politica-de-privacidade" class="hover:underline">Política de Privacidade</a>
         <a href="/acessibilidade" class="hover:underline">Acessibilidade</a>
       </div>
