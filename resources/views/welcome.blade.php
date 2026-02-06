@@ -20,7 +20,7 @@
       </div>
       <div class="absolute inset-0 flex items-center">
         <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 w-full">
-          <div class="max-w-xs sm:max-w-md md:max-w-xl text-white text-left bg-black/10 rounded-xl p-4 sm:p-6 md:p-8 shadow-lg backdrop-blur-sm">
+          <div class="max-w-xs sm:max-w-md md:max-w-xl text-white text-left bg-black/5 rounded-xl p-4 sm:p-6 md:p-8 shadow-lg backdrop-blur-sm">
             <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-3 sm:mb-4 break-words">
               {{ $hero->titulo }}
             </h1>
