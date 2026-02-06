@@ -1,13 +1,13 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-	<div class="container mx-auto px-6 py-12 scroll-reveal">
-		<div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
+	<div class="container mx-auto px-4 py-6 scroll-reveal">
+		<div class="bg-white rounded-lg shadow-md p-6 mb-6 interactive-card">
 			<h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Carta de Serviços</h1>
 			<p class="text-lg text-gray-700">Compromissos e prazos dos serviços institucionais</p>
 		</div>
 
-		<section class="mb-16 scroll-reveal">
+		<section class="mb-8 scroll-reveal">
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Serviços Acadêmicos</h2>
 				<div class="space-y-4">
 					<div class="bg-white p-6 rounded-lg shadow-md interactive-card">
@@ -42,7 +42,7 @@
 			</div>
 		</section>
 
-		<section class="scroll-reveal">
+		<section class="scroll-reveal mt-8">
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Serviços Administrativos</h2>
 				<div class="space-y-4">
 					<div class="bg-white p-6 rounded-lg shadow-md interactive-card">
