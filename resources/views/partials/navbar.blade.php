@@ -161,6 +161,7 @@
            <div x-show="openExtMobile" x-cloak
              class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 z-[70]" style="position:relative;">
           <a href="/cultura" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Extensão Universitária</a>
+          <a href="/estagios" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estágios</a>
           <a href="/alumni" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
         </div>
       </div>
