@@ -115,10 +115,10 @@
             <svg class="w-8 h-8 md:w-10 md:h-10 text-[#2563eb] group-hover:text-white transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
         </div>
-        <form action="/busca" method="GET" class="w-full md:w-1/3 max-w-md flex bg-white rounded mt-6 mt-6 md:mt-0">
-          <input type="text" name="q" placeholder="Busca" class="flex-1 px-4 py-2 rounded-l text-gray-800 focus:outline-none">
-          <button type="submit" class="px-4 text-gray-600 hover:text-[#2563eb]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <form action="/busca" method="GET" class="w-full md:w-1/3 max-w-md flex bg-white rounded-full shadow-lg mt-6 md:mt-0 border border-[#0E8F81] focus-within:ring-2 focus-within:ring-[#F05A28] transition-all duration-300">
+          <input type="text" name="q" placeholder="Busca institucional..." aria-label="Pesquisar" class="flex-1 px-5 py-3 rounded-l-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#F05A28] bg-transparent text-lg" autocomplete="off">
+          <button type="submit" class="px-5 py-3 rounded-r-full bg-[#0E8F81] hover:bg-[#F05A28] text-white transition-colors duration-300 flex items-center" aria-label="Buscar">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
           </button>
