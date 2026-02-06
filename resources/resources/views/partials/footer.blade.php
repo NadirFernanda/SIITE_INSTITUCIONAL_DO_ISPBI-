@@ -1,6 +1,6 @@
 <footer class="border-t mt-12 bg-white">
   <div class="max-w-7xl mx-auto px-4 py-8 text-sm text-[var(--brand-dark)]">
-    <div class="grid grid-cols-2 gap-4 md:flex md:flex-row md:justify-between md:items-center">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-none md:flex md:flex-row md:justify-between md:items-center">
       <div class="bg-gray-50 rounded-lg p-4 flex items-center space-x-4">
         <img src="/images/logo.svg" alt="ISP-Bié" class="w-10 h-10 object-contain" onerror="this.style.display='none'">
         <div>
