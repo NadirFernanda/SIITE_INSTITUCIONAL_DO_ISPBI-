@@ -3,7 +3,7 @@
 @section('content')
 
   <!-- Hero institucional moderno + carrossel contido -->
-  <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden">
+  <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden mt-0 pt-0">
     @php
       $carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->take(5)->get();
       $totalSlides = $carrosseis->count();
