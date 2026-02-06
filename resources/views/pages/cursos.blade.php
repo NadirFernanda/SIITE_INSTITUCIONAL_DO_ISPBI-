@@ -79,8 +79,8 @@ $cursos = [
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Administração, Negócios e Direito',
         'duration' => '4 Anos',
-        'gradientFromHex' => '#FFD700', // amarelo institucional
-        'gradientToHex' => '#FFF9C4',   // amarelo claro
+        'gradientFromHex' => '#B8860B', // dourado escuro
+        'gradientToHex' => '#FFD700',   // amarelo institucional
         'areas' => [
             ['name' => 'Contabilidade e Auditoria', 'icon' => 'calculator'],
             ['name' => 'Gestão Empresarial', 'icon' => 'briefcase'],
