@@ -40,6 +40,48 @@
     <!-- Alpine.js para interatividade do menu mobile -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-    @stack('scripts')
+        @stack('scripts')
+
+        @push('scripts')
+        <script>
+        function testemunhosCarousel() {
+            return {
+                current: 0,
+                autoplay: null,
+                testimonials: window.TESTEMUNHOS || [
+                    {
+                        nome: 'Ana Beatriz',
+                        curso: 'Engenharia Informática',
+                        texto: 'O ISP-Bié mudou a minha vida. Professores excelentes e uma estrutura moderna.',
+                        iniciais: 'AB'
+                    }
+                ],
+                get total() {
+                    return this.testimonials.length
+                },
+                get currentItem() {
+                    return this.testimonials[this.current]
+                },
+                next() {
+                    this.current = (this.current + 1) % this.total
+                },
+                prev() {
+                    this.current = (this.current - 1 + this.total) % this.total
+                },
+                startAutoplay() {
+                    if (this.total > 1) {
+                        this.autoplay = setInterval(() => this.next(), 4000)
+                    }
+                },
+                stopAutoplay() {
+                    if (this.autoplay) clearInterval(this.autoplay)
+                },
+                init() {
+                    this.startAutoplay()
+                }
+            }
+        }
+        </script>
+        @endpush
 </body>
 </html>

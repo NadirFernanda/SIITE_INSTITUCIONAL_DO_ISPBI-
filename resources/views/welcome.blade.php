@@ -245,64 +245,57 @@
   </section>
 
   <!-- Testemunhos - Carrossel Alpine.js -->
-  <!-- Testemunhos -->
-  <section class="py-8 bg-gray-50">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+  <section class="py-12 bg-gray-50">
+    <div 
+      x-data="testemunhosCarousel()"
+      x-init="init()"
+      @mouseenter="stopAutoplay()"
+      @mouseleave="startAutoplay()"
+      class="w-full 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12"
+    >
+      <!-- Cabeçalho -->
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
           Testemunhos
         </h2>
-        <p class="text-xl text-gray-600">
+        <p class="text-lg text-gray-600">
           Saiba o que os nossos estudantes dizem sobre nós
         </p>
       </div>
-      <div class="w-full max-w-2xl mx-auto">
-        <div class="bg-white rounded-3xl shadow-lg p-10 md:p-14 flex flex-col items-center justify-between mx-auto min-h-[340px] max-w-xl w-full border border-gray-200">
-          <div class="flex flex-col items-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold mb-2 shadow-md">
-              <span>AB</span>
+      <!-- Card -->
+      <template x-if="total > 0">
+        <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-gray-200 relative">
+          <!-- Texto -->
+          <p class="text-lg md:text-xl text-gray-700 italic text-center leading-relaxed mb-8 min-h-[96px]"
+             x-text="currentItem.texto">
+          </p>
+          <!-- Autor -->
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-[#2563eb] to-[#3B82F6] flex items-center justify-center text-white font-bold text-xl">
+              <span x-text="currentItem.iniciais"></span>
             </div>
-            <div class="inline-block px-3 py-1 rounded-full bg-[#2563eb]/10 text-[#2563eb] text-xs font-semibold mb-2 border border-[#2563eb]/20">Engenharia Informática</div>
-            <div class="relative w-full">
-              <svg class="absolute -left-8 -top-4 w-12 h-12 text-[#2563eb] opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M7.17 6.17A7 7 0 0 1 13 19h-2a5 5 0 0 0-5-5V6.17z"/></svg>
-              <div class="relative">
-                <p class="text-lg md:text-xl text-gray-700 font-medium italic text-center px-4 leading-relaxed min-h-[72px]">
-                  "O ISP-Bié mudou minha vida. Professores excelentes e estrutura moderna!"
-                </p>
-              </div>
-              <svg class="absolute -right-8 -bottom-4 w-12 h-12 text-[#2563eb] opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M16.83 17.83A7 7 0 0 1 11 5h2a5 5 0 0 0 5 5v7.83z"/></svg>
-            </div>
-          </div>
-          <div class="mt-6 flex flex-col items-center w-full">
-            <h4 class="font-bold text-gray-900 text-lg md:text-xl text-center">Ana Beatriz</h4>
-            <p class="text-sm md:text-base text-gray-500 text-center mt-1">Engenharia Informática</p>
-            <div class="flex items-center justify-center mt-3">
-              <div class="flex text-[#2563eb] text-base md:text-lg">★★★★★</div>
+            <h4 class="font-bold text-gray-900 text-lg" x-text="currentItem.nome"></h4>
+            <p class="text-sm text-gray-500 mt-1" x-text="currentItem.curso"></p>
+            <div class="flex justify-center mt-3 text-[#2563eb]">
+              ★★★★★
             </div>
           </div>
+          <!-- Controles -->
+          <button @click="prev"
+                  class="absolute left-4 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100">
+            ‹
+          </button>
+          <button @click="next"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100">
+            ›
+          </button>
         </div>
-      </div>
+      </template>
+      <!-- Fallback -->
+      <template x-if="total === 0">
+        <p class="text-center text-gray-500 italic">
+          Ainda não existem testemunhos publicados.
+        </p>
+      </template>
     </div>
-          current: 0,
-          testimonials: window.TESTEMUNHOS || [],
-          get total() { return this.testimonials.length },
-          next() {
-            if (this.total === 0) return;
-            this.current = (this.current + 1) % this.total;
-            this.expanded = false;
-          },
-          prev() {
-            if (this.total === 0) return;
-            this.current = (this.current - 1 + this.total) % this.total;
-            this.expanded = false;
-          },
-          expanded: false,
-          autoplay: null,
-          startAutoplay() {
-            if (this.total <= 1) return;
-            this.autoplay = setInterval(() => { this.next() }, 4000);
-          },
-          stopAutoplay() {
-            if (this.autoplay) clearInterval(this.autoplay);
-          }
-        <!-- Fim da seção de testemunhos -->
+  </section>
