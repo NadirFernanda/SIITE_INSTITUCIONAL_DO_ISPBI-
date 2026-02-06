@@ -117,7 +117,7 @@
         </div>
         <form action="/busca" method="GET" class="w-full md:w-1/3 max-w-md flex bg-white rounded-full shadow-lg mt-6 md:mt-0 border border-[#0E8F81] focus-within:ring-2 focus-within:ring-[#F05A28] transition-all duration-300">
           <input type="text" name="q" placeholder="Busca institucional..." aria-label="Pesquisar" class="flex-1 px-5 py-3 rounded-l-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#F05A28] bg-transparent text-lg" autocomplete="off">
-          <button type="submit" class="px-5 py-3 rounded-r-full bg-[#0E8F81] hover:bg-[#F05A28] text-white transition-colors duration-300 flex items-center" aria-label="Buscar">
+          <button type="submit" class="px-5 py-3 rounded-r-full bg-[#F05A28] hover:bg-[#2563eb] text-white transition-colors duration-300 flex items-center" aria-label="Buscar">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
