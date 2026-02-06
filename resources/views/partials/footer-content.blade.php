@@ -110,7 +110,7 @@
           <div class="text-center text-white text-lg mt-2">Desenvolvido por</div>
           <div class="font-semibold text-center">Fernanda Gonçalves</div>
           <div class="mt-4 flex items-center gap-2">
-            <span class="inline-block bg-green-600 text-white px-2 py-1 rounded text-xs font-semibold">Acessível</span>
+            <span class="inline-block bg-[#2C4A5E] text-white px-2 py-1 rounded text-xs font-semibold">Acessível</span>
             <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
           </div>
         </div>
