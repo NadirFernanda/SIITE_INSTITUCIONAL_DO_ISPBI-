@@ -121,6 +121,14 @@ $cursos = [
 ];
 @endphp
 
+<div x-data="{ dark: false }" class="relative">
+    <button @click="dark = !dark" class="absolute right-6 top-4 z-20 px-4 py-2 rounded-lg font-semibold shadow bg-gray-900 text-white hover:bg-gray-700 transition">
+        <span x-show="!dark">🌙 Ativar modo escuro</span>
+        <span x-show="dark">☀️ Desativar modo escuro</span>
+    </button>
+
+    <div :class="dark ? 'bg-gray-900' : ''" class="min-h-screen transition-colors duration-300">
+
 
 <style>
 @keyframes gradient-move {
@@ -142,44 +150,44 @@ $cursos = [
 
 
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
-    @foreach ($cursos as $curso)
-        <div class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[360px]"
-            style="background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});">
 
-        <div class="relative z-10 flex flex-col h-full">
-            <!-- Ícones de áreas -->
-            @if(count($curso['areas']) > 0)
-            <div class="flex gap-3 mb-4 flex-wrap">
-                @foreach ($curso['areas'] as $area)
-                <div class="flex flex-col items-center text-white text-sm w-24">
-                    <span class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-1 icon-animate">
-                        {!! heroicon($area['icon'] ?? '') !!}
-                    </span>
-                    <span class="text-center">{{ $area['name'] }}</span>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
+        @foreach ($cursos as $curso)
+            <div :class="dark ? 'bg-gray-800 text-gray-100 border border-gray-700' : ''"
+                class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[360px]"
+                :style="dark ? '' : 'background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});'">
+
+                <div class="relative z-10 flex flex-col h-full">
+                    <!-- Ícones de áreas -->
+                    @if(count($curso['areas']) > 0)
+                    <div class="flex gap-3 mb-4 flex-wrap">
+                        @foreach ($curso['areas'] as $area)
+                        <div :class="dark ? 'text-gray-100' : 'text-white'" class="flex flex-col items-center text-sm w-24">
+                            <span class="flex items-center justify-center w-12 h-12 rounded-full mb-1 icon-animate" :class="dark ? 'bg-gray-700' : 'bg-white/20'">
+                                {!! heroicon($area['icon'] ?? '') !!}
+                            </span>
+                            <span class="text-center">{{ $area['name'] }}</span>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endif
+
+                    <!-- Título do curso -->
+                    <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-2xl font-bold mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">
+                        {{ $curso['title'] }}
+                    </h3>
+
+                    <!-- Departamento e domínio -->
+                    <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-4">
+                        <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
+                    </p>
+
+                    <!-- Descrição resumida -->
+                    <p :class="dark ? 'text-gray-300' : 'text-white/80'" class="mb-6">{{ $curso['description'] }}</p>
                 </div>
-                @endforeach
             </div>
-            @endif
-
-            <!-- Título do curso -->
-            <h3 class="text-2xl font-bold text-white mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">
-                {{ $curso['title'] }}
-            </h3>
-
-            <!-- Departamento e domínio -->
-            <p class="text-white/90 mb-4">
-                <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
-            </p>
-
-            <!-- Descrição resumida -->
-            <p class="text-white/80 mb-6">{{ $curso['description'] }}</p>
-
-            <!-- Botão "Saiba mais" removido -->
-        </div>
-
+        @endforeach
     </div>
-    @endforeach
 </div>
 
 @endsection
