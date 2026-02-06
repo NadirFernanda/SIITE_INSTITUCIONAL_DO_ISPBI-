@@ -135,7 +135,7 @@
         <section class="mb-16 scroll-reveal">
             <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Cursos Disponíveis</h2>
             <div class="flex flex-wrap justify-center gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-md">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-sm md:max-w-xs">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Cursos de Graduação</h3>
                     <p class="text-gray-600 mb-4">Conheça todos os cursos disponíveis no ISP-Bié</p>
                     <div class="text-sm text-gray-500 mb-4">
