@@ -23,7 +23,7 @@
           <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg">
             <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Visão do ISP-Bié</h2>
             <div class="prose max-w-none text-gray-700 leading-relaxed space-y-4">
-              <p class="text-xl text-[#2563eb] font-semibold mb-6 leading-relaxed">
+              <p class="text-xl text-black mb-6 leading-relaxed">
                 Em 10 anos, o Instituto Superior Politécnico do Bié deverá ser reconhecido como uma instituição de referência e excelência na formação académica, produção científica e resolução de problemas sociais na província do Bié.
               </p>
               
