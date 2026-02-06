@@ -57,9 +57,9 @@
 
   <!-- Seção de Ícones Institucionais: Missão, Visão, Valores, Pilares -->
 <!-- Seção de Ícones Institucionais Compacta - Ícones 15 -->
-<section class="py-8 bg-white border-b border-gray-200">
+<section class="py-4 bg-white border-b border-gray-200">
   <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
       <a href="/missao" class="group flex flex-col items-center justify-center">
             <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#2563eb]/10 mb-2">
               <svg class="w-10 h-10 text-[#2563eb] group-hover:text-[#3B82F6] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
@@ -89,7 +89,7 @@
 </section>
 
     <!-- Barra azul com redes sociais e busca (estilo USP, ícones grandes, centralizados, azul do site) -->
-    <div x-data="{ dark: false }" :class="dark ? 'bg-[#1a237e]' : 'bg-[#2563eb]'" class="py-8 transition-colors duration-500 relative">
+    <div x-data="{ dark: false }" :class="dark ? 'bg-[#1a237e]' : 'bg-[#2563eb]'" class="py-4 transition-colors duration-500 relative">
       <!-- Botão modo escuro isolado -->
       <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12 flex justify-end">
         <button @click="dark = !dark" type="button" aria-label="Alternar modo escuro" class="bg-white/80 hover:bg-white text-[#2563eb] font-bold px-3 py-2 rounded shadow transition-colors duration-300 flex items-center gap-2">
@@ -130,21 +130,21 @@
 
   <!-- Seção Institucional -->
 
-  <section class="py-16 bg-gray-100">
+  <section class="py-8 bg-gray-100">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-4xl font-bold text-gray-900 mb-12">Notícias institucionais</h2>
+      <h2 class="text-4xl font-bold text-gray-900 mb-8">Notícias institucionais</h2>
       @component('components.noticias-carousel')
       @endcomponent
     </div>
   </section>
 
   <!-- Seção Acesso Rápido -->
-  <section class="py-16 bg-white border-t border-gray-200">
+  <section class="py-8 bg-white border-t border-gray-200">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-4xl font-bold text-gray-900 mb-12">Acesso rápido</h2>
+      <h2 class="text-4xl font-bold text-gray-900 mb-8">Acesso rápido</h2>
       
       <!-- Primeira linha -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-6 2xl:gap-8 mb-8">
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 md:gap-4 2xl:gap-6 mb-4">
         
         <a href="/portal" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
@@ -159,7 +159,7 @@
         <a href="/ouvidoria" class="flex flex-col items-center group interactive-card">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
           </div>
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Ouvidoria</span>
@@ -226,10 +226,10 @@
 
   <!-- Seção ISP-Bié em números -->
 
-  <section id="estatisticas" class="py-16 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white scroll-reveal">
+  <section id="estatisticas" class="py-8 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white scroll-reveal">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
       <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
-      <p class="text-lg mb-12 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
+      <p class="text-lg mb-8 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
       @php($estatisticas = \App\Models\Estatistica::orderBy('ordem')->get())
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($estatisticas as $estatistica)
@@ -246,9 +246,9 @@
 
   <!-- Testemunhos - Carrossel Alpine.js -->
   <!-- Testemunhos -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-8 bg-gray-50">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="text-center mb-12">
+      <div class="text-center mb-8">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
           Testemunhos
         </h2>
