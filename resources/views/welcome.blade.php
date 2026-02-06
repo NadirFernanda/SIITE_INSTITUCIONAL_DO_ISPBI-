@@ -256,111 +256,31 @@
           Saiba o que os nossos estudantes dizem sobre nós
         </p>
       </div>
-
-      {{-- Enviar dados reais do admin para o JS --}}
-      <script>
-        window.TESTEMUNHOS = @json($testemunhos);
-      </script>
-
-      <div
-        x-data="{
-          current: 0,
-          testimonials: window.TESTEMUNHOS || [],
-          get total() { return this.testimonials.length },
-          next() {
-            if (this.total === 0) return;
-            this.current = (this.current + 1) % this.total;
-          },
-          prev() {
-            if (this.total === 0) return;
-            this.current = (this.current - 1 + this.total) % this.total;
-          },
-          short(text) {
-            if (!text) return 'Sem mensagem informada.';
-            const maxWords = 15;
-            const words = text.split(/\s+/);
-            if (words.length > maxWords) {
-              return words.slice(0, maxWords).join(' ') + '…';
-            }
-            return text;
-          },
-          autoplay: null,
-          startAutoplay() {
-            if (this.total <= 1) return;
-            this.autoplay = setInterval(() => { this.next() }, 4000);
-          },
-          stopAutoplay() {
-            if (this.autoplay) clearInterval(this.autoplay);
-          }
-        }"
-        x-init="startAutoplay()"
-        @mouseenter="stopAutoplay()" @mouseleave="startAutoplay()"
-        class="relative flex flex-col items-center"
-      >
-        <div class="w-full max-w-2xl overflow-visible">
-          <div class="relative w-full max-w-2xl mx-auto min-h-[360px]">
-            <template x-for="(item, idx) in testimonials" :key="item.id ?? idx">
-              <div
-                x-show="current === idx"
-                x-transition:enter="transition-opacity duration-700"
-                x-transition:enter-start="opacity-0 translate-x-8"
-                x-transition:enter-end="opacity-100 translate-x-0"
-                x-transition:leave="transition-opacity duration-700"
-                x-transition:leave-start="opacity-100 translate-x-0"
-                x-transition:leave-end="opacity-0 -translate-x-8"
-                class="absolute top-0 left-0 w-full flex justify-center"
-                style="min-height:320px;"
-              >
-                <div class="bg-white rounded-3xl shadow-lg p-10 md:p-14 flex flex-col items-center justify-between mx-auto min-h-[340px] max-w-xl w-full border border-gray-200 transition-shadow duration-300 hover:shadow-2xl">
-                  <div class="flex flex-col items-center">
-                    <template x-if="item.avatar">
-                      <img :src="item.avatar" alt="Foto de perfil de estudante" class="w-16 h-16 rounded-full object-cover shadow-md mb-2 border-2 border-[#2563eb]/30" loading="lazy">
-                    </template>
-                    <template x-if="!item.avatar">
-                      <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold mb-2 shadow-md">
-                        <svg class="w-8 h-8 opacity-60 absolute" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="1.5"/></svg>
-                        <span class="relative z-10" x-text="item.nome.substring(0,2).toUpperCase()"></span>
-                      </div>
-                    </template>
-                    <div class="inline-block px-3 py-1 rounded-full bg-[#2563eb]/10 text-[#2563eb] text-xs font-semibold mb-2 border border-[#2563eb]/20" x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></div>
-                    <div class="relative w-full">
-                      <svg class="absolute -left-8 -top-4 w-12 h-12 text-[#2563eb] opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M7.17 6.17A7 7 0 0 1 13 19h-2a5 5 0 0 0-5-5V6.17z"/></svg>
-                      <div class="relative">
-                        <p class="text-lg md:text-xl text-gray-700 font-medium italic text-center px-4 leading-relaxed min-h-[72px] line-clamp-3" x-bind:class="expanded ? '!line-clamp-none' : 'line-clamp-3'">
-                          <span x-text="item.trabalha ? (item.satisfacao || 'Sem mensagem informada.') : 'Procurando emprego.'"></span>
-                        </p>
-                        <template x-if="(item.satisfacao && item.satisfacao.split(/\s+/).length > 25)">
-                          <button @click="expanded = !expanded" x-text="expanded ? 'Ver menos' : 'Ver mais'" class="mt-2 text-[#2563eb] font-semibold underline text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb] rounded transition" :aria-expanded="expanded.toString()"></button>
-                        </template>
-                      </div>
-                      <svg class="absolute -right-8 -bottom-4 w-12 h-12 text-[#2563eb] opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M16.83 17.83A7 7 0 0 1 11 5h2a5 5 0 0 0 5 5v7.83z"/></svg>
-                    </div>
-                  </div>
-                  <div class="mt-6 flex flex-col items-center w-full">
-                    <h4 class="font-bold text-gray-900 text-lg md:text-xl text-center" x-text="item.nome"></h4>
-                    <p class="text-sm md:text-base text-gray-500 text-center mt-1" x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
-                    <div class="flex items-center justify-center mt-3">
-                      <div class="flex text-[#2563eb] text-base md:text-lg">★★★★★</div>
-                    </div>
-                  </div>
-                </div>
+      <div class="w-full max-w-2xl mx-auto">
+        <div class="bg-white rounded-3xl shadow-lg p-10 md:p-14 flex flex-col items-center justify-between mx-auto min-h-[340px] max-w-xl w-full border border-gray-200">
+          <div class="flex flex-col items-center">
+            <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold mb-2 shadow-md">
+              <span>AB</span>
+            </div>
+            <div class="inline-block px-3 py-1 rounded-full bg-[#2563eb]/10 text-[#2563eb] text-xs font-semibold mb-2 border border-[#2563eb]/20">Engenharia Informática</div>
+            <div class="relative w-full">
+              <svg class="absolute -left-8 -top-4 w-12 h-12 text-[#2563eb] opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M7.17 6.17A7 7 0 0 1 13 19h-2a5 5 0 0 0-5-5V6.17z"/></svg>
+              <div class="relative">
+                <p class="text-lg md:text-xl text-gray-700 font-medium italic text-center px-4 leading-relaxed min-h-[72px]">
+                  "O ISP-Bié mudou minha vida. Professores excelentes e estrutura moderna!"
+                </p>
               </div>
-            </template>
+              <svg class="absolute -right-8 -bottom-4 w-12 h-12 text-[#2563eb] opacity-20" fill="currentColor" viewBox="0 0 24 24"><path d="M16.83 17.83A7 7 0 0 1 11 5h2a5 5 0 0 0 5 5v7.83z"/></svg>
+            </div>
+          </div>
+          <div class="mt-6 flex flex-col items-center w-full">
+            <h4 class="font-bold text-gray-900 text-lg md:text-xl text-center">Ana Beatriz</h4>
+            <p class="text-sm md:text-base text-gray-500 text-center mt-1">Engenharia Informática</p>
+            <div class="flex items-center justify-center mt-3">
+              <div class="flex text-[#2563eb] text-base md:text-lg">★★★★★</div>
+            </div>
           </div>
         </div>
-
-        <!-- Indicadores de página (dots) -->
-        <div class="flex justify-center mt-6 space-x-2">
-          <template x-for="(item, idx) in testimonials" :key="idx">
-            <button
-              @click="current = idx"
-              class="w-4 h-4 rounded-full border-2 border-[#3B82F6] transition duration-300 focus:outline-none"
-              :class="current === idx ? 'bg-[#3B82F6] shadow-lg scale-110' : 'bg-gray-200 hover:bg-[#2563eb]/30'"
-              :aria-label="'Ir para testemunho ' + (idx + 1)"
-            ></button>
-          </template>
-        </div>
-        <!-- Botões anterior/próximo removidos -->
       </div>
     </div>
           current: 0,
@@ -385,4 +305,4 @@
           stopAutoplay() {
             if (this.autoplay) clearInterval(this.autoplay);
           }
-        }"
+        <!-- Fim da seção de testemunhos -->
