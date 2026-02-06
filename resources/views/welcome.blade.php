@@ -1,9 +1,19 @@
-﻿@extends('layouts.site')
+﻿{{-- Barras institucionais FIXED (apenas md+) --}}
+<div class="hidden md:block fixed top-0 left-0 w-full h-1 bg-teal-700 z-50"></div>
+<div class="hidden md:block fixed top-1 left-0 w-full h-1 bg-orange-600 z-40"></div>
+
+{{-- Espaço reservado no fluxo para as barras (apenas md+) --}}
+<div class="hidden md:block h-2 w-full"></div>
+
+{{-- Header no fluxo natural --}}
+<header>
+    @include('partials.navbar')
+</header>
 
 @section('content')
 
   <!-- Hero institucional moderno + carrossel contido -->
-  <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden mt-0 pt-0">
+  <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden mt-0 pt-0" style="margin-top:0;padding-top:0;background:transparent;border:none;">
     @php
       $carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->take(5)->get();
       $totalSlides = $carrosseis->count();
