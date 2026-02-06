@@ -3,7 +3,7 @@
 @section('content')
 
   <!-- Hero institucional moderno + carrossel contido -->
-  <section class="relative w-full h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden">
+  <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden">
     @php
       $carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->take(5)->get();
       $totalSlides = $carrosseis->count();
@@ -19,23 +19,23 @@
         <div class="absolute inset-0 bg-black/40"></div>
       </div>
       <div class="absolute inset-0 flex items-center">
-        <div class="max-w-7xl mx-auto px-6 w-full">
-          <div class="max-w-xl text-white text-left">
-            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 w-full">
+          <div class="max-w-xs sm:max-w-md md:max-w-xl text-white text-left bg-black/30 rounded-xl p-4 sm:p-6 md:p-8 shadow-lg backdrop-blur-sm">
+            <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-3 sm:mb-4 break-words">
               {{ $hero->titulo }}
             </h1>
             @if($hero->subtitulo)
-            <p class="text-base md:text-lg opacity-90 mb-6">
+            <p class="text-sm xs:text-base md:text-lg opacity-90 mb-4 sm:mb-6 break-words">
               {{ $hero->subtitulo }}
             </p>
             @endif
-            <div class="flex gap-4">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none">
               @if($hero->link && $hero->texto_botao)
                 <a href="{{ $hero->link }}"
                    class="inline-flex items-center justify-center
                           bg-blue-600 hover:bg-blue-700
                           text-white font-semibold
-                          px-6 py-3 rounded-md transition">
+                          px-4 py-2 sm:px-6 sm:py-3 rounded-md transition text-base sm:text-lg w-full sm:w-auto text-center">
                   {{ $hero->texto_botao }}
                 </a>
               @elseif($hero->link)
@@ -43,7 +43,7 @@
                    class="inline-flex items-center justify-center
                           bg-blue-600 hover:bg-blue-700
                           text-white font-semibold
-                          px-6 py-3 rounded-md transition">
+                          px-4 py-2 sm:px-6 sm:py-3 rounded-md transition text-base sm:text-lg w-full sm:w-auto text-center">
                   CONHEÇA MAIS
                 </a>
               @endif
