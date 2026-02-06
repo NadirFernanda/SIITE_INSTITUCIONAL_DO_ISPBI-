@@ -114,8 +114,8 @@
             <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
           </div>
         </div>
-        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 bg-[#2979FF] hover:bg-[#1a1a1a] text-white rounded-full shadow-lg p-3 transition-colors duration-300" aria-label="Voltar ao topo">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 bg-[#2979FF] hover:bg-[#1a1a1a] text-white rounded-full shadow-lg p-2 transition-colors duration-300 animate-pulse" style="min-width:40px;min-height:40px;" aria-label="Voltar ao topo">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg>
         </button>
         <script>
           document.getElementById('footer-year').textContent = new Date().getFullYear();
