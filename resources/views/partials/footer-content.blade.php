@@ -65,7 +65,7 @@
           <li><a href="/noticias" class="hover:text-[#2979FF] transition-colors link-underline-soft">Notícias</a></li>
         </ul>
         <div class="mt-2 flex items-center gap-2">
-          <a href="https://wa.me/244945027508" target="_blank" rel="noopener" class="bg-[#2979FF] hover:bg-[#1a1a1a] text-white font-bold px-4 py-2 rounded-full flex items-center gap-2 shadow transition-colors duration-300" aria-label="WhatsApp institucional">
+          <a href="https://wa.me/244945027508" target="_blank" rel="noopener" class="bg-[#2979FF] hover:bg-[#1a1a1a] text-white font-bold px-3 py-1 rounded-full flex items-center gap-2 shadow transition-colors duration-300 animate-pulse text-sm" style="min-width:120px;" aria-label="WhatsApp institucional">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.099-.471-.149-.669.15-.198.297-.767.967-.941 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.173.198-.297.298-.495.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.521.074-.793.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.066 2.875 1.216 3.074.149.198 2.1 3.208 5.077 4.487.711.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
             WhatsApp institucional
           </a>
