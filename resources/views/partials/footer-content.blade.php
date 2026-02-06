@@ -4,7 +4,10 @@
     <nav class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6 md:gap-8" aria-label="Links institucionais">
       <!-- Educação -->
       <div>
-      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-educacao">Educação</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4 flex items-center gap-2" id="footer-educacao">
+        <svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3l9 4.5v2a9 9 0 01-18 0v-2L12 3z"/><path d="M12 3v13"/></svg>
+        Educação
+      </h2>
         <ul class="space-y-2" aria-labelledby="footer-educacao">
           <li><a href="/cursos" class="hover:text-[#2979FF] transition-colors link-underline-soft">Cursos de Graduação</a></li>
           <li><a href="/pos-graduacao" class="hover:text-[#2979FF] transition-colors link-underline-soft">Cursos de Pós-Graduação</a></li>
@@ -14,7 +17,10 @@
       </div>
       <!-- Pesquisa -->
       <div>
-      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-pesquisa">Pesquisa</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4 flex items-center gap-2" id="footer-pesquisa">
+        <svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Pesquisa
+      </h2>
         <ul class="space-y-2" aria-labelledby="footer-pesquisa">
           <li><a href="/investigacao" class="hover:text-[#2979FF] transition-colors link-underline-soft">Pesquisa no ISP-Bié</a></li>
           <li><a href="/biblioteca" class="hover:text-[#2979FF] transition-colors link-underline-soft">Biblioteca Digital</a></li>
@@ -24,7 +30,10 @@
       </div>
       <!-- Institucional -->
       <div>
-      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-institucional">Institucional</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4 flex items-center gap-2" id="footer-institucional">
+        <svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 3v4"/><path d="M8 3v4"/></svg>
+        Institucional
+      </h2>
         <ul class="space-y-2" aria-labelledby="footer-institucional">
           <li><a href="/sobre-ispbie" class="hover:text-[#2979FF] transition-colors link-underline-soft">Sobre o ISP-Bié</a></li>
           <li><a href="/missao" class="hover:text-[#2979FF] transition-colors link-underline-soft">Missão</a></li>
@@ -35,14 +44,20 @@
       </div>
       <!-- Parcerias -->
       <div>
-      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-parcerias">Parcerias</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4 flex items-center gap-2" id="footer-parcerias">
+        <svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a4 4 0 00-4-4h-1"/><circle cx="9" cy="7" r="4"/><path d="M9 11v4"/><path d="M9 15v4"/><path d="M5 20h8"/></svg>
+        Parcerias
+      </h2>
         <ul class="space-y-2" aria-labelledby="footer-parcerias">
           <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Governo de Angola</a></li>
         </ul>
       </div>
       <!-- Fale com ISP-Bié -->
       <div>
-      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-fale">Fale com ISP-Bié</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4 flex items-center gap-2" id="footer-fale">
+        <svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Fale com ISP-Bié
+      </h2>
         <ul class="space-y-2 mb-4" aria-labelledby="footer-fale">
           <li><a href="/contactos" class="hover:text-[#2979FF] transition-colors link-underline-soft">Contactos</a></li>
           <li><a href="/ouvidoria" class="hover:text-[#2979FF] transition-colors link-underline-soft">Ouvidoria</a></li>
@@ -61,7 +76,10 @@
       </div>
       <!-- Ensino Superior em Angola -->
       <div>
-      <h2 class="text-[#2979FF] font-bold text-lg mb-4" id="footer-ensino">Ensino Superior em Angola</h2>
+      <h2 class="text-[#2979FF] font-bold text-lg mb-4 flex items-center gap-2" id="footer-ensino">
+        <svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l7 7-7 7-7-7z"/></svg>
+        Ensino Superior em Angola
+      </h2>
         <ul class="space-y-2 text-sm" aria-labelledby="footer-ensino">
           <li><a href="https://www.uan.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Agostinho Neto</a></li>
           <li><a href="https://www.ucan.edu" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Universidade Católica de Angola</a></li>
