@@ -111,7 +111,7 @@
           <div class="font-semibold text-center">Fernanda Gonçalves</div>
           <div class="mt-4 flex items-center gap-2">
             <span class="inline-block bg-[#2C4A5E] text-white px-2 py-1 rounded text-xs font-semibold">Acessível</span>
-            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+            <svg class="w-5 h-5 text-[#2C4A5E]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
           </div>
         </div>
         <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 bg-[#2979FF] hover:bg-[#1a1a1a] text-white rounded-full shadow-lg p-2 transition-colors duration-300 animate-pulse" style="min-width:40px;min-height:40px;" aria-label="Voltar ao topo">
