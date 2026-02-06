@@ -75,36 +75,32 @@
       </p>
     </div>
     <!-- Card -->
-    <template x-if="total > 0">
-      <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-gray-200 relative">
-        <p class="text-lg md:text-xl text-gray-700 italic text-center leading-relaxed mb-8 min-h-[96px]"
-           x-text="currentItem.texto">
-        </p>
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-[#2563eb] to-[#3B82F6] flex items-center justify-center text-white font-bold text-xl">
-            <span x-text="currentItem.iniciais"></span>
-          </div>
-          <h4 class="font-bold text-gray-900 text-lg" x-text="currentItem.nome"></h4>
-          <p class="text-sm text-gray-500 mt-1" x-text="currentItem.curso"></p>
-          <div class="flex justify-center mt-3 text-[#2563eb]">
-            ★★★★★
-          </div>
-        </div>
-        <button @click="prev"
-                class="absolute left-4 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100">
-          ‹
-        </button>
-        <button @click="next"
-                class="absolute right-4 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100">
-          ›
-        </button>
-      </div>
-    </template>
-    <template x-if="total === 0">
-      <p class="text-center text-gray-500 italic">
-        Ainda não existem testemunhos publicados.
+    <div x-show="total > 0" class="max-w-2xl mx-auto bg-white rounded-3xl shadow-lg p-8 md:p-12 border border-gray-200 relative">
+      <p class="text-lg md:text-xl text-gray-700 italic text-center leading-relaxed mb-8 min-h-[96px]"
+         x-text="currentItem.texto">
       </p>
-    </template>
+      <div class="text-center">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-[#2563eb] to-[#3B82F6] flex items-center justify-center text-white font-bold text-xl">
+          <span x-text="currentItem.iniciais"></span>
+        </div>
+        <h4 class="font-bold text-gray-900 text-lg" x-text="currentItem.nome"></h4>
+        <p class="text-sm text-gray-500 mt-1" x-text="currentItem.curso"></p>
+        <div class="flex justify-center mt-3 text-[#2563eb]">
+          ★★★★★
+        </div>
+      </div>
+      <button @click="prev"
+              class="absolute left-4 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100">
+        ‹
+      </button>
+      <button @click="next"
+              class="absolute right-4 top-1/2 -translate-y-1/2 bg-white shadow rounded-full w-10 h-10 flex items-center justify-center hover:bg-gray-100">
+        ›
+      </button>
+    </div>
+    <p x-show="total === 0" class="text-center text-gray-500 italic">
+      Ainda não existem testemunhos publicados.
+    </p>
   </div>
 </section>
 
@@ -112,29 +108,30 @@
 @push('scripts')
 <script>
 function testemunhosCarousel() {
-    return {
-        items: @json(\App\Models\Testemunho::all()),
-        currentIndex: 0,
-        total: @json(\App\Models\Testemunho::count()),
-        get currentItem() {
-            return this.items[this.currentIndex] || {};
-        },
-        init() {
-            this.startAutoplay();
-        },
-        startAutoplay() {
-            this.autoplay = setInterval(() => this.next(), 5000);
-        },
-        stopAutoplay() {
-            clearInterval(this.autoplay);
-        },
-        prev() {
-            this.currentIndex = (this.currentIndex - 1 + this.total) % this.total;
-        },
-        next() {
-            this.currentIndex = (this.currentIndex + 1) % this.total;
-        }
+  return {
+    items: @json(\App\Models\Testemunho::select('nome','curso','iniciais','texto')->get()),
+    currentIndex: 0,
+    total: @json(\App\Models\Testemunho::count()),
+    autoplay: null,
+    get currentItem() {
+      return this.items[this.currentIndex] || {};
+    },
+    init() {
+      this.startAutoplay();
+    },
+    startAutoplay() {
+      this.autoplay = setInterval(() => this.next(), 5000);
+    },
+    stopAutoplay() {
+      clearInterval(this.autoplay);
+    },
+    prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.total) % this.total;
+    },
+    next() {
+      this.currentIndex = (this.currentIndex + 1) % this.total;
     }
+  }
 }
 </script>
 @endpush
