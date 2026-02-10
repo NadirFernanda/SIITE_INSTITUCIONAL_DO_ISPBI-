@@ -149,6 +149,10 @@
         <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#2563eb"/><path d="M7 9h10M7 13h6" stroke="#2563eb"/></svg></span>
         <span>Comunicação</span>
       </a>
+      <a href="/candidaturas" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Candidaturas">
+        <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M9 8h6" stroke="#2563eb"/></svg></span>
+        <span>Candidaturas</span>
+      </a>
       <!-- Dropdown Extensão Universitária - Mobile (padronizado) -->
       <div class="relative lg:hidden">
         <button @click="openExtMobile = !openExtMobile"
@@ -161,6 +165,7 @@
         </button>
            <div x-show="openExtMobile" x-cloak
              class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 z-[70]" style="position:relative;">
+          <a href="/cultura" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Extensão Universitária</a>
           <a href="/estagios" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estágios</a>
           <a href="/alumni" class="block px-3 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
         </div>
