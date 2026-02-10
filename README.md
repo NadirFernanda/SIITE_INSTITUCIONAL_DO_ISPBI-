@@ -242,6 +242,41 @@ O projeto segue as melhores práticas de segurança para aplicações Laravel e 
 - **Headers de segurança**: Recomenda-se configurar headers como `X-Frame-Options`, `X-Content-Type-Options`, `Strict-Transport-Security` no servidor web.
 - **Backups e monitoramento**: Recomenda-se backups regulares e monitoramento de acessos e logs.
 
+## 🔁 CI & Backups (automação recomendada)
+
+O repositório inclui workflows de exemplo em `.github/workflows/`:
+
+- `ci.yml` — instala dependências PHP/Node, compila assets e executa testes em pushes e pull requests para a branch `main`.
+- `backup.yml` — workflow pensado para executar em um runner `self-hosted` (por segurança) e invocar `scripts/backup.sh` para criar backups locais e, opcionalmente, enviar para S3.
+
+### Ativar CI
+
+1. Publique o repositório no GitHub e habilite Actions.
+2. O `ci.yml` roda automaticamente em pushes/pull requests para `main`.
+3. Se os testes do projeto exigirem variáveis de ambiente, adicione os segredos necessários em _Settings → Secrets and variables_ no GitHub.
+
+### Usar backups (local / servidor)
+
+O script `scripts/backup.sh` realiza um dump da base de dados (MySQL), arquiva `storage/` e copia `.env`, gerando ficheiros em `backups/` com timestamp. Opcionalmente, faz upload para S3 se as variáveis `BACKUP_S3_BUCKET`, `AWS_ACCESS_KEY_ID` e `AWS_SECRET_ACCESS_KEY` estiverem disponíveis.
+
+Recomendações de implantação:
+
+- Prefira executar backups a partir de um runner self-hosted que tenha rede direta ao servidor de base de dados e ao sistema de ficheiros do site.
+- Configure segredos no repositório: `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, `BACKUP_S3_BUCKET`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`.
+- Para execução manual/cron no servidor, adicione uma entrada crontab como exemplo:
+
+```bash
+# Exemplo: executar todos os dias às 03:30
+30 3 * * * cd /var/www/isp-bie.ao && /bin/bash ./scripts/backup.sh >> /var/log/isp_backups.log 2>&1
+```
+
+Observações de segurança:
+
+- Nunca versionar credenciais (`.env`) no repositório.
+- Teste o script manualmente antes de agendar execuções automáticas.
+- Monitore o tamanho e a retenção dos backups no destino (S3 ou outro).
+
+
 Essas medidas reduzem drasticamente o risco de ataques comuns (XSS, CSRF, SQL Injection, enumeração de usuários, vazamento de dados sensíveis, etc). A segurança é tratada como prioridade contínua no ciclo de vida do projeto.
 
 ---
