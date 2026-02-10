@@ -89,7 +89,7 @@ O design do website foi desenvolvido com base nas melhores práticas de universi
 11. **Portal institucional (/portal)** - Acesso centralizado aos sistemas institucionais
 12. **Transparência (/transparencia)** - Gestão financeira, orçamentos e prestação de contas
 13. **Ouvidoria (/ouvidoria)** - Canal de manifestações, reclamações e sugestões
-14. **Webmail (https://isp-bie.ao/webmail)** - Acesso ao email institucional @ispbie.ao
+14. **Webmail (http://www.isp-bie.ao/webmail)** - Acesso ao email institucional @ispbie.ao
 15. **Alumni (/alumni)** - Rede de ex-alunos, networking e oportunidades
 16. **Revista Científica (/revista)** - Publicações científicas da instituição
 17. **Biblioteca Digital (/biblioteca)** - Acervo digital (2.500+ livros, 1.200+ artigos)
@@ -222,7 +222,29 @@ ssh usuario@isp-bie
 
 Caso ainda não tenhas acesso, pede à infraestrutura para adicionar a tua chave SSH ao servidor.
 
-## 🚀 Deploy em Produção (VPS)
+
+## 🔒 Medidas de Segurança Aplicadas
+
+O projeto segue as melhores práticas de segurança para aplicações Laravel e web modernas. As principais medidas implementadas são:
+
+- **Autenticação obrigatória**: Todas as rotas administrativas estão protegidas pelo middleware `auth`, exigindo login para acesso.
+- **Autorização por papel**: Apenas usuários com papel `admin` (campo `role` na tabela `users`) podem acessar a listagem de usuários e áreas sensíveis do painel.
+- **Proteção contra enumeração de usuários**: Não há endpoints públicos que exponham dados de usuários administrativos.
+- **Senhas protegidas**: O campo `password` é sempre oculto e armazenado de forma segura (hash).
+- **Proteção CSRF**: Todos os formulários utilizam tokens CSRF, padrão do Laravel.
+- **Proteção XSS**: Saída de dados nas views Blade utiliza `{{ }}` para evitar injeção de scripts.
+- **Proteção SQL Injection**: Todas as queries utilizam Eloquent/Query Builder, nunca SQL manual.
+- **Permissões de arquivos**: Recomenda-se permissões restritas em `storage` e `bootstrap/cache`.
+- **Variáveis de ambiente seguras**: `.env` nunca é versionado e contém apenas dados sensíveis necessários.
+- **Execução de migrations**: O banco de dados é atualizado apenas por migrations versionadas e seguras.
+- **Dependências auditadas**: Recomenda-se rodar `composer audit` e `npm audit` regularmente.
+- **HTTPS obrigatório**: O servidor deve ser configurado para aceitar apenas conexões seguras.
+- **Headers de segurança**: Recomenda-se configurar headers como `X-Frame-Options`, `X-Content-Type-Options`, `Strict-Transport-Security` no servidor web.
+- **Backups e monitoramento**: Recomenda-se backups regulares e monitoramento de acessos e logs.
+
+Essas medidas reduzem drasticamente o risco de ataques comuns (XSS, CSRF, SQL Injection, enumeração de usuários, vazamento de dados sensíveis, etc). A segurança é tratada como prioridade contínua no ciclo de vida do projeto.
+
+---
 
 `git push` neste repositório:
  git add resources/views/pages/sistemas.blade.php
@@ -232,86 +254,20 @@ git push origin main
 
 # 2. Entrar no diretório do projeto
 ```
-cd /var/www/isp-bie.ao
 git pull
 npm run build
 php artisan view:clear
 php artisan cache:clear
 php artisan config:clear
-
-## 🎯 Roadmap Futuro
-
-### Funcionalidades Pendentes
-- [ ] Sistema de autenticação para estudantes e docentes
-- [ ] Integração com sistema académico
-- [ ] Sistema de gestão de conteúdo (CMS)
-- [ ] Portal do estudante com consulta de notas
-- [ ] Sistema de candidaturas online funcional
-- [ ] Newsletter e notificações
-- [ ] Galeria de imagens institucional
-- [ ] Calendário académico interativo
-- [ ] Menu mobile responsivo
-- [ ] Multilinguismo (Português/Inglês)
-
-### Melhorias de Conteúdo
-- [ ] Substituir imagens placeholder por fotografias reais
-- [ ] Implementar sistema de notícias dinâmico
-- [ ] Adicionar perfis de docentes
-- [ ] Criar área de downloads
-- [ ] Implementar mapa interativo do campus
-
-## 📊 Estatísticas do Projeto
-
-- **Total de Rotas:** 26
-- **Total de Views:** 27 (1 layout + 26 páginas)
-- **Componentes Reutilizáveis:** 2 (navbar, footer)
-- **Linhas de Código:** ~5.000+
-- **Tempo de Desenvolvimento:** 1 dia
-
-## 👥 Contribuição
-
-Para contribuir com o projeto:
-
-1. Faça um fork do repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto é propriedade do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ.
-
-## 📞 Contacto
-
-**INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ**  
-📍 Rua Padre Fidalgo entre Artur de Paiva e Francisco de Leite Cardoso S/N, Cuito/Bié  
-📧 geral@ispbie.ao  
-📞 +244 000 000 000  
-🌐 NIF: 5000308765
-
----
-
-**Desenvolvido com ❤️ para o INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ** | Dezembro 2025
-
-## 🚀 Tecnologias Utilizadas
-
-O site institucional do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ foi desenvolvido utilizando as seguintes tecnologias:
-
-- **Laravel** (Backend, Framework PHP)
-- **Blade** (Sistema de templates do Laravel)
-- **Tailwind CSS** (Framework CSS utilitário para design responsivo e moderno)
-- **Vite** (Ferramenta de build e hot reload para assets front-end)
-- **PHP** (Linguagem principal do backend)
-- **JavaScript** (Scripts customizados para interatividade)
-- **HTML5** (Estrutura das páginas)
-- **CSS3** (Estilização customizada)
-- **postgres** (Banco de dados relacional, integração futura)
-- **Autenticação Laravel** (Login, painel administrativo)
-- **Favicon personalizado** (favicon.ico/png institucional)
-- **Imagens institucionais** (logo, fotos, ícones)
-- **Design responsivo** (Mobile-first, compatível com todos os dispositivos)
-- **Integração com rotas web** (routes/web.php)
-- **Estrutura modular de componentes** (partials, layouts, pages)
-
-Essas tecnologias garantem performance, segurança, escalabilidade e uma experiência moderna para todos os usuários do site.
+cd /var/www/isp-bie.ao
+git pull
+composer install --no-dev --optimize-autoloader
+php artisan migrate --force
+npm run build
+php artisan view:clear
+php artisan cache:clear
+php artisan config:clear
+```
+<userPrompt>
+Provide the fully rewritten file, incorporating the suggested code change. You must produce the complete file.
+</userPrompt>

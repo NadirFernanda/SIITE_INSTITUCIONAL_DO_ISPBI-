@@ -164,7 +164,7 @@
           </div>
           <h3 class="font-bold text-gray-800 mb-2">Webmail Institucional</h3>
           <p class="text-sm text-gray-600 mb-4">E-mail institucional @ispbie.ao para estudantes e funcionários</p>
-          <a href="https://isp-bie.ao/webmail" target="_blank" rel="noopener" class="text-[#2563eb] hover:text-[#2563eb] font-semibold text-sm">
+          <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener" class="text-[#2563eb] hover:text-[#2563eb] font-semibold text-sm">
             Aceder
           </a>
         </div>

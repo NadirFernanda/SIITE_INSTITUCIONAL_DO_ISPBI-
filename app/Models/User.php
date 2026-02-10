@@ -1,3 +1,11 @@
+    /**
+     * Verifica se o usuário possui determinado papel (role).
+     * Exemplo simples: campo 'role' na tabela users.
+     */
+    public function hasRole($role)
+    {
+        return isset($this->role) && $this->role === $role;
+    }
 <?php
 
 namespace App\Models;
