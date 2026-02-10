@@ -48,3 +48,4 @@ composer.lock
 .env.development
 .env.test
 .env.example
+README.md
