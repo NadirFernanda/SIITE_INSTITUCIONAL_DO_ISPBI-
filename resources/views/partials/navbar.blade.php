@@ -150,9 +150,10 @@
         <span>Notícias</span>
       </a>
       <a href="/candidaturas" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Candidaturas">
-        <span class="flex items-center justify-center w-10 h-10 rounded-md bg-[#2563eb] text-white">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9 12h6M9 16h6M9 8h6" stroke-linecap="round" stroke-linejoin="round"/>
+        <span>
+          <svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="12" rx="2" stroke="#2563eb" fill="none"/>
+            <path d="M7 9h10M7 13h6" stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
         <span>Candidaturas</span>
