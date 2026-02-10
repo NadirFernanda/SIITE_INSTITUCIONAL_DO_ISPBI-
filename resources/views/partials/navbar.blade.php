@@ -151,7 +151,7 @@
       </a>
       <a href="/candidaturas" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Candidaturas">
         <span>
-          <svg class="w-6 h-6" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <svg class="w-7 h-7" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M9 12h6M9 16h6M9 8h6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
