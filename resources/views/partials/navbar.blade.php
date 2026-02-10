@@ -1,3 +1,4 @@
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-[#2563eb] px-3 py-2 rounded shadow z-60">Saltar para o conteúdo</a>
 <div class="hidden md:block w-full fixed left-0 top-0" style="background:#0E8F81;height:4px;z-index:52;"></div>
 <div class="hidden md:block w-full fixed left-0 top-0" style="background:#F05A28;height:4px;top:4px;z-index:51;"></div>
 
@@ -61,7 +62,7 @@
     </a>
     
     <!-- Botão hamburger (Mobile) -->
-    <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors flex-shrink-0">
+    <button @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen ? 'true' : 'false'" aria-controls="mobile-menu" aria-label="Abrir menu principal" class="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors flex-shrink-0">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         <path x-show="mobileMenuOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -69,7 +70,7 @@
     </button>
     
     <!-- Menu principal (Desktop) -->
-    <nav class="hidden lg:flex flex-row items-center space-x-4 xl:space-x-6 mb-0 pb-0 border-b-0">
+    <nav role="navigation" aria-label="Navegação principal" class="hidden lg:flex flex-row items-center space-x-4 xl:space-x-6 mb-0 pb-0 border-b-0">
       <a href="/cursos" class="flex items-center space-x-1 text-white font-semibold uppercase text-xs tracking-wide hover:text-[#FFD700] transition-colors whitespace-nowrap">
         <span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
         <span>Cursos</span>
@@ -127,7 +128,7 @@
   </div>
 
   <!-- Menu Mobile (off-canvas) -->
-  <div x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 flex lg:hidden overflow-x-hidden w-full max-w-full">
+  <div id="mobile-menu" role="dialog" aria-modal="false" aria-label="Menu principal" x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 flex lg:hidden overflow-x-hidden w-full max-w-full">
     <!-- Fundo branco acessível -->
     <div class="absolute inset-0 bg-white opacity-95 backdrop-filter blur-lg" @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;"></div>
     <!-- Painel lateral com efeito glassmorphism, sombra e detalhes dourados -->
@@ -173,7 +174,7 @@
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="#2563eb"/><rect x="9" y="10" width="6" height="4" rx="1" stroke="#2563eb"/></svg></span>
           <span>Contacto</span>
         </a>
-        <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
+        <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener" aria-label="Abrir Webmail (abre em nova aba)" class="flex items-center space-x-3 py-2 px-4 text-gray-700 hover:text-[#2563eb] hover:bg-gray-50 rounded">
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="#2563eb"/><path d="M4 6l8 7 8-7" stroke="#2563eb"/></svg></span>
           <span>Webmail</span>
         </a>

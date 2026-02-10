@@ -1,6 +1,7 @@
 ﻿@extends('layouts.site')
 
 @section('content')
+<main id="main-content" tabindex="-1">
 
   <!-- Hero institucional moderno + carrossel contido -->
   <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden mt-0 pt-0">
@@ -356,4 +357,5 @@
       </div>
     </div>
   </section>
+  </main>
 @endsection
