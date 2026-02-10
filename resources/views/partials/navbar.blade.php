@@ -165,9 +165,8 @@
         </button>
            <div x-show="openExtMobile" x-cloak
              class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 z-[70]" style="position:relative;">
-           <a href="/cultura" role="menuitem" aria-label="Extensão Universitária" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Extensão Universitária</a>
-           <a href="/estagios" role="menuitem" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estágios</a>
-           <a href="/alumni" role="menuitem" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
+          <a href="/estagios" role="menuitem" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estágios</a>
+          <a href="/alumni" role="menuitem" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Alumni</a>
           </div>
       </div>
       
