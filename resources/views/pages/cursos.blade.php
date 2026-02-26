@@ -187,7 +187,11 @@ $cursos = [
                         <!-- Departamento e domínio - ordem 3 -->
                         <div class="order-3">
                             <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-2 text-base">
-                                <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
+                                @if(isset($curso['domain']) && $curso['department'] === 'Ciências da Saúde' && trim($curso['domain']) === 'Ciências Médicas e da Saúde')
+                                    <span class="font-semibold">{{ $curso['department'] }}</span>
+                                @else
+                                    <span class="font-semibold">{{ $curso['department'] }}</span>@if(!empty($curso['domain'])) - {{ $curso['domain'] }}@endif
+                                @endif
                             </p>
                         </div>
 
