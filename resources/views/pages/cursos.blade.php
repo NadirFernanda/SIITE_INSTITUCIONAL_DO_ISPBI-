@@ -154,43 +154,46 @@ $cursos = [
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
         @foreach ($cursos as $curso)
             <div :class="dark ? 'bg-gray-800 text-gray-100 border border-gray-700' : ''"
-                class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[360px]"
+                class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-8 flex flex-col justify-between group h-full min-h-[360px]"
                 :style="dark ? '' : 'background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});'">
 
                 <div class="relative z-10 flex flex-col h-full">
-                    <!-- Título do curso (forçar ordem 1) -->
-                    <div class="order-1">
-                        <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-2xl font-bold mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">
-                            {{ $curso['title'] }}
-                        </h3>
-                    </div>
-
-                    <!-- Perfis de saída / Áreas (após o título) - ordem 2 -->
-                    <div class="order-2">
-                        @if(count($curso['areas']) > 0)
-                        <div class="flex gap-3 mb-4 flex-wrap">
-                            @foreach ($curso['areas'] as $area)
-                            <div :class="dark ? 'text-gray-100' : 'text-white'" class="flex flex-col items-center text-sm w-24">
-                                <span class="flex items-center justify-center w-12 h-12 rounded-full mb-1 icon-animate" :class="dark ? 'bg-gray-700' : 'bg-white/20'">
-                                    {!! heroicon($area['icon'] ?? '') !!}
-                                </span>
-                                <span class="text-center">{{ $area['name'] }}</span>
-                            </div>
-                            @endforeach
+                    <!-- Conteúdo do card com espaçamento melhorado -->
+                    <div class="flex flex-col gap-3 h-full">
+                        <!-- Título do curso (forçar ordem 1) -->
+                        <div class="order-1">
+                            <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-2xl font-bold mb-1 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg leading-tight">
+                                {{ $curso['title'] }}
+                            </h3>
                         </div>
-                        @endif
-                    </div>
 
-                    <!-- Departamento e domínio - ordem 3 -->
-                    <div class="order-3">
-                        <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-4">
-                            <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
-                        </p>
-                    </div>
+                        <!-- Perfis de saída / Áreas (após o título) - ordem 2 -->
+                        <div class="order-2">
+                            @if(count($curso['areas']) > 0)
+                            <div class="flex gap-4 mb-3 flex-wrap items-start">
+                                @foreach ($curso['areas'] as $area)
+                                <div :class="dark ? 'text-gray-100' : 'text-white'" class="flex flex-col items-start text-sm w-auto min-w-[140px]">
+                                    <span class="flex items-center justify-center w-10 h-10 rounded-full mb-2 icon-animate" :class="dark ? 'bg-gray-700' : 'bg-white/20'">
+                                        {!! heroicon($area['icon'] ?? '') !!}
+                                    </span>
+                                    <span class="text-left text-sm leading-snug">{{ $area['name'] }}</span>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
+                        </div>
 
-                    <!-- Descrição resumida - ordem 4 -->
-                    <div class="order-4 mt-auto">
-                        <p :class="dark ? 'text-gray-300' : 'text-white/80'" class="mb-6">{{ $curso['description'] }}</p>
+                        <!-- Departamento e domínio - ordem 3 -->
+                        <div class="order-3">
+                            <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-2 text-base">
+                                <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
+                            </p>
+                        </div>
+
+                        <!-- Descrição resumida - ordem 4 (empurrada para baixo) -->
+                        <div class="order-4 mt-auto">
+                            <p :class="dark ? 'text-gray-300' : 'text-white/80'" class="mb-0 text-sm leading-relaxed">{{ $curso['description'] }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
