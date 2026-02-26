@@ -54,7 +54,7 @@
                         </div>
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-1">Email</h3>
-                            <p class="text-gray-600">geral@isp-bie.ao<br>secretaria@ispbie.ao</p>
+                            <p class="text-gray-600">geral@isp-bie.ao</p>
                         </div>
                     </div>
 
