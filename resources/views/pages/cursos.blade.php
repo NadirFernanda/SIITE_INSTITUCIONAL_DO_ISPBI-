@@ -153,12 +153,8 @@ $cursos = [
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
         @foreach ($cursos as $curso)
-            <div :class="dark ? 'bg-gray-800 text-gray-100 border border-gray-700' : ''"
-                class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-8 flex flex-col justify-between group h-full min-h-[360px]"
-                :style="dark ? '' : 'background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});'">
-
-                <!-- Overlay to soften gradient in light mode -->
-                <div :class="dark ? 'hidden' : 'absolute inset-0 bg-white/30 rounded-2xl pointer-events-none'" aria-hidden="true"></div>
+            <div :class="dark ? 'bg-gray-800 text-gray-100 border border-gray-700' : 'bg-white text-gray-900 border border-gray-200'"
+                class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-8 flex flex-col justify-between group h-full min-h-[360px]">
 
                 <div class="relative z-10 flex flex-col h-full">
                     <!-- Conteúdo do card com espaçamento melhorado -->
