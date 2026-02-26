@@ -140,17 +140,26 @@
               <li>
                 <div class="font-semibold">Emissão de Declaração</div>
                 <div class="text-gray-600">Declaração — frequência com notas, sem notas ou conclusão de curso</div>
-                <div class="text-sm text-gray-500 mt-1">Prazo: 7 dias úteis</div>
+                <div class="mt-2 flex items-center gap-3">
+                  <span class="inline-flex items-center bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Com urgência: <span class="font-semibold ml-2">48h</span></span>
+                  <span class="inline-flex items-center bg-[#2563eb] text-white text-xs px-3 py-1 rounded-full">Sem urgência: <span class="font-semibold ml-2">7 dias úteis</span></span>
+                </div>
               </li>
               <li>
                 <div class="font-semibold">Emissão de Certificado</div>
                 <div class="text-gray-600">Certificado de conclusão de curso</div>
-                <div class="text-sm text-gray-500 mt-1">Prazo: 15 dias úteis</div>
+                <div class="mt-2 flex items-center gap-3">
+                  <span class="inline-flex items-center bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Com urgência: <span class="font-semibold ml-2">30 dias</span></span>
+                  <span class="inline-flex items-center bg-[#2563eb] text-white text-xs px-3 py-1 rounded-full">Sem urgência: <span class="font-semibold ml-2">60 dias</span></span>
+                </div>
               </li>
               <li>
                 <div class="font-semibold">Solicitação de Histórico Escolar</div>
                 <div class="text-gray-600">Histórico completo ou parcial</div>
-                <div class="text-sm text-gray-500 mt-1">Prazo: 5 dias úteis</div>
+                <div class="mt-2 flex items-center gap-3">
+                  <span class="inline-flex items-center bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Com urgência: <span class="font-semibold ml-2">7 dias</span></span>
+                  <span class="inline-flex items-center bg-[#2563eb] text-white text-xs px-3 py-1 rounded-full">Sem urgência: <span class="font-semibold ml-2">15 dias</span></span>
+                </div>
               </li>
             </ul>
             <p class="text-gray-900 font-bold mt-3">Serviços Administrativos</p>
