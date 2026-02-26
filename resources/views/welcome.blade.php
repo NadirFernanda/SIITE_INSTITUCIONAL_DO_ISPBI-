@@ -161,13 +161,13 @@
         </a>
 
 
-        <a href="/ouvidoria" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Ouvidoria">
+        <a href="/contactos" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contactos">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Ouvidoria</span>
+          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Contactos</span>
         </a>
 
         <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Webmail (abre em nova aba)">

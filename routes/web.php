@@ -114,7 +114,6 @@ Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])-
 
 // Rotas para Acesso Rápido
 // Rota '/portal' removida (página externa usada em vez da view interna)
-Route::view('/ouvidoria', 'pages.ouvidoria')->name('ouvidoria');
 Route::view('/revista', 'pages.revista')->name('revista');
 Route::view('/biblioteca', 'pages.biblioteca')->name('biblioteca');
 Route::view('/repositorio', 'pages.repositorio')->name('repositorio');

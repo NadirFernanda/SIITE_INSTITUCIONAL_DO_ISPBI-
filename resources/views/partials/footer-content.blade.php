@@ -60,7 +60,7 @@
       </h2>
         <ul class="space-y-2 mb-4" aria-labelledby="footer-fale">
           <li><a href="/contactos" class="hover:text-[#2979FF] transition-colors link-underline-soft">Contactos</a></li>
-          <li><a href="/ouvidoria" class="hover:text-[#2979FF] transition-colors link-underline-soft">Ouvidoria</a></li>
+          <li><a href="/contactos" class="hover:text-[#2979FF] transition-colors link-underline-soft">Contactos</a></li>
           <li><a href="/trabalhe-conosco" class="hover:text-[#2979FF] transition-colors link-underline-soft">Trabalhe Connosco</a></li>
           <li><a href="/noticias" class="hover:text-[#2979FF] transition-colors link-underline-soft">Notícias</a></li>
         </ul>
