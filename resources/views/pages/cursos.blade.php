@@ -157,6 +157,9 @@ $cursos = [
                 class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-8 flex flex-col justify-between group h-full min-h-[360px]"
                 :style="dark ? '' : 'background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});'">
 
+                <!-- Overlay to soften gradient in light mode -->
+                <div :class="dark ? 'hidden' : 'absolute inset-0 bg-white/30 rounded-2xl pointer-events-none'" aria-hidden="true"></div>
+
                 <div class="relative z-10 flex flex-col h-full">
                     <!-- Conteúdo do card com espaçamento melhorado -->
                     <div class="flex flex-col gap-3 h-full">
