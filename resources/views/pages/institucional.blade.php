@@ -348,7 +348,7 @@
               </svg>
               <div>
                 <h3 class="text-xl font-bold mb-2">Email</h3>
-                <p class="text-lg opacity-90">geral@ispbie.ao</p>
+                <p class="text-lg opacity-90">geral@isp-bie.ao</p>
               </div>
             </div>
           </div>
