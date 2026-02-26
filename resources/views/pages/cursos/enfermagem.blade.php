@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <p class="text-sm text-gray-600 mb-4"><span class="font-semibold">Ciências da Saúde</span> - Ciências Médicas e da Saúde</p>
+    <p class="text-sm text-gray-600 mb-4"><span class="font-semibold">Ciências da Saúde</span></p>
 
     <p class="text-gray-700">Forma profissionais aptos a atuar na promoção, prevenção, recuperação e reabilitação da saúde, com foco no cuidado humanizado e na gestão em saúde.</p>
 
