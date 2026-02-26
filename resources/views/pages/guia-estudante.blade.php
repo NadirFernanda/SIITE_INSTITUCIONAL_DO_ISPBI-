@@ -135,8 +135,40 @@
           </div>
           <div class="border-l-4 border-[#3B82F6] pl-4">
             <h4 class="font-bold text-gray-900 mb-2">Emissão de Documentos</h4>
-            <p class="text-gray-600 mb-2">Declarações, certidões e históricos escolares.</p>
-            <p class="text-sm text-gray-500">Prazo: 5 a 10 dias úteis</p>
+            <p class="text-gray-600 mb-2">Declarações, certidões e históricos escolares. Disponível com opção de urgência.</p>
+            <ul class="space-y-2 text-sm text-gray-700 mb-2">
+              <li class="flex items-start">
+                <span class="inline-flex items-center mr-3">
+                  <svg class="w-4 h-4 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.487 0l6.518 11.592A1.75 1.75 0 0116.518 17H3.482a1.75 1.75 0 01-1.744-2.309L8.257 3.1zM9 7a1 1 0 112 0v3a1 1 0 11-2 0V7zm1 7a1.25 1.25 0 100-2.5A1.25 1.25 0 0010 14z" clip-rule="evenodd"/></svg>
+                  <span class="text-xs font-semibold text-red-700">Urgente</span>
+                </span>
+                <div>
+                  <span class="font-semibold">Declaração:</span>
+                  <span class="text-gray-600">Com urgência: <span class="font-semibold text-red-700">48h</span> · Sem urgência: 7 dias</span>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-flex items-center mr-3">
+                  <svg class="w-4 h-4 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.487 0l6.518 11.592A1.75 1.75 0 0116.518 17H3.482a1.75 1.75 0 01-1.744-2.309L8.257 3.1zM9 7a1 1 0 112 0v3a1 1 0 11-2 0V7zm1 7a1.25 1.25 0 100-2.5A1.25 1.25 0 0010 14z" clip-rule="evenodd"/></svg>
+                  <span class="text-xs font-semibold text-red-700">Urgente</span>
+                </span>
+                <div>
+                  <span class="font-semibold">Certificado:</span>
+                  <span class="text-gray-600">Com urgência: <span class="font-semibold text-red-700">30 dias</span> · Sem urgência: 60 dias</span>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <span class="inline-flex items-center mr-3">
+                  <svg class="w-4 h-4 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.487 0l6.518 11.592A1.75 1.75 0 0116.518 17H3.482a1.75 1.75 0 01-1.744-2.309L8.257 3.1zM9 7a1 1 0 112 0v3a1 1 0 11-2 0V7zm1 7a1.25 1.25 0 100-2.5A1.25 1.25 0 0010 14z" clip-rule="evenodd"/></svg>
+                  <span class="text-xs font-semibold text-red-700">Urgente</span>
+                </span>
+                <div>
+                  <span class="font-semibold">Histórico Escolar (solicitação):</span>
+                  <span class="text-gray-600">Com urgência: <span class="font-semibold text-red-700">7 dias</span> · Sem urgência: 15 dias</span>
+                </div>
+              </li>
+            </ul>
+            <p class="text-sm text-gray-500 mt-1">Para solicitar, contacte os Serviços Académicos ou use o portal.</p>
           </div>
           <div class="border-l-4 border-[#3B82F6] pl-4">
             <h4 class="font-bold text-gray-900 mb-2">Cartão de Estudante</h4>
