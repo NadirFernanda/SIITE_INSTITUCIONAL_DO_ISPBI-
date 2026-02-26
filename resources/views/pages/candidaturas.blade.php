@@ -28,8 +28,8 @@
                                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-bold text-[#F05A28]">Candidaturas para o ano académico 2024/2025</h3>
-                                                <p class="text-[#F05A28]">As candidaturas para o ano de 2025/2026 estão encerradas</p>
+                                                <h3 class="font-bold text-[#F05A28]">Candidaturas para o ano 2026/2027</h3>
+                                                <p class="text-[#F05A28]">As candidaturas para o ano 2026/2027 ainda não estão abertas</p>
                                             </div>
                                         </div>
                                     </div>
