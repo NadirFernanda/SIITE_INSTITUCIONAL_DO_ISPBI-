@@ -77,6 +77,10 @@ Route::view('/vida-academica', 'pages.vida')->name('vida');
 Route::view('/noticias', 'pages.noticias')->name('noticias');
 Route::view('/contactos', 'pages.contactos')->name('contactos');
 
+// Rota para envio do formulário de contactos
+use App\Http\Controllers\ContactController;
+Route::post('/contactos/send', [ContactController::class, 'send'])->name('contact.send');
+
 Route::view('/valores', 'pages.valores')->name('valores');
 Route::view('/visao', 'pages.visao')->name('visao');
 Route::view('/trabalhe-conosco', 'pages.trabalhe-conosco')->name('trabalhe-conosco');

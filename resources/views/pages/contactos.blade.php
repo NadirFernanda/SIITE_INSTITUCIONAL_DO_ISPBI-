@@ -89,7 +89,12 @@
             <div>
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Envie uma Mensagem</h2>
                 <p class="text-gray-600 mb-4 max-w-xl">Utilize o formulário para pedidos gerais de informação, dúvidas sobre cursos, serviços institucionais ou para estabelecer contacto formal com o ISP-Bié.</p>
-                <form class="space-y-4" novalidate>
+                @if(session('success'))
+                    <div class="mb-4 p-3 rounded bg-green-50 border border-green-200 text-green-800">{{ session('success') }}</div>
+                @elseif(session('error'))
+                    <div class="mb-4 p-3 rounded bg-red-50 border border-red-200 text-red-800">{{ session('error') }}</div>
+                @endif
+                <form action="{{ route('contact.send') }}" method="POST" class="space-y-4" novalidate>
                     @csrf
                     <div>
                         <label for="contact-name" class="block text-gray-700 font-semibold mb-2">Nome Completo</label>
