@@ -3,10 +3,12 @@
 @section('content')
 
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-3xl font-bold text-[#F59E42] mb-6">Comunicação Social</h1>
+    <h1 class="text-3xl font-bold text-[#F59E42] mb-4">Comunicação Social</h1>
+
+    <div class="text-sm font-semibold text-gray-700 mb-2">Algumas áreas de actuação</div>
 
     <!-- Perfis de saída -->
-    <div class="flex gap-4 mb-6 flex-wrap">
+    <div class="flex gap-4 mb-4 flex-wrap">
         <div class="flex items-center space-x-3">
             <div class="w-12 h-12 rounded-full bg-[#F59E42]/20 flex items-center justify-center">📰</div>
             <div>
@@ -26,6 +28,8 @@
             </div>
         </div>
     </div>
+
+    <p class="text-sm text-gray-600 mb-4"><span class="font-semibold">Ciências Humanas, Sociais e Económicas</span> - Ciências Sociais, Jornalismo e Informação</p>
 
     <p class="text-gray-700">Capacita profissionais para atuar em jornalismo, relações públicas, publicidade, comunicação organizacional e produção de conteúdo digital.</p>
 
