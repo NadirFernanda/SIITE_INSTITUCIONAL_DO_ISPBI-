@@ -240,8 +240,8 @@
           <h3 class="text-2xl font-bold text-gray-900">Estágios</h3>
         </div>
         <p class="text-gray-700 mb-4">
-          Os estágios não são obrigatórios, mas são fortemente recomendados para a formação prática 
-          e melhor integração no mercado de trabalho.
+          Os estágios são obrigatórios e fazem parte do currículo académico; são essenciais para a formação prática
+          e para a integração no mercado de trabalho.
         </p>
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
           <p class="font-semibold text-gray-900 mb-2">Centro de Gestão de Estágios</p>
