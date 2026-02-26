@@ -9,10 +9,7 @@
         <span>Guia do Estudante</span>
       </nav>
 
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Guia do Estudante 2025/2026</h1>
-        <p class="text-lg text-gray-700">Tudo o que precisa saber para ter sucesso no ISP-Bié</p>
-      </div>
+      
 
   <!-- Download -->
   <section class="py-8 bg-white border-b scroll-reveal">
