@@ -142,7 +142,7 @@
                 <div class="text-gray-600">Declaração — frequência com notas, sem notas ou conclusão de curso</div>
                 <div class="mt-2 flex items-center gap-3">
                   <span class="inline-flex items-center bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full">Com urgência: <span class="font-semibold ml-2">48h</span></span>
-                  <span class="inline-flex items-center bg-[#2563eb] text-white text-xs px-3 py-1 rounded-full">Sem urgência: <span class="font-semibold ml-2">7 dias úteis</span></span>
+                  <span class="inline-flex items-center bg-[#2563eb] text-white text-xs px-3 py-1 rounded-full">Sem urgência: <span class="font-semibold ml-2">7 dias</span></span>
                 </div>
               </li>
               <li>
