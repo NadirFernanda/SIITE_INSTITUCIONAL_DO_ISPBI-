@@ -158,32 +158,40 @@ $cursos = [
                 :style="dark ? '' : 'background-image: linear-gradient(90deg, {{ $curso['gradientFromHex'] }}, {{ $curso['gradientToHex'] }});'">
 
                 <div class="relative z-10 flex flex-col h-full">
-                    <!-- Ícones de áreas -->
-                    @if(count($curso['areas']) > 0)
-                    <div class="flex gap-3 mb-4 flex-wrap">
-                        @foreach ($curso['areas'] as $area)
-                        <div :class="dark ? 'text-gray-100' : 'text-white'" class="flex flex-col items-center text-sm w-24">
-                            <span class="flex items-center justify-center w-12 h-12 rounded-full mb-1 icon-animate" :class="dark ? 'bg-gray-700' : 'bg-white/20'">
-                                {!! heroicon($area['icon'] ?? '') !!}
-                            </span>
-                            <span class="text-center">{{ $area['name'] }}</span>
-                        </div>
-                        @endforeach
+                    <!-- Título do curso (forçar ordem 1) -->
+                    <div class="order-1">
+                        <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-2xl font-bold mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">
+                            {{ $curso['title'] }}
+                        </h3>
                     </div>
-                    @endif
 
-                    <!-- Título do curso -->
-                    <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-2xl font-bold mb-2 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg">
-                        {{ $curso['title'] }}
-                    </h3>
+                    <!-- Perfis de saída / Áreas (após o título) - ordem 2 -->
+                    <div class="order-2">
+                        @if(count($curso['areas']) > 0)
+                        <div class="flex gap-3 mb-4 flex-wrap">
+                            @foreach ($curso['areas'] as $area)
+                            <div :class="dark ? 'text-gray-100' : 'text-white'" class="flex flex-col items-center text-sm w-24">
+                                <span class="flex items-center justify-center w-12 h-12 rounded-full mb-1 icon-animate" :class="dark ? 'bg-gray-700' : 'bg-white/20'">
+                                    {!! heroicon($area['icon'] ?? '') !!}
+                                </span>
+                                <span class="text-center">{{ $area['name'] }}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
+                    </div>
 
-                    <!-- Departamento e domínio -->
-                    <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-4">
-                        <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
-                    </p>
+                    <!-- Departamento e domínio - ordem 3 -->
+                    <div class="order-3">
+                        <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-4">
+                            <span class="font-semibold">{{ $curso['department'] }}</span> - {{ $curso['domain'] ?? '' }}
+                        </p>
+                    </div>
 
-                    <!-- Descrição resumida -->
-                    <p :class="dark ? 'text-gray-300' : 'text-white/80'" class="mb-6">{{ $curso['description'] }}</p>
+                    <!-- Descrição resumida - ordem 4 -->
+                    <div class="order-4 mt-auto">
+                        <p :class="dark ? 'text-gray-300' : 'text-white/80'" class="mb-6">{{ $curso['description'] }}</p>
+                    </div>
                 </div>
             </div>
         @endforeach
