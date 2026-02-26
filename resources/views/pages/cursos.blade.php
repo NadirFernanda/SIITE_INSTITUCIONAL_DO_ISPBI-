@@ -187,7 +187,18 @@ $cursos = [
                         <!-- Departamento e domínio - ordem 3 -->
                         <div class="order-3">
                             <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-2 text-base">
-                                @if(isset($curso['domain']) && $curso['department'] === 'Ciências da Saúde' && trim($curso['domain']) === 'Ciências Médicas e da Saúde')
+                                @php
+                                    $omitDomain = false;
+                                    if(isset($curso['domain'])) {
+                                        $dept = trim($curso['department'] ?? '');
+                                        $dom = trim($curso['domain'] ?? '');
+                                        if(($dept === 'Ciências da Saúde' && $dom === 'Ciências Médicas e da Saúde') || ($dept === 'Ciências Humanas, Sociais e Económicas' && $dom === 'Ciências Sociais, Jornalismo e Informação')) {
+                                            $omitDomain = true;
+                                        }
+                                    }
+                                @endphp
+
+                                @if($omitDomain)
                                     <span class="font-semibold">{{ $curso['department'] }}</span>
                                 @else
                                     <span class="font-semibold">{{ $curso['department'] }}</span>@if(!empty($curso['domain'])) - {{ $curso['domain'] }}@endif
