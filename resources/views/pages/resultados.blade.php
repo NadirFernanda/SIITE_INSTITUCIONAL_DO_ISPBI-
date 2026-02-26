@@ -103,38 +103,7 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-16 bg-white scroll-reveal">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Perguntas Frequentes</h2>
-      <div class="space-y-4">
-        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
-          <h4 class="font-semibold text-gray-900 mb-2">Quando são publicadas as notas?</h4>
-          <p class="text-gray-600">
-            As notas são publicadas até 7 dias úteis após a realização do exame final de cada disciplina.
-          </p>
-        </div>
-        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
-          <h4 class="font-semibold text-gray-900 mb-2">Como é calculada a nota final?</h4>
-          <p class="text-gray-600">
-            Os estudantes são avaliados através de duas parcelares (1Âª e 2Âª) e um exame final. A nota mínima de aprovação é 10 valores.
-          </p>
-        </div>
-        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
-          <h4 class="font-semibold text-gray-900 mb-2">Posso fazer exame de melhoria?</h4>
-          <p class="text-gray-600">
-            Contacte os Serviços Académicos para informações sobre exames de melhoria e época de recurso.
-          </p>
-        </div>
-        <div class="border border-gray-200 rounded-lg p-6 interactive-card">
-          <h4 class="font-semibold text-gray-900 mb-2">O que acontece se reprovar em mais de 3 disciplinas?</h4>
-          <p class="text-gray-600">
-            O estudante deve repetir o ano lectivo, matriculando-se novamente nas disciplinas em falta.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- FAQ removido conforme solicitado -->
 
   <!-- CTA -->
   <section class="py-12 bg-gray-50">
