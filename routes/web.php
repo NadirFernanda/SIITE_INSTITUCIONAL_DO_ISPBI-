@@ -113,7 +113,7 @@ Route::get('/alumni/{id}', [App\Http\Controllers\AlumniController::class, 'show'
 Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store');
 
 // Rotas para Acesso Rápido
-Route::view('/portal', 'pages.portal')->name('portal');
+// Rota '/portal' removida (página externa usada em vez da view interna)
 Route::view('/ouvidoria', 'pages.ouvidoria')->name('ouvidoria');
 Route::view('/revista', 'pages.revista')->name('revista');
 Route::view('/biblioteca', 'pages.biblioteca')->name('biblioteca');

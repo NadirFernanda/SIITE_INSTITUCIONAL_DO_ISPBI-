@@ -151,7 +151,7 @@
       <!-- Primeira linha -->
       <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 md:gap-4 2xl:gap-6 mb-4">
         
-        <a href="/portal" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Portal ISP-Bié">
+        <a href="https://portal.ispbie.ao" target="_blank" rel="noopener" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Portal ISP-Bié">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>

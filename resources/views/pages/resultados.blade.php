@@ -89,11 +89,11 @@
 
         <!-- Links -->
         <div class="mt-6 pt-6 border-t border-gray-200 text-center">
-          <a href="/portal" class="text-[#2563eb] hover:underline text-sm font-semibold">
+          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener" class="text-[#2563eb] hover:underline text-sm font-semibold">
             Esqueceu a senha?
           </a>
           <span class="text-gray-400 mx-3">|</span>
-          <a href="/portal" class="text-[#2563eb] hover:underline text-sm font-semibold">
+          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener" class="text-[#2563eb] hover:underline text-sm font-semibold">
             Primeiro acesso? Criar conta
           </a>
         </div>
