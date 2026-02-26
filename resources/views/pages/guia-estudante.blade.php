@@ -186,62 +186,7 @@
         </div>
       </div>
 
-      <!-- 3. Avaliação -->
-      <div id="avaliacao" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
-        <div class="flex items-center mb-6">
-          <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
-            3
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900">Avaliação e Exames</h3>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <h4 class="font-bold text-lg text-gray-900 mb-3">Métodos de Avaliação</h4>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="bg-[#e0e7ff] p-4 rounded-lg">
-                <h5 class="font-bold text-[#2563eb] mb-2">1ª Parcial</h5>
-                <p class="text-sm text-gray-700">Avaliação no meio do semestre</p>
-              </div>
-              <div class="bg-[#fef3c7] p-4 rounded-lg">
-                <h5 class="font-bold text-[#F05A28] mb-2">2ª Parcial</h5>
-                <p class="text-sm text-gray-700">Avaliação antes do exame final</p>
-              </div>
-              <div class="bg-blue-50 p-4 rounded-lg">
-                <h5 class="font-bold text-blue-900 mb-2">Exame Final</h5>
-                <p class="text-sm text-gray-700">Prova final (nota mínima: 10)</p>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h4 class="font-bold text-lg text-gray-900 mb-3">Escala de Classificação</h4>
-            <div class="bg-gray-50 p-4 rounded-lg">
-              <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center text-sm">
-                <div>
-                  <div class="font-bold text-red-600">0-9</div>
-                  <div class="text-gray-600">Reprovado</div>
-                </div>
-                <div>
-                  <div class="font-bold text-yellow-600">10-13</div>
-                  <div class="text-gray-600">Suficiente</div>
-                </div>
-                <div>
-                  <div class="font-bold text-blue-600">14-15</div>
-                  <div class="text-gray-600">Bom</div>
-                </div>
-                <div>
-                  <div class="font-bold text-green-600">16-17</div>
-                  <div class="text-gray-600">Muito Bom</div>
-                </div>
-                <div>
-                  <div class="font-bold text-[#2563eb]">18-20</div>
-                  <div class="text-gray-600">Excelente</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <!-- 4. Biblioteca -->
       <div id="biblioteca" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
