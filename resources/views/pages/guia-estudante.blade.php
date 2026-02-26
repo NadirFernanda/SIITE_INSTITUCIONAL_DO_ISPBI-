@@ -12,7 +12,7 @@
       
 
   <!-- Download -->
-  <section class="py-8 bg-white border-b scroll-reveal">
+  <section class="py-6 bg-white border-b scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div>
@@ -24,13 +24,13 @@
   </section>
 
   <!-- Conteúdo -->
-  <section class="py-16 bg-gray-50 scroll-reveal">
+  <section class="py-12 bg-gray-50 scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Índice Rápido -->
-      <div class="bg-white rounded-lg shadow-md p-6 mb-12 interactive-card">
+      <div class="bg-white rounded-lg shadow-md p-5 mb-10 interactive-card">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Índice</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           <a href="#matricula" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
             <span class="font-semibold">1. Matrícula e Inscrição</span>
           </a>
@@ -53,7 +53,7 @@
       </div>
 
       <!-- 1. Matrícula -->
-      <div id="matricula" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
+      <div id="matricula" class="bg-white rounded-lg shadow-md p-6 mb-6 interactive-card">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             1
@@ -111,7 +111,7 @@
       </div>
 
       <!-- 2. Serviços Académicos -->
-      <div id="servicos" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
+      <div id="servicos" class="bg-white rounded-lg shadow-md p-6 mb-6 interactive-card">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             2
@@ -183,7 +183,7 @@
       
 
       <!-- 4. Biblioteca -->
-      <div id="biblioteca" class="bg-white rounded-lg shadow-md p-8 mb-8 interactive-card">
+      <div id="biblioteca" class="bg-white rounded-lg shadow-md p-6 mb-6 interactive-card">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#3B82F6] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             4
@@ -232,7 +232,7 @@
       </div>
 
       <!-- 5. Estágios -->
-      <div id="estagio" class="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div id="estagio" class="bg-white rounded-lg shadow-md p-6 mb-6">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#3B82F6] rounded-lg flex items-center justify-center text-gray-900 text-xl font-bold mr-4">
             5
@@ -251,7 +251,7 @@
       </div>
 
       <!-- 6. Direitos e Deveres -->
-      <div id="direitos" class="bg-white rounded-lg shadow-md p-8">
+      <div id="direitos" class="bg-white rounded-lg shadow-md p-6">
         <div class="flex items-center mb-6">
           <div class="w-12 h-12 bg-[#2563eb] rounded-lg flex items-center justify-center text-white text-xl font-bold mr-4">
             6
