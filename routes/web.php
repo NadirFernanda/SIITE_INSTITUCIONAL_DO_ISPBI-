@@ -80,6 +80,13 @@ Route::get('/investigacao', function () {
 // Admin CRUD for projects
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
+    // Revista submissions moderation
+    Route::get('revistas/submissions', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'index'])->name('revistas');
+    Route::post('revistas/{id}/publish', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'publish'])->name('revistas.publish');
+    Route::get('revistas/{id}', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'show'])->name('revistas.show');
+    Route::get('revistas/{id}/edit', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'edit'])->name('revistas.edit');
+    Route::put('revistas/{id}', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'update'])->name('revistas.update');
+    Route::delete('revistas/{id}', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'destroy'])->name('revistas.destroy');
 });
 
 // Placeholder routes for later scaffolding
@@ -129,6 +136,46 @@ Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])-
 // Rotas para Acesso Rápido
 // Rota '/portal' removida (página externa usada em vez da view interna)
 Route::view('/revista', 'pages.revista')->name('revista');
+
+// Revista: página de submissão (GET form + POST handler)
+Route::get('/revista/submeter', function () {
+    return view('pages.revista-submeter');
+})->name('revista.submeter');
+
+Route::post('/revista/submeter', function (\Illuminate\Http\Request $request) {
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:255',
+        'description' => 'required|string',
+        'link' => 'required|url',
+        'email' => 'required|email|max:255',
+        'affiliation' => 'nullable|string|max:255',
+        'category' => 'nullable|string|max:255',
+        'notes' => 'nullable|string',
+    ]);
+
+    // Save submission for moderation
+    $submission = App\Models\RevistaSubmission::create([
+        'title' => $request->input('title'),
+        'author' => $request->input('author'),
+        'description' => $request->input('description'),
+        'link' => $request->input('link'),
+        'email' => $request->input('email'),
+        'affiliation' => $request->input('affiliation'),
+        'category' => $request->input('category'),
+        'notes' => $request->input('notes'),
+        'status' => 'pending',
+    ]);
+
+    try {
+        \Illuminate\Support\Facades\Mail::to('geral@isp-bie.ao')
+            ->send(new App\Mail\RevistaSubmissionReceived($submission));
+    } catch (\Throwable $e) {
+        \Log::error('Falha ao enviar email de submissão da revista: '.$e->getMessage());
+    }
+
+    return redirect()->route('revista')->with('status', 'Submissão recebida e pendente de avaliação.');
+})->name('revista.submeter.post');
 Route::view('/biblioteca', 'pages.biblioteca')->name('biblioteca');
 Route::view('/repositorio', 'pages.repositorio')->name('repositorio');
 
