@@ -30,7 +30,7 @@ if (!function_exists('heroicon')) {
 $cursos = [
     [
         'title' => 'Enfermagem Geral',
-        'description' => 'Prepara profissionais para o cuidado integral de pessoas, famílias e comunidade, com competências em diagnóstico, tratamento, investigação, gestão e educação em enfermagem nos três níveis de atenção.',
+        'description' => 'O licenciado em Enfermagem é um profissional qualificado para cuidar, prevenir e promover a saúde de indivíduos, famílias e comunidades. Atua no diagnóstico, tratamento, educação, investigação e gestão em serviços de saúde, com autonomia, ética e trabalho em equipa, aplicando conhecimentos científicos, técnicos e práticos em diferentes níveis de atendimento assistencial.',
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
