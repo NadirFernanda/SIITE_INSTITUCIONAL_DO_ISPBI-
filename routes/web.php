@@ -14,7 +14,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/noticias', [App\Http\Controllers\AdminNoticiaController::class, 'index'])->name('admin.noticias');
         Route::get('/admin/noticias/create', [App\Http\Controllers\AdminNoticiaController::class, 'create'])->name('admin.noticias.create');
         Route::post('/admin/noticias', [App\Http\Controllers\AdminNoticiaController::class, 'store'])->name('admin.noticias.store');
-    Route::view('/admin', 'admin.dashboard')->name('admin');
+    Route::get('/admin', function () {
+        $pending = 0;
+        try {
+            $pending = \App\Models\RevistaSubmission::where('status', 'pending')->count();
+        } catch (\Throwable $e) {
+            // ignore if table doesn't exist yet
+        }
+        return view('admin.dashboard', compact('pending'));
+    })->name('admin');
     Route::get('/admin/paginas', function () {
         // Exemplo: buscar páginas do banco se existir o model Pagina
         // $paginas = App\Models\Pagina::all();
