@@ -72,6 +72,7 @@ $cursos = [
             ['name' => 'Comunicação Empresarial', 'icon' => 'briefcase'],
             ['name' => 'Comunicação Jornalística', 'icon' => 'newspaper'],
             ['name' => 'Comunicação Comunitária ou para o Desenvolvimento', 'icon' => 'chat-bubble-left'],
+            ['name' => 'Relações Públicas', 'icon' => 'briefcase'],
         ],
         'link' => 'cursos.comunicacao'
     ],
