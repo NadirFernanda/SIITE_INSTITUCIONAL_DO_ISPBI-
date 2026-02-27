@@ -221,6 +221,12 @@ $accredited = [
                                     <span class="font-semibold">{{ $curso['department'] }}</span>@if(!empty($curso['domain'])) - {{ $curso['domain'] }}@endif
                                 @endif
                             </p>
+
+                            @if(!empty($curso['duration']))
+                                <div :class="dark ? 'text-gray-100 font-semibold text-sm mb-2' : 'text-white font-semibold text-sm mb-2'">Duração</div>
+                                <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-2 text-sm">{{ $curso['duration'] }}</p>
+                            @endif
+                            </p>
                         </div>
 
                         <!-- Descrição resumida - ordem 4 (empurrada para baixo) -->
