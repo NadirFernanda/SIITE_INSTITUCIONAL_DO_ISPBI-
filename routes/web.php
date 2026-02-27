@@ -55,6 +55,8 @@ Route::get('/cursos/enfermagem', function () {
 
 use App\Models\Alumnus;
 
+use App\Http\Controllers\ResultadosController;
+
 Route::get('/busca', function () {
     return view('pages.busca');
 })->name('busca');
@@ -86,6 +88,7 @@ Route::view('/visao', 'pages.visao')->name('visao');
 Route::view('/trabalhe-conosco', 'pages.trabalhe-conosco')->name('trabalhe-conosco');
 Route::view('/sistemas', 'pages.sistemas')->name('sistemas');
 Route::view('/resultados', 'pages.resultados')->name('resultados');
+Route::post('/resultados/validar', [ResultadosController::class, 'validar'])->name('resultados.validar')->middleware('throttle:10,1');
 Route::view('/presidencia', 'pages.presidencia')->name('presidencia');
 Route::view('/pilares', 'pages.pilares')->name('pilares');
 Route::view('/pesquisa', 'pages.pesquisa')->name('pesquisa');
