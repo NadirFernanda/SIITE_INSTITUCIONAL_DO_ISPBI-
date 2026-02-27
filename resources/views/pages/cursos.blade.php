@@ -68,12 +68,9 @@ $cursos = [
         'gradientFromHex' => '#F59E42', // laranja institucional
         'gradientToHex' => '#FBBF24',   // laranja claro
         'areas' => [
-            ['name' => 'Contabilidade e da administração', 'icon' => 'calculator'],
-            ['name' => 'Finanças em sentido amplo', 'icon' => 'chart-bar'],
-            ['name' => 'Direcção dos processos económicos', 'icon' => 'briefcase'],
-            ['name' => 'Gestão empresarial', 'icon' => 'briefcase'],
-            ['name' => 'Auditoria', 'icon' => 'clipboard-list'],
-            ['name' => 'Docência universitária', 'icon' => 'newspaper'],
+            ['name' => 'Comunicação Empresarial', 'icon' => 'briefcase'],
+            ['name' => 'Comunicação Jornalística', 'icon' => 'newspaper'],
+            ['name' => 'Comunicação Comunitária ou para o Desenvolvimento', 'icon' => 'chat-bubble-left'],
         ],
         'link' => 'cursos.comunicacao'
     ],
