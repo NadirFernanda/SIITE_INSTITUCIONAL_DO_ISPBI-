@@ -51,7 +51,7 @@
 
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
 <div x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }">
-  <div class="w-full bg-gray-800 fixed lg:static top-0 left-0 z-50" style="background: #1a1a1a !important; color: #fff !important;">
+  <div class="w-full bg-gray-800" style="background: #1a1a1a !important; color: #fff !important;">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-0.5 sm:py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
@@ -129,9 +129,7 @@
     </nav>
   </div>
 
-  <!-- Espaçador para evitar sobreposição do conteúdo quando o header está fixo em mobile -->
-  <div class="lg:hidden h-16" aria-hidden="true"></div>
-
+  
   <!-- Menu Mobile (off-canvas) -->
   <div id="mobile-menu" role="dialog" aria-modal="false" aria-label="Menu principal" x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 flex lg:hidden overflow-x-hidden w-full max-w-full">
     <!-- Fundo branco acessível -->
