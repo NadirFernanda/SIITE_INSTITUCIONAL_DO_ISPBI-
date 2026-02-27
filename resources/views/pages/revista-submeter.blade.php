@@ -86,18 +86,7 @@
                         <textarea name="notes" rows="3" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">{{ old('notes') }}</textarea>
                     </div>
 
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700">Anexar ficheiro (PDF / DOC / DOCX)</label>
-                        <div class="mt-2">
-                            <label class="relative w-full flex flex-col items-center px-4 py-6 bg-white text-blue-600 rounded-lg shadow-sm border border-dashed border-gray-200 hover:bg-gray-50 cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mb-2 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16v-4a4 4 0 018 0v4m-4 0v4" />
-                                </svg>
-                                <input type="file" name="file" accept=".pdf,.doc,.docx" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-                                <span class="text-sm text-gray-600">Clique ou arraste o ficheiro aqui. Tamanho máximo recomendado: 10MB.</span>
-                            </label>
-                        </div>
-                    </div>
+                    {{-- file upload removed: articles already include a PDF link, so file input is unnecessary --}}
 
                     <div class="md:col-span-2 flex justify-end items-center gap-3 mt-4">
                         <a href="{{ route('revista') }}" class="inline-flex items-center px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">Cancelar</a>
