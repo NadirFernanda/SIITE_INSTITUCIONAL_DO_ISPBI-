@@ -48,7 +48,7 @@
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">2</span>
                                             </div>
-                                            <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Candidatura Online/Presencial</h3>
+                                              <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Candidatura (Online/Presencial)</h3>
                                             <p class="text-sm text-gray-600">Preencha o formulário online</p>
                                         </div>
 
@@ -139,7 +139,7 @@
                                     <h2 class="text-3xl font-bold mb-4">Pronto para Candidatar-se?</h2>
                                     <p class="text-xl text-[#FFD700] mb-8">Inicie sua candidatura online agora mesmo</p>
                                     <div class="flex flex-wrap justify-center gap-4">
-                                        <button id="openFormBtn" class="bg-white text-[#2563eb] border border-[#2563eb] px-8 py-3 rounded-lg font-semibold hover:bg-[#e0e7ff] transition-colors">Candidatar-se Online</button>
+                                        <button id="openFormBtn" class="bg-white text-[#2563eb] border border-[#2563eb] px-8 py-3 rounded-lg font-semibold hover:bg-[#e0e7ff] transition-colors">Candidatar-se (Online/Presencial)</button>
                                         <a href="/contactos" class="bg-[#F05A28] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#c94a1f] transition-colors">Fale Conosco</a>
                                     </div>
                                 </div>
