@@ -54,7 +54,7 @@
         </div>
 
         <div class="text-center interactive-card">
-          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">2</span>
           </div>
           <h3 class="text-xl font-bold text-[#2563eb] mb-3">Candidatura</h3>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="text-center interactive-card">
-          <div class="w-16 h-16 bg-gradient-to-br from-[#9C27B0] to-[#673AB7] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">3</span>
           </div>
           <h3 class="text-xl font-bold text-[#2563eb] mb-3">Provas e Avaliação</h3>
@@ -74,7 +74,7 @@
         </div>
 
         <div class="text-center interactive-card">
-          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">4</span>
           </div>
           <h3 class="text-xl font-bold text-[#2563eb] mb-3">Resultado Final</h3>
@@ -262,11 +262,7 @@
                 Oportunidades de formação contínua
               </li>
               <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                Participação em projetos de investigação
-              </li>
+              
               <li class="flex items-start">
                 <svg class="w-6 h-6 text-[#3B82F6] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
