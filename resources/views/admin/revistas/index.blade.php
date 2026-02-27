@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <div class="flex items-center justify-between mb-6">
             <div>
                 <h1 class="text-3xl font-bold">Submissões da Revista</h1>
@@ -38,8 +38,8 @@
             </div>
 
             <div class="p-6">
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
+                <div class="overflow-visible">
+                    <table class="min-w-0 w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
@@ -53,18 +53,18 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach($submissions as $s)
                                 <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $s->id }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ $s->author }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600"><a href="{{ route('admin.revistas.show', $s->id) }}">{{ $s->title }}</a></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->id }}</td>
+                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->author }}</td>
+                                    <td class="px-6 py-4 whitespace-normal break-words text-sm font-medium text-blue-600"><a href="{{ route('admin.revistas.show', $s->id) }}">{{ $s->title }}</a></td>
+                                    <td class="px-6 py-4 whitespace-normal break-words text-sm">
                                         @if($s->status === 'published')
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Publicado</span>
                                         @else
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendente</span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $s->created_at->format('Y-m-d') }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex gap-2 justify-end">
+                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-500">{{ $s->created_at->format('Y-m-d') }}</td>
+                                    <td class="px-6 py-4 whitespace-normal break-words text-right text-sm font-medium flex gap-2 justify-end">
                                         <a href="{{ route('admin.revistas.edit', $s->id) }}" class="px-3 py-1 bg-yellow-500 text-white rounded">Editar</a>
                                         @if($s->status !== 'published')
                                             <form action="{{ route('admin.revistas.publish', $s->id) }}" method="POST" style="display:inline">
@@ -80,7 +80,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="px-6 py-4 text-sm text-gray-700">{{ $s->description }} @if($s->link) — <a href="{{ $s->link }}" target="_blank" class="underline text-blue-600">Link</a>@endif</td>
+                                    <td colspan="6" class="px-6 py-4 text-sm text-gray-700 whitespace-normal break-words">{{ $s->description }} @if($s->link) — <a href="{{ $s->link }}" target="_blank" class="underline text-blue-600">Link</a>@endif</td>
                                 </tr>
                             @endforeach
                         </tbody>
