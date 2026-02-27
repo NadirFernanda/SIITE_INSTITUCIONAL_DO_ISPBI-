@@ -133,7 +133,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Recibo emitido no ato da inscrição</h3>
+                                                <h3 class="font-semibold text-gray-900">Recibo emitido no acto da inscrição</h3>
                                                 <p class="text-gray-600">(emitido em nome do candidato)</p>
                                             </div>
                                         </li>
@@ -144,7 +144,7 @@
                                             </svg>
                                             <div>
                                                 <h3 class="font-semibold text-gray-900">Número de identificação do processo</h3>
-                                                <p class="text-gray-600">(emitido no ato da inscrição)</p>
+                                                <p class="text-gray-600">(emitido no acto da inscrição)</p>
                                             </div>
                                         </li>
 
