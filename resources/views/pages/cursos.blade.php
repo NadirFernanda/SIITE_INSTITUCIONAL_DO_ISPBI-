@@ -41,6 +41,9 @@ $cursos = [
             ['name' => 'Saúde Pública', 'icon' => 'users'],
             ['name' => 'Gestão em Saúde', 'icon' => 'clipboard-list'],
         ],
+        'link' => 'cursos.enfermagem'
+    ],
+    [
         'title' => 'Psicologia Clínica',
         'description' => 'Forma psicólogos aptos a atuar na promoção da saúde mental, diagnóstico, intervenção terapêutica e acompanhamento psicológico em diversos contextos.',
         'department' => 'Ciências da Saúde',
@@ -106,8 +109,8 @@ $cursos = [
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
-            'gradientFromHex' => '#0EA5E9', // azul água (sky-500)
-            'gradientToHex' => '#38BDF8',   // azul claro (sky-400)
+        'gradientFromHex' => '#0EA5E9', // azul água (sky-500)
+        'gradientToHex' => '#38BDF8',   // azul claro (sky-400)
         'areas' => [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
