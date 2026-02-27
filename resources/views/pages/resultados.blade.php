@@ -44,7 +44,14 @@
         </p>
 
 
-        <form class="space-y-6">
+        @if(session('resultados_error'))
+          <div class="mb-4 p-3 rounded bg-red-50 text-red-800" role="alert">
+            {{ session('resultados_error') }}
+          </div>
+        @endif
+
+        <form id="resultados-form" method="post" action="{{ route('resultados.validar') }}" class="space-y-6">
+          @csrf
           <!-- Email -->
           <div>
             <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -53,7 +60,7 @@
             <input 
               type="email" 
               id="email" 
-              name="email" 
+              name="Email" 
               placeholder="Digite o seu email"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
               required
@@ -68,7 +75,7 @@
             <input 
               type="password" 
               id="senha" 
-              name="senha" 
+              name="Senha" 
               placeholder="Digite a sua senha"
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
               required
@@ -78,6 +85,8 @@
           <!-- Botão -->
           <button 
             type="submit" 
+            name="Entrar"
+            value="Entrar"
             class="w-full bg-[#2563eb] text-white py-3 rounded-lg font-semibold hover:bg-[#1f3342] transition-colors flex items-center justify-center"
           >
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -85,6 +94,64 @@
             </svg>
             Entrar no Portal
           </button>
+
+          <!-- Feedback area (updated via JS) -->
+          <div id="resultados-feedback" class="hidden mt-4 p-3 rounded text-sm"></div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function(){
+            const form = document.getElementById('resultados-form');
+            if(!form) return;
+            const feedback = document.getElementById('resultados-feedback');
+
+            function setFeedback(text, intent){
+              feedback.className = 'mt-4 p-3 rounded text-sm';
+              if(intent === 'loading') feedback.classList.add('bg-blue-50','text-blue-800');
+              else if(intent === 'success') feedback.classList.add('bg-green-50','text-green-800');
+              else if(intent === 'error') feedback.classList.add('bg-red-50','text-red-800');
+              else if(intent === 'warn') feedback.classList.add('bg-yellow-50','text-yellow-800');
+              feedback.textContent = text;
+              feedback.classList.remove('hidden');
+            }
+
+            form.addEventListener('submit', async function(e){
+              e.preventDefault();
+              setFeedback('A enviar...','loading');
+
+              const data = new URLSearchParams(new FormData(form)).toString();
+              // try AJAX POST first (may be blocked by CORS)
+              try{
+                const target = form.action;
+                const resp = await fetch(target, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                  },
+                  body: data,
+                  redirect: 'follow'
+                });
+
+                // parse JSON returned by proxy
+                const json = await resp.json();
+                if(json.success){
+                  setFeedback('Login bem-sucedido. A abrir o portal...','success');
+                  if(json.redirect){
+                    // redirect browser to external portal
+                    window.location.href = json.redirect;
+                  }
+                } else {
+                  setFeedback(json.message || 'Credenciais inválidas. Verifique e tente novamente.','error');
+                }
+              }catch(err){
+                // likely CORS or network error — fallback to normal form submit
+                setFeedback('Não foi possível validar via AJAX (CORS). Abrindo o portal externo...','warn');
+                // small delay so user sees message, then submit normally
+                setTimeout(()=> form.submit(), 800);
+              }
+            });
+          });
+        </script>
         </form>
 
         <!-- Links -->
