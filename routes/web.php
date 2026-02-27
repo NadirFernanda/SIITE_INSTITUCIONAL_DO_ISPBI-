@@ -1,7 +1,7 @@
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 <?php
 
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 
 
 // Rotas do painel administrativo protegidas por autenticação
@@ -72,8 +72,10 @@ Route::get('/', function () {
     return view('welcome', compact('testemunhos'));
 })->name('welcome');
 
-// Investigação (public)
-Route::get('/investigacao', [ProjectController::class, 'index'])->name('investigacao');
+// Investigação (public) - use closure to guarantee controller is executed and view data provided
+Route::get('/investigacao', function () {
+    return app(App\Http\Controllers\ProjectController::class)->index();
+})->name('investigacao');
 
 // Admin CRUD for projects
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
@@ -84,7 +86,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 Route::view('/sobre', 'pages.sobre')->name('sobre');
 Route::view('/cursos', 'pages.cursos')->name('cursos');
 Route::view('/pos-graduacao', 'pages.pos-graduacao')->name('pos-graduacao');
-Route::view('/investigacao', 'pages.investigacao')->name('investigacao');
 Route::view('/vida-academica', 'pages.vida')->name('vida');
 Route::view('/noticias', 'pages.noticias')->name('noticias');
 Route::view('/contactos', 'pages.contactos')->name('contactos');
