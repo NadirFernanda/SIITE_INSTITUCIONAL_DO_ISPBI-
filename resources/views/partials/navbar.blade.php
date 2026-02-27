@@ -32,7 +32,7 @@
       </div>
     </div>
 
-      <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] text-[#2979FF] font-normal text-base">
+      <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
       <span>📝</span> Candidaturas
     </a>
 
