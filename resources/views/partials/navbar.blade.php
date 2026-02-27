@@ -86,7 +86,7 @@
         <button @click="open = !open" @keydown.escape="open = false"
           class="flex items-center gap-1 text-[#2979FF] hover:text-[#FFD700] font-normal uppercase text-base tracking-wide focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
           :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true" aria-controls="institucional-dropdown">
-          <span><svg class="w-5 h-5 mr-1" fill="white" viewBox="0 0 24 24"><path d="M3 21V7a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2h2a2 2 0 0 1 2 2v14H3zm2-2h14V7a1 1 0 0 0-1-1h-2v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6H4a1 1 0 0 0-1 1v12zm4-12V4h6v3H7z"/></svg></span> INSTITUCIONAL
+          <span><svg class="w-5 h-5 mr-1 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21V7a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2h2a2 2 0 0 1 2 2v14H3zm2-2h14V7a1 1 0 0 0-1-1h-2v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6H4a1 1 0 0 0-1 1v12zm4-12V4h6v3H7z"/></svg></span> INSTITUCIONAL
           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
