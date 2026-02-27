@@ -81,10 +81,7 @@
                         <input type="url" name="link" value="{{ old('link') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Observações (opcional)</label>
-                        <textarea name="notes" rows="3" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">{{ old('notes') }}</textarea>
-                    </div>
+                    {{-- notes field removed per request (optional observations) --}}
 
                     {{-- file upload removed: articles already include a PDF link, so file input is unnecessary --}}
 
