@@ -106,7 +106,7 @@
           </svg>
         </button>
                           <div id="institucional-dropdown" x-show="open" @click.away="open = false" x-cloak
-                            class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 px-12 py-8 overflow-x-auto">
+                            class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-[#2979FF] text-white rounded-lg shadow-lg border border-transparent z-50 px-12 py-8 overflow-x-auto">
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
                   <a href="/sobre-ispbie" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Sobre o ISP-Bié</a>
                   <a href="/missao" class="block px-0 py-1 rounded hover:bg-[#2563eb] hover:text-white">Missão</a>
