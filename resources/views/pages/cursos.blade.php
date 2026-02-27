@@ -111,7 +111,7 @@ $cursos = [
     ],
     [
         'title' => 'Engenharia em Recursos Hídricos',
-        'description' => 'Forma engenheiros para a gestão sustentável dos recursos hídricos, planeamento e projeto de infraestruturas, avaliação ambiental, pesquisa e ação em saneamento, energia e consultoria.',
+        'description' => 'O licenciado em Engenharia em Recursos Hídricos é um profissional especializado na gestão, estudo e aproveitamento sustentável da água. Atua em projectos, fiscalização, investigação e implementação de políticas, integrando equipas multidisciplinares e avaliando impactos ambientais, contribuindo para saneamento, energia, irrigação e preservação dos recursos hídricos nos sectores público e privado.',
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
