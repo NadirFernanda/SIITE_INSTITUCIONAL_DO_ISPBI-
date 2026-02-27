@@ -1,23 +1,36 @@
 @extends('layouts.site')
 
 @section('content')
-    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <h1 class="text-3xl font-bold">Submissões da Revista</h1>
-                <p class="text-gray-600 mt-1">Gerencie submissões pendentes e publicadas da Revista Científica.</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <nav class="text-sm text-gray-500 mb-6">
+            <a href="/" class="hover:underline">Início</a>
+            <span class="mx-2">/</span>
+            <span class="font-medium text-gray-700">Submissões da Revista</span>
+        </nav>
+
+        <header class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-blue-600 text-white rounded-md shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2v4h6v-4c0-1.105-1.343-2-3-2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Submissões da Revista</h1>
+                    <p class="text-gray-600">Gerencie submissões pendentes e publicadas da Revista Científica.</p>
+                </div>
             </div>
-            <div class="hidden md:flex items-center gap-3">
+            <div class="mt-4 flex items-center gap-3 justify-end">
                 <a href="{{ route('revista') }}" target="_blank" class="text-sm text-gray-600 hover:underline">Ver site público</a>
                 <a href="{{ route('admin.revistas') }}" class="inline-flex items-center gap-2 bg-white border px-3 py-2 rounded shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" /></svg>
                     <span class="text-sm">Atualizar</span>
                 </a>
             </div>
-        </div>
+        </header>
 
         @if(session('status'))
-            <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">{{ session('status') }}</div>
+            <div class="mb-4 p-4 bg-green-50 border border-green-200 text-green-800 rounded">{{ session('status') }}</div>
         @endif
 
         <div class="bg-white rounded-lg shadow">
