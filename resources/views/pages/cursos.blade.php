@@ -164,14 +164,14 @@ $accredited = [
         @foreach ($cursos as $curso)
             <div :class="dark ? 'bg-gray-800 text-gray-100 border border-gray-700' : 'text-white'"
                 :style="dark ? '' : 'background-color: {{ $curso['gradientFromHex'] }}; border: 2px solid {{ $curso['gradientToHex'] }};'"
-                class="rounded-2xl shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300 p-8 flex flex-col justify-between group h-full min-h-[360px]">
+                class="rounded-lg shadow-md transform hover:scale-105 hover:shadow-lg transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[200px]">
 
                 <div class="relative z-10 flex flex-col h-full">
                     <!-- Conteúdo do card com espaçamento melhorado -->
                     <div class="flex flex-col gap-3 h-full">
                         <!-- Título do curso (forçar ordem 1) -->
                         <div class="order-1">
-                            <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-2xl font-bold mb-1 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg leading-tight">
+                            <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-xl font-bold mb-1 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg leading-tight">
                                 {{ $curso['title'] }}
                             </h3>
                         </div>
