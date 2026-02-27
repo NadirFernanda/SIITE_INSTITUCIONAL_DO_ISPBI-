@@ -1,7 +1,7 @@
 <div style="font-family: Arial, Helvetica, sans-serif; color: #333;">
-    <h2>Nova submissão recebida</h2>
+    <h2>Submissão recebida e pendente para  avaliação.</h2>
 
-    <p>Uma nova submissão para a Revista Científica foi recebida e está pendente de avaliação.</p>
+    <p>Submissão recebida e pendente para  avaliação.</p>
 
     <p><strong>Autor:</strong> {{ $submission->author }}</p>
     <p><strong>Título:</strong> {{ $submission->title }}</p>

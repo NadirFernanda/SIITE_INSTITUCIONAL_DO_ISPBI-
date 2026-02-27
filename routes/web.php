@@ -183,7 +183,7 @@ Route::post('/revista/submeter', function (\Illuminate\Http\Request $request) {
     }
 
     // Redirect back to the submission form so user sees immediate feedback
-    return redirect()->back()->withInput()->with('status', 'Submissão recebida e pendente de avaliação.');
+    return redirect()->back()->withInput()->with('status', 'Submissão recebida e pendente para  avaliação.');
 })->name('revista.submeter.post');
 Route::view('/biblioteca', 'pages.biblioteca')->name('biblioteca');
 Route::view('/repositorio', 'pages.repositorio')->name('repositorio');
