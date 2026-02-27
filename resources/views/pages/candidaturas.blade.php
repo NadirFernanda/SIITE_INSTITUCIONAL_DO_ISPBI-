@@ -80,51 +80,30 @@
 
                                 <h2 class="text-3xl font-bold text-[#2563eb] mb-8">Documentos Necessários</h2>
                                 <div class="bg-white p-8 rounded-lg shadow-md">
-                                    <ul class="space-y-4">
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                            </svg>
-                                            <div>
-                                                <h3 class="font-semibold text-gray-900">Certificado do Ensino Secundário</h3>
-                                                <p class="text-gray-600">Original e fotocópia autenticada</p>
-                                            </div>
+                                    <ul class="space-y-4 list-disc list-inside text-gray-700">
+                                        <li>
+                                            <strong>Bilhete de Identidade;</strong>
                                         </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-teal-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                            </svg>
-                                            <div>
-                                                <h3 class="font-semibold text-gray-900">Bilhete de Identidade</h3>
-                                                <p class="text-gray-600">Fotocópia autenticada</p>
-                                            </div>
+                                        <li>
+                                            <strong>Fotocópia do certificado de conclusão do segundo ciclo;</strong>
                                         </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-teal-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                            </svg>
-                                            <div>
-                                                <h3 class="font-semibold text-gray-900">Atestado Médico</h3>
-                                                <p class="text-gray-600">Comprovação de aptidão física</p>
-                                            </div>
+                                        <li>
+                                            <strong>Pasta de processos (no caso de inscrição presencial);</strong>
                                         </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-teal-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                            </svg>
-                                            <div>
-                                                <h3 class="font-semibold text-gray-900">Fotografias 3x4</h3>
-                                                <p class="text-gray-600">4 fotografias tipo passe recentes</p>
-                                            </div>
+                                        <li>
+                                            <strong>Ficha de inscrição devidamente preenchida;</strong>
                                         </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-teal-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
-                                            </svg>
-                                            <div>
-                                                <h3 class="font-semibold text-gray-900">Comprovativo de Pagamento</h3>
-                                                <p class="text-gray-600">Taxa de candidatura: 5.000 AOA</p>
-                                            </div>
+                                        <li>
+                                            <strong>Comprovativo dos emolumentos de pagamento correspondentes via RUP;</strong>
+                                        </li>
+                                        <li>
+                                            <strong>No ato da inscrição, é emitido um recibo em nome do candidato;</strong>
+                                        </li>
+                                        <li>
+                                            <strong>No ato da inscrição, é emitido um número de identificação válido para todo o processo;</strong>
+                                        </li>
+                                        <li>
+                                            <strong>Caso o certificado ainda não tenha sido emitido por razões alheias aos candidatos, poderá inscrever-se com a declaração de conclusão do ensino médio.</strong>
                                         </li>
                                     </ul>
                                 </div>
