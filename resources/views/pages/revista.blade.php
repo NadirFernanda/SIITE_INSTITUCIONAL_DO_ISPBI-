@@ -60,6 +60,41 @@
             </div>
         </section>
 
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Artigos Publicados</h2>
+                @if(isset($articles) && $articles->count())
+                    <div class="grid gap-6">
+                        @foreach($articles as $a)
+                            <article class="bg-white border rounded-lg p-6 shadow-sm">
+                                <div class="flex flex-col md:flex-row md:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-gray-900"><a href="{{ route('revista.show', $a->id) }}" class="hover:underline">{{ $a->title }}</a></h3>
+                                        <p class="text-sm text-gray-600">Autor: {{ $a->author }} @if($a->affiliation) — {{ $a->affiliation }}@endif</p>
+                                    </div>
+                                    <div class="mt-3 md:mt-0 text-sm text-gray-500">{{ $a->published_at ? $a->published_at->format('d F, Y') : $a->created_at->format('d F, Y') }}</div>
+                                </div>
+                                <p class="mt-4 text-gray-700">{{ Str::limit(strip_tags($a->description), 220) }}</p>
+                                <div class="mt-4">
+                                    @if($a->link)
+                                        <a href="{{ $a->link }}" target="_blank" rel="noopener" class="text-sm text-blue-600 hover:underline">Abrir artigo (Link externo)</a>
+                                    @else
+                                        <a href="{{ route('revista.show', $a->id) }}" class="text-sm text-blue-600 hover:underline">Ver detalhes</a>
+                                    @endif
+                                </div>
+                            </article>
+                        @endforeach
+                    </div>
+
+                    <div class="mt-6">
+                        {{ $articles->withQueryString()->links() }}
+                    </div>
+                @else
+                    <div class="p-6 bg-gray-50 border rounded">Ainda não há artigos publicados.</div>
+                @endif
+            </div>
+        </section>
+
     <!-- Footer -->
 
 @endsection
