@@ -179,7 +179,7 @@ $accredited = [
                         <!-- Perfis de saída / Áreas (após o título) - ordem 2 -->
                         <div class="order-2">
                             @if(count($curso['areas']) > 0)
-                            <div :class="dark ? 'text-gray-100 font-semibold text-sm mb-2' : 'text-white font-semibold text-sm mb-2'">Algumas áreas de actuação</div>
+                            <div :class="dark ? 'text-gray-100 font-semibold text-sm mb-2' : 'text-white font-semibold text-sm mb-2'">Perfil de saída</div>
                             <div class="flex gap-4 mb-3 flex-wrap items-start">
                                 @foreach ($curso['areas'] as $area)
                                 <div :class="dark ? 'text-gray-100' : 'text-white'" class="flex flex-col items-start text-sm w-auto min-w-[140px]">
