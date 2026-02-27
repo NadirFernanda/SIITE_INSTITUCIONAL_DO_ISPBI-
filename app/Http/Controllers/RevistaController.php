@@ -14,15 +14,28 @@ class RevistaController extends Controller
             ->select(['id','title','author','affiliation','published_at','description','link','created_at'])
             ->orderByDesc('published_at');
 
-        // Apply search filter if provided
-        if ($request->filled('q')) {
-            $q = $request->input('q');
-            $query->where(function($r) use ($q) {
-                $r->where('title', 'like', "%{$q}%")
-                  ->orWhere('author', 'like', "%{$q}%")
-                  ->orWhere('description', 'like', "%{$q}%");
-            });
-        }
+                // Apply search filter if provided — make multi-term and partial matching less strict
+                if ($request->filled('q')) {
+                        $q = trim($request->input('q'));
+                        // split into terms to increase recall (match any term)
+                        $terms = preg_split('/\s+/', $q);
+
+                        $query->where(function($r) use ($q, $terms) {
+                                // match full phrase first
+                                $r->where('title', 'like', "%{$q}%")
+                                    ->orWhere('author', 'like', "%{$q}%")
+                                    ->orWhere('description', 'like', "%{$q}%");
+
+                                // also match any individual term (partial matches)
+                                foreach ($terms as $term) {
+                                        $term = trim($term);
+                                        if ($term === '') continue;
+                                        $r->orWhere('title', 'like', "%{$term}%")
+                                            ->orWhere('author', 'like', "%{$term}%")
+                                            ->orWhere('description', 'like', "%{$term}%");
+                                }
+                        });
+                }
 
         // Apply category filter if provided
         if ($request->filled('category')) {
