@@ -32,7 +32,7 @@
       </div>
     </div>
 
-      <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] text-[#2979FF]">
+      <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] text-[#2979FF] font-bold text-base">
       <span>📝</span> Candidaturas
     </a>
 
@@ -58,7 +58,7 @@
       <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5" style="background:transparent!important;">
         <img src="/images/logo.png" alt="ISP-Bié" class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
-      <span class="text-[#2979FF] font-bold text-xs sm:text-sm md:text-base lg:text-xl tracking-tight truncate">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
+      <span class="text-[#2979FF] font-bold text-base tracking-tight truncate">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
     </a>
     
     <!-- Botão hamburger (Mobile) -->
@@ -71,18 +71,18 @@
     
     <!-- Menu principal (Desktop) -->
     <nav role="navigation" aria-label="Navegação principal" class="hidden lg:flex flex-row items-center space-x-4 xl:space-x-6 mb-0 pb-0 border-b-0">
-      <a href="/cursos" class="flex items-center space-x-1 text-[#2979FF] font-semibold uppercase text-xs tracking-wide hover:text-[#FFD700] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Cursos">
+      <a href="/cursos" class="flex items-center space-x-1 text-[#2979FF] font-bold uppercase text-base tracking-wide hover:text-[#FFD700] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Cursos">
         <span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
         <span>Cursos</span>
       </a>
-      <a href="/investigacao" class="flex items-center space-x-1 text-[#2979FF] font-semibold uppercase text-xs tracking-wide hover:text-[#FFD700] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
+      <a href="/investigacao" class="flex items-center space-x-1 text-[#2979FF] font-bold uppercase text-base tracking-wide hover:text-[#FFD700] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
         <span><svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <span>Pesquisa e Inovação</span>
       </a>
       <!-- Dropdown Institucional - Desktop -->
       <div x-data="{ open: false }" class="relative inline-block">
         <button @click="open = !open" @keydown.escape="open = false"
-          class="flex items-center gap-1 text-[#2979FF] hover:text-[#FFD700] font-semibold uppercase text-xs tracking-wide focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
+          class="flex items-center gap-1 text-[#2979FF] hover:text-[#FFD700] font-bold uppercase text-base tracking-wide focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
           :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true" aria-controls="institucional-dropdown">
           <span><svg class="w-5 h-5 mr-1" fill="white" viewBox="0 0 24 24"><path d="M3 21V7a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2h2a2 2 0 0 1 2 2v14H3zm2-2h14V7a1 1 0 0 0-1-1h-2v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6H4a1 1 0 0 0-1 1v12zm4-12V4h6v3H7z"/></svg></span> INSTITUCIONAL
           <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -107,7 +107,7 @@
       <!-- Dropdown Extensão Universitária - Desktop -->
       <div x-data="{ openExt: false }" class="relative inline-block">
         <button @click="openExt = !openExt" @keydown.escape="openExt = false"
-          class="flex items-center gap-1 text-[#2979FF] hover:text-[#FFD700] font-semibold uppercase text-xs tracking-wide"
+          class="flex items-center gap-1 text-[#2979FF] hover:text-[#FFD700] font-bold uppercase text-base tracking-wide"
                 :aria-expanded="openExt ? 'true' : 'false'" aria-haspopup="true">
           <span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
           <span>Extensão Universitária</span>
@@ -134,22 +134,22 @@
     <!-- Painel lateral com efeito glassmorphism, sombra e detalhes dourados -->
     <div class="relative ml-auto w-full max-w-xs h-full bg-white/70 shadow-2xl flex flex-col py-10 px-6 space-y-3 overflow-y-auto animate-slide-in-right border-l-4 border-[#FFD700] rounded-l-2xl text-base sm:text-sm z-[60]" style="backdrop-filter: blur(12px);">
       <button @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;" class="self-end text-gray-700 p-2 hover:bg-gray-100 rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Fechar menu">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
       <!-- Links principais padronizados -->
-      <a href="/cursos" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Ensino">
+      <a href="/cursos" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] font-bold text-base hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Ensino">
         <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="#2563eb"/><path d="M16 3v4M8 3v4" stroke="#2563eb"/></svg></span>
         <span>Ensino</span>
       </a>
-      <a href="/investigacao" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
+      <a href="/investigacao" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] font-bold text-base hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
         <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="#2563eb"/><path d="M12 9v3l2 2" stroke="#2563eb"/></svg></span>
         <span>Pesquisa e Inovação</span>
       </a>
-      <a href="/noticias" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Notícias">
+      <a href="/noticias" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] font-bold text-base hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Notícias">
         <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#2563eb"/><path d="M7 9h10M7 13h6" stroke="#2563eb"/></svg></span>
         <span>Notícias</span>
       </a>
-      <a href="/candidaturas" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Candidaturas">
+      <a href="/candidaturas" class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] font-bold text-base hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Candidaturas">
         <span>
           <svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <rect x="3" y="5" width="18" height="12" rx="2" stroke="#2563eb" fill="none"/>
@@ -161,7 +161,7 @@
       <!-- Dropdown Extensão Universitária - Mobile (padronizado) -->
       <div class="relative lg:hidden">
         <button @click="openExtMobile = !openExtMobile"
-          class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors w-full">
+            class="flex items-center space-x-3 py-2 px-4 text-[#2979FF] font-bold hover:text-[#2563eb] hover:bg-gray-50 rounded transition-colors w-full">
           <span><svg class="w-5 h-5" fill="none" stroke="#2563eb" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#2563eb"/><path d="M8 3v4M16 3v4" stroke="#2563eb"/></svg></span>
           <span>Extensão Universitária</span>
           <svg class="w-4 h-4 ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
