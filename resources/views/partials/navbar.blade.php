@@ -52,10 +52,10 @@
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
 <div x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }">
   <div class="w-full bg-gray-800 fixed lg:static top-0 left-0 z-50" style="background: #1a1a1a !important; color: #fff !important;">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
+    <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-1 sm:py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
-      <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5" style="background:transparent!important;">
+      <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-0.5 sm:px-2 sm:py-1.5" style="background:transparent!important;">
         <img src="/images/logo.png" alt="ISP-Bié" class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
       <div class="min-w-0">
@@ -130,7 +130,7 @@
   </div>
 
   <!-- Espaçador para evitar sobreposição do conteúdo quando o header está fixo em mobile -->
-  <div class="lg:hidden h-14" aria-hidden="true"></div>
+  <div class="lg:hidden h-12" aria-hidden="true"></div>
 
   <!-- Menu Mobile (off-canvas) -->
   <div id="mobile-menu" role="dialog" aria-modal="false" aria-label="Menu principal" x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 flex lg:hidden overflow-x-hidden w-full max-w-full">
