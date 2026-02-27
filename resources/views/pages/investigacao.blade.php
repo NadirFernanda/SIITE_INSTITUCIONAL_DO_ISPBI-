@@ -43,7 +43,7 @@
                         @foreach($inProgress as $p)
                             <div class="bg-white/90 dark:bg-gray-800 rounded-lg p-4 shadow">
                                 <h3 class="font-semibold">{{ $p->title }}</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ Illuminate\\Support\\Str::limit($p->summary, 180) }}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ Illuminate\Support\Str::limit($p->summary, 180) }}</p>
                                 @if(!empty($p->link))
                                     <a href="{{ $p->link }}" class="text-blue-600 hover:underline mt-2 inline-block">Ver mais</a>
                                 @endif
@@ -66,7 +66,7 @@
                         @foreach($inReview as $p)
                             <div class="bg-white/90 dark:bg-gray-800 rounded-lg p-4 shadow">
                                 <h3 class="font-semibold">{{ $p->title }}</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ Illuminate\\Support\\Str::limit($p->summary, 180) }}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ Illuminate\Support\Str::limit($p->summary, 180) }}</p>
                             </div>
                         @endforeach
                     @else
@@ -85,7 +85,7 @@
                         @foreach($completed as $p)
                             <div class="bg-white/90 dark:bg-gray-800 rounded-lg p-4 shadow">
                                 <h3 class="font-semibold">{{ $p->title }}</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ Illuminate\\Support\\Str::limit($p->summary, 180) }}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ Illuminate\Support\Str::limit($p->summary, 180) }}</p>
                                 @if(!empty($p->link))
                                     <a href="{{ $p->link }}" class="text-blue-600 hover:underline mt-2 inline-block">Relatório</a>
                                 @endif
@@ -140,3 +140,4 @@
 </div>
 
 @endsection
+
