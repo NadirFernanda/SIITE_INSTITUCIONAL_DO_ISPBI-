@@ -30,7 +30,7 @@ if (!function_exists('heroicon')) {
 $cursos = [
     [
         'title' => 'Enfermagem Geral',
-        'description' => 'Forma profissionais aptos a atuar na promoção, prevenção, recuperação e reabilitação da saúde, com foco no cuidado humanizado e na gestão em saúde.',
+        'description' => 'Prepara profissionais para o cuidado integral de pessoas, famílias e comunidade, com competências em diagnóstico, tratamento, investigação, gestão e educação em enfermagem nos três níveis de atenção.',
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
@@ -45,7 +45,7 @@ $cursos = [
     ],
     [
         'title' => 'Psicologia Clínica',
-        'description' => 'Forma psicólogos aptos a atuar na promoção da saúde mental, diagnóstico, intervenção terapêutica e acompanhamento psicológico em diversos contextos.',
+        'description' => 'Forma psicólogos para diagnosticar, intervir e prevenir em contextos clínicos, educativos, organizacionais e comunitários, com competências em avaliação, intervenção psicoterapêutica, investigação e trabalho multidisciplinar.',
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
@@ -60,7 +60,7 @@ $cursos = [
     ],
     [
         'title' => 'Comunicação Social',
-        'description' => 'Capacita profissionais para atuar em jornalismo, relações públicas, publicidade, comunicação organizacional e produção de conteúdo digital.',
+        'description' => 'Capacita profissionais para atuar em jornalismo, comunicação empresarial e para o desenvolvimento, planejar e produzir conteúdos mediáticos, além de mediar processos comunicacionais e atuar em docência e investigação.',
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Ciências Sociais, Jornalismo e Informação',
         'duration' => '4 Anos',
@@ -75,7 +75,7 @@ $cursos = [
     ],
     [
         'title' => 'Contabilidade e Administração',
-        'description' => 'Forma profissionais capacitados para atuar nas áreas de contabilidade, gestão empresarial, auditoria, finanças e administração.',
+        'description' => 'Forma profissionais em contabilidade, gestão, auditoria e finanças, preparados para orientar a gestão empresarial, direção económica e exercer funções docentes e de auditoria com base em práticas modernas.',
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Administração, Negócios e Direito',
         'duration' => '4 Anos',
@@ -90,7 +90,7 @@ $cursos = [
     ],
     [
         'title' => 'Engenharia Informática',
-        'description' => 'Prepara profissionais para desenvolver soluções tecnológicas inovadoras, sistemas de informação, redes de computadores e infraestrutura de TI.',
+        'description' => 'Prepara engenheiros em software, arquitetura de computadores, redes e equipamentos eletrónicos, capazes de projetar, desenvolver e gerir soluções informáticas em diversos sectores.',
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '5 Anos',
@@ -105,7 +105,7 @@ $cursos = [
     ],
     [
         'title' => 'Engenharia em Recursos Hídricos',
-        'description' => 'Forma engenheiros especializados na gestão sustentável dos recursos hídricos, desenvolvimento de infraestruturas hidráulicas e saneamento básico.',
+        'description' => 'Forma engenheiros para a gestão sustentável dos recursos hídricos, planeamento e projeto de infraestruturas, avaliação ambiental, pesquisa e ação em saneamento, energia e consultoria.',
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '6 Anos',
