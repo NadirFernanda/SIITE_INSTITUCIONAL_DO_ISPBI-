@@ -37,9 +37,10 @@ $cursos = [
         'gradientFromHex' => '#16A34A', // verde institucional
         'gradientToHex' => '#4ADE80',   // verde claro
         'areas' => [
-            ['name' => 'Enfermagem Hospitalar', 'icon' => 'heart'],
-            ['name' => 'Saúde Pública', 'icon' => 'users'],
-            ['name' => 'Gestão em Saúde', 'icon' => 'clipboard-list'],
+            ['name' => 'O Cuidado de enfermagem', 'icon' => 'heart'],
+            ['name' => 'A pessoa (família, comunidade)', 'icon' => 'users'],
+            ['name' => 'A saúde', 'icon' => 'heart-pulse'],
+            ['name' => 'O ambiente', 'icon' => 'drop'],
         ],
         'link' => 'cursos.enfermagem'
     ],
