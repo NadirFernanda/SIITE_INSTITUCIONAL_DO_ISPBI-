@@ -48,7 +48,7 @@
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">2</span>
                                             </div>
-                                            <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Candidatura Online</h3>
+                                            <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Candidatura Online/Presencial</h3>
                                             <p class="text-sm text-gray-600">Preencha o formulário online</p>
                                         </div>
 
