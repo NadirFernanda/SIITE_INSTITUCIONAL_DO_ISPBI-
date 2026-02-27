@@ -121,6 +121,7 @@ $cursos = [
             ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
             ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
             ['name' => 'Infraestruturas Hidráulicas', 'icon' => 'building'],
+            ['name' => 'Realizar estudos de avaliação dos recursos', 'icon' => 'chart-bar'],
         ],
         'link' => 'cursos.hidricos'
     ],
