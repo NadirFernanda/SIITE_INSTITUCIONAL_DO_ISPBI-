@@ -105,9 +105,18 @@
                 try { new URL(url); return true; } catch(e) { return false; }
             }
 
+            // Clear custom validity on input/change so browser tooltips disappear
+            Object.keys(labels).forEach(function(name){
+                const el = form.elements[name];
+                if (!el) return;
+                el.addEventListener('input', function(){ el.setCustomValidity(''); });
+                el.addEventListener('change', function(){ el.setCustomValidity(''); });
+            });
+
             form.addEventListener('submit', function(e){
                 const errors = [];
-                const firstInvalid = null;
+                let firstField = null;
+                let firstMessage = null;
 
                 Object.keys(labels).forEach(function(name){
                     const el = form.elements[name];
@@ -117,7 +126,9 @@
                     // Required fields
                     if (['author','email','title','description','link'].includes(name)) {
                         if (!val) {
-                            errors.push(`O campo "${labels[name]}" é obrigatório.`);
+                            const msg = `Por favor, preencha o campo "${labels[name]}".`;
+                            errors.push(msg);
+                            if (!firstField) { firstField = el; firstMessage = msg; }
                             return;
                         }
                     }
@@ -125,10 +136,14 @@
                     // Type-specific checks
                     if (val) {
                         if (name === 'email' && !isValidEmail(val)) {
-                            errors.push('O email informado não é válido.');
+                            const msg = 'Por favor, introduza um endereço de email válido.';
+                            errors.push(msg);
+                            if (!firstField) { firstField = el; firstMessage = msg; }
                         }
                         if (name === 'link' && !isValidURL(val)) {
-                            errors.push('O link informado não é um URL válido.');
+                            const msg = 'Por favor, introduza um URL válido.';
+                            errors.push(msg);
+                            if (!firstField) { firstField = el; firstMessage = msg; }
                         }
                     }
                 });
@@ -136,13 +151,23 @@
                 const clientErrors = document.getElementById('client-errors');
                 if (errors.length) {
                     e.preventDefault();
+                    // show aggregated errors
                     clientErrors.innerHTML = '<strong>Ocorreram erros:</strong><ul class="mt-2 list-disc list-inside">' + errors.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>';
                     clientErrors.classList.remove('hidden');
+                    // show native browser tooltip on first invalid field in Portuguese
+                    if (firstField && firstMessage && typeof firstField.reportValidity === 'function') {
+                        firstField.setCustomValidity(firstMessage);
+                        firstField.reportValidity();
+                        firstField.focus();
+                    }
                     clientErrors.scrollIntoView({behavior:'smooth', block:'center'});
                     return false;
                 } else {
-                    // allow submit; hide client errors
                     if (clientErrors) clientErrors.classList.add('hidden');
+                    // Ensure no lingering custom validity
+                    Object.keys(labels).forEach(function(name){
+                        const el = form.elements[name]; if (el) el.setCustomValidity('');
+                    });
                 }
             });
         })();
