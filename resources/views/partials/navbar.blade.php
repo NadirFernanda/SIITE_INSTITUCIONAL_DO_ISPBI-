@@ -2,12 +2,12 @@
 <div class="block w-full fixed left-0 top-0" style="background:#0E8F81;height:4px;z-index:52;"></div>
 <div class="block w-full fixed left-0 top-0" style="background:#F05A28;height:4px;top:4px;z-index:51;"></div>
 
-<!-- Barra inferior institucional em cinza claro - Desktop apenas -->
-<div class="hidden md:flex w-full" style="background:#f3f4f6;color:#183153;font-size:1.01rem;padding:7px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;min-height:36px;">
+<!-- Barra inferior institucional - Desktop (agora em azul com texto branco) -->
+<div class="hidden md:flex w-full" style="background:#2979FF;color:#ffffff;font-size:1.01rem;padding:7px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;min-height:36px;">
   <div class="flex flex-wrap items-center gap-2">
-    <a href="/contactos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto"><span>📷</span> Contacto</a>
-    <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Abrir Webmail (abre em nova aba)"><span>✉️</span> Webmail</a>
-    <a href="/servicos" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Serviços"><span>🗞️</span> Serviços</a>
+    <a href="/contactos" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto"><span>📷</span> Contacto</a>
+    <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Abrir Webmail (abre em nova aba)"><span>✉️</span> Webmail</a>
+    <a href="/servicos" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Serviços"><span>🗞️</span> Serviços</a>
   </div>
   <div class="flex flex-wrap items-center gap-2">
     <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgãos de gestão</a> -->
@@ -15,7 +15,7 @@
     <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
     <div x-data="{ openInfra: false }" class="relative">
             <button @click="openInfra = !openInfra" @keydown.escape="openInfra = false"
-              class="flex items-center gap-1 hover:underline hover:text-[#2563eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
+              class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
               :aria-expanded="openInfra ? 'true' : 'false'" aria-haspopup="true" aria-controls="infra-dropdown">
         <span>⚙️</span> Infraestrutura Digital
         <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -32,18 +32,18 @@
       </div>
     </div>
 
-      <a href="/candidaturas" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
+      <a href="/candidaturas" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
       <span>📝</span> Candidaturas
     </a>
 
     <!-- Links de estudantes movidos para a barra inferior -->
-    <a href="/calendario-academico" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
+    <a href="/calendario-academico" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
       <span>📅</span> Calendário Académico
     </a>
-    <a href="/guia-estudante" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
+    <a href="/guia-estudante" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
       <span>📖</span> Guia do Estudante
     </a>
-    <a href="/resultados" class="flex items-center gap-1 hover:underline hover:text-[#2563eb] whitespace-nowrap">
+    <a href="/resultados" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
       <span>📊</span> Resultados de Exames
     </a>
   </div>
