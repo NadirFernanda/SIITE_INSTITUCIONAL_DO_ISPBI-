@@ -45,7 +45,7 @@ $cursos = [
     ],
     [
         'title' => 'Psicologia Clínica',
-        'description' => 'Forma psicólogos para diagnosticar, intervir e prevenir em contextos clínicos, educativos, organizacionais e comunitários, com competências em avaliação, intervenção psicoterapêutica, investigação e trabalho multidisciplinar.',
+        'description' => 'O licenciado em Psicologia é um profissional que avalia, diagnostica e intervém no desenvolvimento psicológico, promovendo o bem‑estar individual e colectivo. Atua na prevenção, orientação e resolução de problemas em contextos educativos, clínicos, organizacionais e comunitários, desenvolvendo programas, investigações e estratégias de formação, sempre com ética, trabalho multidisciplinar e comunicação eficaz.',
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
