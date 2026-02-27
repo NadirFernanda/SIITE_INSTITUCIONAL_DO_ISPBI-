@@ -166,7 +166,7 @@
                                         <h3 class="text-xl font-semibold text-gray-900 mb-2">Cursos de Graduação</h3>
                                         <p class="text-gray-600 mb-4">Conheça todos os cursos disponíveis no ISP-Bié</p>
                                         <div class="text-sm text-gray-500 mb-4">
-                                            <span class="font-semibold">Vagas:</span> 40 por curso
+                                            <span class="font-semibold">Vagas:</span> variavel
                                         </div>
                                         <a href="/cursos" class="text-[#0E8F81] hover:text-[#0a6b5c] font-medium">Ver todos os cursos →</a>
                                     </div>
