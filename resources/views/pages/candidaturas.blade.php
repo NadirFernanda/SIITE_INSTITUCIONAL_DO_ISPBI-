@@ -80,30 +80,82 @@
 
                                 <h2 class="text-3xl font-bold text-[#2563eb] mb-8">Documentos Necessários</h2>
                                 <div class="bg-white p-8 rounded-lg shadow-md">
-                                    <ul class="space-y-4 list-disc list-inside text-gray-700">
-                                        <li>
-                                            <strong>Bilhete de Identidade;</strong>
+                                    <ul class="space-y-4">
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Bilhete de Identidade</h3>
+                                            </div>
                                         </li>
-                                        <li>
-                                            <strong>Fotocópia do certificado de conclusão do segundo ciclo;</strong>
+
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Fotocópia do certificado de conclusão do segundo ciclo</h3>
+                                            </div>
                                         </li>
-                                        <li>
-                                            <strong>Pasta de processos (no caso de inscrição presencial);</strong>
+
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Pasta de processos</h3>
+                                                <p class="text-gray-600">(no caso de inscrição presencial)</p>
+                                            </div>
                                         </li>
-                                        <li>
-                                            <strong>Ficha de inscrição devidamente preenchida;</strong>
+
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Ficha de inscrição devidamente preenchida</h3>
+                                            </div>
                                         </li>
-                                        <li>
-                                            <strong>Comprovativo dos emolumentos de pagamento correspondentes via RUP;</strong>
+
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Comprovativo dos emolumentos de pagamento</h3>
+                                                <p class="text-gray-600">(via RUP)</p>
+                                            </div>
                                         </li>
-                                        <li>
-                                            <strong>No ato da inscrição, é emitido um recibo em nome do candidato;</strong>
+
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Recibo emitido no ato da inscrição</h3>
+                                                <p class="text-gray-600">(emitido em nome do candidato)</p>
+                                            </div>
                                         </li>
-                                        <li>
-                                            <strong>No ato da inscrição, é emitido um número de identificação válido para todo o processo;</strong>
+
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Número de identificação do processo</h3>
+                                                <p class="text-gray-600">(emitido no ato da inscrição)</p>
+                                            </div>
                                         </li>
-                                        <li>
-                                            <strong>Caso o certificado ainda não tenha sido emitido por razões alheias aos candidatos, poderá inscrever-se com a declaração de conclusão do ensino médio.</strong>
+
+                                        <li class="flex items-start">
+                                            <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="font-semibold text-gray-900">Declaração de conclusão (caso o certificado não esteja disponível)</h3>
+                                                <p class="text-gray-600">Caso o certificado ainda não tenha sido emitido por razões alheias ao candidato, poderá inscrever-se com a declaração de conclusão do ensino médio.</p>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
