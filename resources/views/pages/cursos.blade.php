@@ -202,6 +202,7 @@ $accredited = [
 
                         <!-- Departamento e domínio - ordem 3 -->
                         <div class="order-3">
+                            <div :class="dark ? 'text-gray-100 font-semibold text-sm mb-2' : 'text-white font-semibold text-sm mb-2'">Departamento</div>
                             <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-2 text-base">
                                 @php
                                     $omitDomain = false;
