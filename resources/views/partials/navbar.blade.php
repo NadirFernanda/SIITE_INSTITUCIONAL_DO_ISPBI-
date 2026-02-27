@@ -1,5 +1,5 @@
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-[#2563eb] px-3 py-2 rounded shadow z-60">Saltar para o conteúdo</a>
-<div class="block w-full fixed left-0 top-0" style="background:#0E8F81;height:4px;z-index:52;"></div>
+<div class="block w-full fixed left-0 top-0" style="background:#2979FF;height:4px;z-index:52;"></div>
 <div class="block w-full fixed left-0 top-0" style="background:#F05A28;height:4px;top:4px;z-index:51;"></div>
 
 <!-- Barra inferior institucional - Desktop (agora em azul com texto branco) -->
