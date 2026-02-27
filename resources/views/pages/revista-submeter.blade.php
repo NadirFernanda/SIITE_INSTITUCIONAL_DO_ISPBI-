@@ -81,21 +81,19 @@
             </form>
         </div>
     </div>
+    <script src="{{ asset('js/locale-revista.js') }}"></script>
     <script>
         (function(){
             const form = document.getElementById('revista-form');
             if (!form) return;
 
-            const labels = {
-                author: 'Autor',
-                email: 'Email de contacto',
-                affiliation: 'Filiação',
-                category: 'Categoria',
-                title: 'Título',
-                description: 'Descrição',
-                link: 'Link',
-                notes: 'Observações'
+            // Load labels/messages from centralized locale if available
+            const locale = window.RevistaLocale || {};
+            const labels = locale.labels || {
+                author: 'Autor', email: 'Email de contacto', affiliation: 'Filiação', category: 'Categoria',
+                title: 'Título', description: 'Descrição', link: 'Link', notes: 'Observações'
             };
+            const msgs = (locale.messages || {});
 
             function isValidEmail(email) {
                 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -126,7 +124,7 @@
                     // Required fields
                     if (['author','email','title','description','link'].includes(name)) {
                         if (!val) {
-                            const msg = `Por favor, preencha o campo "${labels[name]}".`;
+                            const msg = (msgs.required ? msgs.required(labels[name]) : `Por favor, preencha o campo "${labels[name]}".`);
                             errors.push(msg);
                             if (!firstField) { firstField = el; firstMessage = msg; }
                             return;
@@ -136,12 +134,12 @@
                     // Type-specific checks
                     if (val) {
                         if (name === 'email' && !isValidEmail(val)) {
-                            const msg = 'Por favor, introduza um endereço de email válido.';
+                            const msg = (msgs.invalidEmail || 'Por favor, introduza um endereço de email válido.');
                             errors.push(msg);
                             if (!firstField) { firstField = el; firstMessage = msg; }
                         }
                         if (name === 'link' && !isValidURL(val)) {
-                            const msg = 'Por favor, introduza um URL válido.';
+                            const msg = (msgs.invalidURL || 'Por favor, introduza um URL válido.');
                             errors.push(msg);
                             if (!firstField) { firstField = el; firstMessage = msg; }
                         }
@@ -152,7 +150,7 @@
                 if (errors.length) {
                     e.preventDefault();
                     // show aggregated errors
-                    clientErrors.innerHTML = '<strong>Ocorreram erros:</strong><ul class="mt-2 list-disc list-inside">' + errors.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>';
+                    clientErrors.innerHTML = '<strong>' + (msgs.occurred || 'Ocorreram erros:') + '</strong><ul class="mt-2 list-disc list-inside">' + errors.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>';
                     clientErrors.classList.remove('hidden');
                     // show native browser tooltip on first invalid field in Portuguese
                     if (firstField && firstMessage && typeof firstField.reportValidity === 'function') {
