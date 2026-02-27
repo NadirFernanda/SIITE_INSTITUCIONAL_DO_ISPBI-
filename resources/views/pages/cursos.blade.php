@@ -56,7 +56,7 @@ $cursos = [
             ['name' => 'Psicologia Clínica e da Saúde', 'icon' => 'heart-pulse'],
             ['name' => 'Psicologia Educativa e do Desenvolvimento', 'icon' => 'chat-bubble-left'],
             ['name' => 'Psicologia do Trabalho e Social', 'icon' => 'users'],
-            ['name' => 'Avaliação Psicológica e Diagnóstico', 'icon' => 'clipboard-list'],
+            ['name' => 'Avaliação Psicológica', 'icon' => 'clipboard-list'],
         ],
         'link' => 'cursos.psicologia'
     ],
