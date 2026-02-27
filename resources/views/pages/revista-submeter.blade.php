@@ -1,4 +1,4 @@
-@extends('layouts.site')
+ bn @extends('layouts.site')
 
 
 @section('content')
@@ -18,7 +18,7 @@
             @endif
 
             @if($errors->any())
-                <div class="mb-4 p-4 bg-red-50 text-red-800 rounded">
+                <div class="mb-4 p-4 bg-red-50 text-red-800 rounded" id="server-errors">
                     <strong>Ocorreram erros:</strong>
                     <ul class="mt-2 list-disc list-inside">
                         @foreach($errors->all() as $error)
@@ -28,7 +28,9 @@
                 </div>
             @endif
 
-            <form action="{{ route('revista.submeter.post') }}" method="POST">
+            <div id="client-errors" class="mb-4 hidden p-4 bg-red-50 text-red-800 rounded"></div>
+
+            <form id="revista-form" action="{{ route('revista.submeter.post') }}" method="POST" novalidate>
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
                     <label class="block">
@@ -79,4 +81,70 @@
             </form>
         </div>
     </div>
+    <script>
+        (function(){
+            const form = document.getElementById('revista-form');
+            if (!form) return;
+
+            const labels = {
+                author: 'Autor',
+                email: 'Email de contacto',
+                affiliation: 'Filiação',
+                category: 'Categoria',
+                title: 'Título',
+                description: 'Descrição',
+                link: 'Link',
+                notes: 'Observações'
+            };
+
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function isValidURL(url) {
+                try { new URL(url); return true; } catch(e) { return false; }
+            }
+
+            form.addEventListener('submit', function(e){
+                const errors = [];
+                const firstInvalid = null;
+
+                Object.keys(labels).forEach(function(name){
+                    const el = form.elements[name];
+                    if (!el) return;
+                    const val = (el.value || '').trim();
+
+                    // Required fields
+                    if (['author','email','title','description','link'].includes(name)) {
+                        if (!val) {
+                            errors.push(`O campo "${labels[name]}" é obrigatório.`);
+                            return;
+                        }
+                    }
+
+                    // Type-specific checks
+                    if (val) {
+                        if (name === 'email' && !isValidEmail(val)) {
+                            errors.push('O email informado não é válido.');
+                        }
+                        if (name === 'link' && !isValidURL(val)) {
+                            errors.push('O link informado não é um URL válido.');
+                        }
+                    }
+                });
+
+                const clientErrors = document.getElementById('client-errors');
+                if (errors.length) {
+                    e.preventDefault();
+                    clientErrors.innerHTML = '<strong>Ocorreram erros:</strong><ul class="mt-2 list-disc list-inside">' + errors.map(function(i){ return '<li>'+i+'</li>'; }).join('') + '</ul>';
+                    clientErrors.classList.remove('hidden');
+                    clientErrors.scrollIntoView({behavior:'smooth', block:'center'});
+                    return false;
+                } else {
+                    // allow submit; hide client errors
+                    if (clientErrors) clientErrors.classList.add('hidden');
+                }
+            });
+        })();
+    </script>
 @endsection
