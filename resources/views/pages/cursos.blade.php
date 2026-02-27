@@ -52,9 +52,9 @@ $cursos = [
         'gradientFromHex' => '#C62828', // vermelho institucional
         'gradientToHex' => '#F05A28',   // laranja institucional
         'areas' => [
-            ['name' => 'Psicologia Clínica', 'icon' => 'heart-pulse'],
-            ['name' => 'Saúde Mental Comunitária', 'icon' => 'users'],
-            ['name' => 'Psicoterapia', 'icon' => 'chat-bubble-left'],
+            ['name' => 'Psicologia Clínica e da Saúde', 'icon' => 'heart-pulse'],
+            ['name' => 'Psicologia Educativa e do Desenvolvimento', 'icon' => 'chat-bubble-left'],
+            ['name' => 'Psicologia do Trabalho e Social', 'icon' => 'users'],
         ],
         'link' => 'cursos.psicologia'
     ],
