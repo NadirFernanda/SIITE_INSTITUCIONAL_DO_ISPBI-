@@ -60,7 +60,7 @@ $cursos = [
     ],
     [
         'title' => 'Comunicação Social',
-        'description' => 'Capacita profissionais para atuar em jornalismo, comunicação empresarial e para o desenvolvimento, planejar e produzir conteúdos mediáticos, além de mediar processos comunicacionais e atuar em docência e investigação.',
+        'description' => 'O licenciado em Psicologia é um profissional que avalia, diagnostica e intervém no desenvolvimento psicológico, promovendo o bem‑estar individual e colectivo. Atua na prevenção, orientação e resolução de problemas em contextos educativos, clínicos, organizacionais e comunitários, desenvolvendo programas, investigações e estratégias de formação, sempre com ética, trabalho multidisciplinar e comunicação eficaz.',
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => 'Ciências Sociais, Jornalismo e Informação',
         'duration' => '4 Anos',
