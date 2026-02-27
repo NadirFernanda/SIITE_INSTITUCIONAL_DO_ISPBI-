@@ -78,7 +78,7 @@ $cursos = [
     ],
     [
         'title' => 'Contabilidade e Administração',
-        'description' => 'Forma profissionais em contabilidade, gestão, auditoria e finanças, preparados para orientar a gestão empresarial, direção económica e exercer funções docentes e de auditoria com base em práticas modernas.',
+        'description' => 'O licenciado em Contabilidade e Administração é um profissional preparado para gerir recursos, analisar finanças e apoiar decisões económicas. Atua na contabilidade, auditoria, gestão empresarial, direcção de processos e docência, aplicando técnicas modernas com ética, contribuindo para o desenvolvimento organizacional e valorização das instituições angolanas no contexto nacional e internacional sustentável.',
         'department' => 'Ciências Humanas, Sociais e Económicas',
         'domain' => '',
         'duration' => '4 Anos',
