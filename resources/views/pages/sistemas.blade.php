@@ -13,7 +13,7 @@
     </div>
 
   <!-- Introdução -->
-  <section class="py-16 bg-white">
+  <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto text-center mb-14">
         <h2 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-5">Infraestrutura Digital</h2>
@@ -31,7 +31,7 @@
   <!-- Sistemas Académicos (conteúdo removido conforme solicitado) -->
 
   <!-- Sistemas Administrativos -->
-  <section class="py-16 bg-white">
+  <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-14 text-center">Sistemas Administrativos</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -111,7 +111,7 @@
   <!-- Aplicações Mobile e Suporte Técnico (removidos conforme solicitado) -->
 
   <!-- Segurança e Privacidade -->
-  <section class="py-16 bg-white">
+  <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-14 text-white shadow-xl">
         <div class="max-w-3xl mx-auto text-center">
