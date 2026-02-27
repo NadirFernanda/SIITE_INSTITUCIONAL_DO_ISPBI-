@@ -46,7 +46,7 @@ $cursos = [
     ],
     [
         'title' => 'Psicologia Clínica',
-        'description' => 'O licenciado em Psicologia é um profissional que avalia, diagnostica e intervém no desenvolvimento psicológico, promovendo o bem‑estar individual e colectivo. Atua na prevenção, orientação e resolução de problemas em contextos educativos, clínicos, organizacionais e comunitários, desenvolvendo programas, investigações e estratégias de formação, sempre com ética, trabalho multidisciplinar e comunicação eficaz.',
+        'description' => 'O licenciado em Comunicação Social é um profissional capacitado para gerir, planear e produzir comunicação pública. Atua em jornalismo, publicidade, assessoria, mediação social, investigação e docência, desenvolvendo estratégias e conteúdos em diferentes linguagens e meios, contribuindo para relações institucionais, organizacionais e comunitárias, promovendo participação, informação e desenvolvimento social responsável e sustentável.',
         'department' => 'Ciências da Saúde',
         'domain' => 'Ciências Médicas e da Saúde',
         'duration' => '5 Anos',
