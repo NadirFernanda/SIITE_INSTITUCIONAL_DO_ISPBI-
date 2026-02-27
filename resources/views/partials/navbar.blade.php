@@ -58,7 +58,9 @@
       <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-1 sm:px-2 sm:py-1.5" style="background:transparent!important;">
         <img src="/images/logo.png" alt="ISP-Bié" class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
-      
+      <div class="min-w-0">
+        <span class="block lg:hidden text-sm font-normal text-white truncate">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
+      </div>
     </a>
     
     <!-- Botão hamburger (Mobile) -->
