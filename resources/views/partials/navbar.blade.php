@@ -76,7 +76,7 @@
         <span>Cursos</span>
       </a>
       <a href="/investigacao" class="flex items-center space-x-1 text-white font-semibold uppercase text-xs tracking-wide hover:text-[#FFD700] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
-        <span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m4 0a4 4 0 11-8 0 4 4 0 018 0z"/><path d="M12 12v2m0 4h.01"/></svg></span>
+        <span><svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <span>Pesquisa e Inovação</span>
       </a>
       <!-- Dropdown Institucional - Desktop -->
