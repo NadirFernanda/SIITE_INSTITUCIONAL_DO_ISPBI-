@@ -17,6 +17,17 @@
                 <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">{{ session('status') }}</div>
             @endif
 
+            @if($errors->any())
+                <div class="mb-4 p-4 bg-red-50 text-red-800 rounded">
+                    <strong>Ocorreram erros:</strong>
+                    <ul class="mt-2 list-disc list-inside">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('revista.submeter.post') }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 gap-4">

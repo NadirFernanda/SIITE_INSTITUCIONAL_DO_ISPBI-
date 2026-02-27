@@ -13,6 +13,12 @@
             <p class="mt-3 text-gray-600 max-w-2xl">A Revista reúne artigos, comunicados e estudos produzidos por docentes, investigadores e estudantes das áreas de Engenharias, Ciências Sociais, Gestão e áreas afins.</p>
         </div>
 
+        @if(session('status'))
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+                <div class="p-4 bg-green-100 text-green-800 rounded">{{ session('status') }}</div>
+            </div>
+        @endif
+
         <!-- Conteúdo Principal -->
         <section class="py-16 bg-white scroll-reveal">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
