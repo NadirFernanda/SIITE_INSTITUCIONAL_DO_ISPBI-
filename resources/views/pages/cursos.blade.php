@@ -213,8 +213,28 @@ $cursos = [
                     </div>
                 </div>
             </div>
-        @endforeach
-    </div>
+                @endforeach
+        </div>
+
+        <!-- Cursos Acreditados -->
+        <section class="mt-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Cursos Acreditados</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($accredited as $ac)
+                        <div class="bg-white/90 dark:bg-gray-800 rounded-lg shadow p-5 flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $ac['title'] }}</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Acreditação oficial</p>
+                            </div>
+                            <div class="ml-4 flex-shrink-0">
+                                <span class="inline-flex items-center justify-center px-3 py-2 rounded-full bg-[#2563eb] text-white font-bold text-lg">{{ $ac['percent'] }}</span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 </div>
 
 @endsection
