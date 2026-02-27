@@ -145,7 +145,7 @@ Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])-
 // Rota '/portal' removida (página externa usada em vez da view interna)
 // Public listing of published revista articles
 Route::get('/revista', [App\Http\Controllers\RevistaController::class, 'index'])->name('revista');
-Route::get('/revista/{id}', [App\Http\Controllers\RevistaController::class, 'show'])->name('revista.show');
+Route::get('/revista/{id}', [App\Http\Controllers\RevistaController::class, 'show'])->whereNumber('id')->name('revista.show');
 
 // Revista: página de submissão (GET form + POST handler)
 Route::get('/revista/submeter', function () {
