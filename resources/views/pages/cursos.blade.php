@@ -95,7 +95,7 @@ $cursos = [
     ],
     [
         'title' => 'Engenharia Informática',
-        'description' => 'Prepara engenheiros em software, arquitetura de computadores, redes e equipamentos eletrónicos, capazes de projetar, desenvolver e gerir soluções informáticas em diversos sectores.',
+        'description' => 'O licenciado em Engenharia Informática é um profissional especializado em software, redes, sistemas e tecnologias digitais. Atua no desenvolvimento, manutenção e implementação de soluções informáticas, consultoria, investigação e inovação, apoiando decisões estratégicas, automatização e eficiência organizacional, trabalhando em diferentes sectores com competências técnicas, analíticas e capacidade de adaptação às necessidades empresariais atuais.',
         'department' => 'Engenharias',
         'domain' => 'Engenharias e Telecomunicações',
         'duration' => '5 Anos',
