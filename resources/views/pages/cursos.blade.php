@@ -41,17 +41,6 @@ $cursos = [
             ['name' => 'Saúde Pública', 'icon' => 'users'],
             ['name' => 'Gestão em Saúde', 'icon' => 'clipboard-list'],
         ],
-
-        $accredited = [
-            ['title' => 'ENFERMAGEM', 'percent' => '65,94%'],
-            ['title' => 'PSICOLOGIA', 'percent' => '67,8%'],
-            ['title' => 'Engenharia Informática', 'percent' => '68,60%'],
-            ['title' => 'Comunicação Social', 'percent' => '73.63%'],
-            ['title' => 'Contabilidade', 'percent' => '73,23%'],
-        ];
-
-        @endphp
-    [
         'title' => 'Psicologia Clínica',
         'description' => 'Forma psicólogos aptos a atuar na promoção da saúde mental, diagnóstico, intervenção terapêutica e acompanhamento psicológico em diversos contextos.',
         'department' => 'Ciências da Saúde',
@@ -127,6 +116,15 @@ $cursos = [
         'link' => 'cursos.hidricos'
     ],
 ];
+
+$accredited = [
+    ['title' => 'ENFERMAGEM', 'percent' => '65,94%'],
+    ['title' => 'PSICOLOGIA', 'percent' => '67,8%'],
+    ['title' => 'Engenharia Informática', 'percent' => '68,60%'],
+    ['title' => 'Comunicação Social', 'percent' => '73.63%'],
+    ['title' => 'Contabilidade', 'percent' => '73,23%'],
+];
+
 @endphp
 
 <div x-data="{ dark: false }" class="relative">
