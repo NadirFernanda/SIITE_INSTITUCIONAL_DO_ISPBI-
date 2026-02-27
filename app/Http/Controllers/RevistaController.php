@@ -14,11 +14,26 @@ class RevistaController extends Controller
             ->select(['id','title','author','affiliation','published_at','description','link','created_at'])
             ->orderByDesc('published_at');
 
+        // Apply search filter if provided
+        if ($request->filled('q')) {
+            $q = $request->input('q');
+            $query->where(function($r) use ($q) {
+                $r->where('title', 'like', "%{$q}%")
+                  ->orWhere('author', 'like', "%{$q}%")
+                  ->orWhere('description', 'like', "%{$q}%");
+            });
+        }
+
+        // Apply category filter if provided
+        if ($request->filled('category')) {
+            $query->where('category', $request->input('category'));
+        }
+
         // If there are filters or search, skip cache to return fresh results
         $hasFilters = $request->filled('q') || $request->filled('category') || $request->filled('status');
 
         if ($hasFilters) {
-            $articles = $query->paginate(15);
+            $articles = $query->paginate(15)->withQueryString();
         } else {
             $page = max(1, (int) $request->get('page', 1));
             $cacheKey = "revista:page:{$page}";

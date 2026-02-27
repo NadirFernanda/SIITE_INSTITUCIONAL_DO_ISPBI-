@@ -62,7 +62,13 @@
 
         <section class="py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Artigos Publicados</h2>
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+                    <h2 class="text-2xl font-bold text-gray-800">Artigos Publicados</h2>
+                    <form method="GET" action="{{ route('revista') }}" class="flex items-center gap-2">
+                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Pesquisar artigos, autor, título..." class="px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Pesquisar</button>
+                    </form>
+                </div>
                 @if(isset($articles) && $articles->count())
                     <div class="grid gap-6">
                         @foreach($articles as $a)
