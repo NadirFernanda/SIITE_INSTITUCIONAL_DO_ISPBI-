@@ -102,9 +102,10 @@ $cursos = [
         'gradientFromHex' => '#2563EB', // azul navbar institucional
         'gradientToHex' => '#60A5FA',   // azul claro
         'areas' => [
-            ['name' => 'Desenvolvimento de Software', 'icon' => 'code'],
-            ['name' => 'Redes e Sistemas', 'icon' => 'server'],
-            ['name' => 'Segurança da Informação', 'icon' => 'shield-check'],
+            ['name' => '1. Tecnologia de software', 'icon' => 'code'],
+            ['name' => '2. Arquitetura e tecnologia de computadores', 'icon' => 'computer-desktop'],
+            ['name' => '3. Tecnologia de redes de computadores', 'icon' => 'server'],
+            ['name' => '4. Equipamentos eletrónicos', 'icon' => 'calculator'],
         ],
         'link' => 'cursos.informatica'
     ],
