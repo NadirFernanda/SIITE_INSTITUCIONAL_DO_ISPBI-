@@ -5,19 +5,29 @@
 <!-- Barra inferior institucional - Desktop (agora em azul com texto branco) -->
 <div class="hidden md:flex w-full" style="background:#2979FF;color:#ffffff;font-size:1.01rem;padding:7px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;min-height:36px;">
   <div class="flex flex-wrap items-center gap-2">
-    <a href="/contactos" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto"><span>📷</span> Contacto</a>
-    <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Abrir Webmail (abre em nova aba)"><span>✉️</span> Webmail</a>
-    <a href="/servicos" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Serviços"><span>🗞️</span> Serviços</a>
+    <a href="/contactos" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2l2 5 3-1 3 1 2-5h2a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg>
+      Contacto
+    </a>
+    <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Abrir Webmail (abre em nova aba)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Webmail
+    </a>
+    <a href="/servicos" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Serviços">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 20H5a2 2 0 01-2-2V7a2 2 0 012-2h4l2 3h6a2 2 0 012 2v7a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Serviços
+    </a>
   </div>
   <div class="flex flex-wrap items-center gap-2">
     <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#2563eb]"><span>🏛️</span> Órgãos de gestão</a> -->
 
     <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
     <div x-data="{ openInfra: false }" class="relative">
-            <button @click="openInfra = !openInfra" @keydown.escape="openInfra = false"
-              class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
-              :aria-expanded="openInfra ? 'true' : 'false'" aria-haspopup="true" aria-controls="infra-dropdown">
-        <span>⚙️</span> Infraestrutura Digital
+              <button @click="openInfra = !openInfra" @keydown.escape="openInfra = false"
+                class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
+                :aria-expanded="openInfra ? 'true' : 'false'" aria-haspopup="true" aria-controls="infra-dropdown">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2h-.5a2 2 0 01-2-2v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2v-.5a2 2 0 012-2h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82L2.4 4.83A2 2 0 015.23 2l.06.06a1.65 1.65 0 001.82.33h.01A1.65 1.65 0 019 2.88V3a2 2 0 012-2h.5a2 2 0 012 2v.09c.35.14.68.34 1 .6.33.28.62.6.86.95.25.36.44.75.57 1.17.13.42.2.86.2 1.31v.5a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33L19.4 4.83A2 2 0 0121.83 7.66l-.06.06a1.65 1.65 0 00-.33 1.82 1.65 1.65 0 001.51 1H21a2 2 0 012 2v.5a2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Infraestrutura Digital
         <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         </svg>
@@ -33,18 +43,22 @@
     </div>
 
       <a href="/candidaturas" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
-      <span>📝</span> Candidaturas
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10M7 11h10M7 15h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Candidaturas
     </a>
 
     <!-- Links de estudantes movidos para a barra inferior -->
     <a href="/calendario-academico" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
-      <span>📅</span> Calendário Académico
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Calendário Académico
     </a>
     <a href="/guia-estudante" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
-      <span>📖</span> Guia do Estudante
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20l9-5-9-5-9 5 9 5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 12v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Guia do Estudante
     </a>
     <a href="/resultados" class="flex items-center gap-1 text-white hover:underline hover:text-white whitespace-nowrap">
-      <span>📊</span> Resultados de Exames
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13v6M12 9v10M17 5v14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Resultados de Exames
     </a>
   </div>
 </div>
