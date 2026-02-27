@@ -132,7 +132,7 @@
           </svg>
         </button>
                <div x-show="openExt" @click.away="openExt = false" x-cloak
-                 class="absolute left-0 mt-2 w-64 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2">
+                 class="absolute left-0 mt-2 w-64 bg-[#2979FF] text-white rounded-lg shadow-lg border border-transparent z-50 p-2">
           <div class="grid grid-cols-1 gap-2">
             <a href="/cultura" class="block px-4 py-2 font-bold rounded hover:bg-[#2563eb] hover:text-white">Extensão Universitária</a>
             <a href="/estagios" class="block px-4 py-2 rounded hover:bg-[#2563eb] hover:text-white">Estágios</a>
