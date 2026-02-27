@@ -85,9 +85,12 @@ $cursos = [
         'gradientFromHex' => '#B8860B', // dourado escuro
         'gradientToHex' => '#FFD700',   // amarelo institucional
         'areas' => [
-            ['name' => 'Contabilidade e Auditoria', 'icon' => 'calculator'],
-            ['name' => 'Gestão Empresarial', 'icon' => 'briefcase'],
-            ['name' => 'Consultoria Financeira', 'icon' => 'chart-bar'],
+            ['name' => 'Contabilidade e da administração', 'icon' => 'calculator'],
+            ['name' => 'Finanças em sentido amplo', 'icon' => 'chart-bar'],
+            ['name' => 'Direcção dos processos económicos', 'icon' => 'briefcase'],
+            ['name' => 'Gestão empresarial', 'icon' => 'briefcase'],
+            ['name' => 'Auditoria', 'icon' => 'clipboard-list'],
+            ['name' => 'Docência universitária', 'icon' => 'newspaper'],
         ],
         'link' => 'cursos.contabilidade'
     ],
