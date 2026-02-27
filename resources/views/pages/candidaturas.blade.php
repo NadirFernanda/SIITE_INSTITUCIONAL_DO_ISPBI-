@@ -35,36 +35,44 @@
                                     </div>
 
                                     <h2 class="text-3xl font-bold text-[#2563eb] mb-8">Processo de Candidatura</h2>
-                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">1</span>
                                             </div>
-                                            <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Documentação</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Documentação</h3>
                                             <p class="text-sm text-gray-600">Prepare os documentos necessários</p>
                                         </div>
 
-                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
+                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">2</span>
                                             </div>
-                                              <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Candidatura (Online/Presencial)</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Candidatura (Online/Presencial)</h3>
                                             <p class="text-sm text-gray-600">Preencha o formulário online</p>
                                         </div>
 
-                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
+                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">3</span>
                                             </div>
-                                            <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Pagamento</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Pagamento</h3>
                                             <p class="text-sm text-gray-600">Efetue o pagamento da taxa</p>
                                         </div>
 
-                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
+                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">4</span>
                                             </div>
-                                            <h3 class="text-lg font-semibold text-[#2563eb] mb-2">Resultado</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Exame de Acesso</h3>
+                                            <p class="text-sm text-gray-600">Informações sobre exame de acesso e calendário</p>
+                                        </div>
+
+                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
+                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#2563eb]">5</span>
+                                            </div>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Resultado</h3>
                                             <p class="text-sm text-gray-600">Aguarde a divulgação dos resultados</p>
                                         </div>
                                     </div>
