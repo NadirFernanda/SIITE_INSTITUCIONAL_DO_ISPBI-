@@ -103,7 +103,88 @@
         </main>
     </div>
 
-    <script src="{{ asset('js/locale-revista.js') }}"></script>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+            <section class="bg-white shadow rounded-lg p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-bold text-gray-800">Submissões</h2>
+                    <p class="text-sm text-gray-500">ID &middot; Autor &middot; Título &middot; Status</p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Autor</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Título</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Criado em</th>
+                                <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-100">
+                            @if(isset($submissions) && $submissions->count())
+                                @foreach($submissions as $submission)
+                                    <tr>
+                                        <td class="px-4 py-3 text-sm text-gray-700">{{ $submission->id }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-700">{{ $submission->author }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-700">{{ Str::limit($submission->title, 70) }}</td>
+                                        <td class="px-4 py-3 text-sm">
+                                            @if($submission->status === 'Publicado' || $submission->status === 'published')
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">Publicado</span>
+                                            @else
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">Pendente</span>
+                                            @endif
+                                        </td>
+                                        <td class="px-4 py-3 text-sm text-gray-500">{{ optional($submission->created_at)->format('Y-m-d') }}</td>
+                                        <td class="px-4 py-3 text-sm text-right space-x-2">
+                                            <a href="{{ route('revista.edit', $submission->id) }}" class="inline-flex items-center px-3 py-1.5 bg-white border rounded text-sm text-gray-700 hover:bg-gray-50">Editar</a>
+                                            @if($submission->status !== 'Publicado' && $submission->status !== 'published')
+                                                <form action="{{ route('revista.publish', $submission->id) }}" method="POST" class="inline-block">
+                                                    @csrf
+                                                    <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded text-sm hover:bg-blue-700">Publicar</button>
+                                                </form>
+                                            @endif
+                                            <form action="{{ route('revista.destroy', $submission->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Tem a certeza que pretende eliminar esta submissão?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-700 border border-red-100 rounded text-sm hover:bg-red-100">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td class="px-4 py-3 text-sm text-gray-700">2</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Instituo Superior Politécnico do Bié</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Impactos da inteligência artificial na autorregulação do aprendizado de programação</td>
+                                    <td class="px-4 py-3 text-sm"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">Publicado</span></td>
+                                    <td class="px-4 py-3 text-sm text-gray-500">2026-02-27</td>
+                                    <td class="px-4 py-3 text-sm text-right">
+                                        <a href="#" class="inline-flex items-center px-3 py-1.5 bg-white border rounded text-sm text-gray-700">Editar</a>
+                                        <a href="#" class="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-700 border border-red-100 rounded text-sm">Eliminar</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 text-sm text-gray-700">1</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Fernanda Gonçalves</td>
+                                    <td class="px-4 py-3 text-sm text-gray-700">Teste</td>
+                                    <td class="px-4 py-3 text-sm"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">Pendente</span></td>
+                                    <td class="px-4 py-3 text-sm text-gray-500">2026-02-27</td>
+                                    <td class="px-4 py-3 text-sm text-right">
+                                        <a href="#" class="inline-flex items-center px-3 py-1.5 bg-white border rounded text-sm text-gray-700">Editar</a>
+                                        <a href="#" class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded text-sm">Publicar</a>
+                                        <a href="#" class="inline-flex items-center px-3 py-1.5 bg-red-50 text-red-700 border border-red-100 rounded text-sm">Eliminar</a>
+                                    </td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <script src="{{ asset('js/locale-revista.js') }}"></script>
     <script>
         (function(){
             const form = document.getElementById('revista-form');
