@@ -86,7 +86,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Bilhete de Identidade</h3>
+                                                <p class="text-gray-900">Bilhete de Identidade</p>
                                             </div>
                                         </li>
 
@@ -95,7 +95,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Fotocópia do certificado de conclusão do segundo ciclo</h3>
+                                                <p class="text-gray-900">Fotocópia do certificado de conclusão do segundo ciclo</p>
                                             </div>
                                         </li>
 
@@ -104,8 +104,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Pasta de processos</h3>
-                                                <p class="text-gray-600">(no caso de inscrição presencial)</p>
+                                                <p class="text-gray-900">Pasta de processos <span class="text-gray-600">(no caso de inscrição presencial)</span></p>
                                             </div>
                                         </li>
 
@@ -114,7 +113,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Ficha de inscrição devidamente preenchida</h3>
+                                                <p class="text-gray-900">Ficha de inscrição devidamente preenchida</p>
                                             </div>
                                         </li>
 
@@ -123,8 +122,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Comprovativo dos emolumentos de pagamento</h3>
-                                                <p class="text-gray-600">(via RUP)</p>
+                                                <p class="text-gray-900">Comprovativo dos emolumentos de pagamento <span class="text-gray-600">(via RUP)</span></p>
                                             </div>
                                         </li>
 
@@ -133,8 +131,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Recibo emitido no ato da inscrição</h3>
-                                                <p class="text-gray-600">(emitido em nome do candidato)</p>
+                                                <p class="text-gray-900">Recibo emitido no ato da inscrição <span class="text-gray-600">(emitido em nome do candidato)</span></p>
                                             </div>
                                         </li>
 
@@ -143,8 +140,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Número de identificação do processo</h3>
-                                                <p class="text-gray-600">(emitido no ato da inscrição)</p>
+                                                <p class="text-gray-900">Número de identificação do processo <span class="text-gray-600">(emitido no ato da inscrição)</span></p>
                                             </div>
                                         </li>
 
@@ -153,7 +149,7 @@
                                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                             </svg>
                                             <div>
-                                                <h3 class="font-semibold text-gray-900">Declaração de conclusão (caso o certificado não esteja disponível)</h3>
+                                                <p class="text-gray-900">Declaração de conclusão (caso o certificado não esteja disponível)</p>
                                                 <p class="text-gray-600">Caso o certificado ainda não tenha sido emitido por razões alheias ao candidato, poderá inscrever-se com a declaração de conclusão do ensino médio.</p>
                                             </div>
                                         </li>
