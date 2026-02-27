@@ -51,7 +51,7 @@
 
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
 <div x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }">
-  <div class="w-full bg-[#2563eb]" style="background:#2563eb!important;color:#fff!important;">
+  <div class="w-full bg-[#1a1a1a]" style="background:#1a1a1a!important;color:#fff!important;">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
