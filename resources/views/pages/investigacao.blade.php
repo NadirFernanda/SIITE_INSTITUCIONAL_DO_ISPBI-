@@ -1,6 +1,72 @@
 @extends('layouts.site')
 
 @section('content')
+
+@php
+    $inProgress = $projects->get('em_curso') ?? collect();
+    $inReview = $projects->get('em_avaliacao') ?? collect();
+    $completed = $projects->get('concluido') ?? collect();
+@endphp
+
+<div class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-6">Investigação e Inovação</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+            <h2 class="text-xl font-semibold mb-4">Projectos em Curso</h2>
+            <div class="space-y-4">
+                @forelse($inProgress as $p)
+                    <div class="bg-white/90 dark:bg-gray-800 rounded-lg p-4 shadow">
+                        <h3 class="font-semibold">{{ $p->title }}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">{{ Str::limit($p->summary, 180) }}</p>
+                        @if($p->link)
+                            <a href="{{ $p->link }}" class="text-blue-600 hover:underline mt-2 inline-block">Ver mais</a>
+                        @endif
+                    </div>
+                @empty
+                    <p class="text-sm text-gray-500">Nenhum projecto em curso.</p>
+                @endforelse
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold mb-4">Projectos em Avaliação</h2>
+            <div class="space-y-4">
+                @forelse($inReview as $p)
+                    <div class="bg-white/90 dark:bg-gray-800 rounded-lg p-4 shadow">
+                        <h3 class="font-semibold">{{ $p->title }}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">{{ Str::limit($p->summary, 180) }}</p>
+                    </div>
+                @empty
+                    <p class="text-sm text-gray-500">Nenhum projecto em avaliação.</p>
+                @endforelse
+            </div>
+        </div>
+
+        <div>
+            <h2 class="text-xl font-semibold mb-4">Projectos Concluídos</h2>
+            <div class="space-y-4">
+                @forelse($completed as $p)
+                    <div class="bg-white/90 dark:bg-gray-800 rounded-lg p-4 shadow">
+                        <h3 class="font-semibold">{{ $p->title }}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">{{ Str::limit($p->summary, 180) }}</p>
+                        @if($p->link)
+                            <a href="{{ $p->link }}" class="text-blue-600 hover:underline mt-2 inline-block">Relatório</a>
+                        @endif
+                    </div>
+                @empty
+                    <p class="text-sm text-gray-500">Nenhum projecto concluído.</p>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@endsection
+@extends('layouts.site')
+
+@section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-reveal">
 
     <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">

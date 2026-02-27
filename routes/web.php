@@ -1,3 +1,5 @@
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 <?php
 
 
@@ -69,6 +71,14 @@ Route::get('/', function () {
         ->get();
     return view('welcome', compact('testemunhos'));
 })->name('welcome');
+
+// Investigação (public)
+Route::get('/investigacao', [ProjectController::class, 'index'])->name('investigacao');
+
+// Admin CRUD for projects
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
+});
 
 // Placeholder routes for later scaffolding
 Route::view('/sobre', 'pages.sobre')->name('sobre');
