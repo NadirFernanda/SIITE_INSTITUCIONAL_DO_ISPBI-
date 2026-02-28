@@ -70,27 +70,44 @@
                     </form>
                 </div>
                 @if(isset($articles) && $articles->count())
-                    <div class="grid gap-6">
-                        @foreach($articles as $a)
-                            @php
-                                $cardUrl = $a->link ?: route('revista.show', $a->id);
-                                $external = (bool) $a->link;
-                            @endphp
-                            <a href="{{ $cardUrl }}" @if($external) target="_blank" rel="noopener" @endif class="block transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg rounded-lg no-underline text-current">
-                                <article class="bg-white border rounded-lg p-6 shadow-sm">
-                                    <div class="flex flex-col md:flex-row md:justify-between">
-                                        <div>
-                                            <h3 class="text-xl font-semibold text-gray-900">{{ $a->title }}</h3>
-                                            <p class="text-sm text-gray-600">Autor: {{ $a->author }} @if($a->affiliation) — {{ $a->affiliation }}@endif</p>
-                                        </div>
-                                        <div class="mt-3 md:mt-0 text-sm text-gray-500">{{ $a->published_at ? $a->published_at->format('d F, Y') : $a->created_at->format('d F, Y') }}</div>
-                                    </div>
-                                    <p class="mt-4 text-gray-700">{{ Str::limit(strip_tags($a->description), 220) }}</p>
-                                    <div class="mt-4">
-                                        <span class="text-sm text-blue-600 hover:underline">{{ $external ? 'Abrir artigo (Link externo)' : 'Ver detalhes' }}</span>
-                                    </div>
-                                </article>
-                            </a>
+                    @php
+                        // Group articles by category (keep compatibility if paginator)
+                        if (method_exists($articles, 'getCollection')) {
+                            $collection = $articles->getCollection();
+                        } else {
+                            $collection = collect($articles);
+                        }
+                        $groups = $collection->groupBy(function($item){ return $item->category ?: 'Sem área de conhecimento'; });
+                    @endphp
+
+                    <div class="space-y-10">
+                        @foreach($groups as $area => $group)
+                            <div>
+                                <h3 class="text-2xl font-semibold text-gray-800 mb-4">{{ $area }}</h3>
+                                <div class="grid gap-6">
+                                    @foreach($group as $a)
+                                        @php
+                                            $cardUrl = $a->link ?: route('revista.show', $a->id);
+                                            $external = (bool) $a->link;
+                                        @endphp
+                                        <a href="{{ $cardUrl }}" @if($external) target="_blank" rel="noopener" @endif class="block transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg rounded-lg no-underline text-current">
+                                            <article class="bg-white border rounded-lg p-6 shadow-sm">
+                                                <div class="flex flex-col md:flex-row md:justify-between">
+                                                    <div>
+                                                        <h3 class="text-xl font-semibold text-gray-900">{{ $a->title }}</h3>
+                                                        <p class="text-sm text-gray-600">Autor: {{ $a->author }} @if($a->affiliation) — {{ $a->affiliation }}@endif</p>
+                                                    </div>
+                                                    <div class="mt-3 md:mt-0 text-sm text-gray-500">{{ $a->published_at ? $a->published_at->format('d F, Y') : $a->created_at->format('d F, Y') }}</div>
+                                                </div>
+                                                <p class="mt-4 text-gray-700">{{ Str::limit(strip_tags($a->description), 220) }}</p>
+                                                <div class="mt-4">
+                                                    <span class="text-sm text-blue-600 hover:underline">{{ $external ? 'Abrir artigo (Link externo)' : 'Ver detalhes' }}</span>
+                                                </div>
+                                            </article>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
                         @endforeach
                     </div>
 
