@@ -35,7 +35,7 @@
                                         </div>
                                     </div>
                                     <div class="md:col-span-2">
-                                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Volume 1, Número 1 (2024)</h3>
+                                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Volume 1, Número 1 (2026)</h3>
                                         <p class="text-gray-600 mb-4">Edição inaugural da Revista Científica do ISP-Bié com artigos selecionados nas áreas de Engenharia e Ciências Sociais.</p>
                                         <div class="flex gap-3">
                                             <a href="#" class="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700">Acessar Edição</a>
