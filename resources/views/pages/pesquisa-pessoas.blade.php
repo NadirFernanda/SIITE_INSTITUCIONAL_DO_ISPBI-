@@ -25,12 +25,12 @@
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Pesquisar</h2>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Nome</label>
-                        <input type="text" placeholder="Digite o nome..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <label for="pesquisa_nome" class="block text-gray-700 font-semibold mb-2">Nome</label>
+                        <input id="pesquisa_nome" type="text" placeholder="Digite o nome..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                     </div>
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Categoria</label>
-                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <label for="pesquisa_categoria" class="block text-gray-700 font-semibold mb-2">Categoria</label>
+                        <select id="pesquisa_categoria" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                             <option>Todas</option>
                             <option>Docentes</option>
                             <option>Funcionários</option>
@@ -38,8 +38,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Departamento</label>
-                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <label for="pesquisa_departamento" class="block text-gray-700 font-semibold mb-2">Departamento</label>
+                        <select id="pesquisa_departamento" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                             <option>Todos</option>
                             <option>Engenharias</option>
                             <option>Ciências Sociais</option>

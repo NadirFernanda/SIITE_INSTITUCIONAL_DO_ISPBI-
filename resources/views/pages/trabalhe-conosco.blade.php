@@ -193,47 +193,47 @@
         <form class="space-y-6">
           @csrf
           
-          <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo *</label>
-              <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+              <label for="alert_name" class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo *</label>
+              <input id="alert_name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
             </div>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-              <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+              <label for="alert_email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+              <input id="alert_email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
             </div>
           </div>
 
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Telefone</label>
-            <input type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+            <label for="alert_phone" class="block text-sm font-semibold text-gray-700 mb-2">Telefone</label>
+            <input id="alert_phone" type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
           </div>
 
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">Íreas de Interesse (selecione todas que se aplicam) *</label>
             <div class="space-y-2">
               <label class="flex items-center">
-                <input type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input id="interesse_docente" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Docente</span>
               </label>
               <label class="flex items-center">
-                <input type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input id="interesse_tecnico" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Técnico Administrativo</span>
               </label>
               <label class="flex items-center">
-                <input type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input id="interesse_tecnico_esp" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Técnico Especializado (TI, Laboratórios, etc.)</span>
               </label>
               <label class="flex items-center">
-                <input type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input id="interesse_pesquisa" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Investigação Científica</span>
               </label>
             </div>
           </div>
 
           <div class="flex items-start">
-            <input type="checkbox" required class="mt-1 mr-3">
-            <label class="text-sm text-gray-600">
+            <input id="alert_privacy" type="checkbox" required class="mt-1 mr-3">
+            <label for="alert_privacy" class="text-sm text-gray-600">
               Autorizo o ISP-Bié a utilizar os meus dados pessoais para envio de alertas sobre concursos públicos, 
               de acordo com a legislação de proteção de dados em vigor. *
             </label>

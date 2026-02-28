@@ -47,23 +47,23 @@
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Autor</label>
-                        <input type="text" name="author" value="{{ old('author') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
+                        <label for="revista_author" class="block text-sm font-medium text-gray-700">Autor</label>
+                        <input id="revista_author" type="text" name="author" value="{{ old('author') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Email de contacto</label>
-                        <input type="email" name="email" value="{{ old('email') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
+                        <label for="revista_email" class="block text-sm font-medium text-gray-700">Email de contacto</label>
+                        <input id="revista_email" type="email" name="email" value="{{ old('email') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Filiação (Instituição)</label>
-                        <input type="text" name="affiliation" value="{{ old('affiliation') }}" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
+                        <label for="revista_affiliation" class="block text-sm font-medium text-gray-700">Filiação (Instituição)</label>
+                        <input id="revista_affiliation" type="text" name="affiliation" value="{{ old('affiliation') }}" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Área de Conhecimento</label>
-                        <select name="category" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">
+                        <label for="revista_category" class="block text-sm font-medium text-gray-700">Área de Conhecimento</label>
+                        <select id="revista_category" name="category" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">
                             <option value="" disabled {{ old('category') ? '' : 'selected' }}>-- Selecionar área de conhecimento --</option>
                             <option value="Engenharias e Tecnologia" {{ old('category') === 'Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
                             <option value="Ciências da Saúde" {{ old('category') === 'Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
@@ -72,18 +72,18 @@
                     </div>
 
                     <div class="col-span-1">
-                        <label class="block text-sm font-medium text-gray-700">Título</label>
-                        <input type="text" name="title" value="{{ old('title') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
+                        <label for="revista_title" class="block text-sm font-medium text-gray-700">Título</label>
+                        <input id="revista_title" type="text" name="title" value="{{ old('title') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
                     <div class="col-span-1">
-                        <label class="block text-sm font-medium text-gray-700">Descrição</label>
-                        <textarea name="description" rows="4" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">{{ old('description') }}</textarea>
+                        <label for="revista_description" class="block text-sm font-medium text-gray-700">Descrição</label>
+                        <textarea id="revista_description" name="description" rows="4" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">{{ old('description') }}</textarea>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Link (URL)</label>
-                        <input type="url" name="link" value="{{ old('link') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
+                        <label for="revista_link" class="block text-sm font-medium text-gray-700">Link (URL)</label>
+                        <input id="revista_link" type="url" name="link" value="{{ old('link') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
                     {{-- notes field removed per request (optional observations) --}}

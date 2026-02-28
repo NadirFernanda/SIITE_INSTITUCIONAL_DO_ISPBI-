@@ -262,25 +262,25 @@
 
         <form class="space-y-6">
           @csrf
-          <div class="grid md:grid-cols-2 gap-6">
+            <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-semibold mb-2">Nome Completo *</label>
-              <input type="text" required class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
+              <label for="cursos_name" class="block text-sm font-semibold mb-2">Nome Completo *</label>
+              <input id="cursos_name" type="text" required class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
             </div>
             <div>
-              <label class="block text-sm font-semibold mb-2">Email *</label>
-              <input type="email" required class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
+              <label for="cursos_email" class="block text-sm font-semibold mb-2">Email *</label>
+              <input id="cursos_email" type="email" required class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
             </div>
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <label class="block text-sm font-semibold mb-2">Telefone</label>
-              <input type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
+              <label for="cursos_phone" class="block text-sm font-semibold mb-2">Telefone</label>
+              <input id="cursos_phone" type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
             </div>
             <div>
-              <label class="block text-sm font-semibold mb-2">Província</label>
-              <select class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
+              <label for="cursos_provincia" class="block text-sm font-semibold mb-2">Província</label>
+              <select id="cursos_provincia" class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
                 <option value="">Selecione</option>
                 <option value="bie">Bié</option>
                 <option value="huambo">Huambo</option>
@@ -292,8 +292,8 @@
           </div>
 
           <div>
-            <label class="block text-sm font-semibold mb-2">Curso de Interesse *</label>
-            <select required class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
+            <label for="cursos_curso" class="block text-sm font-semibold mb-2">Curso de Interesse *</label>
+            <select id="cursos_curso" required class="w-full px-4 py-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-white">
               <option value="">Selecione um curso</option>
               <option value="administracao">Administração Pública</option>
               <option value="rh">Gestão de Recursos Humanos</option>
