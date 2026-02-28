@@ -268,6 +268,8 @@
         </div>
       </div>
 
+      <!-- Publicações removidas conforme pedido pelo utilizador -->
+
       <!-- Infraestrutura de Investigação -->
       <div class="grid md:grid-cols-2 gap-8 mb-12">
         <div class="bg-white p-6 rounded-lg shadow-md">
