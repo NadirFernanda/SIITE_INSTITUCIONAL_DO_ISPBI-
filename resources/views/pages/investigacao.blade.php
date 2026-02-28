@@ -42,17 +42,34 @@
                         <div>
                             <h3 class="text-xl font-semibold mb-2">Projectos em Curso</h3>
                             <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                                <li><span class="font-semibold">AgroTech Bié:</span> Soluções digitais para agricultura sustentável na região.</li>
-                                <li><span class="font-semibold">Saúde Digital:</span> Plataforma de monitoramento remoto de pacientes em áreas rurais.</li>
-                                <li><span class="font-semibold">Educação 4.0:</span> Ferramentas tecnológicas para ensino personalizado e inclusivo.</li>
+                                <li>Cuidados Continuados em Doenças Crónicas: Intervenção em adultos com doenças crónicas não transmissíveis na comunidade do Bairro Cantíflas, Cuito-Bié.</li>
+                                <li>Enfermagem Materna e Hemorragias Obstétricas: Práticas de enfermagem em mulheres com hemorragias no peri-parto, parto e puerpério na Maternidade do Cuito-Bié.</li>
+                                <li>Impacto do Alcoolismo na Juventude: Estudo das consequências do alcoolismo na população jovem do Bairro Cantíflas, Cuito-Bié.</li>
+                                <li>Consultório de Enfermagem: Criação de um consultório para cuidados de enfermagem e promoção da saúde.</li>
+                                <li>Comportamento do Consumidor: Fatores que influenciam o comportamento de compra dos clientes da empresa C.V. &amp; Filhos, Lda.</li>
+                                <li>Gabinete de Assessoria Contabilística: Criação de um gabinete de apoio às empresas nos serviços de contabilidade.</li>
+                                <li>Consultório de Orientação Psicológica: Criação de um serviço de apoio psicológico à comunidade académica e local.</li>
+                                <li>Rádio Internet ISP-Bié: Criação de uma rádio digital para comunicação científica, educativa e institucional.</li>
+                                <li>Qualidade das Águas Subterrâneas do Cuito-Bié: Avaliação da água para consumo humano nas áreas circundantes aos cemitérios.</li>
+                                <li>Sistema de Alerta de Inundações de Cangote: Redução do risco de cheias na localidade de Cangote, Município do Cuito-Bié.</li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 class="text-xl font-semibold mb-2">Projectos em Avaliação</h3>
                             <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                                <li><span class="font-semibold">Energia Limpa Bié:</span> Pesquisa sobre microgeração solar em comunidades locais.</li>
-                                <li><span class="font-semibold">Biotecnologia Aplicada:</span> Desenvolvimento de biofertilizantes regionais.</li>
+                                <li>Observatório Académico do Corredor do Lobito: Plataforma de pesquisa multidisciplinar para recolha e análise de dados socioeconómicos, ambientais e tecnológicos, apoiando a tomada de decisão.</li>
+                                <li>Incubadora de Negócios Locais: Programa de apoio a empreendedores e pequenas empresas ao longo do Corredor do Lobito, promovendo inovação e geração de emprego.</li>
+                                <li>Segurança Ferroviária no Corredor do Lobito: Iniciativas de sensibilização sobre segurança ferroviária e oportunidades económicas, com produção de conteúdos para rádio, televisão e redes sociais.</li>
+                                <li>Sustentabilidade Ambiental no Corredor do Lobito: Implementação de projetos de gestão sustentável da água (ETAR) e mitigação de riscos ambientais associados à erosão, poluição e uso de recursos hídricos.</li>
+                                <li>Monitoramento Hidrometeorológico do Rio Cuquema: Proposta de monitoramento sem uso de sensores remotos na bacia hidrográfica do rio Cuquema, Cuito-Bié.</li>
+                                <li>Análise do Impacto da Marca d’Água Digital em Imagens Médicas: Estudo do impacto no diagnóstico assistido por computador de cancros cerebrais.</li>
+                                <li>Modernização da Sala de Informática do ISP-Bié: Apetrechamento tecnológico para apoio ao ensino e à investigação.</li>
+                                <li>Laboratório de Simulação Clínica do ISP-Bié: Apetrechamento e modernização para formação prática na área da saúde.</li>
+                                <li>Laboratório de Hidrologia: Reforço técnico-científico do laboratório do curso de Engenharia em Recursos Hídricos.</li>
+                                <li>Capacitação Científica de Docentes do ISPB: Fortalecimento das competências em elaboração de projetos de investigação.</li>
+                                <li>Modernização da Biblioteca do ISP-Bié: Reforço da infraestrutura de apoio académico.</li>
+                                <li>Sala de Análise de Dados Qualitativos e Quantitativos: Criação e apetrechamento de espaço dedicado à análise científica de dados.</li>
                             </ul>
                         </div>
 
