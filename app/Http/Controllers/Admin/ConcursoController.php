@@ -51,9 +51,15 @@ class ConcursoController extends Controller
         // If published on create, notify
         if ($concurso->status === 'published') {
             try {
-                Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+                // queue email to avoid blocking request; requires a queue worker (QUEUE_CONNECTION not 'sync')
+                Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->queue(new ConcursoPublished($concurso));
             } catch (\Throwable $e) {
-                \Log::error('Falha ao enviar email de concurso publicado: '.$e->getMessage());
+                // fallback to synchronous send if queueing fails
+                try {
+                    Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+                } catch (\Throwable $e2) {
+                    \Log::error('Falha ao enviar email de concurso publicado: '.$e2->getMessage());
+                }
             }
         }
 
@@ -94,9 +100,13 @@ class ConcursoController extends Controller
         // If changed to published, notify
         if ($concurso->status === 'published' && $was !== 'published') {
             try {
-                Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+                Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->queue(new ConcursoPublished($concurso));
             } catch (\Throwable $e) {
-                \Log::error('Falha ao enviar email de concurso publicado: '.$e->getMessage());
+                try {
+                    Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+                } catch (\Throwable $e2) {
+                    \Log::error('Falha ao enviar email de concurso publicado: '.$e2->getMessage());
+                }
             }
         }
 

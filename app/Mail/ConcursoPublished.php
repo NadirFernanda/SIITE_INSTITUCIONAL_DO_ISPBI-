@@ -5,9 +5,10 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Models\Concurso;
 
-class ConcursoPublished extends Mailable
+class ConcursoPublished extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
