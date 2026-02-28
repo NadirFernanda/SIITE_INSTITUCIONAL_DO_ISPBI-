@@ -88,6 +88,7 @@ Route::get('/investigacao', function () {
 // Admin CRUD for projects
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
+    Route::resource('concursos', App\Http\Controllers\Admin\ConcursoController::class);
     // Revista submissions moderation
     Route::get('revistas/submissions', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'index'])->name('revistas');
     Route::post('revistas/{id}/publish', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'publish'])->name('revistas.publish');

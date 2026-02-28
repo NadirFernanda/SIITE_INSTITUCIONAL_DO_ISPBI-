@@ -34,6 +34,44 @@
     </div>
   </section>
 
+  @php
+      $concursos = \App\Models\Concurso::published()->orderByDesc('publish_at')->get();
+  @endphp
+
+  <!-- Lista de Concursos -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-[#2563eb]">Concursos Abertos</h3>
+      </div>
+
+      @if($concursos->isEmpty())
+        <div class="bg-white p-6 rounded shadow text-center text-gray-700">
+          No momento não há concursos disponíveis. Verifique novamente mais tarde ou inscreva-se para receber alertas.
+        </div>
+      @else
+        <div class="grid md:grid-cols-2 gap-6">
+          @foreach($concursos as $c)
+            <div class="bg-white rounded-lg shadow p-6 interactive-card hover:shadow-lg transition">
+              <h4 class="text-xl font-semibold mb-2">{{ $c->title }}</h4>
+              @if($c->summary)
+                <p class="text-gray-700 mb-3">{{ $c->summary }}</p>
+              @endif
+              <p class="text-sm text-gray-500 mb-3">Publicado em: {{ optional($c->publish_at)->format('d/m/Y') }}</p>
+              @if($c->attachments->isNotEmpty())
+                <div class="space-y-2">
+                  @foreach($c->attachments as $att)
+                    <a href="{{ Storage::url($att->path) }}" class="inline-block text-sm text-[#2563eb] hover:underline" target="_blank">{{ $att->original_name }}</a>
+                  @endforeach
+                </div>
+              @endif
+            </div>
+          @endforeach
+        </div>
+      @endif
+    </div>
+  </section>
+
   <!-- Áreas de Recrutamento removidas conforme pedido -->
 
   <!-- Como Candidatar-se -->
