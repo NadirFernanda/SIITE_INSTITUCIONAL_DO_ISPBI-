@@ -43,14 +43,28 @@
         </form>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            const form = document.getElementById('concurso-form');
-            if (!form) return;
-            const btn = form.querySelector('button[type="submit"]');
-            if (!btn) return;
-            btn.addEventListener('click', function(e){
-                form.submit();
-            });
-        });
+        (function(){
+            function attach(){
+                const form = document.getElementById('concurso-form');
+                if (!form) return;
+                const btn = form.querySelector('button[type="submit"]');
+                form.addEventListener('submit', function(){
+                    console.log('concurso-form (create): submit event fired');
+                });
+                if (btn) {
+                    setTimeout(()=>{
+                        btn.addEventListener('click', function(ev){
+                            try{
+                                console.log('concurso-form (create): submit button clicked — forcing native submit');
+                                ev.preventDefault && ev.preventDefault();
+                                form.submit();
+                            }catch(err){ console.error('concurso-form create: submit error', err); }
+                        }, {passive:false});
+                    }, 50);
+                }
+            }
+            if (document.readyState === 'complete' || document.readyState === 'interactive') attach();
+            else document.addEventListener('DOMContentLoaded', attach);
+        })();
     </script>
 @endsection

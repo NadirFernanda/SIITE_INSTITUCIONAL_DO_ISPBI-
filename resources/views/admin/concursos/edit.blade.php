@@ -62,16 +62,36 @@
         </form>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            const form = document.getElementById('concurso-form');
-            if (!form) return;
-            const btn = form.querySelector('button[type="submit"]');
-            if (!btn) return;
-            btn.addEventListener('click', function(e){
-                // If any submit handlers call preventDefault, this forces the browser to submit.
-                // Using form.submit() bypasses submit event listeners.
-                form.submit();
-            });
-        });
+        // Stronger fallback: attach handlers slightly after load, log actions and force submit.
+        (function(){
+            function attach() {
+                const form = document.getElementById('concurso-form');
+                if (!form) return;
+                const btn = form.querySelector('button[type="submit"]');
+                // attach submit listener to detect if submit is blocked
+                form.addEventListener('submit', function(e){
+                    console.log('concurso-form: submit event fired');
+                }, {capture:false});
+
+                if (btn) {
+                    // add a click handler later to ensure it runs after other handlers
+                    setTimeout(()=>{
+                        btn.addEventListener('click', function(clickEvent){
+                            try {
+                                console.log('concurso-form: submit button clicked — forcing native submit');
+                                // Prevent double submission from other listeners
+                                clickEvent.preventDefault && clickEvent.preventDefault();
+                                // Force native submission (bypasses other submit handlers)
+                                form.submit();
+                            } catch(err) {
+                                console.error('concurso-form: force submit failed', err);
+                            }
+                        }, {passive:false});
+                    }, 50);
+                }
+            }
+            if (document.readyState === 'complete' || document.readyState === 'interactive') attach();
+            else document.addEventListener('DOMContentLoaded', attach);
+        })();
     </script>
 @endsection
