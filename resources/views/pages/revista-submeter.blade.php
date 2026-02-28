@@ -11,7 +11,7 @@
             <span class="font-medium text-gray-700">Submeter Artigo</span>
         </nav>
 
-        <header class="bg-gradient-to-r from-white via-sky-50 to-white rounded-lg p-6 mb-8 shadow-sm border">
+        <header class="bg-white rounded-lg p-6 mb-8 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg border border-gray-200 group interactive-card">
                 <div class="flex items-center gap-4">
                 <div class="w-12 h-12 flex items-center justify-center bg-blue-600 text-white rounded-md shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
