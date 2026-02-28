@@ -83,39 +83,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg">
-                    <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Publicações e Artigos por Área de Conhecimento</h2>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#2563eb] mb-2">Engenharias e Tecnologia</h3>
-                            <ul class="list-disc pl-6 text-gray-700 space-y-1">
-                                <li>"Soluções IoT para Agricultura Familiar" – Revista de Inovação Tecnológica, 2025.</li>
-                                <li>"Modelagem de Estruturas Sustentáveis" – Congresso Nacional de Engenharia, 2024.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#2563eb] mb-2">Ciências da Saúde</h3>
-                            <ul class="list-disc pl-6 text-gray-700 space-y-1">
-                                <li>"Telemedicina em Regiões Remotas" – Jornal de Saúde Pública, 2025.</li>
-                                <li>"Prevenção de Doenças Tropicais" – Simpósio Internacional de Saúde, 2024.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#2563eb] mb-2">Ciências Sociais e Humanas</h3>
-                            <ul class="list-disc pl-6 text-gray-700 space-y-1">
-                                <li>"Inclusão Digital em Comunidades Rurais" – Revista de Educação e Sociedade, 2025.</li>
-                                <li>"Empreendedorismo Social no Bié" – Fórum de Desenvolvimento Regional, 2024.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-[#2563eb] mb-2">Gestão e Administração</h3>
-                            <ul class="list-disc pl-6 text-gray-700 space-y-1">
-                                <li>"Gestão de Projetos de Inovação" – Encontro Nacional de Administração, 2025.</li>
-                                <li>"Finanças para Startups" – Revista Angolana de Negócios, 2024.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <!-- Publicações removidas por solicitação do utilizador -->
             </div>
         </section>
 
