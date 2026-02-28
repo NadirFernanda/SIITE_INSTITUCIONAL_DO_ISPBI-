@@ -22,9 +22,9 @@
             </div>
             <div class="mt-4 flex items-center gap-3 justify-end">
                 <a href="{{ route('revista') }}" target="_blank" class="text-sm text-gray-600 hover:underline">Ver site público</a>
-                <a href="{{ route('admin.revistas') }}" class="inline-flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded shadow">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" /></svg>
-                    <span class="text-sm">Atualizar</span>
+                <a href="{{ route('admin.revistas') }}" class="inline-flex items-center gap-2 bg-[#2563eb] text-white px-4 py-2 rounded-md shadow-sm hover:bg-[#1f4fb6] text-sm font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" /></svg>
+                    <span>Atualizar</span>
                 </a>
             </div>
         </header>
@@ -56,51 +56,51 @@
             </div>
 
             <div class="p-6">
-                <div class="overflow-visible">
-                    <table class="min-w-0 w-full divide-y divide-gray-200">
+                <div class="overflow-auto">
+                    <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow-sm">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Autor</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Área</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Criado em</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
+                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Autor</th>
+                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Título</th>
+                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Área</th>
+                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Criado em</th>
+                                <th class="px-4 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">Ações</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody class="bg-white divide-y divide-gray-100">
                             @foreach($submissions as $s)
-                                <tr class="hover:bg-gray-50">
-                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->id }}</td>
-                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->author }}</td>
-                                    <td class="px-6 py-4 whitespace-normal break-words text-sm font-medium text-blue-600"><a href="{{ route('admin.revistas.show', $s->id) }}">{{ $s->title }}</a></td>
-                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->category ?? '-' }}</td>
-                                    <td class="px-6 py-4 whitespace-normal break-words text-sm">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="px-4 py-4 text-sm text-gray-700">{{ $s->id }}</td>
+                                    <td class="px-4 py-4 text-sm text-gray-700">{{ $s->author }}</td>
+                                    <td class="px-4 py-4 text-sm font-medium text-[#2563eb]"><a href="{{ route('admin.revistas.show', $s->id) }}" class="hover:underline">{{ $s->title }}</a></td>
+                                    <td class="px-4 py-4 text-sm text-gray-700">{{ $s->category ?? '-' }}</td>
+                                    <td class="px-4 py-4 text-sm">
                                         @if($s->status === 'published')
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Publicado</span>
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Publicado</span>
                                         @else
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pendente</span>
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Pendente</span>
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-500">{{ $s->created_at->format('Y-m-d') }}</td>
-                                    <td class="px-6 py-4 whitespace-normal break-words text-right text-sm font-medium flex gap-2 justify-end">
-                                        <a href="{{ route('admin.revistas.edit', $s->id) }}" class="px-3 py-1 bg-blue-600 text-white rounded">Editar</a>
+                                    <td class="px-4 py-4 text-sm text-gray-500">{{ $s->created_at->format('Y-m-d') }}</td>
+                                    <td class="px-4 py-4 text-sm text-right flex gap-2 justify-end">
+                                        <a href="{{ route('admin.revistas.edit', $s->id) }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium bg-[#2563eb] text-white rounded-md hover:bg-[#1f4fb6] transition">Editar</a>
                                         @if($s->status !== 'published')
                                             <form action="{{ route('admin.revistas.publish', $s->id) }}" method="POST" style="display:inline">
                                                 @csrf
-                                                <button class="px-3 py-1 bg-blue-600 text-white rounded">Publicar</button>
+                                                <button class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium bg-green-600 text-white rounded-md hover:bg-green-700 transition">Publicar</button>
                                             </form>
                                         @endif
                                         <form action="{{ route('admin.revistas.destroy', $s->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Eliminar submissão?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="px-3 py-1 bg-blue-600 text-white rounded">Eliminar</button>
+                                            <button class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium bg-red-600 text-white rounded-md hover:bg-red-700 transition">Eliminar</button>
                                         </form>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="px-6 py-4 text-sm text-gray-700 whitespace-normal break-words">{{ $s->description }} @if($s->link) — <a href="{{ $s->link }}" target="_blank" class="underline text-blue-600">Link</a>@endif</td>
+                                    <td colspan="7" class="px-4 py-4 text-sm text-gray-700 border-t">{{ $s->description }} @if($s->link) — <a href="{{ $s->link }}" target="_blank" class="text-indigo-600 hover:underline">Link</a>@endif</td>
                                 </tr>
                             @endforeach
                         </tbody>
