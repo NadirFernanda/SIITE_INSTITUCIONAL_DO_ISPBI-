@@ -43,10 +43,15 @@
                     <h4 class="font-semibold mb-2">Anexos Existentes</h4>
                     <ul class="space-y-2">
                         @foreach($concurso->attachments as $att)
-                            <li>
-                                <a href="{{ Storage::url($att->path) }}" target="_blank" class="text-blue-600">{{ $att->original_name }}</a>
-                            </li>
-                        @endforeach
+                                <li class="flex items-center justify-between">
+                                    <a href="{{ Storage::url($att->path) }}" target="_blank" class="text-blue-600">{{ $att->original_name }}</a>
+                                    <form action="{{ route('admin.concursos.attachments.destroy', $att->id) }}" method="POST" onsubmit="return confirm('Remover anexo?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-red-600 ml-4">Remover</button>
+                                    </form>
+                                </li>
+                            @endforeach
                     </ul>
                 </div>
             @endif

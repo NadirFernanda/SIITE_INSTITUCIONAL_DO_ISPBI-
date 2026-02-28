@@ -7,6 +7,8 @@ use App\Models\Concurso;
 use App\Models\ConcursoAttachment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConcursoPublished;
 
 class ConcursoController extends Controller
 {
@@ -46,6 +48,15 @@ class ConcursoController extends Controller
             }
         }
 
+        // If published on create, notify
+        if ($concurso->status === 'published') {
+            try {
+                Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+            } catch (\Throwable $e) {
+                \Log::error('Falha ao enviar email de concurso publicado: '.$e->getMessage());
+            }
+        }
+
         return redirect()->route('admin.concursos.index')->with('status', 'Concurso criado.');
     }
 
@@ -65,6 +76,7 @@ class ConcursoController extends Controller
             'attachments.*' => 'file|mimes:pdf,doc,docx|max:10240',
         ]);
 
+        $was = $concurso->status;
         $concurso->update($data);
 
         if ($request->hasFile('attachments')) {
@@ -79,6 +91,15 @@ class ConcursoController extends Controller
             }
         }
 
+        // If changed to published, notify
+        if ($concurso->status === 'published' && $was !== 'published') {
+            try {
+                Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+            } catch (\Throwable $e) {
+                \Log::error('Falha ao enviar email de concurso publicado: '.$e->getMessage());
+            }
+        }
+
         return redirect()->route('admin.concursos.index')->with('status', 'Concurso atualizado.');
     }
 
@@ -90,5 +111,13 @@ class ConcursoController extends Controller
         }
         $concurso->delete();
         return redirect()->route('admin.concursos.index')->with('status', 'Concurso removido.');
+    }
+
+    public function destroyAttachment($id)
+    {
+        $att = ConcursoAttachment::findOrFail($id);
+        try { Storage::delete($att->path); } catch (\Throwable $e) { }
+        $att->delete();
+        return back()->with('status', 'Anexo removido.');
     }
 }
