@@ -38,7 +38,7 @@
             </div>
 
             <div>
-                <button class="px-4 py-2 bg-[#2563eb] text-white rounded">Criar Concurso</button>
+                <button type="submit" class="px-4 py-2 bg-[#2563eb] text-white rounded">Criar Concurso</button>
             </div>
         </form>
     </div>
