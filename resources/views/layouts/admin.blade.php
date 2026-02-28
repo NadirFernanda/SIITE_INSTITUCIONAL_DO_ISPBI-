@@ -109,12 +109,6 @@
         <div class="sidebar" style="display:flex;flex-direction:column;height:100vh;">
             <h2>Painel</h2>
             <div style="flex:1 1 auto;display:flex;flex-direction:column;">
-                <a href="/admin/paginas">
-                    <span style="vertical-align:middle;margin-right:8px;">
-                        <!-- Ícone minimalista: Páginas (documento) -->
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="4" stroke="#fff" stroke-width="2" fill="none"/><path d="M8 7h8M8 11h8M8 15h5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-                    </span>Páginas
-                </a>
                 <a href="/admin/noticias">
                     <span style="vertical-align:middle;margin-right:8px;">
                         <!-- Ícone minimalista: Notícias (jornal) -->
@@ -158,10 +152,12 @@
                     </span>Configurações
                 </a>
             </div>
-            <form method="POST" action="{{ route('logout') }}" style="margin: 18px;">
+            <div style="margin: 18px; margin-top: auto;">
+                <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" style="width:100%;background:#fff;color:#1565c0;font-weight:700;padding:10px 0;border:none;border-radius:8px;box-shadow:0 1px 4px rgba(21,101,192,0.08);margin-bottom:8px;cursor:pointer;transition:background 0.2s;">Sair</button>
-            </form>
+                    <button type="submit" style="width:100%;background:#fff;color:#1565c0;font-weight:700;padding:10px 0;border:none;border-radius:8px;box-shadow:0 1px 4px rgba(21,101,192,0.08);margin-bottom:8px;cursor:pointer;transition:background 0.2s;">Sair</button>
+                </form>
+            </div>
         </div>
     <div class="header">
         <h2>Instituto Superior Politécnico do Bié</h2>
