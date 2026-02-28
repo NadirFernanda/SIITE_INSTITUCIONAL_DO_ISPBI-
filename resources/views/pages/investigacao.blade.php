@@ -46,61 +46,61 @@
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Cuidados Continuados em Doenças Crónicas: intervenção em adultos com doenças crónicas não transmissíveis na comunidade do Bairro Cantíflas, Cuito-Bié.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Cuidados Continuados em Doenças Crónicas:</span> intervenção em adultos com doenças crónicas não transmissíveis na comunidade do Bairro Cantíflas, Cuito-Bié.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Enfermagem Materna e Hemorragias Obstétricas: práticas de enfermagem em mulheres com hemorragias no peri-parto, parto e puerpério na Maternidade do Cuito-Bié.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Enfermagem Materna e Hemorragias Obstétricas:</span> práticas de enfermagem em mulheres com hemorragias no peri-parto, parto e puerpério na Maternidade do Cuito-Bié.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Impacto do Alcoolismo na Juventude: estudo das consequências do alcoolismo na população jovem do Bairro Cantíflas, Cuito-Bié.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Impacto do Alcoolismo na Juventude:</span> estudo das consequências do alcoolismo na população jovem do Bairro Cantíflas, Cuito-Bié.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Consultório de Enfermagem: criação de um consultório para cuidados de enfermagem e promoção da saúde.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Consultório de Enfermagem:</span> criação de um consultório para cuidados de enfermagem e promoção da saúde.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Comportamento do Consumidor: fatores que influenciam o comportamento de compra dos clientes da empresa C.V. &amp; Filhos, Lda.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Comportamento do Consumidor:</span> fatores que influenciam o comportamento de compra dos clientes da empresa C.V. &amp; Filhos, Lda.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Gabinete de Assessoria Contabilística: criação de um gabinete de apoio às empresas nos serviços de contabilidade.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Gabinete de Assessoria Contabilística:</span> criação de um gabinete de apoio às empresas nos serviços de contabilidade.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Consultório de Orientação Psicológica: criação de um serviço de apoio psicológico à comunidade académica e local.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Consultório de Orientação Psicológica:</span> criação de um serviço de apoio psicológico à comunidade académica e local.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Rádio Internet ISP-Bié: criação de uma rádio digital para comunicação científica, educativa e institucional.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Rádio Internet ISP-Bié:</span> criação de uma rádio digital para comunicação científica, educativa e institucional.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Qualidade das Águas Subterrâneas do Cuito-Bié: avaliação da água para consumo humano nas áreas circundantes aos cemitérios.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Qualidade das Águas Subterrâneas do Cuito-Bié:</span> avaliação da água para consumo humano nas áreas circundantes aos cemitérios.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Sistema de Alerta de Inundações de Cangote: redução do risco de cheias na localidade de Cangote, Município do Cuito-Bié.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Sistema de Alerta de Inundações de Cangote:</span> redução do risco de cheias na localidade de Cangote, Município do Cuito-Bié.</div>
                                 </div>
                             </div>
                         </div>
@@ -112,73 +112,73 @@
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Observatório Académico do Corredor do Lobito: plataforma de pesquisa multidisciplinar para recolha e análise de dados socioeconómicos, ambientais e tecnológicos, apoiando a tomada de decisão.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Observatório Académico do Corredor do Lobito:</span> plataforma de pesquisa multidisciplinar para recolha e análise de dados socioeconómicos, ambientais e tecnológicos, apoiando a tomada de decisão.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Incubadora de Negócios Locais: programa de apoio a empreendedores e pequenas empresas ao longo do Corredor do Lobito, promovendo inovação e geração de emprego.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Incubadora de Negócios Locais:</span> programa de apoio a empreendedores e pequenas empresas ao longo do Corredor do Lobito, promovendo inovação e geração de emprego.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Segurança Ferroviária no Corredor do Lobito: iniciativas de sensibilização sobre segurança ferroviária e oportunidades económicas, com produção de conteúdos para rádio, televisão e redes sociais.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Segurança Ferroviária no Corredor do Lobito:</span> iniciativas de sensibilização sobre segurança ferroviária e oportunidades económicas, com produção de conteúdos para rádio, televisão e redes sociais.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Sustentabilidade Ambiental no Corredor do Lobito: implementação de projetos de gestão sustentável da água (ETAR) e mitigação de riscos ambientais associados à erosão, poluição e uso de recursos hídricos.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Sustentabilidade Ambiental no Corredor do Lobito:</span> implementação de projetos de gestão sustentável da água (ETAR) e mitigação de riscos ambientais associados à erosão, poluição e uso de recursos hídricos.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Monitoramento Hidrometeorológico do Rio Cuquema: proposta de monitoramento sem uso de sensores remotos na bacia hidrográfica do rio Cuquema, Cuito-Bié.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Monitoramento Hidrometeorológico do Rio Cuquema:</span> proposta de monitoramento sem uso de sensores remotos na bacia hidrográfica do rio Cuquema, Cuito-Bié.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Análise do Impacto da Marca d’Água Digital em Imagens Médicas: estudo do impacto no diagnóstico assistido por computador de cancros cerebrais.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Análise do Impacto da Marca d’Água Digital em Imagens Médicas:</span> estudo do impacto no diagnóstico assistido por computador de cancros cerebrais.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Modernização da Sala de Informática do ISP-Bié: apetrechamento tecnológico para apoio ao ensino e à investigação.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Modernização da Sala de Informática do ISP-Bié:</span> apetrechamento tecnológico para apoio ao ensino e à investigação.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Laboratório de Simulação Clínica do ISP-Bié: apetrechamento e modernização para formação prática na área da saúde.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Laboratório de Simulação Clínica do ISP-Bié:</span> apetrechamento e modernização para formação prática na área da saúde.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Laboratório de Hidrologia: reforço técnico-científico do laboratório do curso de Engenharia em Recursos Hídricos.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Laboratório de Hidrologia:</span> reforço técnico-científico do laboratório do curso de Engenharia em Recursos Hídricos.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Capacitação Científica de Docentes do ISPB: fortalecimento das competências em elaboração de projetos de investigação.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Capacitação Científica de Docentes do ISPB:</span> fortalecimento das competências em elaboração de projetos de investigação.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Modernização da Biblioteca do ISP-Bié: reforço da infraestrutura de apoio académico.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Modernização da Biblioteca do ISP-Bié:</span> reforço da infraestrutura de apoio académico.</div>
                                 </div>
                                 <div class="flex items-start gap-3">
                                     <div class="mt-1 flex-shrink-0">
                                         <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                     </div>
-                                    <div class="text-gray-700">Sala de Análise de Dados Qualitativos e Quantitativos: criação e apetrechamento de espaço dedicado à análise científica de dados.</div>
+                                    <div class="text-gray-700"><span class="font-semibold">Sala de Análise de Dados Qualitativos e Quantitativos:</span> criação e apetrechamento de espaço dedicado à análise científica de dados.</div>
                                 </div>
                             </div>
                         </div>
