@@ -34,8 +34,13 @@
                 </label>
 
                 <label>
-                    <span class="text-gray-700">Categoria</span>
-                    <input type="text" name="category" value="{{ old('category', $s->category) }}" class="mt-1 block w-full rounded border-gray-300" />
+                    <span class="text-gray-700">Área de Conhecimento</span>
+                    <select name="category" class="mt-1 block w-full rounded border-gray-300">
+                        <option value="" {{ old('category', $s->category) ? '' : 'selected' }}>-- Selecionar área --</option>
+                        <option value="Engenharias e Tecnologia" {{ old('category', $s->category)=='Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
+                        <option value="Ciências da Saúde" {{ old('category', $s->category)=='Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
+                        <option value="Ciências Sociais e Humanas" {{ old('category', $s->category)=='Ciências Sociais e Humanas' ? 'selected' : '' }}>Ciências Sociais e Humanas</option>
+                    </select>
                 </label>
 
                 <label>

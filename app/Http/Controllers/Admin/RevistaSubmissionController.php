@@ -52,6 +52,7 @@ class RevistaSubmissionController extends Controller
             'link' => 'required|url',
             'email' => 'required|email|max:255',
             'status' => 'required|in:pending,published',
+            'category' => ['nullable','string','in:Engenharias e Tecnologia,Ciências da Saúde,Ciências Sociais e Humanas'],
         ]);
 
         $s->update($request->only(['title','author','description','link','email','affiliation','category','notes','status']));
