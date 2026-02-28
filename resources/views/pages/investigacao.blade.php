@@ -40,7 +40,7 @@
                     <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Projectos</h2>
                     <div class="grid md:grid-cols-3 gap-6">
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">Projectos em Curso</h3>
+                            <h3 class="text-xl font-semibold text-[#2563eb] mb-2">Projectos em Curso</h3>
                             <ul class="list-disc pl-6 text-gray-700 space-y-2">
                                 <li>Cuidados Continuados em Doenças Crónicas: Intervenção em adultos com doenças crónicas não transmissíveis na comunidade do Bairro Cantíflas, Cuito-Bié.</li>
                                 <li>Enfermagem Materna e Hemorragias Obstétricas: Práticas de enfermagem em mulheres com hemorragias no peri-parto, parto e puerpério na Maternidade do Cuito-Bié.</li>
@@ -56,7 +56,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">Projectos em Avaliação</h3>
+                            <h3 class="text-xl font-semibold text-[#2563eb] mb-2">Projectos em Avaliação</h3>
                             <ul class="list-disc pl-6 text-gray-700 space-y-2">
                                 <li>Observatório Académico do Corredor do Lobito: Plataforma de pesquisa multidisciplinar para recolha e análise de dados socioeconómicos, ambientais e tecnológicos, apoiando a tomada de decisão.</li>
                                 <li>Incubadora de Negócios Locais: Programa de apoio a empreendedores e pequenas empresas ao longo do Corredor do Lobito, promovendo inovação e geração de emprego.</li>
@@ -74,7 +74,7 @@
                         </div>
 
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">Projectos Concluídos</h3>
+                            <h3 class="text-xl font-semibold text-[#2563eb] mb-2">Projectos Concluídos</h3>
                             <ul class="list-disc pl-6 text-gray-700 space-y-2">
                                 <li><span class="font-semibold">Rede de Monitoramento Ambiental:</span> Instalação de sensores para análise da qualidade do ar e da água.</li>
                                 <li><span class="font-semibold">Empreenda Bié:</span> Programa de capacitação de jovens empreendedores.</li>
