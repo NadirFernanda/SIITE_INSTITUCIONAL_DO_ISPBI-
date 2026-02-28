@@ -133,6 +133,12 @@
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="7" width="16" height="10" rx="2" stroke="#fff" stroke-width="2" fill="none"/><rect x="7" y="10" width="4" height="4" rx="1" fill="#fff"/><rect x="13" y="10" width="4" height="4" rx="1" fill="#fff"/></svg>
                     </span>Carrossel
                 </a>
+                <a href="/admin/concursos">
+                    <span style="vertical-align:middle;margin-right:8px;">
+                        <!-- Ícone minimalista: Concursos (megafone) -->
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 11v2a1 1 0 001 1h1v3a1 1 0 001 1h2v-6H5a1 1 0 01-1-1v-2H3z" fill="#fff"/><path d="M21 7.5V16a1 1 0 01-1 1h-2v-9h2a1 1 0 011 0z" fill="#fff"/><path d="M16 8l6-3v2l-6 3V8z" fill="#fff"/></svg>
+                    </span>Concursos
+                </a>
                 <a href="/admin/alumni">
                     <span style="vertical-align:middle;margin-right:8px;">
                         <!-- Ícone minimalista: Alumni (chapéu de formando) -->
