@@ -42,7 +42,12 @@
                         <option value="pending" {{ request('status')=='pending' ? 'selected' : '' }}>Pendente</option>
                         <option value="published" {{ request('status')=='published' ? 'selected' : '' }}>Publicado</option>
                     </select>
-                    <input type="text" name="category" value="{{ request('category') }}" placeholder="Categoria" class="border rounded px-4 py-2" />
+                    <select name="category" class="border rounded px-4 py-2">
+                        <option value="">Todas as áreas</option>
+                        <option value="Engenharias e Tecnologia" {{ request('category')=='Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
+                        <option value="Ciências da Saúde" {{ request('category')=='Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
+                        <option value="Ciências Sociais e Humanas" {{ request('category')=='Ciências Sociais e Humanas' ? 'selected' : '' }}>Ciências Sociais e Humanas</option>
+                    </select>
                     <div class="flex gap-2">
                         <button class="px-4 py-2 bg-blue-600 text-white rounded">Filtrar</button>
                         <a href="{{ route('admin.revistas') }}" class="px-4 py-2 bg-blue-600 text-white rounded text-sm">Limpar</a>
@@ -58,6 +63,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Autor</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Área</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Criado em</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
@@ -69,6 +75,7 @@
                                     <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->id }}</td>
                                     <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->author }}</td>
                                     <td class="px-6 py-4 whitespace-normal break-words text-sm font-medium text-blue-600"><a href="{{ route('admin.revistas.show', $s->id) }}">{{ $s->title }}</a></td>
+                                    <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-700">{{ $s->category ?? '-' }}</td>
                                     <td class="px-6 py-4 whitespace-normal break-words text-sm">
                                         @if($s->status === 'published')
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Publicado</span>
@@ -93,7 +100,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="6" class="px-6 py-4 text-sm text-gray-700 whitespace-normal break-words">{{ $s->description }} @if($s->link) — <a href="{{ $s->link }}" target="_blank" class="underline text-blue-600">Link</a>@endif</td>
+                                    <td colspan="7" class="px-6 py-4 text-sm text-gray-700 whitespace-normal break-words">{{ $s->description }} @if($s->link) — <a href="{{ $s->link }}" target="_blank" class="underline text-blue-600">Link</a>@endif</td>
                                 </tr>
                             @endforeach
                         </tbody>
