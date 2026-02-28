@@ -185,10 +185,20 @@
 
                         <div>
                             <h3 class="text-xl font-semibold text-[#2563eb] mb-2">Projectos Concluídos</h3>
-                            <ul class="list-disc pl-6 text-gray-700 space-y-2">
-                                <li><span class="font-semibold">Rede de Monitoramento Ambiental:</span> Instalação de sensores para análise da qualidade do ar e da água.</li>
-                                <li><span class="font-semibold">Empreenda Bié:</span> Programa de capacitação de jovens empreendedores.</li>
-                            </ul>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 flex-shrink-0">
+                                        <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    </div>
+                                    <div class="text-gray-700"><span class="font-semibold">Rede de Monitoramento Ambiental:</span> Instalação de sensores para análise da qualidade do ar e da água.</div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 flex-shrink-0">
+                                        <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    </div>
+                                    <div class="text-gray-700"><span class="font-semibold">Empreenda Bié:</span> Programa de capacitação de jovens empreendedores.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
