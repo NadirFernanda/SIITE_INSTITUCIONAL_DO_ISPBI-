@@ -11,7 +11,7 @@ class RevistaController extends Controller
     public function index(Request $request)
     {
         $query = RevistaSubmission::where('status', 'published')
-            ->select(['id','title','author','affiliation','published_at','description','link','created_at'])
+            ->select(['id','title','author','affiliation','category','published_at','description','link','created_at'])
             ->orderByDesc('published_at');
 
                 // Apply search filter if provided — make multi-term and partial matching less strict
@@ -62,7 +62,7 @@ class RevistaController extends Controller
     public function show($id)
     {
         $article = RevistaSubmission::where('status', 'published')
-            ->select(['id','title','author','affiliation','published_at','description','link','created_at'])
+            ->select(['id','title','author','affiliation','category','published_at','description','link','created_at'])
             ->findOrFail($id);
 
         return view('pages.revista-show', compact('article'));
