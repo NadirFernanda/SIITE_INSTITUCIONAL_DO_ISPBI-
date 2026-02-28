@@ -36,7 +36,7 @@
         <!-- Projectos e publicações: replicado com o layout da página 'Visão' -->
         <section class="py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg mb-8">
+                <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg mb-8 interactive-card transition-all duration-200 hover:shadow-xl hover:-translate-y-1">
                     <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Projectos</h2>
                     <div class="grid md:grid-cols-3 gap-6">
                         <div>
