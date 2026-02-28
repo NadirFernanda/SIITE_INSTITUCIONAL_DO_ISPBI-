@@ -12,7 +12,7 @@
         </nav>
 
         <header class="bg-gradient-to-r from-white via-sky-50 to-white rounded-lg p-6 mb-8 shadow-sm border">
-            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4">
                 <div class="w-12 h-12 flex items-center justify-center bg-blue-600 text-white rounded-md shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2v4h6v-4c0-1.105-1.343-2-3-2z" />
@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Submeter Artigo</h1>
-                    <p class="text-gray-600 mt-1">Preencha o formulário e anexe o ficheiro do artigo em PDF ou DOC/DOCX (até 10MB).</p>
+                    <p class="text-gray-600 mt-1">Preencha o formulário, submeta os dados correctos e aguarde aprovação do administrador do site.</p>
                 </div>
             </div>
         </header>
