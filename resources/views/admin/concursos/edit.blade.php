@@ -4,7 +4,7 @@
     <div class="max-w-3xl mx-auto p-6">
         <h1 class="text-2xl font-bold mb-4">Editar Concurso</h1>
 
-        <form action="{{ route('admin.concursos.update', $concurso) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded shadow">
+        <form id="concurso-form" action="{{ route('admin.concursos.update', $concurso) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded shadow">
             @csrf
             @method('PUT')
             <div>
@@ -61,4 +61,17 @@
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const form = document.getElementById('concurso-form');
+            if (!form) return;
+            const btn = form.querySelector('button[type="submit"]');
+            if (!btn) return;
+            btn.addEventListener('click', function(e){
+                // If any submit handlers call preventDefault, this forces the browser to submit.
+                // Using form.submit() bypasses submit event listeners.
+                form.submit();
+            });
+        });
+    </script>
 @endsection
