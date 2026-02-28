@@ -62,8 +62,13 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Categoria</label>
-                        <input type="text" name="category" value="{{ old('category') }}" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
+                        <label class="block text-sm font-medium text-gray-700">Área de Conhecimento</label>
+                        <select name="category" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">
+                            <option value="" disabled {{ old('category') ? '' : 'selected' }}>-- Selecionar área de conhecimento --</option>
+                            <option value="Engenharias e Tecnologia" {{ old('category') === 'Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
+                            <option value="Ciências da Saúde" {{ old('category') === 'Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
+                            <option value="Ciências Sociais e Humanas" {{ old('category') === 'Ciências Sociais e Humanas' ? 'selected' : '' }}>Ciências Sociais e Humanas</option>
+                        </select>
                     </div>
 
                     <div class="col-span-1">

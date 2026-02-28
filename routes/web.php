@@ -160,7 +160,7 @@ Route::post('/revista/submeter', function (\Illuminate\Http\Request $request) {
         'link' => 'required|url',
         'email' => 'required|email|max:255',
         'affiliation' => 'nullable|string|max:255',
-        'category' => 'nullable|string|max:255',
+        'category' => ['required','string','in:Engenharias e Tecnologia,Ciências da Saúde,Ciências Sociais e Humanas'],
         'notes' => 'nullable|string',
     ]);
 
