@@ -60,13 +60,13 @@
                     <table class="min-w-full divide-y divide-gray-200 bg-white rounded-lg shadow-sm">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
-                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Autor</th>
-                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Título</th>
-                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Área</th>
-                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
-                                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Criado em</th>
-                                <th class="px-4 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">Ações</th>
+                                <th class="px-4 py-3 text-left text-xs font-sans font-semibold text-gray-600 uppercase tracking-wider">ID</th>
+                                <th class="px-4 py-3 text-left text-xs font-sans font-semibold text-gray-600 uppercase tracking-wider">Autor</th>
+                                <th class="px-4 py-3 text-left text-xs font-sans font-semibold text-gray-600 uppercase tracking-wider">Título</th>
+                                <th class="px-4 py-3 text-left text-xs font-sans font-semibold text-gray-600 uppercase tracking-wider">Área</th>
+                                <th class="px-4 py-3 text-left text-xs font-sans font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+                                <th class="px-4 py-3 text-left text-xs font-sans font-semibold text-gray-600 uppercase tracking-wider">Criado em</th>
+                                <th class="px-4 py-3 text-right text-xs font-sans font-semibold text-gray-600 uppercase tracking-wider">Ações</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100">
