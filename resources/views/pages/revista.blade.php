@@ -66,6 +66,12 @@
                     <h2 class="text-2xl font-bold text-gray-800">Artigos Publicados</h2>
                     <form method="GET" action="{{ route('revista') }}" class="flex items-center gap-2">
                         <input type="text" name="q" value="{{ request('q') }}" placeholder="Pesquisar artigos, autor, título..." class="px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                        <select name="category" aria-label="Filtrar por área" class="px-3 py-2 border rounded-lg shadow-sm">
+                            <option value="">Todas as áreas</option>
+                            <option value="Engenharias e Tecnologia" {{ request('category')=='Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
+                            <option value="Ciências da Saúde" {{ request('category')=='Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
+                            <option value="Ciências Sociais e Humanas" {{ request('category')=='Ciências Sociais e Humanas' ? 'selected' : '' }}>Ciências Sociais e Humanas</option>
+                        </select>
                         <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Pesquisar</button>
                     </form>
                 </div>
