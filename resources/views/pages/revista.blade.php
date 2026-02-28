@@ -47,10 +47,9 @@
                                 <hr class="my-6">
 
                                 <h3 class="text-2xl font-bold text-gray-900 mb-4">Submissão de Artigos</h3>
-                                <p class="text-gray-700 mb-4">A Revista Científica do ISP-Bié aceita submissões de artigos nas áreas de Engenharias, Tecnologias, Ciências Sociais, Administração e áreas afins. Consulte as normas de submissão e prazos.</p>
+                                <p class="text-gray-700 mb-4">A Revista Científica do ISP-Bié aceita submissões de artigos nas áreas de Engenharias e Tecnologia, Ciências da Saúde e Ciências Humanas, Sociais e Econômicas.</p>
                                 <div class="flex items-center gap-3">
                                     <a href="{{ route('revista.submeter') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Submeter Artigo</a>
-                                    <a href="#" class="text-sm text-gray-600 underline">Normas de Submissão (PDF)</a>
                                 </div>
                             </div>
                         </div>
