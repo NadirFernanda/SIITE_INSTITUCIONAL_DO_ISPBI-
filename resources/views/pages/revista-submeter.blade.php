@@ -45,7 +45,7 @@
 
             <form id="revista-form" action="{{ route('revista.submeter.post') }}" method="POST" enctype="multipart/form-data" novalidate class="bg-white shadow-lg rounded-xl p-8 ring-1 ring-gray-100">
                 @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Autor</label>
                         <input type="text" name="author" value="{{ old('author') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
@@ -66,12 +66,12 @@
                         <input type="text" name="category" value="{{ old('category') }}" class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
-                    <div class="md:col-span-2">
+                    <div class="col-span-1">
                         <label class="block text-sm font-medium text-gray-700">Título</label>
                         <input type="text" name="title" value="{{ old('title') }}" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2" />
                     </div>
 
-                    <div class="md:col-span-2">
+                    <div class="col-span-1">
                         <label class="block text-sm font-medium text-gray-700">Descrição</label>
                         <textarea name="description" rows="4" required class="mt-1 block w-full rounded-lg border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent px-3 py-2">{{ old('description') }}</textarea>
                     </div>
@@ -85,7 +85,7 @@
 
                     {{-- file upload removed: articles already include a PDF link, so file input is unnecessary --}}
 
-                    <div class="md:col-span-2 flex justify-end items-center gap-3 mt-4">
+                    <div class="flex justify-end items-center gap-3 mt-4">
                         <a href="{{ route('revista') }}" class="inline-flex items-center px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">Cancelar</a>
                         <button type="submit" class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md shadow hover:from-blue-700 hover:to-indigo-700 transition">Enviar Submissão</button>
                     </div>

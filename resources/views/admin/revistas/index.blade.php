@@ -22,7 +22,7 @@
             </div>
             <div class="mt-4 flex items-center gap-3 justify-end">
                 <a href="{{ route('revista') }}" target="_blank" class="text-sm text-gray-600 hover:underline">Ver site público</a>
-                <a href="{{ route('admin.revistas') }}" class="inline-flex items-center gap-2 bg-white border px-3 py-2 rounded shadow">
+                <a href="{{ route('admin.revistas') }}" class="inline-flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded shadow">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" /></svg>
                     <span class="text-sm">Atualizar</span>
                 </a>
@@ -45,7 +45,7 @@
                     <input type="text" name="category" value="{{ request('category') }}" placeholder="Categoria" class="border rounded px-4 py-2" />
                     <div class="flex gap-2">
                         <button class="px-4 py-2 bg-blue-600 text-white rounded">Filtrar</button>
-                        <a href="{{ route('admin.revistas') }}" class="px-4 py-2 border rounded text-sm">Limpar</a>
+                        <a href="{{ route('admin.revistas') }}" class="px-4 py-2 bg-blue-600 text-white rounded text-sm">Limpar</a>
                     </div>
                 </form>
             </div>
@@ -78,17 +78,17 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-normal break-words text-sm text-gray-500">{{ $s->created_at->format('Y-m-d') }}</td>
                                     <td class="px-6 py-4 whitespace-normal break-words text-right text-sm font-medium flex gap-2 justify-end">
-                                        <a href="{{ route('admin.revistas.edit', $s->id) }}" class="px-3 py-1 bg-yellow-500 text-white rounded">Editar</a>
+                                        <a href="{{ route('admin.revistas.edit', $s->id) }}" class="px-3 py-1 bg-blue-600 text-white rounded">Editar</a>
                                         @if($s->status !== 'published')
                                             <form action="{{ route('admin.revistas.publish', $s->id) }}" method="POST" style="display:inline">
                                                 @csrf
-                                                <button class="px-3 py-1 bg-green-600 text-white rounded">Publicar</button>
+                                                <button class="px-3 py-1 bg-blue-600 text-white rounded">Publicar</button>
                                             </form>
                                         @endif
                                         <form action="{{ route('admin.revistas.destroy', $s->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Eliminar submissão?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="px-3 py-1 bg-red-600 text-white rounded">Eliminar</button>
+                                            <button class="px-3 py-1 bg-blue-600 text-white rounded">Eliminar</button>
                                         </form>
                                     </td>
                                 </tr>
