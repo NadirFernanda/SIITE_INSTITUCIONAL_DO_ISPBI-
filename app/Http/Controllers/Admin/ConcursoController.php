@@ -123,7 +123,7 @@ class ConcursoController extends Controller
                 // normalize and delete from the public disk
                 $p = preg_replace('/^public\\//', '', $att->path);
                 Storage::disk('public')->delete($p);
-            } catch (\\Throwable $e) { }
+            } catch (\Throwable $e) { }
         }
         $concurso->delete();
         return redirect()->route('admin.concursos.index')->with('status', 'Concurso removido.');
@@ -135,7 +135,7 @@ class ConcursoController extends Controller
         try {
             $p = preg_replace('/^public\\//', '', $att->path);
             Storage::disk('public')->delete($p);
-        } catch (\\Throwable $e) { }
+        } catch (\Throwable $e) { }
         $att->delete();
         return back()->with('status', 'Anexo removido.');
     }
