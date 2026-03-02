@@ -57,7 +57,7 @@
             @endif
 
             <div class="flex items-center space-x-3">
-                <button type="submit" class="px-4 py-2 bg-[#2563eb] text-white rounded">Salvar</button>
+                <input type="submit" value="Salvar" onclick="try{alert('DEBUG: submit input clicked');}catch(e){}" class="px-4 py-2 bg-[#2563eb] text-white rounded cursor-pointer" />
                 <a href="{{ url()->previous() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Cancelar</a>
             </div>
         </form>
