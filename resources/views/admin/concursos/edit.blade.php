@@ -56,8 +56,9 @@
                 </div>
             @endif
 
-            <div>
-                <button type="submit" class="px-4 py-2 bg-[#2563eb] text-white rounded">Atualizar Concurso</button>
+            <div class="flex items-center space-x-3">
+                <button type="submit" class="px-4 py-2 bg-[#2563eb] text-white rounded">Salvar</button>
+                <a href="{{ url()->previous() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Cancelar</a>
             </div>
         </form>
     </div>
