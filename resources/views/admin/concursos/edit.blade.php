@@ -69,6 +69,7 @@
             if (!form) return;
             form.addEventListener('submit', function(ev){
                 console.log('concurso-form (edit): submit event fired', ev);
+                try{ alert('DEBUG: concurso-form submit event fired'); }catch(e){}
                 // ensure native submission if possible
                 try {
                     setTimeout(()=>{
@@ -83,6 +84,7 @@
             if (btn) {
                 btn.addEventListener('click', function(ev){
                     console.log('concurso-form (edit): submit button clicked', ev);
+                    try{ alert('DEBUG: concurso-form submit button clicked'); }catch(e){}
                     // force native submit after a tiny delay to override other handlers
                     setTimeout(()=>{
                         try { form.submit(); } catch(e){ /* ignore */ }
