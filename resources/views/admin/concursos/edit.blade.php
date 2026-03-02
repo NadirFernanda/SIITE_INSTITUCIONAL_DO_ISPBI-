@@ -61,39 +61,5 @@
             </div>
         </form>
     </div>
-    <script>
-        // Diagnostic helper: attempt to trigger a native submission if clicks appear to do nothing.
-        // This is non-intrusive: it only calls submit when the button is clicked and
-        // the form is valid. It logs events to the browser console to aid debugging.
-        document.addEventListener('DOMContentLoaded', function(){
-            const form = document.getElementById('concurso-form');
-            if(!form) return;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            if(!submitBtn) return;
-
-            submitBtn.addEventListener('click', function(evt){
-                console.log('[concurso-form] submit button clicked');
-
-                // allow built-in validation to run first
-                setTimeout(() => {
-                    try {
-                        if (!form.checkValidity()) {
-                            console.log('[concurso-form] form invalid, aborting diagnostic submit');
-                            return;
-                        }
-                        // Use requestSubmit if available (respects formnovalidate/options)
-                        if (typeof form.requestSubmit === 'function') {
-                            console.log('[concurso-form] calling requestSubmit()');
-                            form.requestSubmit();
-                        } else {
-                            console.log('[concurso-form] calling submit() fallback');
-                            form.submit();
-                        }
-                    } catch (err) {
-                        console.error('[concurso-form] diagnostic submit error', err);
-                    }
-                }, 30);
-            }, {passive: true});
-        });
-    </script>
+    <!-- Plain submit button only: removed diagnostic JS to avoid interfering with submission -->
 @endsection
