@@ -93,4 +93,61 @@
             }
         })();
     </script>
+    <!-- Fallback AJAX submit: contorna handlers que bloqueiam o submit nativo -->
+    <script>
+        (function(){
+            const form = document.getElementById('concurso-form');
+            if (!form) return;
+
+            // If any other handler prevents submission, this will perform the submit via fetch
+            form.addEventListener('submit', function(e){
+                // If native submit already proceeding (e.g., via form.submit()), allow it
+                if (e && e.defaultPrevented && window.__concurso_native_submitting) return;
+                e.preventDefault();
+                // Avoid double submissions
+                if (window.__concurso_submitting) return;
+                window.__concurso_submitting = true;
+
+                const submitBtn = form.querySelector('input[type="submit"], button[type="submit"]');
+                if (submitBtn) submitBtn.disabled = true;
+
+                const fd = new FormData(form);
+                // Ensure method spoofing is present for Laravel (we'll use POST with _method=PUT)
+                if (!fd.has('_method')) fd.append('_method','PUT');
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: fd,
+                    credentials: 'same-origin',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(async (res) => {
+                    // If the app redirects, follow
+                    if (res.redirected) {
+                        window.location.href = res.url;
+                        return;
+                    }
+
+                    // On success status, redirect to index or show message
+                    if (res.ok) {
+                        // Try to redirect to admin list
+                        try { window.location.href = '/admin/concursos'; } catch(e){ alert('Concurso atualizado.'); }
+                        return;
+                    }
+
+                    // If not ok, show response text for debugging
+                    const txt = await res.text();
+                    console.error('Concurso update failed', res.status, txt);
+                    alert('Erro ao atualizar (código ' + res.status + '). Ver consola para detalhes.');
+                }).catch(err => {
+                    console.error('Network error submitting concurso', err);
+                    alert('Erro de rede ao submeter o formulário.');
+                }).finally(() => {
+                    window.__concurso_submitting = false;
+                    if (submitBtn) submitBtn.disabled = false;
+                });
+            }, {capture:false});
+        })();
+    </script>
 @endsection
