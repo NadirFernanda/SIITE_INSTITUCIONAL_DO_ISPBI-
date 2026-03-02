@@ -63,4 +63,32 @@
         </form>
     </div>
     <!-- Plain submit button only: removed diagnostic JS to avoid interfering with submission -->
+    <script>
+        (function(){
+            const form = document.getElementById('concurso-form');
+            if (!form) return;
+            form.addEventListener('submit', function(ev){
+                console.log('concurso-form (edit): submit event fired', ev);
+                // ensure native submission if possible
+                try {
+                    setTimeout(()=>{
+                        if (!ev.defaultPrevented) return;
+                        console.log('concurso-form (edit): default prevented, forcing native submit');
+                        form.submit();
+                    }, 50);
+                } catch(err){ console.error('concurso-form edit: submit error', err); }
+            }, {capture:true});
+
+            const btn = form.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.addEventListener('click', function(ev){
+                    console.log('concurso-form (edit): submit button clicked', ev);
+                    // force native submit after a tiny delay to override other handlers
+                    setTimeout(()=>{
+                        try { form.submit(); } catch(e){ /* ignore */ }
+                    }, 20);
+                }, {passive:false});
+            }
+        })();
+    </script>
 @endsection
