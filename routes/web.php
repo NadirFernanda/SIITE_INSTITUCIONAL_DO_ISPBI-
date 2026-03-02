@@ -89,6 +89,8 @@ Route::get('/investigacao', function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
     Route::resource('concursos', App\Http\Controllers\Admin\ConcursoController::class);
+    // Delete attachment route for concursos (named under admin. prefix)
+    Route::delete('concursos/attachments/{id}', [App\Http\Controllers\Admin\ConcursoController::class, 'destroyAttachment'])->name('concursos.attachments.destroy');
     Route::delete('concursos/attachments/{id}', [App\Http\Controllers\Admin\ConcursoController::class, 'destroyAttachment'])->name('concursos.attachments.destroy');
     // Revista submissions moderation
     Route::get('revistas/submissions', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'index'])->name('revistas');
