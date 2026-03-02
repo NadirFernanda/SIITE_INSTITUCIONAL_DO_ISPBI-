@@ -121,7 +121,8 @@ class ConcursoController extends Controller
             try {
                 // attachments may be stored with a 'public/' prefix from older code,
                 // normalize and delete from the public disk
-                $p = preg_replace('/^public\\//', '', $att->path);
+                // use # delimiters to avoid needing escaped slashes in the pattern
+                $p = preg_replace('#^public/#', '', $att->path);
                 Storage::disk('public')->delete($p);
             } catch (\Throwable $e) { }
         }
@@ -133,7 +134,8 @@ class ConcursoController extends Controller
     {
         $att = ConcursoAttachment::findOrFail($id);
         try {
-            $p = preg_replace('/^public\\//', '', $att->path);
+            // normalize any legacy 'public/' prefix
+            $p = preg_replace('#^public/#', '', $att->path);
             Storage::disk('public')->delete($p);
         } catch (\Throwable $e) { }
         $att->delete();
