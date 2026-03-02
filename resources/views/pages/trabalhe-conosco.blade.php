@@ -61,7 +61,8 @@
               @if($c->attachments->isNotEmpty())
                 <div class="space-y-2">
                   @foreach($c->attachments as $att)
-                    <a href="{{ Storage::url($att->path) }}" class="inline-block text-sm text-[#2563eb] hover:underline" target="_blank">{{ $att->original_name }}</a>
+                    <?php $publicPath = preg_replace('/^public\\//', '', $att->path); ?>
+                    <a href="{{ Storage::disk('public')->url($publicPath) }}" class="inline-block text-sm text-[#2563eb] hover:underline" target="_blank">{{ $att->original_name }}</a>
                   @endforeach
                 </div>
               @endif

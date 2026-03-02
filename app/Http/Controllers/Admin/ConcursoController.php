@@ -38,7 +38,8 @@ class ConcursoController extends Controller
 
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
-                $path = $file->store('public/concursos');
+                // store on the public disk so files are served from /storage
+                $path = $file->store('concursos', 'public');
                 $concurso->attachments()->create([
                     'path' => $path,
                     'original_name' => $file->getClientOriginalName(),
@@ -87,7 +88,7 @@ class ConcursoController extends Controller
 
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
-                $path = $file->store('public/concursos');
+                $path = $file->store('concursos', 'public');
                 $concurso->attachments()->create([
                     'path' => $path,
                     'original_name' => $file->getClientOriginalName(),
@@ -117,7 +118,12 @@ class ConcursoController extends Controller
     {
         // delete attached files
         foreach ($concurso->attachments as $att) {
-            try { Storage::delete($att->path); } catch (\Throwable $e) { }
+            try {
+                // attachments may be stored with a 'public/' prefix from older code,
+                // normalize and delete from the public disk
+                $p = preg_replace('/^public\\//', '', $att->path);
+                Storage::disk('public')->delete($p);
+            } catch (\\Throwable $e) { }
         }
         $concurso->delete();
         return redirect()->route('admin.concursos.index')->with('status', 'Concurso removido.');
@@ -126,7 +132,10 @@ class ConcursoController extends Controller
     public function destroyAttachment($id)
     {
         $att = ConcursoAttachment::findOrFail($id);
-        try { Storage::delete($att->path); } catch (\Throwable $e) { }
+        try {
+            $p = preg_replace('/^public\\//', '', $att->path);
+            Storage::disk('public')->delete($p);
+        } catch (\\Throwable $e) { }
         $att->delete();
         return back()->with('status', 'Anexo removido.');
     }
