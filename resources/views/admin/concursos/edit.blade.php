@@ -42,24 +42,6 @@
                 <input id="concurso_attachments" type="file" name="attachments[]" multiple class="mt-1" />
             </div>
 
-            @if($concurso->attachments->isNotEmpty())
-                <div class="bg-gray-50 p-4 rounded">
-                    <h4 class="font-semibold mb-2">Anexos Existentes</h4>
-                    <ul class="space-y-2">
-                        @foreach($concurso->attachments as $att)
-                            <li class="flex items-center justify-between">
-                                <a href="{{ Storage::url($att->path) }}" target="_blank" class="text-blue-600">{{ $att->original_name }}</a>
-                                <form action="{{ route('admin.concursos.attachments.destroy', $att->id) }}" method="POST" onsubmit="return confirm('Remover anexo?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="text-red-600 ml-4">Remover</button>
-                                </form>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="flex items-center space-x-3">
                 <button type="button" id="concurso-submit-btn" class="px-4 py-2 bg-[#2563eb] text-white rounded">Salvar</button>
                 <a href="{{ url()->previous() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Cancelar</a>
@@ -71,6 +53,25 @@
                 </div>
             </noscript>
         </form>
+
+        {{-- Anexos existentes: renderizados fora do formulário principal para evitar forms aninhados --}}
+        @if($concurso->attachments->isNotEmpty())
+            <div class="mt-6 bg-gray-50 p-4 rounded">
+                <h4 class="font-semibold mb-2">Anexos Existentes</h4>
+                <ul class="space-y-2">
+                    @foreach($concurso->attachments as $att)
+                        <li class="flex items-center justify-between">
+                            <a href="{{ Storage::url($att->path) }}" target="_blank" class="text-blue-600">{{ $att->original_name }}</a>
+                            <form action="{{ route('admin.concursos.attachments.destroy', $att->id) }}" method="POST" onsubmit="return confirm('Remover anexo?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-red-600 ml-4">Remover</button>
+                            </form>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 
     <script>
