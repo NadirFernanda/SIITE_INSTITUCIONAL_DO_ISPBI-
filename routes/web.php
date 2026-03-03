@@ -88,17 +88,28 @@ Route::get('/investigacao', function () {
 // Admin CRUD for projects
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
-    Route::resource('concursos', App\Http\Controllers\Admin\ConcursoController::class);
-    Route::post('concursos/{concurso}/resend-alerts', [App\Http\Controllers\Admin\ConcursoController::class, 'resendAlerts'])->name('concursos.resend-alerts');
-    // List subscribers to concurso alerts
+
+    // Explicit admin routes for concursos that must be registered BEFORE the
+    // resource route to avoid collisions with the implicit `{concurso}` binding
+    // (e.g. '/admin/concursos/alerts' would otherwise be interpreted as an id).
+    // Global subscribers list + export
     Route::get('concursos/alerts', [App\Http\Controllers\Admin\ConcursoController::class, 'alerts'])->name('concursos.alerts');
     Route::get('concursos/alerts/export', [App\Http\Controllers\Admin\ConcursoController::class, 'alertsExport'])->name('concursos.alerts.export');
-    // Per-concurso subscribers (filtered by concurso.area)
+
+    // Per-concurso subscribers (filtered by concurso.area) and export
     Route::get('concursos/{concurso}/subscribers', [App\Http\Controllers\Admin\ConcursoController::class, 'subscribers'])->name('concursos.subscribers');
     Route::get('concursos/{concurso}/subscribers/export', [App\Http\Controllers\Admin\ConcursoController::class, 'subscribersExport'])->name('concursos.subscribers.export');
+
+    // Manual resend action for a specific concurso
+    Route::post('concursos/{concurso}/resend-alerts', [App\Http\Controllers\Admin\ConcursoController::class, 'resendAlerts'])->name('concursos.resend-alerts');
+
     // Delete attachment route for concursos (named under admin. prefix)
     Route::delete('concursos/attachments/{id}', [App\Http\Controllers\Admin\ConcursoController::class, 'destroyAttachment'])->name('concursos.attachments.destroy');
-    Route::delete('concursos/attachments/{id}', [App\Http\Controllers\Admin\ConcursoController::class, 'destroyAttachment'])->name('concursos.attachments.destroy');
+
+    // Now register the resource routes for concursos (will not intercept the
+    // explicit routes defined above)
+    Route::resource('concursos', App\Http\Controllers\Admin\ConcursoController::class);
+
     // Revista submissions moderation
     Route::get('revistas/submissions', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'index'])->name('revistas');
     Route::post('revistas/{id}/publish', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'publish'])->name('revistas.publish');
