@@ -113,6 +113,9 @@ Route::view('/contactos', 'pages.contactos')->name('contactos');
 use App\Http\Controllers\ContactController;
 Route::post('/contactos/send', [ContactController::class, 'send'])->name('contact.send');
 
+// Alerts for concursos (subscribe)
+use App\Http\Controllers\ConcursoAlertController;
+Route::post('/alerts/subscribe', [ConcursoAlertController::class, 'store'])->name('alerts.subscribe');
 Route::view('/valores', 'pages.valores')->name('valores');
 Route::view('/visao', 'pages.visao')->name('visao');
 Route::view('/trabalhe-conosco', 'pages.trabalhe-conosco')->name('trabalhe-conosco');

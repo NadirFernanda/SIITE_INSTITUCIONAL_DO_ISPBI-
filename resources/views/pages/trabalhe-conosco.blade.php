@@ -230,59 +230,122 @@
           Cadastre-se para receber notificações por email quando novos concursos públicos forem abertos no ISP-Bié.
         </p>
 
-        <form class="space-y-6">
+        <form id="alerts-form" class="space-y-6" method="POST" action="{{ route('alerts.subscribe') }}">
           @csrf
-          
-            <div class="grid md:grid-cols-2 gap-6">
+
+          <div id="alerts-messages" class="hidden mb-4"></div>
+
+          <div class="grid md:grid-cols-2 gap-6">
             <div>
               <label for="alert_name" class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo *</label>
-              <input id="alert_name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+              <input id="alert_name" name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
             </div>
             <div>
               <label for="alert_email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-              <input id="alert_email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+              <input id="alert_email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
             </div>
           </div>
 
           <div>
             <label for="alert_phone" class="block text-sm font-semibold text-gray-700 mb-2">Telefone</label>
-            <input id="alert_phone" type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+            <input id="alert_phone" name="phone" type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
           </div>
 
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Íreas de Interesse (selecione todas que se aplicam) *</label>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Áreas de Interesse (selecione todas que se aplicam) *</label>
             <div class="space-y-2">
               <label class="flex items-center">
-                <input id="interesse_docente" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Docente" id="interesse_docente" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Docente</span>
               </label>
               <label class="flex items-center">
-                <input id="interesse_tecnico" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Técnico Administrativo" id="interesse_tecnico" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Técnico Administrativo</span>
               </label>
               <label class="flex items-center">
-                <input id="interesse_tecnico_esp" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Técnico Especializado" id="interesse_tecnico_esp" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Técnico Especializado (TI, Laboratórios, etc.)</span>
               </label>
               <label class="flex items-center">
-                <input id="interesse_pesquisa" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Investigação Científica" id="interesse_pesquisa" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
                 <span class="text-gray-700">Investigação Científica</span>
               </label>
             </div>
           </div>
 
           <div class="flex items-start">
-            <input id="alert_privacy" type="checkbox" required class="mt-1 mr-3">
+            <input id="alert_privacy" name="consent" type="checkbox" required class="mt-1 mr-3">
             <label for="alert_privacy" class="text-sm text-gray-600">
-              Autorizo o ISP-Bié a utilizar os meus dados pessoais para envio de alertas sobre concursos públicos, 
+              Autorizo o ISP-Bié a utilizar os meus dados pessoais para envio de alertas sobre concursos públicos,
               de acordo com a legislação de proteção de dados em vigor. *
             </label>
           </div>
 
-          <button type="submit" class="w-full bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
+          <button id="alerts-submit" type="submit" class="w-full bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
             Cadastrar para Receber Alertas
           </button>
         </form>
+
+        <noscript>
+          <p class="text-sm text-gray-600 mt-3">Para inscrever-se, ative JavaScript ou use o botão abaixo para enviar o formulário.</p>
+        </noscript>
+
+        <script>
+          (function () {
+            const form = document.getElementById('alerts-form');
+            const messages = document.getElementById('alerts-messages');
+
+            function showMessage(html, isError = false) {
+              messages.innerHTML = html;
+              messages.classList.remove('hidden');
+              messages.classList.toggle('text-red-600', isError);
+              messages.classList.toggle('text-green-600', !isError);
+            }
+
+            form.addEventListener('submit', function (e) {
+              // Let noscript fallback handle non-JS users
+              if (!window.fetch) return;
+              e.preventDefault();
+
+              const submitBtn = document.getElementById('alerts-submit');
+              submitBtn.disabled = true;
+              submitBtn.classList.add('opacity-60');
+
+              const formData = new FormData(form);
+
+              // Ensure CSRF token header is sent when backend expects it
+              const tokenInput = form.querySelector('input[name="_token"]');
+              const headers = {};
+              if (tokenInput) headers['X-CSRF-TOKEN'] = tokenInput.value;
+
+              fetch(form.action, {
+                method: 'POST',
+                headers: headers,
+                body: formData,
+                credentials: 'same-origin'
+              }).then(function (res) {
+                if (!res.ok) throw res;
+                return res.json();
+              }).then(function (json) {
+                showMessage('<strong>Inscrição recebida.</strong> Obrigado por subscrever os alertas.');
+                form.reset();
+              }).catch(function (err) {
+                if (err.json) {
+                  err.json().then(function (j) {
+                    showMessage(j.message || 'Erro ao enviar. Tente novamente.', true);
+                  }).catch(function () {
+                    showMessage('Erro ao enviar. Tente novamente.', true);
+                  });
+                } else {
+                  showMessage('Erro ao enviar. Tente novamente.', true);
+                }
+              }).finally(function () {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-60');
+              });
+            });
+          })();
+        </script>
       </div>
     </div>
   </section>
