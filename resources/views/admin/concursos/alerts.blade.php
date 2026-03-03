@@ -5,12 +5,7 @@
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold">Assinantes - Alertas de Concursos</h1>
             <div class="flex items-center space-x-3">
-                @if(request()->boolean('all'))
-                    <a href="{{ route('admin.concursos.alerts') }}" class="px-3 py-2 bg-white border rounded text-sm">Mostrar apenas com consentimento</a>
-                @else
-                    <a href="{{ route('admin.concursos.alerts', ['all' => 1]) }}" class="px-3 py-2 bg-white border rounded text-sm">Mostrar todos</a>
-                @endif
-                <a href="{{ route('admin.concursos.alerts.export', request()->only('all')) }}" class="px-3 py-2 bg-green-600 text-white rounded text-sm">Exportar CSV</a>
+                <a href="{{ route('admin.concursos.alerts.export') }}" class="px-3 py-2 bg-green-600 text-white rounded text-sm">Exportar CSV</a>
                 <a href="{{ route('admin.concursos.index') }}" class="px-4 py-2 bg-gray-200 rounded">Voltar</a>
             </div>
         </div>
