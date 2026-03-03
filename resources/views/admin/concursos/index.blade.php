@@ -16,6 +16,9 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Título</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Resumo</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Descrição</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Anexos</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Status</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">Publicado</th>
                         <th class="px-6 py-3"></th>
@@ -25,8 +28,11 @@
                     @foreach($concursos as $c)
                         <tr>
                             <td class="px-6 py-4">{{ $c->title }}</td>
+                            <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($c->summary ?? '-', 80) }}</td>
+                            <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($c->body ?? '-', 120) }}</td>
+                            <td class="px-6 py-4">{{ $c->attachments->count() }} @if($c->attachments->count()) <a href="{{ route('admin.concursos.edit', $c) }}#attachments" class="text-blue-600 ml-2">ver</a> @endif</td>
                             <td class="px-6 py-4">{{ $c->status }}</td>
-                            <td class="px-6 py-4">{{ optional($c->publish_at)->format('Y-m-d H:i') ?? '-' }}</td>
+                            <td class="px-6 py-4">{{ $c->publish_at ? $c->publish_at->format('Y-m-d H:i') : '-' }}</td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('admin.concursos.edit', $c) }}" class="text-blue-600 mr-3">Editar</a>
                                 <form action="{{ route('admin.concursos.destroy', $c) }}" method="POST" class="inline" onsubmit="return confirm('Remover?')">
