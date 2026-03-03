@@ -48,8 +48,26 @@
         <svg class="w-5 h-5 text-[#2979FF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a4 4 0 00-4-4h-1"/><circle cx="9" cy="7" r="4"/><path d="M9 11v4"/><path d="M9 15v4"/><path d="M5 20h8"/></svg>
         Parcerias
       </h2>
-        <ul class="space-y-2" aria-labelledby="footer-parcerias">
-          <li><a href="https://governo.gov.ao" target="_blank" rel="noopener" class="hover:text-[#2979FF] transition-colors link-underline-soft">Governo de Angola</a></li>
+        <ul class="space-y-2 text-sm" aria-labelledby="footer-parcerias">
+          <li class="font-semibold text-white">GABINETES PROVINCIAIS</li>
+          <li>ONG ASSOCIAÇÕES COMUNITÁRIAS</li>
+          <li>INSTITUIÇÕES DE ENSINO SUPERIOR</li>
+          <li>HOSPITAIS</li>
+          <li>EMPRESAS</li>
+          <li class="mt-2 font-semibold text-white">GABINETE DA EDUCAÇÃO</li>
+          <li>FUNDO DE APOIO SOCIAL</li>
+          <li>INSTITUTO SUPERIOR POLITÉCNICO NDUNDUMA</li>
+          <li>CENTRO MATERNO INFANTIL DO BIÉ</li>
+          <li>UNITEL</li>
+          <li class="mt-2 font-semibold text-white">INSTITUTO SUPERIOR POLITÉCNICO DA CAÁLA</li>
+          <li>HOSPITAL MARTERES DO CUITO</li>
+          <li>CEFEJOR</li>
+          <li class="mt-2 font-semibold text-white">UNIVERSIDADE JOSÉ EDUARDO DOS SANTOS</li>
+          <li>HOSPITAL MUNICIPAL DO CUNJE</li>
+          <li>STANDARD BANK DE ANGOLA</li>
+          <li class="mt-2 font-semibold text-white">UNIVERSIDADE INTERNACIONAL DO CUANZA</li>
+          <li>DR WALTER STRANGWAY</li>
+          <li>EMPRESA OPÇÃO CONTABIL (SU) LDA</li>
         </ul>
       </div>
       <!-- Fale com ISP-Bié -->
