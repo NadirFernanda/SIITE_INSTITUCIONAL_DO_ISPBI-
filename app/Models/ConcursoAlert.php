@@ -22,5 +22,7 @@ class ConcursoAlert extends Model
     protected $casts = [
         'interests' => 'array',
         'consent' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }
