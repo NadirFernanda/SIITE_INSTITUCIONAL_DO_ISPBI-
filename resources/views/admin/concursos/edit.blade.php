@@ -19,6 +19,17 @@
             </div>
 
             <div>
+                <label for="concurso_area" class="block text-sm font-medium text-gray-700">Área / Categoria</label>
+                <select id="concurso_area" name="area" class="mt-1 block w-full border-gray-300 rounded-md">
+                    <option value="">— Selecionar —</option>
+                    <option value="Docente" {{ (old('area', $concurso->area) === 'Docente') ? 'selected' : '' }}>Docente</option>
+                    <option value="Técnico Administrativo" {{ (old('area', $concurso->area) === 'Técnico Administrativo') ? 'selected' : '' }}>Técnico Administrativo</option>
+                    <option value="Técnico Especializado" {{ (old('area', $concurso->area) === 'Técnico Especializado') ? 'selected' : '' }}>Técnico Especializado</option>
+                    <option value="Investigação Científica" {{ (old('area', $concurso->area) === 'Investigação Científica') ? 'selected' : '' }}>Investigação Científica</option>
+                </select>
+            </div>
+
+            <div>
                 <label for="concurso_body" class="block text-sm font-medium text-gray-700">Descrição / Corpo</label>
                 <textarea id="concurso_body" name="body" rows="6" class="mt-1 block w-full border-gray-300 rounded-md">{{ old('body', $concurso->body) }}</textarea>
             </div>

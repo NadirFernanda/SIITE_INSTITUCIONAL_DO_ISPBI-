@@ -33,6 +33,18 @@
             </div>
 
             <div>
+                <label for="concurso_area" class="block text-sm font-medium text-gray-700">Área / Categoria</label>
+                <select id="concurso_area" name="area" class="mt-1 block w-full border-gray-300 rounded-md">
+                    <option value="">— Selecionar —</option>
+                    <option value="Docente">Docente</option>
+                    <option value="Técnico Administrativo">Técnico Administrativo</option>
+                    <option value="Técnico Especializado">Técnico Especializado</option>
+                    <option value="Investigação Científica">Investigação Científica</option>
+                </select>
+            </div>
+            </div>
+
+            <div>
                 <label for="concurso_attachments" class="block text-sm font-medium text-gray-700">Anexos (pdf, doc, docx)</label>
                 <input id="concurso_attachments" type="file" name="attachments[]" multiple class="mt-1" />
             </div>

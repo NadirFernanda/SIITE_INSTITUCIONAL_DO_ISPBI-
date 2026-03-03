@@ -11,7 +11,7 @@ class Concurso extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'summary', 'body', 'status', 'publish_at', 'created_by',
+        'title', 'summary', 'body', 'status', 'publish_at', 'created_by', 'area',
     ];
 
     protected $dates = ['publish_at'];

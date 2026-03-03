@@ -277,4 +277,78 @@ class ConcursoController extends Controller
 
         return response()->stream($callback, 200, $headers);
     }
+
+    /**
+     * List subscribers that match a specific concurso's area.
+     */
+    public function subscribers(Request $request, Concurso $concurso)
+    {
+        $query = ConcursoAlert::query();
+
+        if (! $request->boolean('all')) {
+            $query->where('consent', true);
+        }
+
+        // If concurso has an area, prefer explicit JSON contains match
+        if ($concurso->area) {
+            $query->whereJsonContains('interests', $concurso->area);
+        }
+
+        if ($q = $request->input('q')) {
+            $query->where(function ($q2) use ($q) {
+                $q2->where('name', 'like', "%{$q}%")->orWhere('email', 'like', "%{$q}%");
+            });
+        }
+
+        $subscribers = $query->orderByDesc('created_at')->paginate(25)->withQueryString();
+        return view('admin.concursos.subscribers', compact('subscribers', 'concurso'));
+    }
+
+    /**
+     * Export subscribers for a specific concurso.
+     */
+    public function subscribersExport(Request $request, Concurso $concurso)
+    {
+        $query = ConcursoAlert::query();
+        if (! $request->boolean('all')) {
+            $query->where('consent', true);
+        }
+        if ($concurso->area) {
+            $query->whereJsonContains('interests', $concurso->area);
+        }
+        if ($q = $request->input('q')) {
+            $query->where(function ($q2) use ($q) {
+                $q2->where('name', 'like', "%{$q}%")->orWhere('email', 'like', "%{$q}%");
+            });
+        }
+
+        $alerts = $query->orderByDesc('created_at')->get();
+
+        $filename = 'concurso_'.$concurso->id.'_subscribers_'.now()->format('Ymd_His').'.csv';
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () use ($alerts) {
+            $out = fopen('php://output', 'w');
+            fprintf($out, "%s", chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($out, ['id','name','email','phone','interests','consent','created_at']);
+            foreach ($alerts as $a) {
+                $interests = is_array($a->interests) ? implode('; ', $a->interests) : ($a->interests ?? '');
+                fputcsv($out, [
+                    $a->id,
+                    $a->name,
+                    $a->email,
+                    $a->phone,
+                    $interests,
+                    $a->consent ? 'Sim' : 'Nao',
+                    $a->created_at ? $a->created_at->toDateTimeString() : '',
+                ]);
+            }
+            fclose($out);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }
