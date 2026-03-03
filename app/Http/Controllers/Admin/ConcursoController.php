@@ -158,4 +158,45 @@ class ConcursoController extends Controller
         $alerts = $query->orderByDesc('created_at')->paginate(25)->appends($request->only('all'));
         return view('admin.concursos.alerts', compact('alerts'));
     }
+
+    /**
+     * Export alerts as CSV. Respects the same `all` query param (default: only consent=true).
+     */
+    public function alertsExport(Request $request)
+    {
+        $query = ConcursoAlert::query();
+        if (! $request->boolean('all')) {
+            $query->where('consent', true);
+        }
+
+        $alerts = $query->orderByDesc('created_at')->get();
+
+        $filename = 'concurso_alerts_'.now()->format('Ymd_His').'.csv';
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $callback = function () use ($alerts) {
+            $out = fopen('php://output', 'w');
+            // BOM for UTF-8 in some spreadsheet apps
+            fprintf($out, "%s", chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($out, ['id','name','email','phone','interests','consent','created_at']);
+            foreach ($alerts as $a) {
+                $interests = is_array($a->interests) ? implode('; ', $a->interests) : ($a->interests ?? '');
+                fputcsv($out, [
+                    $a->id,
+                    $a->name,
+                    $a->email,
+                    $a->phone,
+                    $interests,
+                    $a->consent ? 'Sim' : 'Nao',
+                    $a->created_at ? $a->created_at->toDateTimeString() : '',
+                ]);
+            }
+            fclose($out);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

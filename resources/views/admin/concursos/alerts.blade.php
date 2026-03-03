@@ -10,6 +10,7 @@
                 @else
                     <a href="{{ route('admin.concursos.alerts', ['all' => 1]) }}" class="px-3 py-2 bg-white border rounded text-sm">Mostrar todos</a>
                 @endif
+                <a href="{{ route('admin.concursos.alerts.export', request()->only('all')) }}" class="px-3 py-2 bg-green-600 text-white rounded text-sm">Exportar CSV</a>
                 <a href="{{ route('admin.concursos.index') }}" class="px-4 py-2 bg-gray-200 rounded">Voltar</a>
             </div>
         </div>

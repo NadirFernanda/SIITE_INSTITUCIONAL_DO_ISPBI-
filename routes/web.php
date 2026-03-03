@@ -91,6 +91,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('concursos', App\Http\Controllers\Admin\ConcursoController::class);
     // List subscribers to concurso alerts
     Route::get('concursos/alerts', [App\Http\Controllers\Admin\ConcursoController::class, 'alerts'])->name('concursos.alerts');
+    Route::get('concursos/alerts/export', [App\Http\Controllers\Admin\ConcursoController::class, 'alertsExport'])->name('concursos.alerts.export');
     // Delete attachment route for concursos (named under admin. prefix)
     Route::delete('concursos/attachments/{id}', [App\Http\Controllers\Admin\ConcursoController::class, 'destroyAttachment'])->name('concursos.attachments.destroy');
     Route::delete('concursos/attachments/{id}', [App\Http\Controllers\Admin\ConcursoController::class, 'destroyAttachment'])->name('concursos.attachments.destroy');
