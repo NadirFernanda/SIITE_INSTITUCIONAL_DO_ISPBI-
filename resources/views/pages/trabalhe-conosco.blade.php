@@ -38,11 +38,12 @@
       use Illuminate\Support\Carbon;
 
       // Counts for quick diagnostics (shown only to authenticated users)
-      $allCount = \App\Models\Concurso::count();
-      $publishedCount = \App\Models\Concurso::published()->count();
+        $allCount = \App\Models\Concurso::count();
+        // Use direct status check to avoid publish_at/timezone mismatches for now
+        $publishedCount = \App\Models\Concurso::where('status', 'published')->count();
 
-      // Fetch published concursos; be defensive about publish_at casting
-      $concursos = \App\Models\Concurso::published()
+        // Fetch published concursos by status (temporary fix)
+        $concursos = \App\Models\Concurso::where('status', 'published')
         ->orderByDesc('publish_at')
         ->get()
         ->map(function ($c) {
