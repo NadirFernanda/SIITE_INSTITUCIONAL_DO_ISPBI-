@@ -49,11 +49,6 @@
         Parcerias
       </h2>
         <ul class="space-y-2 text-sm" aria-labelledby="footer-parcerias">
-          <li class="font-semibold text-white">GABINETES PROVINCIAIS</li>
-          <li>ONG ASSOCIAÇÕES COMUNITÁRIAS</li>
-          <li>INSTITUIÇÕES DE ENSINO SUPERIOR</li>
-          <li>HOSPITAIS</li>
-          <li>EMPRESAS</li>
           <li class="mt-2 font-semibold text-white">GABINETE DA EDUCAÇÃO</li>
           <li>FUNDO DE APOIO SOCIAL</li>
           <li>INSTITUTO SUPERIOR POLITÉCNICO NDUNDUMA</li>
