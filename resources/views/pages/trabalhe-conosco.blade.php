@@ -91,14 +91,10 @@
                 <div class="space-y-2">
                   @foreach($c->attachments as $att)
                     @php
+                      // Normalize stored path and build URL from public disk (match admin behavior)
                       $rawPath = $att->path ?? '';
-                      // If the stored path is already an absolute URL (e.g. Moodle link), use it as-is.
-                      if (preg_match('/^https?:\/\//i', $rawPath)) {
-                        $href = $rawPath;
-                      } else {
-                        $publicPath = preg_replace('/^public\\//', '', $rawPath);
-                        $href = Storage::disk('public')->url($publicPath);
-                      }
+                      $publicPath = preg_replace('#^public/#', '', $rawPath);
+                      $href = Storage::disk('public')->url($publicPath);
                     @endphp
                     <a href="{{ $href }}" class="inline-block text-sm text-[#2563eb] hover:underline" target="_blank" rel="noopener noreferrer">{{ $att->original_name }}</a>
                   @endforeach
