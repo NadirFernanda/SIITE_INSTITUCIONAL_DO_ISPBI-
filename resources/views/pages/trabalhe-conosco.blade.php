@@ -34,9 +34,29 @@
     </div>
   </section>
 
-  @php
-      $concursos = \App\Models\Concurso::published()->orderByDesc('publish_at')->get();
-  @endphp
+    @php
+      use Illuminate\Support\Carbon;
+
+      // Counts for quick diagnostics (shown only to authenticated users)
+      $allCount = \App\Models\Concurso::count();
+      $publishedCount = \App\Models\Concurso::published()->count();
+
+      // Fetch published concursos; be defensive about publish_at casting
+      $concursos = \App\Models\Concurso::published()
+        ->orderByDesc('publish_at')
+        ->get()
+        ->map(function ($c) {
+          // Ensure publish_at is a Carbon instance to avoid ->format() errors
+          if ($c->publish_at && ! $c->publish_at instanceof Carbon) {
+            try {
+              $c->publish_at = Carbon::parse($c->publish_at);
+            } catch (\Throwable $e) {
+              $c->publish_at = null;
+            }
+          }
+          return $c;
+        });
+    @endphp
 
   <!-- Lista de Concursos -->
   <section class="py-12 bg-gray-50">
@@ -46,9 +66,17 @@
       </div>
 
       @if($concursos->isEmpty())
-        <div class="bg-white p-6 rounded shadow text-center text-gray-700">
-          No momento não há concursos disponíveis. Verifique novamente mais tarde ou inscreva-se para receber alertas.
-        </div>
+        @auth
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded text-sm text-yellow-800">
+            <strong>Diagnóstico:</strong>
+            Existem <strong>{{ $allCount }}</strong> concursos no painel administrativo, dos quais <strong>{{ $publishedCount }}</strong> estão marcados como "published".
+            Atualmente nenhum concurso aparece como aberto nesta página. Verifique o campo <em>status</em> e a data <em>publish_at</em> em <a href="{{ route('admin.concursos.index') }}" class="underline">Painel Admin</a>.
+          </div>
+        @else
+          <div class="bg-white p-6 rounded shadow text-center text-gray-700">
+            No momento não há concursos disponíveis. Verifique novamente mais tarde ou inscreva-se para receber alertas.
+          </div>
+        @endauth
       @else
         <div class="grid md:grid-cols-2 gap-6">
           @foreach($concursos as $c)
@@ -57,7 +85,7 @@
               @if($c->summary)
                 <p class="text-gray-700 mb-3">{{ $c->summary }}</p>
               @endif
-              <p class="text-sm text-gray-500 mb-3">Publicado em: {{ optional($c->publish_at)->format('d/m/Y') }}</p>
+              <p class="text-sm text-gray-500 mb-3">Publicado em: {{ $c->publish_at ? $c->publish_at->format('d/m/Y') : '-' }}</p>
               @if($c->attachments->isNotEmpty())
                 <div class="space-y-2">
                   @foreach($c->attachments as $att)
