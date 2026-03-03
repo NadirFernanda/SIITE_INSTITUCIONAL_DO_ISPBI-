@@ -91,10 +91,15 @@
                 <div class="space-y-2">
                   @foreach($c->attachments as $att)
                     @php
-                      // Normalize stored path and build URL from public disk (match admin behavior)
+                      // Prefer external URL if the path is already absolute
                       $rawPath = $att->path ?? '';
-                      $publicPath = preg_replace('#^public/#', '', $rawPath);
-                      $href = Storage::disk('public')->url($publicPath);
+                      if (preg_match('/^https?:\/\//i', $rawPath)) {
+                          $href = $rawPath;
+                      } else {
+                          // Normalize any leading 'public/' and build a local relative storage path
+                          $publicPath = preg_replace('#^public/#', '', $rawPath);
+                          $href = '/storage/' . ltrim($publicPath, '/');
+                      }
                     @endphp
                     <a href="{{ $href }}" class="inline-block text-sm text-[#2563eb] hover:underline" target="_blank" rel="noopener noreferrer">{{ $att->original_name }}</a>
                   @endforeach
