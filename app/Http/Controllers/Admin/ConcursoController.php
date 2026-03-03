@@ -55,10 +55,13 @@ class ConcursoController extends Controller
             try {
                 // queue email to avoid blocking request; requires a queue worker (QUEUE_CONNECTION not 'sync')
                 Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->queue(new ConcursoPublished($concurso));
+                // also notify subscribed users who gave consent, in batches to avoid memory issues
+                $this->queueConcursoAlertsToSubscribers($concurso);
             } catch (\Throwable $e) {
                 // fallback to synchronous send if queueing fails
                 try {
                     Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+                    $this->sendConcursoAlertsToSubscribersSync($concurso);
                 } catch (\Throwable $e2) {
                     \Log::error('Falha ao enviar email de concurso publicado: '.$e2->getMessage());
                 }
@@ -103,14 +106,77 @@ class ConcursoController extends Controller
         if ($concurso->status === 'published' && $was !== 'published') {
             try {
                 Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->queue(new ConcursoPublished($concurso));
+                $this->queueConcursoAlertsToSubscribers($concurso);
             } catch (\Throwable $e) {
                 try {
                     Mail::to(['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'])->send(new ConcursoPublished($concurso));
+                    $this->sendConcursoAlertsToSubscribersSync($concurso);
                 } catch (\Throwable $e2) {
                     \Log::error('Falha ao enviar email de concurso publicado: '.$e2->getMessage());
                 }
             }
         }
+
+    }
+
+    /**
+     * Queue notification emails to consenting subscribers in batches.
+     */
+    protected function queueConcursoAlertsToSubscribers(\App\Models\Concurso $concurso)
+    {
+        try {
+            $emails = \App\Models\ConcursoAlert::where('consent', true)
+                ->whereNotNull('email')
+                ->pluck('email')
+                ->unique()
+                ->filter()
+                ->values();
+
+            // exclude internal addresses already notified
+            $exclude = ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'];
+            $emails = $emails->reject(function ($e) use ($exclude) { return in_array($e, $exclude); });
+
+            $chunkSize = 100; // adjust based on queue/provider limits
+            $emails->chunk($chunkSize)->each(function ($chunk) use ($concurso) {
+                try {
+                    Mail::to($chunk->toArray())->queue(new ConcursoPublished($concurso));
+                } catch (\Throwable $e) {
+                    \Log::error('Falha ao enfileirar alertas para concuso subscribers: '.$e->getMessage());
+                }
+            });
+        } catch (\Throwable $e) {
+            \Log::error('Erro ao preparar lista de assinantes para alerts: '.$e->getMessage());
+        }
+    }
+
+    /**
+     * Synchronous fallback to send alerts to subscribers (used when queue unavailable).
+     */
+    protected function sendConcursoAlertsToSubscribersSync(\App\Models\Concurso $concurso)
+    {
+        try {
+            $emails = \App\Models\ConcursoAlert::where('consent', true)
+                ->whereNotNull('email')
+                ->pluck('email')
+                ->unique()
+                ->filter()
+                ->values();
+
+            $exclude = ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'];
+            $emails = $emails->reject(function ($e) use ($exclude) { return in_array($e, $exclude); });
+
+            $chunkSize = 100;
+            $emails->chunk($chunkSize)->each(function ($chunk) use ($concurso) {
+                try {
+                    Mail::to($chunk->toArray())->send(new ConcursoPublished($concurso));
+                } catch (\Throwable $e) {
+                    \Log::error('Falha ao enviar alertas sincronamente: '.$e->getMessage());
+                }
+            });
+        } catch (\Throwable $e) {
+            \Log::error('Erro no envio sincronico de alerts: '.$e->getMessage());
+        }
+    }
 
         return redirect()->route('admin.concursos.index')->with('status', 'Concurso atualizado.');
     }
