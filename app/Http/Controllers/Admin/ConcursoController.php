@@ -146,9 +146,16 @@ class ConcursoController extends Controller
     /**
      * Admin: list subscriptions to concurso alerts
      */
-    public function alerts()
+    public function alerts(Request $request)
     {
-        $alerts = ConcursoAlert::orderByDesc('created_at')->paginate(25);
+        // By default show only subscribers who gave consent. Pass ?all=1 to show everyone.
+        $query = ConcursoAlert::query();
+
+        if (! $request->boolean('all')) {
+            $query->where('consent', true);
+        }
+
+        $alerts = $query->orderByDesc('created_at')->paginate(25)->appends($request->only('all'));
         return view('admin.concursos.alerts', compact('alerts'));
     }
 }
