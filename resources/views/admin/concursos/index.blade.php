@@ -34,6 +34,7 @@
                             <td class="px-6 py-4">{{ $c->status }}</td>
                             <td class="px-6 py-4">{{ $c->publish_at ? \Illuminate\Support\Carbon::parse($c->publish_at)->format('Y-m-d H:i') : '-' }}</td>
                             <td class="px-6 py-4 text-right">
+                                <a href="{{ route('admin.concursos.subscribers', $c) }}" class="text-indigo-600 mr-3">Ver Assinantes</a>
                                 <a href="{{ route('admin.concursos.edit', $c) }}" class="text-blue-600 mr-3">Editar</a>
                                 <form action="{{ route('admin.concursos.destroy', $c) }}" method="POST" class="inline" onsubmit="return confirm('Remover?')">
                                     @csrf
