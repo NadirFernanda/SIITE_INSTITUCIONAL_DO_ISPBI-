@@ -317,6 +317,55 @@
               const tokenInput = form.querySelector('input[name="_token"]');
               const headers = {};
               if (tokenInput) headers['X-CSRF-TOKEN'] = tokenInput.value;
+              // Ask the server to return JSON for fetch requests so controller uses JSON flow
+              headers['Accept'] = 'application/json';
+              // Mark as AJAX request for frameworks that check X-Requested-With
+              headers['X-Requested-With'] = 'XMLHttpRequest';
+
+              function clearFieldErrors() {
+                // remove any previous error messages and error styles
+                form.querySelectorAll('.field-error-msg').forEach(function (el) { el.remove(); });
+                form.querySelectorAll('.field-error').forEach(function (el) { el.classList.remove('field-error'); el.classList.remove('border-red-600'); });
+              }
+
+              function showFieldErrors(errors) {
+                var firstInput = null;
+                Object.keys(errors).forEach(function (field) {
+                  var messages = errors[field];
+                  // handle array inputs like interests[] by matching startsWith
+                  var input = form.querySelector('[name="' + field + '"]') || form.querySelector('[name="' + field + '[]"]');
+                  if (!input) {
+                    // try find by name prefix (for inputs like interests[])
+                    var els = form.querySelectorAll('[name^="' + field.replace(/\[\]$/,'') + '"]');
+                    if (els.length) input = els[0];
+                  }
+                  if (input) {
+                    if (!firstInput) firstInput = input;
+                    // add error class to input (Tailwind compatible)
+                    input.classList.add('border-red-600');
+                    input.classList.add('field-error');
+                    // append messages after the input wrapper
+                    var msg = document.createElement('p');
+                    msg.className = 'field-error-msg text-sm text-red-600 mt-1';
+                    msg.innerText = messages.join(' ');
+                    // if input is inside a div, append to that div, else after input
+                    var parentDiv = input.closest('div') || input.parentNode;
+                    parentDiv.appendChild(msg);
+                  }
+                });
+
+                if (firstInput) {
+                  try {
+                    firstInput.focus({ preventScroll: true });
+                  } catch (e) {
+                    try { firstInput.focus(); } catch (e) { /* ignore */ }
+                  }
+                  // ensure it's visible to the user
+                  try { firstInput.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) { /* ignore */ }
+                }
+              }
+
+              clearFieldErrors();
 
               fetch(form.action, {
                 method: 'POST',
@@ -327,12 +376,19 @@
                 if (!res.ok) throw res;
                 return res.json();
               }).then(function (json) {
+                clearFieldErrors();
                 showMessage('<strong>Inscrição recebida.</strong> Obrigado por subscrever os alertas.');
                 form.reset();
               }).catch(function (err) {
                 if (err.json) {
                   err.json().then(function (j) {
-                    showMessage(j.message || 'Erro ao enviar. Tente novamente.', true);
+                    clearFieldErrors();
+                    if (j.errors) {
+                      showFieldErrors(j.errors);
+                      showMessage(j.message || 'Por favor verifique os campos destacados.', true);
+                    } else {
+                      showMessage(j.message || 'Erro ao enviar. Tente novamente.', true);
+                    }
                   }).catch(function () {
                     showMessage('Erro ao enviar. Tente novamente.', true);
                   });

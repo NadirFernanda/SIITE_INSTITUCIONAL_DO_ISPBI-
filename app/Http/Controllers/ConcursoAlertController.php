@@ -35,7 +35,7 @@ class ConcursoAlertController extends Controller
             // For now, log the subscription for operational visibility
             Log::info('New concurso alert subscription', ['id' => $alert->id, 'email' => $alert->email]);
 
-            if ($request->wantsJson() || $request->ajax()) {
+            if ($request->expectsJson()) {
                 return response()->json(['status' => 'ok', 'message' => 'Inscrição recebida. Obrigado.'], 201);
             }
 
@@ -43,7 +43,7 @@ class ConcursoAlertController extends Controller
 
         } catch (\Throwable $e) {
             Log::error('Failed to store concurso alert: '.$e->getMessage());
-            if ($request->wantsJson() || $request->ajax()) {
+            if ($request->expectsJson()) {
                 return response()->json(['status' => 'error', 'message' => 'Erro ao processar pedido.'], 500);
             }
             return redirect()->back()->withErrors('Erro ao processar o pedido. Por favor, tente novamente.');
