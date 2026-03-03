@@ -4,7 +4,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold">Concursos</h1>
-            <a href="{{ route('admin.concursos.create') }}" class="px-4 py-2 bg-[#2563eb] text-white rounded">Novo Concurso</a>
+            <div class="space-x-2">
+                <a href="{{ route('admin.concursos.create') }}" class="px-4 py-2 bg-[#2563eb] text-white rounded">Novo Concurso</a>
+                <a href="{{ route('admin.concursos.alerts') }}" class="px-4 py-2 bg-gray-100 border rounded">Assinantes</a>
+            </div>
         </div>
 
         @if(session('status'))
@@ -34,7 +37,6 @@
                             <td class="px-6 py-4">{{ $c->status }}</td>
                             <td class="px-6 py-4">{{ $c->publish_at ? \Illuminate\Support\Carbon::parse($c->publish_at)->format('Y-m-d H:i') : '-' }}</td>
                             <td class="px-6 py-4 text-right">
-                                <a href="{{ route('admin.concursos.subscribers', $c) }}" class="text-indigo-600 mr-3">Ver Assinantes</a>
                                 <a href="{{ route('admin.concursos.edit', $c) }}" class="text-blue-600 mr-3">Editar</a>
                                 <form action="{{ route('admin.concursos.destroy', $c) }}" method="POST" class="inline" onsubmit="return confirm('Remover?')">
                                     @csrf
