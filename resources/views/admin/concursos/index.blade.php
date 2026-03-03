@@ -32,7 +32,7 @@
                             <td class="px-6 py-4">{{ \Illuminate\Support\Str::limit($c->body ?? '-', 120) }}</td>
                             <td class="px-6 py-4">{{ $c->attachments->count() }} @if($c->attachments->count()) <a href="{{ route('admin.concursos.edit', $c) }}#attachments" class="text-blue-600 ml-2">ver</a> @endif</td>
                             <td class="px-6 py-4">{{ $c->status }}</td>
-                            <td class="px-6 py-4">{{ $c->publish_at ? $c->publish_at->format('Y-m-d H:i') : '-' }}</td>
+                            <td class="px-6 py-4">{{ $c->publish_at ? \Illuminate\Support\Carbon::parse($c->publish_at)->format('Y-m-d H:i') : '-' }}</td>
                             <td class="px-6 py-4 text-right">
                                 <a href="{{ route('admin.concursos.edit', $c) }}" class="text-blue-600 mr-3">Editar</a>
                                 <form action="{{ route('admin.concursos.destroy', $c) }}" method="POST" class="inline" onsubmit="return confirm('Remover?')">
