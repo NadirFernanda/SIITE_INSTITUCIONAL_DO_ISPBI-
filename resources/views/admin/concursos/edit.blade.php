@@ -57,40 +57,11 @@
             @endif
 
             <div class="flex items-center space-x-3">
-                <input type="submit" value="Salvar" onclick="try{alert('DEBUG: submit input clicked');}catch(e){}" class="px-4 py-2 bg-[#2563eb] text-white rounded cursor-pointer" />
+                <button type="button" id="concurso-submit-btn" class="px-4 py-2 bg-[#2563eb] text-white rounded cursor-pointer">Salvar</button>
                 <a href="{{ url()->previous() }}" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Cancelar</a>
             </div>
         </form>
-    </div>
-    <!-- Plain submit button only: removed diagnostic JS to avoid interfering with submission -->
-    <script>
-        (function(){
-            const form = document.getElementById('concurso-form');
-            if (!form) return;
-            form.addEventListener('submit', function(ev){
-                console.log('concurso-form (edit): submit event fired', ev);
-                try{ alert('DEBUG: concurso-form submit event fired'); }catch(e){}
-                // ensure native submission if possible
-                try {
-                    setTimeout(()=>{
-                        if (!ev.defaultPrevented) return;
-                        console.log('concurso-form (edit): default prevented, forcing native submit');
-                        form.submit();
-                    }, 50);
-                } catch(err){ console.error('concurso-form edit: submit error', err); }
-            }, {capture:true});
-
-            const btn = form.querySelector('button[type="submit"]');
-            if (btn) {
-                btn.addEventListener('click', function(ev){
-                    console.log('concurso-form (edit): submit button clicked', ev);
-                    try{ alert('DEBUG: concurso-form submit button clicked'); }catch(e){}
-                    // force native submit after a tiny delay to override other handlers
-                    setTimeout(()=>{
-                        try { form.submit(); } catch(e){ /* ignore */ }
-                    }, 20);
-                }, {passive:false});
-            }
+            }, {capture:false});
         })();
     </script>
     <!-- Fallback AJAX submit: contorna handlers que bloqueiam o submit nativo -->
@@ -121,6 +92,69 @@
                     credentials: 'same-origin',
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest'
+                    }
+                }).then(async (res) => {
+                    // If the app redirects, follow
+                    if (res.redirected) {
+                        window.location.href = res.url;
+                        return;
+                    }
+
+                    // On success status, redirect to index or show message
+                    if (res.ok) {
+                        // Try to redirect to admin list
+                        try { window.location.href = '/admin/concursos'; } catch(e){ alert('Concurso atualizado.'); }
+                        return;
+                    }
+
+                    // If not ok, show response text for debugging
+                    const txt = await res.text();
+                    console.error('Concurso update failed', res.status, txt);
+                    alert('Erro ao atualizar (código ' + res.status + '). Ver consola para detalhes.');
+                }).catch(err => {
+                    console.error('Network error submitting concurso', err);
+                    alert('Erro de rede ao submeter o formulário.');
+                }).finally(() => {
+                    window.__concurso_submitting = false;
+                    if (submitBtn) submitBtn.disabled = false;
+                });
+            }, {capture:false});
+        })();
+    </script>
+    <script>
+        // Direct click handler on the new button: triggers the same AJAX submit
+        (function(){
+            const form = document.getElementById('concurso-form');
+            const btn = document.getElementById('concurso-submit-btn');
+            if (!form || !btn) return;
+
+            btn.addEventListener('click', function(ev){
+                ev.preventDefault();
+                if (window.__concurso_submitting) return;
+                window.__concurso_submitting = true;
+                btn.disabled = true;
+
+                const fd = new FormData(form);
+                if (!fd.has('_method')) fd.append('_method','PUT');
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: fd,
+                    credentials: 'same-origin',
+                    headers: {'X-Requested-With':'XMLHttpRequest'}
+                }).then(async (res) => {
+                    if (res.redirected) { window.location.href = res.url; return; }
+                    if (res.ok) { window.location.href = '/admin/concursos'; return; }
+                    const txt = await res.text();
+                    console.error('Concurso update failed', res.status, txt);
+                    alert('Erro ao atualizar (código ' + res.status + '). Ver consola para detalhes.');
+                }).catch(err=>{
+                    console.error('Network error submitting concurso', err);
+                    alert('Erro de rede ao submeter o formulário.');
+                }).finally(()=>{ window.__concurso_submitting = false; btn.disabled = false; });
+            }, {passive:false});
+        })();
+    </script>
                     }
                 }).then(async (res) => {
                     // If the app redirects, follow
