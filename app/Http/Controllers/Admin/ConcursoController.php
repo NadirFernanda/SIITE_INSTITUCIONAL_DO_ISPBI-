@@ -230,6 +230,52 @@ class ConcursoController extends Controller
     }
 
     /**
+     * Manually trigger resending alerts to ALL subscribers (ignores consent and area).
+     */
+    public function resendAlertsAll(Concurso $concurso)
+    {
+        try {
+            $emails = \App\Models\ConcursoAlert::whereNotNull('email')
+                ->pluck('email')
+                ->unique()
+                ->filter()
+                ->values();
+
+            $exclude = ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'];
+            $emails = $emails->reject(function ($e) use ($exclude) { return in_array($e, $exclude); });
+
+            $chunkSize = 100;
+            $emails->chunk($chunkSize)->each(function ($chunk) use ($concurso) {
+                try {
+                    Mail::to($chunk->toArray())->queue(new ConcursoPublished($concurso));
+                } catch (\Throwable $e) {
+                    \Log::error('Falha ao enfileirar alertas (ALL) para concurso: '.$e->getMessage());
+                }
+            });
+
+            return back()->with('status', 'Envio de alertas enfileirado para TODOS os assinantes.');
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao reenviar alertas (ALL) para concurso '.$concurso->id.': '.$e->getMessage());
+            // fallback: try synchronous send
+            try {
+                $emails = \App\Models\ConcursoAlert::whereNotNull('email')
+                    ->pluck('email')
+                    ->unique()
+                    ->filter()
+                    ->values()
+                    ->reject(function ($e) { return in_array($e, ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao']); });
+                $emails->chunk(100)->each(function ($chunk) use ($concurso) {
+                    try { Mail::to($chunk->toArray())->send(new ConcursoPublished($concurso)); } catch (\Throwable $e) { \Log::error('Falha no envio sincronico (ALL): '.$e->getMessage()); }
+                });
+                return back()->with('status', 'Envio sincronico concluído para TODOS os assinantes (fallback).');
+            } catch (\Throwable $e2) {
+                \Log::error('Falha no fallback de envio (ALL): '.$e2->getMessage());
+                return back()->withErrors('Falha ao enfileirar/envio de alertas a todos. Verifique os logs.');
+            }
+        }
+    }
+
+    /**
      * Admin: list subscriptions to concurso alerts
      */
     public function alerts(Request $request)

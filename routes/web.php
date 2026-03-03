@@ -102,6 +102,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Manual resend action for a specific concurso
     Route::post('concursos/{concurso}/resend-alerts', [App\Http\Controllers\Admin\ConcursoController::class, 'resendAlerts'])->name('concursos.resend-alerts');
+    // Manual resend to ALL subscribers (ignore consent/area)
+    Route::post('concursos/{concurso}/resend-alerts-all', [App\Http\Controllers\Admin\ConcursoController::class, 'resendAlertsAll'])->name('concursos.resend-alerts-all');
 
     // Delete attachment route for concursos (named under admin. prefix)
     Route::delete('concursos/attachments/{id}', [App\Http\Controllers\Admin\ConcursoController::class, 'destroyAttachment'])->name('concursos.attachments.destroy');

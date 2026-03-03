@@ -47,6 +47,10 @@
                                     @csrf
                                     <button class="text-green-600">Reenviar Alertas</button>
                                 </form>
+                                <form action="{{ route('admin.concursos.resend-alerts-all', $c) }}" method="POST" class="inline ml-3" onsubmit="return confirm('Enviar alertas deste concurso para TODOS os cadastrados (ignora consentimento)?')">
+                                    @csrf
+                                    <button class="text-indigo-600">Enviar a Todos</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
