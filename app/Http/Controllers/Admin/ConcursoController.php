@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Concurso;
+use App\Models\ConcursoAlert;
 use App\Models\ConcursoAttachment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -140,5 +141,14 @@ class ConcursoController extends Controller
         } catch (\Throwable $e) { }
         $att->delete();
         return back()->with('status', 'Anexo removido.');
+    }
+
+    /**
+     * Admin: list subscriptions to concurso alerts
+     */
+    public function alerts()
+    {
+        $alerts = ConcursoAlert::orderByDesc('created_at')->paginate(25);
+        return view('admin.concursos.alerts', compact('alerts'));
     }
 }
