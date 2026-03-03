@@ -117,6 +117,7 @@ class ConcursoController extends Controller
             }
         }
 
+        return redirect()->route('admin.concursos.index')->with('status', 'Concurso atualizado.');
     }
 
     /**
@@ -176,10 +177,7 @@ class ConcursoController extends Controller
         } catch (\Throwable $e) {
             \Log::error('Erro no envio sincronico de alerts: '.$e->getMessage());
         }
-    }
-
-        return redirect()->route('admin.concursos.index')->with('status', 'Concurso atualizado.');
-    }
+        }
 
     public function destroy(Concurso $concurso)
     {
