@@ -76,6 +76,14 @@ class ConcursoController extends Controller
         return view('admin.concursos.edit', compact('concurso'));
     }
 
+    /**
+     * Show a single concurso. Redirect to edit to avoid missing view errors.
+     */
+    public function show(Concurso $concurso)
+    {
+        return redirect()->route('admin.concursos.edit', $concurso);
+    }
+
     public function update(Request $request, Concurso $concurso)
     {
         $data = $request->validate([
