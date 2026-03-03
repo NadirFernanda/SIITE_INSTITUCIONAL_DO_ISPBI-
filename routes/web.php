@@ -89,6 +89,7 @@ Route::get('/investigacao', function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
     Route::resource('concursos', App\Http\Controllers\Admin\ConcursoController::class);
+    Route::post('concursos/{concurso}/resend-alerts', [App\Http\Controllers\Admin\ConcursoController::class, 'resendAlerts'])->name('concursos.resend-alerts');
     // List subscribers to concurso alerts
     Route::get('concursos/alerts', [App\Http\Controllers\Admin\ConcursoController::class, 'alerts'])->name('concursos.alerts');
     Route::get('concursos/alerts/export', [App\Http\Controllers\Admin\ConcursoController::class, 'alertsExport'])->name('concursos.alerts.export');

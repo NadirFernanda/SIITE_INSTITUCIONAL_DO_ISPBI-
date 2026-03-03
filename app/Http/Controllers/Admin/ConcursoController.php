@@ -210,6 +210,20 @@ class ConcursoController extends Controller
     }
 
     /**
+     * Manually trigger resending alerts for a specific concurso.
+     */
+    public function resendAlerts(Concurso $concurso)
+    {
+        try {
+            $this->queueConcursoAlertsToSubscribers($concurso);
+            return back()->with('status', 'Envio de alertas enfileirado para este concurso.');
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao reenviar alertas para concurso '.$concurso->id.': '.$e->getMessage());
+            return back()->withErrors('Falha ao enfileirar envio de alertas. Verifique os logs.');
+        }
+    }
+
+    /**
      * Admin: list subscriptions to concurso alerts
      */
     public function alerts(Request $request)

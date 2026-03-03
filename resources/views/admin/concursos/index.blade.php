@@ -40,6 +40,10 @@
                                     @method('DELETE')
                                     <button class="text-red-600">Remover</button>
                                 </form>
+                                <form action="{{ route('admin.concursos.resend-alerts', $c) }}" method="POST" class="inline ml-3" onsubmit="return confirm('Reenviar alertas deste concurso para assinantes?')">
+                                    @csrf
+                                    <button class="text-green-600">Reenviar Alertas</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
