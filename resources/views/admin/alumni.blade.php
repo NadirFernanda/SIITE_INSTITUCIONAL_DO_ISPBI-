@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="container mx-auto py-8">
-    <h1 class="text-2xl font-bold mb-6">Alumni Cadastrados</h1>
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold">Alumni Cadastrados</h1>
+        <div>
+            <a href="{{ route('admin.alumni.stats') }}" class="bg-blue-600 text-white px-4 py-2 rounded shadow-sm hover:bg-blue-700">Editar Indicadores</a>
+        </div>
+    </div>
     <div class="bg-white rounded shadow p-6">
         @if($alumni->isEmpty())
             <div class="text-gray-500 mt-4">Nenhum cadastro de alumni ainda.</div>
