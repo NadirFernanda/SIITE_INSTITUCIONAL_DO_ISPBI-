@@ -119,21 +119,21 @@
       <!-- Estatísticas Alumni -->
       <div class="bg-gradient-to-r from-[#3B82F6] to-[#FFA500] rounded-lg p-8 text-white scroll-reveal">
         <h3 class="text-2xl font-bold mb-6 text-center">Alumni em Números</h3>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
           <div class="stat-card">
-            <div class="text-4xl font-bold mb-2">500+</div>
+            <div class="text-4xl font-bold mb-2">0</div>
             <div class="text-sm opacity-90">Alumni Formados</div>
           </div>
           <div class="stat-card">
-            <div class="text-4xl font-bold mb-2">85%</div>
+            <div class="text-4xl font-bold mb-2">0%</div>
             <div class="text-sm opacity-90">Taxa de Empregabilidade</div>
           </div>
           <div class="stat-card">
-            <div class="text-4xl font-bold mb-2">12</div>
+            <div class="text-4xl font-bold mb-2">0</div>
             <div class="text-sm opacity-90">Países onde trabalham</div>
           </div>
           <div class="stat-card">
-            <div class="text-4xl font-bold mb-2">30+</div>
+            <div class="text-4xl font-bold mb-2">0</div>
             <div class="text-sm opacity-90">Empresas fundadas</div>
           </div>
         </div>
