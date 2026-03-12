@@ -8,12 +8,12 @@
       $ctaUrl     (string, opcional)   – URL do botão de ação (CTA)
       $ctaLabel   (string, opcional)   – Texto do CTA (default: 'Saiba Mais')
 --}}
-<div class="relative bg-gradient-to-r {{ $gradient ?? 'from-[#1e3a5f] to-[#2563eb]' }} rounded-2xl overflow-hidden mb-10 shadow-xl">
-    <div class="absolute inset-0 opacity-10 pointer-events-none">
-        <svg width="100%" height="100%" viewBox="0 0 800 200" preserveAspectRatio="none">
-            <circle cx="700" cy="-50" r="200" fill="white"/>
-            <circle cx="100" cy="250" r="150" fill="white"/>
-        </svg>
+<div class="relative bg-gradient-to-br {{ $gradient ?? 'from-[#0f1f3d] via-[#1e3a5f] to-[#1d4ed8]' }} rounded-2xl overflow-hidden mb-10 shadow-xl">
+    {{-- Decorative elements --}}
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full opacity-10" style="background:radial-gradient(circle,#ffffff,transparent 70%)"></div>
+        <div class="absolute -bottom-12 -left-10 w-56 h-56 rounded-full opacity-10" style="background:radial-gradient(circle,#ffffff,transparent 70%)"></div>
+        <div class="absolute top-1/2 left-1/3 w-96 h-24 opacity-5" style="background:linear-gradient(90deg,#F05A28,transparent);transform:rotate(-15deg);"></div>
     </div>
     <div class="relative z-10 px-6 py-10 sm:px-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         <div>
