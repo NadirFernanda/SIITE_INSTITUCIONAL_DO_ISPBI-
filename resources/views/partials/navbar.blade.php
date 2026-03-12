@@ -3,7 +3,8 @@
 <div class="block w-full fixed left-0 top-0" style="background:#F05A28;height:4px;top:4px;z-index:51;"></div>
 
 <!-- Barra inferior institucional - Desktop (agora em azul com texto branco) -->
-<div class="hidden md:flex w-full" style="background:#2979FF;color:#ffffff;font-size:1.01rem;padding:7px 2vw;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;min-height:36px;">
+<div class="hidden md:flex w-full" style="background:#2979FF;color:#ffffff;font-size:1.01rem;align-items:center;justify-content:space-between;max-width:100vw;margin:0 auto;min-height:36px;padding:7px 0;">
+  <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
   <div class="flex flex-wrap items-center gap-2">
     <a href="/contactos" class="flex items-center gap-1 text-white hover:underline hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2l2 5 3-1 3 1 2-5h2a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg>
@@ -61,12 +62,13 @@
       Resultados de Exames
     </a>
   </div>
+  </div>
 </div>
 
 <!-- Bloco institucional com navbar + menu mobile no mesmo x-data -->
 <div x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }">
   <div class="w-full bg-gray-800" style="background: #1a1a1a !important; color: #fff !important;">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto flex flex-row items-center justify-between px-2 sm:px-4 py-0.5 sm:py-2">
+    <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between py-1 sm:py-2">
     <!-- Logo e nome -->
     <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
       <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-0.5 sm:px-2 sm:py-1.5" style="background:transparent!important;">

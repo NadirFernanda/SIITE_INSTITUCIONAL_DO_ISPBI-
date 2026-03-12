@@ -1,8 +1,8 @@
-﻿@extends('layouts.site')
+@extends('layouts.site')
 
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
 @include('partials.page-hero', [
     'title'      => 'Institucional',
     'subtitle'   => 'Conheça o Instituto Superior Politécnico do Bié e a sua trajectória institucional.',

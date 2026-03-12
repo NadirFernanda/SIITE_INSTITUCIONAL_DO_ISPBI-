@@ -1,9 +1,9 @@
-﻿@extends('layouts.site')
+@extends('layouts.site')
 
 @section('title', 'Artigos Científicos - ISP-Bié')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
 
     {{-- Hero Banner --}}
     <div class="relative bg-gradient-to-r from-[#1e3a5f] to-[#2563eb] rounded-2xl overflow-hidden mb-10 shadow-xl">

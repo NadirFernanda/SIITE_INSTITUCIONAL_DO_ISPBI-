@@ -10,7 +10,7 @@
     $completed = $projectsCollection->get('concluido') ?? collect();
 @endphp
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
 @include('partials.page-hero', [
     'title'      => 'Investigação, Inovação e Empreendedorismo',
     'subtitle'   => 'Conheça os projetos, publicações e iniciativas do ISP-Bié.',

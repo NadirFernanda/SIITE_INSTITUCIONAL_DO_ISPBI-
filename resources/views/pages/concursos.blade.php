@@ -1,44 +1,44 @@
 @extends('layouts.site')
 
-@section('title', 'Concursos Públicos - ISP-Bié')
+@section('title', 'Concursos Pï¿½blicos - ISP-Biï¿½')
 
 @section('content')
 
     <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-5xl font-bold mb-4">Concursos Públicos</h1>
-            <p class="text-xl text-orange-100">Contratação de pessoal por meio de concurso público</p>
+            <h1 class="text-5xl font-bold mb-4">Concursos Pï¿½blicos</h1>
+            <p class="text-xl text-orange-100">Contrataï¿½ï¿½o de pessoal por meio de concurso pï¿½blico</p>
         </div>
     </div>
 
     <div class="bg-white border-b scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center text-sm text-gray-600">
-                <a href="/" class="hover:text-teal-600">Início</a>
+                <a href="/" class="hover:text-teal-600">Inï¿½cio</a>
                 <span class="mx-2">/</span>
-                <span class="text-gray-900">Concursos Públicos</span>
+                <span class="text-gray-900">Concursos Pï¿½blicos</span>
             </div>
         </div>
     </div>
 
-    <!-- Informação sobre Concursos Públicos -->
+    <!-- Informaï¿½ï¿½o sobre Concursos Pï¿½blicos -->
     <div class="bg-blue-50 border-b scroll-reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
             <div class="max-w-4xl mx-auto">
                 <div class="flex items-start">
                     <svg class="w-8 h-8 text-blue-600 mr-4 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                     </svg>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Contratação por Concurso Público</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Contrataï¿½ï¿½o por Concurso Pï¿½blico</h3>
                         <p class="text-gray-700 leading-relaxed mb-3">
-                            O <strong>Instituto Superior Politécnico do Bié (ISP-Bié)</strong>, sendo uma instituição pública de ensino superior, 
-                            contrata todo o seu pessoal exclusivamente através de <strong>concursos públicos</strong>, em conformidade com a 
-                            legislação angolana e os princípios de transparência, igualdade de oportunidades e mérito.
+                            O <strong>Instituto Superior Politï¿½cnico do Biï¿½ (ISP-Biï¿½)</strong>, sendo uma instituiï¿½ï¿½o pï¿½blica de ensino superior, 
+                            contrata todo o seu pessoal exclusivamente atravï¿½s de <strong>concursos pï¿½blicos</strong>, em conformidade com a 
+                            legislaï¿½ï¿½o angolana e os princï¿½pios de transparï¿½ncia, igualdade de oportunidades e mï¿½rito.
                         </p>
                         <p class="text-gray-700 leading-relaxed">
-                            Todos os editais de concursos são publicados no Diário da República e divulgados nos meios de comunicação social, 
-                            bem como nesta página oficial. Os processos seguem critérios rigorosos de avaliação para garantir a selecção 
+                            Todos os editais de concursos sï¿½o publicados no Diï¿½rio da Repï¿½blica e divulgados nos meios de comunicaï¿½ï¿½o social, 
+                            bem como nesta pï¿½gina oficial. Os processos seguem critï¿½rios rigorosos de avaliaï¿½ï¿½o para garantir a selecï¿½ï¿½o 
                             dos melhores candidatos.
                         </p>
                     </div>
@@ -69,8 +69,8 @@
                             <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Técnicos</h3>
-                    <p class="text-gray-600 text-sm">Técnicos administrativos e de apoio</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Tï¿½cnicos</h3>
+                    <p class="text-gray-600 text-sm">Tï¿½cnicos administrativos e de apoio</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-xl transition-shadow interactive-card">
@@ -80,7 +80,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Outros</h3>
-                    <p class="text-gray-600 text-sm">Bibliotecários, investigadores e outras funções</p>
+                    <p class="text-gray-600 text-sm">Bibliotecï¿½rios, investigadores e outras funï¿½ï¿½es</p>
                 </div>
             </div>
         </section>
@@ -93,7 +93,7 @@
                 </svg>
                 <h3 class="text-xl font-semibold text-gray-700 mb-2">Nenhum Concurso Aberto</h3>
                 <p class="text-gray-600 mb-6">
-                    Não há concursos públicos em andamento no momento. Cadastre-se para receber alertas quando novos concursos forem publicados.
+                    Nï¿½o hï¿½ concursos pï¿½blicos em andamento no momento. Cadastre-se para receber alertas quando novos concursos forem publicados.
                 </p>
                 <a href="/trabalhe-conosco#alertas" class="inline-block bg-[#2563eb] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#1f3342] transition-colors">
                     Receber Alertas
@@ -118,7 +118,7 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <span class="inline-block bg-gray-300 text-gray-700 text-xs px-3 py-1 rounded-full mb-2">ENCERRADO</span>
-                            <h3 class="text-lg font-semibold text-gray-700">Bibliotecário</h3>
+                            <h3 class="text-lg font-semibold text-gray-700">Bibliotecï¿½rio</h3>
                         </div>
                         <button class="text-teal-600 hover:text-teal-700">Ver Resultado</button>
                     </div>
@@ -127,8 +127,8 @@
         </section>
 
         <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center scroll-reveal">
-            <h2 class="text-3xl font-bold mb-4">Receber Alertas de Concursos Públicos</h2>
-            <p class="text-xl mb-8">Cadastre-se para receber notificações sobre novos concursos</p>
+            <h2 class="text-3xl font-bold mb-4">Receber Alertas de Concursos Pï¿½blicos</h2>
+            <p class="text-xl mb-8">Cadastre-se para receber notificaï¿½ï¿½es sobre novos concursos</p>
             <a href="/trabalhe-conosco#alertas" class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors inline-block">
                 Cadastrar-se
             </a>
@@ -136,9 +136,9 @@
 
         
 
-        <!-- Informação Adicional -->
+        <!-- Informaï¿½ï¿½o Adicional -->
         <section class="mt-12 bg-white rounded-lg shadow-md p-8 scroll-reveal interactive-card">
-            <h3 class="text-2xl font-bold text-gray-900 mb-6">Princípios dos Concursos Públicos</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Princï¿½pios dos Concursos Pï¿½blicos</h3>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="flex items-start">
                     <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
@@ -147,8 +147,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h4 class="font-bold text-gray-900 mb-2">Transparência</h4>
-                        <p class="text-gray-600 text-sm">Todos os editais e resultados são publicados oficialmente e divulgados amplamente</p>
+                        <h4 class="font-bold text-gray-900 mb-2">Transparï¿½ncia</h4>
+                        <p class="text-gray-600 text-sm">Todos os editais e resultados sï¿½o publicados oficialmente e divulgados amplamente</p>
                     </div>
                 </div>
 
@@ -171,8 +171,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h4 class="font-bold text-gray-900 mb-2">Mérito</h4>
-                        <p class="text-gray-600 text-sm">Selecção baseada em critérios objectivos de competência e qualificação</p>
+                        <h4 class="font-bold text-gray-900 mb-2">Mï¿½rito</h4>
+                        <p class="text-gray-600 text-sm">Selecï¿½ï¿½o baseada em critï¿½rios objectivos de competï¿½ncia e qualificaï¿½ï¿½o</p>
                     </div>
                 </div>
 
@@ -184,7 +184,7 @@
                     </div>
                     <div>
                         <h4 class="font-bold text-gray-900 mb-2">Legalidade</h4>
-                        <p class="text-gray-600 text-sm">Conformidade com a legislação angolana e regulamentos internos</p>
+                        <p class="text-gray-600 text-sm">Conformidade com a legislaï¿½ï¿½o angolana e regulamentos internos</p>
                     </div>
                 </div>
             </div>
