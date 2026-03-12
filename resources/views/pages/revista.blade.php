@@ -3,7 +3,7 @@
 @section('title', 'Artigos Científicos - ISP-Bié')
 
 @section('content')
-<div class="pt-2">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
     {{-- Hero Banner --}}
     <div class="relative bg-gradient-to-r from-[#1e3a5f] to-[#2563eb] rounded-2xl overflow-hidden mb-10 shadow-xl">
@@ -32,49 +32,6 @@
                 </svg>
                 Submeter Artigo
             </a>
-        </div>
-    </div>
-
-    {{-- Informações da Edição Atual --}}
-    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 mb-10">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-5">
-            <span class="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.396 0 2.7.37 3.8 1.015A7.966 7.966 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
-                Última Edição
-            </span>
-            <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Volume 1, N.º 1 &mdash; 2026</h2>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-6 items-start">
-            <div class="sm:col-span-1">
-                <div class="w-full h-44 sm:h-52 bg-gradient-to-br from-[#1e3a5f] to-[#2563eb] rounded-xl flex flex-col items-center justify-center text-white select-none shadow-md">
-                    <span class="text-5xl font-black tracking-tight">Vol. I</span>
-                    <span class="text-sm mt-2 opacity-75">ISP-Bié &bull; 2026</span>
-                </div>
-            </div>
-            <div class="sm:col-span-2 flex flex-col justify-between gap-4">
-                <div>
-                    <p class="text-gray-600 leading-relaxed">
-                        Edição inaugural do portal de artigos científicos do ISP-Bié, reunindo contributos
-                        originais de docentes, investigadores e estudantes nas áreas de <strong>Engenharias e Tecnologia</strong>,
-                        <strong>Ciências da Saúde</strong> e <strong>Ciências Sociais, Humanas e Económicas</strong>.
-                    </p>
-                    <ul class="mt-4 space-y-1.5 text-sm text-gray-600">
-                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Revisão por pares (peer review) dupla-cego</li>
-                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Acesso livre e aberto (Open Access)</li>
-                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Periodicidade semestral</li>
-                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Idiomas aceites: Português e Inglês</li>
-                    </ul>
-                </div>
-                <div class="flex flex-wrap gap-3">
-                    <a href="#" class="inline-flex items-center gap-2 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                        Aceder à Edição
-                    </a>
-                    <a href="#" class="inline-flex items-center gap-2 border border-gray-300 hover:border-[#2563eb] hover:text-[#2563eb] text-gray-600 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors">
-                        Índice Completo
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 
