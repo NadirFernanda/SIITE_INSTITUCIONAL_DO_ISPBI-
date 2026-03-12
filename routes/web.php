@@ -4,8 +4,8 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 
 
-// Rotas do painel administrativo protegidas por autenticação
-Route::middleware('auth')->group(function () {
+// Rotas do painel administrativo protegidas por autenticação E papel de administrador
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/admin/estatisticas', App\Http\Controllers\Admin\EstatisticaController::class)->names('admin.estatisticas');
             Route::get('/admin/noticias/{id}/edit', [App\Http\Controllers\AdminNoticiaController::class, 'edit'])->name('admin.noticias.edit');
             Route::put('/admin/noticias/{id}', [App\Http\Controllers\AdminNoticiaController::class, 'update'])->name('admin.noticias.update');
@@ -88,7 +88,7 @@ Route::get('/investigacao', function () {
 })->name('investigacao');
 
 // Admin CRUD for projects
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
 
     // Explicit admin routes for concursos that must be registered BEFORE the

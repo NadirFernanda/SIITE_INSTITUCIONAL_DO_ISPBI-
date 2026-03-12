@@ -26,6 +26,18 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        // After credential check, ensure the authenticated user is an admin.
+        // If not, log them out immediately to prevent any admin panel access.
+        if (Auth::user()->role !== 'admin') {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'email' => 'Não tem permissão para aceder ao painel administrativo.',
+            ]);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('admin', absolute: false));
