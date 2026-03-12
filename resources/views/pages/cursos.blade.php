@@ -96,51 +96,54 @@ $cursos = [
 ];
 @endphp
 
+{{-- Intro strip --}}
+<div class="mb-8 flex items-center gap-3">
+    <span class="inline-block w-8 h-0.5 bg-[#F05A28]"></span>
+    <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">6 cursos disponíveis</p>
+</div>
+
 {{-- Grade de Cards --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     @foreach($cursos as $curso)
     <a href="{{ route($curso['route']) }}"
-       class="group flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2">
+       class="group flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2">
 
-        {{-- Barra de cor topo --}}
-        <div class="h-1.5 w-full" style="background:{{ $curso['color'] }};"></div>
+        {{-- Gradient top bar --}}
+        <div class="h-1.5 w-full" style="background:linear-gradient(90deg,{{ $curso['color'] }},{{ $curso['color'] }}99);"></div>
 
         <div class="p-6 flex flex-col flex-1">
-            {{-- Ícone + badge --}}
-            <div class="flex items-start justify-between mb-4">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:{{ $curso['color'] }}18;">
-                    <svg class="w-6 h-6" fill="none" stroke="{{ $curso['color'] }}" stroke-width="1.5" viewBox="0 0 24 24">
+            {{-- Icon + badge --}}
+            <div class="flex items-start justify-between mb-5">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm" style="background:{{ $curso['color'] }}18;">
+                    <svg class="w-7 h-7" fill="none" stroke="{{ $curso['color'] }}" stroke-width="1.5" viewBox="0 0 24 24">
                         {!! $curso['icon'] !!}
                     </svg>
                 </div>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide" style="background:{{ $curso['color'] }}18; color:{{ $curso['color'] }};">
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide" style="background:{{ $curso['color'] }}14; color:{{ $curso['color'] }};">
                     {{ $curso['tag'] }}
                 </span>
             </div>
 
-            {{-- Título --}}
-            <h2 class="text-base font-bold text-[#1e3a5f] leading-snug mb-1 group-hover:text-[#F05A28] transition-colors">
+            {{-- Title --}}
+            <h2 class="text-base font-bold text-[#1e3a5f] leading-snug mb-1 group-hover:text-[#F05A28] transition-colors duration-200">
                 {{ $curso['title'] }}
             </h2>
 
-            {{-- Departamento --}}
-            <p class="text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-3">{{ $curso['department'] }}</p>
+            {{-- Department --}}
+            <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-3">{{ $curso['department'] }}</p>
 
-            {{-- Resumo --}}
+            {{-- Summary --}}
             <p class="text-sm text-gray-500 leading-relaxed flex-1">{{ $curso['summary'] }}</p>
 
-            {{-- Rodapé do card --}}
-            <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
-                <div class="flex items-center gap-3 text-xs text-gray-400">
-                    <span class="flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
-                        {{ $curso['duration'] }}
-                    </span>
-
-                </div>
-                <span class="flex items-center gap-1 text-xs font-semibold" style="color:{{ $curso['color'] }};">
+            {{-- Footer --}}
+            <div class="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="flex items-center gap-1.5 text-xs text-gray-400">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+                    {{ $curso['duration'] }}
+                </span>
+                <span class="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors duration-200" style="background:{{ $curso['color'] }}14; color:{{ $curso['color'] }};">
                     Ver curso
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </span>
             </div>
         </div>
@@ -149,7 +152,7 @@ $cursos = [
 </div>
 
 {{-- Secção cursos acreditados --}}
-<div class="mt-14">
+<div class="mt-16 pt-10 border-t border-gray-100">
     <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">
         <span class="inline-block w-6 h-0.5 bg-[#F05A28]"></span>
         Cursos Acreditados
@@ -162,12 +165,12 @@ $cursos = [
             ['title'=>'Comunicação Social',      'percent'=>'73,63%'],
             ['title'=>'Contabilidade',           'percent'=>'73,23%'],
         ] as $ac)
-        <div class="flex items-center justify-between bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-4">
+        <div class="flex items-center justify-between bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4 hover:shadow-md transition-shadow">
             <div>
                 <p class="text-sm font-semibold text-[#1e3a5f]">{{ $ac['title'] }}</p>
-                <p class="text-[11px] text-gray-400 mt-0.5">Acreditação oficial</p>
+                <p class="text-[11px] text-gray-400 mt-0.5 uppercase tracking-wide">Acreditação oficial</p>
             </div>
-            <span class="text-lg font-bold" style="color:#1D4ED8;">{{ $ac['percent'] }}</span>
+            <span class="text-lg font-bold text-[#1D4ED8]">{{ $ac['percent'] }}</span>
         </div>
         @endforeach
     </div>
