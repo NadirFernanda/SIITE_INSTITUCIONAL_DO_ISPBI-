@@ -1,7 +1,11 @@
 ﻿<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-[#1e3a5f] px-3 py-2 rounded shadow z-60">Saltar para o conteúdo</a>
 
-<!-- Barra de utilidade - Desktop (rola com a página) -->
-<div class="hidden md:flex w-full" style="background:#0f1f3d;color:#ffffff;">
+<header x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }" class="sticky top-0 z-50 shadow-sm">
+  <!-- Barra de acento — topo da página -->
+  <div style="background:#F05A28;height:3px;"></div>
+
+  <!-- Barra de utilidade - Desktop -->
+  <div class="hidden md:flex w-full" style="background:#0f1f3d;color:#ffffff;">
   <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs font-medium tracking-wide py-2">
   <div class="flex flex-wrap items-center gap-2">
     <a href="/contactos" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto">
@@ -63,9 +67,7 @@
   </div>
 </div>
 
-<!-- Bloco institucional com navbar + menu mobile — sticky: cola ao topo quando o utilizador faz scroll -->
-<div x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }" class="sticky top-0 z-50 shadow-md">
-  <div style="background:#F05A28;height:3px;"></div>
+  <!-- Barra institucional — logo + navegação -->
   <div class="w-full bg-white" style="border-bottom: 2px solid #F05A28;">
     <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between py-1 sm:py-2">
     <!-- Logo e nome -->
@@ -275,7 +277,7 @@
       </div>
     </div>
   </div>
-</div>
+</header>
 
 <style>
     /* Prevent dropdown from being cut off at the screen edge */
