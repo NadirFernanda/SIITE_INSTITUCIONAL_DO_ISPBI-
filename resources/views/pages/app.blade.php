@@ -1,22 +1,22 @@
 @extends('layouts.site')
 
-@section('title', 'App ISP-Bié')
+@section('title', 'App ISP-Biï¿½')
 
 @section('content')
 
     <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-16 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-5xl font-bold mb-4">App ISP-Bié</h1>
-            <p class="text-xl text-purple-100">Aplicativo móvel oficial</p>
+            <h1 class="text-5xl font-bold mb-4">App ISP-Biï¿½</h1>
+            <p class="text-xl text-purple-100">Aplicativo mï¿½vel oficial</p>
         </div>
     </div>
 
     <div class="bg-white border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center text-sm text-gray-600">
-                <a href="/" class="hover:text-teal-600">Início</a>
+                <a href="/" class="hover:text-teal-600">Inï¿½cio</a>
                 <span class="mx-2">/</span>
-                <span class="text-gray-900">App ISP-Bié</span>
+                <span class="text-gray-900">App ISP-Biï¿½</span>
             </div>
         </div>
     </div>
@@ -29,7 +29,7 @@
                 </svg>
             </div>
             <h2 class="text-3xl font-bold text-gray-900 mb-4">Baixe o App Oficial</h2>
-            <p class="text-gray-600 mb-8">Acesse todos os serviços do ISP-Bié na palma da sua mão</p>
+            <p class="text-gray-600 mb-8">Acesse todos os serviï¿½os do ISP-Biï¿½ na palma da sua mï¿½o</p>
             <div class="flex justify-center gap-4">
                 <button class="bg-black text-white px-6 py-3 rounded-lg flex items-center hover:bg-gray-800">
                     <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@
                         <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm2.35-1.48l-2.35 1.36-2.58-2.58 2.58-2.58 2.35 1.36c.63.36.63 1.26 0 1.62zM6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z"/>
                     </svg>
                     <div class="text-left">
-                        <div class="text-xs">Disponível no</div>
+                        <div class="text-xs">Disponï¿½vel no</div>
                         <div class="text-sm font-semibold">Google Play</div>
                     </div>
                 </button>
@@ -72,8 +72,8 @@
                             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Horários</h3>
-                    <p class="text-gray-600">Consulte seus horários de aulas</p>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Horï¿½rios</h3>
+                    <p class="text-gray-600">Consulte seus horï¿½rios de aulas</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card">
@@ -82,7 +82,7 @@
                             <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Notificações</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Notificaï¿½ï¿½es</h3>
                     <p class="text-gray-600">Receba avisos importantes</p>
                 </div>
             </div>

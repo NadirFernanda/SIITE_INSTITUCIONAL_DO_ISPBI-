@@ -1,21 +1,21 @@
 @extends('layouts.site')
 
-@section('title', 'Busca na Biblioteca - ISP-Bié')
+@section('title', 'Busca na Biblioteca - ISP-Biï¿½')
 
 @section('content')
 
-    <!-- Cabeçalho em card -->
+    <!-- Cabeï¿½alho em card -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-6 scroll-reveal">
         <div class="bg-white rounded-lg shadow-md p-8 interactive-card">
             <h1 class="text-3xl font-bold text-[#2563eb] mb-2">Busca na Biblioteca</h1>
-            <p class="text-gray-600">Pesquise no catálogo da biblioteca.</p>
+            <p class="text-gray-600">Pesquise no catï¿½logo da biblioteca.</p>
         </div>
     </div>
 
     <div class="bg-white border-b scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center text-sm text-gray-600">
-                <a href="/" class="hover:text-teal-600">Início</a>
+                <a href="/" class="hover:text-teal-600">Inï¿½cio</a>
                 <span class="mx-2">/</span>
                 <span class="text-gray-900">Busca na Biblioteca</span>
             </div>
@@ -27,7 +27,7 @@
             <div class="bg-white p-8 rounded-lg shadow-md interactive-card">
                 <div class="mb-6">
                     <div class="relative">
-                        <input type="text" placeholder="Título, autor, ISBN, palavra-chave..." class="w-full px-6 py-4 pr-12 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" placeholder="Tï¿½tulo, autor, ISBN, palavra-chave..." class="w-full px-6 py-4 pr-12 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <svg class="absolute right-4 top-4 w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/>
                         </svg>
@@ -40,21 +40,21 @@
                         <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option>Todos</option>
                             <option>Livros</option>
-                            <option>Periódicos</option>
+                            <option>Periï¿½dicos</option>
                             <option>Artigos</option>
                             <option>Teses</option>
-                            <option>Multimídia</option>
+                            <option>Multimï¿½dia</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">Área do Conhecimento</label>
+                        <label class="block text-gray-700 font-semibold mb-2">ï¿½rea do Conhecimento</label>
                         <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option>Todas</option>
                             <option>Engenharia</option>
-                            <option>Ciências Sociais</option>
-                            <option>Gestão</option>
-                            <option>Saúde</option>
+                            <option>Ciï¿½ncias Sociais</option>
+                            <option>Gestï¿½o</option>
+                            <option>Saï¿½de</option>
                         </select>
                     </div>
 
@@ -62,7 +62,7 @@
                         <label class="block text-gray-700 font-semibold mb-2">Disponibilidade</label>
                         <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option>Todos</option>
-                            <option>Disponível</option>
+                            <option>Disponï¿½vel</option>
                             <option>Emprestado</option>
                             <option>Reservado</option>
                         </select>
@@ -70,13 +70,13 @@
                 </div>
 
                 <button class="mt-6 w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                    Buscar no Catálogo
+                    Buscar no Catï¿½logo
                 </button>
             </div>
         </div>
 
         <section class="mb-16 scroll-reveal">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Acesso Rápido</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Acesso Rï¿½pido</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center interactive-card">
                     <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
@@ -111,16 +111,16 @@
                             <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-gray-900">Periódicos</h3>
+                    <h3 class="font-semibold text-gray-900">Periï¿½dicos</h3>
                 </a>
             </div>
         </section>
 
         <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center scroll-reveal">
-            <h2 class="text-3xl font-bold mb-4">Não encontrou o que procura?</h2>
-            <p class="text-xl mb-8">Solicite ao bibliotecário</p>
+            <h2 class="text-3xl font-bold mb-4">Nï¿½o encontrou o que procura?</h2>
+            <p class="text-xl mb-8">Solicite ao bibliotecï¿½rio</p>
             <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                Fazer Solicitação
+                Fazer Solicitaï¿½ï¿½o
             </button>
         </div>
     </div>

@@ -1,22 +1,22 @@
 @extends('layouts.site')
 
-@section('title', 'Estatísticas Institucionais - ISP-Bié')
+@section('title', 'Estatï¿½sticas Institucionais - ISP-Biï¿½')
 
 @section('content')
 
     <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-5xl font-bold mb-4">Estatísticas Institucionais</h1>
-            <p class="text-xl text-blue-100">Dados e indicadores do ISP-Bié</p>
+            <h1 class="text-5xl font-bold mb-4">Estatï¿½sticas Institucionais</h1>
+            <p class="text-xl text-blue-100">Dados e indicadores do ISP-Biï¿½</p>
         </div>
     </div>
 
     <div class="bg-white border-b scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center text-sm text-gray-600">
-                <a href="/" class="hover:text-teal-600">Início</a>
+                <a href="/" class="hover:text-teal-600">Inï¿½cio</a>
                 <span class="mx-2">/</span>
-                <span class="text-gray-900">Estatísticas</span>
+                <span class="text-gray-900">Estatï¿½sticas</span>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
         </section>
 
         <section class="mb-16 scroll-reveal">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Evolução de Matrículas</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Evoluï¿½ï¿½o de Matrï¿½culas</h2>
             <div class="bg-white p-8 rounded-lg shadow-md">
                 <div class="h-64 flex items-end justify-around">
                     <div class="flex flex-col items-center">
@@ -73,12 +73,12 @@
         </section>
 
         <section class="scroll-reveal">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Distribuição por Curso</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Distribuiï¿½ï¿½o por Curso</h2>
             <div class="bg-white p-8 rounded-lg shadow-md">
                 <div class="space-y-4">
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="text-gray-700">Contabilidade e Administração</span>
+                            <span class="text-gray-700">Contabilidade e Administraï¿½ï¿½o</span>
                             <span class="font-semibold text-gray-900">285 (22.9%)</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3">
@@ -87,7 +87,7 @@
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="text-gray-700">Engenharia Informática</span>
+                            <span class="text-gray-700">Engenharia Informï¿½tica</span>
                             <span class="font-semibold text-gray-900">245 (19.6%)</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3">
@@ -96,7 +96,7 @@
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="text-gray-700">Eng. Recursos Hídricos</span>
+                            <span class="text-gray-700">Eng. Recursos Hï¿½dricos</span>
                             <span class="font-semibold text-gray-900">198 (15.9%)</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3">
@@ -105,7 +105,7 @@
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="text-gray-700">Comunicação Social</span>
+                            <span class="text-gray-700">Comunicaï¿½ï¿½o Social</span>
                             <span class="font-semibold text-gray-900">212 (17.0%)</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3">
@@ -114,7 +114,7 @@
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="text-gray-700">Psicologia Clínica</span>
+                            <span class="text-gray-700">Psicologia Clï¿½nica</span>
                             <span class="font-semibold text-gray-900">178 (14.3%)</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3">

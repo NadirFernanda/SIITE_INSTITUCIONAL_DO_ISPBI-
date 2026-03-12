@@ -14,15 +14,6 @@
 </head>
 
 <body class="bg-white text-gray-900">
-        <style>
-            @media (min-width: 768px) {
-                body { padding-top: 8px; }
-            }
-        </style>
-    <!-- Barra topo institucional (sempre fixa no topo) -->
-    <div class="hidden md:block w-full fixed left-0 top-0 z-50" style="background:#0E8F81;height:4px;"></div>
-    <div class="hidden md:block w-full fixed left-0 top-0 z-40" style="background:#F05A28;height:4px;top:4px;"></div>
-
     <!-- Navbar institucional principal -->
     @include('partials.navbar')
 
@@ -32,14 +23,9 @@
     @endif
 
     @php
-        // Detecta se é a homepage
         $isHome = request()->routeIs('home') || request()->is('/');
     @endphp
-    <!--
-        O navbar é fixed, então o <main> precisa de padding-top para não ser coberto.
-        Ajuste pt-20/md:pt-24 conforme a altura real do header/navbar.
-    -->
-    <main @if($isHome) class="min-w-0 p-0 m-0 bg-white pt-0 md:pt-0" style="max-width:100vw;" @else class="w-full min-h-screen pt-0" @endif>
+    <main @if($isHome) class="min-w-0 p-0 m-0 bg-white" style="max-width:100vw;" @else class="w-full min-h-screen" @endif>
         @yield('content')
     </main>
 

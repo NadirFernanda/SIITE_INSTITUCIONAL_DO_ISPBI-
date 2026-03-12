@@ -1,264 +1,180 @@
 ﻿@extends('layouts.site')
 
-@section('content')
+@section('title', 'Cursos — ISP-Bié')
 
+@section('content')
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+
+@include('partials.page-hero', [
+    'title'      => 'Oferta Formativa',
+    'subtitle'   => 'Conheça os cursos do ISP-Bié — formação de qualidade para o desenvolvimento de Angola.',
+    'breadcrumb' => 'Cursos',
+    'ctaUrl'     => '/candidaturas',
+    'ctaLabel'   => 'Candidatar-me',
+])
 
 @php
-if (!function_exists('heroicon')) {
-    function heroicon($icon) {
-        $icons = [
-            'heart' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.54 0-2.94.792-3.75 2.016C11.94 4.542 10.54 3.75 9 3.75c-2.761 0-5 2.015-5 4.5 0 7.22 8 11.25 8 11.25s8-4.03 8-11.25z"/></svg>',
-            'users' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m10-6.13a4 4 0 11-8 0 4 4 0 018 0zm6 10v-2a4 4 0 00-3-3.87M3 20v-2a4 4 0 013-3.87"/></svg>',
-            'clipboard-list' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5h6a2 2 0 012 2v14a2 2 0 01-2 2H9a2 2 0 01-2-2V7a2 2 0 012-2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2"/></svg>',
-            'heart-pulse' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.97 0-9-4.03-9-9 0-2.21 1.79-4 4-4 1.66 0 3.09 1.02 3.7 2.5h1.6C13.91 9.02 15.34 8 17 8c2.21 0 4 1.79 4 4 0 4.97-4.03 9-9 9z"/></svg>',
-            'chat-bubble-left' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12c0 4.556 4.694 8.25 10.5 8.25 1.2 0 2.36-.14 3.45-.4.41-.09.85.04 1.13.36l2.12 2.12a.75.75 0 001.28-.53v-2.25c0-.41.34-.75.75-.75h.75c.41 0 .75-.34.75-.75V12c0-4.556-4.694-8.25-10.5-8.25S2.25 7.444 2.25 12z"/></svg>',
-            'newspaper' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 19.5h-15A1.5 1.5 0 013 18V6a1.5 1.5 0 011.5-1.5h15A1.5 1.5 0 0121 6v12a1.5 1.5 0 01-1.5 1.5z"/></svg>',
-            'computer-desktop' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>',
-            'calculator' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M8 6h8M8 10h8M8 14h8M8 18h8"/></svg>',
-            'briefcase' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7V6a2 2 0 012-2h8a2 2 0 012 2v1m-12 0h12a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2zm2 4h8"/></svg>',
-            'chart-bar' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 13h4v6H7zm6-8h4v14h-4z"/></svg>',
-            'code' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>',
-            'server' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="4" rx="2"/><rect width="20" height="8" x="2" y="12" rx="2"/><path d="M6 8h.01M6 16h.01"/></svg>',
-            'shield-check' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5.25-3.75 9.75-8 11-4.25-1.25-8-5.75-8-11V7l8-4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>',
-            'faucet' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 0a6 6 0 016 6v2a6 6 0 01-6 6m0-8a6 6 0 00-6 6v2a6 6 0 006 6m0-8v8"/></svg>',
-            'drop' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 0a7 7 0 017 7v2a7 7 0 01-7 7m0-8a7 7 0 00-7 7v2a7 7 0 007 7m0-8v8"/></svg>',
-            'building' => '<svg class="w-6 h-6 text-white/80" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21V5a2 2 0 012-2h2a2 2 0 012 2v16m0 0h4m-4 0v-4a2 2 0 012-2h4a2 2 0 012 2v4m0 0h4m-4 0V5a2 2 0 00-2-2h-2a2 2 0 00-2 2v16"/></svg>',
-        ];
-        return $icons[$icon] ?? '';
-    }
-}
 $cursos = [
     [
-        'title' => 'Enfermagem Geral',
-        'description' => 'O licenciado em Enfermagem é um profissional qualificado para cuidar, prevenir e promover a saúde de indivíduos, famílias e comunidades. Atua no diagnóstico, tratamento, educação, investigação e gestão em serviços de saúde, com autonomia, ética e trabalho em equipa, aplicando conhecimentos científicos, técnicos e práticos em diferentes níveis de atendimento assistencial.',
+        'slug'       => 'enfermagem',
+        'route'      => 'cursos.enfermagem',
+        'title'      => 'Enfermagem Geral',
         'department' => 'Ciências da Saúde',
-        'domain' => 'Ciências Médicas e da Saúde',
-        'duration' => '5 Anos',
-        'gradientFromHex' => '#16A34A', // verde institucional
-        'gradientToHex' => '#4ADE80',   // verde claro
-        'areas' => [
-            ['name' => 'O Cuidado de enfermagem', 'icon' => 'heart'],
-            ['name' => 'A pessoa (família, comunidade)', 'icon' => 'users'],
-            ['name' => 'A saúde', 'icon' => 'heart-pulse'],
-            ['name' => 'O ambiente', 'icon' => 'drop'],
-        ],
-        'link' => 'cursos.enfermagem'
+        'duration'   => '5 anos',
+        'vagas'      => 40,
+        'tag'        => 'Saúde',
+        'color'      => '#16A34A',
+        'icon'       => '<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>',
+        'svgExtra'   => '',
+        'summary'    => 'Forma profissionais aptos a actuar na promoção, prevenção, recuperação e reabilitação da saúde.',
     ],
     [
-        'title' => 'Psicologia Clínica',
-        'description' => 'O licenciado em Psicologia é um profissional que avalia, diagnostica e intervém no desenvolvimento psicológico, promovendo o bem‑estar individual e colectivo. Atua na prevenção, orientação e resolução de problemas em contextos educativos, clínicos, organizacionais e comunitários, desenvolvendo programas, investigações e estratégias de formação, sempre com ética, trabalho multidisciplinar e comunicação eficaz.',
+        'slug'       => 'psicologia',
+        'route'      => 'cursos.psicologia',
+        'title'      => 'Psicologia Clínica',
         'department' => 'Ciências da Saúde',
-        'domain' => 'Ciências Médicas e da Saúde',
-        'duration' => '5 Anos',
-        'gradientFromHex' => '#C62828', // vermelho institucional
-        'gradientToHex' => '#F05A28',   // laranja institucional
-        'areas' => [
-            ['name' => 'Psicologia Clínica e da Saúde', 'icon' => 'heart-pulse'],
-            ['name' => 'Psicologia Educativa e do Desenvolvimento', 'icon' => 'chat-bubble-left'],
-            ['name' => 'Psicologia do Trabalho e Social', 'icon' => 'users'],
-            ['name' => 'Avaliação Psicológica', 'icon' => 'clipboard-list'],
-        ],
-        'link' => 'cursos.psicologia'
+        'duration'   => '5 anos',
+        'vagas'      => 40,
+        'tag'        => 'Saúde',
+        'color'      => '#D03B1F',
+        'icon'       => '<circle cx="12" cy="8" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>',
+        'svgExtra'   => '',
+        'summary'    => 'Avaliação, diagnóstico e intervenção psicológica em contextos clínicos, educativos e comunitários.',
     ],
     [
-        'title' => 'Comunicação Social',
-        'description' => 'O licenciado em Comunicação Social é um profissional capacitado para gerir, planear e produzir comunicação pública. Atua em jornalismo, publicidade, assessoria, mediação social, investigação e docência, desenvolvendo estratégias e conteúdos em diferentes linguagens e meios, contribuindo para relações institucionais, organizacionais e comunitárias, promovendo participação, informação e desenvolvimento social responsável e sustentável.',
+        'slug'       => 'comunicacao',
+        'route'      => 'cursos.comunicacao',
+        'title'      => 'Comunicação Social',
         'department' => 'Ciências Humanas, Sociais e Económicas',
-        'domain' => 'Ciências Sociais, Jornalismo e Informação',
-        'duration' => '4 Anos',
-        'gradientFromHex' => '#F59E42', // laranja institucional
-        'gradientToHex' => '#FBBF24',   // laranja claro
-        'areas' => [
-            ['name' => 'Comunicação Empresarial', 'icon' => 'briefcase'],
-            ['name' => 'Comunicação Jornalística', 'icon' => 'newspaper'],
-            ['name' => 'Comunicação Comunitária ou para o Desenvolvimento', 'icon' => 'chat-bubble-left'],
-            ['name' => 'Relações Públicas', 'icon' => 'briefcase'],
-        ],
-        'link' => 'cursos.comunicacao'
+        'duration'   => '4 anos',
+        'vagas'      => 40,
+        'tag'        => 'Social',
+        'color'      => '#C2710C',
+        'icon'       => '<path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"/>',
+        'svgExtra'   => '',
+        'summary'    => 'Gestão, planeamento e produção de comunicação pública, jornalismo, publicidade e assessoria.',
     ],
     [
-        'title' => 'Contabilidade e Administração',
-        'description' => 'O licenciado em Contabilidade e Administração é um profissional preparado para gerir recursos, analisar finanças e apoiar decisões económicas. Atua na contabilidade, auditoria, gestão empresarial, direcção de processos e docência, aplicando técnicas modernas com ética, contribuindo para o desenvolvimento organizacional e valorização das instituições angolanas no contexto nacional e internacional sustentável.',
+        'slug'       => 'contabilidade',
+        'route'      => 'cursos.contabilidade',
+        'title'      => 'Contabilidade e Administração',
         'department' => 'Ciências Humanas, Sociais e Económicas',
-        'domain' => '',
-        'duration' => '4 Anos',
-        'gradientFromHex' => '#B8860B', // dourado escuro
-        'gradientToHex' => '#FFD700',   // amarelo institucional
-        'areas' => [
-            ['name' => 'Finanças em sentido amplo', 'icon' => 'chart-bar'],
-            ['name' => 'Direcção dos processos económicos', 'icon' => 'briefcase'],
-            ['name' => 'Gestão empresarial', 'icon' => 'briefcase'],
-            ['name' => 'Auditoria', 'icon' => 'clipboard-list'],
-            ['name' => 'Docência universitária', 'icon' => 'newspaper'],
-        ],
-        'link' => 'cursos.contabilidade'
+        'duration'   => '4 anos',
+        'vagas'      => 40,
+        'tag'        => 'Gestão',
+        'color'      => '#92680A',
+        'icon'       => '<path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 13h4v6H7zm6-8h4v14h-4z"/>',
+        'svgExtra'   => '',
+        'summary'    => 'Gestão de recursos, análise financeira, contabilidade, auditoria e apoio à decisão económica.',
     ],
     [
-        'title' => 'Engenharia Informática',
-        'description' => 'O licenciado em Engenharia Informática é um profissional especializado em software, redes, sistemas e tecnologias digitais. Atua no desenvolvimento, manutenção e implementação de soluções informáticas, consultoria, investigação e inovação, apoiando decisões estratégicas, automatização e eficiência organizacional, trabalhando em diferentes sectores com competências técnicas, analíticas e capacidade de adaptação às necessidades empresariais atuais.',
+        'slug'       => 'informatica',
+        'route'      => 'cursos.informatica',
+        'title'      => 'Engenharia Informática',
         'department' => 'Engenharias',
-        'domain' => 'Engenharias e Telecomunicações',
-        'duration' => '5 Anos',
-        'gradientFromHex' => '#2563EB', // azul navbar institucional
-        'gradientToHex' => '#60A5FA',   // azul claro
-        'areas' => [
-            ['name' => 'Tecnologia de software', 'icon' => 'code'],
-            ['name' => 'Arquitetura e tecnologia de computadores', 'icon' => 'computer-desktop'],
-            ['name' => 'Tecnologia de redes de computadores', 'icon' => 'server'],
-            ['name' => 'Equipamentos eletrónicos', 'icon' => 'calculator'],
-        ],
-        'link' => 'cursos.informatica'
+        'duration'   => '5 anos',
+        'vagas'      => 40,
+        'tag'        => 'Engenharia',
+        'color'      => '#1D4ED8',
+        'icon'       => '<path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>',
+        'svgExtra'   => '',
+        'summary'    => 'Desenvolvimento de software, redes, sistemas e soluções tecnológicas para a transformação digital.',
     ],
     [
-        'title' => 'Engenharia em Recursos Hídricos',
-        'description' => 'O licenciado em Engenharia em Recursos Hídricos é um profissional especializado na gestão, estudo e aproveitamento sustentável da água. Atua em projectos, fiscalização, investigação e implementação de políticas, integrando equipas multidisciplinares e avaliando impactos ambientais, contribuindo para saneamento, energia, irrigação, planeamento e preservação dos recursos hídricos nos sectores público e privado.',
+        'slug'       => 'hidricos',
+        'route'      => 'cursos.hidricos',
+        'title'      => 'Eng. em Recursos Hídricos',
         'department' => 'Engenharias',
-        'domain' => 'Engenharias e Telecomunicações',
-        'duration' => '6 Anos',
-        'gradientFromHex' => '#0EA5E9', // azul água (sky-500)
-        'gradientToHex' => '#38BDF8',   // azul claro (sky-400)
-        'areas' => [
-            ['name' => 'Gestão de Recursos Hídricos', 'icon' => 'faucet'],
-            ['name' => 'Saneamento e Tratamento de Água', 'icon' => 'drop'],
-            ['name' => 'Infraestruturas Hidráulicas', 'icon' => 'building'],
-            ['name' => 'Realizar estudos de avaliação dos recursos', 'icon' => 'chart-bar'],
-        ],
-        'link' => 'cursos.hidricos'
+        'duration'   => '6 anos',
+        'vagas'      => 40,
+        'tag'        => 'Engenharia',
+        'color'      => '#0284C7',
+        'icon'       => '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3c0 0-6 5.686-6 10a6 6 0 0012 0c0-4.314-6-10-6-10z"/>',
+        'svgExtra'   => '',
+        'summary'    => 'Gestão e aproveitamento sustentável de recursos hídricos, saneamento e infraestruturas hidráulicas.',
     ],
 ];
-
-$accredited = [
-    ['title' => 'ENFERMAGEM', 'percent' => '65,94%'],
-    ['title' => 'PSICOLOGIA', 'percent' => '67,8%'],
-    ['title' => 'Engenharia Informática', 'percent' => '68,60%'],
-    ['title' => 'Comunicação Social', 'percent' => '73.63%'],
-    ['title' => 'Contabilidade', 'percent' => '73,23%'],
-];
-
 @endphp
 
-<div x-data="{ dark: false }" class="relative">
-    <button @click="dark = !dark" class="absolute right-6 top-4 z-20 px-4 py-2 rounded-lg font-semibold shadow bg-gray-900 text-white hover:bg-gray-700 transition">
-        <span x-show="!dark">🌙 Ativar modo escuro</span>
-        <span x-show="dark">☀️ Desativar modo escuro</span>
-    </button>
+{{-- Grade de Cards --}}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    @foreach($cursos as $curso)
+    <a href="{{ route($curso['route']) }}"
+       class="group flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2">
 
-    <div :class="dark ? 'bg-gray-900' : ''" class="min-h-screen transition-colors duration-300">
+        {{-- Barra de cor topo --}}
+        <div class="h-1.5 w-full" style="background:{{ $curso['color'] }};"></div>
 
-
-<style>
-@keyframes gradient-move {
-  0%, 100% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-}
-.animated-gradient {
-  background-size: 200% 200%!important;
-  animation: gradient-move 6s ease-in-out infinite;
-}
-.icon-animate {
-  transition: transform 0.3s cubic-bezier(.4,2,.6,1), filter 0.3s;
-}
-.icon-animate:hover {
-  transform: scale(1.18) rotate(-8deg);
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.7));
-}
-</style>
-
-
-
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-8">
-        @foreach ($cursos as $curso)
-            <div :class="dark ? 'bg-gray-800 text-gray-100 border border-gray-700' : 'text-white'"
-                :style="dark ? '' : 'background-color: {{ $curso['gradientFromHex'] }}; border: 2px solid {{ $curso['gradientToHex'] }};'"
-                class="rounded-lg shadow-md transform hover:scale-105 hover:shadow-lg transition-all duration-300 p-6 flex flex-col justify-between group h-full min-h-[200px]">
-
-                <div class="relative z-10 flex flex-col h-full">
-                    <!-- Conteúdo do card com espaçamento melhorado -->
-                    <div class="flex flex-col gap-3 h-full">
-                        <!-- Título do curso (forçar ordem 1) -->
-                        <div class="order-1">
-                            <h3 :class="dark ? 'text-yellow-300' : 'text-white'" class="text-xl font-bold mb-1 transition-all duration-300 group-hover:scale-105 group-hover:text-yellow-100 group-hover:drop-shadow-lg leading-tight">
-                                {{ $curso['title'] }}
-                            </h3>
-                        </div>
-
-                        <!-- Perfis de saída / Áreas (após o título) - ordem 2 -->
-                        <div class="order-2">
-                            @if(count($curso['areas']) > 0)
-                            <div :class="dark ? 'text-gray-100 font-semibold text-sm mb-2' : 'text-white font-semibold text-sm mb-2'">Perfil de saída</div>
-                            <div class="flex gap-4 mb-3 flex-wrap items-start">
-                                @foreach ($curso['areas'] as $area)
-                                <div :class="dark ? 'text-gray-100' : 'text-white'" class="flex flex-col items-start text-sm w-auto min-w-[140px]">
-                                    <span class="flex items-center justify-center w-10 h-10 rounded-full mb-2 icon-animate" :class="dark ? 'bg-gray-700' : 'bg-white/20'">
-                                        {!! heroicon($area['icon'] ?? '') !!}
-                                    </span>
-                                    <span class="text-left text-sm leading-snug">{{ $area['name'] }}</span>
-                                </div>
-                                @endforeach
-                            </div>
-                            @endif
-                        </div>
-
-                        <!-- Departamento e domínio - ordem 3 -->
-                        <div class="order-3">
-                            <div :class="dark ? 'text-gray-100 font-semibold text-sm mb-2' : 'text-white font-semibold text-sm mb-2'">Departamento</div>
-                            <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-2 text-base">
-                                @php
-                                    $omitDomain = false;
-                                    if(isset($curso['domain'])) {
-                                        $dept = trim($curso['department'] ?? '');
-                                        $dom = trim($curso['domain'] ?? '');
-                                        if(($dept === 'Ciências da Saúde' && $dom === 'Ciências Médicas e da Saúde') || ($dept === 'Ciências Humanas, Sociais e Económicas' && $dom === 'Ciências Sociais, Jornalismo e Informação')) {
-                                            $omitDomain = true;
-                                        }
-                                    }
-                                @endphp
-
-                                @if($omitDomain)
-                                    <span class="font-semibold">{{ $curso['department'] }}</span>
-                                @else
-                                    <span class="font-semibold">{{ $curso['department'] }}</span>@if(!empty($curso['domain'])) - {{ $curso['domain'] }}@endif
-                                @endif
-                            </p>
-
-                            @if(!empty($curso['duration']))
-                                <div :class="dark ? 'text-gray-100 font-semibold text-sm mb-2' : 'text-white font-semibold text-sm mb-2'">Duração</div>
-                                <p :class="dark ? 'text-gray-200' : 'text-white/90'" class="mb-2 text-sm">{{ $curso['duration'] }}</p>
-                            @endif
-                            </p>
-                        </div>
-
-                        <!-- Descrição resumida - ordem 4 (empurrada para baixo) -->
-                        <div class="order-4 mt-auto">
-                            <p :class="dark ? 'text-gray-300' : 'text-white/80'" class="mb-0 text-sm leading-relaxed">{{ $curso['description'] }}</p>
-                        </div>
-                    </div>
+        <div class="p-6 flex flex-col flex-1">
+            {{-- Ícone + badge --}}
+            <div class="flex items-start justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:{{ $curso['color'] }}18;">
+                    <svg class="w-6 h-6" fill="none" stroke="{{ $curso['color'] }}" stroke-width="1.5" viewBox="0 0 24 24">
+                        {!! $curso['icon'] !!}
+                    </svg>
                 </div>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide" style="background:{{ $curso['color'] }}18; color:{{ $curso['color'] }};">
+                    {{ $curso['tag'] }}
+                </span>
             </div>
-                @endforeach
+
+            {{-- Título --}}
+            <h2 class="text-base font-bold text-[#1e3a5f] leading-snug mb-1 group-hover:text-[#F05A28] transition-colors">
+                {{ $curso['title'] }}
+            </h2>
+
+            {{-- Departamento --}}
+            <p class="text-[11px] font-medium text-gray-400 uppercase tracking-wide mb-3">{{ $curso['department'] }}</p>
+
+            {{-- Resumo --}}
+            <p class="text-sm text-gray-500 leading-relaxed flex-1">{{ $curso['summary'] }}</p>
+
+            {{-- Rodapé do card --}}
+            <div class="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                <div class="flex items-center gap-3 text-xs text-gray-400">
+                    <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+                        {{ $curso['duration'] }}
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-5.13a4 4 0 110-8 4 4 0 010 8z"/></svg>
+                        {{ $curso['vagas'] }} vagas
+                    </span>
+                </div>
+                <span class="flex items-center gap-1 text-xs font-semibold" style="color:{{ $curso['color'] }};">
+                    Ver curso
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </span>
+            </div>
         </div>
-
-        <!-- Cursos Acreditados -->
-        <section class="mt-12 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Cursos Acreditados</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach($accredited as $ac)
-                        <div class="bg-white/90 dark:bg-gray-800 rounded-lg shadow-md transform hover:scale-105 hover:shadow-lg transition-all duration-300 p-5 flex items-center justify-between">
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ $ac['title'] }}</h3>
-                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Acreditação oficial</p>
-                            </div>
-                            <div class="ml-4 flex-shrink-0">
-                                <span class="inline-flex items-center justify-center px-3 py-2 rounded-full bg-[#2563eb] text-white font-bold text-lg">{{ $ac['percent'] }}</span>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
+    </a>
+    @endforeach
 </div>
 
-@endsection
+{{-- Secção cursos acreditados --}}
+<div class="mt-14">
+    <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">
+        <span class="inline-block w-6 h-0.5 bg-[#F05A28]"></span>
+        Cursos Acreditados
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        @foreach([
+            ['title'=>'Enfermagem',              'percent'=>'65,94%'],
+            ['title'=>'Psicologia',              'percent'=>'67,8%'],
+            ['title'=>'Engenharia Informática',  'percent'=>'68,60%'],
+            ['title'=>'Comunicação Social',      'percent'=>'73,63%'],
+            ['title'=>'Contabilidade',           'percent'=>'73,23%'],
+        ] as $ac)
+        <div class="flex items-center justify-between bg-white rounded-xl border border-gray-100 shadow-sm px-5 py-4">
+            <div>
+                <p class="text-sm font-semibold text-[#1e3a5f]">{{ $ac['title'] }}</p>
+                <p class="text-[11px] text-gray-400 mt-0.5">Acreditação oficial</p>
+            </div>
+            <span class="text-lg font-bold" style="color:#1D4ED8;">{{ $ac['percent'] }}</span>
+        </div>
+        @endforeach
+    </div>
+</div>
 
+</div>
+@endsection
