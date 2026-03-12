@@ -138,7 +138,7 @@
 
   <section class="py-8 bg-gray-100">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-4xl font-bold text-gray-900 mb-8">Notícias institucional</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Notícias institucional</h2>
       @component('components.noticias-carousel')
       @endcomponent
     </div>
@@ -147,7 +147,7 @@
   <!-- Seção Acesso Rápido -->
   <section class="py-8 bg-white border-t border-gray-200">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-4xl font-bold text-gray-900 mb-8">Acesso rápido</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Acesso rápido</h2>
       
       <!-- Primeira linha -->
       <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 md:gap-4 2xl:gap-6 mb-4">
@@ -234,7 +234,7 @@
 
   <section id="estatisticas" class="py-8 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white scroll-reveal">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
       <p class="text-lg mb-8 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
       @php($estatisticas = \App\Models\Estatistica::orderBy('ordem')->get())
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

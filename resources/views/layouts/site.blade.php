@@ -13,7 +13,7 @@
     @endif
 </head>
 
-<body class="bg-white text-gray-900">
+<body class="bg-white text-gray-900 overflow-x-hidden">
     <!-- Navbar institucional principal -->
     @include('partials.navbar')
 
@@ -25,7 +25,7 @@
     @php
         $isHome = request()->routeIs('home') || request()->is('/');
     @endphp
-    <main @if($isHome) class="min-w-0 p-0 m-0 bg-white" style="max-width:100vw;" @else class="w-full min-h-screen" @endif>
+    <main @if($isHome) class="min-w-0 p-0 m-0 bg-white" style="max-width:100vw;" @else class="w-full min-h-screen bg-gray-50" @endif>
         @yield('content')
     </main>
 
@@ -37,8 +37,6 @@
         $jsVersion = file_exists($jsPath) ? filemtime($jsPath) : time();
     @endphp
     <script type="module" src="{{ asset('build/' . $jsFile) }}?v={{ $jsVersion }}"></script>
-    <!-- Alpine.js para interatividade do menu mobile -->
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
         @stack('scripts')
 

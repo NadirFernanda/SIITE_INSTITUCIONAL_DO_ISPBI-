@@ -91,10 +91,10 @@
     <div class="rounded-2xl p-8 text-white" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
         <h3 class="text-base font-bold mb-6 uppercase tracking-widest text-center opacity-90">Alumni em Números</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div><div class="text-4xl font-bold mb-1">{{ $alumni_count }}</div><div class="text-xs text-white/70 uppercase tracking-wide">Alumni Formados</div></div>
-            <div><div class="text-4xl font-bold mb-1">{{ $employability }}%</div><div class="text-xs text-white/70 uppercase tracking-wide">Empregabilidade</div></div>
-            <div><div class="text-4xl font-bold mb-1">{{ $countries }}</div><div class="text-xs text-white/70 uppercase tracking-wide">Países onde trabalham</div></div>
-            <div><div class="text-4xl font-bold mb-1">{{ $companies }}</div><div class="text-xs text-white/70 uppercase tracking-wide">Empresas fundadas</div></div>
+            <div><div class="text-4xl font-bold mb-1" data-counter data-target="{{ $alumni_count }}" data-duration="2000">{{ $alumni_count }}</div><div class="text-xs text-white/70 uppercase tracking-wide">Alumni Formados</div></div>
+            <div><div class="text-4xl font-bold mb-1" data-counter data-target="{{ $employability }}" data-suffix="%" data-duration="2000">{{ $employability }}%</div><div class="text-xs text-white/70 uppercase tracking-wide">Empregabilidade</div></div>
+            <div><div class="text-4xl font-bold mb-1" data-counter data-target="{{ $countries }}" data-duration="2000">{{ $countries }}</div><div class="text-xs text-white/70 uppercase tracking-wide">Países onde trabalham</div></div>
+            <div><div class="text-4xl font-bold mb-1" data-counter data-target="{{ $companies }}" data-duration="2000">{{ $companies }}</div><div class="text-xs text-white/70 uppercase tracking-wide">Empresas fundadas</div></div>
         </div>
     </div>
 </section>

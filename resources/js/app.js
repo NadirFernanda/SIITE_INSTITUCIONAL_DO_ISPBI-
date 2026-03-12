@@ -32,11 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		const animateCounter = (el, target, duration = 1500) => {
 			const start = 0;
 			const startTime = performance.now();
+			const suffix = el.getAttribute('data-suffix') || '';
 
 			const step = (now) => {
 				const progress = Math.min((now - startTime) / duration, 1);
 				const value = Math.floor(start + (target - start) * progress);
-				el.textContent = value.toLocaleString('pt-PT');
+				el.textContent = value.toLocaleString('pt-PT') + suffix;
 
 				if (progress < 1) {
 					requestAnimationFrame(step);
