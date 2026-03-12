@@ -1,21 +1,12 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-    <nav class="text-sm opacity-75 mb-8">
-      <a href="/" class="hover:underline">Início</a> \ Gestão e Governança
-    </nav>
-
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-      <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Gestão e Governança</h1>
-      <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
-      <p class="mt-3 text-gray-600 max-w-2xl">Conheça a estrutura de gestão, os órgãos de decisão e os princípios de governança que garantem transparência, qualidade e responsabilidade institucional no ISP-Bié.</p>
-    </div>
-  </div>
-
-  <!-- Conteúdo Principal -->
-  <section class="py-16 bg-white scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Gestão e Governança',
+    'subtitle'   => 'Conheça a estrutura de gestão, os órgãos de decisão e os princípios de governança do ISP-Bié.',
+    'breadcrumb' => 'Gestão e Governança',
+])
       
       <!-- Introdução -->
       <div class="bg-white p-8 rounded-lg shadow-md mb-12 interactive-card">
@@ -472,8 +463,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
-
-
+</div>
 @endsection
 

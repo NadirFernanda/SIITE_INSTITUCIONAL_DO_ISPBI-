@@ -2,14 +2,12 @@
 
 
 @section('content')
-
-  <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50 scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Inclusão e Pertencimento</h1>
-        <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
-      </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Inclusão e Pertencimento',
+    'subtitle'   => 'Compromisso com a diversidade, inclusão e acolhimento no ISP-Bié.',
+    'breadcrumb' => 'Inclusão',
+])
       
       <!-- Introdução -->
       <div class="bg-white p-8 rounded-lg shadow-md mb-12">
@@ -400,8 +398,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
-
-
+</div>
 @endsection
 

@@ -1,11 +1,12 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-	<div class="container mx-auto px-4 py-6 scroll-reveal">
-		<div class="bg-white rounded-lg shadow-md p-6 mb-6 interactive-card">
-			<h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Carta de Serviços</h1>
-			<p class="text-lg text-gray-700">Compromissos e prazos dos serviços institucionais</p>
-		</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Carta de Serviços',
+    'subtitle'   => 'Compromissos e prazos dos serviços institucionais do ISP-Bié.',
+    'breadcrumb' => 'Carta de Serviços',
+])
 
 		<section class="mb-8 scroll-reveal">
 			<h2 class="text-3xl font-bold text-gray-900 mb-8">Serviços Acadêmicos</h2>

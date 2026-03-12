@@ -2,19 +2,12 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-        <nav class="text-sm opacity-75 mb-8">
-            <a href="/" class="hover:underline">Início</a> \ Repositório Académico
-        </nav>
-
-        <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-            <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Repositório Académico</h1>
-            <p class="text-lg text-gray-700">Trabalhos de conclusão e produção científica do ISP-Bié</p>
-            <p class="mt-3 text-gray-600 max-w-2xl">Aceda a teses, dissertações e trabalhos académicos produzidos por estudantes e docentes do instituto.</p>
-        </div>
-
-        <section class="py-16 bg-white scroll-reveal">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Repositório Académico',
+    'subtitle'   => 'Teses, dissertações e produção científica do ISP-Bié.',
+    'breadcrumb' => 'Repositório Académico',
+])
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
                     <div class="lg:col-span-3">
@@ -84,7 +77,7 @@
 
                 </div>
             </div>
-        </section>
 
+</div>
 @endsection
 

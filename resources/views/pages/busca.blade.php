@@ -1,17 +1,12 @@
 @extends('layouts.site')
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <div class="flex">
-        <nav class="text-sm opacity-75 mb-8 text-left">
-          <a href="/" class="hover:underline">Início</a> \ Busca
-        </nav>
-      </div>
-
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Busca no site</h1>
-        <p class="text-lg text-gray-700">Funcionalidade de busca global em desenvolvimento.</p>
-      </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Busca no Site',
+    'subtitle'   => 'Pesquise conteúdos, notícias e páginas do ISP-Bié.',
+    'breadcrumb' => 'Busca',
+])
 
       @if(request('q'))
         <div class="bg-white rounded-lg shadow-md p-6 interactive-card">
@@ -21,4 +16,6 @@
         </div>
       @endif
   </div>
+
+</div>
 @endsection

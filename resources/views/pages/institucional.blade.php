@@ -2,15 +2,12 @@
 
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-    <nav class="text-sm opacity-75 mb-8">
-    <a href="/" class="hover:underline">Início</a> \ Institucional
-    </nav>
-
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-      <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Institucional</h1>
-      <p class="text-lg text-gray-700">Conheça o Instituto Superior Politécnico do Bié e a sua trajectória institucional</p>
-    </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Institucional',
+    'subtitle'   => 'Conheça o Instituto Superior Politécnico do Bié e a sua trajectória institucional.',
+    'breadcrumb' => 'Institucional',
+])
 
     <h2 class="text-3xl font-bold text-[#2563eb] mb-10">História</h2>
     <div class="relative max-w-4xl mx-auto scroll-reveal">
@@ -96,11 +93,6 @@
       </div>
     </div>
 
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Apresentação -->
   <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,5 +145,6 @@
 
   <!-- As secções Pilares Institucionais, Áreas de Atuação, Estrutura Institucional, Nossa Localização e CTA foram removidas conforme solicitado -->
 
+</div>
 @endsection
 

@@ -2,19 +2,12 @@
 
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Cursos Online
-      </nav>
-
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Cursos Online</h1>
-        <p class="text-lg text-gray-700">Educação à Distância - Em Desenvolvimento</p>
-      </div>
-
-  <!-- Projeto em Desenvolvimento -->
-  <section class="py-16 bg-white scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Cursos Online',
+    'subtitle'   => 'Educação à Distância — em desenvolvimento no ISP-Bié.',
+    'breadcrumb' => 'Cursos Online',
+])
       <div class="max-w-4xl mx-auto">
         <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] rounded-2xl p-12 text-white text-center mb-12 interactive-card">
           <svg class="w-20 h-20 mx-auto mb-6" fill="currentColor" viewBox="0 0 20 20">
@@ -320,5 +313,6 @@
     </div>
   </section>
 
+</div>
 @endsection
 

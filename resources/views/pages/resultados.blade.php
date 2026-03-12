@@ -2,17 +2,12 @@
 
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <nav class="text-sm mb-8">
-        <a href="/" class="hover:underline">Início</a>
-        <span class="mx-2">/</span>
-        <span>Resultados de Exames</span>
-      </nav>
-
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Resultados de Exames</h1>
-        <p class="text-lg text-gray-700">Consulte as suas notas online</p>
-      </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Resultados de Exames',
+    'subtitle'   => 'Consulte as suas notas online no Portal do Estudante.',
+    'breadcrumb' => 'Resultados de Exames',
+])
 
   <!-- Informação -->
   <section class="py-8 bg-yellow-50 border-b scroll-reveal">
@@ -134,5 +129,7 @@
       </div>
     </div>
   </section>
+
+</div>
 @endsection
 

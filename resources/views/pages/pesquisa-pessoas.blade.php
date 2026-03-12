@@ -2,24 +2,14 @@
 
 
 @section('content')
-    <div class="bg-white border-b scroll-reveal">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex items-center text-sm text-gray-600">
-                <a href="/" class="hover:text-teal-600">Início</a>
-                <span class="mx-2">/</span>
-                <span class="text-gray-900">Busca de Pessoas</span>
-            </div>
-        </div>
-    </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Busca de Pessoas',
+    'subtitle'   => 'Encontre docentes, funcionários e pesquisadores do ISP-Bié.',
+    'breadcrumb' => 'Busca de Pessoas',
+])
 
-    <div class="container mx-auto px-6 mt-8 scroll-reveal">
-        <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-            <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Busca de Pessoas</h1>
-            <p class="text-lg text-gray-700">Encontre docentes, funcionários e pesquisadores</p>
-        </div>
-    </div>
-
-    <div class="container mx-auto px-6 py-12 scroll-reveal">
+    <div class="py-4 scroll-reveal">
         <div class="max-w-3xl mx-auto mb-16">
             <div class="bg-white p-8 rounded-lg shadow-md interactive-card">
                 <h2 class="text-2xl font-bold text-gray-900 mb-6">Pesquisar</h2>
@@ -87,5 +77,7 @@
             </div>
         </section>
     </div>
+
+</div>
 @endsection
 

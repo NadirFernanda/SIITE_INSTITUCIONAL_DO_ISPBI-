@@ -1,19 +1,12 @@
 @extends('layouts.site')
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Notícias
-      </nav>
-
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Notícias</h1>
-        <p class="text-lg text-gray-700">Notícias, comunicados e contacto com as notícias</p>
-      </div>
-
-  <!-- Notícias Recentes -->
-  <section class="py-16 bg-white scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Notícias',
+    'subtitle'   => 'Notícias, comunicados e actividades do ISP-Bié.',
+    'breadcrumb' => 'Notícias',
+])
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12">Notícias Recentes</h2>
       <div class="grid md:grid-cols-3 gap-8">
         @php
@@ -39,6 +32,6 @@
           <div class="col-span-3 text-center text-gray-500 py-12">Nenhuma notícia publicada.</div>
         @endforelse
       </div>
-    </div>
-  </section>
+
+</div>
 @endsection

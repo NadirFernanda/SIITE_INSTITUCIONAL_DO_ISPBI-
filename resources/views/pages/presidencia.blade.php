@@ -2,15 +2,14 @@
 
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-    <!-- Breadcrumb -->
-    <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Órgãos de gestão
-    </nav>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Órgãos de Gestão',
+    'subtitle'   => 'Estrutura orgânica e governança institucional do ISP-Bié.',
+    'breadcrumb' => 'Órgãos de Gestão',
+])
 
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Órgãos de gestão</h1>
-        <p class="text-lg text-gray-700 mb-4">Instituto Superior Politécnico do Bié</p>
+    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 mb-8">
         <div class="overflow-x-auto rounded-xl border border-gray-100 bg-white">
             <img
                 src="{{ asset('images/organigrama.jpeg') }}"

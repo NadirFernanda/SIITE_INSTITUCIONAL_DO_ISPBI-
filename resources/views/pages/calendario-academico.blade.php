@@ -2,21 +2,12 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <nav class="text-sm mb-8">
-        <a href="/" class="hover:underline">Início</a>
-        <span class="mx-2">/</span>
-        <span>Calendário Académico</span>
-      </nav>
-
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Calendário Académico 2025/2026</h1>
-        <p class="text-lg text-gray-700">Planeie o seu ano lectivo</p>
-      </div>
-
-  <!-- Download -->
-  <section class="py-8 bg-white border-b scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Calendário Académico 2025/2026',
+    'subtitle'   => 'Planeie o seu ano lectivo e consulte todas as datas importantes.',
+    'breadcrumb' => 'Calendário Académico',
+])
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div>
           <h2 class="text-2xl font-bold text-gray-900 mb-2">Calendário Académico 2025/2026</h2>
@@ -276,5 +267,7 @@
       </div>
     </div>
   </section>
+
+</div>
 @endsection
 

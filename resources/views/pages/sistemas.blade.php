@@ -2,15 +2,12 @@
 
 
 @section('content')
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-    <nav class="text-sm opacity-80 mb-10">
-      <a href="/" class="hover:underline text-[#2563eb]">Início</a> <span class="mx-2 text-gray-400">/</span> <span class="font-semibold text-gray-700">Sistemas</span>
-    </nav>
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-      <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Sistemas Institucionais</h1>
-      <p class="text-lg text-gray-700">Plataformas e Serviços Digitais do ISP-Bié</p>
-      <p class="mt-3 text-gray-600 max-w-2xl">Acesso centralizado aos principais sistemas acadêmicos, administrativos e de suporte.</p>
-    </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Sistemas Institucionais',
+    'subtitle'   => 'Plataformas e serviços digitais — acesso centralizado aos sistemas do ISP-Bié.',
+    'breadcrumb' => 'Sistemas',
+])
 
   <!-- Introdução -->
   <section class="py-12 bg-white">
@@ -141,5 +138,6 @@
     </div>
   </section>
 
+</div>
 @endsection
 

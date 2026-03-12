@@ -3,19 +3,12 @@
 
 @section('content')
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-        <nav class="text-sm opacity-75 mb-8">
-            <a href="/" class="hover:underline">Início</a> \ Contactos
-        </nav>
-
-        <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-            <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Contactos</h1>
-            <p class="text-lg text-gray-700">Fale connosco</p>
-        </div>
-    </div>
-
-    <section class="py-16 bg-white scroll-reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Contactos',
+    'subtitle'   => 'Fale connosco — canais oficiais de atendimento do ISP-Bié.',
+    'breadcrumb' => 'Contactos',
+])
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
             <div>
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Informações de Contacto</h2>
@@ -129,5 +122,5 @@
         </div>
         <p class="text-xs text-gray-600 mt-2">Localização aproximada do campus do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ na cidade do Cuito, província do Bié.</p>
         </div>
-    </section>
+</div>
 @endsection

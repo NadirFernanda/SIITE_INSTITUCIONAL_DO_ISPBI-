@@ -2,19 +2,12 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <nav class="text-sm opacity-75 mb-8">
-        <a href="/" class="hover:underline">Início</a> \ Cultura e Extensão
-      </nav>
-
-      <div class="bg-white rounded-lg shadow-md p-8 mb-10">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Cultura e Extensão</h1>
-        <p class="text-lg text-gray-700">Instituto Superior Politécnico do Bié</p>
-      </div>
-
-  <!-- Conteúdo Principal -->
-  <section class="py-16 bg-gray-50 scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Cultura e Extensão',
+    'subtitle'   => 'Extensão universitária e cultura no ISP-Bié — transformando realidades.',
+    'breadcrumb' => 'Cultura e Extensão',
+])
       
       <!-- Introdução -->
       <div class="bg-white p-8 rounded-lg shadow-md mb-12">
@@ -316,8 +309,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
-
-
+</div>
 @endsection
 

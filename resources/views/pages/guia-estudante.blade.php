@@ -2,12 +2,12 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-      <nav class="text-sm mb-8">
-        <a href="/" class="hover:underline">Início</a>
-        <span class="mx-2">/</span>
-        <span>Guia do Estudante</span>
-      </nav>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Guia do Estudante',
+    'subtitle'   => 'Tudo o que precisa saber para ter sucesso no ISP-Bié.',
+    'breadcrumb' => 'Guia do Estudante',
+])
 
       
 
@@ -334,5 +334,7 @@
       </a>
     </div>
   </section>
+
+</div>
 @endsection
 

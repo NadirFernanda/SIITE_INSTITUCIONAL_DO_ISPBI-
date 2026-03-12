@@ -10,12 +10,12 @@
     $completed = $projectsCollection->get('concluido') ?? collect();
 @endphp
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-reveal">
-
-    <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Investigação, Inovação e Empreendedorismo</h1>
-        <p class="text-lg text-gray-700">Conheça os projetos, publicações e iniciativas do ISP-Bié</p>
-    </div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+@include('partials.page-hero', [
+    'title'      => 'Investigação, Inovação e Empreendedorismo',
+    'subtitle'   => 'Conheça os projetos, publicações e iniciativas do ISP-Bié.',
+    'breadcrumb' => 'Investigação',
+])
 
     <!-- Feature panels -->
     <section class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
