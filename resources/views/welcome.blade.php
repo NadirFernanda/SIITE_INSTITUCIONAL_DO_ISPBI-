@@ -189,13 +189,13 @@
           <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Alumni</span>
         </a>
 
-        <a href="/revista" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Revista Científica">
+        <a href="/revista" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Artigos Científicos">
           <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
             <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+              <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM7 12h10v2H7zm0 4h7v2H7z"/>
             </svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Revista Científica</span>
+          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Artigos Científicos</span>
         </a>
 
         <a href="/biblioteca" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Biblioteca Digital">

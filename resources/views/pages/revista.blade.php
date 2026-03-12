@@ -1,82 +1,170 @@
 ﻿@extends('layouts.site')
 
+@section('title', 'Artigos Científicos - ISP-Bié')
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 scroll-reveal">
-        <nav class="text-sm opacity-75 mb-8">
-            <a href="/" class="hover:underline">Início</a> \ Revista Científica
-        </nav>
+<div class="pt-2">
 
-        <div class="bg-white rounded-lg shadow-md p-8 mb-10 interactive-card">
-            <h1 class="text-3xl md:text-4xl font-bold text-[#2563eb] mb-2">Revista Científica</h1>
-            <p class="text-lg text-gray-700">Publicações científicas e académicas do Instituto Superior Politécnico do Bié</p>
-            <p class="mt-3 text-gray-600 max-w-2xl">A Revista reúne artigos, comunicados e estudos produzidos por docentes, investigadores e estudantes das áreas de Engenharias, Ciências Sociais, Gestão e áreas afins.</p>
+    {{-- Hero Banner --}}
+    <div class="relative bg-gradient-to-r from-[#1e3a5f] to-[#2563eb] rounded-2xl overflow-hidden mb-10 shadow-xl">
+        <div class="absolute inset-0 opacity-10">
+            <svg width="100%" height="100%" viewBox="0 0 800 200" preserveAspectRatio="none">
+                <circle cx="700" cy="-50" r="200" fill="white"/>
+                <circle cx="100" cy="250" r="150" fill="white"/>
+            </svg>
         </div>
-
-        @if(session('status'))
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-                <div class="p-4 bg-green-100 text-green-800 rounded">{{ session('status') }}</div>
+        <div class="relative z-10 px-6 py-10 sm:px-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+                <nav class="text-sm text-blue-200 mb-3">
+                    <a href="/" class="hover:text-white transition-colors">Início</a>
+                    <span class="mx-2 opacity-50">/</span>
+                    <span class="text-white">Artigos Científicos</span>
+                </nav>
+                <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight">Artigos Científicos</h1>
+                <p class="mt-2 text-blue-100 text-base sm:text-lg max-w-xl">
+                    Portal de publicações científicas, académicas e de investigação do ISP-Bié
+                </p>
             </div>
-        @endif
+            <a href="{{ route('revista.submeter') }}"
+               class="inline-flex items-center gap-2 bg-[#F05A28] hover:bg-[#d04a1e] text-white font-semibold px-6 py-3 rounded-xl shadow transition-colors duration-200 whitespace-nowrap self-start md:self-auto">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                </svg>
+                Submeter Artigo
+            </a>
+        </div>
+    </div>
 
-        <!-- Conteúdo Principal -->
-        <section class="py-16 bg-white scroll-reveal">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-
-                    <div class="lg:col-span-3">
-                        <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg">
-                            <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Última Edição</h2>
-                            <div class="prose max-w-none text-gray-700 leading-relaxed space-y-4">
-                                <div class="grid md:grid-cols-3 gap-6 items-start">
-                                    <div class="col-span-1">
-                                        <div class="w-full h-64 bg-gradient-to-br from-[#2563eb] to-[#2563eb] rounded-lg flex items-center justify-center text-white">
-                                            <span class="text-6xl font-bold">Vol. 1</span>
-                                        </div>
-                                    </div>
-                                    <div class="md:col-span-2">
-                                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Volume 1, Número 1 (2026)</h3>
-                                        <p class="text-gray-600 mb-4">Edição inaugural da Revista Científica do ISP-Bié com artigos selecionados por áreas de conhecimentos.</p>
-                                        <div class="flex gap-3">
-                                            <a href="#" class="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700">Acessar Edição</a>
-                                            <a href="#" class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50">Índice Completo</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr class="my-6">
-
-                                <h3 class="text-2xl font-bold text-gray-900 mb-4">Submissão de Artigos</h3>
-                                <p class="text-gray-700 mb-4">A Revista Científica do ISP-Bié aceita submissões de artigos nas áreas de Engenharias e Tecnologia, Ciências da Saúde e Ciências Humanas, Sociais e Econômicas.</p>
-                                <div class="flex items-center gap-3">
-                                    <a href="{{ route('revista.submeter') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">Submeter Artigo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+    {{-- Informações da Edição Atual --}}
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 mb-10">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-5">
+            <span class="inline-flex items-center gap-1.5 bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.396 0 2.7.37 3.8 1.015A7.966 7.966 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+                Última Edição
+            </span>
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Volume 1, N.º 1 &mdash; 2026</h2>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-6 items-start">
+            <div class="sm:col-span-1">
+                <div class="w-full h-44 sm:h-52 bg-gradient-to-br from-[#1e3a5f] to-[#2563eb] rounded-xl flex flex-col items-center justify-center text-white select-none shadow-md">
+                    <span class="text-5xl font-black tracking-tight">Vol. I</span>
+                    <span class="text-sm mt-2 opacity-75">ISP-Bié &bull; 2026</span>
                 </div>
             </div>
-        </section>
-
-        <section class="py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-                    <h2 class="text-2xl font-bold text-gray-800">Artigos Publicados</h2>
-                    <form method="GET" action="{{ route('revista') }}" class="flex items-center gap-2">
-                        <input type="text" name="q" value="{{ request('q') }}" placeholder="Pesquisar artigos, autor, título..." class="px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
-                        <select name="category" aria-label="Filtrar por área" class="px-3 py-2 border rounded-lg shadow-sm">
-                            <option value="">Todas as áreas</option>
-                            <option value="Engenharias e Tecnologia" {{ request('category')=='Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
-                            <option value="Ciências da Saúde" {{ request('category')=='Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
-                            <option value="Ciências Sociais e Humanas" {{ request('category')=='Ciências Sociais e Humanas' ? 'selected' : '' }}>Ciências Sociais e Humanas</option>
-                        </select>
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Pesquisar</button>
-                    </form>
+            <div class="sm:col-span-2 flex flex-col justify-between gap-4">
+                <div>
+                    <p class="text-gray-600 leading-relaxed">
+                        Edição inaugural do portal de artigos científicos do ISP-Bié, reunindo contributos
+                        originais de docentes, investigadores e estudantes nas áreas de <strong>Engenharias e Tecnologia</strong>,
+                        <strong>Ciências da Saúde</strong> e <strong>Ciências Sociais, Humanas e Económicas</strong>.
+                    </p>
+                    <ul class="mt-4 space-y-1.5 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Revisão por pares (peer review) dupla-cego</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Acesso livre e aberto (Open Access)</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Periodicidade semestral</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-[#2563eb] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Idiomas aceites: Português e Inglês</li>
+                    </ul>
                 </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="inline-flex items-center gap-2 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        Aceder à Edição
+                    </a>
+                    <a href="#" class="inline-flex items-center gap-2 border border-gray-300 hover:border-[#2563eb] hover:text-[#2563eb] text-gray-600 text-sm font-medium px-5 py-2.5 rounded-lg transition-colors">
+                        Índice Completo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Áreas de Conhecimento --}}
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-5">
+            <div class="w-10 h-10 bg-[#2563eb] rounded-lg flex items-center justify-center mb-3">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-1">Engenharias e Tecnologia</h3>
+            <p class="text-xs text-gray-600">Informática, Recursos Hídricos, Engenharia Civil e áreas correlatas.</p>
+        </div>
+        <div class="bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200 rounded-xl p-5">
+            <div class="w-10 h-10 bg-[#0E8F81] rounded-lg flex items-center justify-center mb-3">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-1">Ciências da Saúde</h3>
+            <p class="text-xs text-gray-600">Psicologia Clínica, saúde pública, interação bio-social e bem-estar.</p>
+        </div>
+        <div class="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-5">
+            <div class="w-10 h-10 bg-[#F05A28] rounded-lg flex items-center justify-center mb-3">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-1">Ciências Sociais, Humanas e Económicas</h3>
+            <p class="text-xs text-gray-600">Contabilidade, Administração, Comunicação Social e Ciências do Comportamento.</p>
+        </div>
+    </div>
+
+    @if(session('status'))
+        <div class="p-4 mb-6 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm">{{ session('status') }}</div>
+    @endif
+
+    {{-- Normas de Submissão --}}
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 mb-10">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#F05A28] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Normas e Instruções para Autores
+        </h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Formato</p>
+                <p class="text-sm text-gray-700">IMRAD (Introdução, Métodos, Resultados e Discussão). Fonte Times New Roman 12, espaçamento 1,5.</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Extensão</p>
+                <p class="text-sm text-gray-700">Entre 4 000 e 8 000 palavras. Resumo de até 250 palavras em português e inglês (abstract).</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Citações</p>
+                <p class="text-sm text-gray-700">Norma APA 7.ª edição. Todas as referências devem ser veriíicaveis e completas.</p>
+            </div>
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Prazo</p>
+                <p class="text-sm text-gray-700">Submissões abertas em continuidade. Resposta de avaliação em até 60 dias úteis.</p>
+            </div>
+        </div>
+        <div class="mt-5 flex flex-wrap gap-3 items-center">
+            <a href="{{ route('revista.submeter') }}" class="inline-flex items-center gap-2 bg-[#F05A28] hover:bg-[#d04a1e] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                Submeter o meu Artigo
+            </a>
+            <span class="text-xs text-gray-500">Submissões sujeitas a revisão por pares antes da publicação.</span>
+        </div>
+    </div>
+
+    {{-- Artigos Publicados --}}
+    <section class="mb-12">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                Artigos Publicados
+            </h2>
+            <form method="GET" action="{{ route('revista') }}" class="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto">
+                <input type="text" name="q" value="{{ request('q') }}" placeholder="Pesquisar por título, autor…"
+                       class="w-full sm:w-56 px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]" />
+                <select name="category" aria-label="Filtrar por área"
+                        class="w-full sm:w-auto px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]">
+                    <option value="">Todas as áreas</option>
+                    <option value="Engenharias e Tecnologia" {{ request('category')=='Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
+                    <option value="Ciências da Saúde" {{ request('category')=='Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
+                    <option value="Ciências Sociais e Humanas" {{ request('category')=='Ciências Sociais e Humanas' ? 'selected' : '' }}>Ciências Sociais e Humanas</option>
+                </select>
+                <button type="submit" class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-semibold rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Pesquisar
+                </button>
+            </form>
+        </div>
                 @if(isset($articles) && $articles->count())
                     @php
-                        // Group articles by category (keep compatibility if paginator)
                         if (method_exists($articles, 'getCollection')) {
                             $collection = $articles->getCollection();
                         } else {
@@ -88,25 +176,38 @@
                     <div class="space-y-10">
                         @foreach($groups as $area => $group)
                             <div>
-                                <h3 class="text-2xl font-semibold text-gray-800 mb-4">{{ $area }}</h3>
-                                <div class="grid gap-6">
+                                <div class="flex items-center gap-3 mb-5">
+                                    <span class="text-base font-bold text-gray-900">{{ $area }}</span>
+                                    <span class="bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">{{ $group->count() }} artigo(s)</span>
+                                </div>
+                                <div class="grid gap-4">
                                     @foreach($group as $a)
                                         @php
                                             $cardUrl = $a->link ?: route('revista.show', $a->id);
                                             $external = (bool) $a->link;
                                         @endphp
-                                        <a href="{{ $cardUrl }}" @if($external) target="_blank" rel="noopener" @endif class="block transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg rounded-lg no-underline text-current">
-                                            <article class="bg-white border rounded-lg p-6 shadow-sm">
-                                                <div class="flex flex-col md:flex-row md:justify-between">
-                                                    <div>
-                                                        <h3 class="text-xl font-semibold text-gray-900">{{ $a->title }}</h3>
-                                                        <p class="text-sm text-gray-600">Autor: {{ $a->author }} @if($a->affiliation) — {{ $a->affiliation }}@endif</p>
-                                                    </div>
-                                                    <div class="mt-3 md:mt-0 text-sm text-gray-500">{{ $a->published_at ? $a->published_at->format('d F, Y') : $a->created_at->format('d F, Y') }}</div>
+                                        <a href="{{ $cardUrl }}" @if($external) target="_blank" rel="noopener noreferrer" @endif
+                                           class="block group rounded-xl border border-gray-200 hover:border-[#2563eb] hover:shadow-md transition-all duration-200 bg-white no-underline text-current">
+                                            <article class="p-5 sm:p-6">
+                                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+                                                    <h3 class="text-base sm:text-lg font-semibold text-gray-900 group-hover:text-[#2563eb] transition-colors leading-snug">{{ $a->title }}</h3>
+                                                    <time class="text-xs text-gray-400 whitespace-nowrap flex-shrink-0">{{ $a->published_at ? $a->published_at->format('d/m/Y') : $a->created_at->format('d/m/Y') }}</time>
                                                 </div>
-                                                <p class="mt-4 text-gray-700">{{ Str::limit(strip_tags($a->description), 220) }}</p>
-                                                <div class="mt-4">
-                                                    <span class="text-sm text-blue-600 hover:underline">{{ $external ? 'Abrir artigo (Link externo)' : 'Ver detalhes' }}</span>
+                                                <p class="mt-1 text-sm text-gray-500">
+                                                    <span class="font-medium text-gray-700">{{ $a->author }}</span>
+                                                    @if($a->affiliation) <span class="text-gray-400">&mdash; {{ $a->affiliation }}</span>@endif
+                                                </p>
+                                                @if($a->description)
+                                                    <p class="mt-3 text-sm text-gray-600 leading-relaxed">{{ Str::limit(strip_tags($a->description), 220) }}</p>
+                                                @endif
+                                                <div class="mt-4 flex items-center gap-1.5 text-sm text-[#2563eb] font-medium">
+                                                    @if($external)
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                                        Abrir artigo (link externo)
+                                                    @else
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                                        Ler artigo completo
+                                                    @endif
                                                 </div>
                                             </article>
                                         </a>
@@ -116,16 +217,21 @@
                         @endforeach
                     </div>
 
-                    <div class="mt-6">
+                    <div class="mt-8">
                         {{ $articles->withQueryString()->links() }}
                     </div>
                 @else
-                    <div class="p-6 bg-gray-50 border rounded">Ainda não há artigos publicados.</div>
+                    <div class="flex flex-col items-center justify-center py-16 text-center bg-gray-50 border border-dashed border-gray-300 rounded-2xl">
+                        <svg class="w-12 h-12 text-gray-300 mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                        <p class="text-gray-500 text-sm font-medium">Ainda não há artigos publicados.</p>
+                        <p class="text-gray-400 text-xs mt-1">Seja o primeiro a submeter um artigo científico.</p>
+                        <a href="{{ route('revista.submeter') }}" class="mt-4 inline-flex items-center gap-2 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+                            Submeter Artigo
+                        </a>
+                    </div>
                 @endif
-            </div>
-        </section>
+    </section>
 
-    <!-- Footer -->
-
+</div>
 @endsection
 

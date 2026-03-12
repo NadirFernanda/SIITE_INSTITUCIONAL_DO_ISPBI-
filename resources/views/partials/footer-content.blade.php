@@ -1,10 +1,16 @@
 ﻿
-<footer class="bg-[#111827] text-gray-400" aria-label="Rodapé institucional">
+<footer class="relative text-gray-400 overflow-hidden" aria-label="Rodapé institucional">
+  {{-- Imagem de fundo com overlay escuro --}}
+  <div class="absolute inset-0 z-0">
+    <img src="/images/campus-hero.jpg" alt="" role="presentation" class="w-full h-full object-cover object-center opacity-20" loading="lazy">
+    <div class="absolute inset-0 bg-[#0d1117]/90"></div>
+  </div>
+  <div class="relative z-10">
 
   {{-- ── Bloco principal de colunas ── --}}
   <div class="border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <nav class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-6" aria-label="Links institucionais">
+      <nav class="grid grid-cols-1 gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6" aria-label="Links institucionais">
 
         {{-- Educação --}}
         <div>
@@ -168,6 +174,8 @@
 
     </div>
   </div>
+
+  </div>{{-- /relative z-10 --}}
 
   {{-- Botão voltar ao topo --}}
   <button onclick="window.scrollTo({top:0,behavior:'smooth'})"
