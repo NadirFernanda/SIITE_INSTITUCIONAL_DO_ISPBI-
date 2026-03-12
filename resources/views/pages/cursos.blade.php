@@ -136,10 +136,7 @@ $cursos = [
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
                         {{ $curso['duration'] }}
                     </span>
-                    <span class="flex items-center gap-1">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-5.13a4 4 0 110-8 4 4 0 010 8z"/></svg>
-                        {{ $curso['vagas'] }} vagas
-                    </span>
+
                 </div>
                 <span class="flex items-center gap-1 text-xs font-semibold" style="color:{{ $curso['color'] }};">
                     Ver curso

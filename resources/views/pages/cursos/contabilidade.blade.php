@@ -91,22 +91,10 @@
       <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
         <h3 class="text-xs font-bold text-[#1e3a5f] uppercase tracking-widest mb-4">Informações</h3>
         <dl class="space-y-3 text-sm">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#92680A] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 6v6l4 2"/></svg>
-            <div><dt class="text-gray-400 text-[11px]">Duração</dt><dd class="font-semibold text-[#1e3a5f]">4 Anos</dd></div>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#92680A] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            <div><dt class="text-gray-400 text-[11px]">Vagas</dt><dd class="font-semibold text-[#1e3a5f]">40 por ano</dd></div>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#92680A] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M3 21V7a2 2 0 012-2h14a2 2 0 012 2v14"/><path stroke-linecap="round" d="M9 21v-8h6v8"/></svg>
-            <div><dt class="text-gray-400 text-[11px]">Departamento</dt><dd class="font-semibold text-[#1e3a5f]">Ciências Humanas, Sociais e Económicas</dd></div>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#92680A] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path stroke-linecap="round" d="M16 2v4M8 2v4M3 10h18"/></svg>
-            <div><dt class="text-gray-400 text-[11px]">Regime</dt><dd class="font-semibold text-[#1e3a5f]">Presencial — Diurno</dd></div>
-          </div>
+          <div class="flex justify-between"><dt class="text-gray-400 font-medium">Duração</dt><dd class="font-semibold text-[#1e3a5f]">4 Anos</dd></div>
+          <div class="flex justify-between"><dt class="text-gray-400 font-medium">Vagas</dt><dd class="font-semibold text-[#1e3a5f]">A consultar</dd></div>
+          <div class="flex justify-between"><dt class="text-gray-400 font-medium">Departamento</dt><dd class="font-semibold text-[#1e3a5f] text-right">Ciências Humanas, Sociais e Económicas</dd></div>
+          <div class="flex justify-between"><dt class="text-gray-400 font-medium">Regime</dt><dd class="font-semibold text-[#1e3a5f]">Presencial</dd></div>
         </dl>
       </div>
 

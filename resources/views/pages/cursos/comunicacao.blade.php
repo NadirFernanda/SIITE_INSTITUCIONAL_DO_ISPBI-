@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
 @include('partials.page-hero', ['title'=>'Comunicação Social','subtitle'=>'Gestão, produção e mediação da comunicação pública e jornalística.','breadcrumb'=>'Comunicação Social','gradient'=>'from-[#78350f] via-[#C2710C] to-[#FBBF24]','ctaUrl'=>'/candidaturas','ctaLabel'=>'Candidatar-me'])
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
   <div class="lg:col-span-2 space-y-8">
     <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
       <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-4 flex items-center gap-2"><span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Sobre o Curso</h2>
@@ -33,7 +33,7 @@
       <h3 class="text-sm font-bold text-[#1e3a5f] uppercase tracking-widest mb-4">Informações</h3>
       <dl class="space-y-3 text-sm">
         <div class="flex justify-between"><dt class="text-gray-400 font-medium">Duração</dt><dd class="font-semibold text-[#1e3a5f]">4 Anos</dd></div>
-        <div class="flex justify-between"><dt class="text-gray-400 font-medium">Vagas</dt><dd class="font-semibold text-[#1e3a5f]">40 vagas</dd></div>
+        <div class="flex justify-between"><dt class="text-gray-400 font-medium">Vagas</dt><dd class="font-semibold text-[#1e3a5f]">A consultar</dd></div>
         <div class="flex justify-between"><dt class="text-gray-400 font-medium">Departamento</dt><dd class="font-semibold text-[#1e3a5f] text-right">Ciências Humanas, Sociais e Económicas</dd></div>
         <div class="flex justify-between"><dt class="text-gray-400 font-medium">Regime</dt><dd class="font-semibold text-[#1e3a5f]">Presencial</dd></div>
       </dl>
