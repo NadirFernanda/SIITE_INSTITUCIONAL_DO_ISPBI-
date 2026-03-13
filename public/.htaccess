@@ -3,6 +3,11 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    # Deny direct access to .htaccess and other dot-files
+    <FilesMatch "^\.">
+        Require all denied
+    </FilesMatch>
+
     RewriteEngine On
 
     # Handle Authorization Header

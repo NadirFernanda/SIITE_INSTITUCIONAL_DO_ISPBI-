@@ -10,6 +10,11 @@ class SecureHeaders
 {
     public function handle(Request $request, Closure $next): Response
     {
+        // Remove PHP version exposure before response is sent
+        if (function_exists('header_remove')) {
+            header_remove('X-Powered-By');
+        }
+
         $response = $next($request);
 
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
@@ -28,6 +33,8 @@ class SecureHeaders
             "connect-src 'self'; " .
             "object-src 'none';"
         );
+        $response->headers->remove('X-Powered-By');
+        $response->headers->remove('Server');
 
         return $response;
     }
