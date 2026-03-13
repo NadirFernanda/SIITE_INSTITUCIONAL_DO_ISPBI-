@@ -37,10 +37,10 @@
         </svg>
       </button>
             <div id="infra-dropdown" x-show="openInfra" x-cloak
-              class="absolute right-0 mt-2 w-64 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-sm">
-        <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white font-semibold">Página de Sistemas</a>
+              class="absolute right-0 mt-2 w-64 bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 p-2 text-sm">
+        <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#2a4d78] hover:text-white font-semibold">Página de Sistemas</a>
         <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer" aria-label="Abrir SGF (abre em nova aba)"
-          class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]">
+          class="block px-3 py-2 rounded hover:bg-[#2a4d78] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]">
           Sistema de Gestão de Facturas (SGF)
         </a>
       </div>

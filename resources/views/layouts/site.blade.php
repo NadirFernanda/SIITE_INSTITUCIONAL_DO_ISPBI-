@@ -43,6 +43,18 @@
 
         @stack('scripts')
 
+    {{-- Block DevTools keyboard shortcuts (keyboard only — no DOM destruction) --}}
+    <script>
+        (function () {
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'F12') { e.preventDefault(); return false; }
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) { e.preventDefault(); return false; }
+                if ((e.ctrlKey || e.metaKey) && ['U','u'].includes(e.key)) { e.preventDefault(); return false; }
+            });
+            document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+        })();
+    </script>
+
         @push('scripts')
         <script>
         function testemunhosCarousel() {
