@@ -12,10 +12,10 @@ class CarrosselController extends Controller
         $carrossel = Carrossel::findOrFail($id);
         $request->validate([
             'imagem' => 'nullable|image|max:4096',
-            'titulo' => 'nullable',
-            'subtitulo' => 'nullable',
-            'texto_botao' => 'nullable',
-            'link' => 'nullable',
+            'titulo' => 'nullable|string|max:255',
+            'subtitulo' => 'nullable|string|max:500',
+            'texto_botao' => 'nullable|string|max:100',
+            'link' => 'nullable|url|max:500',
             'ordem' => 'nullable|integer',
         ]);
         $data = [
@@ -49,10 +49,10 @@ class CarrosselController extends Controller
     {
         $request->validate([
             'imagem' => 'required|image|max:4096',
-            'titulo' => 'nullable',
-            'subtitulo' => 'nullable',
-            'texto_botao' => 'nullable',
-            'link' => 'nullable',
+            'titulo' => 'nullable|string|max:255',
+            'subtitulo' => 'nullable|string|max:500',
+            'texto_botao' => 'nullable|string|max:100',
+            'link' => 'nullable|url|max:500',
             'ordem' => 'nullable|integer',
         ]);
         $path = $request->file('imagem')->store('carrossel', 'public');

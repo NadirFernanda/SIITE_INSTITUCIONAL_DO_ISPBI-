@@ -43,8 +43,8 @@ class ConcursoController extends Controller
                 $path = $file->store('concursos', 'public');
                 $concurso->attachments()->create([
                     'path' => $path,
-                    'original_name' => $file->getClientOriginalName(),
-                    'mime' => $file->getClientMimeType(),
+                    'original_name' => basename($file->getClientOriginalName()),
+                    'mime' => $file->getMimeType(),
                     'size' => $file->getSize(),
                 ]);
             }
@@ -103,8 +103,8 @@ class ConcursoController extends Controller
                 $path = $file->store('concursos', 'public');
                 $concurso->attachments()->create([
                     'path' => $path,
-                    'original_name' => $file->getClientOriginalName(),
-                    'mime' => $file->getClientMimeType(),
+                    'original_name' => basename($file->getClientOriginalName()),
+                    'mime' => $file->getMimeType(),
                     'size' => $file->getSize(),
                 ]);
             }

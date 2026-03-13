@@ -133,11 +133,11 @@ Route::view('/contactos', 'pages.contactos')->name('contactos');
 
 // Rota para envio do formulário de contactos
 use App\Http\Controllers\ContactController;
-Route::post('/contactos/send', [ContactController::class, 'send'])->name('contact.send');
+Route::post('/contactos/send', [ContactController::class, 'send'])->name('contact.send')->middleware('throttle:5,1');
 
 // Alerts for concursos (subscribe)
 use App\Http\Controllers\ConcursoAlertController;
-Route::post('/alerts/subscribe', [ConcursoAlertController::class, 'store'])->name('alerts.subscribe');
+Route::post('/alerts/subscribe', [ConcursoAlertController::class, 'store'])->name('alerts.subscribe')->middleware('throttle:5,1');
 Route::view('/valores', 'pages.valores')->name('valores');
 Route::view('/visao', 'pages.visao')->name('visao');
 Route::view('/trabalhe-conosco', 'pages.trabalhe-conosco')->name('trabalhe-conosco');
@@ -168,7 +168,7 @@ Route::get('/alumni', function () {
     return view('pages.alumni', compact('alumni'));
 })->name('alumni');
 Route::get('/alumni/{id}', [App\Http\Controllers\AlumniController::class, 'show'])->name('alumni.show');
-Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store');
+Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store')->middleware('throttle:3,1');
 
 // Rotas para Acesso Rápido
 // Rota '/portal' removida (página externa usada em vez da view interna)

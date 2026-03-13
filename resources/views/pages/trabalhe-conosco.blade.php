@@ -67,9 +67,9 @@
       </div>
 
       @if($concursos->isEmpty())
-        @auth
+        @if(Auth::check() && Auth::user()->role === 'admin')
           <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded text-sm text-yellow-800">
-            <strong>Diagnóstico:</strong>
+            <strong>Diagnóstico (admin):</strong>
             Existem <strong>{{ $allCount }}</strong> concursos no painel administrativo, dos quais <strong>{{ $publishedCount }}</strong> estão marcados como "published".
             Atualmente nenhum concurso aparece como aberto nesta página. Verifique o campo <em>status</em> e a data <em>publish_at</em> em <a href="{{ route('admin.concursos.index') }}" class="underline">Painel Admin</a>.
           </div>
@@ -77,7 +77,7 @@
           <div class="bg-white p-6 rounded shadow text-center text-gray-700">
             No momento não há concursos disponíveis. Verifique novamente mais tarde ou inscreva-se para receber alertas.
           </div>
-        @endauth
+        @endif
       @else
         <div class="grid md:grid-cols-2 gap-6">
           @foreach($concursos as $c)
@@ -295,8 +295,8 @@
             const form = document.getElementById('alerts-form');
             const messages = document.getElementById('alerts-messages');
 
-            function showMessage(html, isError = false) {
-              messages.innerHTML = html;
+            function showMessage(text, isError = false) {
+              messages.textContent = text;
               messages.classList.remove('hidden');
               messages.classList.toggle('text-red-600', isError);
               messages.classList.toggle('text-green-600', !isError);
@@ -377,7 +377,7 @@
                 return res.json();
               }).then(function (json) {
                 clearFieldErrors();
-                showMessage('<strong>Inscrição recebida.</strong> Obrigado por subscrever os alertas.');
+                showMessage('Inscrição recebida. Obrigado por subscrever os alertas.');
                 form.reset();
               }).catch(function (err) {
                 if (err.json) {

@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Página') - ISP-Bié</title>
     @php
-        $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        $manifestPath = public_path('build/manifest.json');
+        $manifest = file_exists($manifestPath)
+            ? (json_decode(file_get_contents($manifestPath), true) ?? [])
+            : [];
         $cssFile = $manifest['resources/css/app.css']['file'] ?? null;
     @endphp
     @if($cssFile)

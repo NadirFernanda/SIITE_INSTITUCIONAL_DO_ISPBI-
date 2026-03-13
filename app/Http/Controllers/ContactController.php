@@ -35,7 +35,8 @@ class ContactController extends Controller
             Mail::send([], [], function ($message) use ($to, $subject, $body, $data) {
                 $message->to($to)
                     ->subject($subject)
-                    ->from($data['email'], $data['nome'])
+                    ->from('noreply@isp-bie.ao', 'ISP-Bié Website')
+                    ->replyTo($data['email'], $data['nome'])
                     ->setBody($body, 'text/html');
             });
         } catch (\Exception $e) {

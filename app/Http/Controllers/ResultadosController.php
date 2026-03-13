@@ -15,6 +15,11 @@ class ResultadosController extends Controller
     {
         $url = 'https://app.multiplo.io/isp-bie/_config/valid.php';
 
+        $request->validate([
+            'Email' => 'required|email|max:255',
+            'Senha' => 'required|string|max:255',
+        ]);
+
         $payload = [
             'Email' => $request->input('Email'),
             'Senha' => $request->input('Senha'),
