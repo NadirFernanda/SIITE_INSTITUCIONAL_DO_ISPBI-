@@ -147,152 +147,236 @@
   </div>
 
   
-  <!-- Menu Mobile (off-canvas) -->
-  <div id="mobile-menu" role="dialog" aria-modal="false" aria-label="Menu principal" x-show="mobileMenuOpen" x-cloak class="fixed inset-0 z-50 flex lg:hidden overflow-x-hidden w-full max-w-full">
-    <!-- Fundo branco acessível -->
-    <div class="absolute inset-0 bg-white opacity-95 backdrop-filter blur-lg" @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;"></div>
-    <!-- Painel lateral com efeito glassmorphism, sombra e detalhes dourados -->
-    <div class="relative ml-auto w-full max-w-xs h-full bg-white/70 shadow-2xl flex flex-col py-10 px-6 space-y-3 overflow-y-auto animate-slide-in-right border-l-4 border-[#FFD700] rounded-l-2xl text-base sm:text-sm z-[60]" style="backdrop-filter: blur(12px);">
-      <button @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;" class="self-end text-gray-700 p-2 hover:bg-gray-100 rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Fechar menu">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-      <!-- Links principais padronizados -->
-      <a href="/cursos" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] font-medium text-sm hover:text-[#F05A28] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Ensino">
-        <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
-        <span>Ensino</span>
-      </a>
-      <a href="/investigacao" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] font-medium text-sm hover:text-[#F05A28] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
-        <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" stroke="currentColor"/><path d="M12 9v3l2 2" stroke="currentColor"/></svg></span>
-        <span>Pesquisa e Inovação</span>
-      </a>
-      <a href="/noticias" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] font-medium text-sm hover:text-[#F05A28] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Notícias">
-        <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor"/><path d="M7 9h10M7 13h6" stroke="currentColor"/></svg></span>
-        <span>Notícias</span>
-      </a>
-      <a href="/candidaturas" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] font-medium text-sm hover:text-[#F05A28] hover:bg-gray-50 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Candidaturas">
-        <span>
-          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="3" y="5" width="18" height="12" rx="2" stroke="currentColor" fill="none"/>
-            <path d="M7 9h10M7 13h6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span>Candidaturas</span>
-      </a>
-      <!-- Dropdown Extensão Universitária - Mobile (padronizado) -->
-      <div class="relative lg:hidden">
-        <button @click="openExtMobile = !openExtMobile"
-          class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] font-normal hover:text-[#F05A28] hover:bg-gray-50 rounded transition-colors w-full">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2" stroke="currentColor"/><path d="M8 3v4M16 3v4" stroke="currentColor"/></svg></span>
-          <span>Extensão Universitária</span>
-          <svg class="w-3 h-3 ml-auto" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+  <!-- ═══════════════════════════════════════════════════════════
+       MENU MOBILE — off-canvas lateral
+       ═══════════════════════════════════════════════════════════ -->
+  <div id="mobile-menu"
+       role="dialog" aria-modal="true" aria-label="Menu principal"
+       x-show="mobileMenuOpen" x-cloak
+       class="fixed inset-0 z-[100] flex lg:hidden">
+
+    {{-- Overlay escuro semi-transparente, fecha ao clicar --}}
+    <div class="absolute inset-0 bg-black/40 transition-opacity duration-300"
+         @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;"
+         aria-hidden="true"></div>
+
+    {{-- Painel lateral direito --}}
+    <div class="relative ml-auto w-[min(88vw,360px)] h-full bg-white shadow-2xl flex flex-col overflow-hidden"
+         style="border-left: 3px solid #F05A28;">
+
+      {{-- ── Header do painel ── --}}
+      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100" style="background:#0f1f3d;">
+        <div class="flex items-center gap-2">
+          <img src="/images/logo.png" alt="ISP-Bié" class="w-8 h-8 object-contain" onerror="this.style.display='none'">
+          <span class="text-white text-[11px] font-bold uppercase tracking-widest leading-tight">ISP-Bié</span>
+        </div>
+        <button @click="mobileMenuOpen = false; openExtMobile = false; openMobile = false; openInfraMobile = false;"
+                class="text-white/80 hover:text-white p-1.5 rounded-md hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
+                aria-label="Fechar menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
-           <div x-show="openExtMobile" x-cloak
-             class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 z-[70]" style="position:relative;">
-          <a href="/estagios" role="menuitem" class="block px-4 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Estágios</a>
-          <a href="/alumni" role="menuitem" class="block px-4 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Alumni</a>
-          </div>
       </div>
-      
 
-      <!-- Links extras -->
-      <div class="border-t border-gray-200 pt-4 mt-4">
-        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Links Rápidos</h3>
-        <a href="/contactos" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" stroke="currentColor"/><rect x="9" y="10" width="6" height="4" rx="1" stroke="currentColor"/></svg></span>
-          <span>Contacto</span>
-        </a>
-        <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" aria-label="Abrir Webmail (abre em nova aba)" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor"/><path d="M4 6l8 7 8-7" stroke="currentColor"/></svg></span>
-          <span>Webmail</span>
-        </a>
-        <a href="/servicos" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="2" stroke="currentColor"/><path d="M8 11h8" stroke="currentColor"/></svg></span>
-          <span>Serviços</span>
-        </a>
-        <a href="/presidencia" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="8" rx="2" stroke="currentColor"/><path d="M12 4v4" stroke="currentColor"/></svg></span>
-          <span>Órgãos de Gestão</span>
-        </a>
-        <!-- ...primeiro dropdown Institucional removido... -->
+      {{-- ── Corpo com scroll ── --}}
+      <nav class="flex-1 overflow-y-auto py-3" role="navigation" aria-label="Menu mobile">
 
-        <!-- Dropdown Institucional - Mobile -->
-        <div class="relative lg:hidden mt-2">
-            <button @click="openMobile = !openMobile"
-              class="flex items-center gap-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded w-full font-medium text-sm">
-            <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2" stroke="currentColor"/><path d="M8 3v4M16 3v4" stroke="currentColor"/></svg></span>
+        {{-- Macro helper: link simples --}}
+        {{-- ── Secção PRINCIPAL ── --}}
+        <p class="px-5 pt-2 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Principal</p>
+
+        <a href="/cursos"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors rounded-none focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5 12.083 12.083 0 015.84 10.578L12 14z"/>
+          </svg>
+          <span>Cursos</span>
+        </a>
+
+        <a href="/investigacao"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
+          </svg>
+          <span>Pesquisa e Inovação</span>
+        </a>
+
+        <a href="/noticias"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="14" rx="2"/><path stroke-linecap="round" d="M7 9h10M7 13h6"/>
+          </svg>
+          <span>Notícias</span>
+        </a>
+
+        <a href="/candidaturas"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6M9 16h4M7 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-2M9 4a2 2 0 002 2h2a2 2 0 002-2M9 4a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <span>Candidaturas</span>
+        </a>
+
+        {{-- ── Dropdown: Institucional ── --}}
+        <div>
+          <button @click="openMobile = !openMobile"
+                  class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors w-full focus:outline-none focus:bg-orange-50">
+            <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V8a2 2 0 012-2h4V3h6v3h4a2 2 0 012 2v13H3z"/>
+            </svg>
             <span>Institucional</span>
-            <svg class="w-3 h-3 ml-auto" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 ml-auto text-gray-400 transition-transform duration-200 flex-shrink-0" :class="openMobile ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
-
           <div x-show="openMobile" x-cloak
-            class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-4 grid grid-cols-2 gap-2">
-            <a href="/sobre-ispbie" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Sobre o ISP-Bié</a>
-            <a href="/missao" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Missão</a>
-            <a href="/visao" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Visão</a>
-            <a href="/valores" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Valores</a>
-            <a href="/presidencia" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Órgãos de gestão</a>
-            <a href="/noticias" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Notícias</a>
+               x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+               class="bg-gray-50 border-y border-gray-100">
+            <a href="/sobre-ispbie" class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Sobre o ISP-Bié</a>
+            <a href="/missao"       class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Missão</a>
+            <a href="/visao"        class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Visão</a>
+            <a href="/valores"      class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Valores</a>
+            <a href="/presidencia"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Órgãos de Gestão</a>
           </div>
         </div>
 
-        <!-- Dropdown Infraestrutura Digital - Mobile -->
-        <div class="relative lg:hidden mt-2">
-            <button @click="openInfraMobile = !openInfraMobile"
-              class="flex items-center gap-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded w-full font-medium text-sm">
-            <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path stroke-linecap="round" d="M8 21h8M12 17v4"/></svg></span>
+        {{-- ── Dropdown: Extensão Universitária ── --}}
+        <div>
+          <button @click="openExtMobile = !openExtMobile"
+                  class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors w-full focus:outline-none focus:bg-orange-50">
+            <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
+            </svg>
+            <span>Extensão Universitária</span>
+            <svg class="w-4 h-4 ml-auto text-gray-400 transition-transform duration-200 flex-shrink-0" :class="openExtMobile ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div x-show="openExtMobile" x-cloak
+               x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+               class="bg-gray-50 border-y border-gray-100">
+            <a href="/cultura"   class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Extensão Universitária</a>
+            <a href="/estagios"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Estágios</a>
+            <a href="/alumni"    class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Alumni</a>
+          </div>
+        </div>
+
+        {{-- ── Dropdown: Infraestrutura Digital ── --}}
+        <div>
+          <button @click="openInfraMobile = !openInfraMobile"
+                  class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors w-full focus:outline-none focus:bg-orange-50">
+            <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path stroke-linecap="round" d="M8 21h8M12 17v4"/>
+            </svg>
             <span>Infraestrutura Digital</span>
-            <svg class="w-3 h-3 ml-auto" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 ml-auto text-gray-400 transition-transform duration-200 flex-shrink-0" :class="openInfraMobile ? 'rotate-180' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
             </svg>
           </button>
           <div x-show="openInfraMobile" x-cloak
-            class="mt-2 w-full bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 p-2 grid grid-cols-1 gap-2 text-sm">
-            <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white font-semibold">Página de Sistemas</a>
-            <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer" aria-label="Abrir SGF (abre em nova aba)" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]">
-              Sistema de Gestão de Facturas (SGF)
+               x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
+               class="bg-gray-50 border-y border-gray-100">
+            <a href="/sistemas" class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Página de Sistemas</a>
+            <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer"
+               class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">
+              SGF — Gestão de Facturas
+              <svg class="w-3 h-3 ml-auto flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             </a>
           </div>
         </div>
-      </div>
-      
-      <!-- Calendário e Guias - Mobile, mesmo nível -->
-      <div class="border-t border-gray-200 pt-4 mt-4">
-        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Estudantes</h3>
-        <a href="/calendario-academico" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor"/><path d="M7 9h10M7 13h6" stroke="currentColor"/></svg></span>
+
+        {{-- ── Separador: Estudantes ── --}}
+        <div class="mx-5 my-3 border-t border-gray-100"></div>
+        <p class="px-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Estudantes</p>
+
+        <a href="/calendario-academico"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><path stroke-linecap="round" d="M16 2v4M8 2v4M3 10h18"/>
+          </svg>
           <span>Calendário Académico</span>
         </a>
-        <a href="/guia-estudante" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor"/><path d="M8 10h8M8 14h6" stroke="currentColor"/></svg></span>
+
+        <a href="/guia-estudante"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/>
+          </svg>
           <span>Guia do Estudante</span>
         </a>
-        <a href="/resultados" class="flex items-center space-x-3 py-2 px-4 text-[#1e3a5f] hover:text-[#F05A28] hover:bg-gray-50 rounded">
-          <span><svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="10" rx="2" stroke="currentColor"/><path d="M8 11h8" stroke="currentColor"/></svg></span>
+
+        <a href="/resultados"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18"/><path stroke-linecap="round" d="M7 13v6M12 9v10M17 5v14"/>
+          </svg>
           <span>Resultados de Exames</span>
         </a>
+
+        {{-- ── Separador: Links Rápidos ── --}}
+        <div class="mx-5 my-3 border-t border-gray-100"></div>
+        <p class="px-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Links Rápidos</p>
+
+        <a href="/contactos"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3l2 4-3 2a11 11 0 005 5l2-3 4 2v3a2 2 0 01-2 2A16 16 0 013 5z"/>
+          </svg>
+          <span>Contacto</span>
+        </a>
+
+        <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path stroke-linecap="round" d="M2 7l10 7 10-7"/>
+          </svg>
+          <span>Webmail</span>
+          <svg class="w-3 h-3 ml-auto flex-shrink-0 text-gray-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+
+        <a href="/servicos"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <span>Carta de Serviços</span>
+        </a>
+
+        {{-- Espaçamento no fundo do scroll --}}
+        <div class="h-6"></div>
+      </nav>
+
+      {{-- ── Rodapé do painel ── --}}
+      <div class="px-5 py-3 border-t border-gray-100 bg-gray-50 flex items-center gap-2">
+        <div class="w-1.5 h-1.5 rounded-full bg-[#F05A28]"></div>
+        <span class="text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Instituto Superior Politécnico do Bié</span>
       </div>
     </div>
   </div>
 </header>
 
 <style>
-    /* Prevent dropdown from being cut off at the screen edge */
-    @media (max-width: 1200px) {
-      .navbar-dropdown-large {
-        max-width: 95vw !important;
-        width: 95vw !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-      }
-    }
   [x-cloak] { display: none !important; }
-  
+
+  /* Linha esquerda colorida nos links activos do mobile */
+  .mobile-nav-link:focus-visible {
+    outline: 2px solid #F05A28;
+    outline-offset: -2px;
+  }
+
+  /* Prevent dropdown from being cut off at the screen edge */
+  @media (max-width: 1200px) {
+    .navbar-dropdown-large {
+      max-width: 95vw !important;
+      width: 95vw !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+  }
+
   .homepage-nav {
     background-color: rgba(255, 255, 255, 0.2) !important;
     backdrop-filter: blur(12px) !important;
