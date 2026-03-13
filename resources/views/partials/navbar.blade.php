@@ -1,7 +1,6 @@
 ﻿<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-[#1e3a5f] px-3 py-2 rounded shadow z-60">Saltar para o conteúdo</a>
 
 <header x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false, openInfra: false, openInst: false, openExt: false }"
-        @click.window="openInfra = false; openInst = false; openExt = false"
         class="sticky top-0 z-50 shadow-sm">
   <!-- Barra de acento — topo da página -->
   <div style="background:#F05A28;height:3px;"></div>
@@ -27,7 +26,7 @@
     <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#F05A28]"><span>🏛️</span> Órgãos de gestão</a> -->
 
     <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
-    <div class="relative">
+    <div data-dd class="relative">
               <button @click.stop="openInfra = !openInfra; openInst = false; openExt = false" @keydown.escape="openInfra = false"
                 class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
                 :aria-expanded="openInfra ? 'true' : 'false'" aria-haspopup="true" aria-controls="infra-dropdown">
@@ -101,7 +100,7 @@
         <span>Pesquisa e Inovação</span>
       </a>
       <!-- Dropdown Institucional - Desktop -->
-      <div class="relative inline-block">
+      <div data-dd class="relative inline-block">
         <button @click.stop="openInst = !openInst; openInfra = false; openExt = false" @keydown.escape="openInst = false"
           class="flex items-center gap-1 text-[#1e3a5f] hover:text-[#F05A28] font-semibold uppercase text-[13px] tracking-widest focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
           :aria-expanded="openInst ? 'true' : 'false'" aria-haspopup="true" aria-controls="institucional-dropdown">
@@ -126,7 +125,7 @@
         </div>
       </div>
       <!-- Dropdown Extensão Universitária - Desktop -->
-      <div class="relative inline-block">
+      <div data-dd class="relative inline-block">
         <button @click.stop="openExt = !openExt; openInfra = false; openInst = false" @keydown.escape="openExt = false"
           class="flex items-center gap-1 text-[#1e3a5f] hover:text-[#F05A28] font-semibold uppercase text-[13px] tracking-widest"
                 :aria-expanded="openExt ? 'true' : 'false'" aria-haspopup="true">

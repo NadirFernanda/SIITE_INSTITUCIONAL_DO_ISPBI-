@@ -6,6 +6,19 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+// Fechar dropdowns do navbar ao clicar fora (independente da versão do Alpine)
+document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-dd]')) return; // clique dentro de um dropdown — ignorar
+    const header = document.querySelector('header[x-data]');
+    if (!header || !window.Alpine) return;
+    try {
+        const d = window.Alpine.$data(header);
+        d.openInfra = false;
+        d.openInst  = false;
+        d.openExt   = false;
+    } catch (_) {}
+});
+
 // Animações leves de entrada no scroll para elementos marcados com a classe .scroll-reveal
 document.addEventListener('DOMContentLoaded', () => {
 	// Scroll reveal
