@@ -138,7 +138,7 @@
 
   <section class="py-8 bg-gray-100">
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Notícias institucional</h2>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Notícias Institucionais</h2>
       @component('components.noticias-carousel')
       @endcomponent
     </div>
