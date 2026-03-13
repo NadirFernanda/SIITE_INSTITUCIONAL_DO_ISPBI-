@@ -138,9 +138,9 @@
                <div x-show="openExt" x-cloak
                  class="absolute left-0 mt-2 w-64 bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 p-2">
           <div class="grid grid-cols-1 gap-2">
-            <a href="/cultura" class="block px-4 py-2 font-bold rounded hover:bg-[#1e3a5f] hover:text-white">Extensão Universitária</a>
-            <a href="/estagios" class="block px-4 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Estágios</a>
-            <a href="/alumni" class="block px-4 py-2 rounded hover:bg-[#1e3a5f] hover:text-white">Alumni</a>
+            <a href="/cultura" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Cultura e Extensão</a>
+            <a href="/estagios" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Estágios</a>
+            <a href="/alumni" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Alumni</a>
           </div>
         </div>
       </div>
@@ -257,7 +257,7 @@
           <div x-show="openExtMobile" x-cloak
                x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                class="bg-gray-50 border-y border-gray-100">
-            <a href="/cultura"   class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Extensão Universitária</a>
+            <a href="/cultura"   class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Cultura e Extensão</a>
             <a href="/estagios"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Estágios</a>
             <a href="/alumni"    class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Alumni</a>
           </div>
