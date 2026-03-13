@@ -58,7 +58,8 @@
           [
             'ano' => '29 OUTUBRO 2020',
             'titulo' => 'Instituto Superior Politécnico do Bié',
-            'descricao' => '<span class="text-xl mb-6 opacity-95">Criado pelo <strong>Decreto Presidencial nº 285/20</strong></span><br><span class="text-lg max-w-3xl ml-auto opacity-90">O ISP-Bié surge como instituição autónoma de ensino superior, consolidando mais de uma década de história de formação académica na província do Bié, com o compromisso de formar profissionais altamente qualificados para o desenvolvimento sustentável da região e do país.</span>',
+            'subtitulo' => 'Criado pelo Decreto Presidencial n.º 285/20',
+            'descricao' => 'O ISP-Bié surge como instituição autónoma de ensino superior, consolidando mais de uma década de história de formação académica na província do Bié, com o compromisso de formar profissionais altamente qualificados para o desenvolvimento sustentável da região e do país.',
             'cor' => 'from-[#2563eb] via-[#3B82F6] to-[#2563eb]'
           ],
         ];
@@ -73,7 +74,10 @@
               <div class="w-full max-w-6xl bg-gradient-to-r from-[#2563eb] to-[#3B82F6] rounded-3xl shadow-2xl p-8 md:p-16 text-white text-center flex flex-col items-center">
                 <div class="inline-block bg-white text-[#2563eb] px-10 py-4 rounded-full font-bold text-2xl md:text-3xl mb-8 shadow">{{ $evento['ano'] }}</div>
                 <h3 class="text-4xl md:text-5xl font-extrabold mb-6">{{ $evento['titulo'] }}</h3>
-                <div class="text-xl md:text-2xl font-medium mb-4">{{ $evento['descricao'] }}</div>
+                @if(!empty($evento['subtitulo']))
+                  <p class="text-xl font-semibold mb-4 opacity-95">{{ $evento['subtitulo'] }}</p>
+                @endif
+                <div class="text-lg md:text-xl font-medium opacity-90">{{ $evento['descricao'] }}</div>
               </div>
             </div>
           @else
