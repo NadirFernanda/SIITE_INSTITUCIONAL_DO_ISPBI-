@@ -16,12 +16,12 @@ class MidiaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'arquivo' => 'required|file|max:5120',
+            'arquivo' => 'required|file|mimes:jpg,jpeg,png,gif,webp,pdf,doc,docx,xls,xlsx,ppt,pptx,mp4,mp3|max:5120',
         ]);
         $file = $request->file('arquivo');
         $path = $file->store('midias', 'public');
         \App\Models\Midia::create([
-            'nome' => $file->getClientOriginalName(),
+            'nome' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
             'caminho' => $path,
         ]);
         return redirect('/admin/midia')->with('success', 'Arquivo enviado com sucesso!');

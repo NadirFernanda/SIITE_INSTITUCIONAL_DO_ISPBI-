@@ -50,6 +50,16 @@ class ResultadosController extends Controller
                 $base = 'https://app.multiplo.io/isp-bie/';
                 $redirect = rtrim($base, '/') . '/' . ltrim($redirect, '/');
             }
+            // Whitelist: only allow redirects to the trusted external portal
+            $allowed = ['https://app.multiplo.io/'];
+            $safe = collect($allowed)->contains(fn($base) => str_starts_with($redirect, $base));
+            if (!$safe) {
+                Log::warning('Blocked suspicious redirect from external server: ' . $redirect);
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => false, 'message' => 'Erro de redirecionamento.'], 400);
+                }
+                return redirect()->route('resultados')->with('resultados_error', 'Erro de redirecionamento.');
+            }
             if ($request->expectsJson()) {
                 return response()->json(['success' => true, 'redirect' => $redirect], 200);
             }

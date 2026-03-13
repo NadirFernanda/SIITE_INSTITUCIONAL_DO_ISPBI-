@@ -71,9 +71,9 @@
             <!-- Último card: destaque igual à imagem, largura aumentada -->
             <div class="flex justify-center items-center w-full relative z-10">
               <div class="w-full max-w-6xl bg-gradient-to-r from-[#2563eb] to-[#3B82F6] rounded-3xl shadow-2xl p-8 md:p-16 text-white text-center flex flex-col items-center">
-                <div class="inline-block bg-white text-[#2563eb] px-10 py-4 rounded-full font-bold text-2xl md:text-3xl mb-8 shadow">{!! $evento['ano'] !!}</div>
-                <h3 class="text-4xl md:text-5xl font-extrabold mb-6">{!! $evento['titulo'] !!}</h3>
-                <div class="text-xl md:text-2xl font-medium mb-4">{!! $evento['descricao'] !!}</div>
+                <div class="inline-block bg-white text-[#2563eb] px-10 py-4 rounded-full font-bold text-2xl md:text-3xl mb-8 shadow">{{ $evento['ano'] }}</div>
+                <h3 class="text-4xl md:text-5xl font-extrabold mb-6">{{ $evento['titulo'] }}</h3>
+                <div class="text-xl md:text-2xl font-medium mb-4">{{ $evento['descricao'] }}</div>
               </div>
             </div>
           @else
@@ -82,9 +82,9 @@
                 <!-- Linha vertical central dentro do card -->
                 <div class="hidden md:block absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gray-200 z-0"></div>
                 <div class="bg-white p-6 rounded-lg shadow-lg relative z-10">
-                  <div class="inline-block bg-gradient-to-r {{ $evento['cor'] }} text-white px-4 py-2 rounded-full font-bold mb-4">{!! $evento['ano'] !!}</div>
-                  <h3 class="text-xl font-bold text-[#2563eb] mb-3">{!! $evento['titulo'] !!}</h3>
-                  <p class="text-gray-700 leading-relaxed text-sm">{!! $evento['descricao'] !!}</p>
+                  <div class="inline-block bg-gradient-to-r {{ $evento['cor'] }} text-white px-4 py-2 rounded-full font-bold mb-4">{{ $evento['ano'] }}</div>
+                  <h3 class="text-xl font-bold text-[#2563eb] mb-3">{{ $evento['titulo'] }}</h3>
+                  <p class="text-gray-700 leading-relaxed text-sm">{{ $evento['descricao'] }}</p>
                 </div>
               </div>
             </div>

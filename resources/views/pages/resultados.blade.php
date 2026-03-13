@@ -45,7 +45,8 @@
           </div>
         @endif
 
-        <form id="resultados-form" method="post" action="https://app.multiplo.io/isp-bie/_config/valid.php" class="space-y-6">
+        <form id="resultados-form" method="post" action="{{ route('resultados.validar') }}" class="space-y-6">
+          @csrf
           <!-- Email -->
           <div>
             <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
