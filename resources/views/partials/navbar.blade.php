@@ -1,6 +1,8 @@
 ﻿<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-[#1e3a5f] px-3 py-2 rounded shadow z-60">Saltar para o conteúdo</a>
 
-<header x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false }" class="sticky top-0 z-50 shadow-sm">
+<header x-data="{ mobileMenuOpen: false, openExtMobile: false, openMobile: false, openInfraMobile: false, openInfra: false, openInst: false, openExt: false }"
+        @click.window="openInfra = false; openInst = false; openExt = false"
+        class="sticky top-0 z-50 shadow-sm">
   <!-- Barra de acento — topo da página -->
   <div style="background:#F05A28;height:3px;"></div>
 
@@ -25,8 +27,8 @@
     <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#F05A28]"><span>🏛️</span> Órgãos de gestão</a> -->
 
     <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
-    <div x-data="{ openInfra: false }" class="relative">
-              <button @click="openInfra = !openInfra" @keydown.escape="openInfra = false"
+    <div class="relative">
+              <button @click.stop="openInfra = !openInfra; openInst = false; openExt = false" @keydown.escape="openInfra = false"
                 class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
                 :aria-expanded="openInfra ? 'true' : 'false'" aria-haspopup="true" aria-controls="infra-dropdown">
               <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path stroke-linecap="round" d="M8 21h8M12 17v4"/></svg>
@@ -35,7 +37,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
         </svg>
       </button>
-            <div id="infra-dropdown" x-show="openInfra" @click.away="openInfra = false" x-cloak
+            <div id="infra-dropdown" x-show="openInfra" x-cloak
               class="absolute right-0 mt-2 w-64 bg-white text-[#183153] rounded-lg shadow-lg border border-gray-200 z-50 p-2 text-sm">
         <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#1e3a5f] hover:text-white font-semibold">Página de Sistemas</a>
         <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer" aria-label="Abrir SGF (abre em nova aba)"
@@ -99,16 +101,16 @@
         <span>Pesquisa e Inovação</span>
       </a>
       <!-- Dropdown Institucional - Desktop -->
-      <div x-data="{ open: false }" class="relative inline-block">
-        <button @click="open = !open" @keydown.escape="open = false"
+      <div class="relative inline-block">
+        <button @click.stop="openInst = !openInst; openInfra = false; openExt = false" @keydown.escape="openInst = false"
           class="flex items-center gap-1 text-[#1e3a5f] hover:text-[#F05A28] font-semibold uppercase text-[13px] tracking-widest focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]"
-          :aria-expanded="open ? 'true' : 'false'" aria-haspopup="true" aria-controls="institucional-dropdown">
+          :aria-expanded="openInst ? 'true' : 'false'" aria-haspopup="true" aria-controls="institucional-dropdown">
           <span><svg class="w-5 h-5 mr-1 text-[#1e3a5f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 21V7a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2h2a2 2 0 0 1 2 2v14H3zm2-2h14V7a1 1 0 0 0-1-1h-2v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6H4a1 1 0 0 0-1 1v12zm4-12V4h6v3H7z"/></svg></span> INSTITUCIONAL
           <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-                          <div id="institucional-dropdown" x-show="open" @click.away="open = false" x-cloak
+                          <div id="institucional-dropdown" x-show="openInst" x-cloak
                             class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 px-12 py-8 overflow-x-auto">
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
                   <a href="/sobre-ispbie" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Sobre o ISP-Bié</a>
@@ -124,8 +126,8 @@
         </div>
       </div>
       <!-- Dropdown Extensão Universitária - Desktop -->
-      <div x-data="{ openExt: false }" class="relative inline-block">
-        <button @click="openExt = !openExt" @keydown.escape="openExt = false"
+      <div class="relative inline-block">
+        <button @click.stop="openExt = !openExt; openInfra = false; openInst = false" @keydown.escape="openExt = false"
           class="flex items-center gap-1 text-[#1e3a5f] hover:text-[#F05A28] font-semibold uppercase text-[13px] tracking-widest"
                 :aria-expanded="openExt ? 'true' : 'false'" aria-haspopup="true">
           <span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
@@ -134,7 +136,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
           </svg>
         </button>
-               <div x-show="openExt" @click.away="openExt = false" x-cloak
+               <div x-show="openExt" x-cloak
                  class="absolute left-0 mt-2 w-64 bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 p-2">
           <div class="grid grid-cols-1 gap-2">
             <a href="/cultura" class="block px-4 py-2 font-bold rounded hover:bg-[#1e3a5f] hover:text-white">Extensão Universitária</a>
