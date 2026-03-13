@@ -85,47 +85,5 @@
         </script>
         @endpush
 
-    {{-- DevTools / inspect prevention --}}
-    <script>
-        (function () {
-            // Disable right-click context menu
-            document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-
-            // Block common DevTools keyboard shortcuts
-            document.addEventListener('keydown', function (e) {
-                // F12
-                if (e.key === 'F12') { e.preventDefault(); return false; }
-                // Ctrl+Shift+I / Cmd+Option+I
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return false; }
-                // Ctrl+Shift+J / Cmd+Option+J
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return false; }
-                // Ctrl+Shift+C / Cmd+Option+C
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
-                // Ctrl+U (view source)
-                if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return false; }
-                // Ctrl+S (save page)
-                if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) { e.preventDefault(); return false; }
-                // Ctrl+A (select all)
-                if ((e.ctrlKey || e.metaKey) && (e.key === 'A' || e.key === 'a')) { e.preventDefault(); return false; }
-            });
-
-            // Disable text selection
-            document.addEventListener('selectstart', function (e) { e.preventDefault(); });
-
-            // Detect DevTools open via size threshold and redirect
-            (function devToolsDetect() {
-                var threshold = 160;
-                setInterval(function () {
-                    if (
-                        window.outerWidth - window.innerWidth > threshold ||
-                        window.outerHeight - window.innerHeight > threshold
-                    ) {
-                        document.body.innerHTML = '';
-                        window.location.href = '/';
-                    }
-                }, 1000);
-            })();
-        })();
-    </script>
 </body>
 </html>
