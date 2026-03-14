@@ -172,42 +172,6 @@ $cursos = [
     @endforeach
 </div>
 
-{{-- Highlights gradient strip --}}
-<div class="mt-12 relative rounded-2xl overflow-hidden shadow-xl scroll-reveal" style="background:linear-gradient(135deg,#0f1f3d 0%,#1e3a5f 40%,#1d4ed8 100%);">
-    <div class="absolute -top-10 -right-10 w-56 h-56 rounded-full opacity-10" style="background:radial-gradient(circle,#ffffff,transparent 65%)"></div>
-    <div class="absolute -bottom-8 left-1/3 w-48 h-48 rounded-full opacity-10" style="background:radial-gradient(circle,#F05A28,transparent 65%)"></div>
-    <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2) 50%,transparent);"></div>
-    <div class="relative z-10 p-8 md:p-10">
-        <p class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-6">ISP-Bié em Números</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{{ count($cursos) }}</div>
-                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Cursos</div>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{{ $totalVagas }}</div>
-                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Vagas / Ano</div>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">5</div>
-                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Acreditados</div>
-            </div>
-            <div>
-                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">15+</div>
-                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Anos de Ensino</div>
-            </div>
-        </div>
-        <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-blue-100 text-sm opacity-80">Formação académica de qualidade para o desenvolvimento de Angola</p>
-            <a href="/candidaturas" class="inline-flex items-center gap-2 bg-[#F05A28] hover:bg-[#d04a1e] text-white font-bold px-6 py-3 rounded-xl shadow transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 whitespace-nowrap text-sm">
-                Candidatar-me
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </a>
-        </div>
-    </div>
-    <div class="absolute bottom-0 left-0 right-0 h-[3px]" style="background:linear-gradient(90deg,transparent,#F05A28 30%,#60a5fa 70%,transparent);"></div>
-</div>
-
 {{-- Secção cursos acreditados --}}
 <div class="mt-16 pt-10 border-t border-gray-100">
     <div class="flex items-center gap-3 mb-6">
