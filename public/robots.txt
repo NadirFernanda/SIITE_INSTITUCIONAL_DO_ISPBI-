@@ -1,2 +1,12 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login
+Disallow: /logout
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /profile
+Disallow: /dashboard
+Disallow: /verify-email
+Disallow: /confirm-password
+
+Sitemap: https://isp-bie.ao/sitemap.xml
