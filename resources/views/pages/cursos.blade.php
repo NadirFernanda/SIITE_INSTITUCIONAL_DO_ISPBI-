@@ -97,35 +97,50 @@ $cursos = [
 @endphp
 
 {{-- Intro strip --}}
+@php $totalVagas = array_sum(array_column($cursos, 'vagas')); @endphp
 <div class="mb-8 flex items-center gap-3">
     <span class="inline-block w-8 h-0.5 bg-[#F05A28]"></span>
-    <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">6 cursos disponíveis</p>
+    <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">{{ count($cursos) }} cursos disponíveis</p>
 </div>
 
 {{-- Grade de Cards --}}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     @foreach($cursos as $curso)
     <a href="{{ route($curso['route']) }}"
-       class="group flex flex-col bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2">
+       x-data="{ hovered: false }"
+       @mouseenter="hovered = true" @mouseleave="hovered = false"
+       :style="hovered ? 'box-shadow: 0 24px 56px -8px {{ $curso['color'] }}55, 0 4px 16px -4px {{ $curso['color'] }}33' : ''"
+       class="group flex flex-col bg-white rounded-2xl shadow-md hover:-translate-y-2 transition-all duration-300 overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-2"
+       style="focus-ring-color: {{ $curso['color'] }};">
 
-        {{-- Gradient top bar --}}
-        <div class="h-1.5 w-full" style="background:linear-gradient(90deg,{{ $curso['color'] }},{{ $curso['color'] }}99);"></div>
+        {{-- Vivid coloured header with glass shine --}}
+        <div class="relative h-32 flex items-center justify-center overflow-hidden"
+             style="background: linear-gradient(140deg, {{ $curso['color'] }} 0%, {{ $curso['color'] }}cc 60%, {{ $curso['color'] }}88 100%);">
+            {{-- Glass highlight overlay --}}
+            <div class="absolute inset-0 bg-gradient-to-br from-white/30 via-white/5 to-transparent pointer-events-none"></div>
+            {{-- Decorative depth circles --}}
+            <div class="absolute -top-10 -left-10 w-36 h-36 rounded-full bg-white/10 pointer-events-none"></div>
+            <div class="absolute -bottom-12 -right-8 w-32 h-32 rounded-full bg-black/15 pointer-events-none"></div>
+            {{-- Icon --}}
+            <div class="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl"
+                 style="background: rgba(255,255,255,0.22); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3);">
+                <svg class="w-8 h-8 text-white drop-shadow" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    {!! $curso['icon'] !!}
+                </svg>
+            </div>
+            {{-- Tag badge --}}
+            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white"
+                  style="background: rgba(0,0,0,0.25); backdrop-filter: blur(4px);">
+                {{ $curso['tag'] }}
+            </span>
+            {{-- Shine line at bottom of header --}}
+            <div class="absolute bottom-0 left-0 right-0 h-px" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5) 50%, transparent);"></div>
+        </div>
 
         <div class="p-6 flex flex-col flex-1">
-            {{-- Icon + badge --}}
-            <div class="flex items-start justify-between mb-5">
-                <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm" style="background:{{ $curso['color'] }}18;">
-                    <svg class="w-7 h-7" fill="none" stroke="{{ $curso['color'] }}" stroke-width="1.5" viewBox="0 0 24 24">
-                        {!! $curso['icon'] !!}
-                    </svg>
-                </div>
-                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide" style="background:{{ $curso['color'] }}14; color:{{ $curso['color'] }};">
-                    {{ $curso['tag'] }}
-                </span>
-            </div>
-
             {{-- Title --}}
-            <h2 class="text-base font-bold text-[#1e3a5f] leading-snug mb-1 group-hover:text-[#F05A28] transition-colors duration-200">
+            <h2 class="text-base font-bold text-[#1e3a5f] leading-snug mb-1 transition-colors duration-200"
+                :style="hovered ? 'color: {{ $curso['color'] }}' : ''">
                 {{ $curso['title'] }}
             </h2>
 
@@ -141,9 +156,10 @@ $cursos = [
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
                     {{ $curso['duration'] }}
                 </span>
-                <span class="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-lg transition-colors duration-200" style="background:{{ $curso['color'] }}14; color:{{ $curso['color'] }};">
+                <span class="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-lg text-white shadow-sm transition-all duration-200 group-hover:shadow-md"
+                      style="background: {{ $curso['color'] }};">
                     Ver curso
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </span>
             </div>
         </div>
@@ -153,21 +169,18 @@ $cursos = [
 
 {{-- Highlights gradient strip --}}
 <div class="mt-12 relative rounded-2xl overflow-hidden shadow-xl scroll-reveal" style="background:linear-gradient(135deg,#0f1f3d 0%,#1e3a5f 40%,#1d4ed8 100%);">
-    {{-- Dot overlay --}}
-    <div class="absolute inset-0 pointer-events-none opacity-[0.07]">
-        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="cs-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="white"/></pattern></defs><rect width="100%" height="100%" fill="url(#cs-dots)"/></svg>
-    </div>
     <div class="absolute -top-10 -right-10 w-56 h-56 rounded-full opacity-10" style="background:radial-gradient(circle,#ffffff,transparent 65%)"></div>
     <div class="absolute -bottom-8 left-1/3 w-48 h-48 rounded-full opacity-10" style="background:radial-gradient(circle,#F05A28,transparent 65%)"></div>
+    <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2) 50%,transparent);"></div>
     <div class="relative z-10 p-8 md:p-10">
         <p class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-6">ISP-Bié em Números</p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">6</div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{{ count($cursos) }}</div>
                 <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Cursos</div>
             </div>
             <div>
-                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">240</div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">{{ $totalVagas }}</div>
                 <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Vagas / Ano</div>
             </div>
             <div>

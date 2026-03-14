@@ -10,18 +10,6 @@
 --}}
 <div class="relative bg-gradient-to-br {{ $gradient ?? 'from-[#0f1f3d] via-[#1e3a5f] to-[#1d4ed8]' }} rounded-2xl overflow-hidden mb-10 shadow-2xl">
 
-    {{-- Dot matrix pattern overlay --}}
-    <div class="absolute inset-0 pointer-events-none opacity-[0.07]">
-        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <pattern id="page-hero-dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
-                    <circle cx="2" cy="2" r="1.5" fill="white"/>
-                </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#page-hero-dots)"/>
-        </svg>
-    </div>
-
     {{-- Decorative glow circles --}}
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
         <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-[0.12]" style="background:radial-gradient(circle,#ffffff,transparent 65%)"></div>
