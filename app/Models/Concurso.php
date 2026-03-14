@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Concurso extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'title', 'summary', 'body', 'status', 'publish_at', 'created_by', 'area',
     ];
 
-    protected $dates = ['publish_at'];
+    protected $casts = ['publish_at' => 'datetime'];
 
     public function attachments()
     {

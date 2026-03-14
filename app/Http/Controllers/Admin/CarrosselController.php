@@ -32,7 +32,7 @@ class CarrosselController extends Controller
             $data['imagem'] = $request->file('imagem')->store('carrossel', 'public');
         }
         $carrossel->update($data);
-        return redirect('/admin/carrossel')->with('success', 'Carrossel atualizado com sucesso!');
+        return redirect()->route('admin.carrossel.index')->with('success', 'Carrossel atualizado com sucesso!');
     }
     public function edit($id)
     {
@@ -64,7 +64,7 @@ class CarrosselController extends Controller
             'link' => $request->link,
             'ordem' => $request->ordem ?? 0,
         ]);
-        return redirect('/admin/carrossel')->with('success', 'Imagem adicionada ao carrossel!');
+        return redirect()->route('admin.carrossel.index')->with('success', 'Imagem adicionada ao carrossel!');
     }
 
     public function destroy($id)
@@ -72,7 +72,7 @@ class CarrosselController extends Controller
         $item = Carrossel::findOrFail($id);
         \Storage::disk('public')->delete($item->imagem);
         $item->delete();
-        return redirect('/admin/carrossel')->with('success', 'Imagem removida do carrossel!');
+        return redirect()->route('admin.carrossel.index')->with('success', 'Imagem removida do carrossel!');
     }
 
     public function togglePublicar($id)
