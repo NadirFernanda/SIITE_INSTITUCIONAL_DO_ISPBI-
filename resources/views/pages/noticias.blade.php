@@ -34,6 +34,9 @@
           <div class="col-span-3 text-center text-gray-500 py-12">Nenhuma notícia publicada.</div>
         @endforelse
       </div>
+      <div class="mt-10">
+        {{ $noticias->links() }}
+      </div>
 
 </div>
 @endsection

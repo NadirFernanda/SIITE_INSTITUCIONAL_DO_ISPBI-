@@ -9,4 +9,8 @@ class Estatistica extends Model
     protected $fillable = [
         'titulo', 'valor', 'descricao', 'ordem', 'icone'
     ];
+
+    protected $casts = [
+        'ordem' => 'integer',
+    ];
 }

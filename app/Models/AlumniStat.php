@@ -17,4 +17,11 @@ class AlumniStat extends Model
         'countries_count',
         'companies_founded',
     ];
+
+    protected $casts = [
+        'alumni_count'              => 'integer',
+        'employability_percentage'  => 'integer',
+        'countries_count'           => 'integer',
+        'companies_founded'         => 'integer',
+    ];
 }

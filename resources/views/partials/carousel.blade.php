@@ -1,7 +1,7 @@
 ﻿<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <div class="carousel relative overflow-hidden rounded-lg shadow-sm bg-white">
     <div class="carousel-track flex transition-transform duration-700">
-      @php($carrosseis = \App\Models\Carrossel::orderBy('ordem')->get())
+      @php($carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->get())
       @if($carrosseis->count())
         @foreach($carrosseis as $item)
         <div class="carousel-slide min-w-full p-6">

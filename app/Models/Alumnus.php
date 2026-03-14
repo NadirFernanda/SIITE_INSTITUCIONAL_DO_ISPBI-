@@ -22,4 +22,11 @@ class Alumnus extends Model
         'publicado',
         'testemunho',
     ];
+
+    protected $casts = [
+        'trabalha'  => 'boolean',
+        'publicado' => 'boolean',
+        'testemunho'=> 'boolean',
+        'ano'       => 'integer',
+    ];
 }

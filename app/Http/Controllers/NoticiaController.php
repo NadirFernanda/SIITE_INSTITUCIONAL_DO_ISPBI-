@@ -8,7 +8,7 @@ class NoticiaController extends Controller
 {
     public function index()
     {
-        $noticias = Noticia::where('publicada', true)->orderByDesc('data')->get();
+        $noticias = Noticia::where('publicada', true)->orderByDesc('data')->paginate(20);
         return view('pages.noticias', compact('noticias'));
     }
 

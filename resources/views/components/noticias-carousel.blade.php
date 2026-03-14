@@ -1,6 +1,3 @@
-@php
-    $noticiasRecentes = \App\Models\Noticia::where('publicada', 1)->orderByDesc('data')->take(6)->get();
-@endphp
 <div
     class="relative w-full max-w-5xl mx-auto my-12"
     x-data="{

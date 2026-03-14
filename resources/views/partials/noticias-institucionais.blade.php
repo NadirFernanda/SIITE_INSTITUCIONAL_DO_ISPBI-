@@ -9,9 +9,6 @@ use Illuminate\Support\Str;
       <div class="h-1 w-24 bg-[#3B82F6]"></div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-      @php
-        $noticias = \App\Models\Noticia::where('institucional', true)->orderByDesc('data')->take(6)->get();
-      @endphp
       @forelse($noticias as $noticia)
         <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
           @if($noticia->imagem)

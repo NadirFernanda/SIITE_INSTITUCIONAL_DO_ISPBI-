@@ -5,26 +5,45 @@ namespace App\Providers;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         if (app()->environment('production')) {
             \URL::forceScheme('https');
         }
+
+        // View Composers: inject DB data into components/partials that previously
+        // had @php query blocks, keeping views query-free.
+        View::composer('welcome', function ($view) {
+            $view->with('estatisticas', \App\Models\Estatistica::orderBy('ordem')->get());
+        });
+
+        View::composer('components.noticias-carousel', function ($view) {
+            $view->with('noticiasRecentes',
+                \App\Models\Noticia::where('publicada', 1)->orderByDesc('data')->take(6)->get()
+            );
+        });
+
+        View::composer('components.testemunhos-carousel', function ($view) {
+            $view->with('testemunhos',
+                \App\Models\Alumnus::where('publicado', 1)->where('testemunho', true)->orderByDesc('id')->take(10)->get()
+            );
+        });
+
+        View::composer('partials.noticias-institucionais', function ($view) {
+            $view->with('noticias',
+                \App\Models\Noticia::where('institucional', true)->orderByDesc('data')->take(6)->get()
+            );
+        });
 
         $this->configureRateLimiting();
     }

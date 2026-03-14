@@ -26,12 +26,7 @@ class AlumniStatsController extends Controller
             'companies_founded' => 'required|integer|min:0',
         ]);
 
-        $stats = AlumniStat::first();
-        if (! $stats) {
-            $stats = AlumniStat::create($data);
-        } else {
-            $stats->update($data);
-        }
+        AlumniStat::updateOrCreate([], $data);
 
         return redirect()->route('admin.alumni.stats')->with('success', 'Indicadores atualizados.');
     }

@@ -231,7 +231,6 @@
     <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
       <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
       <p class="text-lg mb-8 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
-      @php($estatisticas = \App\Models\Estatistica::orderBy('ordem')->get())
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach($estatisticas as $estatistica)
         <div class="text-center stat-card">

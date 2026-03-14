@@ -23,16 +23,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         }
         return view('admin.dashboard', compact('pending'));
     })->name('admin');
-    Route::get('/admin/paginas', function () {
-        // Exemplo: buscar páginas do banco se existir o model Pagina
-        // $paginas = App\Models\Pagina::all();
-        $paginas = [];
-        return view('admin.paginas', compact('paginas'));
-    })->name('admin.paginas');
-    Route::get('/admin/midia', function () {
-        $midias = [];
-        return view('admin.midia', compact('midias'));
-    })->name('admin.midia');
+    Route::get('/admin/paginas', [App\Http\Controllers\Admin\PaginaController::class, 'index'])->name('admin.paginas');
+    Route::get('/admin/paginas/create', [App\Http\Controllers\Admin\PaginaController::class, 'create'])->name('admin.paginas.create');
+    Route::post('/admin/paginas', [App\Http\Controllers\Admin\PaginaController::class, 'store'])->name('admin.paginas.store');
+    Route::get('/admin/midia', [App\Http\Controllers\Admin\MidiaController::class, 'index'])->name('admin.midia');
+    Route::post('/admin/midia', [App\Http\Controllers\Admin\MidiaController::class, 'store'])->name('admin.midia.store');
+    Route::delete('/admin/midia/{id}', [App\Http\Controllers\Admin\MidiaController::class, 'destroy'])->name('admin.midia.destroy');
     Route::resource('/admin/carrossel', App\Http\Controllers\Admin\CarrosselController::class)->names('admin.carrossel');
     Route::post('/admin/carrossel/{id}/toggle-publicar', [App\Http\Controllers\Admin\CarrosselController::class, 'togglePublicar'])->name('admin.carrossel.toggle-publicar');
     Route::get('/admin/alumni', [App\Http\Controllers\AdminAlumniController::class, 'index'])->name('admin.alumni');
@@ -40,10 +36,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/alumni/stats', [App\Http\Controllers\Admin\AlumniStatsController::class, 'update'])->name('admin.alumni.stats.update');
     Route::post('/admin/alumni/{id}/toggle-publicar', [App\Http\Controllers\AdminAlumniController::class, 'togglePublicar'])->name('admin.alumni.toggle-publicar');
     Route::post('/admin/alumni/{id}/toggle-testemunho', [App\Http\Controllers\AdminAlumniController::class, 'toggleTestemunho'])->name('admin.alumni.toggle-testemunho');
-    Route::get('/admin/usuarios', function () {
-        $usuarios = [];
-        return view('admin.usuarios', compact('usuarios'));
-    })->name('admin.usuarios');
+    Route::get('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('admin.usuarios');
     Route::get('/admin/configuracoes', function () {
         $configuracoes = [];
         return view('admin.configuracoes', compact('configuracoes'));

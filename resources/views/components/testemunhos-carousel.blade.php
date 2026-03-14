@@ -1,7 +1,4 @@
-@php
-        $testemunhos = \App\Models\Alumnus::where('publicado', 1)->whereNotNull('testemunho')->orderByDesc('id')->take(10)->get();
-@endphp
-@if($testemunhos->count())
+@if(isset($testemunhos) && $testemunhos->count())
 <div class="relative w-full max-w-7xl mx-auto my-12" x-data="{ current: 0, total: {{ $testemunhos->count() }} }" x-init="setInterval(() => { current = (current + 1) % total }, 7000)" style="margin-bottom:48px;">
         <div class="overflow-hidden rounded-2xl shadow-lg bg-white" style="margin-bottom: 32px;">
                 <div class="flex transition-transform duration-700" :style="'transform: translateX(-' + (current * 100) + '%)'">

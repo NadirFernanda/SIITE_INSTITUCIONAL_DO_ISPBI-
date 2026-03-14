@@ -12,4 +12,9 @@ class Project extends Model
     protected $fillable = [
         'title', 'summary', 'status', 'lead', 'start_date', 'end_date', 'link'
     ];
+
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date'   => 'date',
+    ];
 }
