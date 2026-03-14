@@ -53,18 +53,21 @@ class SecureHeaders
         $response->headers->set('Cross-Origin-Resource-Policy', 'same-origin');
 
         // --- Content Security Policy ---
-        // 'unsafe-eval' has been removed to prevent dynamic code execution (XSS vector).
-        // 'unsafe-inline' is retained for styles/scripts until a nonce-based approach
-        // is adopted; 'base-uri' and 'form-action' are locked to self to block
-        // base-tag hijacking and cross-site form submissions.
+        // 'unsafe-eval' is required by Alpine.js v3 which uses new Function() to
+        // evaluate directive expressions (x-data, x-show, x-on, etc.). Removing it
+        // silently breaks all Alpine interactivity. It is retained here alongside
+        // 'unsafe-inline' until a nonce/hash-based CSP is adopted.
+        // 'base-uri' and 'form-action' are locked to 'self' to block base-tag
+        // hijacking and cross-site form submissions.
+        // fonts.bunny.net is allowed for the admin login layout (Figtree font).
         $response->headers->set(
             'Content-Security-Policy',
             implode(' ', [
                 "default-src 'self';",
-                "script-src 'self' 'unsafe-inline';",
-                "style-src 'self' 'unsafe-inline';",
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval';",
+                "style-src 'self' 'unsafe-inline' https://fonts.bunny.net;",
                 "img-src 'self' data: https:;",
-                "font-src 'self' data:;",
+                "font-src 'self' data: https://fonts.bunny.net;",
                 "frame-src https://www.google.com https://www.youtube.com;",
                 "connect-src 'self';",
                 "object-src 'none';",
