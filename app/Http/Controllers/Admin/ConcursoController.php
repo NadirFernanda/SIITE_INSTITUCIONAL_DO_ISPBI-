@@ -15,17 +15,20 @@ class ConcursoController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Concurso::class);
         $concursos = Concurso::orderByDesc('publish_at')->paginate(20);
         return view('admin.concursos.index', compact('concursos'));
     }
 
     public function create()
     {
+        $this->authorize('create', Concurso::class);
         return view('admin.concursos.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Concurso::class);
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'summary' => 'nullable|string|max:500',
@@ -73,6 +76,7 @@ class ConcursoController extends Controller
 
     public function edit(Concurso $concurso)
     {
+        $this->authorize('update', $concurso);
         return view('admin.concursos.edit', compact('concurso'));
     }
 
@@ -86,6 +90,7 @@ class ConcursoController extends Controller
 
     public function update(Request $request, Concurso $concurso)
     {
+        $this->authorize('update', $concurso);
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'summary' => 'nullable|string|max:500',
@@ -189,6 +194,7 @@ class ConcursoController extends Controller
 
     public function destroy(Concurso $concurso)
     {
+        $this->authorize('delete', $concurso);
         // delete attached files
         foreach ($concurso->attachments as $att) {
             try {

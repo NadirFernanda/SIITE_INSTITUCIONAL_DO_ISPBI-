@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -20,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment('production')) {
             \URL::forceScheme('https');
         }
+
+        // Authorization policies
+        Gate::policy(\App\Models\Noticia::class, \App\Policies\NoticiaPolicy::class);
+        Gate::policy(\App\Models\Concurso::class, \App\Policies\ConcursoPolicy::class);
 
         // View Composers: inject DB data into components/partials that previously
         // had @php query blocks, keeping views query-free.

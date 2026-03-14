@@ -10,28 +10,33 @@ class AdminNoticiaController extends Controller
     public function togglePublicar($id)
     {
         $noticia = Noticia::findOrFail($id);
+        $this->authorize('update', $noticia);
         $noticia->publicada = !$noticia->publicada;
         $noticia->save();
         return redirect()->route('admin.noticias')->with('success', 'Status de publicação atualizado!');
     }
     public function create()
     {
+        $this->authorize('create', Noticia::class);
         return view('admin.noticias-create');
     }
     public function index()
     {
+        $this->authorize('viewAny', Noticia::class);
         $noticias = Noticia::orderByDesc('data')->get();
         return view('admin.noticias', compact('noticias'));
     }
     public function edit($id)
     {
         $noticia = Noticia::findOrFail($id);
+        $this->authorize('update', $noticia);
         return view('admin.noticias-edit', compact('noticia'));
     }
 
     public function update(Request $request, $id)
     {
         $noticia = Noticia::findOrFail($id);
+        $this->authorize('update', $noticia);
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
             'texto' => 'required|string',
@@ -58,6 +63,7 @@ class AdminNoticiaController extends Controller
     public function destroy($id)
     {
         $noticia = Noticia::findOrFail($id);
+        $this->authorize('delete', $noticia);
         if ($noticia->imagem) Storage::disk('public')->delete($noticia->imagem);
         if ($noticia->pdf) Storage::disk('public')->delete($noticia->pdf);
         $noticia->delete();
@@ -66,6 +72,7 @@ class AdminNoticiaController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Noticia::class);
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
             'texto' => 'required|string',

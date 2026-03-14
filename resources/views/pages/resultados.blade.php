@@ -39,69 +39,30 @@
         </p>
 
 
-        @if(session('resultados_error'))
-          <div class="mb-4 p-3 rounded bg-red-50 text-red-800" role="alert">
-            {{ session('resultados_error') }}
-          </div>
-        @endif
+        <p class="text-gray-600 mb-8">
+          O acesso ao Portal de Resultados é feito diretamente no sistema externo do ISP-BIE.
+          Utilize as suas credenciais do Portal do Estudante.
+        </p>
 
-        <form id="resultados-form" method="post" action="{{ route('resultados.validar') }}" class="space-y-6">
-          @csrf
-          <!-- Email -->
-          <div>
-            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
-              Email
-            </label>
-            <input 
-              type="email" 
-              id="email" 
-              name="Email" 
-              placeholder="Digite o seu email"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
-              required
-            >
-          </div>
-
-          <!-- Senha -->
-          <div>
-            <label for="senha" class="block text-sm font-semibold text-gray-700 mb-2">
-              Senha
-            </label>
-            <input 
-              type="password" 
-              id="senha" 
-              name="Senha" 
-              placeholder="Digite a sua senha"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent"
-              required
-            >
-          </div>
-
-          <!-- Botão -->
-          <button 
-            type="submit" 
-            name="Entrar"
-            value="Entrar"
-            class="w-full bg-[#2563eb] text-white py-3 rounded-lg font-semibold hover:bg-[#1f3342] transition-colors flex items-center justify-center"
-          >
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-            </svg>
-            Entrar no Portal
-          </button>
-
-          <!-- Feedback area (kept for progressive enhancement) -->
-          <div id="resultados-feedback" class="hidden mt-4 p-3 rounded text-sm"></div>
-
-        </form>
+        <a
+          href="https://app.multiplo.io/isp-bie/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full bg-[#2563eb] text-white py-3 rounded-lg font-semibold hover:bg-[#1f3342] transition-colors flex items-center justify-center"
+        >
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+          Aceder ao Portal de Resultados
+        </a>
 
         <!-- Links -->
         <div class="mt-6 pt-6 border-t border-gray-200 text-center">
-          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener" class="text-[#2563eb] hover:underline text-sm font-semibold">
+          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener noreferrer" class="text-[#2563eb] hover:underline text-sm font-semibold">
             Esqueceu a senha?
           </a>
           <span class="text-gray-400 mx-3">|</span>
-          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener" class="text-[#2563eb] hover:underline text-sm font-semibold">
+          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener noreferrer" class="text-[#2563eb] hover:underline text-sm font-semibold">
             Primeiro acesso? Criar conta
           </a>
         </div>
