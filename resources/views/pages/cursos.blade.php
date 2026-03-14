@@ -97,12 +97,6 @@ $cursos = [
 @endphp
 
 {{-- Intro strip --}}
-@php
-    // Vagas totais: lidas do painel de Estatísticas (admin pode actualizar em /admin/estatisticas)
-    // Pesquisa por título que contenha "vaga" (insensível a maiúsculas)
-    $estatVagas = \App\Models\Estatistica::whereRaw('LOWER(titulo) LIKE ?', ['%vaga%'])->first();
-    $totalVagas = $estatVagas ? (int) $estatVagas->valor : array_sum(array_column($cursos, 'vagas'));
-@endphp
 <div class="mb-8 flex items-center gap-3">
     <span class="inline-block w-8 h-0.5 bg-[#F05A28]"></span>
     <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">{{ count($cursos) }} cursos disponíveis</p>

@@ -23,8 +23,8 @@
                 {{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}
             </div>
 
-            <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                {!! nl2br(e($noticia->texto)) !!}
+            <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap">
+                {{ $noticia->texto }}
             </div>
 
             @if($noticia->pdf)
