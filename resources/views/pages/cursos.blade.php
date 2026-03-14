@@ -151,26 +151,68 @@ $cursos = [
     @endforeach
 </div>
 
+{{-- Highlights gradient strip --}}
+<div class="mt-12 relative rounded-2xl overflow-hidden shadow-xl scroll-reveal" style="background:linear-gradient(135deg,#0f1f3d 0%,#1e3a5f 40%,#1d4ed8 100%);">
+    {{-- Dot overlay --}}
+    <div class="absolute inset-0 pointer-events-none opacity-[0.07]">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="cs-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="white"/></pattern></defs><rect width="100%" height="100%" fill="url(#cs-dots)"/></svg>
+    </div>
+    <div class="absolute -top-10 -right-10 w-56 h-56 rounded-full opacity-10" style="background:radial-gradient(circle,#ffffff,transparent 65%)"></div>
+    <div class="absolute -bottom-8 left-1/3 w-48 h-48 rounded-full opacity-10" style="background:radial-gradient(circle,#F05A28,transparent 65%)"></div>
+    <div class="relative z-10 p-8 md:p-10">
+        <p class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-6">ISP-Bié em Números</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">6</div>
+                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Cursos</div>
+            </div>
+            <div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">240</div>
+                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Vagas / Ano</div>
+            </div>
+            <div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">5</div>
+                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Acreditados</div>
+            </div>
+            <div>
+                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">15+</div>
+                <div class="text-xs sm:text-sm font-semibold text-blue-200 uppercase tracking-widest mt-2">Anos de Ensino</div>
+            </div>
+        </div>
+        <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-blue-100 text-sm opacity-80">Formação académica de qualidade para o desenvolvimento de Angola</p>
+            <a href="/candidaturas" class="inline-flex items-center gap-2 bg-[#F05A28] hover:bg-[#d04a1e] text-white font-bold px-6 py-3 rounded-xl shadow transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 whitespace-nowrap text-sm">
+                Candidatar-me
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0 h-[3px]" style="background:linear-gradient(90deg,transparent,#F05A28 30%,#60a5fa 70%,transparent);"></div>
+</div>
+
 {{-- Secção cursos acreditados --}}
 <div class="mt-16 pt-10 border-t border-gray-100">
-    <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">
+    <div class="flex items-center gap-3 mb-6">
         <span class="inline-block w-6 h-0.5 bg-[#F05A28]"></span>
-        Cursos Acreditados
-    </h2>
+        <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest">
+            Cursos Acreditados
+        </h2>
+    </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach([
-            ['title'=>'Enfermagem',              'percent'=>'65,94%'],
-            ['title'=>'Psicologia',              'percent'=>'67,8%'],
-            ['title'=>'Engenharia Informática',  'percent'=>'68,60%'],
-            ['title'=>'Comunicação Social',      'percent'=>'73,63%'],
-            ['title'=>'Contabilidade',           'percent'=>'73,23%'],
+            ['title'=>'Enfermagem',              'percent'=>'65,94%', 'color'=>'#16A34A'],
+            ['title'=>'Psicologia',              'percent'=>'67,8%',  'color'=>'#D03B1F'],
+            ['title'=>'Engenharia Informática',  'percent'=>'68,60%', 'color'=>'#1D4ED8'],
+            ['title'=>'Comunicação Social',      'percent'=>'73,63%', 'color'=>'#C2710C'],
+            ['title'=>'Contabilidade',           'percent'=>'73,23%', 'color'=>'#92680A'],
         ] as $ac)
-        <div class="flex items-center justify-between bg-white rounded-2xl border border-gray-100 shadow-sm px-5 py-4 hover:shadow-md transition-shadow">
-            <div>
-                <p class="text-sm font-semibold text-[#1e3a5f]">{{ $ac['title'] }}</p>
+        <div class="group flex items-center justify-between rounded-2xl border border-gray-100 px-5 py-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 overflow-hidden relative bg-white">
+            <div class="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl" style="background:{{ $ac['color'] }};"></div>
+            <div class="pl-2">
+                <p class="text-sm font-bold text-[#1e3a5f]">{{ $ac['title'] }}</p>
                 <p class="text-[11px] text-gray-400 mt-0.5 uppercase tracking-wide">Acreditação oficial</p>
             </div>
-            <span class="text-lg font-bold text-[#1D4ED8]">{{ $ac['percent'] }}</span>
+            <span class="text-xl font-extrabold" style="color:{{ $ac['color'] }};">{{ $ac['percent'] }}</span>
         </div>
         @endforeach
     </div>

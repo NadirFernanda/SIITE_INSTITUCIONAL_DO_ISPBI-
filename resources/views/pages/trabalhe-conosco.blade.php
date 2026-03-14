@@ -1,30 +1,21 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-  <!-- Banner -->
-  <section class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-16 scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center space-x-4 mb-4">
-        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-        </svg>
-        <div>
-          <h1 class="text-4xl font-bold">Trabalhe Connosco</h1>
-          <p class="text-lg opacity-90">Faça parte da equipa do ISP-Bié</p>
-        </div>
-      </div>
-      
-      <nav class="text-sm opacity-75">
-        <a href="/" class="hover:underline">Início</a> \ Trabalhe Connosco
-      </nav>
-    </div>
-  </section>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+
+@include('partials.page-hero', [
+    'title'      => 'Trabalhe Connosco',
+    'subtitle'   => 'Faça parte da equipa do ISP-Bié — oportunidades abertas através de concursos públicos.',
+    'breadcrumb' => 'Trabalhe Connosco',
+    'ctaUrl'     => '/contactos',
+    'ctaLabel'   => 'Contacte-nos',
+])
 
   <!-- Introdução -->
-  <section class="py-16 bg-white scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-10 bg-white scroll-reveal">
+    <div class="">
       <div class="max-w-3xl mx-auto text-center mb-12">
-        <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Concursos Públicos</h2>
+        <h2 class="text-3xl font-bold text-[#1e3a5f] mb-4">Concursos Públicos</h2>
         <p class="text-lg text-gray-700 leading-relaxed">
           O Instituto Superior Politécnico do Bié recruta seus colaboradores através de 
           <strong>concursos públicos</strong>, garantindo transparência e igualdade de oportunidades. 
@@ -480,5 +471,6 @@
     </div>
   </section>
 
+</div>{{-- /max-w-7xl wrapper --}}
 @endsection
 
