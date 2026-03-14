@@ -30,7 +30,7 @@
               <div class="text-sm text-gray-500 mb-2">{{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}</div>
               <h3 class="text-xl font-bold text-[#2563eb] mb-3">{{ $noticia->titulo }}</h3>
               <p class="text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit(strip_tags($noticia->texto), 120) }}</p>
-              <a href="#noticia-{{ $noticia->id }}" class="text-[#2563eb] font-semibold hover:underline mt-auto">Ver mais →</a>
+              <a href="{{ route('noticias.show', $noticia->id) }}" class="text-[#2563eb] font-semibold hover:underline mt-auto">Ver mais →</a>
             </div>
           </article>
         @empty

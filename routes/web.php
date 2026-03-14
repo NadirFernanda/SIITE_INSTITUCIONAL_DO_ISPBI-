@@ -223,7 +223,7 @@ Route::view('/repositorio', 'pages.repositorio')->name('repositorio');
 Route::view('/busca-pessoas', 'pages.pesquisa-pessoas')->name('busca-pessoas');
 Route::view('/busca-biblioteca', 'pages.busca-biblioteca')->name('busca-biblioteca');
 // Rota para exibir notícia individual
-Route::get('/noticias/{id}', [App\Http\Controllers\NoticiaController::class, 'show']);
+Route::get('/noticias/{id}', [App\Http\Controllers\NoticiaController::class, 'show'])->name('noticias.show');
 Route::view('/servicos', 'pages.servicos')->name('servicos');
 
 require __DIR__.'/auth.php';

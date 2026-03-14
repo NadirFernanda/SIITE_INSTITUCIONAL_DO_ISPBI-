@@ -1,23 +1,48 @@
 @extends('layouts.site')
 
 @section('content')
-<div class="max-w-md mx-auto py-12 px-4">
-    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all flex flex-col">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16">
+    @include('partials.page-hero', [
+        'title'      => $noticia->titulo,
+        'subtitle'   => \Carbon\Carbon::parse($noticia->data)->translatedFormat('d \d\e F \d\e Y'),
+        'breadcrumb' => 'Notícias',
+    ])
+
+    <article class="bg-white rounded-2xl shadow-md overflow-hidden">
         @if($noticia->imagem)
-            <img src="{{ asset('storage/' . $noticia->imagem) }}" alt="Imagem da notícia" class="h-72 w-full object-cover">
-        @else
-            <div class="h-72 w-full flex items-center justify-center bg-gradient-to-br from-[#2563eb] to-[#3B82F6]">
-                <svg class="w-16 h-16 text-white opacity-60" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
+            <div class="relative w-full" style="aspect-ratio:16/9; overflow:hidden;">
+                <img src="{{ asset('storage/' . $noticia->imagem) }}"
+                     alt="{{ $noticia->titulo }}"
+                     class="absolute inset-0 w-full h-full object-contain bg-gray-50">
             </div>
         @endif
-        <div class="p-6 flex-1 flex flex-col">
-            <div class="text-sm text-gray-500 mb-2">{{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}</div>
-            <h1 class="text-2xl font-bold text-[#2563eb] mb-3">{{ $noticia->titulo }}</h1>
-            <div class="text-gray-700 text-base mb-4">{!! nl2br(e($noticia->texto)) !!}</div>
+
+        <div class="p-8">
+            <div class="flex items-center gap-3 text-sm text-gray-500 mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                {{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}
+            </div>
+
+            <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+                {!! nl2br(e($noticia->texto)) !!}
+            </div>
+
             @if($noticia->pdf)
-                <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-4">Ver PDF</a>
+                <div class="mt-8">
+                    <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank"
+                       class="inline-flex items-center gap-2 bg-[#2563eb] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Ver documento PDF
+                    </a>
+                </div>
             @endif
-            <a href="/noticias" class="text-blue-600 hover:underline mt-auto">← Voltar para notícias</a>
+
+            <div class="mt-10 pt-6 border-t border-gray-100">
+                <a href="{{ route('noticias') }}" class="inline-flex items-center gap-2 text-[#2563eb] font-semibold hover:underline">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Voltar para Notícias
+                </a>
+            </div>
         </div>
     </article>
 </div>
