@@ -5,11 +5,6 @@
 
   <!-- Hero institucional moderno + carrossel contido -->
   <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden mt-0 pt-0">
-    @php
-      $carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->take(5)->get();
-      $totalSlides = $carrosseis->count();
-      $hero = $carrosseis->first();
-    @endphp
     @if($totalSlides > 0)
       <div x-data="{ current: 0, slides: {{ $totalSlides }}, images: [@foreach($carrosseis as $c)'{{ asset('storage/' . $c->imagem) }}'@if(!$loop->last),@endif @endforeach] }"
            x-init="setInterval(() => { current = (current + 1) % slides }, 5000)"

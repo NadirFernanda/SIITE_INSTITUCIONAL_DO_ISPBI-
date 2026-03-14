@@ -25,31 +25,6 @@
     </div>
   </section>
 
-    @php
-      use Illuminate\Support\Carbon;
-
-      // Counts for quick diagnostics (shown only to authenticated users)
-        $allCount = \App\Models\Concurso::count();
-        // Use direct status check to avoid publish_at/timezone mismatches for now
-        $publishedCount = \App\Models\Concurso::where('status', 'published')->count();
-
-        // Fetch published concursos by status (temporary fix)
-        $concursos = \App\Models\Concurso::where('status', 'published')
-        ->orderByDesc('publish_at')
-        ->get()
-        ->map(function ($c) {
-          // Ensure publish_at is a Carbon instance to avoid ->format() errors
-          if ($c->publish_at && ! $c->publish_at instanceof Carbon) {
-            try {
-              $c->publish_at = Carbon::parse($c->publish_at);
-            } catch (\Throwable $e) {
-              $c->publish_at = null;
-            }
-          }
-          return $c;
-        });
-    @endphp
-
   <!-- Lista de Concursos -->
   <section class="py-12 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

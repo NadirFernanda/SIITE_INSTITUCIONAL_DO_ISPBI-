@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class NoticiaController extends Controller
 {
+    public function index()
+    {
+        $noticias = Noticia::where('publicada', true)->orderByDesc('data')->get();
+        return view('pages.noticias', compact('noticias'));
+    }
+
     public function show($id)
     {
         $noticia = Noticia::where('id', $id)

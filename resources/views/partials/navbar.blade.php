@@ -9,7 +9,7 @@
   <div class="hidden md:flex w-full" style="background:#0f1f3d;color:#ffffff;">
   <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs font-medium tracking-wide py-2">
   <div class="flex flex-wrap items-center gap-2">
-    <a href="/contactos" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto">
+    <a href="{{ route('contactos') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contacto">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2l2 5 3-1 3 1 2-5h2a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg>
       Contacto
     </a>
@@ -17,7 +17,7 @@
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Webmail
     </a>
-    <a href="/servicos" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Serviços">
+    <a href="{{ route('servicos') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Serviços">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 20H5a2 2 0 01-2-2V7a2 2 0 012-2h4l2 3h6a2 2 0 012 2v7a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Serviços
     </a>
@@ -38,7 +38,7 @@
       </button>
             <div id="infra-dropdown" x-show="openInfra" x-cloak
               class="absolute right-0 mt-2 w-64 bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 p-2 text-sm">
-        <a href="/sistemas" class="block px-3 py-2 rounded hover:bg-[#2a4d78] hover:text-white font-semibold">Página de Sistemas</a>
+        <a href="{{ route('sistemas') }}" class="block px-3 py-2 rounded hover:bg-[#2a4d78] hover:text-white font-semibold">Página de Sistemas</a>
         <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer" aria-label="Abrir SGF (abre em nova aba)"
           class="block px-3 py-2 rounded hover:bg-[#2a4d78] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]">
           Sistema de Gestão de Facturas (SGF)
@@ -46,21 +46,21 @@
       </div>
     </div>
 
-      <a href="/candidaturas" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
+      <a href="{{ route('candidaturas') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10M7 11h10M7 15h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Candidaturas
     </a>
 
     <!-- Links de estudantes movidos para a barra inferior -->
-    <a href="/calendario-academico" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
+    <a href="{{ route('calendario-academico') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Calendário Académico
     </a>
-    <a href="/guia-estudante" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
+    <a href="{{ route('guia-estudante') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20l9-5-9-5-9 5 9 5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 12v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Guia do Estudante
     </a>
-    <a href="/resultados" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
+    <a href="{{ route('resultados') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13v6M12 9v10M17 5v14" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Resultados de Exames
     </a>
@@ -72,7 +72,7 @@
   <div class="w-full bg-white" style="border-bottom: 2px solid #F05A28;">
     <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between py-1 sm:py-2">
     <!-- Logo e nome -->
-    <a href="/" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+    <a href="{{ url('/') }}" class="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
       <div class="flex items-center justify-center rounded-md sm:rounded-lg shadow-sm px-1.5 py-0.5 sm:px-2 sm:py-1.5" style="background:transparent!important;">
         <img src="/images/logo.png" alt="ISP-Bié" class="w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
@@ -91,11 +91,11 @@
     
     <!-- Menu principal (Desktop) -->
     <nav role="navigation" aria-label="Navegação principal" class="hidden lg:flex flex-row items-center space-x-4 xl:space-x-6 mb-0 pb-0 border-b-0">
-      <a href="/cursos" class="flex items-center space-x-1 text-[#1e3a5f] font-semibold uppercase text-[13px] tracking-widest hover:text-[#F05A28] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Cursos">
+      <a href="{{ route('cursos') }}" class="flex items-center space-x-1 text-[#1e3a5f] font-semibold uppercase text-[13px] tracking-widest hover:text-[#F05A28] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Cursos">
         <span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
         <span>Cursos</span>
       </a>
-      <a href="/investigacao" class="flex items-center space-x-1 text-[#1e3a5f] font-semibold uppercase text-[13px] tracking-widest hover:text-[#F05A28] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
+      <a href="{{ route('investigacao') }}" class="flex items-center space-x-1 text-[#1e3a5f] font-semibold uppercase text-[13px] tracking-widest hover:text-[#F05A28] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
         <span><svg class="w-5 h-5 text-[#1e3a5f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <span>Pesquisa e Inovação</span>
       </a>
@@ -112,12 +112,12 @@
                           <div id="institucional-dropdown" x-show="openInst" x-cloak
                             class="absolute left-1/2 -translate-x-1/2 mt-8 max-w-screen-lg w-[54rem] bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 px-12 py-8 overflow-x-auto">
                 <div class="grid grid-cols-3 gap-x-16 gap-y-3">
-                  <a href="/sobre-ispbie" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Sobre o ISP-Bié</a>
-                  <a href="/missao" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Missão</a>
-                  <a href="/visao" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Visão</a>
-                  <a href="/valores" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Valores</a>
-                  <a href="/presidencia" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Órgãos de gestão</a>
-                  <a href="/noticias" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Notícias</a>
+                  <a href="{{ route('institucional') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Sobre o ISP-Bié</a>
+                  <a href="{{ route('missao') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Missão</a>
+                  <a href="{{ route('visao') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Visão</a>
+                  <a href="{{ route('valores') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Valores</a>
+                  <a href="{{ route('presidencia') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Órgãos de gestão</a>
+                  <a href="{{ route('noticias') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Notícias</a>
                 </div>
                 <div class="mt-8 border-t border-gray-700 pt-6 text-center">
 
@@ -138,9 +138,9 @@
                <div x-show="openExt" x-cloak
                  class="absolute left-0 mt-2 w-64 bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 p-2">
           <div class="grid grid-cols-1 gap-2">
-            <a href="/cultura" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Cultura e Extensão</a>
-            <a href="/estagios" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Estágios</a>
-            <a href="/alumni" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Alumni</a>
+            <a href="{{ route('cultura') }}" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Cultura e Extensão</a>
+            <a href="{{ route('estagios') }}" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Estágios</a>
+            <a href="{{ route('alumni') }}" class="block px-4 py-2 rounded hover:bg-[#2a4d78] hover:text-white">Alumni</a>
           </div>
         </div>
       </div>
@@ -187,7 +187,7 @@
         {{-- ── Secção PRINCIPAL ── --}}
         <p class="px-5 pt-2 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Principal</p>
 
-        <a href="/cursos"
+        <a href="{{ route('cursos') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors rounded-none focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5 12.083 12.083 0 015.84 10.578L12 14z"/>
@@ -195,7 +195,7 @@
           <span>Cursos</span>
         </a>
 
-        <a href="/investigacao"
+        <a href="{{ route('investigacao') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/>
@@ -203,7 +203,7 @@
           <span>Pesquisa e Inovação</span>
         </a>
 
-        <a href="/noticias"
+        <a href="{{ route('noticias') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <rect x="3" y="5" width="18" height="14" rx="2"/><path stroke-linecap="round" d="M7 9h10M7 13h6"/>
@@ -211,7 +211,7 @@
           <span>Notícias</span>
         </a>
 
-        <a href="/candidaturas"
+        <a href="{{ route('candidaturas') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6M9 16h4M7 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2h-2M9 4a2 2 0 002 2h2a2 2 0 002-2M9 4a2 2 0 012-2h2a2 2 0 012 2"/>
@@ -234,11 +234,11 @@
           <div x-show="openMobile" x-cloak
                x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                class="bg-gray-50 border-y border-gray-100">
-            <a href="/sobre-ispbie" class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Sobre o ISP-Bié</a>
-            <a href="/missao"       class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Missão</a>
-            <a href="/visao"        class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Visão</a>
-            <a href="/valores"      class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Valores</a>
-            <a href="/presidencia"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Órgãos de Gestão</a>
+            <a href="{{ route('institucional') }}" class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Sobre o ISP-Bié</a>
+            <a href="{{ route('missao') }}"       class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Missão</a>
+            <a href="{{ route('visao') }}"        class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Visão</a>
+            <a href="{{ route('valores') }}"      class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Valores</a>
+            <a href="{{ route('presidencia') }}"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Órgãos de Gestão</a>
           </div>
         </div>
 
@@ -257,9 +257,9 @@
           <div x-show="openExtMobile" x-cloak
                x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                class="bg-gray-50 border-y border-gray-100">
-            <a href="/cultura"   class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Cultura e Extensão</a>
-            <a href="/estagios"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Estágios</a>
-            <a href="/alumni"    class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Alumni</a>
+            <a href="{{ route('cultura') }}"   class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Cultura e Extensão</a>
+            <a href="{{ route('estagios') }}"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Estágios</a>
+            <a href="{{ route('alumni') }}"    class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Alumni</a>
           </div>
         </div>
 
@@ -278,7 +278,7 @@
           <div x-show="openInfraMobile" x-cloak
                x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                class="bg-gray-50 border-y border-gray-100">
-            <a href="/sistemas" class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Página de Sistemas</a>
+            <a href="{{ route('sistemas') }}" class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Página de Sistemas</a>
             <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer"
                class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">
               SGF — Gestão de Facturas
@@ -291,7 +291,7 @@
         <div class="mx-5 my-3 border-t border-gray-100"></div>
         <p class="px-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Estudantes</p>
 
-        <a href="/calendario-academico"
+        <a href="{{ route('calendario-academico') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <rect x="3" y="4" width="18" height="18" rx="2"/><path stroke-linecap="round" d="M16 2v4M8 2v4M3 10h18"/>
@@ -299,7 +299,7 @@
           <span>Calendário Académico</span>
         </a>
 
-        <a href="/guia-estudante"
+        <a href="{{ route('guia-estudante') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/>
@@ -307,7 +307,7 @@
           <span>Guia do Estudante</span>
         </a>
 
-        <a href="/resultados"
+        <a href="{{ route('resultados') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18"/><path stroke-linecap="round" d="M7 13v6M12 9v10M17 5v14"/>
@@ -319,7 +319,7 @@
         <div class="mx-5 my-3 border-t border-gray-100"></div>
         <p class="px-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Links Rápidos</p>
 
-        <a href="/contactos"
+        <a href="{{ route('contactos') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3l2 4-3 2a11 11 0 005 5l2-3 4 2v3a2 2 0 01-2 2A16 16 0 013 5z"/>
@@ -336,7 +336,7 @@
           <svg class="w-3 h-3 ml-auto flex-shrink-0 text-gray-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
 
-        <a href="/servicos"
+        <a href="{{ route('servicos') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>

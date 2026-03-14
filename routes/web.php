@@ -79,7 +79,10 @@ Route::get('/', function () {
         ->orderByDesc('created_at')
         ->take(6)
         ->get();
-    return view('welcome', compact('testemunhos'));
+    $carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->take(5)->get();
+    $totalSlides = $carrosseis->count();
+    $hero = $carrosseis->first();
+    return view('welcome', compact('testemunhos', 'carrosseis', 'totalSlides', 'hero'));
 })->name('welcome');
 
 // Investigação (public) - use closure to guarantee controller is executed and view data provided
@@ -128,7 +131,7 @@ Route::view('/sobre', 'pages.sobre')->name('sobre');
 Route::view('/cursos', 'pages.cursos')->name('cursos');
 Route::view('/pos-graduacao', 'pages.pos-graduacao')->name('pos-graduacao');
 Route::view('/vida-academica', 'pages.vida')->name('vida');
-Route::view('/noticias', 'pages.noticias')->name('noticias');
+Route::get('/noticias', [App\Http\Controllers\NoticiaController::class, 'index'])->name('noticias');
 Route::view('/contactos', 'pages.contactos')->name('contactos');
 
 // Rota para envio do formulário de contactos
@@ -140,7 +143,21 @@ use App\Http\Controllers\ConcursoAlertController;
 Route::post('/alerts/subscribe', [ConcursoAlertController::class, 'store'])->name('alerts.subscribe')->middleware('throttle:5,1');
 Route::view('/valores', 'pages.valores')->name('valores');
 Route::view('/visao', 'pages.visao')->name('visao');
-Route::view('/trabalhe-conosco', 'pages.trabalhe-conosco')->name('trabalhe-conosco');
+Route::get('/trabalhe-conosco', function () {
+    $concursos = \App\Models\Concurso::where('status', 'published')
+        ->orderByDesc('publish_at')
+        ->get()
+        ->map(function ($c) {
+            if ($c->publish_at && ! $c->publish_at instanceof \Carbon\Carbon) {
+                try { $c->publish_at = \Carbon\Carbon::parse($c->publish_at); }
+                catch (\Throwable $e) { $c->publish_at = null; }
+            }
+            return $c;
+        });
+    $allCount = \App\Models\Concurso::count();
+    $publishedCount = \App\Models\Concurso::where('status', 'published')->count();
+    return view('pages.trabalhe-conosco', compact('concursos', 'allCount', 'publishedCount'));
+})->name('trabalhe-conosco');
 Route::view('/sistemas', 'pages.sistemas')->name('sistemas');
 Route::view('/resultados', 'pages.resultados')->name('resultados');
 Route::post('/resultados/validar', [ResultadosController::class, 'validar'])->name('resultados.validar')->middleware('throttle:10,1');

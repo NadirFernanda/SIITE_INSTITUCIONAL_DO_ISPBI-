@@ -9,9 +9,6 @@
 ])
       <h2 class="text-3xl font-bold text-[#2563eb] mb-12">Notícias Recentes</h2>
       <div class="grid md:grid-cols-3 gap-8">
-        @php
-          $noticias = \App\Models\Noticia::where('publicada', true)->orderByDesc('data')->get();
-        @endphp
         @forelse($noticias as $noticia)
           <article class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all flex flex-col interactive-card">
             {{-- 16:9 aspect-ratio container — image is never cropped, always fully visible --}}
