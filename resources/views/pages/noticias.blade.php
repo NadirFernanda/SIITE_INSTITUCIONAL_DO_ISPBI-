@@ -13,14 +13,19 @@
           $noticias = \App\Models\Noticia::where('publicada', true)->orderByDesc('data')->get();
         @endphp
         @forelse($noticias as $noticia)
-          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all flex flex-col interactive-card">
-            @if($noticia->imagem)
-              <img src="{{ asset('storage/' . $noticia->imagem) }}" alt="{{ $noticia->titulo }}" class="h-48 w-full object-cover">
-            @else
-              <div class="h-48 w-full flex items-center justify-center bg-gradient-to-br from-[#2563eb] to-[#3B82F6]">
-                <svg class="w-16 h-16 text-white opacity-60" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
-              </div>
-            @endif
+          <article class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all flex flex-col interactive-card">
+            {{-- 16:9 aspect-ratio container — image is never cropped, always fully visible --}}
+            <div class="relative w-full" style="aspect-ratio:16/9; overflow:hidden;">
+              @if($noticia->imagem)
+                <img src="{{ asset('storage/' . $noticia->imagem) }}"
+                     alt="{{ $noticia->titulo }}"
+                     class="absolute inset-0 w-full h-full object-contain bg-gray-50">
+              @else
+                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#2563eb] to-[#3B82F6]">
+                  <svg class="w-16 h-16 text-white opacity-60" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/></svg>
+                </div>
+              @endif
+            </div>
             <div class="p-6 flex-1 flex flex-col">
               <div class="text-sm text-gray-500 mb-2">{{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}</div>
               <h3 class="text-xl font-bold text-[#2563eb] mb-3">{{ $noticia->titulo }}</h3>
