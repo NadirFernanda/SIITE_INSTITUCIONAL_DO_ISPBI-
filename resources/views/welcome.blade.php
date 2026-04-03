@@ -51,77 +51,83 @@
     @endif
   </section>
 
-  <!-- Barra unificada: links institucionais + redes sociais + busca -->
-  <div x-data="{ dark: false }" class="bg-white border-b border-gray-200">
+  <!-- Barra institucional moderna -->
+  <div x-data="{ dark: false }" style="background:linear-gradient(135deg,#1e3a8a 0%,#1565c0 60%,#1976d2 100%);border-bottom:3px solid #F05A28;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-wrap items-center justify-between gap-2 py-3">
+      <div class="flex flex-wrap items-center justify-between gap-3 py-3">
 
-        {{-- Links institucionais --}}
-        <div class="flex items-center gap-1 sm:gap-3">
-          <a href="/missao" class="group flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-[#2563eb]/5 transition-colors">
-            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 transition-colors">
-              <svg class="w-5 h-5 text-[#2563eb]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        {{-- Links institucionais com pill activo --}}
+        <div class="flex items-center gap-1">
+          <a href="/missao" class="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-center w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#2563eb]/15 transition-colors flex-shrink-0">
+              <svg class="w-4 h-4 text-white group-hover:text-[#1565c0]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
             </div>
-            <span class="text-xs font-semibold text-gray-700 group-hover:text-[#2563eb] transition-colors">Missão</span>
+            <span class="text-xs font-bold text-white group-hover:text-[#1565c0] tracking-wide transition-colors">Missão</span>
           </a>
-          <a href="/visao" class="group flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-[#2563eb]/5 transition-colors">
-            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 transition-colors">
-              <svg class="w-5 h-5 text-[#2563eb]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a4 4 0 100 8 4 4 0 000-8z"/></svg>
+          <a href="/visao" class="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-center w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#2563eb]/15 transition-colors flex-shrink-0">
+              <svg class="w-4 h-4 text-white group-hover:text-[#1565c0]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
             </div>
-            <span class="text-xs font-semibold text-gray-700 group-hover:text-[#2563eb] transition-colors">Visão</span>
+            <span class="text-xs font-bold text-white group-hover:text-[#1565c0] tracking-wide transition-colors">Visão</span>
           </a>
-          <a href="/valores" class="group flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-[#2563eb]/5 transition-colors">
-            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 transition-colors">
-              <svg class="w-5 h-5 text-[#2563eb]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c2.54 0 4.71 1.61 5.5 4.09C13.79 4.61 15.96 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <a href="/valores" class="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-center w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#2563eb]/15 transition-colors flex-shrink-0">
+              <svg class="w-4 h-4 text-white group-hover:text-[#1565c0]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c2.54 0 4.71 1.61 5.5 4.09C13.79 4.61 15.96 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </div>
-            <span class="text-xs font-semibold text-gray-700 group-hover:text-[#2563eb] transition-colors">Valores</span>
+            <span class="text-xs font-bold text-white group-hover:text-[#1565c0] tracking-wide transition-colors">Valores</span>
           </a>
-          <a href="/pilares" class="group flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-[#2563eb]/5 transition-colors">
-            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2563eb]/10 group-hover:bg-[#2563eb]/20 transition-colors">
-              <svg class="w-5 h-5 text-[#2563eb]" fill="currentColor" viewBox="0 0 24 24"><path d="M4 22h16V2H4v20zm2-2V4h12v16H6z"/></svg>
+          <a href="/pilares" class="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white hover:shadow-md transition-all duration-200">
+            <div class="flex items-center justify-center w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#2563eb]/15 transition-colors flex-shrink-0">
+              <svg class="w-4 h-4 text-white group-hover:text-[#1565c0]" fill="currentColor" viewBox="0 0 24 24"><path d="M2 20h2V8H2v12zm4 0h2v-8H6v8zm4 0h2V4h-2v16zm4 0h2v-6h-2v6zm4 0h2V10h-2v10z"/></svg>
             </div>
-            <span class="text-xs font-semibold text-gray-700 group-hover:text-[#2563eb] transition-colors">Pilares</span>
+            <span class="text-xs font-bold text-white group-hover:text-[#1565c0] tracking-wide transition-colors">Pilares</span>
           </a>
         </div>
 
-        {{-- Separador vertical (desktop) --}}
-        <div class="hidden sm:block w-px h-10 bg-gray-200 flex-shrink-0"></div>
+        {{-- Lado direito: sociais + busca + modo escuro --}}
+        <div class="flex items-center gap-2">
 
-        {{-- Redes sociais + busca + modo escuro --}}
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest hidden md:inline">Siga-nos</span>
-          <div class="flex items-center gap-1">
+          {{-- Redes sociais --}}
+          <div class="flex items-center gap-1 mr-1">
             <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" target="_blank" rel="noopener" aria-label="Facebook"
-               class="flex items-center justify-center w-8 h-8 rounded-full bg-[#2563eb]/8 hover:bg-[#2563eb] text-[#2563eb] hover:text-white transition-all duration-200">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+               class="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#1565c0] transition-all duration-200 hover:scale-110 hover:shadow-md">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
             <a href="https://www.linkedin.com/company/instituto-superior-polit%C3%A9cnico-do-bi%C3%A9" target="_blank" rel="noopener" aria-label="LinkedIn"
-               class="flex items-center justify-center w-8 h-8 rounded-full bg-[#2563eb]/8 hover:bg-[#2563eb] text-[#2563eb] hover:text-white transition-all duration-200">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+               class="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#1565c0] transition-all duration-200 hover:scale-110 hover:shadow-md">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
             <a href="https://www.instagram.com/ispbie?igsh=MWpuaWVwMnYyN3c3OA==" target="_blank" rel="noopener" aria-label="Instagram"
-               class="flex items-center justify-center w-8 h-8 rounded-full bg-[#2563eb]/8 hover:bg-[#2563eb] text-[#2563eb] hover:text-white transition-all duration-200">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="7" r="1.5" fill="currentColor"/></svg>
+               class="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#1565c0] transition-all duration-200 hover:scale-110 hover:shadow-md">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="7" r="1.5" fill="currentColor"/></svg>
             </a>
             <a href="https://youtube.com/@ispbieoficial?si=s1somPSkOYJ2PxQC" target="_blank" rel="noopener" aria-label="YouTube"
-               class="flex items-center justify-center w-8 h-8 rounded-full bg-[#2563eb]/8 hover:bg-[#2563eb] text-[#2563eb] hover:text-white transition-all duration-200">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+               class="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#1565c0] transition-all duration-200 hover:scale-110 hover:shadow-md">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
           </div>
-          <div class="w-px h-6 bg-gray-200 hidden sm:block"></div>
-          <form action="/busca" method="GET" class="flex items-center border border-gray-200 rounded-full overflow-hidden hover:border-[#2563eb]/40 focus-within:border-[#2563eb] focus-within:ring-2 focus-within:ring-[#2563eb]/20 transition-all duration-200">
-            <input type="text" name="q" placeholder="Busca institucional..." aria-label="Pesquisar"
-                   class="text-xs text-gray-700 placeholder-gray-400 px-3 py-1.5 focus:outline-none bg-transparent w-36 sm:w-44" autocomplete="off">
-            <button type="submit" aria-label="Buscar" class="flex items-center justify-center w-7 h-7 mr-0.5 rounded-full bg-[#F05A28] hover:bg-[#d44d20] text-white transition-colors flex-shrink-0">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+
+          {{-- Separador --}}
+          <div class="w-px h-6 bg-white/25 flex-shrink-0"></div>
+
+          {{-- Campo de busca --}}
+          <form action="/busca" method="GET" class="flex items-center bg-white/15 hover:bg-white/20 rounded-full border border-white/30 focus-within:bg-white focus-within:border-white/60 focus-within:shadow-lg transition-all duration-300 overflow-hidden group">
+            <svg class="w-3.5 h-3.5 text-white/70 group-focus-within:text-gray-400 ml-3 flex-shrink-0 transition-colors" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar"
+                   class="bg-transparent text-white group-focus-within:text-gray-800 placeholder-white/60 group-focus-within:placeholder-gray-400 text-xs px-2 py-2 focus:outline-none w-28 sm:w-36 transition-colors" autocomplete="off">
+            <button type="submit" aria-label="Buscar" class="flex items-center justify-center h-full px-2.5 bg-[#F05A28] hover:bg-[#d44d20] text-white transition-colors flex-shrink-0">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
             </button>
           </form>
+
+          {{-- Modo escuro --}}
           <button @click="dark = !dark" type="button" aria-label="Alternar modo escuro"
-                  class="flex items-center justify-center w-8 h-8 rounded-full border border-gray-200 hover:border-[#2563eb] text-gray-500 hover:text-[#2563eb] hover:bg-[#2563eb]/5 transition-all duration-200">
+                  class="flex items-center justify-center w-8 h-8 rounded-full bg-white/15 hover:bg-white text-white hover:text-[#1565c0] border border-white/20 hover:border-white transition-all duration-200 hover:shadow-md flex-shrink-0">
             <svg x-show="!dark" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
-            <svg x-show="dark" x-cloak class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M6.05 17.95l-1.414 1.414M17.95 17.95l-1.414-1.414M6.05 6.05L4.636 7.464"/></svg>
+            <svg x-show="dark" x-cloak class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
           </button>
         </div>
+
       </div>
     </div>
   </div>
