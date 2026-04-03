@@ -3,6 +3,7 @@
 return [
     'required' => 'O campo :attribute é obrigatório.',
     'email' => 'O campo :attribute deve ser um endereço de email válido.',
+    'url' => 'O campo :attribute deve ser um URL válido.',
     'min' => [
         'string' => 'O campo :attribute deve ter pelo menos :min caracteres.',
     ],
@@ -12,5 +13,6 @@ return [
     'attributes' => [
         'email' => 'usuário',
         'password' => 'senha',
+        'link' => 'link',
     ],
 ];
