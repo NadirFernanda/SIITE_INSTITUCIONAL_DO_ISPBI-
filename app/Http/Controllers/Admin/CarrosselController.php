@@ -45,6 +45,11 @@ class CarrosselController extends Controller
         return view('admin.carrossel', compact('carrosseis'));
     }
 
+    public function create()
+    {
+        return view('admin.carrossel.create');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
