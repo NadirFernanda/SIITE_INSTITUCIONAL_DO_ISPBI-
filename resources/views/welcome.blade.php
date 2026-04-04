@@ -129,7 +129,7 @@
       <div class="flex flex-col items-center gap-1.5 py-2 sm:flex-row sm:justify-between sm:gap-2 sm:py-3">
 
         {{-- Links institucionais --}}
-        <div class="flex items-center justify-center sm:justify-start gap-0.5 sm:gap-1 flex-nowrap">
+        <div class="flex items-center justify-between w-full sm:w-auto sm:justify-start gap-0.5 sm:gap-1 flex-nowrap">
           <a href="/missao" class="group flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
              onmouseover="this.style.background='#F05A28'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">  
             <div class="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
@@ -161,10 +161,10 @@
         </div>
 
         {{-- Lado direito: sociais + busca --}}
-        <div class="flex items-center justify-center sm:justify-end gap-2">
+        <div class="flex items-center justify-between w-full sm:w-auto sm:justify-end gap-2">
 
           {{-- Redes sociais --}}
-          <div class="flex items-center gap-1">
+          <div class="flex items-center gap-3 sm:gap-1">
             <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9" target="_blank" rel="noopener" aria-label="Facebook"
                class="flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200" style="background:rgba(255,255,255,0.18);"
                onmouseover="this.style.background='#F05A28';this.style.transform='scale(1.15)'" onmouseout="this.style.background='rgba(255,255,255,0.18)';this.style.transform='scale(1)'">  
