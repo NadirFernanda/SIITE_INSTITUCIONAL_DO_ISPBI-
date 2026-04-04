@@ -130,32 +130,32 @@
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 py-3">
 
         {{-- Links institucionais --}}
-        <div class="flex items-center justify-center sm:justify-start gap-1 flex-wrap">
-          <a href="/missao" class="group flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
+        <div class="flex items-center justify-center sm:justify-start gap-0.5 sm:gap-1 flex-nowrap">
+          <a href="/missao" class="group flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
              onmouseover="this.style.background='#F05A28'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">  
-            <div class="flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
-              <svg class="w-3.5 h-3.5" fill="white" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            <div class="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
+              <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="white" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
             </div>
             <span class="text-xs font-bold text-white tracking-wide">Missão</span>
           </a>
-          <a href="/visao" class="group flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
+          <a href="/visao" class="group flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
              onmouseover="this.style.background='#F05A28'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">  
-            <div class="flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
-              <svg class="w-3.5 h-3.5" fill="white" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            <div class="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
+              <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="white" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
             </div>
             <span class="text-xs font-bold text-white tracking-wide">Visão</span>
           </a>
-          <a href="/valores" class="group flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
+          <a href="/valores" class="group flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
              onmouseover="this.style.background='#F05A28'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">  
-            <div class="flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
-              <svg class="w-3.5 h-3.5" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c2.54 0 4.71 1.61 5.5 4.09C13.79 4.61 15.96 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <div class="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
+              <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="white" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c2.54 0 4.71 1.61 5.5 4.09C13.79 4.61 15.96 3 18.5 3 21.58 3 24 5.42 24 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </div>
             <span class="text-xs font-bold text-white tracking-wide">Valores</span>
           </a>
-          <a href="/pilares" class="group flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
+          <a href="/pilares" class="group flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
              onmouseover="this.style.background='#F05A28'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">  
-            <div class="flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
-              <svg class="w-3.5 h-3.5" fill="white" viewBox="0 0 24 24"><path d="M2 20h2V8H2v12zm4 0h2v-8H6v8zm4 0h2V4h-2v16zm4 0h2v-6h-2v6zm4 0h2V10h-2v10z"/></svg>
+            <div class="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
+              <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="white" viewBox="0 0 24 24"><path d="M2 20h2V8H2v12zm4 0h2v-8H6v8zm4 0h2V4h-2v16zm4 0h2v-6h-2v6zm4 0h2V10h-2v10z"/></svg>
             </div>
             <span class="text-xs font-bold text-white tracking-wide">Pilares</span>
           </a>

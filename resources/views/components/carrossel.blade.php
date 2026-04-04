@@ -5,7 +5,7 @@
 
 @if($totalSlides > 0)
 <div class="relative w-full" x-data="{ currentSlide: 0 }" x-init="if ({{ $totalSlides }} > 1) { setInterval(() => { currentSlide = (currentSlide + 1) % {{ $totalSlides }} }, 5000) }">
-    <div class="relative h-full min-h-[220px] sm:min-h-[320px] md:min-h-[400px] lg:min-h-[420px] xl:min-h-[480px] 2xl:min-h-[520px] max-h-full overflow-hidden w-full">
+    <div class="relative h-full min-h-[160px] sm:min-h-[320px] md:min-h-[400px] lg:min-h-[420px] xl:min-h-[480px] 2xl:min-h-[520px] max-h-full overflow-hidden w-full">
         @foreach($carrosseis as $index => $carrossel)
             <div x-show="currentSlide === {{ $index }}" x-cloak class="absolute inset-0 transition-opacity duration-700 flex items-center justify-center">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $carrossel->imagem) }}');"></div>
@@ -51,7 +51,7 @@
 </div>
 @else
     <!-- Fallback simples quando não há slides publicados -->
-    <div class="relative h-full min-h-[220px] sm:min-h-[320px] md:min-h-[400px] lg:min-h-[420px] xl:min-h-[480px] 2xl:min-h-[520px] max-h-full flex items-center justify-center bg-gray-100">
+    <div class="relative h-full min-h-[160px] sm:min-h-[320px] md:min-h-[400px] lg:min-h-[420px] xl:min-h-[480px] 2xl:min-h-[520px] max-h-full flex items-center justify-center bg-gray-100">
         <p class="text-gray-500 text-center px-4">Em breve, conteúdos em destaque do ISP-Bié serão apresentados aqui.</p>
     </div>
 @endif
