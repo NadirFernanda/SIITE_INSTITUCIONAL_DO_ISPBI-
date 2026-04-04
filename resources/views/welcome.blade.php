@@ -466,9 +466,9 @@
           <p class="text-sm text-gray-400" x-text="(current + 1) + ' de ' + total + ' testemunhos'"></p>
           <a href="/alumni"
              class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
-             style="background:#2563eb;"
-             onmouseover="this.style.background='#F05A28';this.style.transform='translateY(-1px)'"
-             onmouseout="this.style.background='#2563eb';this.style.transform='translateY(0)'">
+             style="background:#F05A28;"
+             onmouseover="this.style.background='#d44d20';this.style.transform='translateY(-1px)'"
+             onmouseout="this.style.background='#F05A28';this.style.transform='translateY(0)'">
             Ver todos os testemunhos
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
           </a>
