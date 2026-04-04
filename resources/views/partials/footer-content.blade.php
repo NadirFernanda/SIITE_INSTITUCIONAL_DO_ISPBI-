@@ -238,7 +238,7 @@
               <li class="text-xs text-gray-400 leading-snug">Hospital Mártires do Cuito</li>
               <li class="text-xs text-gray-400 leading-snug">Centro Materno Infantil do Bié</li>
               <li class="text-xs text-gray-400 leading-snug">Cefejor</li>
-              <li><a href="/outras-instituicoes" class="text-xs transition-colors duration-150" style="color:rgba(240,90,40,0.65);"
+              <li><a href="/sobre-ispbie" class="text-xs transition-colors duration-150" style="color:rgba(240,90,40,0.65);"
                     onmouseover="this.style.color='#F05A28'" onmouseout="this.style.color='rgba(240,90,40,0.65)'">+ Ver todas as parcerias →</a></li>
             </ul>
           </div>
