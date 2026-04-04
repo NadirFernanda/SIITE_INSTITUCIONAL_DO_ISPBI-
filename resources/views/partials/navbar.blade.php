@@ -77,13 +77,7 @@
         <img src="/images/logo.png" alt="ISP-Bié" class="w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
       <div class="min-w-0">
-        {{-- Mobile/tablet: compact single line --}}
         <span class="block lg:hidden text-[10px] font-semibold text-[#1e3a5f] uppercase tracking-widest truncate">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
-        {{-- Desktop: two-line styled brand name --}}
-        <div class="hidden lg:block leading-tight">
-          <p class="text-sm font-extrabold text-[#1e3a5f] tracking-tight">Instituto Superior Politécnico do Bié</p>
-          <p class="text-[10px] text-[#F05A28] font-semibold uppercase tracking-widest mt-0.5">Cuito · Angola · Est. 2020</p>
-        </div>
       </div>
     </a>
     
