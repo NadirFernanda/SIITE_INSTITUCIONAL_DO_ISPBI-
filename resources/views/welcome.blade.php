@@ -4,61 +4,103 @@
 <main id="main-content" tabindex="-1" role="main">
 
   {{-- ─────────────────────────────────────────────────────────────────
-       HERO — Carrossel com overlay e CTA institucional
+       HERO — Carrossel com setas, dots, conteúdo por slide
   ───────────────────────────────────────────────────────────────────── --}}
-  <section class="relative w-full overflow-hidden" style="min-height:280px;height:60vh;max-height:700px;">
+  @php
+    $slidesJson = $totalSlides > 0
+      ? $carrosseis->map(fn($c) => [
+          'titulo'      => $c->titulo,
+          'subtitulo'   => $c->subtitulo ?? '',
+          'texto_botao' => $c->texto_botao ?? 'Conheça Mais',
+          'link'        => $c->link ?? '',
+          'imagem'      => asset('storage/' . $c->imagem),
+        ])->toJson(JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP)
+      : '[]';
+  @endphp
+  <script>window._ispCarousel = {!! $slidesJson !!};</script>
+
+  <section
+    x-data="{
+      current: 0,
+      slides: window._ispCarousel || [],
+      get total() { return this.slides.length; },
+      paused: false,
+      init() { if (this.total > 1) setInterval(() => { if (!this.paused) this.next(); }, 6000); },
+      next() { this.current = (this.current + 1) % this.total; },
+      prev() { this.current = (this.current - 1 + this.total) % this.total; },
+      goto(i)  { this.current = i; }
+    }"
+    @mouseenter="paused = true" @mouseleave="paused = false"
+    class="relative w-full overflow-hidden"
+    style="min-height:280px;height:60vh;max-height:700px;"
+    aria-label="Carrossel de imagens institucionais">
+
+    {{-- ── Slides de fundo ── --}}
     @if($totalSlides > 0)
-      <div x-data="{ current: 0, slides: {{ $totalSlides }}, images: [@foreach($carrosseis as $c)'{{ asset('storage/' . $c->imagem) }}'@if(!$loop->last),@endif @endforeach] }"
-           x-init="setInterval(() => { current = (current + 1) % slides }, 6000)"
-           class="absolute inset-0">
-        <template x-for="(img, idx) in images" :key="idx">
-          <div x-show="current === idx"
-               x-transition:enter="transition-opacity duration-1000"
-               x-transition:enter-start="opacity-0"
-               x-transition:enter-end="opacity-100"
-               x-transition:leave="transition-opacity duration-1000"
-               x-transition:leave-start="opacity-100"
-               x-transition:leave-end="opacity-0"
-               class="absolute inset-0 w-full h-full bg-cover bg-center"
-               :style="'background-image: url(' + img + ')'"></div>
-        </template>
-        {{-- Overlay gradiente: opaco em baixo, transparente em cima --}}
-        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(5,15,45,0.90) 0%,rgba(5,15,45,0.50) 55%,rgba(0,0,0,0.08) 100%);"></div>
-      </div>
+      <template x-for="(slide, idx) in slides" :key="idx">
+        <div x-show="current === idx"
+             x-transition:enter="transition-opacity duration-1000"
+             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+             x-transition:leave="transition-opacity duration-1000"
+             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+             class="absolute inset-0 w-full h-full bg-cover bg-center"
+             :style="'background-image:url(' + slide.imagem + ')'"></div>
+      </template>
     @else
       <div class="absolute inset-0 bg-gradient-to-br from-[#1e3a8a] to-[#1976d2]"></div>
     @endif
 
-    {{-- Conteúdo posicionado no fundo esquerdo --}}
-    <div class="absolute inset-0 flex items-end">
-      <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 w-full pb-8 sm:pb-12 md:pb-16 lg:pb-20">
+    {{-- ── Overlay escuro gradiente ── --}}
+    <div class="absolute inset-0 pointer-events-none"
+         style="background:linear-gradient(to top,rgba(5,15,45,0.92) 0%,rgba(5,15,45,0.50) 50%,rgba(0,0,0,0.10) 100%);"></div>
+
+    {{-- ── Seta Anterior ── --}}
+    <button x-show="total > 1" @click="prev()" aria-label="Slide anterior"
+            class="absolute left-3 sm:left-5 top-1/2 z-20 hidden sm:flex items-center justify-center w-11 h-11 rounded-full text-white backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#F05A28]"
+            style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.30);transform:translateY(-50%);"
+            onmouseover="this.style.background='rgba(240,90,40,0.85)';this.style.scale='1.08'"
+            onmouseout="this.style.background='rgba(255,255,255,0.15)';this.style.scale='1'">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+
+    {{-- ── Seta Seguinte ── --}}
+    <button x-show="total > 1" @click="next()" aria-label="Próximo slide"
+            class="absolute right-3 sm:right-5 top-1/2 z-20 hidden sm:flex items-center justify-center w-11 h-11 rounded-full text-white backdrop-blur-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#F05A28]"
+            style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.30);transform:translateY(-50%);"
+            onmouseover="this.style.background='rgba(240,90,40,0.85)';this.style.scale='1.08'"
+            onmouseout="this.style.background='rgba(255,255,255,0.15)';this.style.scale='1'">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    {{-- ── Conteúdo: texto + dots + counter ── --}}
+    <div class="absolute inset-0 flex items-end z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 w-full pb-6 sm:pb-10 md:pb-14 lg:pb-16">
+
+        @if($totalSlides > 0)
+        {{-- Texto reactivo ao slide actual --}}
         <div class="max-w-2xl">
-          {{-- Badge institucional --}}
           <div class="hidden sm:inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase"
                style="background:rgba(240,90,40,0.18);border:1px solid rgba(240,90,40,0.55);color:#ffaa80;">
             <span class="w-1.5 h-1.5 rounded-full bg-[#F05A28] animate-pulse"></span>
             Instituto Superior Politécnico do Bié
           </div>
-          <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-3 sm:mb-4"
-              style="text-shadow:0 2px 20px rgba(0,0,0,0.5);">
-            {{ $hero->titulo }}
-          </h1>
-          @if($hero->subtitulo)
-          <p class="text-sm sm:text-lg text-white/80 mb-6 sm:mb-8 leading-relaxed max-w-xl line-clamp-3 sm:line-clamp-none">
-            {{ $hero->subtitulo }}
-          </p>
-          @endif
+          <h1 x-text="slides[current] ? slides[current].titulo : ''"
+              class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-3 sm:mb-4"
+              style="text-shadow:0 2px 20px rgba(0,0,0,0.5);"></h1>
+          <p x-show="slides[current] && slides[current].subtitulo"
+             x-text="slides[current] ? slides[current].subtitulo : ''"
+             class="text-sm sm:text-lg text-white/80 mb-5 sm:mb-7 leading-relaxed max-w-xl line-clamp-3 sm:line-clamp-none"></p>
           <div class="flex flex-wrap gap-2 sm:gap-3">
-            @if($hero->link)
-              <a href="{{ $hero->link }}"
+            <template x-if="slides[current] && slides[current].link">
+              <a :href="slides[current].link"
                  class="inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg font-semibold text-white text-sm shadow-xl transition-all duration-200"
                  style="background:#F05A28;"
                  onmouseover="this.style.background='#d44d20';this.style.transform='translateY(-2px)'"
                  onmouseout="this.style.background='#F05A28';this.style.transform='translateY(0)'">
-                {{ $hero->texto_botao ?? 'Conheça Mais' }}
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                <span x-text="slides[current].texto_botao || 'Conheça Mais'"></span>
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
               </a>
-            @endif
+            </template>
             <a href="/cursos"
                class="hidden sm:inline-flex items-center gap-2 px-7 py-3 rounded-lg font-semibold text-white text-sm transition-all duration-200"
                style="background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.4);"
@@ -68,6 +110,31 @@
             </a>
           </div>
         </div>
+        @else
+        <div class="max-w-2xl">
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4" style="text-shadow:0 2px 20px rgba(0,0,0,0.5);">Instituto Superior Politécnico do Bié</h1>
+          <a href="/cursos" class="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-semibold text-white text-sm" style="background:#F05A28;">Conhecer os Cursos</a>
+        </div>
+        @endif
+
+        {{-- Dots + contador (só se existir mais de 1 slide) --}}
+        @if($totalSlides > 1)
+        <div class="flex items-center justify-between mt-5 sm:mt-6">
+          <div class="flex items-center gap-2" role="tablist" aria-label="Navegação do carrossel">
+            <template x-for="(_, idx) in slides" :key="idx">
+              <button @click="goto(idx)" role="tab"
+                      :aria-selected="current === idx"
+                      :aria-label="'Slide ' + (idx + 1)"
+                      class="rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F05A28]"
+                      :class="current === idx ? 'w-8 h-2 bg-[#F05A28]' : 'w-2 h-2 bg-white/40 hover:bg-white/70'"></button>
+            </template>
+          </div>
+          <div class="text-white/50 text-xs font-mono tabular-nums select-none pr-1">
+            <span x-text="current + 1"></span>&thinsp;/&thinsp;<span x-text="total"></span>
+          </div>
+        </div>
+        @endif
+
       </div>
     </div>
   </section>

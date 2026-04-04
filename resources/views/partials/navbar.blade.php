@@ -77,7 +77,13 @@
         <img src="/images/logo.png" alt="ISP-Bié" class="w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0" style="background:transparent!important;" onerror="this.style.display='none'">
       </div>
       <div class="min-w-0">
+        {{-- Mobile/tablet: compact single line --}}
         <span class="block lg:hidden text-[10px] font-semibold text-[#1e3a5f] uppercase tracking-widest truncate">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
+        {{-- Desktop: two-line styled brand name --}}
+        <div class="hidden lg:block leading-tight">
+          <p class="text-sm font-extrabold text-[#1e3a5f] tracking-tight">Instituto Superior Politécnico do Bié</p>
+          <p class="text-[10px] text-[#F05A28] font-semibold uppercase tracking-widest mt-0.5">Cuito · Angola · Est. 2020</p>
+        </div>
       </div>
     </a>
     
@@ -91,11 +97,11 @@
     
     <!-- Menu principal (Desktop) -->
     <nav role="navigation" aria-label="Navegação principal" class="hidden lg:flex flex-row items-center space-x-4 xl:space-x-6 mb-0 pb-0 border-b-0">
-      <a href="{{ route('cursos') }}" class="flex items-center space-x-1 text-[#1e3a5f] font-semibold uppercase text-[13px] tracking-widest hover:text-[#F05A28] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Cursos">
+      <a href="{{ route('cursos') }}" class="flex items-center space-x-1 font-semibold uppercase text-[13px] tracking-widest transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28] {{ request()->routeIs('cursos*') ? 'text-[#F05A28] border-b-2 border-[#F05A28] pb-0.5' : 'text-[#1e3a5f] hover:text-[#F05A28]' }}" aria-label="Cursos">
         <span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor"/><path d="M16 3v4M8 3v4" stroke="currentColor"/></svg></span>
         <span>Cursos</span>
       </a>
-      <a href="{{ route('investigacao') }}" class="flex items-center space-x-1 text-[#1e3a5f] font-semibold uppercase text-[13px] tracking-widest hover:text-[#F05A28] transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Pesquisa e Inovação">
+      <a href="{{ route('investigacao') }}" class="flex items-center space-x-1 font-semibold uppercase text-[13px] tracking-widest transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28] {{ request()->routeIs('investigacao*') ? 'text-[#F05A28] border-b-2 border-[#F05A28] pb-0.5' : 'text-[#1e3a5f] hover:text-[#F05A28]' }}" aria-label="Pesquisa e Inovação">
         <span><svg class="w-5 h-5 text-[#1e3a5f]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
         <span>Pesquisa e Inovação</span>
       </a>
