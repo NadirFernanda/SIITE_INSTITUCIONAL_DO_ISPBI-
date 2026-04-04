@@ -32,7 +32,7 @@
     }"
     @mouseenter="paused = true" @mouseleave="paused = false"
     class="relative w-full overflow-hidden"
-    style="min-height:280px;height:60vh;max-height:700px;"
+    style="min-height:420px;height:80vh;max-height:900px;"
     aria-label="Carrossel de imagens institucionais">
 
     {{-- ── Slides de fundo ── --}}
