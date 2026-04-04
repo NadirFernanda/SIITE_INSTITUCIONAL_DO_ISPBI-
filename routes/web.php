@@ -232,5 +232,6 @@ Route::view('/busca-biblioteca', 'pages.busca-biblioteca')->name('busca-bibliote
 // Rota para exibir notícia individual
 Route::get('/noticias/{id}', [App\Http\Controllers\NoticiaController::class, 'show'])->name('noticias.show');
 Route::view('/servicos', 'pages.servicos')->name('servicos');
+Route::view('/parcerias', 'pages.parcerias')->name('parcerias');
 
 require __DIR__.'/auth.php';
