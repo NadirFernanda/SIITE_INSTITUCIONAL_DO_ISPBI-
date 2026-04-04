@@ -4,11 +4,17 @@
 ════════════════════════════════════════════════════════════════════ --}}
 <footer class="relative text-gray-400 overflow-hidden" aria-label="Rodapé institucional">
 
-  {{-- ── Background: campus photo + deep dark gradient overlay ── --}}
+  {{-- ── Background: campus photo bem visível + overlay escuro em camadas ── --}}
   <div class="absolute inset-0 z-0" aria-hidden="true">
+    {{-- Imagem a 45% de opacidade — visível mas sem competir com o texto --}}
     <img src="/images/campus-hero.jpg" alt="" role="presentation"
-         class="w-full h-full object-cover object-center opacity-10" loading="lazy">
-    <div class="absolute inset-0" style="background:linear-gradient(180deg,#091020 0%,#0d1117 35%,#0a0e18 100%);"></div>
+         class="w-full h-full object-cover object-center" style="opacity:0.45;" loading="lazy">
+    {{-- Camada 1: gradiente escuro top→bottom para garantir legibilidade --}}
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(9,16,32,0.72) 0%,rgba(9,16,32,0.60) 40%,rgba(9,16,32,0.88) 100%);"></div>
+    {{-- Camada 2: vinheta lateral suave --}}
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.55) 100%);"></div>
+    {{-- Camada 3: tint azul institucional muito subtil --}}
+    <div class="absolute inset-0" style="background:rgba(14,24,50,0.25);mix-blend-mode:multiply;"></div>
   </div>
 
   {{-- ── Orange identity accent bar ── --}}
@@ -19,7 +25,7 @@
     {{-- ════════════════════════════════════════════════════════
          ROW 1 — Brand identity + Alert subscription
     ═══════════════════════════════════════════════════════════ --}}
-    <div class="border-b" style="border-color:rgba(255,255,255,0.07);background:rgba(255,255,255,0.015);">
+    <div class="border-b" style="border-color:rgba(255,255,255,0.12);background:rgba(0,0,0,0.15);backdrop-filter:blur(2px);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
 
@@ -95,7 +101,7 @@
     {{-- ════════════════════════════════════════════════════════
          ROW 2 — Quick contact strip (hidden on xs)
     ═══════════════════════════════════════════════════════════ --}}
-    <div class="hidden sm:block border-b" style="border-color:rgba(255,255,255,0.07);background:rgba(240,90,40,0.035);">
+    <div class="hidden sm:block border-b" style="border-color:rgba(255,255,255,0.12);background:rgba(0,0,0,0.25);backdrop-filter:blur(2px);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
         <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
 
@@ -139,7 +145,7 @@
     {{-- ════════════════════════════════════════════════════════
          ROW 3 — Navigation columns
     ═══════════════════════════════════════════════════════════ --}}
-    <div class="border-b" style="border-color:rgba(255,255,255,0.07);">
+    <div class="border-b" style="border-color:rgba(255,255,255,0.12);background:rgba(0,0,0,0.20);backdrop-filter:blur(2px);">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <nav class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 sm:gap-6" aria-label="Navegação do rodapé">
 
@@ -151,12 +157,12 @@
               Educação
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-educacao">
-              <li><a href="/cursos"           class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Cursos de Graduação</a></li>
-              <li><a href="/pos-graduacao"    class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Pós-Graduação</a></li>
-              <li><a href="/candidaturas"     class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Como Ingressar</a></li>
-              <li><a href="/cursos-online"    class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Cursos Online</a></li>
-              <li><a href="/bolsas"           class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Bolsas de Estudo</a></li>
-              <li><a href="/concursos"        class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Concursos Públicos</a></li>
+              <li><a href="/cursos"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Cursos de Graduação</a></li>
+              <li><a href="/pos-graduacao"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Pós-Graduação</a></li>
+              <li><a href="/candidaturas"     class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Como Ingressar</a></li>
+              <li><a href="/cursos-online"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Cursos Online</a></li>
+              <li><a href="/bolsas"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Bolsas de Estudo</a></li>
+              <li><a href="/concursos"        class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Concursos Públicos</a></li>
             </ul>
           </div>
 
@@ -168,12 +174,12 @@
               Pesquisa
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-pesquisa">
-              <li><a href="/investigacao"     class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Investigação</a></li>
-              <li><a href="/biblioteca"       class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Biblioteca Digital</a></li>
-              <li><a href="/repositorio"      class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Repositório Académico</a></li>
-              <li><a href="/revista"          class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Revista Científica</a></li>
-              <li><a href="/projetos"         class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Projectos de I&amp;D</a></li>
-              <li><a href="/busca-biblioteca" class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Catálogo da Biblioteca</a></li>
+              <li><a href="/investigacao"     class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Investigação</a></li>
+              <li><a href="/biblioteca"       class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Biblioteca Digital</a></li>
+              <li><a href="/repositorio"      class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Repositório Académico</a></li>
+              <li><a href="/revista"          class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Revista Científica</a></li>
+              <li><a href="/projetos"         class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Projectos de I&amp;D</a></li>
+              <li><a href="/busca-biblioteca" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Catálogo da Biblioteca</a></li>
             </ul>
           </div>
 
@@ -185,12 +191,12 @@
               Institucional
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-institucional">
-              <li><a href="/sobre-ispbie"     class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Sobre o ISP-Bié</a></li>
-              <li><a href="/missao"           class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Missão, Visão e Valores</a></li>
-              <li><a href="/gestao"           class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Gestão e Governança</a></li>
-              <li><a href="/transparencia"    class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Transparência</a></li>
-              <li><a href="/noticias"         class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Notícias e Eventos</a></li>
-              <li><a href="/#estatisticas"    class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">ISP-Bié em Números</a></li>
+              <li><a href="/sobre-ispbie"     class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Sobre o ISP-Bié</a></li>
+              <li><a href="/missao"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Missão, Visão e Valores</a></li>
+              <li><a href="/gestao"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Gestão e Governança</a></li>
+              <li><a href="/transparencia"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Transparência</a></li>
+              <li><a href="/noticias"         class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Notícias e Eventos</a></li>
+              <li><a href="/#estatisticas"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">ISP-Bié em Números</a></li>
             </ul>
           </div>
 
@@ -202,16 +208,16 @@
               Serviços
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-servicos">
-              <li><a href="/resultados"       class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Portal do Estudante</a></li>
+              <li><a href="/resultados"       class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Portal do Estudante</a></li>
               <li><a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer"
                                               class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed flex items-center gap-1">
                 Webmail Institucional
                 <svg class="w-2.5 h-2.5 opacity-40 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
               </a></li>
-              <li><a href="/alumni"           class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Alumni</a></li>
-              <li><a href="/servicos"         class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Carta de Serviços</a></li>
-              <li><a href="/ouvidoria"        class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Ouvidoria</a></li>
-              <li><a href="/contactos"        class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Contactos</a></li>
+              <li><a href="/alumni"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Alumni</a></li>
+              <li><a href="/servicos"         class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Carta de Serviços</a></li>
+              <li><a href="/ouvidoria"        class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Ouvidoria</a></li>
+              <li><a href="/contactos"        class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Contactos</a></li>
             </ul>
           </div>
 
@@ -223,14 +229,14 @@
               Parceiros
             </h3>
             <ul class="space-y-2" aria-labelledby="footer-parceiros">
-              <li class="text-xs text-gray-600 leading-snug">Gabinete Prov. da Educação</li>
-              <li class="text-xs text-gray-600 leading-snug">Fundo de Apoio Social (FAS)</li>
-              <li class="text-xs text-gray-600 leading-snug">Standard Bank de Angola</li>
-              <li class="text-xs text-gray-600 leading-snug">Unitel</li>
-              <li class="text-xs text-gray-600 leading-snug">ISP Ndunduma · ISP da Caála</li>
-              <li class="text-xs text-gray-600 leading-snug">Hospital Mártires do Cuito</li>
-              <li class="text-xs text-gray-600 leading-snug">Centro Materno Infantil do Bié</li>
-              <li class="text-xs text-gray-600 leading-snug">Cefejor</li>
+              <li class="text-xs text-gray-400 leading-snug">Gabinete Prov. da Educação</li>
+              <li class="text-xs text-gray-400 leading-snug">Fundo de Apoio Social (FAS)</li>
+              <li class="text-xs text-gray-400 leading-snug">Standard Bank de Angola</li>
+              <li class="text-xs text-gray-400 leading-snug">Unitel</li>
+              <li class="text-xs text-gray-400 leading-snug">ISP Ndunduma · ISP da Caála</li>
+              <li class="text-xs text-gray-400 leading-snug">Hospital Mártires do Cuito</li>
+              <li class="text-xs text-gray-400 leading-snug">Centro Materno Infantil do Bié</li>
+              <li class="text-xs text-gray-400 leading-snug">Cefejor</li>
               <li><a href="/outras-instituicoes" class="text-xs transition-colors duration-150" style="color:rgba(240,90,40,0.65);"
                     onmouseover="this.style.color='#F05A28'" onmouseout="this.style.color='rgba(240,90,40,0.65)'">+ Ver todas as parcerias →</a></li>
             </ul>
@@ -248,20 +254,20 @@
 
         {{-- Left: copyright + legal --}}
         <div class="space-y-1.5">
-          <p class="text-xs text-gray-600">
+          <p class="text-xs text-gray-400">
             &copy; 2020&ndash;{{ date('Y') }} Instituto Superior Politécnico do Bié &mdash; Todos os direitos reservados.
           </p>
           <p class="text-xs">
-            <a href="/politica-privacidade" class="text-gray-600 hover:text-[#F05A28] transition-colors">Política de Privacidade</a>
-            <span class="mx-2 text-gray-700" aria-hidden="true">·</span>
-            <a href="/termos"               class="text-gray-600 hover:text-[#F05A28] transition-colors">Termos de Uso</a>
-            <span class="mx-2 text-gray-700" aria-hidden="true">·</span>
-            <a href="/acessibilidade"       class="text-gray-600 hover:text-[#F05A28] transition-colors">Acessibilidade</a>
+            <a href="/politica-privacidade" class="text-gray-400 hover:text-[#F05A28] transition-colors">Política de Privacidade</a>
+            <span class="mx-2 text-gray-500" aria-hidden="true">·</span>
+            <a href="/termos"               class="text-gray-400 hover:text-[#F05A28] transition-colors">Termos de Uso</a>
+            <span class="mx-2 text-gray-500" aria-hidden="true">·</span>
+            <a href="/acessibilidade"       class="text-gray-400 hover:text-[#F05A28] transition-colors">Acessibilidade</a>
           </p>
           <p class="text-xs text-gray-700">
-            Desenvolvido por <span class="text-gray-500">Fernanda Gonçalves</span>
-            <span class="mx-1.5 text-gray-700" aria-hidden="true">·</span>
-            <em class="not-italic text-gray-700">"De Angola com amor"</em>
+            Desenvolvido por <span class="text-gray-300">Fernanda Gonçalves</span>
+            <span class="mx-1.5 text-gray-500" aria-hidden="true">·</span>
+            <em class="not-italic text-gray-400">"De Angola com amor"</em>
           </p>
         </div>
 
