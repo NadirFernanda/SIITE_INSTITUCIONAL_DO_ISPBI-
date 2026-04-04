@@ -32,10 +32,11 @@
           {{-- Brand block --}}
           <div class="flex items-start sm:items-center gap-5">
 
-            {{-- ISP monogram badge --}}
-            <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl font-black text-white select-none shadow-2xl"
-                 style="background:linear-gradient(135deg,#F05A28 0%,#c93e18 100%);box-shadow:0 10px 36px rgba(240,90,40,0.40);font-size:1.35rem;letter-spacing:-0.5px;">
-              ISP
+            {{-- ISP-Bié monogram badge --}}
+            <div class="flex-shrink-0 flex flex-col items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl font-black text-white select-none shadow-2xl leading-none"
+                 style="background:linear-gradient(135deg,#F05A28 0%,#c93e18 100%);box-shadow:0 10px 36px rgba(240,90,40,0.40);">
+              <span style="font-size:1.1rem;letter-spacing:-0.5px;">ISP</span>
+              <span style="font-size:0.6rem;letter-spacing:0.5px;opacity:0.9;margin-top:2px;">Bié</span>
             </div>
 
             <div>
