@@ -31,8 +31,7 @@
       goto(i)  { this.current = i; }
     }"
     @mouseenter="paused = true" @mouseleave="paused = false"
-    class="relative w-full overflow-hidden"
-    style="min-height:420px;height:80vh;max-height:900px;"
+    class="relative w-full overflow-hidden h-[45vh] min-h-[220px] max-h-[350px] sm:h-[80vh] sm:min-h-[420px] sm:max-h-[900px]"
     aria-label="Carrossel de imagens institucionais">
 
     {{-- ── Slides de fundo ── --}}
