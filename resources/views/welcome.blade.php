@@ -126,10 +126,10 @@
   <div style="background:linear-gradient(135deg,#1e3a8a 0%,#1565c0 60%,#1976d2 100%);border-bottom:3px solid #F05A28;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {{-- Mobile: coluna central com links + sociais. Desktop: linha única --}}
-      <div class="flex flex-row items-center justify-between gap-2 py-3">
+      <div class="flex flex-col items-center gap-1.5 py-2 sm:flex-row sm:justify-between sm:gap-2 sm:py-3">
 
         {{-- Links institucionais --}}
-        <div class="flex items-center justify-center sm:justify-start gap-0.5 sm:gap-1 flex-nowrap ml-2 sm:ml-0">
+        <div class="flex items-center justify-center sm:justify-start gap-0.5 sm:gap-1 flex-nowrap">
           <a href="/missao" class="group flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1 sm:py-2 rounded-lg transition-all duration-200" style="background:rgba(255,255,255,0.1);"
              onmouseover="this.style.background='#F05A28'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">  
             <div class="flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full flex-shrink-0" style="background:rgba(255,255,255,0.2);">
@@ -161,7 +161,7 @@
         </div>
 
         {{-- Lado direito: sociais + busca --}}
-        <div class="flex items-center justify-center sm:justify-end gap-2 mr-2 sm:mr-0">
+        <div class="flex items-center justify-center sm:justify-end gap-2">
 
           {{-- Redes sociais --}}
           <div class="flex items-center gap-1">
