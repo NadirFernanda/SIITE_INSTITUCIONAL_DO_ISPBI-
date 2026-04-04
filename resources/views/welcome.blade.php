@@ -3,52 +3,73 @@
 @section('content')
 <main id="main-content" tabindex="-1" role="main">
 
-  <!-- Hero institucional moderno + carrossel contido -->
-  <section class="relative w-full h-[46vh] sm:h-[50vh] md:h-[42vh] xl:h-[420px] overflow-hidden mt-0 pt-0">
+  {{-- ─────────────────────────────────────────────────────────────────
+       HERO — Carrossel com overlay e CTA institucional
+  ───────────────────────────────────────────────────────────────────── --}}
+  <section class="relative w-full overflow-hidden" style="min-height:520px;height:68vh;max-height:700px;">
     @if($totalSlides > 0)
       <div x-data="{ current: 0, slides: {{ $totalSlides }}, images: [@foreach($carrosseis as $c)'{{ asset('storage/' . $c->imagem) }}'@if(!$loop->last),@endif @endforeach] }"
-           x-init="setInterval(() => { current = (current + 1) % slides }, 5000)"
+           x-init="setInterval(() => { current = (current + 1) % slides }, 6000)"
            class="absolute inset-0">
         <template x-for="(img, idx) in images" :key="idx">
-          <div x-show="current === idx" x-transition:enter="transition-opacity duration-1000" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-1000" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="absolute inset-0 w-full h-full bg-cover bg-center" :style="'background-image: url(' + img + ')'"></div>
+          <div x-show="current === idx"
+               x-transition:enter="transition-opacity duration-1000"
+               x-transition:enter-start="opacity-0"
+               x-transition:enter-end="opacity-100"
+               x-transition:leave="transition-opacity duration-1000"
+               x-transition:leave-start="opacity-100"
+               x-transition:leave-end="opacity-0"
+               class="absolute inset-0 w-full h-full bg-cover bg-center"
+               :style="'background-image: url(' + img + ')'"></div>
         </template>
-        <div class="absolute inset-0 bg-black/40"></div>
+        {{-- Overlay gradiente: opaco em baixo, transparente em cima --}}
+        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(5,15,45,0.90) 0%,rgba(5,15,45,0.50) 55%,rgba(0,0,0,0.08) 100%);"></div>
       </div>
-      <div class="absolute inset-0 flex items-center">
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 w-full">
-          <div class="max-w-xs sm:max-w-md md:max-w-xl text-white text-left bg-black/2 rounded-xl p-4 sm:p-6 md:p-8 shadow-lg backdrop-blur-sm">
-            <h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-3 sm:mb-4 break-words">
-              {{ $hero->titulo }}
-            </h1>
-            @if($hero->subtitulo)
-            <p class="text-sm xs:text-base md:text-lg opacity-90 mb-4 sm:mb-6 break-words">
-              {{ $hero->subtitulo }}
-            </p>
+    @else
+      <div class="absolute inset-0 bg-gradient-to-br from-[#1e3a8a] to-[#1976d2]"></div>
+    @endif
+
+    {{-- Conteúdo posicionado no fundo esquerdo --}}
+    <div class="absolute inset-0 flex items-end">
+      <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full pb-12 md:pb-16 lg:pb-20">
+        <div class="max-w-2xl">
+          {{-- Badge institucional --}}
+          <div class="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase"
+               style="background:rgba(240,90,40,0.18);border:1px solid rgba(240,90,40,0.55);color:#ffaa80;">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#F05A28] animate-pulse"></span>
+            Instituto Superior Politécnico do Bié
+          </div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-4"
+              style="text-shadow:0 2px 20px rgba(0,0,0,0.5);">
+            {{ $hero->titulo }}
+          </h1>
+          @if($hero->subtitulo)
+          <p class="text-base sm:text-lg text-white/80 mb-8 leading-relaxed max-w-xl">
+            {{ $hero->subtitulo }}
+          </p>
+          @endif
+          <div class="flex flex-wrap gap-3">
+            @if($hero->link)
+              <a href="{{ $hero->link }}"
+                 class="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-semibold text-white text-sm shadow-xl transition-all duration-200"
+                 style="background:#F05A28;"
+                 onmouseover="this.style.background='#d44d20';this.style.transform='translateY(-2px)'"
+                 onmouseout="this.style.background='#F05A28';this.style.transform='translateY(0)'">
+                {{ $hero->texto_botao ?? 'Conheça Mais' }}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </a>
             @endif
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none">
-              @if($hero->link && $hero->texto_botao)
-                <a href="{{ $hero->link }}"
-                   class="inline-flex items-center justify-center
-                          bg-blue-600 hover:bg-blue-700
-                          text-white font-semibold
-                          px-4 py-2 sm:px-6 sm:py-3 rounded-md transition text-base sm:text-lg w-full sm:w-auto text-center">
-                  {{ $hero->texto_botao }}
-                </a>
-              @elseif($hero->link)
-                <a href="{{ $hero->link }}"
-                   class="inline-flex items-center justify-center
-                          bg-blue-600 hover:bg-blue-700
-                          text-white font-semibold
-                          px-4 py-2 sm:px-6 sm:py-3 rounded-md transition text-base sm:text-lg w-full sm:w-auto text-center">
-                  CONHEÇA MAIS
-                </a>
-              @endif
-            </div>
+            <a href="/cursos"
+               class="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-semibold text-white text-sm transition-all duration-200"
+               style="background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.4);"
+               onmouseover="this.style.background='rgba(255,255,255,0.2)'"
+               onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+              Cursos Oferecidos
+            </a>
           </div>
         </div>
       </div>
-
-    @endif
+    </div>
   </section>
 
   <!-- Barra institucional moderna -->
@@ -136,138 +157,167 @@
       </div>
     </div>
   </div>
+
+  {{-- ─────────────────────────────────────────────────────────────────
+       NOTÍCIAS EM DESTAQUE
+  ───────────────────────────────────────────────────────────────────── --}}
+  <section class="py-14 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div class="flex items-end justify-between mb-10">
+        <div>
+          <p class="text-xs font-bold tracking-widest uppercase mb-1" style="color:#F05A28;">Actualidade</p>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">Notícias Institucionais</h2>
+        </div>
+        <a href="/noticias" class="hidden sm:inline-flex items-center gap-1 text-sm font-semibold transition-colors" style="color:#2563eb;"
+           onmouseover="this.style.color='#1e4db7'" onmouseout="this.style.color='#2563eb'">
+          Ver todas
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
       </div>
-    </div>
-  </div>
-  </section>
-
-
-  <!-- Seção Institucional -->
-
-  <section class="py-8 bg-gray-100">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Notícias Institucionais</h2>
       @component('components.noticias-carousel')
       @endcomponent
     </div>
   </section>
 
-  <!-- Seção Acesso Rápido -->
-  <section class="py-8 bg-white border-t border-gray-200">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">Acesso rápido</h2>
-      
-      <!-- Primeira linha -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2 md:gap-4 2xl:gap-6 mb-4">
-        
-        <a href="/resultados" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Portal ISP-Bié">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
-            </svg>
+  {{-- ─────────────────────────────────────────────────────────────────
+       ACESSO RÁPIDO
+  ───────────────────────────────────────────────────────────────────── --}}
+  <section class="py-14 border-t border-gray-100" style="background:#f8fafc;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div class="mb-10">
+        <p class="text-xs font-bold tracking-widest uppercase mb-1" style="color:#F05A28;">Serviços</p>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900">Acesso Rápido</h2>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4">
+
+        {{-- helper macro: card link --}}
+        <a href="/resultados" aria-label="Portal ISP-Bié"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Portal ISP-Bié</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Portal ISP-Bié</span>
         </a>
 
-
-        <a href="/contactos" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Contactos">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
+        <a href="/contactos" aria-label="Contactos"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Contactos</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Contactos</span>
         </a>
 
-        <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Webmail (abre em nova aba)">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
+        <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" aria-label="Webmail (abre em nova aba)"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Webmail</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Webmail</span>
         </a>
 
-        <a href="/alumni" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Alumni">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-            </svg>
+        <a href="/alumni" aria-label="Alumni"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Alumni</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Alumni</span>
         </a>
 
-        <a href="/revista" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Artigos Científicos">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM7 12h10v2H7zm0 4h7v2H7z"/>
-            </svg>
+        <a href="/revista" aria-label="Artigos Científicos"
+        <a href="/revista" aria-label="Artigos Científicos"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM7 12h10v2H7zm0 4h7v2H7z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Artigos Científicos</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Artigos Científicos</span>
         </a>
 
-        <a href="/biblioteca" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Biblioteca Digital">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/>
-            </svg>
+        <a href="/biblioteca" aria-label="Biblioteca Digital"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Biblioteca Digital</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Biblioteca Digital</span>
         </a>
 
-        <a href="/repositorio" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Repositório Académico">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
-            </svg>
+        <a href="/repositorio" aria-label="Repositório Académico"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Repositório Académico</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Repositório Académico</span>
         </a>
-        <a href="/busca-pessoas" class="flex flex-col items-center group interactive-card rounded-xl shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Busca Pessoas">
-          <div class="w-20 h-20 mb-3 text-[#2563eb] group-hover:text-[#2563eb] transition-colors">
-            <svg fill="currentColor" viewBox="0 0 24 24">
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-              <circle cx="9.5" cy="9.5" r="1.5"/>
-            </svg>
+
+        <a href="/busca-pessoas" aria-label="Busca de Pessoas"
+           class="flex flex-col items-center gap-3 p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2"
+           style="transition:transform .18s,box-shadow .18s,border-color .18s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 24px rgba(37,99,235,0.13)';this.style.borderColor='rgba(37,99,235,0.28)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor=''">
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
+            <svg class="w-6 h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
           </div>
-          <span class="text-sm font-semibold text-center text-gray-800 group-hover:text-[#2563eb]">Busca Pessoas</span>
+          <span class="text-xs font-semibold text-gray-700 leading-tight">Busca de Pessoas</span>
         </a>
+
       </div>
     </div>
   </section>
 
 
 
-  <!-- Seção ISP-Bié em números -->
-
-  <section id="estatisticas" class="py-8 bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white scroll-reveal">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 text-white drop-shadow-lg" style="text-shadow: 0 2px 8px #2563eb, 0 1px 0 #fff;">ISP-Bié em números</h2>
-      <p class="text-lg mb-8 text-white opacity-100 font-semibold drop-shadow" style="text-shadow: 0 1px 6px #2563eb;">Fonte: Anuário Estatístico ISP-Bié 2024 (fonte de dados 2023).</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {{-- ─────────────────────────────────────────────────────────────────
+       ISP-BIÉ EM NÚMEROS
+  ───────────────────────────────────────────────────────────────────── --}}
+  <section id="estatisticas" class="py-16 text-white scroll-reveal" style="background:linear-gradient(135deg,#1e3a8a 0%,#1565c0 60%,#1976d2 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div class="mb-12 text-center">
+        <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:#ffaa80;">Dados Institucionais</p>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">ISP-Bié em números</h2>
+        <p class="text-sm text-white/70 max-w-md mx-auto">Fonte: Anuário Estatístico ISP-Bié 2024 (dados referentes a 2023).</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($estatisticas as $estatistica)
-        <div class="text-center stat-card">
-          <div class="text-xl font-extrabold mb-2 text-white drop-shadow" style="letter-spacing:-1px;">{{ $estatistica->titulo }}</div>
-          <div class="text-5xl font-bold mb-3" data-counter data-target="{{ $estatistica->valor }}">{{ $estatistica->valor }}</div>
-          <div class="text-lg mb-4">{!! nl2br(e($estatistica->descricao)) !!}</div>
-          <div class="w-24 h-1 bg-white mx-auto shadow-lg" style="opacity:1;"></div>
+        <div class="stat-card text-center rounded-2xl px-8 py-8" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(4px);">
+          <div class="text-sm font-bold uppercase tracking-widest mb-3 text-white/70">{{ $estatistica->titulo }}</div>
+          <div class="text-5xl sm:text-6xl font-extrabold mb-3 text-white" data-counter data-target="{{ $estatistica->valor }}" style="letter-spacing:-2px;">{{ $estatistica->valor }}</div>
+          <div class="w-12 h-0.5 mx-auto mb-3" style="background:rgba(240,90,40,0.8);"></div>
+          <div class="text-sm text-white/80 leading-relaxed">{!! nl2br(e($estatistica->descricao)) !!}</div>
         </div>
         @endforeach
       </div>
     </div>
   </section>
 
-  <!-- Testemunhos - Carrossel Alpine.js -->
-  <!-- Testemunhos -->
-  <section class="py-8 bg-gray-50">
-    <div class="w-full 2xl:max-w-screen-2xl mx-auto px-2 sm:px-6 lg:px-12">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Testemunhos
-        </h2>
-        <p class="text-xl text-gray-600">
-          Saiba o que os nossos estudantes dizem sobre nós
-        </p>
+  {{-- ─────────────────────────────────────────────────────────────────
+       TESTEMUNHOS
+  ───────────────────────────────────────────────────────────────────── --}}
+  <section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      <div class="text-center mb-12">
+        <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:#F05A28;">Comunidade</p>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-3">Testemunhos</h2>
+        <p class="text-gray-500 text-base max-w-md mx-auto">O que os nossos estudantes dizem sobre nós</p>
       </div>
 
       {{-- Enviar dados reais do admin para o JS --}}
