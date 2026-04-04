@@ -37,16 +37,6 @@
                             <h3 class="text-2xl font-bold text-[#2563eb] mb-2">{{ $noticia->titulo }}</h3>
                             <p class="text-gray-700 text-base mb-4">{{ Str::limit($noticia->texto, 180) }}</p>
                         </div>
-                        <div class="flex justify-center">
-                            <a href="/noticias/{{ $noticia->id }}"
-                               class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
-                               style="background:#F05A28;"
-                               onmouseover="this.style.background='#d44d20';this.style.transform='translateY(-1px)'"
-                               onmouseout="this.style.background='#F05A28';this.style.transform='translateY(0)'">
-                                Ler mais
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                            </a>
-                        </div>
                     </div>
                 </div>
             @endforeach
@@ -61,5 +51,17 @@
                 class="w-3 h-3 rounded-full focus:outline-none"
             ></button>
         </template>
+    </div>
+
+    <!-- Botão fora do carrossel, abaixo das bolinhas -->
+    <div class="flex flex-col items-center gap-3 mt-5">
+        <a href="/noticias"
+           class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
+           style="background:#F05A28;"
+           onmouseover="this.style.background='#d44d20';this.style.transform='translateY(-1px)'"
+           onmouseout="this.style.background='#F05A28';this.style.transform='translateY(0)'">
+            Ler mais notícias
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
     </div>
 </div>
