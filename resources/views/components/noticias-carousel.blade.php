@@ -37,7 +37,7 @@
                             <h3 class="text-2xl font-bold text-[#2563eb] mb-2">{{ $noticia->titulo }}</h3>
                             <p class="text-gray-700 text-base mb-4">{{ Str::limit($noticia->texto, 180) }}</p>
                         </div>
-                        <div class="flex justify-end">
+                        <div class="flex justify-center">
                             <a href="/noticias/{{ $noticia->id }}"
                                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg"
                                style="background:#F05A28;"
