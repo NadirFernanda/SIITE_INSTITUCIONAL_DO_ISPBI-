@@ -42,18 +42,18 @@
               <h2 class="text-white text-base sm:text-lg font-bold tracking-tight leading-tight">
                 Instituto Superior Politécnico do Bié
               </h2>
-              <p class="text-gray-500 text-xs mt-1.5 leading-relaxed max-w-xs sm:max-w-sm">
+              <p class="text-gray-300 text-xs mt-1.5 leading-relaxed max-w-xs sm:max-w-sm">
                 Formando líderes e profissionais de excelência desde 2020.<br class="hidden sm:block">
                 O conhecimento ao serviço de Angola.
               </p>
               <div class="flex flex-wrap items-center gap-2 mt-3">
-                <span class="inline-flex items-center gap-1.5 text-xs text-gray-500 rounded-full px-2.5 py-1"
-                      style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                <span class="inline-flex items-center gap-1.5 text-xs text-gray-300 rounded-full px-2.5 py-1"
+                      style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);">
                   <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" aria-hidden="true"></span>
                   Decreto Presidencial nº 285/20 de 29/10/2020
                 </span>
-                <span class="inline-flex items-center gap-1.5 text-xs text-gray-500 rounded-full px-2.5 py-1"
-                      style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);">
+                <span class="inline-flex items-center gap-1.5 text-xs text-gray-300 rounded-full px-2.5 py-1"
+                      style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);">
                   NIF 5000308765
                 </span>
               </div>
@@ -68,7 +68,7 @@
               </svg>
               <p class="text-white text-sm font-semibold">Alertas &amp; Novidades</p>
             </div>
-            <p class="text-gray-500 text-xs mb-3 leading-relaxed pl-6">
+            <p class="text-gray-300 text-xs mb-3 leading-relaxed pl-6">
               Receba notificações sobre concursos, candidaturas e eventos do ISP-Bié.
             </p>
             <form action="/alertas/concursos" method="POST" class="flex gap-2">
@@ -105,7 +105,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
         <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
 
-          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-gray-500">
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-gray-300">
             <span class="flex items-center gap-2">
               <svg class="w-3.5 h-3.5 text-[#F05A28] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -210,7 +210,7 @@
             <ul class="space-y-2.5" aria-labelledby="footer-servicos">
               <li><a href="/resultados"       class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Portal do Estudante</a></li>
               <li><a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer"
-                                              class="text-xs text-gray-500 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed flex items-center gap-1">
+                                              class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed flex items-center gap-1">
                 Webmail Institucional
                 <svg class="w-2.5 h-2.5 opacity-40 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
               </a></li>
@@ -264,10 +264,10 @@
             <span class="mx-2 text-gray-500" aria-hidden="true">·</span>
             <a href="/acessibilidade"       class="text-gray-400 hover:text-[#F05A28] transition-colors">Acessibilidade</a>
           </p>
-          <p class="text-xs text-gray-700">
-            Desenvolvido por <span class="text-gray-300">Fernanda Gonçalves</span>
-            <span class="mx-1.5 text-gray-500" aria-hidden="true">·</span>
-            <em class="not-italic text-gray-400">"De Angola com amor"</em>
+          <p class="text-xs text-gray-400">
+            Desenvolvido por <span class="text-gray-200">Fernanda Gonçalves</span>
+            <span class="mx-1.5 text-gray-400" aria-hidden="true">·</span>
+            <em class="not-italic text-gray-300">"De Angola com amor"</em>
           </p>
         </div>
 
