@@ -117,23 +117,7 @@
         </div>
         @endif
 
-        {{-- Dots + contador (só se existir mais de 1 slide) --}}
-        @if($totalSlides > 1)
-        <div class="flex items-center justify-between mt-5 sm:mt-6">
-          <div class="flex items-center gap-2" role="tablist" aria-label="Navegação do carrossel">
-            <template x-for="(_, idx) in slides" :key="idx">
-              <button @click="goto(idx)" role="tab"
-                      :aria-selected="current === idx"
-                      :aria-label="'Slide ' + (idx + 1)"
-                      class="rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#F05A28]"
-                      :class="current === idx ? 'w-8 h-2 bg-[#F05A28]' : 'w-2 h-2 bg-white/40 hover:bg-white/70'"></button>
-            </template>
-          </div>
-          <div class="text-white/50 text-xs font-mono tabular-nums select-none pr-1">
-            <span x-text="current + 1"></span>&thinsp;/&thinsp;<span x-text="total"></span>
-          </div>
-        </div>
-        @endif
+
 
       </div>
     </div>
