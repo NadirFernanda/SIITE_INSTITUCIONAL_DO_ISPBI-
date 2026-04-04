@@ -126,7 +126,7 @@
   <div style="background:linear-gradient(135deg,#1e3a8a 0%,#1565c0 60%,#1976d2 100%);border-bottom:3px solid #F05A28;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {{-- Mobile: coluna central com links + sociais. Desktop: linha única --}}
-      <div class="flex flex-col items-center gap-1.5 py-2 sm:flex-row sm:justify-between sm:gap-2 sm:py-3">
+      <div class="flex flex-col items-center gap-3 py-3 sm:flex-row sm:justify-between sm:gap-2 sm:py-3">
 
         {{-- Links institucionais --}}
         <div class="flex items-center justify-between w-full sm:w-auto sm:justify-start gap-0.5 sm:gap-1 flex-nowrap">
