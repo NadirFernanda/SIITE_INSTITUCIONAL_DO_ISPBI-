@@ -16,14 +16,16 @@ class ContactController extends Controller
             'nome' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'assunto' => 'nullable|string|max:255',
-            'mensagem' => 'required|string',
+            'mensagem' => 'required|string|max:10000',
         ]);
 
         $to = 'geral@isp-bie.ao';
 
+        // Strip CR/LF to prevent email header injection (defense-in-depth;
+        // Symfony Mailer also encodes headers, but explicit stripping is safer).
         $subject = 'Contacto via site';
         if (!empty($data['assunto'])) {
-            $subject .= ' - ' . $data['assunto'];
+            $subject .= ' - ' . preg_replace('/[\r\n]+/', ' ', $data['assunto']);
         }
 
         $body = "<p><strong>Nome:</strong> " . e($data['nome']) . "</p>";

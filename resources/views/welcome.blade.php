@@ -14,11 +14,11 @@
           'texto_botao' => $c->texto_botao ?? 'Conheça Mais',
           'link'        => $c->link ?? '',
           'imagem'      => asset('storage/' . $c->imagem),
-        ])->toJson(JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP)
+        ])->toJson(JSON_HEX_TAG | JSON_HEX_QUOT | JSON_HEX_AMP)
       : '[]';
   @endphp
   <section
-    data-slides='{!! $slidesJson !!}'
+    data-slides="{{ $slidesJson }}"
     x-data="{
       current: 0,
       slides: [],
