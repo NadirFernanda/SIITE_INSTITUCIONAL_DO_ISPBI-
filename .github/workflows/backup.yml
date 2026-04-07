@@ -1,6 +1,6 @@
 name: Scheduled Backup
 
-on:
+"on":
   schedule:
     - cron: '0 3 * * *' # Daily at 03:00 UTC (adjust as needed)
   workflow_dispatch:
