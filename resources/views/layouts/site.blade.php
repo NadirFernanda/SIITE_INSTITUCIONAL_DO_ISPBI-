@@ -120,59 +120,5 @@
 
         @stack('scripts')
 
-    {{-- Block DevTools keyboard shortcuts (keyboard only — no DOM destruction) --}}
-    <script>
-        (function () {
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'F12') { e.preventDefault(); return false; }
-                if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) { e.preventDefault(); return false; }
-                if ((e.ctrlKey || e.metaKey) && ['U','u'].includes(e.key)) { e.preventDefault(); return false; }
-            });
-            document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-        })();
-    </script>
-
-        @push('scripts')
-        <script>
-        function testemunhosCarousel() {
-            return {
-                current: 0,
-                autoplay: null,
-                testimonials: window.TESTEMUNHOS || [
-                    {
-                        nome: 'Ana Beatriz',
-                        curso: 'Engenharia Informática',
-                        texto: 'O ISP-Bié mudou a minha vida. Professores excelentes e uma estrutura moderna.',
-                        iniciais: 'AB'
-                    }
-                ],
-                get total() {
-                    return this.testimonials.length
-                },
-                get currentItem() {
-                    return this.testimonials[this.current]
-                },
-                next() {
-                    this.current = (this.current + 1) % this.total
-                },
-                prev() {
-                    this.current = (this.current - 1 + this.total) % this.total
-                },
-                startAutoplay() {
-                    if (this.total > 1) {
-                        this.autoplay = setInterval(() => this.next(), 4000)
-                    }
-                },
-                stopAutoplay() {
-                    if (this.autoplay) clearInterval(this.autoplay)
-                },
-                init() {
-                    this.startAutoplay()
-                }
-            }
-        }
-        </script>
-        @endpush
-
 </body>
 </html>

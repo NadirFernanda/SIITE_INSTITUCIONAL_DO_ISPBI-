@@ -99,22 +99,6 @@
       </div>
         </div>
       </div>
-    <script>
-      // Adiciona rolagem suave ao clicar em cada card das fases de implementação
-      document.addEventListener('DOMContentLoaded', function() {
-        const cards = document.querySelectorAll('.fase-card');
-        cards.forEach(card => {
-          card.addEventListener('click', function() {
-            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-          card.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-              card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          });
-        });
-      });
-    </script>
   </section>
 
   <!-- Cursos Planejados -->

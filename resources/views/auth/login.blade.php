@@ -1,3 +1,6 @@
+<style>
+  #email:focus, #password:focus { border-color: #1565c0 !important; }
+</style>
 <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f4f8fb;">
     <div style="width:100%;max-width:410px;margin:auto;">
         <div style="text-align:center;margin-bottom:18px;">
@@ -15,19 +18,11 @@
                 placeholder="E-mail"
                 value="{{ old('email') }}"
                 style="width:100%;padding:13px 16px;border:2px solid #dbeafe;border-radius:10px;font-size:1.08rem;background:#f8fafc;transition:border .2s;outline:none;"
-                onfocus="this.style.borderColor='#1565c0'"
-                onblur="this.style.borderColor='#dbeafe'"
-                oninvalid="this.setCustomValidity('Por favor, preencha o campo E-mail.')"
-                oninput="this.setCustomValidity('')"
             />
             <x-input-error :messages="$errors->get('email')" class="mt-1" />
             <input id="password" name="password" type="password" required autocomplete="current-password"
                 placeholder="Senha"
                 style="width:100%;padding:13px 16px;border:2px solid #dbeafe;border-radius:10px;font-size:1.08rem;background:#f8fafc;transition:border .2s;outline:none;"
-                onfocus="this.style.borderColor='#1565c0'"
-                onblur="this.style.borderColor='#dbeafe'"
-                oninvalid="this.setCustomValidity('Por favor, preencha o campo Senha.')"
-                oninput="this.setCustomValidity('')"
             />
             <x-input-error :messages="$errors->get('password')" class="mt-1" />
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">

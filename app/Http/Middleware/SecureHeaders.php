@@ -54,15 +54,21 @@ class SecureHeaders
 
         // --- Content Security Policy ---
         // 'unsafe-eval' is required by Alpine.js v3 (new Function() for x-data expressions).
-        // 'unsafe-inline' is required by the many inline onmouseover/onclick event handlers
-        // spread across Blade templates; removing it requires a full template refactor.
-        // frame-ancestors restricts who may embed this site in an iframe (stronger than
-        // X-Frame-Options). worker-src blocks rogue service workers.
+        // 'unsafe-inline' is kept for admin routes where many legacy inline handlers remain
+        // (admin is behind authentication — risk is contained). All public-facing templates
+        // have had inline handlers replaced with Tailwind/Alpine so unsafe-inline is dropped
+        // from public script-src.
+        $path     = ltrim($request->path(), '/');
+        $isAdmin  = str_starts_with($path, 'admin');
+        $scriptSrc = $isAdmin
+            ? "script-src 'self' 'unsafe-inline' 'unsafe-eval';"
+            : "script-src 'self' 'unsafe-eval';";
+
         $response->headers->set(
             'Content-Security-Policy',
             implode(' ', [
                 "default-src 'self';",
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval';",
+                $scriptSrc,
                 "style-src 'self' 'unsafe-inline' https://fonts.bunny.net;",
                 "img-src 'self' data: https:;",
                 "font-src 'self' data: https://fonts.bunny.net;",
@@ -78,7 +84,6 @@ class SecureHeaders
         );
 
         // --- No-cache for authenticated / sensitive routes ---
-        $path = ltrim($request->path(), '/');
         $isSensitive = collect($this->sensitivePrefixes)
             ->contains(fn(string $prefix) => str_starts_with($path, $prefix));
 
