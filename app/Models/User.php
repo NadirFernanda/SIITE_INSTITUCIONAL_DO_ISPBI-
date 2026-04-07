@@ -19,7 +19,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        // NOTE: 'role' is intentionally NOT in $fillable to prevent mass-assignment
+        // privilege escalation. Set it explicitly via forceFill() or direct assignment.
     ];
 
     /**

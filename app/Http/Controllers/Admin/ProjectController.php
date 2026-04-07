@@ -10,7 +10,9 @@ class ProjectController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // Defence-in-depth: enforce both auth AND admin at controller level
+        // in addition to the route-group middleware.
+        $this->middleware(['auth', 'admin']);
     }
 
     public function index()

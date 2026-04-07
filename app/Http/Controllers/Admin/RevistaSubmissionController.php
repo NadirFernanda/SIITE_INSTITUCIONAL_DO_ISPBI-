@@ -46,13 +46,15 @@ class RevistaSubmissionController extends Controller
     {
         $s = RevistaSubmission::findOrFail($id);
         $request->validate([
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'description' => 'required|string',
-            'link' => 'required|url',
-            'email' => 'required|email|max:255',
-            'status' => 'required|in:pending,published',
-            'category' => ['nullable','string','in:Engenharias e Tecnologia,Ciências da Saúde,Ciências Sociais e Humanas'],
+            'title'       => 'required|string|max:255',
+            'author'      => 'required|string|max:255',
+            'description' => 'required|string|max:10000',
+            'link'        => 'required|url|max:2083',
+            'email'       => 'required|email|max:255',
+            'affiliation' => 'nullable|string|max:255',
+            'category'    => ['nullable','string','in:Engenharias e Tecnologia,Ciências da Saúde,Ciências Sociais e Humanas'],
+            'notes'       => 'nullable|string|max:5000',
+            'status'      => 'required|in:pending,published',
         ]);
 
         $s->update($request->only(['title','author','description','link','email','affiliation','category','notes','status']));
