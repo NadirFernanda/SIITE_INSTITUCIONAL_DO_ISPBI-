@@ -21,7 +21,9 @@ class EnsureUserIsAdmin
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            abort(403, 'Acesso reservado a administradores.');
+            // Redirect silently rather than returning a 403 that reveals the
+            // admin panel exists at this URL (prevents path enumeration).
+            return redirect('/');
         }
 
         return $next($request);

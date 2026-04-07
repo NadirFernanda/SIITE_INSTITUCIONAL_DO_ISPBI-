@@ -33,8 +33,9 @@ class AuthenticatedSessionController extends Controller
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
+            // Generic message prevents confirming that an admin panel exists.
             throw \Illuminate\Validation\ValidationException::withMessages([
-                'email' => 'Não tem permissão para aceder ao painel administrativo.',
+                'email' => __('auth.failed'),
             ]);
         }
 
