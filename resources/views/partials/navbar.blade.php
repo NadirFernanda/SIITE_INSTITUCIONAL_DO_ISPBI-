@@ -13,7 +13,7 @@
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2l2 5 3-1 3 1 2-5h2a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/></svg>
       Contacto
     </a>
-    <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Abrir Webmail (abre em nova aba)">
+    <a href="https://ws11.angoweb.net/webmail" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]" aria-label="Abrir Webmail (abre em nova aba)">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Webmail
     </a>
@@ -327,7 +327,7 @@
           <span>Contacto</span>
         </a>
 
-        <a href="http://www.isp-bie.ao/webmail" target="_blank" rel="noopener noreferrer"
+        <a href="https://ws11.angoweb.net/webmail" target="_blank" rel="noopener noreferrer"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <rect x="2" y="4" width="20" height="16" rx="2"/><path stroke-linecap="round" d="M2 7l10 7 10-7"/>
