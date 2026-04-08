@@ -150,7 +150,7 @@
                        onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">{{ $att->original_name }}</a>
                 </div>
                 <form action="{{ route('admin.concursos.attachments.destroy', $att->id) }}" method="POST"
-                      onsubmit="return confirm('Remover anexo «{{ addslashes($att->original_name) }}»?')" style="flex-shrink:0;">
+                      onsubmit="return confirm('Remover anexo ' + @json($att->original_name) + '?')" style="flex-shrink:0;">
                     @csrf
                     @method('DELETE')
                     <button type="submit"

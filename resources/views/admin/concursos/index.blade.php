@@ -97,7 +97,7 @@
                         </button>
                     </form>
                     <form action="{{ route('admin.concursos.destroy', $c) }}" method="POST" style="display:inline;"
-                          onsubmit="return confirm('Remover «{{ addslashes($c->title) }}»?')">
+                          onsubmit="return confirm('Remover ' + @json($c->title) + '?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" title="Remover"

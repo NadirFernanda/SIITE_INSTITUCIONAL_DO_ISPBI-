@@ -117,7 +117,7 @@
 
                 {{-- Apagar --}}
                 <form method="POST" action="{{ route('admin.noticias.destroy', $noticia->id) }}" style="display:inline;"
-                      onsubmit="return confirm('Confirma que deseja apagar a notícia «{{ addslashes($noticia->titulo) }}»?')">
+                      onsubmit="return confirm('Confirma que deseja apagar a notícia ' + @json($noticia->titulo) + '?')">
                     @csrf
                     @method('DELETE')
                     <button type="submit" title="Apagar"
