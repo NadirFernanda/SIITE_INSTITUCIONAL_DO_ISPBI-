@@ -11,7 +11,7 @@
 
     <p><strong>Descrição:</strong><br>{{ $submission->description }}</p>
 
-    @if($submission->link)
+    @if($submission->link && preg_match('/^https?:\/\//i', $submission->link))
         <p><strong>Link:</strong> <a href="{{ $submission->link }}">{{ $submission->link }}</a></p>
     @endif
 

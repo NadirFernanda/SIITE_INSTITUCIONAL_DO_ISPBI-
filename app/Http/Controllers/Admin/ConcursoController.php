@@ -325,10 +325,10 @@ class ConcursoController extends Controller
                 $interests = is_array($a->interests) ? implode('; ', $a->interests) : ($a->interests ?? '');
                 fputcsv($out, [
                     $a->id,
-                    $a->name,
-                    $a->email,
-                    $a->phone,
-                    $interests,
+                    $this->csvSanitize($a->name),
+                    $this->csvSanitize($a->email),
+                    $this->csvSanitize($a->phone),
+                    $this->csvSanitize($interests),
                     $a->consent ? 'Sim' : 'Nao',
                     $a->created_at ? $a->created_at->toDateTimeString() : '',
                 ]);
@@ -399,10 +399,10 @@ class ConcursoController extends Controller
                 $interests = is_array($a->interests) ? implode('; ', $a->interests) : ($a->interests ?? '');
                 fputcsv($out, [
                     $a->id,
-                    $a->name,
-                    $a->email,
-                    $a->phone,
-                    $interests,
+                    $this->csvSanitize($a->name),
+                    $this->csvSanitize($a->email),
+                    $this->csvSanitize($a->phone),
+                    $this->csvSanitize($interests),
                     $a->consent ? 'Sim' : 'Nao',
                     $a->created_at ? $a->created_at->toDateTimeString() : '',
                 ]);
@@ -411,5 +411,20 @@ class ConcursoController extends Controller
         };
 
         return response()->stream($callback, 200, $headers);
+    }
+
+    /**
+     * Prevent CSV formula injection by prefixing dangerous leading characters.
+     * Protects against spreadsheet apps interpreting user data as formulas.
+     */
+    private function csvSanitize(?string $value): string
+    {
+        if ($value === null || $value === '') {
+            return '';
+        }
+        if (in_array($value[0], ['=', '+', '-', '@', "\t", "\r"], true)) {
+            return "'" . $value;
+        }
+        return $value;
     }
 }

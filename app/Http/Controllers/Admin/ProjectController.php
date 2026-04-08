@@ -35,7 +35,7 @@ class ProjectController extends Controller
             'lead' => 'nullable|string|max:255',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
-            'link' => 'nullable|url',
+            'link' => 'nullable|url|starts_with:http://,https://',
         ]);
 
         Project::create($data);
@@ -56,7 +56,7 @@ class ProjectController extends Controller
             'lead' => 'nullable|string|max:255',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
-            'link' => 'nullable|url',
+            'link' => 'nullable|url|starts_with:http://,https://',
         ]);
 
         $project->update($data);

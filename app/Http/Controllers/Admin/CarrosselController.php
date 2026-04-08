@@ -15,7 +15,7 @@ class CarrosselController extends Controller
             'titulo' => 'nullable|string|max:255',
             'subtitulo' => 'nullable|string|max:500',
             'texto_botao' => 'nullable|string|max:100',
-            'link' => 'nullable|url|max:500',
+            'link' => 'nullable|url|starts_with:http://,https://|max:500',
             'ordem' => 'nullable|integer',
         ]);
         $data = [
@@ -57,7 +57,7 @@ class CarrosselController extends Controller
             'titulo' => 'nullable|string|max:255',
             'subtitulo' => 'nullable|string|max:500',
             'texto_botao' => 'nullable|string|max:100',
-            'link' => 'nullable|url|max:500',
+            'link' => 'nullable|url|starts_with:http://,https://|max:500',
             'ordem' => 'nullable|integer',
         ]);
         $path = $request->file('imagem')->store('carrossel', 'public');

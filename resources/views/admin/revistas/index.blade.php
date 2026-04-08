@@ -100,7 +100,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="px-4 py-4 text-sm text-gray-700 border-t">{{ $s->description }} @if($s->link) — <a href="{{ $s->link }}" target="_blank" class="text-indigo-600 hover:underline">Link</a>@endif</td>
+                                    <td colspan="7" class="px-4 py-4 text-sm text-gray-700 border-t">{{ $s->description }} @if($s->link && preg_match('/^https?:\/\//i', $s->link)) — <a href="{{ $s->link }}" target="_blank" class="text-indigo-600 hover:underline">Link</a>@endif</td>
                                 </tr>
                             @endforeach
                         </tbody>

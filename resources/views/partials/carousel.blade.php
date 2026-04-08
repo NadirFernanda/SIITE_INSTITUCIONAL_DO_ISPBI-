@@ -8,7 +8,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div>
               <h3 class="text-2xl font-bold">{{ $item->titulo }}</h3>
-              @if($item->link)
+              @if($item->link && preg_match('/^https?:\/\//i', $item->link))
                 <a href="{{ $item->link }}" class="mt-4 inline-block link-brand">Ler mais →</a>
               @endif
             </div>

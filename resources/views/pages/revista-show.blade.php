@@ -20,7 +20,7 @@
                 {!! nl2br(e($article->description)) !!}
             </div>
 
-            @if($article->link)
+            @if($article->link && preg_match('/^https?:\/\//i', $article->link))
                 <div class="mt-6">
                     <a href="{{ $article->link }}" target="_blank" rel="noopener" class="inline-block bg-blue-600 text-white px-4 py-2 rounded">Abrir ficheiro do artigo</a>
                 </div>

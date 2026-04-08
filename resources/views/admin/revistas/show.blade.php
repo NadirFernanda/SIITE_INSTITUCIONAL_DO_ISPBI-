@@ -6,7 +6,7 @@
         <p class="text-sm text-gray-600">Autor: {{ $s->author }} — Categoria: {{ $s->category ?? '—' }}</p>
         <div class="mt-4 bg-white p-4 rounded shadow">
             <p class="mb-4">{{ $s->description }}</p>
-            <p class="text-sm">Link: <a href="{{ $s->link }}" target="_blank" class="underline">Abrir</a></p>
+            <p class="text-sm">Link: @if($s->link && preg_match('/^https?:\/\//i', $s->link))<a href="{{ $s->link }}" target="_blank" class="underline">Abrir</a>@else<span class="text-gray-400">—</span>@endif</p>
             <p class="text-sm mt-2">Email: {{ $s->email }}</p>
             <p class="text-sm">Filiação: {{ $s->affiliation }}</p>
             <p class="text-sm">Observações: {{ $s->notes }}</p>
