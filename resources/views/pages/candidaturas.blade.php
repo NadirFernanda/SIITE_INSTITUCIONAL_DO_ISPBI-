@@ -166,40 +166,102 @@
 
                                 <hr class="my-6">
 
-                                <div class="bg-gradient-to-r from-[#2563eb] to-[#174ea6] rounded-xl p-8 text-white text-center">
-                                    <h2 class="text-3xl font-bold mb-4">Pronto para Candidatar-se?</h2>
-                                    <p class="text-xl text-[#FFD700] mb-8">Inicie sua candidatura online agora mesmo</p>
-                                    <div class="flex flex-wrap justify-center gap-4">
-                                        <button id="openFormBtn" class="bg-white text-[#2563eb] border border-[#2563eb] px-8 py-3 rounded-lg font-semibold hover:bg-[#e0e7ff] transition-colors">Candidatar-se (Online/Presencial)</button>
-                                        <a href="/contactos" class="bg-[#F05A28] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#c94a1f] transition-colors">Fale Conosco</a>
+                                {{-- Success message --}}
+                                @if(session('candidatura_success'))
+                                <div class="bg-green-50 border border-green-200 text-green-800 rounded-xl p-5 mb-8 flex items-start gap-3">
+                                    <svg class="w-6 h-6 flex-shrink-0 mt-0.5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <div>
+                                        <p class="font-bold text-green-800 mb-1">Candidatura submetida com sucesso!</p>
+                                        <p class="text-sm text-green-700">{{ session('candidatura_success') }}</p>
                                     </div>
                                 </div>
+                                @endif
 
-                                <!-- Modal permanece para funcionalidade JS -->
-                                <div id="formModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
-                                    <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-8 relative max-h-[90vh] overflow-auto">
-                                        <button id="closeFormBtn" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
-                                        <h2 class="text-2xl font-bold mb-6 text-[#2563eb]">Formulário de Candidatura</h2>
-                                        <form class="space-y-4 text-left">
-                                            @csrf
-                                            <!-- campos mantidos -->
+                                {{-- Application form --}}
+                                <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-8">
+                                    <h2 class="text-2xl font-bold text-[#2563eb] mb-2">Formulário de Candidatura Online</h2>
+                                    <p class="text-gray-500 text-sm mb-8">Preencha todos os campos obrigatórios (<span class="text-red-500">*</span>)</p>
+
+                                    <form method="POST" action="{{ route('candidaturas.store') }}" class="space-y-5">
+                                        @csrf
+
+                                        {{-- Dados Pessoais --}}
+                                        <p class="text-xs font-bold text-[#2563eb] uppercase tracking-wider mb-1 mt-4">Dados Pessoais</p>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block font-semibold mb-1">Nome Completo</label>
-                                                <input type="text" class="w-full border rounded px-3 py-2" required>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Nome Completo <span class="text-red-500">*</span></label>
+                                                <input type="text" name="nome" value="{{ old('nome') }}" required maxlength="255"
+                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('nome') border-red-400 @enderror">
+                                                @error('nome')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block font-semibold mb-1">Email</label>
-                                                <input type="email" class="w-full border rounded px-3 py-2" required>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">BI (Bilhete de Identidade)</label>
+                                                <input type="text" name="bi" value="{{ old('bi') }}" maxlength="20"
+                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('bi') border-red-400 @enderror">
+                                                @error('bi')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block font-semibold mb-1">Telefone</label>
-                                                <input type="tel" class="w-full border rounded px-3 py-2" required>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+                                                <input type="email" name="email" value="{{ old('email') }}" required maxlength="255"
+                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('email') border-red-400 @enderror">
+                                                @error('email')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
-                                            <div class="text-right">
-                                                <button type="submit" class="bg-[#2563eb] text-white px-6 py-2 rounded font-semibold hover:bg-[#174ea6]">Enviar Candidatura</button>
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Telefone <span class="text-red-500">*</span></label>
+                                                <input type="tel" name="telefone" value="{{ old('telefone') }}" required maxlength="50"
+                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('telefone') border-red-400 @enderror">
+                                                @error('telefone')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
-                                        </form>
-                                    </div>
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Data de Nascimento</label>
+                                                <input type="date" name="data_nascimento" value="{{ old('data_nascimento') }}"
+                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('data_nascimento') border-red-400 @enderror">
+                                                @error('data_nascimento')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- Dados Académicos --}}
+                                        <p class="text-xs font-bold text-[#2563eb] uppercase tracking-wider mb-1 mt-6">Dados Académicos</p>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Curso Pretendido <span class="text-red-500">*</span></label>
+                                                <select name="curso" required
+                                                        class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('curso') border-red-400 @enderror">
+                                                    <option value="">Seleccione um curso</option>
+                                                    @foreach(\App\Models\Candidatura::$cursos as $curso)
+                                                        <option value="{{ $curso }}" {{ old('curso') === $curso ? 'selected' : '' }}>{{ $curso }}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('curso')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Escola de Origem</label>
+                                                <input type="text" name="escola_origem" value="{{ old('escola_origem') }}" maxlength="255"
+                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Ano de Conclusão do Ensino Médio</label>
+                                                <input type="number" name="ano_conclusao" value="{{ old('ano_conclusao') }}" min="1990" max="{{ date('Y') }}" maxlength="4"
+                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('ano_conclusao') border-red-400 @enderror">
+                                                @error('ano_conclusao')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- Observações --}}
+                                        <div class="mt-2">
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Observações</label>
+                                            <textarea name="observacoes" rows="4" maxlength="2000"
+                                                      class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition resize-none"
+                                                      placeholder="Informação adicional que considere relevante...">{{ old('observacoes') }}</textarea>
+                                        </div>
+
+                                        <div class="pt-2">
+                                            <button type="submit"
+                                                    class="w-full sm:w-auto bg-[#2563eb] hover:bg-[#174ea6] text-white font-bold px-10 py-3 rounded-xl transition-colors text-sm">
+                                                Submeter Candidatura
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
 
                             </div>

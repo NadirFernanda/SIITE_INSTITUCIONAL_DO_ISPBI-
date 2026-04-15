@@ -117,6 +117,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::get('revistas/{id}/edit', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'edit'])->name('revistas.edit');
     Route::put('revistas/{id}', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'update'])->name('revistas.update');
     Route::delete('revistas/{id}', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'destroy'])->name('revistas.destroy');
+
+    // Candidaturas admin
+    Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
+    Route::get('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'show'])->name('candidaturas.show');
+    Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
+    Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
 });
 
 // Placeholder routes for later scaffolding
@@ -171,6 +178,7 @@ Route::view('/cultura', 'pages.cultura')->name('cultura');
 Route::view('/calendario-academico', 'pages.calendario-academico')->name('calendario-academico');
 
 Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
+Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:5,1');
 Route::get('/alumni', function () {
     $alumni = App\Models\Alumnus::where('publicado', true)->orderByDesc('created_at')->get();
     return view('pages.alumni', compact('alumni'));
