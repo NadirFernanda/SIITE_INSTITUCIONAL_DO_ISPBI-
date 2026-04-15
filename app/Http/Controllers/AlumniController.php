@@ -26,7 +26,7 @@ class AlumniController extends Controller
             'trabalha' => 'required|in:sim,nao',
             'empresa' => 'nullable|string|max:255',
             'cargo' => 'nullable|string|max:255',
-            'satisfacao' => 'nullable|string',
+            'satisfacao' => 'nullable|string|max:5000',
         ]);
 
         $alumnus = new Alumnus();
