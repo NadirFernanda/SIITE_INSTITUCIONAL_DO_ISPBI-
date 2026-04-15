@@ -30,7 +30,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'summary' => 'nullable|string',
+            'summary' => 'nullable|string|max:5000',
             'status' => 'required|in:em_curso,em_avaliacao,concluido',
             'lead' => 'nullable|string|max:255',
             'start_date' => 'nullable|date',
@@ -51,7 +51,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'summary' => 'nullable|string',
+            'summary' => 'nullable|string|max:5000',
             'status' => 'required|in:em_curso,em_avaliacao,concluido',
             'lead' => 'nullable|string|max:255',
             'start_date' => 'nullable|date',

@@ -21,8 +21,8 @@ class PaginaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo' => 'required',
-            'conteudo' => 'nullable',
+            'titulo' => 'required|string|max:255',
+            'conteudo' => 'nullable|string|max:65535',
         ]);
         Pagina::create([
             'titulo' => $request->titulo,

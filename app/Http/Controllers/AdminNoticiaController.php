@@ -40,7 +40,7 @@ class AdminNoticiaController extends Controller
         Gate::authorize('update', $noticia);
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
-            'texto' => 'required|string',
+            'texto' => 'required|string|max:65535',
             'imagem' => 'nullable|image|max:2048',
             'pdf' => 'nullable|file|mimes:pdf|max:5120',
             'data' => 'required|date',
@@ -76,7 +76,7 @@ class AdminNoticiaController extends Controller
         Gate::authorize('create', Noticia::class);
         $validated = $request->validate([
             'titulo' => 'required|string|max:255',
-            'texto' => 'required|string',
+            'texto' => 'required|string|max:65535',
             'imagem' => 'nullable|image|max:2048',
             'pdf' => 'nullable|file|mimes:pdf|max:5120',
             'data' => 'required|date',

@@ -72,7 +72,7 @@
             <p class="text-gray-300 text-xs mb-3 leading-relaxed pl-6">
               Receba notificações sobre concursos, candidaturas e eventos do ISP-Bié.
             </p>
-            <form action="/alertas/concursos" method="POST" class="flex gap-2">
+            <form action="{{ route('alerts.subscribe') }}" method="POST" class="flex gap-2">
               @csrf
               <label for="footer-email" class="sr-only">Email para alertas</label>
               <input type="email" id="footer-email" name="email"
