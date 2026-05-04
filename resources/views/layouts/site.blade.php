@@ -117,6 +117,30 @@
         $jsVersion = file_exists($jsPath) ? filemtime($jsPath) : time();
     @endphp
     <script type="module" src="{{ asset('build/' . $jsFile) }}?v={{ $jsVersion }}"></script>
+    <script>
+        window.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+
+        window.addEventListener('keydown', function (event) {
+            const ctrlKey = event.ctrlKey || event.metaKey;
+            const key = event.key?.toLowerCase();
+
+            if (event.key === 'F12') {
+                event.preventDefault();
+                return;
+            }
+
+            if (ctrlKey && (key === 'u' || key === 's' || key === 'p' || key === 'i' || key === 'j' || key === 'c')) {
+                event.preventDefault();
+                return;
+            }
+
+            if (ctrlKey && event.shiftKey && ['i', 'j', 'c'].includes(key)) {
+                event.preventDefault();
+            }
+        });
+    </script>
 
         @stack('scripts')
 

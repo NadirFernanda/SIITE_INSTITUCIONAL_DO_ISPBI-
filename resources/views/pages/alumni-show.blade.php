@@ -9,7 +9,7 @@
           <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
         </svg>
         <div>
-          <h1 class="text-3xl md:text-4xl font-bold">Testemunho de {{ $alumnus->nome }}</h1>
+          <h1 class="text-3xl md:text-4xl font-bold">Testemunho Alumni</h1>
           <p class="text-lg mt-1 opacity-90">História de um(a) ex-estudante do ISP-Bié</p>
         </div>
       </div>
@@ -29,24 +29,16 @@
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100 interactive-card">
         <div class="flex items-center gap-6 mb-6">
           <div class="w-20 h-20 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-3xl font-bold">
-            {{ strtoupper(mb_substr($alumnus->nome, 0, 1)) }}{{ mb_strtoupper(mb_substr(explode(' ', $alumnus->nome)[count(explode(' ', $alumnus->nome))-1], 0, 1)) }}
+            ✓
           </div>
           <div>
-            <h2 class="text-2xl font-bold text-gray-900 mb-1">{{ $alumnus->nome }}</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-1">Alumni</h2>
             <p class="text-gray-700 text-base">
               {{ $alumnus->curso }}
               @if($alumnus->ano)
                 &bull; Turma de {{ $alumnus->ano }}
               @endif
             </p>
-            @if($alumnus->trabalha && $alumnus->empresa)
-              <p class="text-sm text-gray-600 mt-1">
-                Atualmente em {{ $alumnus->empresa }}
-                @if($alumnus->cargo)
-                  &mdash; {{ $alumnus->cargo }}
-                @endif
-              </p>
-            @endif
           </div>
         </div>
 

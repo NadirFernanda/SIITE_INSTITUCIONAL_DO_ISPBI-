@@ -179,12 +179,27 @@ Route::view('/calendario-academico', 'pages.calendario-academico')->name('calend
 
 Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
 Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:5,1');
+
+// Rotas públicas de Alumni - sem dados sensíveis
 Route::get('/alumni', function () {
     $alumni = App\Models\Alumnus::where('publicado', true)->orderByDesc('created_at')->get();
     return view('pages.alumni', compact('alumni'));
 })->name('alumni');
-Route::get('/alumni/{id}', [App\Http\Controllers\AlumniController::class, 'show'])->name('alumni.show');
 Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store')->middleware('throttle:3,1');
+
+// Rotas protegidas de Alumni - dados sensíveis apenas com autenticação
+Route::middleware('auth')->group(function () {
+    Route::get('/alumni/{id}/completo', [App\Http\Controllers\AlumniProtectedController::class, 'show'])->name('alumni.show.protected');
+});
+
+// Fallback: rota pública /alumni/{id} sem dados sensíveis (redirecionada ou minificada)
+Route::get('/alumni/{id}', function ($id) {
+    $alumnus = App\Models\Alumnus::where('id', $id)
+        ->where('publicado', true)
+        ->where('testemunho', true)
+        ->firstOrFail();
+    return view('pages.alumni-show', compact('alumnus'));
+})->name('alumni.show');
 
 // Rotas para Acesso Rápido
 // Rota '/portal' removida (página externa usada em vez da view interna)
