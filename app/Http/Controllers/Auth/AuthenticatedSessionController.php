@@ -26,14 +26,13 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        // After credential check, ensure the authenticated user is an admin.
-        // If not, log them out immediately to prevent any admin panel access.
-        if (Auth::user()->role !== 'admin') {
+        // Apenas 'admin' e 'tecnico' podem aceder aos painéis internos.
+        $role = Auth::user()->role ?? '';
+        if (! in_array($role, ['admin', 'tecnico'], true)) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            // Generic message prevents confirming that an admin panel exists.
             throw \Illuminate\Validation\ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
@@ -41,7 +40,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin', absolute: false));
+        // Cada role é redirecionado para o seu painel exclusivo.
+        $destination = $role === 'admin'
+            ? route('admin', absolute: false)
+            : route('tecnico.candidaturas.index', absolute: false);
+
+        return redirect()->intended($destination);
     }
 
     /**

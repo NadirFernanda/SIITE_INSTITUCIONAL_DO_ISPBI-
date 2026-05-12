@@ -128,6 +128,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
 });
 
+// Painel técnico — acesso exclusivo a utilizadores com role 'tecnico' (ou 'admin')
+// Apenas candidaturas; sem acesso ao resto do painel administrativo
+Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:30,1'])->group(function () {
+    Route::get('candidaturas/export', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'export'])->name('candidaturas.export');
+    Route::get('candidaturas', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'show'])->name('candidaturas.show');
+    Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
+});
+
 // Placeholder routes for later scaffolding
 Route::view('/sobre', 'pages.sobre')->name('sobre');
 Route::view('/cursos', 'pages.cursos')->name('cursos');
