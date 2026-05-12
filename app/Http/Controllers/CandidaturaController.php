@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CandidaturaReceived;
 use App\Models\Candidatura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CandidaturaController extends Controller
 {
@@ -21,11 +23,17 @@ class CandidaturaController extends Controller
             'observacoes'    => 'nullable|string|max:2000',
         ]);
 
-        Candidatura::create($request->only([
+        $candidatura = Candidatura::create($request->only([
             'nome', 'email', 'telefone', 'bi',
             'data_nascimento', 'curso', 'escola_origem',
             'ano_conclusao', 'observacoes',
         ]));
+
+        try {
+            Mail::to('geral@isp-bie.ao')->send(new CandidaturaReceived($candidatura));
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao enviar email de candidatura: ' . $e->getMessage());
+        }
 
         return redirect()->route('candidaturas')
             ->with('candidatura_success', 'Candidatura submetida com sucesso! Entraremos em contacto em breve.');

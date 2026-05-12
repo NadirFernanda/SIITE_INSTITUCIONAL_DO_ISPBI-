@@ -19,10 +19,12 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
         $pending = 0;
         try {
             $pending = \App\Models\RevistaSubmission::where('status', 'pending')->count();
-        } catch (\Throwable $e) {
-            // ignore if table doesn't exist yet
-        }
-        return view('admin.dashboard', compact('pending'));
+        } catch (\Throwable $e) {}
+        $pendingCandidaturas = 0;
+        try {
+            $pendingCandidaturas = \App\Models\Candidatura::where('status', 'pendente')->count();
+        } catch (\Throwable $e) {}
+        return view('admin.dashboard', compact('pending', 'pendingCandidaturas'));
     })->name('admin');
     Route::get('/admin/paginas', [App\Http\Controllers\Admin\PaginaController::class, 'index'])->name('admin.paginas');
     Route::get('/admin/paginas/create', [App\Http\Controllers\Admin\PaginaController::class, 'create'])->name('admin.paginas.create');
