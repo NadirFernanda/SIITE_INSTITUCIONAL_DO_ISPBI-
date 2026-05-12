@@ -40,6 +40,9 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::post('/admin/alumni/{id}/toggle-publicar', [App\Http\Controllers\AdminAlumniController::class, 'togglePublicar'])->name('admin.alumni.toggle-publicar');
     Route::post('/admin/alumni/{id}/toggle-testemunho', [App\Http\Controllers\AdminAlumniController::class, 'toggleTestemunho'])->name('admin.alumni.toggle-testemunho');
     Route::get('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('admin.usuarios');
+    Route::post('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'store'])->name('admin.usuarios.store');
+    Route::patch('/admin/usuarios/{usuario}/password', [App\Http\Controllers\Admin\UsuarioController::class, 'resetPassword'])->name('admin.usuarios.password');
+    Route::delete('/admin/usuarios/{usuario}', [App\Http\Controllers\Admin\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');
     Route::get('/admin/configuracoes', function () {
         $configuracoes = [];
         return view('admin.configuracoes', compact('configuracoes'));

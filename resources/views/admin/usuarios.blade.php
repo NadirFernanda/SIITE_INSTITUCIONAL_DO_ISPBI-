@@ -3,10 +3,9 @@
 @section('content')
 <div style="padding:32px 24px;max-width:1000px;margin:0 auto;">
 
-    {{-- Header --}}
     <div style="margin-bottom:28px;">
         <h1 style="font-size:1.6rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Utilizadores</h1>
-        <p style="color:#64748b;font-size:0.95rem;margin:0;">Contas com acesso ao painel administrativo</p>
+        <p style="color:#64748b;font-size:0.95rem;margin:0;">Contas com acesso ao painel — técnicos e administradores</p>
     </div>
 
     {{-- Flash --}}
@@ -16,54 +15,176 @@
             {{ session('success') }}
         </div>
     @endif
+    @if(session('error'))
+        <div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:12px 18px;border-radius:10px;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            {{ session('error') }}
+        </div>
+    @endif
 
-    {{-- Table card --}}
+    {{-- Criar técnico --}}
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px 28px;margin-bottom:28px;">
+        <h2 style="font-size:1rem;font-weight:700;color:#1565c0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
+            Criar Novo Técnico
+        </h2>
+        <form method="POST" action="{{ route('admin.usuarios.store') }}">
+            @csrf
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
+                        Nome <span style="color:#ef4444;">*</span>
+                    </label>
+                    <input type="text" name="name" value="{{ old('name') }}" required maxlength="255"
+                           style="width:100%;border:1px solid {{ $errors->has('name') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
+                    @error('name')<p style="color:#ef4444;font-size:0.78rem;margin:4px 0 0;">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
+                        Email <span style="color:#ef4444;">*</span>
+                    </label>
+                    <input type="email" name="email" value="{{ old('email') }}" required maxlength="255"
+                           style="width:100%;border:1px solid {{ $errors->has('email') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
+                    @error('email')<p style="color:#ef4444;font-size:0.78rem;margin:4px 0 0;">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
+                        Password <span style="color:#ef4444;">*</span>
+                        <span style="font-weight:400;color:#94a3b8;">(mín. 10 caracteres)</span>
+                    </label>
+                    <input type="password" name="password" required minlength="10"
+                           style="width:100%;border:1px solid {{ $errors->has('password') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
+                    @error('password')<p style="color:#ef4444;font-size:0.78rem;margin:4px 0 0;">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
+                        Confirmar Password <span style="color:#ef4444;">*</span>
+                    </label>
+                    <input type="password" name="password_confirmation" required minlength="10"
+                           style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button type="submit"
+                        style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                        onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                    Criar técnico
+                </button>
+                <span style="font-size:0.8rem;color:#64748b;">O role será <strong>Técnico</strong> — acesso apenas ao painel de candidaturas</span>
+            </div>
+        </form>
+    </div>
+
+    {{-- Lista de utilizadores --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">
-        <div style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:16px 24px;">
-            <span style="font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;">Lista de utilizadores</span>
+        <div style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:14px 22px;">
+            <span style="font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;">
+                Utilizadores registados ({{ $usuarios->count() }})
+            </span>
         </div>
 
-        @if(isset($usuarios) && $usuarios->count() > 0)
-        <table style="width:100%;border-collapse:collapse;">
+        @if($usuarios->isEmpty())
+        <div style="padding:56px 40px;text-align:center;">
+            <svg width="48" height="48" fill="none" stroke="#cbd5e1" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 14px;display:block;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <p style="color:#94a3b8;font-size:1rem;margin:0;">Nenhum utilizador.</p>
+        </div>
+        @else
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
             <thead>
-                <tr style="border-bottom:1px solid #e2e8f0;">
-                    <th style="padding:12px 24px;text-align:left;font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;width:60px;">#</th>
-                    <th style="padding:12px 24px;text-align:left;font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;">Nome</th>
-                    <th style="padding:12px 24px;text-align:left;font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;">Email</th>
-                    <th style="padding:12px 24px;text-align:left;font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;">Papel</th>
+                <tr style="border-bottom:2px solid #e2e8f0;">
+                    <th style="padding:13px 22px;text-align:left;font-weight:700;color:#475569;">#</th>
+                    <th style="padding:13px 22px;text-align:left;font-weight:700;color:#475569;">Nome</th>
+                    <th style="padding:13px 22px;text-align:left;font-weight:700;color:#475569;">Email</th>
+                    <th style="padding:13px 22px;text-align:left;font-weight:700;color:#475569;">Role</th>
+                    <th style="padding:13px 22px;text-align:center;font-weight:700;color:#475569;">Ações</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($usuarios as $usuario)
-                <tr style="border-bottom:1px solid #f1f5f9;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='transparent'">
-                    <td style="padding:14px 24px;font-size:0.82rem;color:#94a3b8;font-weight:600;">{{ $usuario->id }}</td>
-                    <td style="padding:14px 24px;">
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <div style="width:36px;height:36px;border-radius:50%;background:#e3f2fd;color:#1565c0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;flex-shrink:0;">
-                                {{ strtoupper(substr($usuario->name, 0, 1)) }}
+                @foreach($usuarios as $u)
+                <tr style="border-bottom:1px solid #f1f5f9;" id="row-{{ $u->id }}">
+                    <td style="padding:14px 22px;color:#94a3b8;font-size:0.8rem;">{{ $u->id }}</td>
+                    <td style="padding:14px 22px;">
+                        <div style="display:flex;align-items:center;gap:11px;">
+                            <div style="width:34px;height:34px;border-radius:50%;background:{{ $u->role === 'admin' ? '#e3f2fd' : '#dcfce7' }};color:{{ $u->role === 'admin' ? '#1565c0' : '#15803d' }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">
+                                {{ strtoupper(substr($u->name, 0, 1)) }}
                             </div>
-                            <span style="font-weight:600;color:#1a2332;font-size:0.92rem;">{{ $usuario->name }}</span>
+                            <div>
+                                <div style="font-weight:600;color:#1a2332;">{{ $u->name }}</div>
+                                @if($u->id === auth()->id())
+                                    <div style="font-size:0.72rem;color:#94a3b8;">(a sua conta)</div>
+                                @endif
+                            </div>
                         </div>
                     </td>
-                    <td style="padding:14px 24px;font-size:0.88rem;color:#475569;">{{ $usuario->email }}</td>
-                    <td style="padding:14px 24px;">
-                        @if(isset($usuario->role) && $usuario->role === 'admin')
-                            <span style="background:#e3f2fd;color:#1565c0;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">Admin</span>
+                    <td style="padding:14px 22px;color:#475569;">{{ $u->email }}</td>
+                    <td style="padding:14px 22px;">
+                        @if($u->role === 'admin')
+                            <span style="background:#e3f2fd;color:#1565c0;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Admin</span>
+                        @elseif($u->role === 'tecnico')
+                            <span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Técnico</span>
                         @else
-                            <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">Utilizador</span>
+                            <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
+                        @endif
+                    </td>
+                    <td style="padding:14px 22px;text-align:center;">
+                        @if($u->role === 'tecnico')
+                        <div style="display:flex;gap:8px;justify-content:center;align-items:center;">
+                            {{-- Reset password --}}
+                            <button onclick="document.getElementById('reset-{{ $u->id }}').style.display='block';this.closest('tr').nextElementSibling.style.display='table-row';"
+                                    style="background:#f59e0b;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
+                                    onmouseover="this.style.background='#d97706'" onmouseout="this.style.background='#f59e0b'">
+                                Redefinir password
+                            </button>
+                            {{-- Eliminar --}}
+                            <form method="POST" action="{{ route('admin.usuarios.destroy', $u) }}"
+                                  onsubmit="return confirm('Eliminar o utilizador {{ addslashes($u->name) }}? Esta acção é irreversível.')">
+                                @csrf @method('DELETE')
+                                <button type="submit"
+                                        style="background:#ef4444;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
+                                        onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#ef4444'">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </div>
+                        @else
+                            <span style="color:#cbd5e1;font-size:0.8rem;">—</span>
                         @endif
                     </td>
                 </tr>
+                {{-- Reset password inline row (hidden) --}}
+                @if($u->role === 'tecnico')
+                <tr style="display:none;background:#fffbeb;" id="reset-{{ $u->id }}">
+                    <td colspan="5" style="padding:16px 22px;">
+                        <form method="POST" action="{{ route('admin.usuarios.password', $u) }}"
+                              style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
+                            @csrf @method('PATCH')
+                            <div>
+                                <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Nova password (mín. 10)</label>
+                                <input type="password" name="password" required minlength="10"
+                                       style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Confirmar</label>
+                                <input type="password" name="password_confirmation" required minlength="10"
+                                       style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                            </div>
+                            <button type="submit"
+                                    style="background:#f59e0b;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
+                                Guardar
+                            </button>
+                            <button type="button"
+                                    onclick="this.closest('tr').style.display='none'"
+                                    style="background:#f1f5f9;color:#475569;border:none;border-radius:7px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:0.88rem;">
+                                Cancelar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>
-        @else
-        <div style="padding:64px 48px;text-align:center;">
-            <svg width="52" height="52" fill="none" stroke="#cbd5e1" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto 16px;display:block;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            <p style="color:#94a3b8;font-size:1rem;margin:0;">Nenhum utilizador cadastrado.</p>
-        </div>
         @endif
     </div>
 
