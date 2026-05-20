@@ -238,7 +238,7 @@
           <span class="text-xs font-semibold text-gray-700 leading-tight">Contactos</span>
         </a>
 
-        <a href="https://ws11.angoweb.net/webmail" target="_blank" rel="noopener noreferrer" aria-label="Webmail (abre em nova aba)"
+        <a href="http://mx100.angoweb.net/webmail" target="_blank" rel="noopener noreferrer" aria-label="Webmail (abre em nova aba)"
            class="flex flex-col items-center gap-2 p-3 sm:p-5 bg-white rounded-xl border border-gray-100 shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-2 transition-all duration-[180ms] hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(37,99,235,0.13)] hover:border-[rgba(37,99,235,0.28)]">
           <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex-shrink-0" style="background:#eff6ff;">
             <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="#2563eb" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>

@@ -202,7 +202,7 @@
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-servicos">
               <li><a href="/resultados"       class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Portal do Estudante</a></li>
-              <li><a href="https://ws11.angoweb.net/webmail" target="_blank" rel="noopener noreferrer"
+              <li><a href="http://mx100.angoweb.net/webmail" target="_blank" rel="noopener noreferrer"
                                               class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed flex items-center gap-1">
                 Webmail Institucional
                 <svg class="w-2.5 h-2.5 opacity-40 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
