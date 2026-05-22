@@ -117,76 +117,7 @@
         $jsVersion = file_exists($jsPath) ? filemtime($jsPath) : time();
     @endphp
     <script type="module" src="{{ asset('build/' . $jsFile) }}?v={{ $jsVersion }}"></script>
-    <script>
-    (function () {
-        // --- 1. Bloquear menu de contexto (botão direito) ---
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault(); e.stopImmediatePropagation(); return false;
-        }, true);
-
-        // --- 2. Bloquear atalhos de teclado ---
-        // Usa fase de captura (true) para interceptar antes do browser processar
-        var BLOCKED_KEYS = {
-            single: ['F12'],
-            ctrl:   ['u','s','p','i','j','k'],
-            ctrlShift: ['i','j','c','k']
-        };
-
-        function blockKeys(e) {
-            var ctrlKey = e.ctrlKey || e.metaKey;
-            var key = (e.key || '').toLowerCase();
-
-            if (BLOCKED_KEYS.single.indexOf(e.key) !== -1) {
-                e.preventDefault(); e.stopImmediatePropagation(); return false;
-            }
-            if (ctrlKey && BLOCKED_KEYS.ctrl.indexOf(key) !== -1) {
-                e.preventDefault(); e.stopImmediatePropagation(); return false;
-            }
-            if (ctrlKey && e.shiftKey && BLOCKED_KEYS.ctrlShift.indexOf(key) !== -1) {
-                e.preventDefault(); e.stopImmediatePropagation(); return false;
-            }
-        }
-
-        document.addEventListener('keydown', blockKeys, true);
-        document.addEventListener('keyup',   blockKeys, true);
-
-        // --- 3. Detectar DevTools abertos e reagir ---
-        // Técnica: ao fazer console.log de um objecto, o browser chama o getter
-        // do id apenas quando o painel da consola está aberto
-        var devOpen = false;
-        var img = new Image();
-        Object.defineProperty(img, 'id', {
-            get: function () { devOpen = true; }
-        });
-
-        function checkDevtools() {
-            devOpen = false;
-            console.log('%c', img);
-            console.clear();
-            if (devOpen) {
-                // Redireciona silenciosamente para a raiz quando detectado
-                document.documentElement.innerHTML = '';
-                window.location.replace('/');
-            }
-        }
-
-        // Também monitoriza diferença de tamanho da janela (DevTools lateral/inferior)
-        function checkSize() {
-            var widthDiff  = window.outerWidth  - window.innerWidth;
-            var heightDiff = window.outerHeight - window.innerHeight;
-            if (widthDiff > 200 || heightDiff > 200) {
-                document.documentElement.innerHTML = '';
-                window.location.replace('/');
-            }
-        }
-
-        setInterval(function () { checkDevtools(); checkSize(); }, 800);
-
-        // --- 4. Desactivar selecção de texto e arrastamento ---
-        document.addEventListener('selectstart', function (e) { e.preventDefault(); }, true);
-        document.addEventListener('dragstart',   function (e) { e.preventDefault(); }, true);
-    })();
-    </script>
+    <script src="{{ asset('js/security.js') }}"></script>
 
         @stack('scripts')
 
