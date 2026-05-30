@@ -28,12 +28,13 @@
     thead tr { background:#f0f0f0; }
     th { padding:5px 10px; text-align:left; font-size:9pt; font-weight:bold; border:1px solid #ccc; }
     td { padding:8px 10px; font-size:9.5pt; border:1px solid #ddd; }
+    td.nome-col { text-transform:uppercase; }
     tr:nth-child(even) { background:#f9f9f9; }
 
-    .assinaturas { display:flex; justify-content:space-between; margin-top:14mm; }
-    .assinatura { text-align:center; width:40%; }
-    .assinatura .linha { border-bottom:1px solid #000; height:8mm; margin-bottom:2mm; }
-    .assinatura .label { font-size:9pt; font-weight:bold; }
+    .assinatura-unica { text-align:center; margin-top:14mm; }
+    .assinatura-unica .linha { border-bottom:1px solid #000; width:70mm; margin:0 auto 2mm; height:8mm; }
+    .assinatura-unica .label { font-size:9pt; font-weight:bold; }
+    .assinatura-unica .sublabel { font-size:8.5pt; color:#333; margin-top:1mm; }
 
     .footer { text-align:center; font-size:8pt; color:#666; margin-top:8mm; border-top:1px solid #ddd; padding-top:4mm; }
 </style>
@@ -68,14 +69,14 @@
                 <tr>
                     <th style="width:26pt;text-align:center;">N.º</th>
                     <th>Nome Completo</th>
-                    <th style="width:47%;">Assinatura</th>
+                    <th style="width:44%;">Assinatura</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($lista->sortBy('numero_lugar') as $c)
                 <tr>
                     <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ $c->numero_lugar }}</td>
-                    <td>{{ $c->nome }}</td>
+                    <td class="nome-col">{{ $c->nome }}</td>
                     <td>&nbsp;</td>
                 </tr>
                 @endforeach
@@ -84,15 +85,10 @@
         @endforeach
     @endif
 
-    <div class="assinaturas">
-        <div class="assinatura">
-            <div class="linha"></div>
-            <div class="label">Responsável de Sala</div>
-        </div>
-        <div class="assinatura">
-            <div class="linha"></div>
-            <div class="label">Chefe de Departamento</div>
-        </div>
+    <div class="assinatura-unica">
+        <div class="linha"></div>
+        <div class="label">Professor Doutor Fernando Maia</div>
+        <div class="sublabel">Presidente da Instituição</div>
     </div>
 
     <div class="footer">
