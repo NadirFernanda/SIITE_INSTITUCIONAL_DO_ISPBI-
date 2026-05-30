@@ -1,275 +1,414 @@
+@php
+    $logoPath = public_path('images/logo.png');
+    $logoBase64 = '';
+    if (file_exists($logoPath) && filesize($logoPath) > 0) {
+        $logoBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Times New Roman", Times, serif; font-size: 12pt; color: #000; background: #fff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    font-family: DejaVu Sans, Arial, sans-serif;
+    font-size: 10pt;
+    color: #1a1a1a;
+    background: #fff;
+}
 
-    .page { width: 100%; padding: 18mm 18mm 10mm 18mm; }
+.page { padding: 12mm 14mm; }
 
-    /* Linha pontilhada de corte */
-    .corte { border-top: 2px dashed #000; margin-bottom: 10mm; padding-top: 4mm; }
+/* ─── CABEÇALHO ─── */
+.header {
+    display: table;
+    width: 100%;
+    margin-bottom: 4mm;
+}
+.header-logo {
+    display: table-cell;
+    width: 28mm;
+    vertical-align: middle;
+}
+.header-logo img {
+    width: 24mm;
+    height: auto;
+}
+.header-text {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.inst-name {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #1a4e8a;
+    letter-spacing: 0.5px;
+    margin-bottom: 1mm;
+}
+.inst-dept {
+    font-size: 9pt;
+    font-weight: bold;
+    margin-bottom: 0.5mm;
+}
+.inst-exam {
+    font-size: 9pt;
+    font-weight: bold;
+    margin-bottom: 0.5mm;
+}
+.inst-title {
+    font-size: 10pt;
+    font-weight: bold;
+}
+.ficha-num-cell {
+    display: table-cell;
+    width: 28mm;
+    vertical-align: middle;
+    text-align: right;
+}
+.ficha-num {
+    font-size: 11pt;
+    font-weight: bold;
+    white-space: nowrap;
+}
 
-    /* Cabeçalho */
-    .header { text-align: center; margin-bottom: 6mm; }
-    .header img { height: 22mm; }
-    .header .inst { font-size: 15pt; font-weight: bold; color: #1a4e8a; letter-spacing: 1px; margin-top: 3mm; }
-    .header .dept { font-size: 11pt; font-weight: bold; margin-top: 3mm; }
-    .header .exam { font-size: 11pt; font-weight: bold; margin-top: 1mm; }
-    .header .ficha-title { font-size: 11pt; font-weight: bold; margin-top: 1mm; }
+.linha-dupla {
+    border-top: 3px double #1a4e8a;
+    margin: 2mm 0 3mm 0;
+}
 
-    /* Número da ficha */
-    .ficha-num { text-align: right; font-size: 13pt; font-weight: bold; margin-bottom: 4mm; }
+/* ─── CAMPOS ─── */
+.campo {
+    margin-bottom: 2.5mm;
+    display: table;
+    width: 100%;
+}
+.campo-label {
+    display: table-cell;
+    font-weight: bold;
+    font-size: 9.5pt;
+    white-space: nowrap;
+    padding-right: 2mm;
+    vertical-align: bottom;
+}
+.campo-valor {
+    display: table-cell;
+    width: 100%;
+    border-bottom: 0.8pt solid #333;
+    vertical-align: bottom;
+    padding-bottom: 0.5mm;
+    font-size: 9.5pt;
+}
 
-    /* Linha dupla separadora */
-    .linha-dupla { border-top: 3px double #000; border-bottom: 1px solid #000; height: 4px; margin: 3mm 0 5mm 0; }
+/* linha de 2 colunas */
+.row2 { display: table; width: 100%; margin-bottom: 2.5mm; }
+.col { display: table-cell; vertical-align: bottom; }
+.col-label { font-weight: bold; font-size: 9.5pt; white-space: nowrap; padding-right: 2mm; }
+.col-val { border-bottom: 0.8pt solid #333; padding-bottom: 0.5mm; font-size: 9.5pt; }
 
-    /* Campos */
-    .campo { margin-bottom: 5mm; }
-    .campo-label { font-weight: bold; font-size: 11pt; display: inline; }
-    .campo-linha { display: inline-block; border-bottom: 1px solid #000; min-width: 160mm; vertical-align: bottom; margin-left: 2mm; }
-    .campo-valor { font-size: 11pt; display: inline; }
+/* checkboxes */
+.check-row { display: table; width: 100%; margin-bottom: 2.5mm; }
+.check-label { display: table-cell; font-weight: bold; font-size: 9.5pt; padding-right: 3mm; white-space: nowrap; vertical-align: middle; }
+.check-item { display: table-cell; vertical-align: middle; white-space: nowrap; padding-right: 4mm; font-size: 9.5pt; }
+.box {
+    display: inline-block;
+    width: 3.5mm;
+    height: 3.5mm;
+    border: 0.8pt solid #333;
+    vertical-align: middle;
+    margin-right: 1mm;
+    background: #fff;
+    text-align: center;
+    font-size: 7pt;
+    line-height: 3.5mm;
+}
+.box.on { background: #1a4e8a; color: #fff; }
 
-    /* Sexo e Período — checkboxes */
-    .check-row { display: flex; align-items: center; margin-bottom: 5mm; gap: 6mm; flex-wrap: wrap; }
-    .check-item { display: flex; align-items: center; gap: 2mm; font-size: 11pt; }
-    .check-box { width: 5mm; height: 5mm; border: 1px solid #000; display: inline-block; background: #fff; text-align: center; line-height: 5mm; font-size: 10pt; }
-    .check-box.checked { background: #000; color: #fff; }
+/* data */
+.data-linha { font-size: 9.5pt; margin: 3mm 0 4mm 0; }
 
-    /* Linha de curso + período */
-    .curso-row { display: flex; align-items: flex-end; margin-bottom: 5mm; gap: 4mm; }
-    .curso-row .curso-label { font-weight: bold; font-size: 11pt; white-space: nowrap; }
-    .curso-row .curso-linha { flex: 1; border-bottom: 1px solid #000; min-height: 5mm; }
-    .curso-row .periodo-label { font-weight: bold; font-size: 11pt; white-space: nowrap; }
+/* assinaturas */
+.sigs { display: table; width: 100%; margin-top: 4mm; }
+.sig { display: table-cell; width: 44%; text-align: center; }
+.sig-line { border-bottom: 0.8pt solid #333; margin-bottom: 1mm; height: 7mm; }
+.sig-label { font-size: 8.5pt; font-weight: bold; }
 
-    /* Data */
-    .data-row { margin: 6mm 0 10mm 0; font-size: 11pt; }
+/* ─── LINHA DE CORTE ─── */
+.corte {
+    border-top: 1.5pt dashed #999;
+    margin: 5mm 0;
+    text-align: center;
+    position: relative;
+}
+.corte-texto {
+    background: #fff;
+    padding: 0 3mm;
+    font-size: 7pt;
+    color: #999;
+    position: relative;
+    top: -1.5mm;
+}
 
-    /* Assinaturas */
-    .assinaturas { display: flex; justify-content: space-between; margin-top: 8mm; }
-    .assinatura { text-align: center; width: 44%; }
-    .assinatura .linha-ass { border-bottom: 1px solid #000; width: 100%; margin-bottom: 2mm; height: 8mm; }
-    .assinatura .ass-label { font-size: 10pt; font-weight: bold; }
-
-    /* Talão de canto */
-    .talao-canto { text-align: right; font-size: 10pt; font-weight: bold; margin-bottom: 2mm; }
+/* ─── SECÇÃO INFERIOR (talão candidato) ─── */
+.talao-title {
+    font-size: 9pt;
+    font-weight: bold;
+    color: #1a4e8a;
+    margin-bottom: 3mm;
+    text-align: center;
+}
 </style>
 </head>
 <body>
 <div class="page">
 
-    {{-- ═══ SECÇÃO SUPERIOR (cópia arquivo) ═══ --}}
-    <div class="corte">
-        <div class="header">
-            <img src="{{ public_path('images/logo-ispbie.png') }}" alt="ISP-Bié">
-            <div class="inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-            <div class="linha-dupla"></div>
-            <div class="dept">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS</div>
-            <div class="exam">EXAME DE ACESSO 2025/2026</div>
-            <div class="ficha-title">FICHA DE INSCRIÇÃO</div>
-        </div>
+{{-- ═══════════════════════════════════════════════════════ --}}
+{{-- SECÇÃO 1 — ARQUIVO (cópia completa)                     --}}
+{{-- ═══════════════════════════════════════════════════════ --}}
 
-        <div class="talao-canto">Ficha n.º {{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
-
-        {{-- Nome --}}
-        <div class="campo">
-            <span class="campo-label">Nome:</span>
-            <span class="campo-linha">&nbsp;{{ $candidatura->nome }}</span>
-        </div>
-
-        {{-- Filiação --}}
-        <div class="campo">
-            <span class="campo-label">Filiação:</span>
-            <span class="campo-linha" style="min-width:60mm;">&nbsp;{{ $candidatura->filiacao_pai }}</span>
-            <span class="campo-label" style="margin-left:4mm;">e de</span>
-            <span class="campo-linha" style="min-width:60mm;">&nbsp;{{ $candidatura->filiacao_mae }}</span>
-        </div>
-
-        {{-- Data de Nascimento --}}
-        <div class="campo">
-            <span class="campo-label">Data de Nascimento:</span>
-            <span class="campo-linha" style="min-width:60mm;">&nbsp;{{ $candidatura->data_nascimento?->format('d/m/Y') }}</span>
-        </div>
-
-        {{-- Naturalidade --}}
-        <div class="campo">
-            <span class="campo-label">Naturalidade: Município de</span>
-            <span class="campo-linha" style="min-width:50mm;">&nbsp;{{ $candidatura->naturalidade_municipio }}</span>
-            <span class="campo-label" style="margin-left:4mm;">Província de</span>
-            <span class="campo-linha" style="min-width:40mm;">&nbsp;{{ $candidatura->naturalidade_provincia }}</span>
-        </div>
-
-        {{-- BI --}}
-        <div class="campo">
-            <span class="campo-label">Bilhete de Identidade/Passaporte N.º</span>
-            <span class="campo-linha" style="min-width:35mm;">&nbsp;{{ $candidatura->bi }}</span>
-            <span class="campo-label" style="margin-left:4mm;">Emitido em</span>
-            <span class="campo-linha" style="min-width:30mm;">&nbsp;{{ $candidatura->bi_emitido_em }}</span>
-            <span class="campo-label" style="margin-left:4mm;">aos</span>
-            <span class="campo-linha" style="min-width:22mm;">&nbsp;{{ $candidatura->bi_data_emissao?->format('d/m/Y') }}</span>
-        </div>
-
-        {{-- Sexo + Estado Civil --}}
-        <div class="check-row">
-            <span class="campo-label">Sexo:</span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->sexo === 'masculino' ? 'checked' : '' }}">{{ $candidatura->sexo === 'masculino' ? '✓' : '' }}</span> Masculino
-            </span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->sexo === 'feminino' ? 'checked' : '' }}">{{ $candidatura->sexo === 'feminino' ? '✓' : '' }}</span> Feminino
-            </span>
-            <span class="campo-label" style="margin-left:8mm;">Estado Civil:</span>
-            <span class="campo-linha" style="min-width:50mm;">&nbsp;{{ $candidatura->estado_civil }}</span>
-        </div>
-
-        {{-- Necessidade Especial --}}
-        <div class="campo">
-            <span class="campo-label">Necessidade de Educação Especial:</span>
-            <span class="campo-linha" style="min-width:80mm;">&nbsp;{{ $candidatura->necessidade_especial }}</span>
-        </div>
-
-        {{-- Residência --}}
-        <div class="campo">
-            <span class="campo-label">Residência (Município):</span>
-            <span class="campo-linha" style="min-width:45mm;">&nbsp;{{ $candidatura->residencia_municipio }}</span>
-            <span class="campo-label" style="margin-left:4mm;">Rua/Bairro:</span>
-            <span class="campo-linha" style="min-width:50mm;">&nbsp;{{ $candidatura->residencia_bairro }}</span>
-        </div>
-
-        {{-- Telefone + Email --}}
-        <div class="campo">
-            <span class="campo-label">Telefone:</span>
-            <span class="campo-linha" style="min-width:35mm;">&nbsp;{{ $candidatura->telefone }}</span>
-            @if($candidatura->telefone2)
-            <span class="campo-linha" style="min-width:30mm;">&nbsp;{{ $candidatura->telefone2 }}</span>
-            @endif
-            <span class="campo-label" style="margin-left:4mm;">e-mail</span>
-            <span class="campo-linha" style="min-width:55mm;">&nbsp;{{ $candidatura->email }}</span>
-        </div>
-
-        {{-- Habilitações + Escola --}}
-        <div class="campo">
-            <span class="campo-label">Habilitações Literárias:</span>
-            <span class="campo-linha" style="min-width:25mm;">&nbsp;{{ $candidatura->habilitacoes }}</span>
-            <span class="campo-label" style="margin-left:4mm;">Escola e Curso de Proveniência:</span>
-            <span class="campo-linha" style="min-width:55mm;">&nbsp;{{ $candidatura->escola_origem }}</span>
-        </div>
-
-        {{-- Estado Financeiro --}}
-        @php $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo']; @endphp
-        <div class="check-row">
-            <span class="campo-label">Estado Financeiro da Família:</span>
-            @foreach($ef as $val => $label)
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->estado_financeiro === $val ? 'checked' : '' }}">{{ $candidatura->estado_financeiro === $val ? '✓' : '' }}</span> {{ $label }}
-            </span>
-            @endforeach
-        </div>
-
-        {{-- Trabalhador --}}
-        <div class="check-row">
-            <span class="campo-label">Trabalhador:</span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->trabalhador ? 'checked' : '' }}">{{ $candidatura->trabalhador ? '✓' : '' }}</span> Sim
-            </span>
-            <span class="check-item">
-                <span class="check-box {{ !$candidatura->trabalhador ? 'checked' : '' }}">{{ !$candidatura->trabalhador ? '✓' : '' }}</span> Não
-            </span>
-            <span class="campo-label" style="margin-left:6mm;">Nome da Instituição Laboral:</span>
-            <span class="campo-linha" style="min-width:55mm;">&nbsp;{{ $candidatura->instituicao_laboral ?? '' }}</span>
-        </div>
-
-        {{-- Curso + Período --}}
-        <div class="curso-row">
-            <span class="curso-label">Curso a se inscrever</span>
-            <span class="curso-linha">&nbsp;{{ $candidatura->curso }}</span>
-            <span class="periodo-label">Período:</span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->periodo === 'regular' ? 'checked' : '' }}">{{ $candidatura->periodo === 'regular' ? '✓' : '' }}</span> Regular
-            </span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->periodo === 'pos-laboral' ? 'checked' : '' }}">{{ $candidatura->periodo === 'pos-laboral' ? '✓' : '' }}</span> Pós-laboral
-            </span>
-        </div>
-
-        <div class="data-row">
-            Cuito, aos <u>&nbsp;&nbsp;{{ $candidatura->created_at->format('d') }}&nbsp;&nbsp;</u>
-            de <u>&nbsp;&nbsp;{{ $candidatura->created_at->translatedFormat('F') }}&nbsp;&nbsp;</u>
-            de {{ $candidatura->created_at->format('Y') }}.
-        </div>
-
-        <div class="assinaturas">
-            <div class="assinatura">
-                <div class="linha-ass"></div>
-                <div class="ass-label">Conferiu</div>
-            </div>
-            <div class="assinatura">
-                <div class="linha-ass"></div>
-                <div class="ass-label">Candidato (a)</div>
-            </div>
-        </div>
+<div class="header">
+    <div class="header-logo">
+        @if($logoBase64)
+            <img src="{{ $logoBase64 }}" alt="ISP-Bié">
+        @endif
     </div>
-
-    {{-- ═══ TALÃO INFERIOR (cópia candidato) ═══ --}}
-    <div style="border-top: 2px dashed #000; padding-top: 6mm;">
-
-        <div class="header" style="margin-bottom:4mm;">
-            <img src="{{ public_path('images/logo-ispbie.png') }}" alt="ISP-Bié">
-            <div class="inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-            <div class="linha-dupla"></div>
-            <div class="dept">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS</div>
-            <div class="exam">EXAME DE ACESSO 2025/2026</div>
-            <div class="ficha-title">FICHA DE INSCRIÇÃO</div>
-        </div>
-
-        <div class="talao-canto">Ficha n.º {{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
-
-        <div class="campo">
-            <span class="campo-label">Nome:</span>
-            <span class="campo-linha">&nbsp;{{ $candidatura->nome }}</span>
-        </div>
-
-        <div class="check-row" style="margin-bottom:4mm;">
-            <span class="campo-label">Sexo:</span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->sexo === 'masculino' ? 'checked' : '' }}">{{ $candidatura->sexo === 'masculino' ? '✓' : '' }}</span> Masculino
-            </span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->sexo === 'feminino' ? 'checked' : '' }}">{{ $candidatura->sexo === 'feminino' ? '✓' : '' }}</span> Feminino
-            </span>
-        </div>
-
-        <div class="curso-row">
-            <span class="curso-label">Curso a se inscrever</span>
-            <span class="curso-linha">&nbsp;{{ $candidatura->curso }}</span>
-            <span class="periodo-label">Período:</span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->periodo === 'regular' ? 'checked' : '' }}">{{ $candidatura->periodo === 'regular' ? '✓' : '' }}</span> Regular
-            </span>
-            <span class="check-item">
-                <span class="check-box {{ $candidatura->periodo === 'pos-laboral' ? 'checked' : '' }}">{{ $candidatura->periodo === 'pos-laboral' ? '✓' : '' }}</span> Pós-laboral
-            </span>
-        </div>
-
-        <div class="data-row">
-            Cuito, aos <u>&nbsp;&nbsp;{{ $candidatura->created_at->format('d') }}&nbsp;&nbsp;</u>
-            de <u>&nbsp;&nbsp;{{ $candidatura->created_at->translatedFormat('F') }}&nbsp;&nbsp;</u>
-            de {{ $candidatura->created_at->format('Y') }}.
-        </div>
-
-        <div class="assinaturas">
-            <div class="assinatura">
-                <div class="linha-ass"></div>
-                <div class="ass-label">Conferiu</div>
-            </div>
-            <div class="assinatura">
-                <div class="linha-ass"></div>
-                <div class="ass-label">Candidato (a)</div>
-            </div>
-        </div>
+    <div class="header-text">
+        <div class="inst-name">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
+        <div class="inst-dept">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS</div>
+        <div class="inst-exam">EXAME DE ACESSO 2025/2026</div>
+        <div class="inst-title">FICHA DE INSCRIÇÃO</div>
     </div>
-
+    <div class="ficha-num-cell">
+        <div class="ficha-num">Ficha n.º<br>{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
+    </div>
 </div>
+
+<div class="linha-dupla"></div>
+
+{{-- Nome --}}
+<div class="campo">
+    <div class="campo-label">Nome:</div>
+    <div class="campo-valor">{{ $candidatura->nome }}</div>
+</div>
+
+{{-- Filiação --}}
+<div class="row2">
+    <div class="col" style="width:auto">
+        <span class="col-label">Filiação:</span>
+    </div>
+    <div class="col" style="width:45%">
+        <div style="border-bottom:0.8pt solid #333;padding-bottom:0.5mm;font-size:9.5pt;">{{ $candidatura->filiacao_pai }}</div>
+    </div>
+    <div class="col" style="width:auto;padding:0 2mm;">
+        <span class="col-label">e de</span>
+    </div>
+    <div class="col">
+        <div style="border-bottom:0.8pt solid #333;padding-bottom:0.5mm;font-size:9.5pt;">{{ $candidatura->filiacao_mae }}</div>
+    </div>
+</div>
+
+{{-- Data Nascimento --}}
+<div class="campo">
+    <div class="campo-label">Data de Nascimento:</div>
+    <div class="campo-valor" style="max-width:50mm;">{{ $candidatura->data_nascimento?->format('d/m/Y') }}</div>
+</div>
+
+{{-- Naturalidade --}}
+<div class="row2">
+    <div class="col" style="width:auto"><span class="col-label">Naturalidade: Município de</span></div>
+    <div class="col" style="width:40%"><div class="col-val">{{ $candidatura->naturalidade_municipio }}</div></div>
+    <div class="col" style="width:auto;padding:0 2mm;"><span class="col-label">Província de</span></div>
+    <div class="col"><div class="col-val">{{ $candidatura->naturalidade_provincia }}</div></div>
+</div>
+
+{{-- BI --}}
+<div class="row2">
+    <div class="col" style="width:auto"><span class="col-label">BI / Passaporte N.º</span></div>
+    <div class="col" style="width:28%"><div class="col-val">{{ $candidatura->bi }}</div></div>
+    <div class="col" style="width:auto;padding:0 2mm;"><span class="col-label">Emitido em</span></div>
+    <div class="col" style="width:25%"><div class="col-val">{{ $candidatura->bi_emitido_em }}</div></div>
+    <div class="col" style="width:auto;padding:0 2mm;"><span class="col-label">aos</span></div>
+    <div class="col"><div class="col-val">{{ $candidatura->bi_data_emissao?->format('d/m/Y') }}</div></div>
+</div>
+
+{{-- Sexo + Estado Civil --}}
+<div class="check-row">
+    <div class="check-label">Sexo:</div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->sexo === 'masculino' ? 'on' : '' }}">{{ $candidatura->sexo === 'masculino' ? '✓' : '' }}</span> Masculino
+    </div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->sexo === 'feminino' ? 'on' : '' }}">{{ $candidatura->sexo === 'feminino' ? '✓' : '' }}</span> Feminino
+    </div>
+    <div class="check-label" style="padding-left:4mm;">Estado Civil:</div>
+    <div class="col-val" style="width:100%;border-bottom:0.8pt solid #333;padding-bottom:0.5mm;font-size:9.5pt;">{{ $candidatura->estado_civil }}</div>
+</div>
+
+{{-- Necessidade Especial --}}
+<div class="campo">
+    <div class="campo-label">Necessidade de Educação Especial:</div>
+    <div class="campo-valor">{{ $candidatura->necessidade_especial }}</div>
+</div>
+
+{{-- Residência --}}
+<div class="row2">
+    <div class="col" style="width:auto"><span class="col-label">Residência (Município):</span></div>
+    <div class="col" style="width:38%"><div class="col-val">{{ $candidatura->residencia_municipio }}</div></div>
+    <div class="col" style="width:auto;padding:0 2mm;"><span class="col-label">Rua/Bairro:</span></div>
+    <div class="col"><div class="col-val">{{ $candidatura->residencia_bairro }}</div></div>
+</div>
+
+{{-- Telefone + Email --}}
+<div class="row2">
+    <div class="col" style="width:auto"><span class="col-label">Telefone:</span></div>
+    <div class="col" style="width:22%"><div class="col-val">{{ $candidatura->telefone }}</div></div>
+    @if($candidatura->telefone2)
+    <div class="col" style="width:auto;padding:0 2mm;">/</div>
+    <div class="col" style="width:20%"><div class="col-val">{{ $candidatura->telefone2 }}</div></div>
+    @endif
+    <div class="col" style="width:auto;padding:0 2mm;"><span class="col-label">E-mail:</span></div>
+    <div class="col"><div class="col-val">{{ $candidatura->email }}</div></div>
+</div>
+
+{{-- Habilitações + Escola --}}
+<div class="row2">
+    <div class="col" style="width:auto"><span class="col-label">Habilitações Literárias:</span></div>
+    <div class="col" style="width:20%"><div class="col-val">{{ $candidatura->habilitacoes }}</div></div>
+    <div class="col" style="width:auto;padding:0 2mm;"><span class="col-label">Escola e Curso de Proveniência:</span></div>
+    <div class="col"><div class="col-val">{{ $candidatura->escola_origem }}</div></div>
+</div>
+
+{{-- Estado Financeiro --}}
+@php $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo']; @endphp
+<div class="check-row">
+    <div class="check-label">Estado Financeiro da Família:</div>
+    @foreach($ef as $val => $label)
+    <div class="check-item">
+        <span class="box {{ $candidatura->estado_financeiro === $val ? 'on' : '' }}">{{ $candidatura->estado_financeiro === $val ? '✓' : '' }}</span> {{ $label }}
+    </div>
+    @endforeach
+</div>
+
+{{-- Trabalhador --}}
+<div class="check-row">
+    <div class="check-label">Trabalhador:</div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->trabalhador ? 'on' : '' }}">{{ $candidatura->trabalhador ? '✓' : '' }}</span> Sim
+    </div>
+    <div class="check-item">
+        <span class="box {{ !$candidatura->trabalhador ? 'on' : '' }}">{{ !$candidatura->trabalhador ? '✓' : '' }}</span> Não
+    </div>
+    <div class="check-label" style="padding-left:3mm;">Instituição Laboral:</div>
+    <div class="col-val" style="width:100%;border-bottom:0.8pt solid #333;padding-bottom:0.5mm;font-size:9.5pt;">{{ $candidatura->instituicao_laboral ?? '' }}</div>
+</div>
+
+{{-- Curso + Período --}}
+<div class="check-row">
+    <div class="check-label">Curso a se inscrever:</div>
+    <div class="col-val" style="width:55%;border-bottom:0.8pt solid #333;padding-bottom:0.5mm;font-size:9.5pt;padding-right:3mm;">{{ $candidatura->curso }}</div>
+    <div class="check-label" style="padding-left:3mm;">Período:</div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->periodo === 'regular' ? 'on' : '' }}">{{ $candidatura->periodo === 'regular' ? '✓' : '' }}</span> Regular
+    </div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->periodo === 'pos-laboral' ? 'on' : '' }}">{{ $candidatura->periodo === 'pos-laboral' ? '✓' : '' }}</span> Pós-laboral
+    </div>
+</div>
+
+<div class="data-linha">
+    Cuito, aos <u>&nbsp;&nbsp;{{ $candidatura->created_at->format('d') }}&nbsp;&nbsp;</u>
+    de <u>&nbsp;&nbsp;{{ $candidatura->created_at->translatedFormat('F') }}&nbsp;&nbsp;</u>
+    de {{ $candidatura->created_at->format('Y') }}.
+</div>
+
+<div class="sigs">
+    <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-label">Conferiu</div>
+    </div>
+    <div class="sig" style="width:12%;"></div>
+    <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-label">Candidato (a)</div>
+    </div>
+</div>
+
+{{-- ═══════════════════════════════════════════════════════ --}}
+{{-- LINHA DE CORTE                                          --}}
+{{-- ═══════════════════════════════════════════════════════ --}}
+<div class="corte">
+    <span class="corte-texto">✂ &nbsp; recortar aqui &nbsp; ✂</span>
+</div>
+
+{{-- ═══════════════════════════════════════════════════════ --}}
+{{-- SECÇÃO 2 — TALÃO DO CANDIDATO                           --}}
+{{-- ═══════════════════════════════════════════════════════ --}}
+
+<div class="header">
+    <div class="header-logo">
+        @if($logoBase64)
+            <img src="{{ $logoBase64 }}" alt="ISP-Bié">
+        @endif
+    </div>
+    <div class="header-text">
+        <div class="inst-name">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
+        <div class="inst-dept">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS</div>
+        <div class="inst-exam">EXAME DE ACESSO 2025/2026</div>
+        <div class="inst-title">FICHA DE INSCRIÇÃO</div>
+    </div>
+    <div class="ficha-num-cell">
+        <div class="ficha-num">Ficha n.º<br>{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
+    </div>
+</div>
+
+<div class="linha-dupla"></div>
+
+<div class="campo">
+    <div class="campo-label">Nome:</div>
+    <div class="campo-valor">{{ $candidatura->nome }}</div>
+</div>
+
+<div class="check-row" style="margin-bottom:3mm;">
+    <div class="check-label">Sexo:</div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->sexo === 'masculino' ? 'on' : '' }}">{{ $candidatura->sexo === 'masculino' ? '✓' : '' }}</span> Masculino
+    </div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->sexo === 'feminino' ? 'on' : '' }}">{{ $candidatura->sexo === 'feminino' ? '✓' : '' }}</span> Feminino
+    </div>
+</div>
+
+<div class="check-row">
+    <div class="check-label">Curso a se inscrever:</div>
+    <div class="col-val" style="width:55%;border-bottom:0.8pt solid #333;padding-bottom:0.5mm;font-size:9.5pt;padding-right:3mm;">{{ $candidatura->curso }}</div>
+    <div class="check-label" style="padding-left:3mm;">Período:</div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->periodo === 'regular' ? 'on' : '' }}">{{ $candidatura->periodo === 'regular' ? '✓' : '' }}</span> Regular
+    </div>
+    <div class="check-item">
+        <span class="box {{ $candidatura->periodo === 'pos-laboral' ? 'on' : '' }}">{{ $candidatura->periodo === 'pos-laboral' ? '✓' : '' }}</span> Pós-laboral
+    </div>
+</div>
+
+<div class="data-linha">
+    Cuito, aos <u>&nbsp;&nbsp;{{ $candidatura->created_at->format('d') }}&nbsp;&nbsp;</u>
+    de <u>&nbsp;&nbsp;{{ $candidatura->created_at->translatedFormat('F') }}&nbsp;&nbsp;</u>
+    de {{ $candidatura->created_at->format('Y') }}.
+</div>
+
+<div class="sigs">
+    <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-label">Conferiu</div>
+    </div>
+    <div class="sig" style="width:12%;"></div>
+    <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-label">Candidato (a)</div>
+    </div>
+</div>
+
+</div>{{-- /page --}}
 </body>
 </html>
