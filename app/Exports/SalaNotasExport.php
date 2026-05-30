@@ -59,13 +59,13 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $rows[] = [$c->numero_lugar, strtoupper($c->nome), ''];
         }
 
-        // Linhas vazias + assinatura única do Presidente
+        // Linhas vazias + assinatura única do Presidente (conteúdo em A para merge A:C)
         $rows[] = ['', '', ''];
         $rows[] = ['', '', ''];
         $rows[] = ['', '', ''];
-        $rows[] = ['', '_______________________________', ''];
-        $rows[] = ['', 'Professor Doutor Fernando Maia', ''];
-        $rows[] = ['', 'Presidente da Instituição', ''];
+        $rows[] = ['_______________________________', '', ''];
+        $rows[] = ['Professor Doutor Fernando Maia', '', ''];
+        $rows[] = ['Presidente da Instituição', '', ''];
 
         return $rows;
     }
