@@ -211,8 +211,13 @@
 
                                         {{-- 3. Data de Nascimento --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Data de Nascimento</label>
-                                            <input type="date" name="data_nascimento" value="{{ old('data_nascimento') }}" class="{{ $inp }} @error('data_nascimento') border-red-400 @enderror" style="max-width:220px;">
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Data de Nascimento <span class="text-red-500">*</span></label>
+                                            <input type="date" name="data_nascimento" id="data_nascimento"
+                                                   value="{{ old('data_nascimento') }}"
+                                                   required
+                                                   max="{{ now()->subYears(17)->format('Y-m-d') }}"
+                                                   class="{{ $inp }} @error('data_nascimento') border-red-400 @enderror" style="max-width:220px;">
+                                            <p class="text-xs text-gray-400 mt-1">Idade mínima: 17 anos</p>
                                             @error('data_nascimento')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                         </div>
 

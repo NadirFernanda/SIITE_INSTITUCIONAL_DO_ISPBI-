@@ -19,7 +19,7 @@ class CandidaturaController extends Controller
             'nome'                    => 'required|string|max:255',
             'filiacao_pai'            => 'nullable|string|max:255',
             'filiacao_mae'            => 'nullable|string|max:255',
-            'data_nascimento'         => 'nullable|date|before:today',
+            'data_nascimento'         => 'required|date|before_or_equal:' . now()->subYears(17)->format('Y-m-d'),
             'naturalidade_municipio'  => 'nullable|string|max:255',
             'naturalidade_provincia'  => 'nullable|string|max:255',
             'bi'                      => 'required|string|max:20',
@@ -51,7 +51,9 @@ class CandidaturaController extends Controller
             'observacoes'             => 'nullable|string|max:2000',
         ], [
             'curso.unique'  => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
-            'bi.required'   => 'O Bilhete de Identidade é obrigatório.',
+            'bi.required'              => 'O Bilhete de Identidade é obrigatório.',
+            'data_nascimento.required' => 'A data de nascimento é obrigatória.',
+            'data_nascimento.before_or_equal' => 'É necessário ter pelo menos 17 anos para se candidatar.',
         ]);
 
         $data = $request->only([
