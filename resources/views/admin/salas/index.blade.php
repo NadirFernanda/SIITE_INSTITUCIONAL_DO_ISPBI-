@@ -78,13 +78,13 @@
                     <input type="text" name="nome" value="{{ old('nome') }}" required maxlength="100"
                            placeholder="Ex: Sala A, Anfiteatro 1..."
                            style="width:100%;border:1px solid {{ $errors->has('nome') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
-                    @error('nome')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
+                    @error('nome')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
                 <div style="margin-bottom:16px;">
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Capacidade <span style="color:#ef4444">*</span></label>
                     <input type="number" name="capacidade" value="{{ old('capacidade') }}" required min="1" max="1000"
                            style="width:140px;border:1px solid {{ $errors->has('capacidade') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;">
-                    @error('capacidade')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
+                    @error('capacidade')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
                 <button type="submit"
                         style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-weight:700;cursor:pointer;font-size:0.88rem;">
