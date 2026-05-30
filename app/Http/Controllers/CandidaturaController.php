@@ -6,11 +6,15 @@ use App\Mail\CandidaturaReceived;
 use App\Models\Candidatura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class CandidaturaController extends Controller
 {
     public function store(Request $request)
     {
+        $periodo = $request->input('periodo');
+        $periodoLabel = $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
+
         $request->validate([
             'nome'                    => 'required|string|max:255',
             'filiacao_pai'            => 'nullable|string|max:255',
@@ -35,9 +39,18 @@ class CandidaturaController extends Controller
             'estado_financeiro'       => 'nullable|in:maximo,medio,minimo',
             'trabalhador'             => 'nullable|in:sim,nao',
             'instituicao_laboral'     => 'nullable|string|max:255',
-            'curso'                   => ['required', 'string', 'in:' . implode(',', Candidatura::$cursos)],
+            'curso'                   => [
+                'required', 'string', 'in:' . implode(',', Candidatura::$cursos),
+                // Bloquear duplicado: mesmo email + mesmo período + mesmo curso
+                Rule::unique('candidaturas')->where(function ($query) use ($request) {
+                    return $query->where('email', $request->input('email'))
+                                 ->where('periodo', $request->input('periodo'));
+                }),
+            ],
             'periodo'                 => 'nullable|in:regular,pos-laboral',
             'observacoes'             => 'nullable|string|max:2000',
+        ], [
+            'curso.unique' => "Já existe uma candidatura com este email para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
         ]);
 
         $data = $request->only([
