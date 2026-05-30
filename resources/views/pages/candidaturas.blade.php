@@ -180,7 +180,24 @@
                                 {{-- Application form --}}
                                 <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-8">
                                     <h2 class="text-2xl font-bold text-[#2563eb] mb-1">Ficha de Inscrição — Exame de Acesso 2025/2026</h2>
-                                    <p class="text-gray-500 text-sm mb-8">Todos os campos são obrigatórios, excepto o Telefone 2 e a Instituição Laboral (apenas se não trabalhar).</p>
+                                    <p class="text-gray-500 text-sm mb-6">Todos os campos são obrigatórios, excepto o Telefone 2 e a Instituição Laboral (apenas se não trabalhar).</p>
+
+                                    {{-- Banner de erros de validação --}}
+                                    @if($errors->any())
+                                    <div class="bg-red-50 border border-red-200 rounded-xl p-5 mb-6 flex items-start gap-3">
+                                        <svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        <div>
+                                            <p class="font-semibold text-red-700 mb-2">Por favor corrija os seguintes erros antes de submeter:</p>
+                                            <ul class="space-y-1">
+                                                @foreach($errors->all() as $erro)
+                                                    <li class="text-sm text-red-600 flex items-start gap-1.5">
+                                                        <span class="mt-0.5 text-red-400">›</span> {{ $erro }}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    @endif
 
                                     @php $inp = 'w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition'; @endphp
 
@@ -435,6 +452,14 @@
 </div>
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
+@if($errors->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var el = document.getElementById('formulario-candidatura');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+</script>
+@endif
 @endpush
 @endsection
 
