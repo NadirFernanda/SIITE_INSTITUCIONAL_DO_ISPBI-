@@ -9,8 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <style>
+@page { margin: 15mm; size: A4 portrait; }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: DejaVu Sans, Arial, sans-serif; font-size:10pt; color:#000; }
+html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:10pt; color:#000; }
 
 /* ── Cabeçalho (aparece só na 1.ª página por estar no fluxo normal) ── */
 .header {
