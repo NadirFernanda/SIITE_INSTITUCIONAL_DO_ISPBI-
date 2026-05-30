@@ -187,8 +187,16 @@
                                 Ver
                             </a>
                             <a href="{{ route('tecnico.salas.pdf', $sala) }}"
-                               style="background:#15803d;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
+                               style="background:#1565c0;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 PDF
+                            </a>
+                            <a href="{{ route('tecnico.salas.excel-exame', $sala) }}"
+                               style="background:#15803d;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
+                                Exame
+                            </a>
+                            <a href="{{ route('tecnico.salas.excel-notas', $sala) }}"
+                               style="background:#0e5c2f;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
+                                Notas
                             </a>
                             {{-- Editar capacidade inline --}}
                             <button onclick="document.getElementById('edit-{{ $sala->id }}').style.display='block'"
