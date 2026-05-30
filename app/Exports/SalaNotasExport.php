@@ -63,8 +63,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         $rows[] = ['', '', ''];
         $rows[] = ['', '', ''];
-        $rows[] = ['', '', ''];
-        $rows[] = ['_______________________________', '', ''];
+        $rows[] = ['', '', ''];  // linha de assinatura — borda aplicada via styles
         $rows[] = ['Professor Doutor Fernando Maia', '', ''];
         $rows[] = ['Presidente da Instituição', '', ''];
 
@@ -141,18 +140,24 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         }
 
         // Assinatura única do Presidente — centrada, mesclar A-C
-        $sigStart = $dataEnd + 4; // linha da linha de assinatura
-        $sigNome  = $sigStart + 1;
-        $sigCargo = $sigStart + 2;
+        // Assinatura: linha vazia com borda-bottom + nome + cargo (tudo centrado, A:C mesclado)
+        $sigLine  = $dataEnd + 4;
+        $sigNome  = $sigLine + 1;
+        $sigCargo = $sigLine + 2;
 
-        $sheet->mergeCells("A{$sigStart}:C{$sigStart}");
-        $sheet->mergeCells("A{$sigNome}:C{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
+        foreach ([$sigLine, $sigNome, $sigCargo] as $r) {
+            $sheet->mergeCells("A{$r}:C{$r}");
+        }
 
-        $sheet->getStyle("A{$sigStart}")->applyFromArray([
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-            'borders'   => ['bottom' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => '000000']]],
+        // Linha de assinatura: célula mesclada com borda inferior centrada
+        // Usamos padding interno através de borda apenas no meio (B original)
+        // Solução: border-bottom na célula mesclada, alinhamento centro
+        $sheet->getStyle("A{$sigLine}")->applyFromArray([
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_BOTTOM],
+            'borders'   => ['bottom' => ['borderStyle' => Border::BORDER_MEDIUM, 'color' => ['rgb' => '000000']]],
         ]);
+        $sheet->getRowDimension($sigLine)->setRowHeight(18);
+
         $sheet->getStyle("A{$sigNome}")->applyFromArray([
             'font'      => ['bold' => true, 'size' => 10],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
@@ -161,18 +166,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'font'      => ['size' => 9, 'italic' => true],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
-        $sheet->getRowDimension($sigStart)->setRowHeight(20);
-
-        // ── Logo no cabeçalho de impressão (sempre centrada, em qualquer escala) ──
-        $logoPath = public_path('images/logo.png');
-        if (file_exists($logoPath) && filesize($logoPath) > 0) {
-            $hfDrawing = new HeaderFooterDrawing();
-            $hfDrawing->setPath($logoPath);
-            $hfDrawing->setHeight(45);
-            $sheet->getHeaderFooter()
-                  ->setOddHeader('&C&G')
-                  ->addImage($hfDrawing, HeaderFooter::IMAGE_HEADER_CENTER);
-        }
 
         // ── Impressão A4 ──
         $ps = $sheet->getPageSetup();
@@ -184,11 +177,9 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setHeader(0.3)   // distância do topo ao logo
-            ->setTop(1.4)      // distância do topo ao início do conteúdo
-            ->setBottom(0.59)
+            ->setTop(0.59)->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
-            ->setFooter(0.2);
+            ->setHeader(0.2)->setFooter(0.2);
 
         return [];
     }
