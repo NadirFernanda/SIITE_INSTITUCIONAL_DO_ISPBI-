@@ -129,6 +129,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::post('salas/distribuir', [App\Http\Controllers\Admin\SalaController::class, 'distribuir'])->name('salas.distribuir');
     Route::post('salas/limpar', [App\Http\Controllers\Admin\SalaController::class, 'limpar'])->name('salas.limpar');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Admin\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExame'])->name('salas.excel-exame');
     Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Admin\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
     Route::get('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'show'])->name('salas.show');
@@ -159,6 +160,7 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::post('salas/distribuir', [App\Http\Controllers\Tecnico\SalaController::class, 'distribuir'])->name('salas.distribuir');
     Route::post('salas/limpar', [App\Http\Controllers\Tecnico\SalaController::class, 'limpar'])->name('salas.limpar');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Tecnico\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'excelExame'])->name('salas.excel-exame');
     Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Tecnico\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
     Route::get('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'show'])->name('salas.show');

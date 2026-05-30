@@ -154,6 +154,14 @@ class SalaController extends Controller
         return $pdf->download('sala-' . \Str::slug($sala->nome) . '.pdf');
     }
 
+    public function pdfExame(Sala $sala)
+    {
+        $candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
+        $pdf = Pdf::loadView('pdf.sala-exame', compact('sala', 'candidaturas'))
+                  ->setPaper('a4', 'portrait');
+        return $pdf->download('lista-exame-' . \Str::slug($sala->nome) . '.pdf');
+    }
+
     public function excelExame(Sala $sala)
     {
         return Excel::download(new SalaExameExport($sala),

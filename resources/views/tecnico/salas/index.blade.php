@@ -190,7 +190,7 @@
                                style="background:#1565c0;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 PDF
                             </a>
-                            <a href="{{ route('tecnico.salas.excel-exame', $sala) }}"
+                            <a href="{{ route('tecnico.salas.pdf-exame', $sala) }}"
                                style="background:#15803d;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 Exame
                             </a>
