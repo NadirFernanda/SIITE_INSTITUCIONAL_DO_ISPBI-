@@ -123,6 +123,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::put('revistas/{id}', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'update'])->name('revistas.update');
     Route::delete('revistas/{id}', [App\Http\Controllers\Admin\RevistaSubmissionController::class, 'destroy'])->name('revistas.destroy');
 
+    // Salas de exame (rotas fixas ANTES das rotas com {sala})
+    Route::get('salas', [App\Http\Controllers\Admin\SalaController::class, 'index'])->name('salas.index');
+    Route::post('salas', [App\Http\Controllers\Admin\SalaController::class, 'store'])->name('salas.store');
+    Route::post('salas/distribuir', [App\Http\Controllers\Admin\SalaController::class, 'distribuir'])->name('salas.distribuir');
+    Route::post('salas/limpar', [App\Http\Controllers\Admin\SalaController::class, 'limpar'])->name('salas.limpar');
+    Route::get('salas/{sala}/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'show'])->name('salas.show');
+    Route::patch('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'update'])->name('salas.update');
+    Route::delete('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'destroy'])->name('salas.destroy');
+
     // Candidaturas admin
     Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
     Route::get('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'index'])->name('candidaturas.index');

@@ -37,6 +37,8 @@ class Candidatura extends Model
         'observacoes',
         'status',
         'notas_admin',
+        'sala_id',
+        'numero_lugar',
     ];
 
     protected $casts = [
@@ -69,4 +71,9 @@ class Candidatura extends Model
         'aprovada'   => '#22c55e',
         'rejeitada'  => '#ef4444',
     ];
+
+    public function sala()
+    {
+        return $this->belongsTo(Sala::class);
+    }
 }
