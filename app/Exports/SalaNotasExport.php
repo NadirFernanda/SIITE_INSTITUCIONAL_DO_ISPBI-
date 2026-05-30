@@ -8,15 +8,15 @@ use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooter;
+use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
+class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths
 {
     protected Sala $sala;
     protected Collection $candidaturas;
@@ -59,7 +59,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $rows[] = [$c->numero_lugar, strtoupper($c->nome), ''];
         }
 
-        // Linhas vazias + assinatura única do Presidente (conteúdo em A para merge A:C)
         $rows[] = ['', '', ''];
         $rows[] = ['', '', ''];
         $rows[] = ['', '', ''];
@@ -162,44 +161,33 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         ]);
         $sheet->getRowDimension($sigStart)->setRowHeight(20);
 
-        // ── Impressão A4: fitToWidth=1 preenche largura total ──
+        // ── Logo no cabeçalho de impressão (sempre centrada, em qualquer escala) ──
+        $logoPath = public_path('images/logo.png');
+        if (file_exists($logoPath) && filesize($logoPath) > 0) {
+            $hfDrawing = new HeaderFooterDrawing();
+            $hfDrawing->setPath($logoPath);
+            $hfDrawing->setHeight(45);
+            $sheet->getHeaderFooter()
+                  ->setOddHeader('&C&G')
+                  ->addImage($hfDrawing, HeaderFooter::IMAGE_HEADER_CENTER);
+        }
+
+        // ── Impressão A4 ──
         $ps = $sheet->getPageSetup();
         $ps->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
         $ps->setPaperSize(PageSetup::PAPERSIZE_A4);
         $ps->setFitToPage(true);
         $ps->setFitToWidth(1);
-        $ps->setFitToHeight(0);  // altura livre (múltiplas páginas)
+        $ps->setFitToHeight(0);
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setTop(0.59)->setBottom(0.59)
+            ->setTop(0.9)    // margem maior para acomodar logo no cabeçalho
+            ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
-            ->setHeader(0.2)->setFooter(0.2);
+            ->setHeader(0.1)->setFooter(0.2);
 
         return [];
     }
 
-    public function drawings()
-    {
-        $logoPath = public_path('images/logo.png');
-        if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
-
-        [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 52;
-        $displayW = (int)($logoW * $displayH / $logoH);
-
-        $colBPx  = 60 * 7;
-        $offsetX = max(0, (int)(($colBPx - $displayW) / 2));
-
-        $drawing = new Drawing();
-        $drawing->setName('Logo ISP-Bié');
-        $drawing->setPath($logoPath);
-        $drawing->setHeight($displayH);
-        $drawing->setWidth($displayW);
-        $drawing->setCoordinates('B1');
-        $drawing->setOffsetX($offsetX);
-        $drawing->setOffsetY(4);
-
-        return [$drawing];
-    }
 }
