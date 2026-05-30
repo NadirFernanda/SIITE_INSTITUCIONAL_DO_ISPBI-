@@ -12,48 +12,64 @@ class CandidaturaController extends Controller
 {
     public function store(Request $request)
     {
-        $periodo = $request->input('periodo');
+        $periodo      = $request->input('periodo');
         $periodoLabel = $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
 
         $request->validate([
-            'nome'                    => 'required|string|max:255',
-            'filiacao_pai'            => 'nullable|string|max:255',
-            'filiacao_mae'            => 'nullable|string|max:255',
-            'data_nascimento'         => 'required|date|before_or_equal:' . now()->subYears(17)->format('Y-m-d'),
-            'naturalidade_municipio'  => 'nullable|string|max:255',
-            'naturalidade_provincia'  => 'nullable|string|max:255',
-            'bi'                      => 'required|string|max:20',
-            'bi_emitido_em'           => 'nullable|string|max:255',
-            'bi_data_emissao'         => 'nullable|date|before:today',
-            'sexo'                    => 'nullable|in:masculino,feminino',
-            'estado_civil'            => 'nullable|string|max:100',
-            'necessidade_especial'    => 'nullable|string|max:255',
-            'residencia_municipio'    => 'nullable|string|max:255',
-            'residencia_bairro'       => 'nullable|string|max:255',
-            'telefone'                => 'required|string|max:50',
-            'telefone2'               => 'nullable|string|max:50',
-            'email'                   => 'required|email|max:255',
-            'habilitacoes'            => 'nullable|string|max:100',
-            'escola_origem'           => 'nullable|string|max:255',
-            'ano_conclusao'           => 'nullable|integer|min:1990|max:' . date('Y'),
-            'estado_financeiro'       => 'nullable|in:maximo,medio,minimo',
-            'trabalhador'             => 'nullable|in:sim,nao',
-            'instituicao_laboral'     => 'nullable|string|max:255',
-            'curso'                   => [
+            'nome'                   => 'required|string|max:255',
+            'filiacao_pai'           => 'required|string|max:255',
+            'filiacao_mae'           => 'required|string|max:255',
+            'data_nascimento'        => 'required|date|before_or_equal:' . now()->subYears(17)->format('Y-m-d'),
+            'naturalidade_municipio' => 'required|string|max:255',
+            'naturalidade_provincia' => 'required|string|max:255',
+            'bi'                     => 'required|string|max:20',
+            'bi_emitido_em'          => 'required|string|max:255',
+            'bi_data_emissao'        => 'required|date|before:today',
+            'sexo'                   => 'required|in:masculino,feminino',
+            'estado_civil'           => 'required|string|max:100',
+            'necessidade_especial'   => 'required|string|max:255',
+            'residencia_municipio'   => 'required|string|max:255',
+            'residencia_bairro'      => 'required|string|max:255',
+            'telefone'               => 'required|string|max:50',
+            'telefone2'              => 'nullable|string|max:50',
+            'email'                  => 'required|email|max:255',
+            'habilitacoes'           => 'required|string|max:100',
+            'escola_origem'          => 'required|string|max:255',
+            'ano_conclusao'          => 'required|integer|min:1990|max:' . date('Y'),
+            'estado_financeiro'      => 'required|in:maximo,medio,minimo',
+            'trabalhador'            => 'required|in:sim,nao',
+            'instituicao_laboral'    => 'nullable|required_if:trabalhador,sim|string|max:255',
+            'curso'                  => [
                 'required', 'string', 'in:' . implode(',', Candidatura::$cursos),
-                // Bloquear duplicado: mesmo BI + mesmo período + mesmo curso
                 Rule::unique('candidaturas')->where(function ($query) use ($request) {
                     return $query->where('bi', $request->input('bi'))
                                  ->where('periodo', $request->input('periodo'));
                 }),
             ],
-            'periodo'                 => 'nullable|in:regular,pos-laboral',
-            'observacoes'             => 'nullable|string|max:2000',
+            'periodo'                => 'required|in:regular,pos-laboral',
         ], [
-            'curso.unique'  => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
-            'bi.required'              => 'O Bilhete de Identidade é obrigatório.',
-            'data_nascimento.required' => 'A data de nascimento é obrigatória.',
-            'data_nascimento.before_or_equal' => 'É necessário ter pelo menos 17 anos para se candidatar.',
+            'curso.unique'                       => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
+            'bi.required'                        => 'O Bilhete de Identidade é obrigatório.',
+            'data_nascimento.required'            => 'A data de nascimento é obrigatória.',
+            'data_nascimento.before_or_equal'     => 'É necessário ter pelo menos 17 anos para se candidatar.',
+            'filiacao_pai.required'               => 'O nome do pai é obrigatório.',
+            'filiacao_mae.required'               => 'O nome da mãe é obrigatório.',
+            'naturalidade_municipio.required'     => 'O município de naturalidade é obrigatório.',
+            'naturalidade_provincia.required'     => 'A província de naturalidade é obrigatória.',
+            'bi_emitido_em.required'              => 'O local de emissão do BI é obrigatório.',
+            'bi_data_emissao.required'            => 'A data de emissão do BI é obrigatória.',
+            'sexo.required'                       => 'O sexo é obrigatório.',
+            'estado_civil.required'               => 'O estado civil é obrigatório.',
+            'necessidade_especial.required'       => 'Este campo é obrigatório. Escreva "Nenhuma" se não aplicável.',
+            'residencia_municipio.required'       => 'O município de residência é obrigatório.',
+            'residencia_bairro.required'          => 'O bairro/rua de residência é obrigatório.',
+            'habilitacoes.required'               => 'As habilitações literárias são obrigatórias.',
+            'escola_origem.required'              => 'A escola de proveniência é obrigatória.',
+            'ano_conclusao.required'              => 'O ano de conclusão é obrigatório.',
+            'estado_financeiro.required'          => 'O estado financeiro da família é obrigatório.',
+            'trabalhador.required'                => 'Indique se é trabalhador ou não.',
+            'instituicao_laboral.required_if'     => 'Indique o nome da instituição onde trabalha.',
+            'periodo.required'                    => 'O período de inscrição é obrigatório.',
         ]);
 
         $data = $request->only([
@@ -65,9 +81,8 @@ class CandidaturaController extends Controller
             'telefone', 'telefone2', 'email',
             'habilitacoes', 'escola_origem', 'ano_conclusao',
             'estado_financeiro', 'instituicao_laboral',
-            'curso', 'periodo', 'observacoes',
+            'curso', 'periodo',
         ]);
-        // Converter trabalhador para boolean
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
         $candidatura = Candidatura::create($data);

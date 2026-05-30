@@ -180,7 +180,7 @@
                                 {{-- Application form --}}
                                 <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-8">
                                     <h2 class="text-2xl font-bold text-[#2563eb] mb-1">Ficha de Inscrição — Exame de Acesso 2025/2026</h2>
-                                    <p class="text-gray-500 text-sm mb-8">Preencha todos os campos obrigatórios (<span class="text-red-500">*</span>)</p>
+                                    <p class="text-gray-500 text-sm mb-8">Todos os campos são obrigatórios, excepto o Telefone 2 e a Instituição Laboral (apenas se não trabalhar).</p>
 
                                     @php $inp = 'w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition'; @endphp
 
@@ -196,15 +196,17 @@
 
                                         {{-- 2. Filiação --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Filiação</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Filiação <span class="text-red-500">*</span></label>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">Filho(a) de (pai)</label>
-                                                    <input type="text" name="filiacao_pai" value="{{ old('filiacao_pai') }}" maxlength="255" class="{{ $inp }}">
+                                                    <input type="text" name="filiacao_pai" value="{{ old('filiacao_pai') }}" required maxlength="255" class="{{ $inp }} @error('filiacao_pai') border-red-400 @enderror">
+                                                    @error('filiacao_pai')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">e de (mãe)</label>
-                                                    <input type="text" name="filiacao_mae" value="{{ old('filiacao_mae') }}" maxlength="255" class="{{ $inp }}">
+                                                    <input type="text" name="filiacao_mae" value="{{ old('filiacao_mae') }}" required maxlength="255" class="{{ $inp }} @error('filiacao_mae') border-red-400 @enderror">
+                                                    @error('filiacao_mae')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -212,7 +214,7 @@
                                         {{-- 3. Data de Nascimento --}}
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Data de Nascimento <span class="text-red-500">*</span></label>
-                                            <input type="date" name="data_nascimento" id="data_nascimento"
+                                            <input type="date" name="data_nascimento"
                                                    value="{{ old('data_nascimento') }}"
                                                    required
                                                    max="{{ now()->subYears(17)->format('Y-m-d') }}"
@@ -223,43 +225,47 @@
 
                                         {{-- 4. Naturalidade --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Naturalidade</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Naturalidade <span class="text-red-500">*</span></label>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">Província</label>
                                                     <select id="select-provincia" name="naturalidade_provincia"
                                                             data-old="{{ old('naturalidade_provincia') }}"
-                                                            class="{{ $inp }}">
+                                                            required class="{{ $inp }} @error('naturalidade_provincia') border-red-400 @enderror">
                                                         <option value="">Seleccione a província</option>
                                                     </select>
+                                                    @error('naturalidade_provincia')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">Município</label>
                                                     <select id="select-municipio" name="naturalidade_municipio"
                                                             data-old="{{ old('naturalidade_municipio') }}"
-                                                            class="{{ $inp }}">
+                                                            required class="{{ $inp }} @error('naturalidade_municipio') border-red-400 @enderror">
                                                         <option value="">Seleccione primeiro a província</option>
                                                     </select>
+                                                    @error('naturalidade_municipio')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                             </div>
                                         </div>
 
                                         {{-- 5. Bilhete de Identidade / Passaporte --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Bilhete de Identidade / Passaporte</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Bilhete de Identidade / Passaporte <span class="text-red-500">*</span></label>
                                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                                 <div>
-                                                    <label class="block text-xs text-gray-500 mb-1">Número <span class="text-red-500">*</span></label>
+                                                    <label class="block text-xs text-gray-500 mb-1">Número</label>
                                                     <input type="text" name="bi" value="{{ old('bi') }}" required maxlength="20" class="{{ $inp }} @error('bi') border-red-400 @enderror">
                                                     @error('bi')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">Emitido em (local)</label>
-                                                    <input type="text" name="bi_emitido_em" value="{{ old('bi_emitido_em') }}" maxlength="255" class="{{ $inp }}">
+                                                    <input type="text" name="bi_emitido_em" value="{{ old('bi_emitido_em') }}" required maxlength="255" class="{{ $inp }} @error('bi_emitido_em') border-red-400 @enderror">
+                                                    @error('bi_emitido_em')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">Data de emissão</label>
-                                                    <input type="date" name="bi_data_emissao" value="{{ old('bi_data_emissao') }}" class="{{ $inp }}">
+                                                    <input type="date" name="bi_data_emissao" value="{{ old('bi_data_emissao') }}" required class="{{ $inp }} @error('bi_data_emissao') border-red-400 @enderror">
+                                                    @error('bi_data_emissao')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -267,44 +273,49 @@
                                         {{-- 6. Sexo + Estado Civil --}}
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Sexo</label>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Sexo <span class="text-red-500">*</span></label>
                                                 <div class="flex gap-6">
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                        <input type="radio" name="sexo" value="masculino" {{ old('sexo') === 'masculino' ? 'checked' : '' }} class="accent-[#2563eb]"> Masculino
+                                                        <input type="radio" name="sexo" value="masculino" {{ old('sexo') === 'masculino' ? 'checked' : '' }} required class="accent-[#2563eb]"> Masculino
                                                     </label>
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
                                                         <input type="radio" name="sexo" value="feminino" {{ old('sexo') === 'feminino' ? 'checked' : '' }} class="accent-[#2563eb]"> Feminino
                                                     </label>
                                                 </div>
+                                                @error('sexo')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Estado Civil</label>
-                                                <input type="text" name="estado_civil" value="{{ old('estado_civil') }}" maxlength="100" placeholder="Ex: Solteiro(a), Casado(a)..." class="{{ $inp }}">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Estado Civil <span class="text-red-500">*</span></label>
+                                                <input type="text" name="estado_civil" value="{{ old('estado_civil') }}" required maxlength="100" placeholder="Ex: Solteiro(a), Casado(a)..." class="{{ $inp }} @error('estado_civil') border-red-400 @enderror">
+                                                @error('estado_civil')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                         </div>
 
                                         {{-- 7. Necessidade de Educação Especial --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Necessidade de Educação Especial</label>
-                                            <input type="text" name="necessidade_especial" value="{{ old('necessidade_especial') }}" maxlength="255" placeholder="Indique se aplicável" class="{{ $inp }}">
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Necessidade de Educação Especial <span class="text-red-500">*</span></label>
+                                            <input type="text" name="necessidade_especial" value="{{ old('necessidade_especial') }}" required maxlength="255" placeholder="Escreva 'Nenhuma' se não aplicável" class="{{ $inp }} @error('necessidade_especial') border-red-400 @enderror">
+                                            @error('necessidade_especial')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                         </div>
 
                                         {{-- 8. Residência --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Residência</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Residência <span class="text-red-500">*</span></label>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">Município</label>
-                                                    <input type="text" name="residencia_municipio" value="{{ old('residencia_municipio') }}" maxlength="255" class="{{ $inp }}">
+                                                    <input type="text" name="residencia_municipio" value="{{ old('residencia_municipio') }}" required maxlength="255" class="{{ $inp }} @error('residencia_municipio') border-red-400 @enderror">
+                                                    @error('residencia_municipio')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                                 <div>
                                                     <label class="block text-xs text-gray-500 mb-1">Rua / Bairro</label>
-                                                    <input type="text" name="residencia_bairro" value="{{ old('residencia_bairro') }}" maxlength="255" class="{{ $inp }}">
+                                                    <input type="text" name="residencia_bairro" value="{{ old('residencia_bairro') }}" required maxlength="255" class="{{ $inp }} @error('residencia_bairro') border-red-400 @enderror">
+                                                    @error('residencia_bairro')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                             </div>
                                         </div>
 
-                                        {{-- 9. Telefone + Email --}}
+                                        {{-- 9. Telefones + Email --}}
                                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Telefone 1 <span class="text-red-500">*</span></label>
@@ -312,7 +323,7 @@
                                                 @error('telefone')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Telefone 2</label>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Telefone 2 <span class="text-gray-400 font-normal">(opcional)</span></label>
                                                 <input type="tel" name="telefone2" value="{{ old('telefone2') }}" maxlength="50" class="{{ $inp }}">
                                             </div>
                                             <div>
@@ -325,44 +336,60 @@
                                         {{-- 10. Habilitações + Escola --}}
                                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Habilitações Literárias</label>
-                                                <input type="text" name="habilitacoes" value="{{ old('habilitacoes') }}" maxlength="100" placeholder="Ex: 12ª Classe" class="{{ $inp }}">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Habilitações Literárias <span class="text-red-500">*</span></label>
+                                                <input type="text" name="habilitacoes" value="{{ old('habilitacoes') }}" required maxlength="100" placeholder="Ex: 12ª Classe" class="{{ $inp }} @error('habilitacoes') border-red-400 @enderror">
+                                                @error('habilitacoes')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                             <div class="sm:col-span-2">
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Escola e Curso de Proveniência</label>
-                                                <input type="text" name="escola_origem" value="{{ old('escola_origem') }}" maxlength="255" class="{{ $inp }}">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Escola e Curso de Proveniência <span class="text-red-500">*</span></label>
+                                                <input type="text" name="escola_origem" value="{{ old('escola_origem') }}" required maxlength="255" class="{{ $inp }} @error('escola_origem') border-red-400 @enderror">
+                                                @error('escola_origem')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                         </div>
 
-                                        {{-- 11. Estado Financeiro --}}
+                                        {{-- 11. Ano de Conclusão --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Estado Financeiro da Família</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Ano de Conclusão do Ensino Médio <span class="text-red-500">*</span></label>
+                                            <input type="number" name="ano_conclusao" value="{{ old('ano_conclusao') }}" required min="1990" max="{{ date('Y') }}"
+                                                   class="{{ $inp }} @error('ano_conclusao') border-red-400 @enderror" style="max-width:160px;">
+                                            @error('ano_conclusao')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                        </div>
+
+                                        {{-- 12. Estado Financeiro --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Estado Financeiro da Família <span class="text-red-500">*</span></label>
                                             <div class="flex gap-6">
                                                 @foreach(['maximo' => 'Máximo', 'medio' => 'Médio', 'minimo' => 'Mínimo'] as $val => $label)
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                    <input type="radio" name="estado_financeiro" value="{{ $val }}" {{ old('estado_financeiro') === $val ? 'checked' : '' }} class="accent-[#2563eb]"> {{ $label }}
+                                                    <input type="radio" name="estado_financeiro" value="{{ $val }}" {{ old('estado_financeiro') === $val ? 'checked' : '' }} required class="accent-[#2563eb]"> {{ $label }}
                                                 </label>
                                                 @endforeach
                                             </div>
+                                            @error('estado_financeiro')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                         </div>
 
-                                        {{-- 12. Trabalhador --}}
+                                        {{-- 13. Trabalhador --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Trabalhador</label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Trabalhador <span class="text-red-500">*</span></label>
                                             <div class="flex gap-6 items-center flex-wrap">
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                    <input type="radio" name="trabalhador" value="sim" {{ old('trabalhador') === 'sim' ? 'checked' : '' }} class="accent-[#2563eb]" onchange="document.getElementById('inst-laboral').classList.remove('hidden')"> Sim
+                                                    <input type="radio" name="trabalhador" value="sim" {{ old('trabalhador') === 'sim' ? 'checked' : '' }} required class="accent-[#2563eb]"
+                                                           onchange="document.getElementById('inst-laboral').classList.remove('hidden')"> Sim
                                                 </label>
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                    <input type="radio" name="trabalhador" value="nao" {{ old('trabalhador') === 'nao' ? 'checked' : '' }} class="accent-[#2563eb]" onchange="document.getElementById('inst-laboral').classList.add('hidden')"> Não
+                                                    <input type="radio" name="trabalhador" value="nao" {{ old('trabalhador') === 'nao' ? 'checked' : '' }} class="accent-[#2563eb]"
+                                                           onchange="document.getElementById('inst-laboral').classList.add('hidden')"> Não
                                                 </label>
-                                                <div id="inst-laboral" class="{{ old('trabalhador') === 'sim' ? '' : 'hidden' }} flex-1 min-w-[200px]">
-                                                    <input type="text" name="instituicao_laboral" value="{{ old('instituicao_laboral') }}" maxlength="255" placeholder="Nome da Instituição Laboral" class="{{ $inp }}">
+                                                <div id="inst-laboral" class="{{ old('trabalhador') === 'sim' ? '' : 'hidden' }} flex-1 min-w-[220px]">
+                                                    <input type="text" name="instituicao_laboral" value="{{ old('instituicao_laboral') }}" maxlength="255"
+                                                           placeholder="Nome da Instituição Laboral" class="{{ $inp }} @error('instituicao_laboral') border-red-400 @enderror">
+                                                    @error('instituicao_laboral')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                             </div>
+                                            @error('trabalhador')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                         </div>
 
-                                        {{-- 13. Curso + Período --}}
+                                        {{-- 14. Curso + Período --}}
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Curso a Inscrever <span class="text-red-500">*</span></label>
@@ -375,23 +402,17 @@
                                                 @error('curso')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Período</label>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Período <span class="text-red-500">*</span></label>
                                                 <div class="flex gap-6 mt-1">
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                        <input type="radio" name="periodo" value="regular" {{ old('periodo') === 'regular' ? 'checked' : '' }} class="accent-[#2563eb]"> Regular
+                                                        <input type="radio" name="periodo" value="regular" {{ old('periodo') === 'regular' ? 'checked' : '' }} required class="accent-[#2563eb]"> Regular
                                                     </label>
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
                                                         <input type="radio" name="periodo" value="pos-laboral" {{ old('periodo') === 'pos-laboral' ? 'checked' : '' }} class="accent-[#2563eb]"> Pós-laboral
                                                     </label>
                                                 </div>
+                                                @error('periodo')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
-                                        </div>
-
-                                        {{-- 14. Observações --}}
-                                        <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Observações</label>
-                                            <textarea name="observacoes" rows="3" maxlength="2000" class="{{ $inp }} resize-none"
-                                                      placeholder="Informação adicional que considere relevante...">{{ old('observacoes') }}</textarea>
                                         </div>
 
                                         <div class="pt-2">
