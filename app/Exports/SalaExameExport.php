@@ -164,17 +164,17 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 52;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar horizontalmente: (largura total em px) / 2 - (largura do logo) / 2
-        // Largura das colunas A=8, B=55, C=30 chars × 7px/char
-        $totalPx = (8 + 55 + 30) * 7;
-        $offsetX = max(0, (int)(($totalPx - $displayW) / 2));
+        // Centrar dentro da coluna B (a mais larga, ~55 chars × 7px = 385px)
+        // offsetX = (largura coluna B em px - largura do logo) / 2
+        $colBPx  = 55 * 7;
+        $offsetX = max(0, (int)(($colBPx - $displayW) / 2));
 
         $drawing = new Drawing();
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
         $drawing->setHeight($displayH);
         $drawing->setWidth($displayW);
-        $drawing->setCoordinates('A1');
+        $drawing->setCoordinates('B1');
         $drawing->setOffsetX($offsetX);
         $drawing->setOffsetY(4);
 

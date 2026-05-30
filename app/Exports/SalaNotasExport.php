@@ -166,16 +166,16 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 52;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar: colunas A=8, B=55, C=18 → total ~567px
-        $totalPx = (8 + 55 + 18) * 7;
-        $offsetX = max(0, (int)(($totalPx - $displayW) / 2));
+        // Centrar dentro da coluna B (~55 chars × 7px = 385px)
+        $colBPx  = 55 * 7;
+        $offsetX = max(0, (int)(($colBPx - $displayW) / 2));
 
         $drawing = new Drawing();
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
         $drawing->setHeight($displayH);
         $drawing->setWidth($displayW);
-        $drawing->setCoordinates('A1');
+        $drawing->setCoordinates('B1');
         $drawing->setOffsetX($offsetX);
         $drawing->setOffsetY(4);
 
