@@ -67,8 +67,8 @@
             <thead>
                 <tr>
                     <th style="width:45px;text-align:center;">N.º</th>
-                    <th>Nome Completo</th>
-                    <th style="width:160px;text-align:center;">Assinatura</th>
+                    <th style="width:55%;">Nome Completo</th>
+                    <th style="width:38%;text-align:center;">Assinatura</th>
                 </tr>
             </thead>
             <tbody>
