@@ -72,7 +72,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function columnWidths(): array
     {
-        return ['A' => 8, 'B' => 55, 'C' => 30];
+        return ['A' => 6, 'B' => 42, 'C' => 50];
     }
 
     public function styles(Worksheet $sheet): array
@@ -131,7 +131,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 'font'      => ['bold' => true, 'color' => ['rgb' => '1565C0']],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
-            $sheet->getRowDimension($r)->setRowHeight(22);
+            $sheet->getRowDimension($r)->setRowHeight(28);
         }
 
         // ── Configuração de impressão A4 com paginação natural ──
