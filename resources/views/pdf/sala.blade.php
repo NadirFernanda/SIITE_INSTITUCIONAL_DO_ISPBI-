@@ -66,7 +66,7 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width:60px;text-align:center;">N.º Lugar</th>
+                    <th style="width:50px;text-align:center;">N.º</th>
                     <th>Nome Completo</th>
                     <th style="width:120px;">BI / Passaporte</th>
                     <th style="width:70px;text-align:center;">Sexo</th>
