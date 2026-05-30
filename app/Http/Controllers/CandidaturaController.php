@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\CandidaturaReceived;
 use App\Models\Candidatura;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
@@ -93,7 +94,23 @@ class CandidaturaController extends Controller
             \Log::error('Falha ao enviar email de candidatura: ' . $e->getMessage());
         }
 
-        return redirect()->route('candidaturas')
-            ->with('candidatura_success', 'Candidatura submetida com sucesso! Entraremos em contacto em breve.');
+        return redirect()->route('candidaturas.comprovativo', $candidatura);
+    }
+
+    public function comprovativo(Candidatura $candidatura)
+    {
+        return view('pages.candidatura-sucesso', compact('candidatura'));
+    }
+
+    public function downloadPdf(Candidatura $candidatura)
+    {
+        app('translator')->setLocale('pt');
+
+        $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))
+                  ->setPaper('a4', 'portrait');
+
+        $filename = 'comprovativo-candidatura-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf';
+
+        return $pdf->download($filename);
     }
 }

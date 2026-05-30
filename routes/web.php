@@ -193,6 +193,8 @@ Route::view('/calendario-academico', 'pages.calendario-academico')->name('calend
 
 Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
 Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:5,1');
+Route::get('/candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\CandidaturaController::class, 'comprovativo'])->name('candidaturas.comprovativo');
+Route::get('/candidaturas/{candidatura}/pdf', [App\Http\Controllers\CandidaturaController::class, 'downloadPdf'])->name('candidaturas.pdf');
 
 // Rotas públicas de Alumni - sem dados sensíveis
 Route::get('/alumni', function () {
