@@ -140,10 +140,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         }
 
         // Assinatura única do Presidente — centrada, mesclar A-C
-        // Assinatura: linha vazia com borda-bottom + nome + cargo (tudo centrado, A:C mesclado)
-        $sigLine  = $dataEnd + 4;
-        $sigNome  = $sigLine + 1;
-        $sigCargo = $sigLine + 2;
+        // Assinatura: 3 linhas vazias após dados, depois linha com borda, nome, cargo
+        // $dataEnd+1, +2, +3 = vazias; +3 = borda assinatura; +4 = nome; +5 = cargo
+        $sigLine  = $dataEnd + 3;
+        $sigNome  = $dataEnd + 4;
+        $sigCargo = $dataEnd + 5;
 
         foreach ([$sigLine, $sigNome, $sigCargo] as $r) {
             $sheet->mergeCells("A{$r}:C{$r}");
