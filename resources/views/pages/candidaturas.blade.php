@@ -221,12 +221,20 @@
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Naturalidade</label>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div>
-                                                    <label class="block text-xs text-gray-500 mb-1">Município</label>
-                                                    <input type="text" name="naturalidade_municipio" value="{{ old('naturalidade_municipio') }}" maxlength="255" class="{{ $inp }}">
+                                                    <label class="block text-xs text-gray-500 mb-1">Província</label>
+                                                    <select id="select-provincia" name="naturalidade_provincia"
+                                                            data-old="{{ old('naturalidade_provincia') }}"
+                                                            class="{{ $inp }}">
+                                                        <option value="">Seleccione a província</option>
+                                                    </select>
                                                 </div>
                                                 <div>
-                                                    <label class="block text-xs text-gray-500 mb-1">Província</label>
-                                                    <input type="text" name="naturalidade_provincia" value="{{ old('naturalidade_provincia') }}" maxlength="255" class="{{ $inp }}">
+                                                    <label class="block text-xs text-gray-500 mb-1">Município</label>
+                                                    <select id="select-municipio" name="naturalidade_municipio"
+                                                            data-old="{{ old('naturalidade_municipio') }}"
+                                                            class="{{ $inp }}">
+                                                        <option value="">Seleccione primeiro a província</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -399,5 +407,8 @@
         </section>
 
 </div>
+@push('scripts')
+<script src="{{ asset('js/provincias-angola.js') }}"></script>
+@endpush
 @endsection
 
