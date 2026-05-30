@@ -36,10 +36,8 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $rows = [];
 
-        // Linha 1 — logo
-        $rows[] = ['', '', ''];
+        $rows[] = ['', '', ''];  // linha 1 — logo
 
-        // Cabeçalho instituição
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
         $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
         $rows[] = ['EXAME DE ACESSO 2025/2026 — LANÇAMENTO DE NOTAS', '', ''];
@@ -54,37 +52,40 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows[] = ['', '', ''];
 
         // Linha 9 — cabeçalho da tabela
-        $rows[] = ['N.º', 'Nome Completo', 'Nota (0–20)'];
+        $rows[] = ['N.º', 'NOME COMPLETO', 'NOTA (0–20)'];
 
-        // Dados
+        // Dados — nome em maiúsculas
         foreach ($this->candidaturas as $c) {
-            $rows[] = [$c->numero_lugar, $c->nome, ''];
+            $rows[] = [$c->numero_lugar, strtoupper($c->nome), ''];
         }
 
-        // Assinaturas
+        // Linhas vazias + assinatura única do Presidente
         $rows[] = ['', '', ''];
         $rows[] = ['', '', ''];
-        $rows[] = ['_______________________________', '', '_______________________________'];
-        $rows[] = ['Responsável de Sala', '', 'Chefe de Departamento'];
+        $rows[] = ['', '', ''];
+        $rows[] = ['', '_______________________________', ''];
+        $rows[] = ['', 'Professor Doutor Fernando Maia', ''];
+        $rows[] = ['', 'Presidente da Instituição', ''];
 
         return $rows;
     }
 
     public function columnWidths(): array
     {
-        return ['A' => 8, 'B' => 55, 'C' => 18];
+        // N.º estreito, Nome largo, Nota médio
+        return ['A' => 7, 'B' => 60, 'C' => 20];
     }
 
     public function styles(Worksheet $sheet): array
     {
-        // Mesclar cabeçalho
+        // Mesclar cabeçalho A-C
         $sheet->mergeCells('A2:C2');
         $sheet->mergeCells('A3:C3');
         $sheet->mergeCells('A4:C4');
         $sheet->mergeCells('A6:C6');
         $sheet->mergeCells('A7:C7');
 
-        // Alturas
+        // Alturas do cabeçalho
         $sheet->getRowDimension(1)->setRowHeight(60);
         $sheet->getRowDimension(2)->setRowHeight(22);
         $sheet->getRowDimension(3)->setRowHeight(16);
@@ -95,7 +96,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->getRowDimension(8)->setRowHeight(6);
         $sheet->getRowDimension(9)->setRowHeight(22);
 
-        // Estilos cabeçalho
+        // Títulos instituição
         $sheet->getStyle('A2')->applyFromArray([
             'font'      => ['bold' => true, 'size' => 14, 'color' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
@@ -138,21 +139,42 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
-        // ── Configuração de impressão A4 com paginação natural ──
+        // Assinatura única do Presidente — centrada, mesclar A-C
+        $sigStart = $dataEnd + 4; // linha da linha de assinatura
+        $sigNome  = $sigStart + 1;
+        $sigCargo = $sigStart + 2;
+
+        $sheet->mergeCells("A{$sigStart}:C{$sigStart}");
+        $sheet->mergeCells("A{$sigNome}:C{$sigNome}");
+        $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
+
+        $sheet->getStyle("A{$sigStart}")->applyFromArray([
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            'borders'   => ['bottom' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => '000000']]],
+        ]);
+        $sheet->getStyle("A{$sigNome}")->applyFromArray([
+            'font'      => ['bold' => true, 'size' => 10],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
+        $sheet->getStyle("A{$sigCargo}")->applyFromArray([
+            'font'      => ['size' => 9, 'italic' => true],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
+        $sheet->getRowDimension($sigStart)->setRowHeight(20);
+
+        // ── Impressão A4: fitToWidth=1 preenche largura total ──
         $ps = $sheet->getPageSetup();
         $ps->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
         $ps->setPaperSize(PageSetup::PAPERSIZE_A4);
-        $ps->setFitToPage(false);
-        $ps->setScale(100);
+        $ps->setFitToPage(true);
+        $ps->setFitToWidth(1);
+        $ps->setFitToHeight(0);  // altura livre (múltiplas páginas)
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setTop(0.59)
-            ->setBottom(0.59)
-            ->setLeft(0.39)
-            ->setRight(0.39)
-            ->setHeader(0.2)
-            ->setFooter(0.2);
+            ->setTop(0.59)->setBottom(0.59)
+            ->setLeft(0.39)->setRight(0.39)
+            ->setHeader(0.2)->setFooter(0.2);
 
         return [];
     }
@@ -166,8 +188,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 52;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar dentro da coluna B (~55 chars × 7px = 385px)
-        $colBPx  = 55 * 7;
+        $colBPx  = 60 * 7;
         $offsetX = max(0, (int)(($colBPx - $displayW) / 2));
 
         $drawing = new Drawing();
