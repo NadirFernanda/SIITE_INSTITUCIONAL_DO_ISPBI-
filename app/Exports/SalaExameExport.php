@@ -173,8 +173,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
         $drawing->setHeight(50);
-        $drawing->setCoordinates('B1');
-        $drawing->setOffsetX(5);
+        $drawing->setCoordinates('C1'); // centrado na tabela de 6 colunas (A-F)
+        $drawing->setOffsetX(20);
         $drawing->setOffsetY(4);
 
         return [$drawing];

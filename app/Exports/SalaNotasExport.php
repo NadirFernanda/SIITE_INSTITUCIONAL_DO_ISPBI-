@@ -35,40 +35,41 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $rows = [];
 
-        $rows[] = ['', '', '', '', '', '', '']; // linha 1 — logo
-        $rows[] = ['', 'INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', '', '', '', ''];
-        $rows[] = ['', 'DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', '', '', '', ''];
-        $rows[] = ['', 'EXAME DE ACESSO 2025/2026 — LANÇAMENTO DE NOTAS', '', '', '', '', ''];
-        $rows[] = ['', '', '', '', '', '', ''];
+        // Linha 1 — logo (espaço reservado)
+        $rows[] = ['', '', ''];
 
+        // Cabeçalho instituição (A-C = 3 colunas)
+        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
+        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
+        $rows[] = ['EXAME DE ACESSO 2025/2026 — LANÇAMENTO DE NOTAS', '', ''];
+        $rows[] = ['', '', ''];
+
+        // Info da sala
         $grupos = $this->candidaturas
             ->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
             ->keys()->implode(' / ');
 
-        $rows[] = ['', 'Sala:', $this->sala->nome, 'Capacidade:', $this->sala->capacidade, '', ''];
-        $rows[] = ['', 'Curso(s) / Período:', $grupos, '', '', '', ''];
-        $rows[] = ['', '', '', '', '', '', ''];
+        $rows[] = ['Sala: ' . $this->sala->nome, '', ''];
+        $rows[] = ['Curso(s) / Período: ' . $grupos, '', ''];
+        $rows[] = ['', '', ''];
 
-        // Cabeçalho da tabela
-        $rows[] = ['N.º', 'Nome Completo', 'BI / Passaporte', 'Sexo', 'Nota (0–20)', 'Classificação', 'Observações'];
+        // Cabeçalho da tabela — só N.º, Nome e Nota
+        $rows[] = ['N.º', 'Nome Completo', 'Nota (0–20)'];
 
         // Dados
         foreach ($this->candidaturas as $c) {
             $rows[] = [
                 $c->numero_lugar,
                 $c->nome,
-                $c->bi,
-                $c->sexo ? ucfirst($c->sexo) : '',
-                '', // nota — em branco para preenchimento
-                '', // aprovado/reprovado
-                '', // observações
+                '', // nota em branco para preenchimento
             ];
         }
 
-        $rows[] = ['', '', '', '', '', '', ''];
-        $rows[] = ['', '', '', '', '', '', ''];
-        $rows[] = ['', '_________________________________', '', '', '_________________________________', '', ''];
-        $rows[] = ['', 'Responsável de Sala', '', '', 'Chefe de Departamento', '', ''];
+        // Assinaturas
+        $rows[] = ['', '', ''];
+        $rows[] = ['', '', ''];
+        $rows[] = ['_______________________________', '', '_______________________________'];
+        $rows[] = ['Responsável de Sala', '', 'Chefe de Departamento'];
 
         return $rows;
     }
@@ -77,72 +78,74 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         return [
             'A' => 8,
-            'B' => 38,
+            'B' => 50,
             'C' => 18,
-            'D' => 10,
-            'E' => 14,
-            'F' => 16,
-            'G' => 20,
         ];
     }
 
     public function styles(Worksheet $sheet): array
     {
-        $sheet->mergeCells('B2:G2');
-        $sheet->mergeCells('B3:G3');
-        $sheet->mergeCells('B4:G4');
-        $sheet->mergeCells('C6:G6');
-        $sheet->mergeCells('C7:G7');
+        // Mesclar cabeçalho A-C
+        $sheet->mergeCells('A2:C2');
+        $sheet->mergeCells('A3:C3');
+        $sheet->mergeCells('A4:C4');
+        $sheet->mergeCells('A6:C6');
+        $sheet->mergeCells('A7:C7');
 
-        $sheet->getRowDimension(1)->setRowHeight(55);
+        $sheet->getRowDimension(1)->setRowHeight(60); // logo
         $sheet->getRowDimension(2)->setRowHeight(22);
         $sheet->getRowDimension(3)->setRowHeight(16);
         $sheet->getRowDimension(4)->setRowHeight(18);
 
-        // Cabeçalho tabela
-        $sheet->getStyle('A9:G9')->applyFromArray([
+        // Títulos instituição
+        $sheet->getStyle('A2')->applyFromArray([
+            'font'      => ['bold' => true, 'size' => 14, 'color' => ['rgb' => '1565C0']],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
+        $sheet->getStyle('A3')->applyFromArray([
+            'font'      => ['bold' => true, 'size' => 11],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
+        $sheet->getStyle('A4')->applyFromArray([
+            'font'      => ['bold' => true, 'size' => 12, 'color' => ['rgb' => '0E5C2F']],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
+
+        // Info sala
+        $sheet->getStyle('A6:A7')->applyFromArray(['font' => ['bold' => true, 'size' => 10]]);
+
+        // Cabeçalho tabela (linha 9)
+        $sheet->getStyle('A9:C9')->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
             'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '0E5C2F']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
             'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'FFFFFF']]],
         ]);
-        $sheet->getRowDimension(9)->setRowHeight(20);
+        $sheet->getRowDimension(9)->setRowHeight(22);
 
         // Linhas de dados
         $dataEnd = 9 + $this->candidaturas->count();
         for ($r = 10; $r <= $dataEnd; $r++) {
             $bg = ($r % 2 === 0) ? 'EDF7F1' : 'FFFFFF';
-            $sheet->getStyle("A{$r}:G{$r}")->applyFromArray([
-                'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
-                'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
+            $sheet->getStyle("A{$r}:C{$r}")->applyFromArray([
+                'fill'    => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
+                'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
                 'alignment' => ['vertical' => Alignment::VERTICAL_CENTER],
             ]);
-            // Coluna Nota — borda mais grossa para destacar
-            $sheet->getStyle("E{$r}")->applyFromArray([
-                'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_MEDIUM, 'color' => ['rgb' => '0E5C2F']]],
-                'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-            ]);
+            // Coluna N.º — negrito centrado
             $sheet->getStyle("A{$r}")->applyFromArray([
                 'font'      => ['bold' => true, 'color' => ['rgb' => '0E5C2F']],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
-            $sheet->getRowDimension($r)->setRowHeight(18);
+            // Coluna Nota — borda verde mais grossa e centrada
+            $sheet->getStyle("C{$r}")->applyFromArray([
+                'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_MEDIUM, 'color' => ['rgb' => '0E5C2F']]],
+                'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            ]);
+            $sheet->getRowDimension($r)->setRowHeight(20);
         }
 
-        $sheet->getStyle('B2')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 14, 'color' => ['rgb' => '1565C0']],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-        $sheet->getStyle('B3')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 11],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-        $sheet->getStyle('B4')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 12, 'color' => ['rgb' => '0E5C2F']],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-        $sheet->getStyle('B6:B7')->applyFromArray(['font' => ['bold' => true]]);
-
+        // Impressão A4
         $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_PORTRAIT);
         $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
         $sheet->getPageSetup()->setFitToPage(true);
@@ -156,14 +159,14 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     public function drawings()
     {
         $logoPath = public_path('images/logo.png');
-        if (!file_exists($logoPath)) return [];
+        if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
 
         $drawing = new Drawing();
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
-        $drawing->setHeight(50);
-        $drawing->setCoordinates('B1');
-        $drawing->setOffsetX(5);
+        $drawing->setHeight(52);
+        $drawing->setCoordinates('B1'); // centrado na tabela de 3 colunas (A-C)
+        $drawing->setOffsetX(0);
         $drawing->setOffsetY(4);
 
         return [$drawing];
