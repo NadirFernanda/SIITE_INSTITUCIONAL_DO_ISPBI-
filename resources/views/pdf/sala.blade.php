@@ -1,3 +1,9 @@
+@php
+    $logoPath = public_path('images/logo.png');
+    $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
+        ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
+        : '';
+@endphp
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -36,7 +42,7 @@
 <div class="page">
 
     <div class="header">
-        <img src="{{ public_path('images/logo-ispbie.png') }}" alt="ISP-Bié">
+        @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
         <div class="inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
         <div class="linha-dupla"></div>
         <div class="sub">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS — EXAME DE ACESSO 2025/2026</div>

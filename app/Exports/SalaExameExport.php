@@ -166,7 +166,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function drawings()
     {
-        $logoPath = public_path('images/logo-ispbie.png');
+        $logoPath = public_path('images/logo.png');
         if (!file_exists($logoPath)) return [];
 
         $drawing = new Drawing();
