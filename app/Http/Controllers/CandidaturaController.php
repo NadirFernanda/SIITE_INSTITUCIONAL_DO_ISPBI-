@@ -7,6 +7,7 @@ use App\Models\Candidatura;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 
 class CandidaturaController extends Controller
@@ -15,6 +16,9 @@ class CandidaturaController extends Controller
     {
         $periodo      = $request->input('periodo');
         $periodoLabel = $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
+
+        // Normalizar BI (maiúsculas, sem espaços) para evitar bypass da validação de duplicados
+        $request->merge(['bi' => strtoupper(trim($request->input('bi', '')))]);
 
         $request->validate([
             'nome'                   => 'required|string|max:255',
@@ -49,28 +53,28 @@ class CandidaturaController extends Controller
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
         ], [
-            'curso.unique'                       => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
-            'bi.required'                        => 'O Bilhete de Identidade é obrigatório.',
-            'data_nascimento.required'            => 'A data de nascimento é obrigatória.',
-            'data_nascimento.before_or_equal'     => 'É necessário ter pelo menos 17 anos para se candidatar.',
-            'filiacao_pai.required'               => 'O nome do pai é obrigatório.',
-            'filiacao_mae.required'               => 'O nome da mãe é obrigatório.',
-            'naturalidade_municipio.required'     => 'O município de naturalidade é obrigatório.',
-            'naturalidade_provincia.required'     => 'A província de naturalidade é obrigatória.',
-            'bi_emitido_em.required'              => 'O local de emissão do BI é obrigatório.',
-            'bi_data_emissao.required'            => 'A data de emissão do BI é obrigatória.',
-            'sexo.required'                       => 'O sexo é obrigatório.',
-            'estado_civil.required'               => 'O estado civil é obrigatório.',
-            'necessidade_especial.required'       => 'Este campo é obrigatório. Escreva "Nenhuma" se não aplicável.',
-            'residencia_municipio.required'       => 'O município de residência é obrigatório.',
-            'residencia_bairro.required'          => 'O bairro/rua de residência é obrigatório.',
-            'habilitacoes.required'               => 'As habilitações literárias são obrigatórias.',
-            'escola_origem.required'              => 'A escola de proveniência é obrigatória.',
-            'ano_conclusao.required'              => 'O ano de conclusão é obrigatório.',
-            'estado_financeiro.required'          => 'O estado financeiro da família é obrigatório.',
-            'trabalhador.required'                => 'Indique se é trabalhador ou não.',
-            'instituicao_laboral.required_if'     => 'Indique o nome da instituição onde trabalha.',
-            'periodo.required'                    => 'O período de inscrição é obrigatório.',
+            'curso.unique'                   => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
+            'bi.required'                    => 'O Bilhete de Identidade é obrigatório.',
+            'data_nascimento.required'       => 'A data de nascimento é obrigatória.',
+            'data_nascimento.before_or_equal'=> 'É necessário ter pelo menos 17 anos para se candidatar.',
+            'filiacao_pai.required'          => 'O nome do pai é obrigatório.',
+            'filiacao_mae.required'          => 'O nome da mãe é obrigatório.',
+            'naturalidade_municipio.required'=> 'O município de naturalidade é obrigatório.',
+            'naturalidade_provincia.required'=> 'A província de naturalidade é obrigatória.',
+            'bi_emitido_em.required'         => 'O local de emissão do BI é obrigatório.',
+            'bi_data_emissao.required'       => 'A data de emissão do BI é obrigatória.',
+            'sexo.required'                  => 'O sexo é obrigatório.',
+            'estado_civil.required'          => 'O estado civil é obrigatório.',
+            'necessidade_especial.required'  => 'Este campo é obrigatório. Escreva "Nenhuma" se não aplicável.',
+            'residencia_municipio.required'  => 'O município de residência é obrigatório.',
+            'residencia_bairro.required'     => 'O bairro/rua de residência é obrigatório.',
+            'habilitacoes.required'          => 'As habilitações literárias são obrigatórias.',
+            'escola_origem.required'         => 'A escola de proveniência é obrigatória.',
+            'ano_conclusao.required'         => 'O ano de conclusão é obrigatório.',
+            'estado_financeiro.required'     => 'O estado financeiro da família é obrigatório.',
+            'trabalhador.required'           => 'Indique se é trabalhador ou não.',
+            'instituicao_laboral.required_if'=> 'Indique o nome da instituição onde trabalha.',
+            'periodo.required'               => 'O período de inscrição é obrigatório.',
         ]);
 
         $data = $request->only([
@@ -94,16 +98,34 @@ class CandidaturaController extends Controller
             \Log::error('Falha ao enviar email de candidatura: ' . $e->getMessage());
         }
 
-        return redirect()->route('candidaturas.comprovativo', $candidatura);
+        // URL assinada e com expiração (72h) — só o candidato que acabou de submeter
+        // consegue aceder ao comprovativo. Impede enumeração de IDs por terceiros.
+        $signedUrl = URL::temporarySignedRoute(
+            'candidaturas.comprovativo',
+            now()->addHours(72),
+            ['candidatura' => $candidatura->id]
+        );
+
+        return redirect($signedUrl);
     }
 
-    public function comprovativo(Candidatura $candidatura)
+    public function comprovativo(Request $request, Candidatura $candidatura)
     {
+        // Verificar assinatura — rejeita acessos directos sem token válido
+        if (! $request->hasValidSignature()) {
+            abort(403, 'Este link é inválido ou expirou. Se submeteu a candidatura há menos de 72 horas, utilize o link enviado após a submissão.');
+        }
+
         return view('pages.candidatura-sucesso', compact('candidatura'));
     }
 
-    public function downloadPdf(Candidatura $candidatura)
+    public function downloadPdf(Request $request, Candidatura $candidatura)
     {
+        // Mesma protecção: apenas com assinatura válida ou utilizador autenticado (admin/técnico)
+        if (! $request->hasValidSignature() && ! auth()->check()) {
+            abort(403, 'Acesso não autorizado.');
+        }
+
         app('translator')->setLocale('pt');
 
         $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))

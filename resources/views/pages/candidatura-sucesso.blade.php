@@ -3,6 +3,7 @@
 @section('title', 'Candidatura Submetida — ISP-Bié')
 
 @section('content')
+@php use Illuminate\Support\Facades\URL; @endphp
 <div class="max-w-2xl mx-auto px-4 py-16 text-center">
 
     {{-- Ícone de sucesso --}}
@@ -46,7 +47,7 @@
 
     {{-- Botões --}}
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="{{ route('candidaturas.pdf', $candidatura) }}"
+        <a href="{{ URL::temporarySignedRoute('candidaturas.pdf', now()->addHours(72), ['candidatura' => $candidatura->id]) }}"
            class="inline-flex items-center justify-center gap-3 bg-[#2563eb] hover:bg-[#174ea6] text-white font-bold px-8 py-4 rounded-xl transition-colors text-sm shadow-lg">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
