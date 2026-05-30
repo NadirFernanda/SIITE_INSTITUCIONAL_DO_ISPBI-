@@ -8,15 +8,17 @@ use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooter;
 use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths
+class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
     protected Sala $sala;
     protected Collection $candidaturas;
@@ -132,7 +134,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
             $sheet->getStyle("C{$r}")->applyFromArray([
-                'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_MEDIUM, 'color' => ['rgb' => '0E5C2F']]],
+                'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
             $sheet->getRowDimension($r)->setRowHeight(22);
@@ -191,4 +193,27 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         return [];
     }
 
+    public function drawings()
+    {
+        $logoPath = public_path('images/logo.png');
+        if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
+
+        [$logoW, $logoH] = getimagesize($logoPath);
+        $displayH = 52;
+        $displayW = (int)($logoW * $displayH / $logoH);
+
+        $colBPx  = 60 * 7;
+        $offsetX = max(0, (int)(($colBPx - $displayW) / 2));
+
+        $drawing = new Drawing();
+        $drawing->setName('Logo ISP-Bié');
+        $drawing->setPath($logoPath);
+        $drawing->setHeight($displayH);
+        $drawing->setWidth($displayW);
+        $drawing->setCoordinates('B1');
+        $drawing->setOffsetX($offsetX);
+        $drawing->setOffsetY(4);
+
+        return [$drawing];
+    }
 }
