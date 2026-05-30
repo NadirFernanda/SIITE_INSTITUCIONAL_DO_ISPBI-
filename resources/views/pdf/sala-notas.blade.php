@@ -22,7 +22,7 @@
     .sala-titulo { font-size:16pt; font-weight:bold; text-align:center; margin:4mm 0 1mm; }
     .sala-info { text-align:center; font-size:10pt; color:#333; margin-bottom:6mm; }
 
-    .grupo-header { background:#1a4e8a; color:#fff; font-weight:bold; font-size:10pt; padding:4px 10px; margin-top:5mm; }
+    .grupo-header { background:#0e5c2f; color:#fff; font-weight:bold; font-size:10pt; padding:4px 10px; margin-top:5mm; }
 
     table { width:100%; border-collapse:collapse; margin-top:1mm; }
     thead tr { background:#f0f0f0; }
@@ -68,13 +68,13 @@
                 <tr>
                     <th style="width:45px;text-align:center;">N.º</th>
                     <th>Nome Completo</th>
-                    <th style="width:160px;text-align:center;">Assinatura</th>
+                    <th style="width:90px;text-align:center;">Nota (0–20)</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($lista->sortBy('numero_lugar') as $c)
                 <tr>
-                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ $c->numero_lugar }}</td>
+                    <td style="text-align:center;font-weight:bold;color:#0e5c2f;">{{ $c->numero_lugar }}</td>
                     <td>{{ $c->nome }}</td>
                     <td>&nbsp;</td>
                 </tr>
