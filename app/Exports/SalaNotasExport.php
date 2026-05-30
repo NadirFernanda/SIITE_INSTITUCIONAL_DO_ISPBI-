@@ -182,10 +182,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setTop(0.9)    // margem maior para acomodar logo no cabeçalho
+            ->setHeader(0.3)   // distância do topo ao logo
+            ->setTop(1.4)      // distância do topo ao início do conteúdo
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
-            ->setHeader(0.1)->setFooter(0.2);
+            ->setFooter(0.2);
 
         return [];
     }
