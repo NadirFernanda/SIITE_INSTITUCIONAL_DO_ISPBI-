@@ -36,7 +36,7 @@
                     </label>
                     <input type="text" name="name" value="{{ old('name') }}" required maxlength="255"
                            style="width:100%;border:1px solid {{ $errors->has('name') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
-                    @error('name')<p style="color:#ef4444;font-size:0.78rem;margin:4px 0 0;">{{ $message }}</p>@enderror
+                    @error('name')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
@@ -44,7 +44,7 @@
                     </label>
                     <input type="email" name="email" value="{{ old('email') }}" required maxlength="255"
                            style="width:100%;border:1px solid {{ $errors->has('email') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
-                    @error('email')<p style="color:#ef4444;font-size:0.78rem;margin:4px 0 0;">{{ $message }}</p>@enderror
+                    @error('email')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
@@ -53,7 +53,7 @@
                     </label>
                     <input type="password" name="password" required minlength="10"
                            style="width:100%;border:1px solid {{ $errors->has('password') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
-                    @error('password')<p style="color:#ef4444;font-size:0.78rem;margin:4px 0 0;">{{ $message }}</p>@enderror
+                    @error('password')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
