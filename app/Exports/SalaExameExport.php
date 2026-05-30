@@ -39,21 +39,23 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $rows = [];
 
-        // Linhas 1-5: espaço para logo + cabeçalho (logo vai na coluna B via drawing)
-        $rows[] = ['', '', '', '', '', '']; // linha 1 — logo aqui
-        $rows[] = ['', 'INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', '', '', ''];
-        $rows[] = ['', 'DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', '', '', ''];
-        $rows[] = ['', 'EXAME DE ACESSO 2025/2026 — LISTA DE EXAME', '', '', '', ''];
-        $rows[] = ['', '', '', '', '', ''];
+        // Linha 1 — logo (3 colunas: A, B, C)
+        $rows[] = ['', '', ''];
 
-        // Linha 6: info da sala
+        // Cabeçalho instituição
+        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
+        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
+        $rows[] = ['EXAME DE ACESSO 2025/2026 — LISTA DE EXAME', '', ''];
+        $rows[] = ['', '', ''];
+
+        // Info da sala
         $grupos = $this->candidaturas
             ->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
             ->keys()->implode(' / ');
 
-        $rows[] = ['', 'Sala:', $this->sala->nome, 'Capacidade:', $this->sala->capacidade, ''];
-        $rows[] = ['', 'Curso(s) / Período:', $grupos, '', '', ''];
-        $rows[] = ['', '', '', '', '', ''];
+        $rows[] = ['Sala: ' . $this->sala->nome, '', ''];
+        $rows[] = ['Curso(s) / Período: ' . $grupos, '', ''];
+        $rows[] = ['', '', ''];
 
         // Linha 9: cabeçalho da tabela — N.º, Nome, Assinatura
         $rows[] = ['N.º', 'Nome Completo', 'Assinatura'];
