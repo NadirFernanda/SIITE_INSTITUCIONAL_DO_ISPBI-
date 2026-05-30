@@ -158,6 +158,9 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::post('salas', [App\Http\Controllers\Tecnico\SalaController::class, 'store'])->name('salas.store');
     Route::post('salas/distribuir', [App\Http\Controllers\Tecnico\SalaController::class, 'distribuir'])->name('salas.distribuir');
     Route::post('salas/limpar', [App\Http\Controllers\Tecnico\SalaController::class, 'limpar'])->name('salas.limpar');
+    Route::get('salas/{sala}/pdf', [App\Http\Controllers\Tecnico\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'excelExame'])->name('salas.excel-exame');
+    Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Tecnico\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
     Route::get('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'show'])->name('salas.show');
     Route::patch('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'update'])->name('salas.update');
     Route::delete('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'destroy'])->name('salas.destroy');

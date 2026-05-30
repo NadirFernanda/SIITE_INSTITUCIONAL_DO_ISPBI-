@@ -24,7 +24,7 @@
 
         @php $inp = 'width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.88rem;box-sizing:border-box;'; @endphp
 
-        <form method="POST" action="{{ route('tecnico.candidaturas.store') }}">
+        <form method="POST" action="{{ route('tecnico.candidaturas.store') }}" novalidate>
             @csrf
 
             {{-- Secção helper --}}
@@ -39,7 +39,7 @@
             <div style="margin-bottom:14px;">
                 @php tc_label('Nome Completo') @endphp
                 <input type="text" name="nome" value="{{ old('nome') }}" required maxlength="255" style="{{ $inp }}@error('nome')border-color:#f87171;@enderror">
-                @error('nome')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                @error('nome')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
             </div>
 
             {{-- Filiação --}}
@@ -61,7 +61,7 @@
                        max="{{ now()->subYears(17)->format('Y-m-d') }}"
                        style="{{ $inp }}max-width:200px;">
                 <span style="font-size:0.76rem;color:#94a3b8;margin-left:8px;">Idade mínima: 17 anos</span>
-                @error('data_nascimento')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                @error('data_nascimento')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
             </div>
 
             {{-- Naturalidade --}}
@@ -85,7 +85,7 @@
                 <div>
                     @php tc_label('BI / Passaporte N.º') @endphp
                     <input type="text" name="bi" value="{{ old('bi') }}" required maxlength="20" style="{{ $inp }}">
-                    @error('bi')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                    @error('bi')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     @php tc_label('Emitido em (local)') @endphp
@@ -109,7 +109,7 @@
                             <input type="radio" name="sexo" value="feminino" {{ old('sexo')==='feminino'?'checked':'' }}> Feminino
                         </label>
                     </div>
-                    @error('sexo')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                    @error('sexo')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     @php tc_label('Estado Civil') @endphp
@@ -167,7 +167,7 @@
             <div style="margin-bottom:14px;">
                 @php tc_label('Ano de Conclusão') @endphp
                 <input type="number" name="ano_conclusao" value="{{ old('ano_conclusao') }}" required min="1990" max="{{ date('Y') }}" style="width:140px;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.88rem;">
-                @error('ano_conclusao')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                @error('ano_conclusao')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
             </div>
 
             {{-- Estado Financeiro --}}
@@ -180,7 +180,7 @@
                     </label>
                     @endforeach
                 </div>
-                @error('estado_financeiro')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                @error('estado_financeiro')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
             </div>
 
             {{-- Trabalhador --}}
@@ -198,10 +198,10 @@
                     <div id="tc-inst" style="display:{{ old('trabalhador')==='sim'?'block':'none' }};flex:1;min-width:220px;">
                         <input type="text" name="instituicao_laboral" value="{{ old('instituicao_laboral') }}" maxlength="255"
                                placeholder="Nome da Instituição Laboral" style="{{ $inp }}">
-                        @error('instituicao_laboral')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                        @error('instituicao_laboral')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                     </div>
                 </div>
-                @error('trabalhador')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                @error('trabalhador')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
             </div>
 
             {{-- Curso + Período --}}
@@ -214,7 +214,7 @@
                             <option value="{{ $curso }}" {{ old('curso')===$curso?'selected':'' }}>{{ $curso }}</option>
                         @endforeach
                     </select>
-                    @error('curso')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                    @error('curso')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                 </div>
                 <div>
                     @php tc_label('Período') @endphp
@@ -226,7 +226,7 @@
                             <input type="radio" name="periodo" value="pos-laboral" {{ old('periodo')==='pos-laboral'?'checked':'' }}> Pós-laboral
                         </label>
                     </div>
-                    @error('periodo')<p style="color:#ef4444;font-size:0.78rem;margin:3px 0 0;">{{ $message }}</p>@enderror
+                    @error('periodo')<p style="font-size:0.72rem;color:#ef4444;margin-top:4px;font-weight:300;letter-spacing:0.02em;">{{ $message }}</p>@enderror
                 </div>
             </div>
 
