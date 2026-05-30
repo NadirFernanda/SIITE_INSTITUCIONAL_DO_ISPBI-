@@ -244,8 +244,8 @@
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Bilhete de Identidade / Passaporte</label>
                                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                                 <div>
-                                                    <label class="block text-xs text-gray-500 mb-1">Número</label>
-                                                    <input type="text" name="bi" value="{{ old('bi') }}" maxlength="20" class="{{ $inp }} @error('bi') border-red-400 @enderror">
+                                                    <label class="block text-xs text-gray-500 mb-1">Número <span class="text-red-500">*</span></label>
+                                                    <input type="text" name="bi" value="{{ old('bi') }}" required maxlength="20" class="{{ $inp }} @error('bi') border-red-400 @enderror">
                                                     @error('bi')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                                 </div>
                                                 <div>

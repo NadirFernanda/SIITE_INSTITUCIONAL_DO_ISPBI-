@@ -22,7 +22,7 @@ class CandidaturaController extends Controller
             'data_nascimento'         => 'nullable|date|before:today',
             'naturalidade_municipio'  => 'nullable|string|max:255',
             'naturalidade_provincia'  => 'nullable|string|max:255',
-            'bi'                      => 'nullable|string|max:20',
+            'bi'                      => 'required|string|max:20',
             'bi_emitido_em'           => 'nullable|string|max:255',
             'bi_data_emissao'         => 'nullable|date|before:today',
             'sexo'                    => 'nullable|in:masculino,feminino',
@@ -41,16 +41,17 @@ class CandidaturaController extends Controller
             'instituicao_laboral'     => 'nullable|string|max:255',
             'curso'                   => [
                 'required', 'string', 'in:' . implode(',', Candidatura::$cursos),
-                // Bloquear duplicado: mesmo email + mesmo período + mesmo curso
+                // Bloquear duplicado: mesmo BI + mesmo período + mesmo curso
                 Rule::unique('candidaturas')->where(function ($query) use ($request) {
-                    return $query->where('email', $request->input('email'))
+                    return $query->where('bi', $request->input('bi'))
                                  ->where('periodo', $request->input('periodo'));
                 }),
             ],
             'periodo'                 => 'nullable|in:regular,pos-laboral',
             'observacoes'             => 'nullable|string|max:2000',
         ], [
-            'curso.unique' => "Já existe uma candidatura com este email para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
+            'curso.unique'  => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
+            'bi.required'   => 'O Bilhete de Identidade é obrigatório.',
         ]);
 
         $data = $request->only([
