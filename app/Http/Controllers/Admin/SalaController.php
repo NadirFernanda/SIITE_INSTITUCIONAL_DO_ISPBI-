@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\SalaExameExport;
+use App\Exports\SalaNotasExport;
 use App\Http\Controllers\Controller;
 use App\Models\Candidatura;
 use App\Models\Sala;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SalaController extends Controller
 {
@@ -171,15 +174,23 @@ class SalaController extends Controller
 
     public function pdf(Sala $sala)
     {
-        $candidaturas = $sala->candidaturas()
-            ->orderBy('numero_lugar')
-            ->get();
+        $candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
 
         $pdf = Pdf::loadView('pdf.sala', compact('sala', 'candidaturas'))
                   ->setPaper('a4', 'portrait');
 
-        $filename = 'sala-' . \Str::slug($sala->nome) . '.pdf';
+        return $pdf->download('sala-' . \Str::slug($sala->nome) . '.pdf');
+    }
 
-        return $pdf->download($filename);
+    public function excelExame(Sala $sala)
+    {
+        $filename = 'lista-exame-' . \Str::slug($sala->nome) . '.xlsx';
+        return Excel::download(new SalaExameExport($sala), $filename);
+    }
+
+    public function excelNotas(Sala $sala)
+    {
+        $filename = 'lancamento-notas-' . \Str::slug($sala->nome) . '.xlsx';
+        return Excel::download(new SalaNotasExport($sala), $filename);
     }
 }

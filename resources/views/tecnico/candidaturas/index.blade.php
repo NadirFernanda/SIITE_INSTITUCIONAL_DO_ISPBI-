@@ -8,14 +8,18 @@
             <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 3px;">Candidaturas Online</h1>
             <p style="color:#64748b;font-size:0.92rem;margin:0;">Gestão e acompanhamento das candidaturas recebidas</p>
         </div>
-        <a href="{{ route('tecnico.candidaturas.export') }}{{ request()->getQueryString() ? '?' . request()->getQueryString() : '' }}"
-           style="display:inline-flex;align-items:center;gap:7px;background:#22c55e;color:#fff;padding:9px 18px;border-radius:10px;font-weight:600;font-size:0.88rem;text-decoration:none;"
-           onmouseover="this.style.background='#16a34a'" onmouseout="this.style.background='#22c55e'">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            </svg>
-            Exportar CSV
-        </a>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a href="{{ route('tecnico.candidaturas.create') }}"
+               style="display:inline-flex;align-items:center;gap:7px;background:#0e5c2f;color:#fff;padding:9px 18px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                Nova Candidatura
+            </a>
+            <a href="{{ route('tecnico.candidaturas.export') }}{{ request()->getQueryString() ? '?' . request()->getQueryString() : '' }}"
+               style="display:inline-flex;align-items:center;gap:7px;background:#22c55e;color:#fff;padding:9px 18px;border-radius:10px;font-weight:600;font-size:0.88rem;text-decoration:none;">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                Exportar CSV
+            </a>
+        </div>
     </div>
 
     @if(session('success'))

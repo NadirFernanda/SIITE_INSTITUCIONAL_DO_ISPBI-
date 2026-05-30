@@ -129,6 +129,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::post('salas/distribuir', [App\Http\Controllers\Admin\SalaController::class, 'distribuir'])->name('salas.distribuir');
     Route::post('salas/limpar', [App\Http\Controllers\Admin\SalaController::class, 'limpar'])->name('salas.limpar');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExame'])->name('salas.excel-exame');
+    Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Admin\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
     Route::get('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'show'])->name('salas.show');
     Route::patch('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'update'])->name('salas.update');
     Route::delete('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'destroy'])->name('salas.destroy');
@@ -141,13 +143,24 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
 });
 
-// Painel técnico — acesso exclusivo a utilizadores com role 'tecnico' (ou 'admin')
-// Apenas candidaturas; sem acesso ao resto do painel administrativo
+// Painel técnico — acesso a utilizadores com role 'tecnico' ou 'admin'
 Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:30,1'])->group(function () {
+    // Candidaturas
     Route::get('candidaturas/export', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'export'])->name('candidaturas.export');
+    Route::get('candidaturas/create', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'create'])->name('candidaturas.create');
+    Route::post('candidaturas', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'store'])->name('candidaturas.store');
     Route::get('candidaturas', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
+
+    // Salas de exame
+    Route::get('salas', [App\Http\Controllers\Tecnico\SalaController::class, 'index'])->name('salas.index');
+    Route::post('salas', [App\Http\Controllers\Tecnico\SalaController::class, 'store'])->name('salas.store');
+    Route::post('salas/distribuir', [App\Http\Controllers\Tecnico\SalaController::class, 'distribuir'])->name('salas.distribuir');
+    Route::post('salas/limpar', [App\Http\Controllers\Tecnico\SalaController::class, 'limpar'])->name('salas.limpar');
+    Route::get('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'show'])->name('salas.show');
+    Route::patch('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'update'])->name('salas.update');
+    Route::delete('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'destroy'])->name('salas.destroy');
 });
 
 // Placeholder routes for later scaffolding

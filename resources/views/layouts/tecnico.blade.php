@@ -63,6 +63,14 @@
                     <span class="badge">{{ $pendente }}</span>
                 @endif
             </a>
+            <a href="{{ route('tecnico.salas.index') }}"
+               class="{{ request()->routeIs('tecnico.salas.*') ? 'active' : '' }}">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <rect x="2" y="7" width="20" height="13" rx="2"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2"/>
+                    <path stroke-linecap="round" d="M12 12v4M10 14h4"/>
+                </svg>
+                Salas de Exame
+            </a>
         </div>
         <div style="margin:16px 12px;">
             <form method="POST" action="{{ route('logout') }}">
