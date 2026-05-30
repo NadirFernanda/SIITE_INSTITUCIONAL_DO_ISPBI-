@@ -70,7 +70,6 @@
                     <th>Nome Completo</th>
                     <th style="width:120px;">BI / Passaporte</th>
                     <th style="width:70px;text-align:center;">Sexo</th>
-                    <th style="width:80px;text-align:center;">Assinatura</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,7 +79,6 @@
                     <td>{{ $c->nome }}</td>
                     <td>{{ $c->bi }}</td>
                     <td style="text-align:center;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
-                    <td>&nbsp;</td>
                 </tr>
                 @endforeach
             </tbody>
