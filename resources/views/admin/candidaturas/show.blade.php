@@ -30,50 +30,57 @@
         </div>
     @endif
 
-    {{-- Candidate info --}}
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:28px;margin-bottom:22px;">
-        <h2 style="font-size:1rem;font-weight:700;color:#1565c0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">Dados Pessoais</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;">
-            @php
-            $fields = [
-                ['label' => 'Nome Completo',       'value' => $candidatura->nome],
-                ['label' => 'Email',                'value' => $candidatura->email],
-                ['label' => 'Telefone',             'value' => $candidatura->telefone],
-                ['label' => 'BI',                   'value' => $candidatura->bi ?? '—'],
-                ['label' => 'Data de Nascimento',   'value' => $candidatura->data_nascimento ? $candidatura->data_nascimento->format('d/m/Y') : '—'],
-            ];
-            @endphp
-            @foreach($fields as $f)
-            <div>
-                <div style="font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">{{ $f['label'] }}</div>
-                <div style="font-size:0.95rem;color:#1a2332;font-weight:500;">{{ $f['value'] }}</div>
-            </div>
-            @endforeach
+    @php
+    function _campo($label, $value) {
+        $v = $value ?? '—';
+        echo '<div><div style="font-size:0.73rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">'.$label.'</div><div style="font-size:0.93rem;color:#1a2332;font-weight:500;">'.$v.'</div></div>';
+    }
+    @endphp
+
+    {{-- Dados Pessoais --}}
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px;margin-bottom:18px;">
+        <h2 style="font-size:0.95rem;font-weight:700;color:#1565c0;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Dados Pessoais</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+            @php _campo('Nome Completo', $candidatura->nome); @endphp
+            @php _campo('Filiação — Pai', $candidatura->filiacao_pai); @endphp
+            @php _campo('Filiação — Mãe', $candidatura->filiacao_mae); @endphp
+            @php _campo('Data de Nascimento', $candidatura->data_nascimento?->format('d/m/Y')); @endphp
+            @php _campo('Naturalidade — Município', $candidatura->naturalidade_municipio); @endphp
+            @php _campo('Naturalidade — Província', $candidatura->naturalidade_provincia); @endphp
+            @php _campo('BI / Passaporte Nº', $candidatura->bi); @endphp
+            @php _campo('BI Emitido em', $candidatura->bi_emitido_em); @endphp
+            @php _campo('Data de Emissão BI', $candidatura->bi_data_emissao?->format('d/m/Y')); @endphp
+            @php _campo('Sexo', $candidatura->sexo ? ucfirst($candidatura->sexo) : null); @endphp
+            @php _campo('Estado Civil', $candidatura->estado_civil); @endphp
+            @php _campo('Necessidade de Ed. Especial', $candidatura->necessidade_especial); @endphp
+            @php _campo('Residência — Município', $candidatura->residencia_municipio); @endphp
+            @php _campo('Residência — Rua/Bairro', $candidatura->residencia_bairro); @endphp
+            @php _campo('Telefone 1', $candidatura->telefone); @endphp
+            @php _campo('Telefone 2', $candidatura->telefone2); @endphp
+            @php _campo('Email', $candidatura->email); @endphp
         </div>
     </div>
 
-    {{-- Academic info --}}
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:28px;margin-bottom:22px;">
-        <h2 style="font-size:1rem;font-weight:700;color:#1565c0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">Dados Académicos</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;">
+    {{-- Dados Académicos e Socioeconómicos --}}
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px;margin-bottom:18px;">
+        <h2 style="font-size:0.95rem;font-weight:700;color:#1565c0;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Dados Académicos e Socioeconómicos</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+            @php _campo('Habilitações Literárias', $candidatura->habilitacoes); @endphp
+            @php _campo('Escola e Curso de Proveniência', $candidatura->escola_origem); @endphp
+            @php _campo('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php
-            $academic = [
-                ['label' => 'Curso Pretendido',  'value' => $candidatura->curso],
-                ['label' => 'Escola de Origem',  'value' => $candidatura->escola_origem ?? '—'],
-                ['label' => 'Ano de Conclusão',  'value' => $candidatura->ano_conclusao ?? '—'],
-            ];
+            $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];
+            _campo('Estado Financeiro da Família', $candidatura->estado_financeiro ? ($ef[$candidatura->estado_financeiro] ?? $candidatura->estado_financeiro) : null);
             @endphp
-            @foreach($academic as $f)
-            <div>
-                <div style="font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">{{ $f['label'] }}</div>
-                <div style="font-size:0.95rem;color:#1a2332;font-weight:500;">{{ $f['value'] }}</div>
-            </div>
-            @endforeach
+            @php _campo('Trabalhador', $candidatura->trabalhador === null ? '—' : ($candidatura->trabalhador ? 'Sim' : 'Não')); @endphp
+            @php _campo('Instituição Laboral', $candidatura->instituicao_laboral); @endphp
+            @php _campo('Curso a Inscrever', $candidatura->curso); @endphp
+            @php _campo('Período', $candidatura->periodo ? ucfirst(str_replace('-',' ',$candidatura->periodo)) : null); @endphp
         </div>
         @if($candidatura->observacoes)
-        <div style="margin-top:18px;">
-            <div style="font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">Observações do Candidato</div>
-            <div style="font-size:0.92rem;color:#334155;background:#f8fafc;border-radius:8px;padding:12px 16px;line-height:1.6;">{{ $candidatura->observacoes }}</div>
+        <div style="margin-top:16px;">
+            <div style="font-size:0.73rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px;">Observações</div>
+            <div style="font-size:0.9rem;color:#334155;background:#f8fafc;border-radius:8px;padding:12px 16px;line-height:1.6;">{{ $candidatura->observacoes }}</div>
         </div>
         @endif
     </div>

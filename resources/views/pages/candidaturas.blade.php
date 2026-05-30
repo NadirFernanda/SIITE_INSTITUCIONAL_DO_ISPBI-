@@ -179,54 +179,181 @@
 
                                 {{-- Application form --}}
                                 <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-8">
-                                    <h2 class="text-2xl font-bold text-[#2563eb] mb-2">Formulário de Candidatura Online</h2>
+                                    <h2 class="text-2xl font-bold text-[#2563eb] mb-1">Ficha de Inscrição — Exame de Acesso 2025/2026</h2>
                                     <p class="text-gray-500 text-sm mb-8">Preencha todos os campos obrigatórios (<span class="text-red-500">*</span>)</p>
 
-                                    <form method="POST" action="{{ route('candidaturas.store') }}" class="space-y-5">
+                                    @php $inp = 'w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition'; @endphp
+
+                                    <form method="POST" action="{{ route('candidaturas.store') }}" class="space-y-6">
                                         @csrf
 
-                                        {{-- Dados Pessoais --}}
-                                        <p class="text-xs font-bold text-[#2563eb] uppercase tracking-wider mb-1 mt-4">Dados Pessoais</p>
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                            <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Nome Completo <span class="text-red-500">*</span></label>
-                                                <input type="text" name="nome" value="{{ old('nome') }}" required maxlength="255"
-                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('nome') border-red-400 @enderror">
-                                                @error('nome')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">BI (Bilhete de Identidade)</label>
-                                                <input type="text" name="bi" value="{{ old('bi') }}" maxlength="20"
-                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('bi') border-red-400 @enderror">
-                                                @error('bi')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
-                                                <input type="email" name="email" value="{{ old('email') }}" required maxlength="255"
-                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('email') border-red-400 @enderror">
-                                                @error('email')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Telefone <span class="text-red-500">*</span></label>
-                                                <input type="tel" name="telefone" value="{{ old('telefone') }}" required maxlength="50"
-                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('telefone') border-red-400 @enderror">
-                                                @error('telefone')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Data de Nascimento</label>
-                                                <input type="date" name="data_nascimento" value="{{ old('data_nascimento') }}"
-                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('data_nascimento') border-red-400 @enderror">
-                                                @error('data_nascimento')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                        {{-- 1. Nome --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Nome Completo <span class="text-red-500">*</span></label>
+                                            <input type="text" name="nome" value="{{ old('nome') }}" required maxlength="255" class="{{ $inp }} @error('nome') border-red-400 @enderror">
+                                            @error('nome')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                        </div>
+
+                                        {{-- 2. Filiação --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Filiação</label>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Filho(a) de (pai)</label>
+                                                    <input type="text" name="filiacao_pai" value="{{ old('filiacao_pai') }}" maxlength="255" class="{{ $inp }}">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">e de (mãe)</label>
+                                                    <input type="text" name="filiacao_mae" value="{{ old('filiacao_mae') }}" maxlength="255" class="{{ $inp }}">
+                                                </div>
                                             </div>
                                         </div>
 
-                                        {{-- Dados Académicos --}}
-                                        <p class="text-xs font-bold text-[#2563eb] uppercase tracking-wider mb-1 mt-6">Dados Académicos</p>
+                                        {{-- 3. Data de Nascimento --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Data de Nascimento</label>
+                                            <input type="date" name="data_nascimento" value="{{ old('data_nascimento') }}" class="{{ $inp }} @error('data_nascimento') border-red-400 @enderror" style="max-width:220px;">
+                                            @error('data_nascimento')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                        </div>
+
+                                        {{-- 4. Naturalidade --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Naturalidade</label>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Município</label>
+                                                    <input type="text" name="naturalidade_municipio" value="{{ old('naturalidade_municipio') }}" maxlength="255" class="{{ $inp }}">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Província</label>
+                                                    <input type="text" name="naturalidade_provincia" value="{{ old('naturalidade_provincia') }}" maxlength="255" class="{{ $inp }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{-- 5. Bilhete de Identidade / Passaporte --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Bilhete de Identidade / Passaporte</label>
+                                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Número</label>
+                                                    <input type="text" name="bi" value="{{ old('bi') }}" maxlength="20" class="{{ $inp }} @error('bi') border-red-400 @enderror">
+                                                    @error('bi')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                                </div>
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Emitido em (local)</label>
+                                                    <input type="text" name="bi_emitido_em" value="{{ old('bi_emitido_em') }}" maxlength="255" class="{{ $inp }}">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Data de emissão</label>
+                                                    <input type="date" name="bi_data_emissao" value="{{ old('bi_data_emissao') }}" class="{{ $inp }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{-- 6. Sexo + Estado Civil --}}
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Curso Pretendido <span class="text-red-500">*</span></label>
-                                                <select name="curso" required
-                                                        class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('curso') border-red-400 @enderror">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Sexo</label>
+                                                <div class="flex gap-6">
+                                                    <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                        <input type="radio" name="sexo" value="masculino" {{ old('sexo') === 'masculino' ? 'checked' : '' }} class="accent-[#2563eb]"> Masculino
+                                                    </label>
+                                                    <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                        <input type="radio" name="sexo" value="feminino" {{ old('sexo') === 'feminino' ? 'checked' : '' }} class="accent-[#2563eb]"> Feminino
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Estado Civil</label>
+                                                <input type="text" name="estado_civil" value="{{ old('estado_civil') }}" maxlength="100" placeholder="Ex: Solteiro(a), Casado(a)..." class="{{ $inp }}">
+                                            </div>
+                                        </div>
+
+                                        {{-- 7. Necessidade de Educação Especial --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Necessidade de Educação Especial</label>
+                                            <input type="text" name="necessidade_especial" value="{{ old('necessidade_especial') }}" maxlength="255" placeholder="Indique se aplicável" class="{{ $inp }}">
+                                        </div>
+
+                                        {{-- 8. Residência --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Residência</label>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Município</label>
+                                                    <input type="text" name="residencia_municipio" value="{{ old('residencia_municipio') }}" maxlength="255" class="{{ $inp }}">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-xs text-gray-500 mb-1">Rua / Bairro</label>
+                                                    <input type="text" name="residencia_bairro" value="{{ old('residencia_bairro') }}" maxlength="255" class="{{ $inp }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{-- 9. Telefone + Email --}}
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Telefone 1 <span class="text-red-500">*</span></label>
+                                                <input type="tel" name="telefone" value="{{ old('telefone') }}" required maxlength="50" class="{{ $inp }} @error('telefone') border-red-400 @enderror">
+                                                @error('telefone')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Telefone 2</label>
+                                                <input type="tel" name="telefone2" value="{{ old('telefone2') }}" maxlength="50" class="{{ $inp }}">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+                                                <input type="email" name="email" value="{{ old('email') }}" required maxlength="255" class="{{ $inp }} @error('email') border-red-400 @enderror">
+                                                @error('email')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 10. Habilitações + Escola --}}
+                                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Habilitações Literárias</label>
+                                                <input type="text" name="habilitacoes" value="{{ old('habilitacoes') }}" maxlength="100" placeholder="Ex: 12ª Classe" class="{{ $inp }}">
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Escola e Curso de Proveniência</label>
+                                                <input type="text" name="escola_origem" value="{{ old('escola_origem') }}" maxlength="255" class="{{ $inp }}">
+                                            </div>
+                                        </div>
+
+                                        {{-- 11. Estado Financeiro --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Estado Financeiro da Família</label>
+                                            <div class="flex gap-6">
+                                                @foreach(['maximo' => 'Máximo', 'medio' => 'Médio', 'minimo' => 'Mínimo'] as $val => $label)
+                                                <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                    <input type="radio" name="estado_financeiro" value="{{ $val }}" {{ old('estado_financeiro') === $val ? 'checked' : '' }} class="accent-[#2563eb]"> {{ $label }}
+                                                </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+                                        {{-- 12. Trabalhador --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Trabalhador</label>
+                                            <div class="flex gap-6 items-center flex-wrap">
+                                                <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                    <input type="radio" name="trabalhador" value="sim" {{ old('trabalhador') === 'sim' ? 'checked' : '' }} class="accent-[#2563eb]" onchange="document.getElementById('inst-laboral').classList.remove('hidden')"> Sim
+                                                </label>
+                                                <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                    <input type="radio" name="trabalhador" value="nao" {{ old('trabalhador') === 'nao' ? 'checked' : '' }} class="accent-[#2563eb]" onchange="document.getElementById('inst-laboral').classList.add('hidden')"> Não
+                                                </label>
+                                                <div id="inst-laboral" class="{{ old('trabalhador') === 'sim' ? '' : 'hidden' }} flex-1 min-w-[200px]">
+                                                    <input type="text" name="instituicao_laboral" value="{{ old('instituicao_laboral') }}" maxlength="255" placeholder="Nome da Instituição Laboral" class="{{ $inp }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{-- 13. Curso + Período --}}
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Curso a Inscrever <span class="text-red-500">*</span></label>
+                                                <select name="curso" required class="{{ $inp }} @error('curso') border-red-400 @enderror">
                                                     <option value="">Seleccione um curso</option>
                                                     @foreach(\App\Models\Candidatura::$cursos as $curso)
                                                         <option value="{{ $curso }}" {{ old('curso') === $curso ? 'selected' : '' }}>{{ $curso }}</option>
@@ -235,23 +362,22 @@
                                                 @error('curso')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Escola de Origem</label>
-                                                <input type="text" name="escola_origem" value="{{ old('escola_origem') }}" maxlength="255"
-                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition">
-                                            </div>
-                                            <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Ano de Conclusão do Ensino Médio</label>
-                                                <input type="number" name="ano_conclusao" value="{{ old('ano_conclusao') }}" min="1990" max="{{ date('Y') }}" maxlength="4"
-                                                       class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition @error('ano_conclusao') border-red-400 @enderror">
-                                                @error('ano_conclusao')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Período</label>
+                                                <div class="flex gap-6 mt-1">
+                                                    <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                        <input type="radio" name="periodo" value="regular" {{ old('periodo') === 'regular' ? 'checked' : '' }} class="accent-[#2563eb]"> Regular
+                                                    </label>
+                                                    <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                        <input type="radio" name="periodo" value="pos-laboral" {{ old('periodo') === 'pos-laboral' ? 'checked' : '' }} class="accent-[#2563eb]"> Pós-laboral
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        {{-- Observações --}}
-                                        <div class="mt-2">
+                                        {{-- 14. Observações --}}
+                                        <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Observações</label>
-                                            <textarea name="observacoes" rows="4" maxlength="2000"
-                                                      class="w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition resize-none"
+                                            <textarea name="observacoes" rows="3" maxlength="2000" class="{{ $inp }} resize-none"
                                                       placeholder="Informação adicional que considere relevante...">{{ old('observacoes') }}</textarea>
                                         </div>
 

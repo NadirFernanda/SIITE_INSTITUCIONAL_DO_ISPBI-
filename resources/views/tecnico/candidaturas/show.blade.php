@@ -27,49 +27,56 @@
         </div>
     @endif
 
+    @php
+    function _tc($label, $value) {
+        $v = $value ?? '—';
+        echo '<div><div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">'.$label.'</div><div style="font-size:0.92rem;color:#1a2332;font-weight:500;">'.$v.'</div></div>';
+    }
+    @endphp
+
     {{-- Dados Pessoais --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;margin-bottom:18px;">
-        <h2 style="font-size:0.9rem;font-weight:700;color:#0e5c2f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Pessoais</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
-            @php
-            $fields = [
-                ['label' => 'Nome Completo',     'value' => $candidatura->nome],
-                ['label' => 'Email',              'value' => $candidatura->email],
-                ['label' => 'Telefone',           'value' => $candidatura->telefone],
-                ['label' => 'BI',                 'value' => $candidatura->bi ?? '—'],
-                ['label' => 'Data de Nascimento', 'value' => $candidatura->data_nascimento ? $candidatura->data_nascimento->format('d/m/Y') : '—'],
-            ];
-            @endphp
-            @foreach($fields as $f)
-            <div>
-                <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">{{ $f['label'] }}</div>
-                <div style="font-size:0.93rem;color:#1a2332;font-weight:500;">{{ $f['value'] }}</div>
-            </div>
-            @endforeach
+        <h2 style="font-size:0.88rem;font-weight:700;color:#0e5c2f;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Pessoais</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;">
+            @php _tc('Nome Completo', $candidatura->nome); @endphp
+            @php _tc('Filiação — Pai', $candidatura->filiacao_pai); @endphp
+            @php _tc('Filiação — Mãe', $candidatura->filiacao_mae); @endphp
+            @php _tc('Data de Nascimento', $candidatura->data_nascimento?->format('d/m/Y')); @endphp
+            @php _tc('Naturalidade — Município', $candidatura->naturalidade_municipio); @endphp
+            @php _tc('Naturalidade — Província', $candidatura->naturalidade_provincia); @endphp
+            @php _tc('BI / Passaporte Nº', $candidatura->bi); @endphp
+            @php _tc('BI Emitido em', $candidatura->bi_emitido_em); @endphp
+            @php _tc('Data de Emissão BI', $candidatura->bi_data_emissao?->format('d/m/Y')); @endphp
+            @php _tc('Sexo', $candidatura->sexo ? ucfirst($candidatura->sexo) : null); @endphp
+            @php _tc('Estado Civil', $candidatura->estado_civil); @endphp
+            @php _tc('Necessidade de Ed. Especial', $candidatura->necessidade_especial); @endphp
+            @php _tc('Residência — Município', $candidatura->residencia_municipio); @endphp
+            @php _tc('Residência — Rua/Bairro', $candidatura->residencia_bairro); @endphp
+            @php _tc('Telefone 1', $candidatura->telefone); @endphp
+            @php _tc('Telefone 2', $candidatura->telefone2); @endphp
+            @php _tc('Email', $candidatura->email); @endphp
         </div>
     </div>
 
-    {{-- Dados Académicos --}}
+    {{-- Dados Académicos e Socioeconómicos --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;margin-bottom:18px;">
-        <h2 style="font-size:0.9rem;font-weight:700;color:#0e5c2f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Académicos</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        <h2 style="font-size:0.88rem;font-weight:700;color:#0e5c2f;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Académicos e Socioeconómicos</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;">
+            @php _tc('Habilitações Literárias', $candidatura->habilitacoes); @endphp
+            @php _tc('Escola e Curso de Proveniência', $candidatura->escola_origem); @endphp
+            @php _tc('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php
-            $academic = [
-                ['label' => 'Curso Pretendido', 'value' => $candidatura->curso],
-                ['label' => 'Escola de Origem', 'value' => $candidatura->escola_origem ?? '—'],
-                ['label' => 'Ano de Conclusão', 'value' => $candidatura->ano_conclusao ?? '—'],
-            ];
+            $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];
+            _tc('Estado Financeiro', $candidatura->estado_financeiro ? ($ef[$candidatura->estado_financeiro] ?? $candidatura->estado_financeiro) : null);
             @endphp
-            @foreach($academic as $f)
-            <div>
-                <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">{{ $f['label'] }}</div>
-                <div style="font-size:0.93rem;color:#1a2332;font-weight:500;">{{ $f['value'] }}</div>
-            </div>
-            @endforeach
+            @php _tc('Trabalhador', $candidatura->trabalhador === null ? '—' : ($candidatura->trabalhador ? 'Sim' : 'Não')); @endphp
+            @php _tc('Instituição Laboral', $candidatura->instituicao_laboral); @endphp
+            @php _tc('Curso a Inscrever', $candidatura->curso); @endphp
+            @php _tc('Período', $candidatura->periodo ? ucfirst(str_replace('-',' ',$candidatura->periodo)) : null); @endphp
         </div>
         @if($candidatura->observacoes)
-        <div style="margin-top:16px;">
-            <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:5px;">Observações do Candidato</div>
+        <div style="margin-top:14px;">
+            <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Observações</div>
             <div style="font-size:0.9rem;color:#334155;background:#f8fafc;border-radius:8px;padding:11px 14px;line-height:1.6;">{{ $candidatura->observacoes }}</div>
         </div>
         @endif

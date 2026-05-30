@@ -10,22 +10,41 @@ class Candidatura extends Model
 
     protected $fillable = [
         'nome',
-        'email',
-        'telefone',
-        'bi',
+        'filiacao_pai',
+        'filiacao_mae',
         'data_nascimento',
-        'curso',
+        'naturalidade_municipio',
+        'naturalidade_provincia',
+        'bi',
+        'bi_emitido_em',
+        'bi_data_emissao',
+        'sexo',
+        'estado_civil',
+        'necessidade_especial',
+        'residencia_municipio',
+        'residencia_bairro',
+        'telefone',
+        'telefone2',
+        'email',
+        'habilitacoes',
         'escola_origem',
         'ano_conclusao',
+        'estado_financeiro',
+        'trabalhador',
+        'instituicao_laboral',
+        'curso',
+        'periodo',
         'observacoes',
         'status',
         'notas_admin',
     ];
 
     protected $casts = [
-        'data_nascimento' => 'date',
-        'created_at'      => 'datetime',
-        'updated_at'      => 'datetime',
+        'data_nascimento'  => 'date',
+        'bi_data_emissao'  => 'date',
+        'trabalhador'      => 'boolean',
+        'created_at'       => 'datetime',
+        'updated_at'       => 'datetime',
     ];
 
     public static array $cursos = [
