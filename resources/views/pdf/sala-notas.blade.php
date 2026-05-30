@@ -61,7 +61,6 @@
         @php [$curso, $periodo] = explode('|||', $chave); @endphp
         <div class="grupo-header">
             {{ $curso }} — {{ $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular' }}
-            ({{ $lista->count() }} candidatos)
         </div>
         <table>
             <thead>
