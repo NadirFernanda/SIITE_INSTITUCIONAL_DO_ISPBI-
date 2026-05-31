@@ -116,7 +116,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
 
         // ── Alturas ──
-        $sheet->getRowDimension(1)->setRowHeight(2); // linha vazia mínima
+        $sheet->getRowDimension(1)->setRowHeight(55); // espaço para o logo (Drawing)
         $sheet->getRowDimension(2)->setRowHeight(22);
         $sheet->getRowDimension(3)->setRowHeight(16);
         $sheet->getRowDimension(4)->setRowHeight(18);
@@ -177,18 +177,10 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
 
-        // ── Logo no cabeçalho de impressão (garante centralização ao imprimir) ──
-        $logoPath = public_path('images/logo.png');
-        if (file_exists($logoPath) && filesize($logoPath) > 0) {
-            $hfDrawing = new HeaderFooterDrawing();
-            $hfDrawing->setPath($logoPath);
-            $hfDrawing->setHeight(45);
-            $sheet->getHeaderFooter()
-                  ->setOddHeader('&C&G')
-                  ->addImage($hfDrawing, HeaderFooter::IMAGE_HEADER_CENTER);
-        }
+        // ── Sem header de impressão — logo só na página 1 via Drawing ──
+        // Página 2+ fica limpa (só lista + assinatura, sem repetição do logo/cabeçalho)
 
-        // ── Impressão A4: fitToWidth=1 garante que preenche a largura ──
+        // ── Impressão A4 ──
         $ps = $sheet->getPageSetup();
         $ps->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
         $ps->setPaperSize(PageSetup::PAPERSIZE_A4);
@@ -198,8 +190,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setHeader(0.6)
-            ->setTop(1.0)
+            ->setHeader(0.2)
+            ->setTop(0.6)
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
@@ -209,8 +201,26 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function drawings()
     {
-        // Logo apenas no cabeçalho de impressão (HeaderFooterDrawing em styles())
-        // Sem Drawing flutuante — evita dupla logo na pré-visualização
-        return [];
+        $logoPath = public_path('images/logo.png');
+        if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
+
+        [$logoW, $logoH] = getimagesize($logoPath);
+        $displayH = 50;
+        $displayW = (int)($logoW * $displayH / $logoH);
+
+        // Centrar horizontalmente: total colunas A(6)+B(65)+C(34)=105 × 7px = 735px
+        $totalPx = 105 * 7;
+        $offsetX = max(0, (int)(($totalPx - $displayW) / 2));
+
+        $drawing = new Drawing();
+        $drawing->setName('Logo ISP-Bié');
+        $drawing->setPath($logoPath);
+        $drawing->setHeight($displayH);
+        $drawing->setWidth($displayW);
+        $drawing->setCoordinates('A1');
+        $drawing->setOffsetX($offsetX);
+        $drawing->setOffsetY(4);
+
+        return [$drawing];
     }
 }

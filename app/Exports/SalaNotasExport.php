@@ -115,7 +115,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
 
         // ── Alturas (igual ao SalaExameExport) ──
-        $sheet->getRowDimension(1)->setRowHeight(2);
+        $sheet->getRowDimension(1)->setRowHeight(55);
         $sheet->getRowDimension(2)->setRowHeight(22);
         $sheet->getRowDimension(3)->setRowHeight(16);
         $sheet->getRowDimension(4)->setRowHeight(18);
@@ -179,18 +179,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
 
-        // ── Logo no cabeçalho de impressão (centrada, sem dupla logo) ──
-        $logoPath = public_path('images/logo.png');
-        if (file_exists($logoPath) && filesize($logoPath) > 0) {
-            $hfDrawing = new HeaderFooterDrawing();
-            $hfDrawing->setPath($logoPath);
-            $hfDrawing->setHeight(45);
-            $sheet->getHeaderFooter()
-                  ->setOddHeader('&C&G')
-                  ->addImage($hfDrawing, HeaderFooter::IMAGE_HEADER_CENTER);
-        }
-
-        // ── Impressão A4 (igual ao SalaExameExport) ──
+        // ── Impressão A4 — sem header repetido nas páginas 2+ ──
         $ps = $sheet->getPageSetup();
         $ps->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
         $ps->setPaperSize(PageSetup::PAPERSIZE_A4);
@@ -200,8 +189,8 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setHeader(0.6)
-            ->setTop(1.0)
+            ->setHeader(0.2)
+            ->setTop(0.6)
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
@@ -211,7 +200,26 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function drawings()
     {
-        // Logo apenas no cabeçalho de impressão (HeaderFooterDrawing em styles())
-        return [];
+        $logoPath = public_path('images/logo.png');
+        if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
+
+        [$logoW, $logoH] = getimagesize($logoPath);
+        $displayH = 50;
+        $displayW = (int)($logoW * $displayH / $logoH);
+
+        // Centrar: A(7)+B(65)+C(23)=95 × 7px = 665px
+        $totalPx = 95 * 7;
+        $offsetX = max(0, (int)(($totalPx - $displayW) / 2));
+
+        $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+        $drawing->setName('Logo ISP-Bié');
+        $drawing->setPath($logoPath);
+        $drawing->setHeight($displayH);
+        $drawing->setWidth($displayW);
+        $drawing->setCoordinates('A1');
+        $drawing->setOffsetX($offsetX);
+        $drawing->setOffsetY(4);
+
+        return [$drawing];
     }
 }
