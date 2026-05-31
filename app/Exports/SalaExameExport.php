@@ -209,25 +209,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function drawings()
     {
-        $logoPath = public_path('images/logo.png');
-        if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
-
-        [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 52;
-        $displayW = (int)($logoW * $displayH / $logoH);
-
-        // Centrar em B (coluna 99 chars × 7px = 693px)
-        $offsetX = max(0, (int)((99 * 7 - $displayW) / 2));
-
-        $drawing = new Drawing();
-        $drawing->setName('Logo ISP-Bié');
-        $drawing->setPath($logoPath);
-        $drawing->setHeight($displayH);
-        $drawing->setWidth($displayW);
-        $drawing->setCoordinates('B1');
-        $drawing->setOffsetX($offsetX);
-        $drawing->setOffsetY(4);
-
-        return [$drawing];
+        // Logo apenas no cabeçalho de impressão (HeaderFooterDrawing em styles())
+        // Sem Drawing flutuante — evita dupla logo na pré-visualização
+        return [];
     }
 }
