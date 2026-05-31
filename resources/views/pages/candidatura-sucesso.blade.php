@@ -19,37 +19,42 @@
         <p class="text-gray-500">Ficha n.º <strong class="text-[#2563eb] text-lg">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</strong></p>
     </div>
 
-    {{-- Estado actual --}}
-    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 mb-6 flex items-start gap-4">
-        <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-        <div>
-            <p class="font-bold text-amber-800 mb-1">Estado Actual: <span class="bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full text-sm">PENDENTE</span></p>
-            <p class="text-sm text-amber-700">O comprovativo gerado nesta fase é apenas um <strong>comprovativo provisório de submissão</strong>. A candidatura ainda não está concluída.</p>
-        </div>
-    </div>
-
     {{-- Próximos passos --}}
     <div class="bg-white border border-gray-200 rounded-2xl p-6 mb-6 shadow-sm">
         <h2 class="text-sm font-bold text-[#2563eb] uppercase tracking-wider mb-4">Próximos Passos para Concluir a Candidatura</h2>
-        <div class="space-y-3">
-            <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-[#2563eb] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
-                <p class="text-sm text-gray-700">Descarregue e imprima o comprovativo provisório abaixo.</p>
-            </div>
-            <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-[#2563eb] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
-                <p class="text-sm text-gray-700">Apresente-se à instituição com a <strong>documentação física exigida</strong> e o <strong>comprovativo de pagamento</strong>.</p>
-            </div>
-            <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-[#2563eb] text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
-                <p class="text-sm text-gray-700">O DAAC (Departamento dos Assuntos Académicos) irá validar os documentos e <strong>assinar digitalmente</strong> o comprovativo.</p>
-            </div>
-            <div class="flex items-start gap-3">
-                <div class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</div>
-                <p class="text-sm text-gray-700">Após a assinatura, receberá o comprovativo definitivo <strong>por email e WhatsApp</strong> e o estado mudará para <strong>CONCLUÍDA</strong>.</p>
-            </div>
+        <p class="text-sm text-gray-600 mb-4">Para que a sua candidatura seja considerada <strong>CONCLUÍDA</strong>, deverá:</p>
+        <ul class="space-y-2 mb-5">
+            <li class="flex items-start gap-2 text-sm text-gray-700">
+                <span class="text-[#2563eb] font-bold mt-0.5">—</span>
+                Apresentar a documentação física exigida pela instituição;
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-700">
+                <span class="text-[#2563eb] font-bold mt-0.5">—</span>
+                Apresentar o comprovativo de pagamento da candidatura;
+            </li>
+            <li class="flex items-start gap-2 text-sm text-gray-700">
+                <span class="text-[#2563eb] font-bold mt-0.5">—</span>
+                Aguardar a validação do Departamento dos Assuntos Académicos (DAAC).
+            </li>
+        </ul>
+        <p class="text-sm text-gray-600 mb-2">
+            Após a validação dos documentos e assinatura digital do comprovativo pelo DAAC, o estado da candidatura será alterado para <strong>CONCLUÍDA</strong>.
+        </p>
+        <p class="text-sm text-gray-600 mb-2">
+            O comprovativo definitivo será enviado automaticamente para o seu <strong>email</strong> e <strong>WhatsApp</strong>.
+        </p>
+        <p class="text-sm text-gray-600">
+            Caso necessário, poderá também levantar o comprovativo assinado <strong>presencialmente na instituição</strong>.
+        </p>
+    </div>
+
+    {{-- Estado actual --}}
+    <div class="bg-amber-50 border border-amber-100 rounded-2xl p-5 mb-6 flex items-start gap-3">
+        <div class="text-amber-500 mt-0.5 text-lg flex-shrink-0">⏳</div>
+        <div>
+            <p class="font-bold text-gray-800 mb-1">Estado Actual da Candidatura</p>
+            <p class="text-sm text-gray-700 mb-1">Status: <span class="bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full text-xs">PENDENTE ⏳</span></p>
+            <p class="text-sm text-amber-700 mt-2">A candidatura apenas será considerada concluída após a validação documental e assinatura digital do DAAC.</p>
         </div>
     </div>
 
