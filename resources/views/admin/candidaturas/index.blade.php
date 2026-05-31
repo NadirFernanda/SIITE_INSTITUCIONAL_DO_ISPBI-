@@ -44,35 +44,68 @@
         @endforeach
     </div>
 
-    {{-- Filters --}}
+    {{-- Pesquisa avançada --}}
     <form method="GET" action="{{ route('admin.candidaturas.index') }}"
-          style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:22px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;">
-        <div style="flex:1;min-width:180px;">
-            <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:4px;">Pesquisar</label>
-            <input type="text" name="q" value="{{ request('q') }}" placeholder="Nome, email ou BI..."
-                   style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.9rem;box-sizing:border-box;">
+          style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 24px;margin-bottom:22px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+
+        {{-- Barra principal de pesquisa --}}
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;">
+            <div style="flex:1;position:relative;">
+                <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" name="q" value="{{ request('q') }}"
+                       placeholder="Pesquisar por nome, nº ficha, BI, email, telefone, escola, município, bairro, pai, mãe..."
+                       style="width:100%;border:1.5px solid {{ request('q') ? '#2563eb' : '#e2e8f0' }};border-radius:10px;padding:10px 14px 10px 38px;font-size:0.92rem;box-sizing:border-box;outline:none;transition:border 0.2s;"
+                       onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor=this.value?'#2563eb':'#e2e8f0'">
+            </div>
+            <button type="submit"
+                    style="background:#1565c0;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.9rem;white-space:nowrap;display:flex;align-items:center;gap:6px;">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+                Pesquisar
+            </button>
+            @if(request()->hasAny(['q','status','curso','periodo']))
+            <a href="{{ route('admin.candidaturas.index') }}"
+               style="background:#f1f5f9;color:#64748b;border-radius:10px;padding:10px 16px;font-weight:600;font-size:0.88rem;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:5px;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                Limpar
+            </a>
+            @endif
         </div>
-        <div style="min-width:150px;">
-            <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:4px;">Estado</label>
-            <select name="status" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.9rem;">
-                <option value="">Todos</option>
-                @foreach(\App\Models\Candidatura::$statusLabels as $val => $label)
-                    <option value="{{ $val }}" {{ request('status') === $val ? 'selected' : '' }}>{{ $label }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div style="min-width:200px;">
-            <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:4px;">Curso</label>
-            <select name="curso" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.9rem;">
-                <option value="">Todos</option>
-                @foreach(\App\Models\Candidatura::$cursos as $c)
-                    <option value="{{ $c }}" {{ request('curso') === $c ? 'selected' : '' }}>{{ $c }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div style="display:flex;gap:8px;">
-            <button type="submit" style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-weight:600;cursor:pointer;font-size:0.9rem;">Filtrar</button>
-            <a href="{{ route('admin.candidaturas.index') }}" style="background:#f1f5f9;color:#475569;border:none;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer;font-size:0.9rem;text-decoration:none;display:inline-flex;align-items:center;">Limpar</a>
+
+        {{-- Filtros secundários --}}
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+            <div style="min-width:130px;">
+                <label style="display:block;font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Estado</label>
+                <select name="status" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.88rem;background:#f8fafc;">
+                    <option value="">Todos</option>
+                    @foreach(\App\Models\Candidatura::$statusLabels as $val => $label)
+                        <option value="{{ $val }}" {{ request('status') === $val ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div style="min-width:200px;">
+                <label style="display:block;font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Curso</label>
+                <select name="curso" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.88rem;background:#f8fafc;">
+                    <option value="">Todos</option>
+                    @foreach(\App\Models\Candidatura::$cursos as $c)
+                        <option value="{{ $c }}" {{ request('curso') === $c ? 'selected' : '' }}>{{ $c }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div style="min-width:140px;">
+                <label style="display:block;font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Período</label>
+                <select name="periodo" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.88rem;background:#f8fafc;">
+                    <option value="">Todos</option>
+                    <option value="regular"    {{ request('periodo') === 'regular'    ? 'selected' : '' }}>Regular</option>
+                    <option value="pos-laboral"{{ request('periodo') === 'pos-laboral'? 'selected' : '' }}>Pós-Laboral</option>
+                </select>
+            </div>
+            @if(request()->hasAny(['q','status','curso','periodo']))
+            <div style="padding-bottom:2px;">
+                <span style="font-size:0.8rem;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px;">
+                    {{ $candidaturas->total() }} resultado{{ $candidaturas->total() !== 1 ? 's' : '' }}
+                </span>
+            </div>
+            @endif
         </div>
     </form>
 

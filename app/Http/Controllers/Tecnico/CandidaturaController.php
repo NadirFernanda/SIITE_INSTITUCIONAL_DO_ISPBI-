@@ -22,12 +22,28 @@ class CandidaturaController extends Controller
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
         }
+        if ($request->filled('periodo')) {
+            $query->where('periodo', $request->input('periodo'));
+        }
         if ($request->filled('q')) {
             $q = $request->input('q');
             $query->where(function ($r) use ($q) {
-                $r->where('nome', 'like', "%{$q}%")
-                  ->orWhere('email', 'like', "%{$q}%")
-                  ->orWhere('bi', 'like', "%{$q}%");
+                $r->where('nome',                    'like', "%{$q}%")
+                  ->orWhere('email',                 'like', "%{$q}%")
+                  ->orWhere('bi',                    'like', "%{$q}%")
+                  ->orWhere('telefone',              'like', "%{$q}%")
+                  ->orWhere('telefone2',             'like', "%{$q}%")
+                  ->orWhere('escola_origem',         'like', "%{$q}%")
+                  ->orWhere('estado_civil',          'like', "%{$q}%")
+                  ->orWhere('naturalidade_municipio','like', "%{$q}%")
+                  ->orWhere('naturalidade_provincia','like', "%{$q}%")
+                  ->orWhere('residencia_municipio',  'like', "%{$q}%")
+                  ->orWhere('residencia_bairro',     'like', "%{$q}%")
+                  ->orWhere('filiacao_pai',          'like', "%{$q}%")
+                  ->orWhere('filiacao_mae',          'like', "%{$q}%");
+                if (is_numeric($q)) {
+                    $r->orWhere('id', (int) $q);
+                }
             });
         }
 
