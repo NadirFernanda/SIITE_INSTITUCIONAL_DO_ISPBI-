@@ -23,13 +23,18 @@ class UsuarioController extends Controller
             'password' => 'required|string|min:10|confirmed',
         ]);
 
+        $role = in_array($request->input('role'), ['tecnico', 'daac'], true)
+            ? $request->input('role')
+            : 'tecnico';
+
         User::create([
             'name'     => $request->input('name'),
             'email'    => $request->input('email'),
             'password' => Hash::make($request->input('password')),
-        ])->forceFill(['role' => 'tecnico'])->save();
+        ])->forceFill(['role' => $role])->save();
 
-        return redirect()->route('admin.usuarios')->with('success', 'Técnico criado com sucesso.');
+        $roleLabel = $role === 'daac' ? 'DAAC' : 'Técnico';
+        return redirect()->route('admin.usuarios')->with('success', "{$roleLabel} criado com sucesso.");
     }
 
     public function resetPassword(Request $request, User $usuario)

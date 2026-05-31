@@ -63,13 +63,23 @@
                            style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
                 </div>
             </div>
+            <div style="margin-bottom:14px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Tipo de Utilizador <span style="color:#ef4444;">*</span></label>
+                <div style="display:flex;gap:16px;">
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
+                        <input type="radio" name="role" value="tecnico" checked style="accent-color:#1565c0;"> Técnico <small style="color:#94a3b8;">(painel candidaturas)</small>
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
+                        <input type="radio" name="role" value="daac" style="accent-color:#2563eb;"> DAAC <small style="color:#94a3b8;">(assinar comprovativos)</small>
+                    </label>
+                </div>
+            </div>
             <div style="display:flex;align-items:center;gap:12px;">
                 <button type="submit"
                         style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
                         onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
-                    Criar técnico
+                    Criar utilizador
                 </button>
-                <span style="font-size:0.8rem;color:#64748b;">O role será <strong>Técnico</strong> — acesso apenas ao painel de candidaturas</span>
             </div>
         </form>
     </div>
@@ -123,6 +133,8 @@
                             <span style="background:#e3f2fd;color:#1565c0;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Admin</span>
                         @elseif($u->role === 'tecnico')
                             <span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Técnico</span>
+                        @elseif($u->role === 'daac')
+                            <span style="background:#ede9fe;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">DAAC</span>
                         @else
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif

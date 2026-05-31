@@ -145,6 +145,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
 });
 
 // Painel técnico — acesso a utilizadores com role 'tecnico' ou 'admin'
+// Painel DAAC — assinar candidaturas digitalmente
+Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1'])->group(function () {
+    Route::get('candidaturas', [App\Http\Controllers\Daac\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Daac\CandidaturaController::class, 'show'])->name('candidaturas.show');
+    Route::post('candidaturas/{candidatura}/assinar', [App\Http\Controllers\Daac\CandidaturaController::class, 'assinar'])->name('candidaturas.assinar');
+});
+
 Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:30,1'])->group(function () {
     // Candidaturas
     Route::get('candidaturas/export', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'export'])->name('candidaturas.export');

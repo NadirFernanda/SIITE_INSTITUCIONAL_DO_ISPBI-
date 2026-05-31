@@ -187,6 +187,16 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         </div>
     </div>
 
+    @if($candidatura->isAssinada())
+    <div style="background:#f5f3ff;border:1pt solid #c4b5fd;border-radius:6px;padding:4mm 6mm;margin-top:5mm;text-align:center;">
+        <div style="font-size:8pt;font-weight:bold;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2mm;">✓ Assinado Digitalmente pelo DAAC</div>
+        <div style="font-size:8pt;color:#555;">
+            {{ $candidatura->assinante?->name ?? 'DAAC' }} &mdash; {{ $candidatura->assinado_em?->format('d/m/Y \à\s H:i') }}
+        </div>
+        <div style="font-family:monospace;font-size:9pt;font-weight:bold;color:#7c3aed;margin-top:1.5mm;">{{ $candidatura->assinatura_codigo }}</div>
+    </div>
+    @endif
+
     <div class="footer">
         Documento gerado em {{ now()->format('d/m/Y H:i') }} &mdash; ISP-Bié &mdash; Válido para apresentação no dia do exame
     </div>
