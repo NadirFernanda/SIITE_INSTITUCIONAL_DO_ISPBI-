@@ -27,14 +27,14 @@
         <h2 style="font-size:1rem;font-weight:700;color:#1565c0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
             Criar Novo Técnico
         </h2>
-        <form method="POST" action="{{ route('admin.usuarios.store') }}">
+        <form method="POST" action="{{ route('admin.usuarios.store') }}" autocomplete="off">
             @csrf
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
                 <div>
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
                         Nome <span style="color:#ef4444;">*</span>
                     </label>
-                    <input type="text" name="name" value="{{ old('name') }}" required maxlength="255"
+                    <input type="text" name="name" value="{{ old('name') }}" required maxlength="255" autocomplete="off"
                            style="width:100%;border:1px solid {{ $errors->has('name') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
                     @error('name')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
@@ -42,7 +42,7 @@
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
                         Email <span style="color:#ef4444;">*</span>
                     </label>
-                    <input type="email" name="email" value="{{ old('email') }}" required maxlength="255"
+                    <input type="email" name="email" value="{{ old('email') }}" required maxlength="255" autocomplete="off"
                            style="width:100%;border:1px solid {{ $errors->has('email') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
                     @error('email')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
@@ -51,7 +51,7 @@
                         Password <span style="color:#ef4444;">*</span>
                         <span style="font-weight:400;color:#94a3b8;">(mín. 10 caracteres)</span>
                     </label>
-                    <input type="password" name="password" required minlength="10"
+                    <input type="password" name="password" required minlength="10" autocomplete="new-password"
                            style="width:100%;border:1px solid {{ $errors->has('password') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
                     @error('password')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
@@ -59,7 +59,7 @@
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
                         Confirmar Password <span style="color:#ef4444;">*</span>
                     </label>
-                    <input type="password" name="password_confirmation" required minlength="10"
+                    <input type="password" name="password_confirmation" required minlength="10" autocomplete="new-password"
                            style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
                 </div>
             </div>
@@ -173,12 +173,12 @@
                             @csrf @method('PATCH')
                             <div>
                                 <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Nova password (mín. 10)</label>
-                                <input type="password" name="password" required minlength="10"
+                                <input type="password" name="password" required minlength="10" autocomplete="new-password"
                                        style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
                             </div>
                             <div>
                                 <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Confirmar</label>
-                                <input type="password" name="password_confirmation" required minlength="10"
+                                <input type="password" name="password_confirmation" required minlength="10" autocomplete="new-password"
                                        style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
                             </div>
                             <button type="submit"
