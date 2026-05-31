@@ -198,8 +198,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setHeader(0.7)
-            ->setTop(1.4)
+            ->setHeader(0.6)
+            ->setTop(1.3)
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
