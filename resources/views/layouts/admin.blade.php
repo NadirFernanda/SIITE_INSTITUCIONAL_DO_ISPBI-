@@ -103,7 +103,7 @@
 <body>
     <div class="sidebar" style="display:flex;flex-direction:column;height:100vh;">
         <h2>Painel</h2>
-        <div style="flex:1 1 auto;display:flex;flex-direction:column;">
+        <div style="flex:1 1 auto;overflow-y:auto;display:flex;flex-direction:column;">
             <a href="/admin/noticias">
                 <span style="vertical-align:middle;margin-right:8px;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" fill="#fff"/><rect x="6" y="8" width="6" height="2" rx="1" fill="#1565c0"/><rect x="6" y="12" width="12" height="2" rx="1" fill="#1565c0"/></svg>
@@ -150,10 +150,10 @@
                 </span>Configurações
             </a>
         </div>
-        <div style="margin:18px;margin-top:auto;">
+        <div style="flex-shrink:0;margin:12px 14px 16px;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px;">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" style="width:100%;background:#fff;color:#1565c0;font-weight:700;padding:10px 0;border:none;border-radius:8px;box-shadow:0 1px 4px rgba(21,101,192,0.08);margin-bottom:8px;cursor:pointer;transition:background 0.2s;">Sair</button>
+                <button type="submit" style="width:100%;background:#fff;color:#1565c0;font-weight:700;padding:10px 0;border:none;border-radius:8px;box-shadow:0 1px 4px rgba(21,101,192,0.08);cursor:pointer;transition:background 0.2s;">Sair</button>
             </form>
         </div>
     </div>
