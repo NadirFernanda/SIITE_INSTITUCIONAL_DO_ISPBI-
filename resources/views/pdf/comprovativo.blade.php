@@ -3,140 +3,183 @@
     $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
         ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
         : '';
+    $periodoLabel = $candidatura->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
+    $efMap = ['maximo' => 'Máximo', 'medio' => 'Médio', 'minimo' => 'Mínimo'];
 @endphp
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <style>
-@page { size: A4 portrait; margin: 18mm 20mm; }
+@page { size: A4 portrait; margin: 0; }
 * { margin:0; padding:0; box-sizing:border-box; }
-html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:11pt; color:#000; }
+html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:9.5pt; color:#1a1a2e; }
 
-.page-border {
-    border: 0.5pt dotted #aaa;
-    padding: 10mm;
+/* ── CABEÇALHO AZUL ── */
+.header {
+    background: #1a4e8a;
+    color: #fff;
+    padding: 8mm 12mm;
+    display: table;
+    width: 100%;
+}
+.h-logo  { display:table-cell; width:22mm; vertical-align:middle; }
+.h-logo img { width:18mm; height:auto; }
+.h-center { display:table-cell; vertical-align:middle; padding-left:5mm; }
+.h-inst  { font-size:13pt; font-weight:bold; letter-spacing:0.4px; }
+.h-sub   { font-size:8.5pt; color:#cce0f5; margin-top:1.5mm; }
+.h-right { display:table-cell; width:30mm; text-align:right; vertical-align:middle; }
+.h-ficha-label { font-size:7.5pt; text-transform:uppercase; letter-spacing:0.08em; color:#cce0f5; }
+.h-ficha-num   { font-size:22pt; font-weight:bold; line-height:1.1; }
+
+/* ── BANNER ── */
+.banner {
+    background: #0d3666;
+    color: #fff;
+    text-align: center;
+    padding: 4mm 0;
+    font-size: 11pt;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
 }
 
-/* Cabeçalho */
-.header { text-align:center; margin-bottom:6mm; }
-.header img { height:22mm; margin-bottom:3mm; }
-.inst-name { font-size:14pt; font-weight:bold; color:#1a4e8a; letter-spacing:0.5px; }
-.linha-dupla { border-top:3pt double #000; border-bottom:1pt solid #000; height:5px; margin:3mm 0; }
-.header-sub  { font-size:10pt; font-weight:bold; margin-top:2mm; }
-.header-exam { font-size:10pt; font-weight:bold; margin-top:1.5mm; }
-.header-doc  { font-size:11pt; font-weight:bold; margin-top:1.5mm; }
+/* ── CONTEÚDO ── */
+.content { padding: 7mm 12mm; }
 
-/* Ficha nº — linha direita */
-.ficha-row { display:table; width:100%; margin-top:3mm; margin-bottom:5mm; }
-.ficha-left  { display:table-cell; width:60%; }
-.ficha-right { display:table-cell; width:40%; text-align:right; vertical-align:bottom; font-size:13pt; font-weight:bold; }
-
-/* Campos */
-.campo { margin-bottom:5mm; font-weight:bold; font-size:11pt; }
-.campo-linha {
-    display:inline-block;
-    width:80%;
-    border-bottom:1pt solid #000;
-    margin-left:2mm;
-    vertical-align:bottom;
+/* Secção */
+.sec-title {
+    font-size: 7.5pt;
+    font-weight: bold;
+    color: #1a4e8a;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1.5pt solid #1a4e8a;
+    padding-bottom: 1.5mm;
+    margin-bottom: 4mm;
+    margin-top: 5mm;
 }
 
-/* Checkboxes */
-.chk-row { margin-bottom:5mm; font-weight:bold; font-size:11pt; }
-.box {
-    display:inline-block;
-    width:4mm; height:4mm;
-    border:1pt solid #000;
-    vertical-align:middle;
-    margin:0 2mm 0 3mm;
-    background:#fff;
-    text-align:center;
-    line-height:4mm;
-    font-size:8pt;
-}
-.box.on { background:#000; color:#fff; }
+/* Grid de campos */
+.fields { display: table; width: 100%; margin-bottom: 1mm; }
+.frow   { display: table-row; }
+.fcell  { display: table-cell; vertical-align: top; padding: 0 3mm 4mm 0; }
+.flabel { font-size: 7pt; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5mm; }
+.fval   { font-size: 10pt; font-weight: bold; color: #1a1a2e; border-bottom: 0.5pt solid #ddd; padding-bottom: 1.5mm; min-height: 5mm; }
 
-/* Linha curso + período */
-.curso-row { margin-bottom:5mm; font-weight:bold; font-size:11pt; }
-.curso-linha {
-    display:inline-block;
-    width:47%;
-    border-bottom:1pt solid #000;
-    margin-left:2mm;
-    vertical-align:bottom;
-}
+/* badge */
+.badge { display:inline-block; background:#e3f2fd; color:#1a4e8a; border:0.5pt solid #90caf9; border-radius:3px; font-size:8pt; font-weight:bold; padding:1px 7px; }
 
-/* Data */
-.data-linha { font-size:11pt; margin-bottom:8mm; }
-.data-u { display:inline-block; min-width:12mm; border-bottom:1pt solid #000; text-align:center; margin:0 1mm; vertical-align:bottom; }
+/* ── ASSINATURAS ── */
+.sigs { display:table; width:100%; margin-top:8mm; }
+.sig  { display:table-cell; width:42%; text-align:center; vertical-align:bottom; }
+.sig-gap { display:table-cell; width:16%; }
+.sig-line  { border-bottom:0.8pt solid #333; height:9mm; margin-bottom:2mm; }
+.sig-label { font-size:9.5pt; font-weight:bold; }
 
-/* Assinaturas */
-.sigs { display:table; width:100%; margin-top:4mm; }
-.sig  { display:table-cell; width:44%; text-align:center; }
-.sig-line { border-bottom:1pt solid #000; height:9mm; margin-bottom:2mm; }
-.sig-label { font-size:11pt; font-weight:bold; }
+/* rodapé */
+.footer { text-align:center; font-size:7pt; color:#aaa; margin-top:5mm; border-top:0.5pt solid #eee; padding-top:2.5mm; }
 </style>
 </head>
 <body>
-<div class="page-border">
 
-    {{-- CABEÇALHO --}}
-    <div class="header">
-        @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié"><br>@endif
-        <div class="inst-name">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-        <div class="linha-dupla"></div>
-        <div class="header-sub">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS</div>
-        <div class="header-exam">EXAME DE ACESSO 2025/2026</div>
-        <div class="header-doc">FICHA DE INSCRIÇÃO</div>
+{{-- CABEÇALHO AZUL --}}
+<div class="header">
+    <div class="h-logo">
+        @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
+    </div>
+    <div class="h-center">
+        <div class="h-inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
+        <div class="h-sub">Departamento dos Assuntos Académicos &nbsp;·&nbsp; Exame de Acesso 2025/2026</div>
+    </div>
+    <div class="h-right">
+        <div class="h-ficha-label">Ficha N.º</div>
+        <div class="h-ficha-num">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
+    </div>
+</div>
+
+{{-- BANNER --}}
+<div class="banner">Comprovativo de Candidatura</div>
+
+<div class="content">
+
+    {{-- DADOS PESSOAIS --}}
+    <div class="sec-title">Dados Pessoais</div>
+    <div class="fields">
+        <div class="frow">
+            <div class="fcell" style="width:55%">
+                <div class="flabel">Nome Completo</div>
+                <div class="fval">{{ strtoupper($candidatura->nome) }}</div>
+            </div>
+            <div class="fcell" style="width:25%">
+                <div class="flabel">Bilhete de Identidade</div>
+                <div class="fval">{{ $candidatura->bi }}</div>
+            </div>
+            <div class="fcell" style="width:20%">
+                <div class="flabel">Data de Nascimento</div>
+                <div class="fval">{{ $candidatura->data_nascimento?->format('d/m/Y') ?? '—' }}</div>
+            </div>
+        </div>
+        <div class="frow">
+            <div class="fcell" style="width:20%">
+                <div class="flabel">Sexo</div>
+                <div class="fval">{{ $candidatura->sexo ? ucfirst($candidatura->sexo) : '—' }}</div>
+            </div>
+            <div class="fcell" style="width:25%">
+                <div class="flabel">Estado Civil</div>
+                <div class="fval">{{ $candidatura->estado_civil ?? '—' }}</div>
+            </div>
+            <div class="fcell" style="width:25%">
+                <div class="flabel">Telefone</div>
+                <div class="fval">{{ $candidatura->telefone }}</div>
+            </div>
+            <div class="fcell" style="width:30%">
+                <div class="flabel">E-mail</div>
+                <div class="fval">{{ $candidatura->email }}</div>
+            </div>
+        </div>
     </div>
 
-    {{-- FICHA Nº --}}
-    <div class="ficha-row">
-        <div class="ficha-left"></div>
-        <div class="ficha-right">Ficha n.º <u>&nbsp;&nbsp;{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}&nbsp;&nbsp;</u></div>
+    {{-- CURSO INSCRITO --}}
+    <div class="sec-title">Inscrição</div>
+    <div style="background:#f0f6ff;border-left:3pt solid #1a4e8a;padding:4mm 6mm;border-radius:0 4px 4px 0;display:table;width:100%;margin-bottom:3mm;">
+        <div style="display:table-cell;width:70%;vertical-align:middle;">
+            <div class="flabel">Curso Inscrito</div>
+            <div style="font-size:11pt;font-weight:bold;color:#1a4e8a;margin-top:1mm;">{{ $candidatura->curso }}</div>
+        </div>
+        <div style="display:table-cell;width:30%;vertical-align:middle;text-align:right;">
+            <div class="flabel">Período</div>
+            <div style="font-size:11pt;font-weight:bold;background:#1a4e8a;color:#fff;padding:2px 10px;border-radius:3px;display:inline-block;margin-top:1mm;">{{ $periodoLabel }}</div>
+        </div>
     </div>
-
-    {{-- NOME --}}
-    <div class="campo">
-        Nome: <span class="campo-linha">{{ $candidatura->nome }}</span>
-    </div>
-
-    {{-- SEXO --}}
-    <div class="chk-row">
-        Sexo:
-        <span class="box {{ $candidatura->sexo === 'masculino' ? 'on' : '' }}">{{ $candidatura->sexo === 'masculino' ? '✓' : '' }}</span> Masculino
-        <span class="box {{ $candidatura->sexo === 'feminino' ? 'on' : '' }}">{{ $candidatura->sexo === 'feminino' ? '✓' : '' }}</span> Feminino
-    </div>
-
-    {{-- CURSO + PERÍODO --}}
-    <div class="curso-row">
-        Curso a se inscrever<span class="curso-linha">{{ $candidatura->curso }}</span>
-        &nbsp;&nbsp;Período:
-        <b>Regular</b><span class="box {{ $candidatura->periodo === 'regular' ? 'on' : '' }}">{{ $candidatura->periodo === 'regular' ? '✓' : '' }}</span>
-        <b>Pós-laboral</b><span class="box {{ $candidatura->periodo === 'pos-laboral' ? 'on' : '' }}">{{ $candidatura->periodo === 'pos-laboral' ? '✓' : '' }}</span>
+    <div style="margin-bottom:2mm;">
+        <span class="badge">{{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}</span>
+        &nbsp;
+        <span style="font-size:8pt;color:#888;">Submetido em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}</span>
     </div>
 
     {{-- DATA --}}
-    <div class="data-linha">
-        Cuito, aos
-        <span class="data-u">{{ $candidatura->created_at->format('d') }}</span>
-        de
-        <span class="data-u" style="min-width:28mm;">{{ $candidatura->created_at->translatedFormat('F') }}</span>
-        de {{ $candidatura->created_at->format('Y') }}
+    <div style="font-size:10pt;margin-top:4mm;">
+        Cuito, aos <u>&nbsp;&nbsp;{{ $candidatura->created_at->format('d') }}&nbsp;&nbsp;</u>
+        de <u>&nbsp;&nbsp;{{ $candidatura->created_at->translatedFormat('F') }}&nbsp;&nbsp;</u>
+        de {{ $candidatura->created_at->format('Y') }}.
     </div>
 
-    {{-- ASSINATURAS --}}
+    {{-- ASSINATURAS: Conferiu (esq) + Candidato(a) (dir) --}}
     <div class="sigs">
         <div class="sig">
             <div class="sig-line"></div>
             <div class="sig-label">Conferiu</div>
         </div>
-        <div style="display:table-cell;width:12%;"></div>
+        <div class="sig-gap"></div>
         <div class="sig">
             <div class="sig-line"></div>
             <div class="sig-label">Candidato (a)</div>
         </div>
+    </div>
+
+    <div class="footer">
+        Documento gerado em {{ now()->format('d/m/Y H:i') }} &mdash; ISP-Bié &mdash; Válido para apresentação no dia do exame
     </div>
 
 </div>
