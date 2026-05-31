@@ -72,7 +72,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 
 /* ── ASSINATURAS ── */
 .sigs { display:table; width:100%; margin-top:8mm; }
-.sig  { display:table-cell; width:42%; text-align:center; vertical-align:bottom; }
+.sig  { display:table-cell; width:42%; text-align:center; vertical-align:top; }
 .sig-gap { display:table-cell; width:16%; }
 .sig-line  { border-bottom:0.8pt solid #333; height:9mm; margin-bottom:2mm; }
 .sig-label { font-size:9.5pt; font-weight:bold; }
@@ -170,6 +170,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         <div class="sig">
             <div class="sig-line"></div>
             <div class="sig-label">Conferiu</div>
+            <div style="height:12pt;"></div>
         </div>
         <div class="sig-gap"></div>
         <div class="sig">
