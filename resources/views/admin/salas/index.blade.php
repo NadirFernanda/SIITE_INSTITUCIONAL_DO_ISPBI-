@@ -80,11 +80,27 @@
                            style="width:100%;border:1px solid {{ $errors->has('nome') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
                     @error('nome')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
-                <div style="margin-bottom:16px;">
+                <div style="margin-bottom:12px;">
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Capacidade <span style="color:#ef4444">*</span></label>
                     <input type="number" name="capacidade" value="{{ old('capacidade') }}" required min="1" max="1000"
                            style="width:140px;border:1px solid {{ $errors->has('capacidade') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;">
                     @error('capacidade')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                    <div>
+                        <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Data do Exame</label>
+                        <input type="date" name="data_exame" value="{{ old('data_exame') }}"
+                               style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
+                    </div>
+                    <div>
+                        <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Horário</label>
+                        <select name="horario" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.9rem;">
+                            <option value="">— Sem horário —</option>
+                            @foreach(\App\Models\Sala::$horarios as $h)
+                                <option value="{{ $h }}" {{ old('horario') === $h ? 'selected' : '' }}>{{ $h }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <button type="submit"
                         style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-weight:700;cursor:pointer;font-size:0.88rem;">

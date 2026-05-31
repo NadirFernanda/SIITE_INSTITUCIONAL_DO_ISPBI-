@@ -40,12 +40,13 @@ class SalaController extends Controller
         $request->validate([
             'nome'       => 'required|string|max:100|unique:salas,nome',
             'capacidade' => 'required|integer|min:1|max:1000',
+            'data_exame' => 'nullable|date',
+            'horario'    => 'nullable|in:' . implode(',', Sala::$horarios),
         ], [
-            'nome.unique'      => 'Já existe uma sala com este nome.',
-            'capacidade.min'   => 'A capacidade mínima é 1.',
+            'nome.unique' => 'Já existe uma sala com este nome.',
         ]);
 
-        Sala::create($request->only('nome', 'capacidade'));
+        Sala::create($request->only('nome', 'capacidade', 'data_exame', 'horario'));
 
         return redirect()->route('admin.salas.index')->with('success', 'Sala criada com sucesso.');
     }
@@ -55,9 +56,11 @@ class SalaController extends Controller
         $request->validate([
             'nome'       => 'required|string|max:100|unique:salas,nome,' . $sala->id,
             'capacidade' => 'required|integer|min:1|max:1000',
+            'data_exame' => 'nullable|date',
+            'horario'    => 'nullable|in:' . implode(',', Sala::$horarios),
         ]);
 
-        $sala->update($request->only('nome', 'capacidade'));
+        $sala->update($request->only('nome', 'capacidade', 'data_exame', 'horario'));
 
         return redirect()->route('admin.salas.index')->with('success', 'Sala actualizada.');
     }
@@ -97,11 +100,24 @@ class SalaController extends Controller
                 ->with('error', 'Não existem salas registadas. Crie salas antes de distribuir.');
         }
 
-        // Candidatos a distribuir (excluindo rejeitados)
-        $grupos = Candidatura::whereNotIn('status', ['rejeitada'])
-            ->orderBy('curso')->orderBy('periodo')->orderBy('nome')
-            ->get()
-            ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo);
+        // Candidatos a distribuir — Enfermagem vem PRIMEIRO para obter salas maiores
+        $prioritarios = Candidatura::$cursosPrioritarios;
+
+        $todos = Candidatura::whereNotIn('status', ['rejeitada'])
+            ->orderBy('nome')
+            ->get();
+
+        // Separar prioritários (Enfermagem) dos restantes
+        $grupoPrioritario = $todos->filter(fn($c) => in_array($c->curso, $prioritarios))
+                                  ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
+                                  ->sortByDesc(fn($g) => $g->count());
+
+        $grupoNormal = $todos->reject(fn($c) => in_array($c->curso, $prioritarios))
+                             ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
+                             ->sortByDesc(fn($g) => $g->count());
+
+        // Merge: prioritários primeiro
+        $grupos = $grupoPrioritario->merge($grupoNormal);
 
         $totalCandidatos = Candidatura::whereNotIn('status', ['rejeitada'])->count();
         $totalLugares    = $salas->sum('capacidade');

@@ -39,7 +39,11 @@ class Candidatura extends Model
         'Comunicação Social',
         'Psicologia Clínica',
         'Engenharia Civil',
+        'Enfermagem',
     ];
+
+    // Cursos com prioridade para salas de maior capacidade
+    public static array $cursosPrioritarios = ['Enfermagem'];
 
     public static array $statusLabels = [
         'pendente'   => 'Pendente',

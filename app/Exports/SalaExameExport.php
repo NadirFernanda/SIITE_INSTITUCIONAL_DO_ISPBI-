@@ -49,8 +49,19 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
             ->keys()->implode(' / ');
 
+        $dataHorario = '';
+        if ($this->sala->data_exame) {
+            $dataHorario .= $this->sala->data_exame->format('d/m/Y');
+        }
+        if ($this->sala->horario) {
+            $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
+        }
+
         $rows[] = ['Sala: ' . $this->sala->nome, '', ''];
         $rows[] = ['Curso(s) / Período: ' . $grupos, '', ''];
+        if ($dataHorario) {
+            $rows[] = ['Data / Horário: ' . $dataHorario, '', ''];
+        }
         $rows[] = ['', '', ''];
 
         // Linha 9 — cabeçalho da tabela
