@@ -67,7 +67,7 @@ class CandidaturaController extends Controller
     public function updateStatus(Request $request, Candidatura $candidatura)
     {
         $request->validate([
-            'status'      => 'required|in:pendente,em_analise,aprovada,rejeitada',
+            'status'      => 'required|in:pendente,em_analise,aprovada',
             'notas_admin' => 'nullable|string|max:2000',
         ]);
 
