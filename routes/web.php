@@ -150,6 +150,7 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1
     Route::get('candidaturas', [App\Http\Controllers\Daac\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Daac\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::post('candidaturas/{candidatura}/assinar', [App\Http\Controllers\Daac\CandidaturaController::class, 'assinar'])->name('candidaturas.assinar');
+    Route::post('candidaturas/{candidatura}/rejeitar', [App\Http\Controllers\Daac\CandidaturaController::class, 'rejeitar'])->name('candidaturas.rejeitar');
 });
 
 Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:30,1'])->group(function () {

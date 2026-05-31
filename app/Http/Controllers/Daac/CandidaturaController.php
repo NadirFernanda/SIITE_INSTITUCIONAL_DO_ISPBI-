@@ -63,13 +63,14 @@ class CandidaturaController extends Controller
             'confirmar.accepted' => 'Confirme que pretende assinar digitalmente esta candidatura.',
         ]);
 
-        // Gerar código único de assinatura (hash do conteúdo + utilizador + timestamp)
+        // Código único: hash dos dados + utilizador autenticado + timestamp
         $codigo = strtoupper(substr(
             hash('sha256',
                 $candidatura->id . '|' .
                 $candidatura->bi . '|' .
                 $candidatura->nome . '|' .
                 Auth::id() . '|' .
+                Auth::user()->name . '|' .
                 now()->toIso8601String() . '|' .
                 Str::random(16)
             ),
@@ -78,12 +79,11 @@ class CandidaturaController extends Controller
 
         $candidatura->update([
             'status'            => 'concluida',
-            'assinado_por'      => Auth::id(),
+            'assinado_por'      => Auth::id(),   // ID do utilizador DAAC
             'assinado_em'       => now(),
             'assinatura_codigo' => $codigo,
         ]);
 
-        // Enviar email ao candidato com comprovativo assinado
         try {
             Mail::to($candidatura->email)
                 ->send(new ComprovatvioConcluido($candidatura));
@@ -92,6 +92,30 @@ class CandidaturaController extends Controller
         }
 
         return redirect()->route('daac.candidaturas.show', $candidatura)
-            ->with('success', "Candidatura assinada com sucesso. Código: {$codigo}");
+            ->with('success', "Candidatura assinada por " . Auth::user()->name . ". Código: {$codigo}");
+    }
+
+    public function rejeitar(Request $request, Candidatura $candidatura)
+    {
+        if ($candidatura->isAssinada()) {
+            return back()->with('error', 'Não é possível rejeitar uma candidatura já assinada.');
+        }
+
+        $request->validate([
+            'motivo_rejeicao' => 'required|string|max:1000',
+        ], [
+            'motivo_rejeicao.required' => 'Indique o motivo da rejeição.',
+        ]);
+
+        $nota = "[Rejeitado por " . Auth::user()->name . " em " . now()->format('d/m/Y H:i') . "]\n" .
+                $request->input('motivo_rejeicao');
+
+        $candidatura->update([
+            'status'      => 'rejeitada',
+            'notas_admin' => $nota,
+        ]);
+
+        return redirect()->route('daac.candidaturas.index')
+            ->with('success', "Candidatura de {$candidatura->nome} rejeitada por " . Auth::user()->name . ".");
     }
 }
