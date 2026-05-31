@@ -17,7 +17,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 
 /* ── CABEÇALHO AZUL ── */
 .header {
-    background: #1a4e8a;
+    background: #2563eb;
     color: #fff;
     padding: 8mm 12mm;
     display: table;
@@ -34,7 +34,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 
 /* ── BANNER ── */
 .banner {
-    background: #0d3666;
+    background: #1d4ed8;
     color: #fff;
     text-align: center;
     padding: 4mm 0;
@@ -51,10 +51,10 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 .sec-title {
     font-size: 7.5pt;
     font-weight: bold;
-    color: #1a4e8a;
+    color: #2563eb;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border-bottom: 1.5pt solid #1a4e8a;
+    border-bottom: 1.5pt solid #2563eb;
     padding-bottom: 1.5mm;
     margin-bottom: 4mm;
     margin-top: 5mm;
@@ -68,7 +68,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 .fval   { font-size: 10pt; font-weight: bold; color: #1a1a2e; border-bottom: 0.5pt solid #ddd; padding-bottom: 1.5mm; min-height: 5mm; }
 
 /* badge */
-.badge { display:inline-block; background:#e3f2fd; color:#1a4e8a; border:0.5pt solid #90caf9; border-radius:3px; font-size:8pt; font-weight:bold; padding:1px 7px; }
+.badge { display:inline-block; background:#e3f2fd; color:#2563eb; border:0.5pt solid #90caf9; border-radius:3px; font-size:8pt; font-weight:bold; padding:1px 7px; }
 
 /* ── ASSINATURAS ── */
 .sigs { display:table; width:100%; margin-top:8mm; }
@@ -142,14 +142,14 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 
     {{-- CURSO INSCRITO --}}
     <div class="sec-title">Inscrição</div>
-    <div style="background:#f0f6ff;border-left:3pt solid #1a4e8a;padding:4mm 6mm;border-radius:0 4px 4px 0;display:table;width:100%;margin-bottom:3mm;">
+    <div style="background:#f0f6ff;border-left:3pt solid #2563eb;padding:4mm 6mm;border-radius:0 4px 4px 0;display:table;width:100%;margin-bottom:3mm;">
         <div style="display:table-cell;width:70%;vertical-align:middle;">
             <div class="flabel">Curso Inscrito</div>
-            <div style="font-size:11pt;font-weight:bold;color:#1a4e8a;margin-top:1mm;">{{ $candidatura->curso }}</div>
+            <div style="font-size:11pt;font-weight:bold;color:#2563eb;margin-top:1mm;">{{ $candidatura->curso }}</div>
         </div>
         <div style="display:table-cell;width:30%;vertical-align:middle;text-align:right;">
             <div class="flabel">Período</div>
-            <div style="font-size:11pt;font-weight:bold;background:#1a4e8a;color:#fff;padding:2px 10px;border-radius:3px;display:inline-block;margin-top:1mm;">{{ $periodoLabel }}</div>
+            <div style="font-size:11pt;font-weight:bold;background:#2563eb;color:#fff;padding:2px 10px;border-radius:3px;display:inline-block;margin-top:1mm;">{{ $periodoLabel }}</div>
         </div>
     </div>
     <div style="margin-bottom:2mm;">
@@ -175,6 +175,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         <div class="sig">
             <div class="sig-line"></div>
             <div class="sig-label">Candidato (a)</div>
+            <div style="font-size:8pt;color:#555;font-style:italic;margin-top:2mm;">{{ strtoupper($candidatura->nome) }}</div>
         </div>
     </div>
 
