@@ -143,7 +143,7 @@
             <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;cursor:pointer;">
                 <input type="checkbox" name="confirmar" value="1" style="margin-top:2px;accent-color:#2563eb;">
                 <span style="font-size:0.88rem;color:#334155;">
-                    Declaro que verifiquei os dados e documentos desta candidatura e assino digitalmente
+                    Eu, <strong>{{ Auth::user()->name }}</strong>, declaro que verifiquei os dados e documentos desta candidatura e assino digitalmente
                     em nome do DAAC — Departamento dos Assuntos Académicos do ISP-Bié.
                 </span>
             </label>
