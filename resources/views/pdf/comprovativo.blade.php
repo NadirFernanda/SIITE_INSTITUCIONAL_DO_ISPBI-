@@ -165,6 +165,13 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         de {{ $candidatura->created_at->format('Y') }}.
     </div>
 
+    {{-- AVISO --}}
+    <div style="background:#fffbeb;border:1pt solid #f6c344;border-left:3pt solid #e6a817;padding:4mm 6mm;margin:5mm 0;border-radius:0 4px 4px 0;">
+        <strong style="color:#b45309;">Importante:</strong> Apresente este comprovativo (impresso ou em formato digital) no dia do exame de acesso.
+        Guarde o número da sua ficha: <strong style="color:#b45309;">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</strong>.
+        Candidatura registada em {{ $candidatura->created_at->format('d/m/Y') }} às {{ $candidatura->created_at->format('H:i') }}.
+    </div>
+
     {{-- ASSINATURAS: Conferiu (esq) + Candidato(a) (dir) --}}
     <div class="sigs">
         <div class="sig">
