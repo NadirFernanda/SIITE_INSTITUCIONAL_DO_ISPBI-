@@ -199,7 +199,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         $sheet->getPageMargins()
             ->setHeader(0.8)
-            ->setTop(1.6)
+            ->setTop(1.0)
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
