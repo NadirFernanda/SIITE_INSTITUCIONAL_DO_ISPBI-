@@ -169,8 +169,12 @@
                 <tr style="display:none;background:#fffbeb;" id="reset-{{ $u->id }}">
                     <td colspan="5" style="padding:16px 22px;">
                         <form method="POST" action="{{ route('admin.usuarios.password', $u) }}"
+                              autocomplete="off"
                               style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
                             @csrf @method('PATCH')
+                            {{-- Campo falso oculto: engana o browser e impede auto-fill nas passwords reais --}}
+                            <input type="text" name="_dummy_user" tabindex="-1" style="display:none;" aria-hidden="true">
+                            <input type="password" name="_dummy_pass" tabindex="-1" style="display:none;" aria-hidden="true">
                             <div>
                                 <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Nova password (mín. 10)</label>
                                 <input type="password" name="password" required minlength="10" autocomplete="new-password"
