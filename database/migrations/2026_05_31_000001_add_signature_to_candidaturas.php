@@ -2,38 +2,55 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        // Adicionar colunas de assinatura digital
+        // Adicionar colunas de assinatura (compatível com todos os drivers)
         Schema::table('candidaturas', function (Blueprint $table) {
-            $table->unsignedBigInteger('assinado_por')->nullable()->after('notas_admin');
-            $table->timestamp('assinado_em')->nullable()->after('assinado_por');
-            $table->string('assinatura_codigo', 64)->nullable()->after('assinado_em');
+            if (! Schema::hasColumn('candidaturas', 'assinado_por')) {
+                $table->unsignedBigInteger('assinado_por')->nullable()->after('notas_admin');
+            }
+            if (! Schema::hasColumn('candidaturas', 'assinado_em')) {
+                $table->timestamp('assinado_em')->nullable()->after('assinado_por');
+            }
+            if (! Schema::hasColumn('candidaturas', 'assinatura_codigo')) {
+                $table->string('assinatura_codigo', 64)->nullable()->after('assinado_em');
+            }
         });
 
-        // Expandir o enum do status para incluir 'concluida'
-        // (SQLite não suporta ALTER COLUMN, por isso usamos SQL directo)
-        if (DB::getDriverName() === 'sqlite') {
-            DB::statement("
-                CREATE TABLE IF NOT EXISTS candidaturas_new AS SELECT * FROM candidaturas WHERE 0
-            ");
-            // Não recriamos a tabela — o SQLite neste projecto usa VARCHAR sem CHECK
-            // Verificar e adicionar 'concluida' apenas no nível de aplicação
-        } else {
-            // MySQL/PostgreSQL: modificar o enum directamente
+        // Expandir o enum/check do status para incluir 'concluida'
+        $driver = DB::getDriverName();
+
+        if ($driver === 'mysql') {
             DB::statement("ALTER TABLE candidaturas MODIFY COLUMN status ENUM('pendente','em_analise','aprovada','rejeitada','concluida') NOT NULL DEFAULT 'pendente'");
+        } elseif ($driver === 'pgsql') {
+            // PostgreSQL: remover a constraint CHECK antiga e criar nova
+            DB::statement("ALTER TABLE candidaturas DROP CONSTRAINT IF EXISTS candidaturas_status_check");
+            DB::statement("ALTER TABLE candidaturas ADD CONSTRAINT candidaturas_status_check CHECK (status IN ('pendente','em_analise','aprovada','rejeitada','concluida'))");
         }
+        // SQLite: não tem suporte nativo para modificar constraints — a validação
+        // é feita apenas na camada de aplicação (CandidaturaController + Eloquent)
     }
 
     public function down(): void
     {
         Schema::table('candidaturas', function (Blueprint $table) {
-            $table->dropColumn(['assinado_por', 'assinado_em', 'assinatura_codigo']);
+            $table->dropColumn(array_filter(
+                ['assinado_por', 'assinado_em', 'assinatura_codigo'],
+                fn($col) => Schema::hasColumn('candidaturas', $col)
+            ));
         });
+
+        $driver = DB::getDriverName();
+        if ($driver === 'mysql') {
+            DB::statement("ALTER TABLE candidaturas MODIFY COLUMN status ENUM('pendente','em_analise','aprovada','rejeitada') NOT NULL DEFAULT 'pendente'");
+        } elseif ($driver === 'pgsql') {
+            DB::statement("ALTER TABLE candidaturas DROP CONSTRAINT IF EXISTS candidaturas_status_check");
+            DB::statement("ALTER TABLE candidaturas ADD CONSTRAINT candidaturas_status_check CHECK (status IN ('pendente','em_analise','aprovada','rejeitada'))");
+        }
     }
 };
