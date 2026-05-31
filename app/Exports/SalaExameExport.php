@@ -116,7 +116,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A{$sigCargo}:B{$sigCargo}");
 
         // ── Alturas ──
-        $sheet->getRowDimension(1)->setRowHeight(60);
+        $sheet->getRowDimension(1)->setRowHeight(2); // linha vazia mínima
         $sheet->getRowDimension(2)->setRowHeight(22);
         $sheet->getRowDimension(3)->setRowHeight(16);
         $sheet->getRowDimension(4)->setRowHeight(18);
@@ -198,8 +198,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setHeader(0.3)
-            ->setTop(1.4)
+            ->setHeader(0.3)   // logo a 0.3" do topo
+            ->setTop(0.9)      // conteúdo a 0.9" do topo (mais próximo do logo)
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
