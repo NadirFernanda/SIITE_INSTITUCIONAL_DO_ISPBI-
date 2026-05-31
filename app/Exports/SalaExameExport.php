@@ -83,7 +83,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function columnWidths(): array
     {
-        return ['A' => 6, 'B' => 42, 'C' => 50];
+        // A4 portrait com margens 0.5" ≈ 105 unidades → preenche página
+        return ['A' => 6, 'B' => 70, 'C' => 29];
     }
 
     public function styles(Worksheet $sheet): array
