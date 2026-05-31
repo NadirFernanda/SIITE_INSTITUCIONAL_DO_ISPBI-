@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooter;
+use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -20,6 +22,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 {
     protected Sala $sala;
     protected Collection $candidaturas;
+    protected int $tableRow; // linha onde começa a tabela (depende de existir data/horário)
 
     public function __construct(Sala $sala)
     {
@@ -36,18 +39,26 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $rows = [];
 
-        // 2 colunas: A = N.º, B = Nome Completo
-        $rows[] = ['', ''];  // linha 1 — logo
+        // Linha 1 — espaço para logo (Drawing)
+        $rows[] = ['', ''];
 
+        // Cabeçalho (linhas 2-4) — mescladas A:B, centradas
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', ''];
         $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', ''];
         $rows[] = ['EXAME DE ACESSO 2025/2026 — LISTA DE EXAME', ''];
+
+        // Linha 5 — vazia
         $rows[] = ['', ''];
 
+        // Linhas 6-7 — info da sala
         $grupos = $this->candidaturas
             ->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
             ->keys()->implode(' / ');
 
+        $rows[] = ['Sala: ' . $this->sala->nome, ''];
+        $rows[] = ['Curso(s) / Período: ' . $grupos, ''];
+
+        // Linha 8 — data/horário (sempre, para manter estrutura fixa)
         $dataHorario = '';
         if ($this->sala->data_exame) {
             $dataHorario .= $this->sala->data_exame->format('d/m/Y');
@@ -55,55 +66,65 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($this->sala->horario) {
             $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
         }
+        $rows[] = $dataHorario ? ['Data / Horário: ' . $dataHorario, ''] : ['', ''];
 
-        $rows[] = ['Sala: ' . $this->sala->nome, ''];
-        $rows[] = ['Curso(s) / Período: ' . $grupos, ''];
-        if ($dataHorario) {
-            $rows[] = ['Data / Horário: ' . $dataHorario, ''];
-        }
+        // Linha 9 — vazia
         $rows[] = ['', ''];
 
-        // Cabeçalho da tabela — apenas N.º e Nome
+        // Linha 10 — cabeçalho da tabela (SEMPRE na linha 10)
+        $this->tableRow = 10;
         $rows[] = ['N.º', 'NOME COMPLETO'];
 
+        // Linhas de dados
         foreach ($this->candidaturas as $c) {
             $rows[] = [$c->numero_lugar, strtoupper($c->nome)];
         }
 
-        // Assinatura do Presidente (centrada)
+        // Assinatura do Presidente — centrada (merge A:B)
         $rows[] = ['', ''];
         $rows[] = ['', ''];
         $rows[] = ['', ''];
-        $rows[] = ['', '_________________________________'];
-        $rows[] = ['', 'Professor Doutor Fernando Maia'];
-        $rows[] = ['', 'Presidente da Instituição'];
+        $rows[] = ['_________________________________', ''];
+        $rows[] = ['Professor Doutor Fernando Maia', ''];
+        $rows[] = ['Presidente da Instituição', ''];
 
         return $rows;
     }
 
     public function columnWidths(): array
     {
-        // A4 portrait com margens 0.5" ≈ 105 unidades → 2 colunas
+        // A4 portrait, margens ~10mm → A(6) + B(99) ≈ 105 unidades
         return ['A' => 6, 'B' => 99];
     }
 
     public function styles(Worksheet $sheet): array
     {
-        // Mesclar cabeçalho A:B (2 colunas)
+        $dataEnd = $this->tableRow + $this->candidaturas->count();
+        $sigLinha = $dataEnd + 4;
+        $sigNome  = $sigLinha + 1;
+        $sigCargo = $sigLinha + 2;
+
+        // ── Mesclar cabeçalho ──
         $sheet->mergeCells('A2:B2');
         $sheet->mergeCells('A3:B3');
         $sheet->mergeCells('A4:B4');
         $sheet->mergeCells('A6:B6');
         $sheet->mergeCells('A7:B7');
+        $sheet->mergeCells('A8:B8');
+        $sheet->mergeCells("A{$sigLinha}:B{$sigLinha}");
+        $sheet->mergeCells("A{$sigNome}:B{$sigNome}");
+        $sheet->mergeCells("A{$sigCargo}:B{$sigCargo}");
 
+        // ── Alturas ──
         $sheet->getRowDimension(1)->setRowHeight(60);
         $sheet->getRowDimension(2)->setRowHeight(22);
         $sheet->getRowDimension(3)->setRowHeight(16);
         $sheet->getRowDimension(4)->setRowHeight(18);
-        $sheet->getRowDimension(5)->setRowHeight(6);
-        $sheet->getRowDimension(9)->setRowHeight(22);
+        $sheet->getRowDimension(5)->setRowHeight(8);
+        $sheet->getRowDimension(9)->setRowHeight(8);
+        $sheet->getRowDimension($this->tableRow)->setRowHeight(22);
 
-        // Títulos — centrados
+        // ── Estilos do cabeçalho ──
         $sheet->getStyle('A2')->applyFromArray([
             'font'      => ['bold' => true, 'size' => 14, 'color' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
@@ -116,19 +137,19 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'font'      => ['bold' => true, 'size' => 12],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
-        $sheet->getStyle('A6:A7')->applyFromArray(['font' => ['bold' => true, 'size' => 10]]);
+        $sheet->getStyle('A6:A8')->applyFromArray(['font' => ['bold' => true, 'size' => 10]]);
 
-        // Cabeçalho tabela (A:B)
-        $sheet->getStyle('A9:B9')->applyFromArray([
+        // ── Cabeçalho da tabela ──
+        $tr = $this->tableRow;
+        $sheet->getStyle("A{$tr}:B{$tr}")->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
             'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
             'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'FFFFFF']]],
         ]);
 
-        // Linhas de dados
-        $dataEnd = 9 + $this->candidaturas->count();
-        for ($r = 10; $r <= $dataEnd; $r++) {
+        // ── Linhas de dados ──
+        for ($r = $tr + 1; $r <= $dataEnd; $r++) {
             $bg = ($r % 2 === 0) ? 'EBF3FD' : 'FFFFFF';
             $sheet->getStyle("A{$r}:B{$r}")->applyFromArray([
                 'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
@@ -142,14 +163,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
-        // Assinatura do Presidente — centrada em B
-        $sigStart = $dataEnd + 4;
-        $sigNome  = $sigStart + 1;
-        $sigCargo = $sigStart + 2;
-        $sheet->mergeCells("A{$sigStart}:B{$sigStart}");
-        $sheet->mergeCells("A{$sigNome}:B{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:B{$sigCargo}");
-        $sheet->getStyle("A{$sigStart}")->applyFromArray([
+        // ── Assinatura do Presidente ──
+        $sheet->getStyle("A{$sigLinha}")->applyFromArray([
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             'borders'   => ['bottom' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => '000000']]],
         ]);
@@ -162,22 +177,31 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
 
-        // ── Configuração de impressão A4 com paginação natural ──
-        // setFitToPage(false) + scale(100) = Excel pagina normalmente.
-        // Página 1: cabeçalho + dados. Página 2+: apenas dados (sem repetir cabeçalho).
+        // ── Logo no cabeçalho de impressão (garante centralização ao imprimir) ──
+        $logoPath = public_path('images/logo.png');
+        if (file_exists($logoPath) && filesize($logoPath) > 0) {
+            $hfDrawing = new HeaderFooterDrawing();
+            $hfDrawing->setPath($logoPath);
+            $hfDrawing->setHeight(45);
+            $sheet->getHeaderFooter()
+                  ->setOddHeader('&C&G')
+                  ->addImage($hfDrawing, HeaderFooter::IMAGE_HEADER_CENTER);
+        }
+
+        // ── Impressão A4: fitToWidth=1 garante que preenche a largura ──
         $ps = $sheet->getPageSetup();
         $ps->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
         $ps->setPaperSize(PageSetup::PAPERSIZE_A4);
-        $ps->setFitToPage(false);
-        $ps->setScale(100);
+        $ps->setFitToPage(true);
+        $ps->setFitToWidth(1);
+        $ps->setFitToHeight(0);
         $ps->setHorizontalCentered(true);
 
         $sheet->getPageMargins()
-            ->setTop(0.59)     // ~15mm
+            ->setHeader(0.3)
+            ->setTop(1.4)
             ->setBottom(0.59)
-            ->setLeft(0.39)    // ~10mm
-            ->setRight(0.39)
-            ->setHeader(0.2)
+            ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
 
         return [];
@@ -192,9 +216,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 52;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar em coluna B (99 chars × 7px = 693px)
-        $colBPx  = 99 * 7;
-        $offsetX = max(0, (int)(($colBPx - $displayW) / 2));
+        // Centrar em B (coluna 99 chars × 7px = 693px)
+        $offsetX = max(0, (int)((99 * 7 - $displayW) / 2));
 
         $drawing = new Drawing();
         $drawing->setName('Logo ISP-Bié');
