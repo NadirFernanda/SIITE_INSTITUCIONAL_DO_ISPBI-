@@ -66,7 +66,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($this->sala->horario) {
             $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
         }
-        $rows[] = $dataHorario ? ['Data / Horário: ' . $dataHorario, ''] : ['', '', ''];
+        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), '', ''];
 
         // Linha 9 — vazia
         $rows[] = ['', '', ''];
