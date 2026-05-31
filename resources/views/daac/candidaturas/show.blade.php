@@ -56,6 +56,20 @@
         </div>
     </div>
 
+    {{-- Comprovativo para rever --}}
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:14px;padding:20px 24px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+            <div style="font-size:0.88rem;font-weight:700;color:#0369a1;margin-bottom:4px;">Comprovativo de Candidatura</div>
+            <div style="font-size:0.82rem;color:#475569;">Reveja o comprovativo antes de assinar digitalmente.</div>
+        </div>
+        <a href="{{ route('candidaturas.pdf', $candidatura) }}"
+           style="display:inline-flex;align-items:center;gap:7px;background:#0369a1;color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;"
+           onmouseover="this.style.background='#075985'" onmouseout="this.style.background='#0369a1'">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Descarregar Comprovativo (PDF)
+        </a>
+    </div>
+
     {{-- Assinatura existente --}}
     @if($candidatura->isAssinada())
     <div style="background:#f5f3ff;border:1px solid #ddd6fe;border-radius:14px;padding:22px 24px;margin-bottom:18px;">
