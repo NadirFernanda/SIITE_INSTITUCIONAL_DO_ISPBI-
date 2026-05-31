@@ -19,7 +19,7 @@
     {{-- KPIs --}}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:22px;">
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;text-align:center;">
-            <div style="font-size:1.8rem;font-weight:800;color:#f59e0b;line-height:1;">{{ $totais['aprovada'] }}</div>
+            <div style="font-size:1.8rem;font-weight:800;color:#f59e0b;line-height:1;">{{ $totais['por_assinar'] }}</div>
             <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Por assinar</div>
         </div>
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;text-align:center;">
@@ -42,10 +42,12 @@
         </div>
         <div>
             <select name="status" style="border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#f8fafc;">
-                <option value="">Aprovadas + Concluídas</option>
-                <option value="aprovada"  {{ request('status') === 'aprovada'  ? 'selected' : '' }}>Por assinar</option>
-                <option value="concluida" {{ request('status') === 'concluida' ? 'selected' : '' }}>Concluídas</option>
-                <option value="pendente"  {{ request('status') === 'pendente'  ? 'selected' : '' }}>Pendentes</option>
+                <option value="">Todas</option>
+                <option value="pendente"   {{ request('status') === 'pendente'   ? 'selected' : '' }}>Pendentes</option>
+                <option value="em_analise" {{ request('status') === 'em_analise' ? 'selected' : '' }}>Em Análise</option>
+                <option value="aprovada"   {{ request('status') === 'aprovada'   ? 'selected' : '' }}>Aprovadas</option>
+                <option value="concluida"  {{ request('status') === 'concluida'  ? 'selected' : '' }}>Concluídas</option>
+                <option value="rejeitada"  {{ request('status') === 'rejeitada'  ? 'selected' : '' }}>Rejeitadas</option>
             </select>
         </div>
         <button type="submit" style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:600;cursor:pointer;font-size:0.88rem;">Filtrar</button>

@@ -18,10 +18,8 @@ class CandidaturaController extends Controller
 
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
-        } else {
-            // Por defeito mostrar aprovadas + concluídas
-            $query->whereIn('status', ['aprovada', 'concluida']);
         }
+        // Sem filtro de status: mostra todas (pendente, em_análise, aprovada, concluída)
 
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
@@ -40,9 +38,9 @@ class CandidaturaController extends Controller
         $candidaturas = $query->paginate(20)->withQueryString();
 
         $totais = [
-            'aprovada'  => Candidatura::where('status', 'aprovada')->count(),
-            'concluida' => Candidatura::where('status', 'concluida')->count(),
-            'total'     => Candidatura::count(),
+            'por_assinar' => Candidatura::whereNull('assinado_em')->count(),
+            'concluida'   => Candidatura::where('status', 'concluida')->count(),
+            'total'       => Candidatura::count(),
         ];
 
         return view('daac.candidaturas.index', compact('candidaturas', 'totais'));
