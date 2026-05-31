@@ -213,16 +213,16 @@
 
                                         {{-- 2. Filiação --}}
                                         <div>
-                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Filiação <span class="text-red-500">*</span></label>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Filiação <span class="text-gray-400 font-normal text-xs">(opcional)</span></label>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div>
-                                                    <label class="block text-xs text-gray-500 mb-1">Filho(a) de (pai)</label>
-                                                    <input type="text" name="filiacao_pai" value="{{ old('filiacao_pai') }}" required maxlength="255" class="{{ $inp }} @error('filiacao_pai') border-red-400 @enderror">
+                                                    <label class="block text-xs text-gray-500 mb-1">Nome do Pai</label>
+                                                    <input type="text" name="filiacao_pai" value="{{ old('filiacao_pai') }}" maxlength="255" class="{{ $inp }} @error('filiacao_pai') border-red-400 @enderror">
                                                     @error('filiacao_pai')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                                 </div>
                                                 <div>
-                                                    <label class="block text-xs text-gray-500 mb-1">e de (mãe)</label>
-                                                    <input type="text" name="filiacao_mae" value="{{ old('filiacao_mae') }}" required maxlength="255" class="{{ $inp }} @error('filiacao_mae') border-red-400 @enderror">
+                                                    <label class="block text-xs text-gray-500 mb-1">Nome da Mãe</label>
+                                                    <input type="text" name="filiacao_mae" value="{{ old('filiacao_mae') }}" maxlength="255" class="{{ $inp }} @error('filiacao_mae') border-red-400 @enderror">
                                                     @error('filiacao_mae')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                                 </div>
                                             </div>

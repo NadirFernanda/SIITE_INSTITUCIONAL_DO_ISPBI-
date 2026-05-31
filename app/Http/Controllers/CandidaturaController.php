@@ -22,8 +22,8 @@ class CandidaturaController extends Controller
 
         $request->validate([
             'nome'                   => 'required|string|max:255',
-            'filiacao_pai'           => 'required|string|max:255',
-            'filiacao_mae'           => 'required|string|max:255',
+            'filiacao_pai'           => 'nullable|string|max:255',
+            'filiacao_mae'           => 'nullable|string|max:255',
             'data_nascimento'        => 'required|date|before_or_equal:' . now()->subYears(17)->format('Y-m-d'),
             'naturalidade_municipio' => 'required|string|max:255',
             'naturalidade_provincia' => 'required|string|max:255',

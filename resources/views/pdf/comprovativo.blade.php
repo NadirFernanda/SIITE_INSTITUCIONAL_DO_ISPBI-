@@ -3,275 +3,255 @@
     $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
         ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
         : '';
-    $fichaNum   = str_pad($candidatura->id, 5, '0', STR_PAD_LEFT);
     $periodoLabel = $candidatura->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
-    $efLabels = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];
+    $efMap = ['maximo' => 'Máximo', 'medio' => 'Médio', 'minimo' => 'Mínimo'];
 @endphp
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <style>
+@page { size: A4 portrait; margin: 14mm 16mm; }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: DejaVu Sans, Arial, sans-serif; font-size:9.5pt; color:#1a1a2e; background:#f4f6fb; }
+html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:9.5pt; color:#1a1a2e; }
 
-.page { padding:10mm 12mm 10mm 12mm; }
+/* ── CABEÇALHO ── */
+.header { display:table; width:100%; border-bottom:2.5pt solid #1a4e8a; padding-bottom:5mm; margin-bottom:5mm; }
+.header-logo { display:table-cell; width:22mm; vertical-align:middle; }
+.header-logo img { width:18mm; height:auto; }
+.header-center { display:table-cell; vertical-align:middle; text-align:center; }
+.header-right { display:table-cell; width:34mm; vertical-align:middle; text-align:right; }
+.inst-name { font-size:11pt; font-weight:bold; color:#1a4e8a; letter-spacing:0.3px; }
+.inst-sub  { font-size:8pt; font-weight:bold; color:#333; margin-top:1.5mm; }
+.inst-doc  { font-size:8.5pt; font-weight:bold; color:#555; margin-top:1mm; }
+.ficha-box { background:#1a4e8a; color:#fff; padding:4px 10px; border-radius:4px; display:inline-block; font-size:9pt; font-weight:bold; }
 
-/* ── TOPO ── */
-.top-bar {
-    background: #1565C0;
-    color: #fff;
-    padding: 5mm 8mm;
-    border-radius: 3mm 3mm 0 0;
-    display: table;
-    width: 100%;
-}
-.top-logo { display:table-cell; width:22mm; vertical-align:middle; }
-.top-logo img { height:14mm; width:auto; }
-.top-text { display:table-cell; vertical-align:middle; padding-left:4mm; }
-.top-inst { font-size:12pt; font-weight:bold; letter-spacing:0.3px; }
-.top-sub  { font-size:8pt; opacity:0.85; margin-top:1mm; }
-.top-num  { display:table-cell; vertical-align:middle; text-align:right; white-space:nowrap; }
-.top-num .label { font-size:7pt; opacity:0.8; text-transform:uppercase; letter-spacing:1px; }
-.top-num .num   { font-size:18pt; font-weight:bold; line-height:1; }
-
-/* ── FAIXA DO TÍTULO ── */
-.title-bar {
-    background: #0d47a1;
-    color: #fff;
-    text-align: center;
-    padding: 3mm 0;
-    font-size: 10pt;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* ── CORPO ── */
-.body-wrap {
-    background: #fff;
-    border: 0.5pt solid #dde3f0;
-    border-top: none;
-    border-radius: 0 0 3mm 3mm;
-    padding: 6mm 8mm;
-}
-
-/* ── SECÇÕES ── */
-.section { margin-bottom: 5mm; }
+/* ── SECÇÃO ── */
+.section { margin-bottom:4mm; }
 .section-title {
-    font-size: 7.5pt;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #1565C0;
-    border-bottom: 1.5pt solid #1565C0;
-    padding-bottom: 1mm;
-    margin-bottom: 3mm;
+    font-size:7.5pt; font-weight:bold; color:#fff;
+    background:#1a4e8a; padding:2.5px 8px;
+    text-transform:uppercase; letter-spacing:0.06em;
+    margin-bottom:2mm;
 }
+.grid { display:table; width:100%; }
+.grid-row { display:table-row; }
+.cell { display:table-cell; padding:2px 4px 4px; vertical-align:top; }
+.cell-label { font-size:7pt; font-weight:bold; color:#888; text-transform:uppercase; letter-spacing:0.04em; }
+.cell-val   { font-size:9pt; color:#1a1a2e; font-weight:500; border-bottom:0.5pt solid #ddd; padding-bottom:1px; min-height:5mm; }
 
-/* ── GRID DE CAMPOS ── */
-.grid { display: table; width: 100%; border-collapse: collapse; }
-.grid-row { display: table-row; }
-.grid-cell {
-    display: table-cell;
-    padding: 1.5mm 2mm 1.5mm 0;
-    vertical-align: top;
-    width: 50%;
-}
-.field-label {
-    font-size: 7pt;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 0.5mm;
-}
-.field-value {
-    font-size: 9.5pt;
-    font-weight: bold;
-    color: #1a1a2e;
-    border-bottom: 0.5pt solid #dde3f0;
-    padding-bottom: 1mm;
-    min-height: 5mm;
-}
+/* checklist */
+.chk-row { display:table; width:100%; margin-bottom:1.5mm; }
+.chk-item { display:table-cell; white-space:nowrap; padding-right:6mm; font-size:9pt; vertical-align:middle; }
+.chk-box { display:inline-block; width:3.5mm; height:3.5mm; border:0.8pt solid #555; vertical-align:middle; margin-right:1.5mm; background:#fff; text-align:center; line-height:3.5mm; font-size:6pt; }
+.chk-box.on { background:#1a4e8a; border-color:#1a4e8a; color:#fff; }
+.chk-label { display:table-cell; font-weight:bold; font-size:8.5pt; padding-right:4mm; vertical-align:middle; white-space:nowrap; }
+.chk-val   { display:table-cell; font-size:9pt; vertical-align:middle; border-bottom:0.5pt solid #ddd; width:100%; padding-bottom:1px; }
 
-/* ── DESTAQUE CURSO ── */
-.curso-block {
-    background: #e8f0fe;
-    border-left: 3pt solid #1565C0;
-    border-radius: 1mm;
-    padding: 3mm 4mm;
-    margin: 4mm 0;
-    display: table;
-    width: 100%;
-}
-.curso-block .cb-left  { display:table-cell; vertical-align:middle; }
-.curso-block .cb-right { display:table-cell; vertical-align:middle; text-align:right; white-space:nowrap; }
-.curso-block .cb-label { font-size:7pt; color:#555; text-transform:uppercase; letter-spacing:0.8px; }
-.curso-block .cb-value { font-size:11pt; font-weight:bold; color:#1565C0; margin-top:0.5mm; }
-.periodo-badge {
-    background: #1565C0;
-    color: #fff;
-    font-size: 8pt;
-    font-weight: bold;
-    padding: 1.5mm 4mm;
-    border-radius: 10mm;
-    display: inline-block;
-}
-
-/* ── AVISO ── */
-.aviso {
-    background: #fff8e1;
-    border: 0.5pt solid #ffe082;
-    border-radius: 2mm;
-    padding: 3mm 4mm;
-    margin-top: 4mm;
-    font-size: 8pt;
-    color: #5d4037;
-}
-.aviso strong { color: #e65100; }
+/* ── ASSINATURA ── */
+.sig-block { text-align:center; margin-top:6mm; }
+.sig-line { border-bottom:0.8pt solid #555; width:65mm; margin:0 auto 1.5mm; height:7mm; }
+.sig-name  { font-size:8.5pt; font-weight:bold; }
+.sig-title { font-size:7.5pt; color:#555; margin-top:1mm; }
 
 /* ── RODAPÉ ── */
-.footer-bar {
-    background: #f4f6fb;
-    border-top: 0.5pt solid #dde3f0;
-    margin-top: 5mm;
-    padding: 3mm 0 0 0;
-    display: table;
-    width: 100%;
+.footer { text-align:center; font-size:7pt; color:#aaa; margin-top:5mm; border-top:0.5pt solid #eee; padding-top:2.5mm; }
+
+.badge {
+    display:inline-block; background:#e8f4fd; color:#1a4e8a;
+    border:0.8pt solid #b3d4f0; border-radius:3px;
+    font-size:8pt; font-weight:bold; padding:1px 7px;
 }
-.footer-date { display:table-cell; vertical-align:middle; font-size:8pt; color:#666; }
-.footer-sig  { display:table-cell; vertical-align:middle; text-align:center; width:55mm; }
-.footer-sig .sig-line { border-top: 0.8pt solid #aaa; width:50mm; margin:0 auto 1mm; padding-top:1mm; }
-.footer-sig .sig-name { font-size:7.5pt; font-weight:bold; color:#333; }
-.footer-sig .sig-role { font-size:7pt; color:#666; font-style:italic; }
 </style>
 </head>
 <body>
-<div class="page">
 
-    {{-- ── TOPO AZUL ── --}}
-    <div class="top-bar">
-        <div class="top-logo">
-            @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
+{{-- CABEÇALHO --}}
+<div class="header">
+    <div class="header-logo">
+        @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
+    </div>
+    <div class="header-center">
+        <div class="inst-name">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
+        <div class="inst-sub">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS</div>
+        <div class="inst-doc">COMPROVATIVO DE CANDIDATURA — EXAME DE ACESSO 2025/2026</div>
+    </div>
+    <div class="header-right">
+        <div class="ficha-box">N.º {{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
+    </div>
+</div>
+
+{{-- DADOS PESSOAIS --}}
+<div class="section">
+    <div class="section-title">Dados Pessoais</div>
+
+    <div class="grid">
+        <div class="grid-row">
+            <div class="cell" style="width:55%">
+                <div class="cell-label">Nome Completo</div>
+                <div class="cell-val">{{ $candidatura->nome }}</div>
+            </div>
+            <div class="cell" style="width:22%">
+                <div class="cell-label">BI / Passaporte</div>
+                <div class="cell-val">{{ $candidatura->bi }}</div>
+            </div>
+            <div class="cell" style="width:23%">
+                <div class="cell-label">Data de Nascimento</div>
+                <div class="cell-val">{{ $candidatura->data_nascimento?->format('d/m/Y') ?? '—' }}</div>
+            </div>
         </div>
-        <div class="top-text">
-            <div class="top-inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-            <div class="top-sub">Departamento dos Assuntos Académicos &nbsp;·&nbsp; Exame de Acesso 2025/2026</div>
+        <div class="grid-row">
+            <div class="cell" style="width:50%">
+                <div class="cell-label">Nome do Pai</div>
+                <div class="cell-val">{{ $candidatura->filiacao_pai ?? '—' }}</div>
+            </div>
+            <div class="cell" style="width:50%">
+                <div class="cell-label">Nome da Mãe</div>
+                <div class="cell-val">{{ $candidatura->filiacao_mae ?? '—' }}</div>
+            </div>
         </div>
-        <div class="top-num">
-            <div class="label">Ficha n.º</div>
-            <div class="num">{{ $fichaNum }}</div>
+        <div class="grid-row">
+            <div class="cell" style="width:30%">
+                <div class="cell-label">Naturalidade — Município</div>
+                <div class="cell-val">{{ $candidatura->naturalidade_municipio }}</div>
+            </div>
+            <div class="cell" style="width:30%">
+                <div class="cell-label">Naturalidade — Província</div>
+                <div class="cell-val">{{ $candidatura->naturalidade_provincia }}</div>
+            </div>
+            <div class="cell" style="width:20%">
+                <div class="cell-label">BI Emitido em</div>
+                <div class="cell-val">{{ $candidatura->bi_emitido_em }}</div>
+            </div>
+            <div class="cell" style="width:20%">
+                <div class="cell-label">Data de Emissão BI</div>
+                <div class="cell-val">{{ $candidatura->bi_data_emissao?->format('d/m/Y') ?? '—' }}</div>
+            </div>
         </div>
     </div>
 
-    {{-- ── TÍTULO ── --}}
-    <div class="title-bar">Comprovativo de Candidatura</div>
+    {{-- Sexo + Estado Civil --}}
+    <div class="chk-row" style="margin-top:2mm;">
+        <div class="chk-label">Sexo:</div>
+        <div class="chk-item"><span class="chk-box {{ $candidatura->sexo === 'masculino' ? 'on' : '' }}">{{ $candidatura->sexo === 'masculino' ? '✓' : '' }}</span> Masculino</div>
+        <div class="chk-item"><span class="chk-box {{ $candidatura->sexo === 'feminino' ? 'on' : '' }}">{{ $candidatura->sexo === 'feminino' ? '✓' : '' }}</span> Feminino</div>
+        <div class="chk-label" style="padding-left:6mm;">Estado Civil:</div>
+        <div class="chk-val">{{ $candidatura->estado_civil }}</div>
+    </div>
+    <div style="margin-top:2mm;">
+        <div class="cell-label">Necessidade de Educação Especial</div>
+        <div class="cell-val">{{ $candidatura->necessidade_especial }}</div>
+    </div>
+</div>
 
-    {{-- ── CORPO ── --}}
-    <div class="body-wrap">
-
-        {{-- Dados Pessoais --}}
-        <div class="section">
-            <div class="section-title">Dados Pessoais</div>
-            <div class="grid">
-                <div class="grid-row">
-                    <div class="grid-cell" style="width:100%;">
-                        <div class="field-label">Nome Completo</div>
-                        <div class="field-value">{{ strtoupper($candidatura->nome) }}</div>
-                    </div>
-                </div>
-                <div class="grid-row">
-                    <div class="grid-cell">
-                        <div class="field-label">Bilhete de Identidade</div>
-                        <div class="field-value">{{ $candidatura->bi ?? '—' }}</div>
-                    </div>
-                    <div class="grid-cell">
-                        <div class="field-label">Data de Nascimento</div>
-                        <div class="field-value">{{ $candidatura->data_nascimento?->format('d/m/Y') ?? '—' }}</div>
-                    </div>
-                </div>
-                <div class="grid-row">
-                    <div class="grid-cell">
-                        <div class="field-label">Sexo</div>
-                        <div class="field-value">{{ $candidatura->sexo ? ucfirst($candidatura->sexo) : '—' }}</div>
-                    </div>
-                    <div class="grid-cell">
-                        <div class="field-label">Estado Civil</div>
-                        <div class="field-value">{{ $candidatura->estado_civil ?? '—' }}</div>
-                    </div>
-                </div>
-                <div class="grid-row">
-                    <div class="grid-cell">
-                        <div class="field-label">Telefone</div>
-                        <div class="field-value">{{ $candidatura->telefone }}</div>
-                    </div>
-                    <div class="grid-cell">
-                        <div class="field-label">E-mail</div>
-                        <div class="field-value">{{ $candidatura->email }}</div>
-                    </div>
-                </div>
+{{-- RESIDÊNCIA E CONTACTOS --}}
+<div class="section">
+    <div class="section-title">Residência e Contactos</div>
+    <div class="grid">
+        <div class="grid-row">
+            <div class="cell" style="width:30%">
+                <div class="cell-label">Município de Residência</div>
+                <div class="cell-val">{{ $candidatura->residencia_municipio }}</div>
+            </div>
+            <div class="cell" style="width:35%">
+                <div class="cell-label">Rua / Bairro</div>
+                <div class="cell-val">{{ $candidatura->residencia_bairro }}</div>
+            </div>
+            <div class="cell" style="width:17%">
+                <div class="cell-label">Telefone 1</div>
+                <div class="cell-val">{{ $candidatura->telefone }}</div>
+            </div>
+            <div class="cell" style="width:18%">
+                <div class="cell-label">Telefone 2</div>
+                <div class="cell-val">{{ $candidatura->telefone2 ?? '—' }}</div>
             </div>
         </div>
-
-        {{-- Curso --}}
-        <div class="curso-block">
-            <div class="cb-left">
-                <div class="cb-label">Curso Inscrito</div>
-                <div class="cb-value">{{ $candidatura->curso }}</div>
-            </div>
-            <div class="cb-right">
-                <div class="cb-label" style="margin-bottom:1.5mm;">Período</div>
-                <div class="periodo-badge">{{ $periodoLabel }}</div>
+        <div class="grid-row">
+            <div class="cell" style="width:50%">
+                <div class="cell-label">E-mail</div>
+                <div class="cell-val">{{ $candidatura->email }}</div>
             </div>
         </div>
+    </div>
+</div>
 
-        {{-- Dados Académicos --}}
-        <div class="section">
-            <div class="section-title">Dados Académicos</div>
-            <div class="grid">
-                <div class="grid-row">
-                    <div class="grid-cell">
-                        <div class="field-label">Escola de Proveniência</div>
-                        <div class="field-value">{{ $candidatura->escola_origem ?? '—' }}</div>
-                    </div>
-                    <div class="grid-cell">
-                        <div class="field-label">Ano de Conclusão</div>
-                        <div class="field-value">{{ $candidatura->ano_conclusao ?? '—' }}</div>
-                    </div>
-                </div>
-                <div class="grid-row">
-                    <div class="grid-cell">
-                        <div class="field-label">Habilitações Literárias</div>
-                        <div class="field-value">{{ $candidatura->habilitacoes ?? '—' }}</div>
-                    </div>
-                    <div class="grid-cell">
-                        <div class="field-label">Naturalidade</div>
-                        <div class="field-value">{{ $candidatura->naturalidade_municipio ?? '—' }}{{ $candidatura->naturalidade_provincia ? ', ' . $candidatura->naturalidade_provincia : '' }}</div>
-                    </div>
-                </div>
+{{-- DADOS ACADÉMICOS --}}
+<div class="section">
+    <div class="section-title">Dados Académicos e Socioeconómicos</div>
+    <div class="grid">
+        <div class="grid-row">
+            <div class="cell" style="width:22%">
+                <div class="cell-label">Habilitações Literárias</div>
+                <div class="cell-val">{{ $candidatura->habilitacoes }}</div>
+            </div>
+            <div class="cell" style="width:48%">
+                <div class="cell-label">Escola e Curso de Proveniência</div>
+                <div class="cell-val">{{ $candidatura->escola_origem }}</div>
+            </div>
+            <div class="cell" style="width:15%">
+                <div class="cell-label">Ano de Conclusão</div>
+                <div class="cell-val">{{ $candidatura->ano_conclusao }}</div>
+            </div>
+            <div class="cell" style="width:15%">
+                <div class="cell-label">Estado Financeiro</div>
+                <div class="cell-val">{{ $efMap[$candidatura->estado_financeiro] ?? '—' }}</div>
             </div>
         </div>
+    </div>
 
-        {{-- Aviso --}}
-        <div class="aviso">
-            <strong>Importante:</strong> Apresente este comprovativo (impresso ou em formato digital) no dia do exame de acesso.
-            Guarde o número da sua ficha: <strong>{{ $fichaNum }}</strong>.
-            Candidatura registada em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}.
-        </div>
+    <div class="chk-row" style="margin-top:2mm;">
+        <div class="chk-label">Trabalhador:</div>
+        <div class="chk-item"><span class="chk-box {{ $candidatura->trabalhador ? 'on' : '' }}">{{ $candidatura->trabalhador ? '✓' : '' }}</span> Sim</div>
+        <div class="chk-item"><span class="chk-box {{ !$candidatura->trabalhador ? 'on' : '' }}">{{ !$candidatura->trabalhador ? '✓' : '' }}</span> Não</div>
+        @if($candidatura->instituicao_laboral)
+        <div class="chk-label" style="padding-left:6mm;">Instituição:</div>
+        <div class="chk-val">{{ $candidatura->instituicao_laboral }}</div>
+        @endif
+    </div>
+</div>
 
-        {{-- Rodapé --}}
-        <div class="footer-bar">
-            <div class="footer-date">
-                Cuito, {{ $candidatura->created_at->format('d') }} de {{ $candidatura->created_at->translatedFormat('F') }} de {{ $candidatura->created_at->format('Y') }}
-            </div>
-            <div class="footer-sig">
-                <div class="sig-line"></div>
-                <div class="sig-name">Candidato(a)</div>
-                <div class="sig-role">{{ strtoupper($candidatura->nome) }}</div>
-            </div>
-        </div>
+{{-- INSCRIÇÃO --}}
+<div class="section">
+    <div class="section-title">Inscrição</div>
+    <div class="chk-row">
+        <div class="chk-label">Curso:</div>
+        <div class="chk-val" style="font-weight:bold;">{{ $candidatura->curso }}</div>
+        <div class="chk-label" style="padding-left:8mm;">Período:</div>
+        <div class="chk-item"><span class="chk-box {{ $candidatura->periodo === 'regular' ? 'on' : '' }}">{{ $candidatura->periodo === 'regular' ? '✓' : '' }}</span> Regular</div>
+        <div class="chk-item"><span class="chk-box {{ $candidatura->periodo === 'pos-laboral' ? 'on' : '' }}">{{ $candidatura->periodo === 'pos-laboral' ? '✓' : '' }}</span> Pós-Laboral</div>
+    </div>
+    <div style="margin-top:2.5mm;">
+        <span class="badge">Estado: {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}</span>
+        &nbsp;&nbsp;
+        <span style="font-size:8pt;color:#666;">Submetido em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}</span>
+    </div>
+</div>
 
-    </div>{{-- /body-wrap --}}
-</div>{{-- /page --}}
+{{-- DATA --}}
+<div style="font-size:9pt; margin-top:3mm;">
+    Cuito, aos <u>&nbsp;&nbsp;{{ $candidatura->created_at->format('d') }}&nbsp;&nbsp;</u>
+    de <u>&nbsp;&nbsp;{{ $candidatura->created_at->translatedFormat('F') }}&nbsp;&nbsp;</u>
+    de {{ $candidatura->created_at->format('Y') }}.
+</div>
+
+{{-- ASSINATURAS --}}
+<div style="display:table;width:100%;margin-top:6mm;">
+    <div style="display:table-cell;width:42%;text-align:center;vertical-align:bottom;">
+        <div style="border-bottom:0.8pt solid #555;height:7mm;margin-bottom:1.5mm;"></div>
+        <div style="font-size:8.5pt;font-weight:bold;">Conferiu</div>
+        <div style="font-size:7.5pt;color:#777;margin-top:0.5mm;">(Funcionário da Instituição)</div>
+    </div>
+    <div style="display:table-cell;width:16%;"></div>
+    <div style="display:table-cell;width:42%;text-align:center;vertical-align:bottom;">
+        <div style="border-bottom:0.8pt solid #555;height:7mm;margin-bottom:1.5mm;"></div>
+        <div style="font-size:8.5pt;font-weight:bold;">Professor Doutor Fernando Maia</div>
+        <div style="font-size:7.5pt;color:#777;margin-top:0.5mm;">Presidente da Instituição</div>
+    </div>
+</div>
+
+<div class="footer">
+    Comprovativo gerado em {{ now()->format('d/m/Y H:i') }} &mdash; ISP-Bié &mdash; Documento válido para apresentação no dia do exame
+</div>
+
 </body>
 </html>
