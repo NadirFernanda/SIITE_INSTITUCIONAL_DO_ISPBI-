@@ -136,6 +136,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::patch('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'update'])->name('salas.update');
     Route::delete('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'destroy'])->name('salas.destroy');
 
+    // Relatórios
+    Route::get('relatorios', function (\Illuminate\Http\Request $r) {
+        return app(\App\Http\Controllers\RelatorioController::class)->index($r, 'layouts.admin');
+    })->name('relatorios');
+    Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
+
     // Candidaturas admin
     Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
     Route::get('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'index'])->name('candidaturas.index');
@@ -153,6 +159,12 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1
     Route::post('candidaturas/{candidatura}/assinar', [App\Http\Controllers\Daac\CandidaturaController::class, 'assinar'])->name('candidaturas.assinar');
     Route::post('candidaturas/{candidatura}/rejeitar', [App\Http\Controllers\Daac\CandidaturaController::class, 'rejeitar'])->name('candidaturas.rejeitar');
 
+    // Relatórios DAAC
+    Route::get('relatorios', function (\Illuminate\Http\Request $r) {
+        return app(\App\Http\Controllers\RelatorioController::class)->index($r, 'layouts.daac');
+    })->name('relatorios');
+    Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
+
     // Salas — acesso às listas para impressão/exportação
     Route::get('salas', [App\Http\Controllers\Daac\SalaController::class, 'index'])->name('salas.index');
     Route::get('salas/{sala}', [App\Http\Controllers\Daac\SalaController::class, 'show'])->name('salas.show');
@@ -162,6 +174,12 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1
 });
 
 Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:30,1'])->group(function () {
+    // Relatórios
+    Route::get('relatorios', function (\Illuminate\Http\Request $r) {
+        return app(\App\Http\Controllers\RelatorioController::class)->index($r, 'layouts.tecnico');
+    })->name('relatorios');
+    Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
+
     // Candidaturas
     Route::get('candidaturas/export', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'export'])->name('candidaturas.export');
     Route::get('candidaturas/create', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'create'])->name('candidaturas.create');

@@ -139,6 +139,11 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="13" rx="2" stroke="#fff" stroke-width="2" fill="none"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2" stroke="#fff" stroke-width="2"/><path d="M12 12v4M10 14h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
                 </span>Salas de Exame
             </a>
+            <a href="{{ route('admin.relatorios') }}">
+                <span style="vertical-align:middle;margin-right:8px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M9 17l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>Relatórios
+            </a>
             <a href="/admin/usuarios">
                 <span style="vertical-align:middle;margin-right:8px;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="#fff" stroke-width="2" fill="none"/><path d="M6 19c0-2.2 3-3.5 6-3.5s6 1.3 6 3.5" stroke="#fff" stroke-width="2" fill="none"/></svg>
