@@ -39,17 +39,25 @@
             <div class="sidebar-logo-title">ISP-Bié</div>
             <span class="sidebar-logo-sub">DAAC — Assuntos Académicos</span>
         </div>
-        <div style="flex:1;">
+        <div style="flex:1;overflow-y:auto;">
             <a href="{{ route('daac.candidaturas.index') }}"
-               class="{{ request()->routeIs('daac.*') ? 'active' : '' }}">
+               class="{{ request()->routeIs('daac.candidaturas.*') ? 'active' : '' }}">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 Candidaturas
-                @php $pendentes = \App\Models\Candidatura::where('status','aprovada')->count(); @endphp
+                @php $pendentes = \App\Models\Candidatura::whereNotIn('status',['concluida','rejeitada'])->count(); @endphp
                 @if($pendentes > 0)
                     <span class="badge">{{ $pendentes }}</span>
                 @endif
+            </a>
+            <a href="{{ route('daac.salas.index') }}"
+               class="{{ request()->routeIs('daac.salas.*') ? 'active' : '' }}">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <rect x="2" y="7" width="20" height="13" rx="2"/>
+                    <path stroke-linecap="round" d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2M12 12v4M10 14h4"/>
+                </svg>
+                Salas e Listas
             </a>
         </div>
         <div style="margin:16px 12px;">
