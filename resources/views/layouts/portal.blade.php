@@ -173,43 +173,141 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 6px;
-            border-radius: 8px;
+            padding: 7px;
+            border-radius: 9px;
             color: #1e3a5f;
+            transition: background 0.15s;
         }
         .p-hamburger:hover { background: #f4f6fb; }
 
-        /* Mobile menu */
-        .p-mobile-menu {
+        /* Mobile overlay */
+        .p-overlay {
             display: none;
-            background: #fff;
-            border-bottom: 3px solid #F05A28;
-            padding: 8px 0 16px;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,31,61,0.45);
+            z-index: 300;
+            backdrop-filter: blur(2px);
         }
-        .p-mobile-menu.open { display: block; }
-        .p-mobile-link {
-            display: block;
-            padding: 12px 28px;
+        .p-overlay.open { display: block; }
+
+        /* Mobile drawer */
+        .p-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(82vw, 320px);
+            background: #fff;
+            z-index: 400;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: -8px 0 40px rgba(30,58,95,0.18);
+        }
+        .p-drawer.open { transform: translateX(0); }
+
+        /* Drawer header */
+        .p-drawer-head {
+            padding: 20px 20px 16px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2a5298 100%);
+            position: relative;
+            flex-shrink: 0;
+        }
+        .p-drawer-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            transition: background 0.15s;
+        }
+        .p-drawer-close:hover { background: rgba(255,255,255,0.25); }
+        .p-drawer-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .p-drawer-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F05A28, #e84417);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.25);
+        }
+        .p-drawer-uname { font-size: 0.95rem; font-weight: 700; color: #fff; }
+        .p-drawer-uemail { font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-top: 2px; word-break: break-all; }
+
+        /* Drawer nav */
+        .p-drawer-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .p-drawer-section {
+            padding: 14px 20px 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9ca3af;
+        }
+        .p-drawer-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            color: #1e3a5f;
+            color: #374151;
             text-decoration: none;
-            border-bottom: 1px solid #f5f6fa;
             transition: background 0.12s, color 0.12s;
+            border-left: 3px solid transparent;
         }
-        .p-mobile-link:hover, .p-mobile-link.active { background: #fff4f0; color: #F05A28; }
-        .p-mobile-logout {
+        .p-drawer-link:hover { background: #f4f6fb; color: #1e3a5f; border-left-color: #e2e8f0; }
+        .p-drawer-link.active { background: #fff4f0; color: #F05A28; border-left-color: #F05A28; }
+        .p-drawer-link svg { flex-shrink: 0; color: #9ca3af; }
+        .p-drawer-link:hover svg, .p-drawer-link.active svg { color: currentColor; }
+
+        /* Drawer footer */
+        .p-drawer-foot {
+            border-top: 1px solid #f0f1f5;
+            padding: 12px 0 8px;
+            flex-shrink: 0;
+        }
+        .p-drawer-logout {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            width: 100%;
+            padding: 13px 20px;
             background: none;
             border: none;
-            width: 100%;
-            text-align: left;
-            padding: 12px 28px;
             font-size: 0.9rem;
             font-weight: 600;
             color: #dc2626;
             cursor: pointer;
+            text-align: left;
+            transition: background 0.12s;
         }
-        .p-mobile-logout:hover { background: #fff5f5; }
+        .p-drawer-logout:hover { background: #fff5f5; }
 
         /* ── Main content ── */
         .p-main {
@@ -236,10 +334,12 @@
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            .p-nav-links, .p-site-link, .p-avatar-name, .p-chevron { display: none; }
+            .p-nav-links, .p-site-link, .p-avatar-name, .p-chevron, .p-dropdown-wrap { display: none; }
             .p-hamburger { display: flex; }
-            .p-main { padding: 24px 16px 60px; }
-            .p-nav-inner { padding: 0 16px; }
+            .p-main { padding: 20px 14px 60px; }
+            .p-nav-inner { padding: 0 14px; height: 56px; }
+            .p-brand img { width: 32px; height: 32px; }
+            .p-brand-name { font-size: 0.82rem; }
         }
     </style>
 </head>
@@ -311,18 +411,70 @@
 </div>
 </header>
 
-{{-- Mobile menu (hidden by default via CSS) --}}
-<div class="p-mobile-menu" id="mobileMenu">
-    <a href="{{ route('portal.dashboard') }}"  class="p-mobile-link {{ request()->routeIs('portal.dashboard')   ? 'active' : '' }}">Início</a>
-    <a href="{{ route('portal.noticias') }}"   class="p-mobile-link {{ request()->routeIs('portal.noticias*')   ? 'active' : '' }}">Notícias</a>
-    <a href="{{ route('portal.diretorio') }}"  class="p-mobile-link {{ request()->routeIs('portal.diretorio')   ? 'active' : '' }}">Directório</a>
-    <a href="{{ route('portal.documentos') }}" class="p-mobile-link {{ request()->routeIs('portal.documentos*') ? 'active' : '' }}">Documentos</a>
-    <a href="{{ route('portal.perfil') }}"     class="p-mobile-link {{ request()->routeIs('portal.perfil*')     ? 'active' : '' }}">Meu Perfil</a>
-    <a href="{{ route('welcome') }}"           class="p-mobile-link" style="color:#9ca3af;">← Site ISP-Bié</a>
-    <form method="POST" action="{{ route('portal.logout') }}">
-        @csrf
-        <button type="submit" class="p-mobile-logout">Sair</button>
-    </form>
+{{-- Mobile overlay --}}
+<div class="p-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+{{-- Mobile drawer --}}
+<div class="p-drawer" id="mobileDrawer">
+
+    {{-- Drawer header: user card --}}
+    <div class="p-drawer-head">
+        <button class="p-drawer-close" onclick="closeMobileMenu()" aria-label="Fechar menu">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="p-drawer-user">
+            <div class="p-drawer-avatar">{{ strtoupper(substr(Auth::user()->name ?? 'A', 0, 1)) }}</div>
+            <div>
+                <div class="p-drawer-uname">{{ Auth::user()->name ?? '' }}</div>
+                <div class="p-drawer-uemail">{{ Auth::user()->email ?? '' }}</div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Drawer nav --}}
+    <nav class="p-drawer-nav">
+        <div class="p-drawer-section">Menu</div>
+
+        <a href="{{ route('portal.dashboard') }}" class="p-drawer-link {{ request()->routeIs('portal.dashboard') ? 'active' : '' }}">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            Início
+        </a>
+        <a href="{{ route('portal.noticias') }}" class="p-drawer-link {{ request()->routeIs('portal.noticias*') ? 'active' : '' }}">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path stroke-linecap="round" d="M7 9h10M7 13h6"/></svg>
+            Notícias
+        </a>
+        <a href="{{ route('portal.diretorio') }}" class="p-drawer-link {{ request()->routeIs('portal.diretorio') ? 'active' : '' }}">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Directório
+        </a>
+        <a href="{{ route('portal.documentos') }}" class="p-drawer-link {{ request()->routeIs('portal.documentos*') ? 'active' : '' }}">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+            Documentos
+        </a>
+
+        <div class="p-drawer-section" style="margin-top:8px;">Conta</div>
+
+        <a href="{{ route('portal.perfil') }}" class="p-drawer-link {{ request()->routeIs('portal.perfil*') ? 'active' : '' }}">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+            Meu Perfil
+        </a>
+        <a href="{{ route('welcome') }}" class="p-drawer-link" style="color:#9ca3af;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            Site ISP-Bié
+        </a>
+    </nav>
+
+    {{-- Drawer footer: logout --}}
+    <div class="p-drawer-foot">
+        <form method="POST" action="{{ route('portal.logout') }}">
+            @csrf
+            <button type="submit" class="p-drawer-logout">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                Sair
+            </button>
+        </form>
+    </div>
+
 </div>
 
 {{-- ═══ CONTEÚDO ═══ --}}
@@ -349,14 +501,24 @@
         document.getElementById('portalDropdown').classList.toggle('open');
     }
     function toggleMobileMenu() {
-        document.getElementById('mobileMenu').classList.toggle('open');
+        document.getElementById('mobileDrawer').classList.toggle('open');
+        document.getElementById('mobileOverlay').classList.toggle('open');
+        document.body.style.overflow = document.getElementById('mobileDrawer').classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMobileMenu() {
+        document.getElementById('mobileDrawer').classList.remove('open');
+        document.getElementById('mobileOverlay').classList.remove('open');
+        document.body.style.overflow = '';
     }
     document.addEventListener('click', function(e) {
-        var dd   = document.getElementById('portalDropdown');
-        var btn  = document.querySelector('.p-avatar-btn');
+        var dd  = document.getElementById('portalDropdown');
+        var btn = document.querySelector('.p-avatar-btn');
         if (dd && btn && !btn.contains(e.target) && !dd.contains(e.target)) {
             dd.classList.remove('open');
         }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeMobileMenu();
     });
 </script>
 </body>
