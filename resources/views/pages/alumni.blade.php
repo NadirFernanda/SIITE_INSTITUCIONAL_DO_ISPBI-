@@ -83,12 +83,12 @@
 
     {{-- Estatísticas Alumni --}}
     @php
-        $published = \App\Models\Alumnus::where('publicado', true);
-        $alumni_count  = $published->count();
-        $working       = (clone $published)->where('trabalha', true)->count();
+        $allAlumni     = \App\Models\Alumnus::query();
+        $alumni_count  = $allAlumni->count();
+        $working       = (clone $allAlumni)->where('trabalha', true)->count();
         $employability = $alumni_count > 0 ? (int) round($working / $alumni_count * 100) : 0;
-        $countries     = (clone $published)->whereNotNull('pais')->where('pais','!=','')->distinct('pais')->count('pais');
-        $companies     = (clone $published)->whereNotNull('empresa')->where('empresa','!=','')->distinct('empresa')->count('empresa');
+        $countries     = (clone $allAlumni)->whereNotNull('pais')->where('pais','!=','')->distinct('pais')->count('pais');
+        $companies     = (clone $allAlumni)->whereNotNull('empresa')->where('empresa','!=','')->distinct('empresa')->count('empresa');
     @endphp
     <div class="rounded-2xl p-8 text-white" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
         <h3 class="text-base font-bold mb-6 uppercase tracking-widest text-center opacity-90">Alumni em Números</h3>
