@@ -26,9 +26,10 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-        // Apenas 'admin' e 'tecnico' podem aceder aos painéis internos.
-        $role = Auth::user()->role ?? '';
-        if (! in_array($role, ['admin', 'tecnico', 'daac'], true)) {
+        $user = Auth::user();
+        $role = $user->role ?? '';
+
+        if (! in_array($role, ['admin', 'tecnico', 'daac', 'alumni'], true)) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
@@ -40,11 +41,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Cada role é redirecionado para o seu painel exclusivo.
-        $destination = match($role) {
-            'admin'   => route('admin', absolute: false),
-            'daac'    => route('daac.candidaturas.index', absolute: false),
-            default   => route('tecnico.candidaturas.index', absolute: false),
+        $destination = match(true) {
+            $role === 'admin'  => route('admin', absolute: false),
+            $role === 'daac'   => route('daac.candidaturas.index', absolute: false),
+            $role === 'tecnico' => route('tecnico.candidaturas.index', absolute: false),
+            $role === 'alumni' && $user->aprovado  => route('portal.dashboard', absolute: false),
+            $role === 'alumni' && ! $user->aprovado => route('portal.pendente', absolute: false),
+            default => '/',
         };
 
         return redirect()->intended($destination);
