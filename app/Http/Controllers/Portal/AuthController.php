@@ -7,6 +7,7 @@ use App\Models\Alumnus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -17,11 +18,21 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $cursosPermitidos = [
+            'Informática de Gestão',
+            'Gestão de Recursos Hídricos',
+            'Psicologia',
+            'Comunicação Social',
+            'Contabilidade e Finanças',
+            'Enfermagem',
+            'Outro',
+        ];
+
         $validated = $request->validate([
             'nome'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
+            'email'    => 'required|email:rfc,dns|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'curso'    => 'required|string',
+            'curso'    => 'required|string|in:' . implode(',', $cursosPermitidos),
             'ano'      => 'required|integer|min:1990|max:2030',
         ], [
             'nome.required'       => 'O nome é obrigatório.',
@@ -33,6 +44,7 @@ class AuthController extends Controller
             'password.min'        => 'A palavra-passe deve ter pelo menos 8 caracteres.',
             'password.confirmed'  => 'As palavras-passe não coincidem.',
             'curso.required'      => 'O curso é obrigatório.',
+            'curso.in'            => 'Selecione um curso válido da lista.',
             'ano.required'        => 'O ano de conclusão é obrigatório.',
             'ano.integer'         => 'O ano de conclusão deve ser um número inteiro.',
             'ano.min'             => 'O ano de conclusão deve ser a partir de 1990.',
@@ -42,7 +54,7 @@ class AuthController extends Controller
         $user = new User();
         $user->name     = $validated['nome'];
         $user->email    = $validated['email'];
-        $user->password = bcrypt($validated['password']);
+        $user->password = Hash::make($validated['password']);
         $user->forceFill([
             'role'     => 'alumni',
             'aprovado' => false,
