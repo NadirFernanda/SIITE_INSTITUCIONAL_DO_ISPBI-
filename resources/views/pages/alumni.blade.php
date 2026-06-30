@@ -101,6 +101,50 @@
     </div>
 </section>
 
+{{-- CTA Portal Alumni --}}
+<section class="mb-10">
+    <div class="rounded-2xl overflow-hidden" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 px-8 py-8">
+            <div class="text-white">
+                <p class="text-xs font-bold uppercase tracking-widest text-white/60 mb-1">Exclusivo para ex-estudantes</p>
+                <h3 class="text-xl font-bold mb-1">Aceda ao Portal Alumni</h3>
+                <p class="text-sm text-white/70">Notícias exclusivas, directório de alumni, documentos e muito mais.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+                @auth
+                    @if(Auth::user()->role === 'alumni' && Auth::user()->aprovado)
+                        <a href="{{ route('portal.dashboard') }}"
+                           class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-[#1e3a5f] bg-white hover:bg-orange-50 transition-colors whitespace-nowrap">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            Entrar no Portal
+                        </a>
+                    @elseif(Auth::user()->role === 'alumni')
+                        <span class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white/60 bg-white/10 whitespace-nowrap cursor-not-allowed">
+                            A aguardar aprovação
+                        </span>
+                    @else
+                        <a href="{{ route('portal.register') }}"
+                           class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-[#1e3a5f] bg-white hover:bg-orange-50 transition-colors whitespace-nowrap">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+                            Registar no Portal
+                        </a>
+                    @endauth
+                @else
+                    <a href="{{ route('portal.register') }}"
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-[#1e3a5f] bg-white hover:bg-orange-50 transition-colors whitespace-nowrap">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
+                        Registar no Portal
+                    </a>
+                    <a href="{{ route('login') }}"
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white border border-white/30 hover:bg-white/10 transition-colors whitespace-nowrap">
+                        Já tenho conta
+                    </a>
+                @endauth
+            </div>
+        </div>
+    </div>
+</section>
+
 {{-- Formulário de registo --}}
 <section id="formulario" class="mt-4">
     <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">

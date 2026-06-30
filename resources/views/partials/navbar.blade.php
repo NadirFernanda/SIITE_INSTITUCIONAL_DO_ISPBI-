@@ -66,14 +66,18 @@
     </a>
     @auth
       @if(Auth::user()->role === 'alumni' && Auth::user()->aprovado)
-        <a href="{{ route('portal.dashboard') }}" class="flex items-center gap-1 text-[#F05A28] hover:underline hover:text-[#F05A28] whitespace-nowrap font-bold">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <a href="{{ route('portal.dashboard') }}"
+           class="flex items-center gap-1.5 px-3 py-1 rounded-md text-white font-bold text-xs whitespace-nowrap transition-opacity hover:opacity-90"
+           style="background:#F05A28;">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           Portal Alumni
         </a>
       @endif
     @else
-      <a href="{{ route('portal.register') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <a href="{{ route('portal.register') }}"
+         class="flex items-center gap-1.5 px-3 py-1 rounded-md text-white font-bold text-xs whitespace-nowrap transition-opacity hover:opacity-90"
+         style="background:#F05A28;">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
         Portal Alumni
       </a>
     @endauth
