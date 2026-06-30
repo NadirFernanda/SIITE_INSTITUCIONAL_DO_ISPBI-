@@ -17,6 +17,7 @@ class Alumnus extends Model
         'contacto',
         'trabalha',
         'empresa',
+        'pais',
         'cargo',
         'satisfacao',
         'publicado',

@@ -83,11 +83,12 @@
 
     {{-- Estatísticas Alumni --}}
     @php
-        $stats = \App\Models\AlumniStat::first();
-        $alumni_count = \App\Models\Alumnus::where('publicado', true)->count();
-        $employability = $stats->employability_percentage ?? 0;
-        $countries = $stats->countries_count ?? 0;
-        $companies = $stats->companies_founded ?? 0;
+        $published = \App\Models\Alumnus::where('publicado', true);
+        $alumni_count  = $published->count();
+        $working       = (clone $published)->where('trabalha', true)->count();
+        $employability = $alumni_count > 0 ? (int) round($working / $alumni_count * 100) : 0;
+        $countries     = (clone $published)->whereNotNull('pais')->where('pais','!=','')->distinct('pais')->count('pais');
+        $companies     = (clone $published)->whereNotNull('empresa')->where('empresa','!=','')->distinct('empresa')->count('empresa');
     @endphp
     <div class="rounded-2xl p-8 text-white" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
         <h3 class="text-base font-bold mb-6 uppercase tracking-widest text-center opacity-90">Alumni em Números</h3>
@@ -167,9 +168,15 @@
           </div>
           <template x-if="trabalha === 'sim'">
             <div class="space-y-4">
-              <div>
-                <label for="empresa" class="block text-sm font-semibold text-gray-700 mb-1">Onde trabalha <span class="text-red-500">*</span></label>
-                <input type="text" id="empresa" name="empresa" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="Nome da empresa ou instituição">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="empresa" class="block text-sm font-semibold text-gray-700 mb-1">Onde trabalha <span class="text-red-500">*</span></label>
+                  <input type="text" id="empresa" name="empresa" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="Nome da empresa ou instituição">
+                </div>
+                <div>
+                  <label for="pais" class="block text-sm font-semibold text-gray-700 mb-1">País onde trabalha <span class="text-red-500">*</span></label>
+                  <input type="text" id="pais" name="pais" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="Ex: Angola, Portugal...">
+                </div>
               </div>
               <div>
                 <label for="cargo" class="block text-sm font-semibold text-gray-700 mb-1">Cargo atual <span class="text-red-500">*</span></label>
