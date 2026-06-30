@@ -32,11 +32,11 @@
         @endphp
         @forelse($alumni as $alumnus)
           <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow flex items-center gap-5">
-            <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#1e3a5f] flex items-center justify-center text-white text-lg font-bold">
-              ✓
+            <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#1e3a5f] flex items-center justify-center text-white text-lg font-bold uppercase">
+              {{ mb_substr($alumnus->nome ?? 'A', 0, 1) }}
             </div>
             <div class="min-w-0">
-              <p class="font-bold text-[#1e3a5f]">Alumni {{ $alumnus->id }}</p>
+              <p class="font-bold text-[#1e3a5f]">{{ $alumnus->nome }}</p>
               <p class="text-sm text-gray-400 mb-2">
                 {{ $alumnus->curso }}@if($alumnus->ano) &bull; Turma {{ $alumnus->ano }}@endif
               </p>
