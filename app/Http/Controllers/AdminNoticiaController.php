@@ -57,6 +57,7 @@ class AdminNoticiaController extends Controller
         }
 
         $validated['institucional'] = (bool) $request->input('institucional', false);
+        $validated['publicada']     = $request->boolean('publicada');
         $noticia->update($validated);
         return redirect()->route('admin.noticias')->with('success', 'Notícia atualizada com sucesso!');
     }
@@ -75,12 +76,12 @@ class AdminNoticiaController extends Controller
     {
         Gate::authorize('create', Noticia::class);
         $validated = $request->validate([
-            'titulo' => 'required|string|max:255',
-            'texto' => 'required|string|max:65535',
-            'imagem' => 'nullable|image|max:2048',
-            'pdf' => 'nullable|file|mimes:pdf|max:5120',
-            'data' => 'required|date',
-            'institucional' => 'required|boolean',
+            'titulo'       => 'required|string|max:255',
+            'texto'        => 'required|string|max:65535',
+            'imagem'       => 'nullable|image|max:2048',
+            'pdf'          => 'nullable|file|mimes:pdf|max:5120',
+            'data'         => 'required|date',
+            'institucional'=> 'required|boolean',
         ]);
 
         if ($request->hasFile('imagem')) {
@@ -91,6 +92,7 @@ class AdminNoticiaController extends Controller
         }
 
         $validated['institucional'] = (bool) $request->input('institucional', false);
+        $validated['publicada']     = $request->boolean('publicada');
         Noticia::create($validated);
         return redirect()->route('admin.noticias')->with('success', 'Notícia cadastrada com sucesso!');
     }

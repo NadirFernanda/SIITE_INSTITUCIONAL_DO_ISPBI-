@@ -94,6 +94,19 @@
                         <option value="1" @if(old('institucional', $noticia->institucional)) selected @endif>Institucional</option>
                     </select>
                 </div>
+
+                {{-- Publicada --}}
+                <div style="grid-column:1/-1;">
+                    <label style="display:inline-flex;align-items:center;gap:10px;cursor:pointer;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;background:#f8fafc;width:100%;box-sizing:border-box;"
+                           onmouseover="this.style.background='#eff6ff';this.style.borderColor='#1565c0'"
+                           onmouseout="this.style.background='#f8fafc';this.style.borderColor='#d1d5db'">
+                        <input type="checkbox" name="publicada" value="1"
+                               {{ old('publicada', $noticia->publicada ? '1' : '0') === '1' ? 'checked' : '' }}
+                               style="width:18px;height:18px;accent-color:#1565c0;cursor:pointer;">
+                        <span style="font-size:0.9rem;font-weight:600;color:#374151;">Publicada</span>
+                        <span style="font-size:0.8rem;color:#64748b;margin-left:4px;">— visível no site público</span>
+                    </label>
+                </div>
             </div>
         </div>
 
