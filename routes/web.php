@@ -224,6 +224,8 @@ use App\Http\Controllers\ConcursoAlertController;
 Route::post('/alerts/subscribe', [ConcursoAlertController::class, 'store'])->name('alerts.subscribe')->middleware('throttle:5,1');
 Route::view('/valores', 'pages.valores')->name('valores');
 Route::view('/visao', 'pages.visao')->name('visao');
+Route::redirect('/concursos', '/trabalhe-conosco', 301);
+
 Route::get('/trabalhe-conosco', function () {
     $concursos = \App\Models\Concurso::where('status', 'published')
         ->orderByDesc('publish_at')
