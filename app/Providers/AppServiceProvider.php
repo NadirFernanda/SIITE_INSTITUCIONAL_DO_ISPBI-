@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\View;
@@ -48,6 +50,22 @@ class AppServiceProvider extends ServiceProvider
             $view->with('noticias',
                 \App\Models\Noticia::where('institucional', true)->orderByDesc('data')->take(6)->get()
             );
+        });
+
+        // Redirecionar utilizadores autenticados que tentam aceder a rotas "guest"
+        // (ex: /login) para o painel correcto consoante o seu role.
+        RedirectIfAuthenticated::redirectUsing(function (Request $request) {
+            $user = Auth::user();
+            $role = $user?->role ?? '';
+
+            return match(true) {
+                $role === 'admin'                          => route('admin'),
+                $role === 'daac'                           => route('daac.candidaturas.index'),
+                $role === 'tecnico'                        => route('tecnico.candidaturas.index'),
+                $role === 'alumni' && $user->aprovado      => route('portal.dashboard'),
+                $role === 'alumni' && ! $user->aprovado    => route('portal.pendente'),
+                default                                    => '/',
+            };
         });
 
         $this->configureRateLimiting();
