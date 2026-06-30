@@ -11,6 +11,61 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function showLogin()
+    {
+        // Já autenticado como alumni aprovado → portal
+        if (Auth::check() && Auth::user()->role === 'alumni') {
+            return Auth::user()->aprovado
+                ? redirect()->route('portal.dashboard')
+                : redirect()->route('portal.pendente');
+        }
+
+        // Já autenticado como outro role → não tem acesso ao portal alumni
+        if (Auth::check()) {
+            Auth::logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+        }
+
+        return view('portal.login');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required|string',
+        ], [
+            'email.required'    => 'O e-mail é obrigatório.',
+            'email.email'       => 'Insira um e-mail válido.',
+            'password.required' => 'A palavra-passe é obrigatória.',
+        ]);
+
+        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'email' => 'E-mail ou palavra-passe incorrectos.',
+            ]);
+        }
+
+        $user = Auth::user();
+
+        // Só alumni podem entrar pelo portal
+        if ($user->role !== 'alumni') {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'email' => 'Esta área é exclusiva para alumni. Utilize o acesso institucional.',
+            ]);
+        }
+
+        $request->session()->regenerate();
+
+        return $user->aprovado
+            ? redirect()->route('portal.dashboard')
+            : redirect()->route('portal.pendente');
+    }
+
     public function showRegister()
     {
         return view('portal.register');

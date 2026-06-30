@@ -353,6 +353,8 @@ Route::view('/servicos', 'pages.servicos')->name('servicos');
 Route::view('/parcerias', 'pages.parcerias')->name('parcerias');
 
 // ─── Portal Alumni — Publico ──────────────────────────────────────────────────
+Route::get('/portal/login', [App\Http\Controllers\Portal\AuthController::class, 'showLogin'])->name('portal.login');
+Route::post('/portal/login', [App\Http\Controllers\Portal\AuthController::class, 'login'])->name('portal.login.post')->middleware('throttle:5,1');
 Route::get('/portal/register', [App\Http\Controllers\Portal\AuthController::class, 'showRegister'])->name('portal.register');
 Route::post('/portal/register', [App\Http\Controllers\Portal\AuthController::class, 'register'])->name('portal.register.post')->middleware('throttle:5,1');
 Route::get('/portal/pendente', fn () => view('portal.pendente'))->name('portal.pendente');

@@ -130,7 +130,7 @@
                         </a>
                     @endif
                 @else
-                    <a href="{{ route('login') }}"
+                    <a href="{{ route('portal.login') }}"
                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-[#1e3a5f] bg-white hover:bg-orange-50 transition-colors whitespace-nowrap">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
                         Entrar

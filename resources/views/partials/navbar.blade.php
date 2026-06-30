@@ -74,7 +74,7 @@
         </a>
       @endif
     @else
-      <a href="{{ route('portal.register') }}"
+      <a href="{{ route('portal.login') }}"
          class="flex items-center gap-1.5 px-3 py-1 rounded-md text-white font-bold text-xs whitespace-nowrap transition-opacity hover:opacity-90"
          style="background:#F05A28;">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
@@ -376,12 +376,12 @@
             </a>
           @endif
         @else
-          <a href="{{ route('portal.register') }}"
+          <a href="{{ route('portal.login') }}"
              class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
             <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
             </svg>
-            <span>Portal Alumni — Registar</span>
+            <span>Portal Alumni — Entrar</span>
           </a>
         @endauth
 

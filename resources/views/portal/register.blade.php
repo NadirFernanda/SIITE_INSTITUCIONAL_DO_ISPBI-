@@ -112,8 +112,8 @@
                 </form>
 
                 <div style="margin-top:20px;text-align:center;font-size:0.84rem;color:#6b7280;">
-                    Ja tem conta?
-                    <a href="{{ route('login') }}" style="color:#1e3a5f;font-weight:600;text-decoration:none;">Entrar</a>
+                    Já tem conta?
+                    <a href="{{ route('portal.login') }}" style="color:#1e3a5f;font-weight:600;text-decoration:none;">Entrar</a>
                 </div>
 
                 <div style="margin-top:10px;text-align:center;font-size:0.84rem;color:#6b7280;">

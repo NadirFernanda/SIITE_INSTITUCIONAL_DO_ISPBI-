@@ -16,13 +16,17 @@ class EnsureUserIsAlumni
     public function handle(Request $request, Closure $next): Response
     {
         if (! Auth::check()) {
-            return redirect('/login');
+            return redirect()->route('portal.login');
         }
 
         $user = Auth::user();
 
         if ($user->role !== 'alumni') {
-            return redirect('/login');
+            // Não é alumni — deslogar e enviar para o login do portal
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect()->route('portal.login');
         }
 
         if (! $user->aprovado) {
