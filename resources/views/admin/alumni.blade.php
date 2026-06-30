@@ -4,17 +4,30 @@
 <div style="padding:32px 24px;max-width:1200px;margin:0 auto;">
 
     {{-- Header --}}
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;">
         <div>
             <h1 style="font-size:1.6rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Alumni Cadastrados</h1>
-            <p style="color:#64748b;font-size:0.95rem;margin:0;">Gestão de ex-alunos registados</p>
+            <p style="color:#64748b;font-size:0.95rem;margin:0;">Gestao de ex-alunos registados</p>
         </div>
-        <a href="{{ route('admin.alumni.stats') }}"
-           style="display:inline-flex;align-items:center;gap:8px;background:#1565c0;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
-           onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            Editar Indicadores
-        </a>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+            @if(isset($pendingCount) && $pendingCount > 0)
+                <span style="background:#fff8e1;color:#f57f17;padding:5px 14px;border-radius:20px;font-size:0.8rem;font-weight:700;border:1px solid #ffcc02;">
+                    {{ $pendingCount }} pendente{{ $pendingCount !== 1 ? 's' : '' }} de aprovacao
+                </span>
+            @endif
+            <a href="{{ route('admin.alumni.stats') }}"
+               style="display:inline-flex;align-items:center;gap:8px;background:#1565c0;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
+               onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Editar Indicadores
+            </a>
+            <a href="{{ route('admin.alumni-documentos.index') }}"
+               style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1565c0;border:1px solid #1565c0;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
+               onmouseover="this.style.background='#e3f2fd'" onmouseout="this.style.background='#fff'">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Documentos Alumni
+            </a>
+        </div>
     </div>
 
     {{-- Flash --}}
@@ -57,6 +70,9 @@
                         </div>
                         {{-- Status badges --}}
                         <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+                            @if($alumnus->user_id)
+                                <span style="background:#e8f0fe;color:#1565c0;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">Portal</span>
+                            @endif
                             @if($alumnus->publicado)
                                 <span style="background:#e8f5e9;color:#2e7d32;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">Publicado</span>
                             @else
@@ -67,6 +83,14 @@
                             @endif
                             @if($alumnus->testemunho)
                                 <span style="background:#f3e5f5;color:#7b1fa2;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">Testemunho</span>
+                            @endif
+                            {{-- Portal approval status --}}
+                            @if($alumnus->user)
+                                @if($alumnus->user->aprovado)
+                                    <span style="background:#e8f5e9;color:#2e7d32;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">Portal Aprovado</span>
+                                @else
+                                    <span style="background:#fff3e0;color:#e65100;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">Aguarda Aprovacao</span>
+                                @endif
                             @endif
                         </div>
                     </div>
@@ -83,6 +107,12 @@
                             <span>
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:-2px;margin-right:4px;"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                                 {{ $alumnus->empresa }}@if($alumnus->cargo) &middot; {{ $alumnus->cargo }}@endif
+                            </span>
+                        @endif
+                        @if($alumnus->user)
+                            <span style="color:#1565c0;">
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:inline;vertical-align:-2px;margin-right:4px;"><circle cx="12" cy="8" r="4"/><path stroke-linecap="round" d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+                                {{ $alumnus->user->email }}
                             </span>
                         @endif
                     </div>
@@ -113,6 +143,7 @@
                             {{ $alumnus->publicado ? 'Despublicar' : 'Publicar' }}
                         </button>
                     </form>
+
                     @if($alumnus->trabalha)
                         <form method="POST" action="{{ route('admin.alumni.toggle-testemunho', $alumnus->id) }}">
                             @csrf
@@ -122,6 +153,29 @@
                                 {{ $alumnus->testemunho ? 'Rem. Testemunho' : 'Add Testemunho' }}
                             </button>
                         </form>
+                    @endif
+
+                    {{-- Portal approval actions --}}
+                    @if($alumnus->user)
+                        @if(!$alumnus->user->aprovado)
+                            <form method="POST" action="{{ route('admin.alumni.aprovar', $alumnus->id) }}">
+                                @csrf
+                                <button type="submit"
+                                    style="padding:7px 14px;border-radius:8px;font-size:0.8rem;font-weight:600;border:none;cursor:pointer;white-space:nowrap;background:#e8f5e9;color:#2e7d32;"
+                                    onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                                    Aprovar Portal
+                                </button>
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('admin.alumni.revogar', $alumnus->id) }}">
+                                @csrf
+                                <button type="submit"
+                                    style="padding:7px 14px;border-radius:8px;font-size:0.8rem;font-weight:600;border:none;cursor:pointer;white-space:nowrap;background:#fff3e0;color:#e65100;"
+                                    onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                                    Revogar Acesso
+                                </button>
+                            </form>
+                        @endif
                     @endif
                 </div>
 

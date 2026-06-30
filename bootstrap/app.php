@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin'   => \App\Http\Middleware\EnsureUserIsAdmin::class,
             'tecnico' => \App\Http\Middleware\EnsureUserIsTecnico::class,
             'daac'    => \App\Http\Middleware\EnsureUserIsDAAC::class,
+            'alumni'  => \App\Http\Middleware\EnsureUserIsAlumni::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -19,11 +19,13 @@ class Noticia extends Model
         'data',
         'institucional',
         'publicada',
+        'para_alumni',
     ];
 
     protected $casts = [
         'data'          => 'date',
         'publicada'     => 'boolean',
         'institucional' => 'boolean',
+        'para_alumni'   => 'boolean',
     ];
 }

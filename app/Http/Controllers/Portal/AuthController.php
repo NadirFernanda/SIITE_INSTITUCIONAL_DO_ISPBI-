@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Http\Controllers\Portal;
+
+use App\Http\Controllers\Controller;
+use App\Models\Alumnus;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class AuthController extends Controller
+{
+    public function showRegister()
+    {
+        return view('portal.register');
+    }
+
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'nome'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'curso'    => 'required|string',
+            'ano'      => 'required|integer|min:1990|max:2030',
+        ], [
+            'nome.required'       => 'O nome é obrigatório.',
+            'nome.max'            => 'O nome não pode ter mais de 255 caracteres.',
+            'email.required'      => 'O endereço de e-mail é obrigatório.',
+            'email.email'         => 'Por favor insira um endereço de e-mail válido.',
+            'email.unique'        => 'Este endereço de e-mail já está registado.',
+            'password.required'   => 'A palavra-passe é obrigatória.',
+            'password.min'        => 'A palavra-passe deve ter pelo menos 8 caracteres.',
+            'password.confirmed'  => 'As palavras-passe não coincidem.',
+            'curso.required'      => 'O curso é obrigatório.',
+            'ano.required'        => 'O ano de conclusão é obrigatório.',
+            'ano.integer'         => 'O ano de conclusão deve ser um número inteiro.',
+            'ano.min'             => 'O ano de conclusão deve ser a partir de 1990.',
+            'ano.max'             => 'O ano de conclusão não pode ser superior a 2030.',
+        ]);
+
+        $user = new User();
+        $user->name     = $validated['nome'];
+        $user->email    = $validated['email'];
+        $user->password = bcrypt($validated['password']);
+        $user->forceFill([
+            'role'     => 'alumni',
+            'aprovado' => false,
+        ]);
+        $user->save();
+
+        Alumnus::create([
+            'nome'      => $validated['nome'],
+            'curso'     => $validated['curso'],
+            'ano'       => $validated['ano'],
+            'user_id'   => $user->id,
+            'contacto'  => '',
+            'trabalha'  => false,
+            'publicado' => false,
+        ]);
+
+        return redirect()->route('portal.pendente')
+            ->with('success', 'A sua conta está a ser analisada pelo administrador. Receberá acesso em breve.');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
+}

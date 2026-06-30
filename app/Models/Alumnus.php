@@ -22,6 +22,7 @@ class Alumnus extends Model
         'satisfacao',
         'publicado',
         'testemunho',
+        'user_id',
     ];
 
     protected $casts = [
@@ -30,4 +31,9 @@ class Alumnus extends Model
         'testemunho'=> 'boolean',
         'ano'       => 'integer',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'user_id');
+    }
 }

@@ -64,6 +64,19 @@
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13v6M12 9v10M17 5v14" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Resultados de Exames
     </a>
+    @auth
+      @if(Auth::user()->role === 'alumni' && Auth::user()->aprovado)
+        <a href="{{ route('portal.dashboard') }}" class="flex items-center gap-1 text-[#F05A28] hover:underline hover:text-[#F05A28] whitespace-nowrap font-bold">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Portal Alumni
+        </a>
+      @endif
+    @else
+      <a href="{{ route('portal.register') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Portal Alumni
+      </a>
+    @endauth
   </div>
   </div>
 </div>
@@ -343,6 +356,30 @@
           </svg>
           <span>Carta de Serviços</span>
         </a>
+
+        {{-- ── Portal Alumni ── --}}
+        <div class="mx-5 my-3 border-t border-gray-100"></div>
+        <p class="px-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Alumni</p>
+
+        @auth
+          @if(Auth::user()->role === 'alumni' && Auth::user()->aprovado)
+            <a href="{{ route('portal.dashboard') }}"
+               class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#F05A28] hover:bg-orange-50 transition-colors focus:outline-none focus:bg-orange-50">
+              <svg class="w-4 h-4 flex-shrink-0 text-[#F05A28]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <span class="font-semibold">Portal Alumni</span>
+            </a>
+          @endif
+        @else
+          <a href="{{ route('portal.register') }}"
+             class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+            <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>Portal Alumni — Registar</span>
+          </a>
+        @endauth
 
         {{-- Espaçamento no fundo do scroll --}}
         <div class="h-6"></div>

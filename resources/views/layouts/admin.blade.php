@@ -129,6 +129,11 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M2 7l10-4 10 4-10 4-10-4z" stroke="#fff" stroke-width="2" fill="none"/><path d="M6 10v4c0 2 4 4 6 4s6-2 6-4v-4" stroke="#fff" stroke-width="2" fill="none"/></svg>
                 </span>Alumni
             </a>
+            <a href="/admin/alumni-documentos">
+                <span style="vertical-align:middle;margin-right:8px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke="#fff" stroke-width="2" fill="none"/></svg>
+                </span>Docs Alumni
+            </a>
             <a href="/admin/candidaturas">
                 <span style="vertical-align:middle;margin-right:8px;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#fff" stroke-width="2" fill="none"/><path d="M8 7h8M8 11h8M8 15h5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>

@@ -150,6 +150,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
     Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
+
+    // Alumni documentos (portal)
+    Route::get('alumni-documentos', [App\Http\Controllers\Admin\AlumniDocumentoController::class, 'index'])->name('alumni-documentos.index');
+    Route::post('alumni-documentos', [App\Http\Controllers\Admin\AlumniDocumentoController::class, 'store'])->name('alumni-documentos.store');
+    Route::delete('alumni-documentos/{documento}', [App\Http\Controllers\Admin\AlumniDocumentoController::class, 'destroy'])->name('alumni-documentos.destroy');
+
+    // Alumni portal approval / revocation
+    Route::post('alumni/{id}/aprovar', [App\Http\Controllers\AdminAlumniController::class, 'aprovar'])->name('alumni.aprovar');
+    Route::post('alumni/{id}/revogar', [App\Http\Controllers\AdminAlumniController::class, 'revogar'])->name('alumni.revogar');
 });
 
 // Painel técnico — acesso a utilizadores com role 'tecnico' ou 'admin'
@@ -342,5 +351,23 @@ Route::view('/busca-biblioteca', 'pages.busca-biblioteca')->name('busca-bibliote
 Route::get('/noticias/{id}', [App\Http\Controllers\NoticiaController::class, 'show'])->name('noticias.show');
 Route::view('/servicos', 'pages.servicos')->name('servicos');
 Route::view('/parcerias', 'pages.parcerias')->name('parcerias');
+
+// ─── Portal Alumni — Publico ──────────────────────────────────────────────────
+Route::get('/portal/register', [App\Http\Controllers\Portal\AuthController::class, 'showRegister'])->name('portal.register');
+Route::post('/portal/register', [App\Http\Controllers\Portal\AuthController::class, 'register'])->name('portal.register.post')->middleware('throttle:5,1');
+Route::get('/portal/pendente', fn () => view('portal.pendente'))->name('portal.pendente');
+Route::post('/portal/logout', [App\Http\Controllers\Portal\AuthController::class, 'logout'])->name('portal.logout');
+
+// ─── Portal Alumni — Protegido ────────────────────────────────────────────────
+Route::prefix('portal')->name('portal.')->middleware(['auth', 'alumni', 'throttle:60,1'])->group(function () {
+    Route::get('/', [App\Http\Controllers\Portal\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/perfil', [App\Http\Controllers\Portal\PerfilController::class, 'edit'])->name('perfil');
+    Route::put('/perfil', [App\Http\Controllers\Portal\PerfilController::class, 'update'])->name('perfil.update');
+    Route::get('/noticias', [App\Http\Controllers\Portal\NoticiaController::class, 'index'])->name('noticias');
+    Route::get('/noticias/{id}', [App\Http\Controllers\Portal\NoticiaController::class, 'show'])->name('noticias.show');
+    Route::get('/diretorio', [App\Http\Controllers\Portal\DiretorioController::class, 'index'])->name('diretorio');
+    Route::get('/documentos', [App\Http\Controllers\Portal\DocumentoController::class, 'index'])->name('documentos');
+    Route::get('/documentos/{documento}/download', [App\Http\Controllers\Portal\DocumentoController::class, 'download'])->name('documentos.download');
+});
 
 require __DIR__.'/auth.php';
