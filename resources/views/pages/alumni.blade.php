@@ -84,7 +84,7 @@
     {{-- Estatísticas Alumni --}}
     @php
         $stats = \App\Models\AlumniStat::first();
-        $alumni_count = $stats->alumni_count ?? 0;
+        $alumni_count = \App\Models\Alumnus::where('publicado', true)->count();
         $employability = $stats->employability_percentage ?? 0;
         $countries = $stats->countries_count ?? 0;
         $companies = $stats->companies_founded ?? 0;
