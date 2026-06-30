@@ -36,7 +36,8 @@
               {{ mb_substr($alumnus->nome ?? 'A', 0, 1) }}
             </div>
             <div class="min-w-0">
-              <p class="font-bold text-[#1e3a5f]">{{ $alumnus->nome }}</p>
+              <p class="font-bold text-[#1e3a5f] uppercase">{{ $alumnus->nome }}</p>
+              <p class="text-xs text-gray-400 font-semibold mb-1">Alumni #{{ $alumnus->id }}</p>
               <p class="text-sm text-gray-400 mb-2">
                 {{ $alumnus->curso }}@if($alumnus->ano) &bull; Turma {{ $alumnus->ano }}@endif
               </p>
