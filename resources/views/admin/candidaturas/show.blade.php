@@ -16,10 +16,18 @@
             <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Candidatura #{{ $candidatura->id }}</h1>
             <p style="color:#64748b;font-size:0.9rem;margin:0;">Recebida em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}</p>
         </div>
-        @php $color = \App\Models\Candidatura::$statusColors[$candidatura->status] ?? '#94a3b8'; @endphp
-        <span style="background:{{ $color }}20;color:{{ $color }};padding:6px 16px;border-radius:20px;font-size:0.9rem;font-weight:700;">
-            {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}
-        </span>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            @php $color = \App\Models\Candidatura::$statusColors[$candidatura->status] ?? '#94a3b8'; @endphp
+            <span style="background:{{ $color }}20;color:{{ $color }};padding:6px 16px;border-radius:20px;font-size:0.9rem;font-weight:700;">
+                {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}
+            </span>
+            <a href="{{ route('admin.candidaturas.edit', $candidatura) }}"
+               style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;text-decoration:none;"
+               onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+            </a>
+        </div>
     </div>
 
     {{-- Flash --}}

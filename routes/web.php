@@ -145,6 +145,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     // Candidaturas admin
     Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
     Route::get('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}/edit', [App\Http\Controllers\Admin\CandidaturaController::class, 'edit'])->name('candidaturas.edit');
+    Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
     Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
@@ -185,8 +187,11 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::get('candidaturas/create', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'create'])->name('candidaturas.create');
     Route::post('candidaturas', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'store'])->name('candidaturas.store');
     Route::get('candidaturas', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}/edit', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'edit'])->name('candidaturas.edit');
+    Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
+    Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
 
     // Salas de exame
     Route::get('salas', [App\Http\Controllers\Tecnico\SalaController::class, 'index'])->name('salas.index');
