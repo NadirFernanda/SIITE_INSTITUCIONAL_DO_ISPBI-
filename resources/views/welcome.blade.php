@@ -480,7 +480,7 @@
           @endif
         </div>
 
-        {{-- Gráfico de barras por país --}}
+        {{-- Gráfico de barras por país (SVG server-side) --}}
         <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <h3 class="text-base font-bold text-[#1e3a5f] mb-5">Acessos por País</h3>
           @if($visitasPorPais->isEmpty())
@@ -489,12 +489,59 @@
               <p class="text-sm">Sem dados de visitas ainda.</p>
             </div>
           @else
-            <div style="position:relative;height:260px;">
-              <canvas id="visitsChart"
-                data-labels="{{ e(json_encode($visitasPorPais->pluck('pais')->values()->toArray())) }}"
-                data-values="{{ e(json_encode($visitasPorPais->pluck('total')->map(fn($v) => (int)$v)->values()->toArray())) }}">
-              </canvas>
-            </div>
+            @php
+              $chartData  = $visitasPorPais->values();
+              $maxVal     = max(1, $chartData->max('total'));
+              $n          = $chartData->count();
+              $svgW       = 600;
+              $svgH       = 240;
+              $padL       = 12; $padR = 12; $padT = 16; $padB = 54;
+              $barArea    = $svgW - $padL - $padR;
+              $barH       = $svgH - $padT - $padB;
+              $gap        = max(4, (int)($barArea / $n * 0.22));
+              $barW       = (int)(($barArea - $gap * ($n - 1)) / $n);
+            @endphp
+            <svg viewBox="0 0 {{ $svgW }} {{ $svgH }}" style="width:100%;height:260px;display:block;" aria-label="Gráfico de acessos por país">
+              <defs>
+                <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2563eb" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0.7"/>
+                </linearGradient>
+              </defs>
+              {{-- Linhas guia horizontais --}}
+              @for($i = 1; $i <= 4; $i++)
+                @php $gy = $padT + $barH - ($barH * $i / 4); @endphp
+                <line x1="{{ $padL }}" y1="{{ $gy }}" x2="{{ $svgW - $padR }}" y2="{{ $gy }}"
+                      stroke="#e5e7eb" stroke-width="1"/>
+                <text x="{{ $padL - 4 }}" y="{{ $gy + 4 }}" text-anchor="end" font-size="9" fill="#9ca3af">
+                  {{ number_format($maxVal * $i / 4) }}
+                </text>
+              @endfor
+              {{-- Barras --}}
+              @foreach($chartData as $idx => $v)
+                @php
+                  $bx  = $padL + $idx * ($barW + $gap);
+                  $bh  = max(2, (int)($barH * $v->total / $maxVal));
+                  $by  = $padT + $barH - $bh;
+                  $cx  = $bx + $barW / 2;
+                  $opacity = 0.45 + 0.55 * ($v->total / $maxVal);
+                  $label = mb_strlen($v->pais) > 11 ? mb_substr($v->pais, 0, 10) . '…' : $v->pais;
+                @endphp
+                <rect x="{{ $bx }}" y="{{ $by }}" width="{{ $barW }}" height="{{ $bh }}"
+                      fill="url(#barGrad)" opacity="{{ round($opacity, 2) }}" rx="3"/>
+                {{-- Valor em cima --}}
+                <text x="{{ $cx }}" y="{{ $by - 4 }}" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">
+                  {{ number_format($v->total) }}
+                </text>
+                {{-- Rótulo em baixo --}}
+                <text x="{{ $cx }}" y="{{ $padT + $barH + 14 }}" text-anchor="middle" font-size="10" font-weight="600" fill="#4b5563">
+                  {{ $label }}
+                </text>
+              @endforeach
+              {{-- Eixo X --}}
+              <line x1="{{ $padL }}" y1="{{ $padT + $barH }}" x2="{{ $svgW - $padR }}" y2="{{ $padT + $barH }}"
+                    stroke="#d1d5db" stroke-width="1.5"/>
+            </svg>
           @endif
         </div>
 
