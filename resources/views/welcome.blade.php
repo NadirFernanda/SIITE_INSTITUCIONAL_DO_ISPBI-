@@ -489,59 +489,25 @@
               <p class="text-sm">Sem dados de visitas ainda.</p>
             </div>
           @else
-            @php
-              $chartData  = $visitasPorPais->values();
-              $maxVal     = max(1, $chartData->max('total'));
-              $n          = $chartData->count();
-              $svgW       = 600;
-              $svgH       = 240;
-              $padL       = 12; $padR = 12; $padT = 16; $padB = 54;
-              $barArea    = $svgW - $padL - $padR;
-              $barH       = $svgH - $padT - $padB;
-              $gap        = max(4, (int)($barArea / $n * 0.22));
-              $barW       = (int)(($barArea - $gap * ($n - 1)) / $n);
-            @endphp
-            <svg viewBox="0 0 {{ $svgW }} {{ $svgH }}" style="width:100%;height:260px;display:block;" aria-label="Gráfico de acessos por país">
-              <defs>
-                <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#2563eb" stop-opacity="0.9"/>
-                  <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0.7"/>
-                </linearGradient>
-              </defs>
-              {{-- Linhas guia horizontais --}}
-              @for($i = 1; $i <= 4; $i++)
-                @php $gy = $padT + $barH - ($barH * $i / 4); @endphp
-                <line x1="{{ $padL }}" y1="{{ $gy }}" x2="{{ $svgW - $padR }}" y2="{{ $gy }}"
-                      stroke="#e5e7eb" stroke-width="1"/>
-                <text x="{{ $padL - 4 }}" y="{{ $gy + 4 }}" text-anchor="end" font-size="9" fill="#9ca3af">
-                  {{ number_format($maxVal * $i / 4) }}
-                </text>
-              @endfor
-              {{-- Barras --}}
-              @foreach($chartData as $idx => $v)
-                @php
-                  $bx  = $padL + $idx * ($barW + $gap);
-                  $bh  = max(2, (int)($barH * $v->total / $maxVal));
-                  $by  = $padT + $barH - $bh;
-                  $cx  = $bx + $barW / 2;
-                  $opacity = 0.45 + 0.55 * ($v->total / $maxVal);
-                  $label = mb_strlen($v->pais) > 11 ? mb_substr($v->pais, 0, 10) . '…' : $v->pais;
-                @endphp
-                <rect x="{{ $bx }}" y="{{ $by }}" width="{{ $barW }}" height="{{ $bh }}"
-                      fill="url(#barGrad)" opacity="{{ round($opacity, 2) }}" rx="3"/>
-                {{-- Valor em cima --}}
-                <text x="{{ $cx }}" y="{{ $by - 4 }}" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a5f">
-                  {{ number_format($v->total) }}
-                </text>
-                {{-- Rótulo em baixo --}}
-                <text x="{{ $cx }}" y="{{ $padT + $barH + 14 }}" text-anchor="middle" font-size="10" font-weight="600" fill="#4b5563">
-                  {{ $label }}
-                </text>
+            @php $maxVal = max(1, $visitasPorPais->max('total')); @endphp
+            <div style="display:flex;align-items:flex-end;gap:8px;height:220px;padding-bottom:28px;position:relative;">
+              {{-- Linhas guia --}}
+              @foreach([25,50,75,100] as $pct)
+                <div style="position:absolute;left:0;right:0;bottom:{{ 28 + ($pct / 100 * 192) }}px;border-top:1px dashed #e5e7eb;"></div>
               @endforeach
-              {{-- Eixo X --}}
-              <line x1="{{ $padL }}" y1="{{ $padT + $barH }}" x2="{{ $svgW - $padR }}" y2="{{ $padT + $barH }}"
-                    stroke="#d1d5db" stroke-width="1.5"/>
-            </svg>
+              @foreach($visitasPorPais as $v)
+                @php
+                  $hPct  = max(3, round($v->total / $maxVal * 100));
+                  $label = mb_strlen($v->pais) > 10 ? mb_substr($v->pais, 0, 9) . '…' : $v->pais;
+                  $alpha = round(0.45 + 0.55 * ($v->total / $maxVal), 2);
+                @endphp
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;">
+                  <span style="font-size:9px;font-weight:700;color:#1e3a5f;margin-bottom:3px;">{{ number_format($v->total) }}</span>
+                  <div style="width:100%;height:{{ $hPct }}%;background:linear-gradient(180deg,#2563eb,#1e3a5f);opacity:{{ $alpha }};border-radius:4px 4px 0 0;"></div>
+                  <span style="position:absolute;bottom:-24px;font-size:9px;font-weight:600;color:#4b5563;white-space:nowrap;overflow:hidden;max-width:100%;text-align:center;">{{ $label }}</span>
+                </div>
+              @endforeach
+            </div>
           @endif
         </div>
 
