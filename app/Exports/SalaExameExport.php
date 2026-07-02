@@ -205,21 +205,25 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
 
         [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 50;
+        $displayH = 55;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar horizontalmente: total colunas A(6)+B(65)+C(34)=105 × 7px = 735px
-        $totalPx = 105 * 7;
-        $offsetX = max(0, (int)(($totalPx - $displayW) / 2));
+        // Centrar logo across colunas A(6)+B(65)+C(34)=105 chars.
+        // Ancoramos em B1 para evitar que offsets grandes sejam ignorados pelo Excel.
+        // Centro total (a 8px/char): (105*8)/2 = 420px desde a esquerda.
+        // Offset desde A1 até B1 = 6*8 = 48px.
+        // => Offset desde B1 até ao centro = 420 - 48 = 372px.
+        $centerFromB1 = (int)(((6 + 65 + 34) * 8 / 2) - (6 * 8));
+        $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
 
         $drawing = new Drawing();
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
         $drawing->setHeight($displayH);
         $drawing->setWidth($displayW);
-        $drawing->setCoordinates('A1');
+        $drawing->setCoordinates('B1');
         $drawing->setOffsetX($offsetX);
-        $drawing->setOffsetY(4);
+        $drawing->setOffsetY(3);
 
         return [$drawing];
     }

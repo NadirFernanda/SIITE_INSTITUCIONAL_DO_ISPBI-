@@ -31,7 +31,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function title(): string
     {
-        return 'Lançamento de Notas';
+        return 'Pauta';
     }
 
     public function array(): array
@@ -44,7 +44,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Cabeçalho (linhas 2-4) — mescladas A:C, centradas
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
         $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
-        $rows[] = ['EXAME DE ACESSO 2026/2027 — LANÇAMENTO DE NOTAS', '', ''];
+        $rows[] = ['EXAME DE ACESSO 2026/2027 — PAUTA', '', ''];
 
         // Linha 5 — vazia
         $rows[] = ['', '', ''];
@@ -204,21 +204,26 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
 
         [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 50;
+        $displayH = 55;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar: A(7)+B(65)+C(23)=95 × 7px = 665px
-        $totalPx = 95 * 7;
-        $offsetX = max(0, (int)(($totalPx - $displayW) / 2));
+        // Centrar logo across colunas A(7)+B(65)+C(23)=95 chars.
+        // Ancoramos em B1 porque offsets grandes a partir de A1 não são
+        // respeitados pelo Excel quando ultrapassam a largura da coluna A.
+        // Centro total (em px a 8px/char): (95*8)/2 = 380px desde a esquerda.
+        // Offset desde A1_esquerda até B1_esquerda = 7*8 = 56px.
+        // => Offset desde B1 até ao centro = 380 - 56 = 324px.
+        $centerFromB1 = (int)(((7 + 65 + 23) * 8 / 2) - (7 * 8));
+        $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
 
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
         $drawing->setHeight($displayH);
         $drawing->setWidth($displayW);
-        $drawing->setCoordinates('A1');
+        $drawing->setCoordinates('B1');
         $drawing->setOffsetX($offsetX);
-        $drawing->setOffsetY(4);
+        $drawing->setOffsetY(3);
 
         return [$drawing];
     }
