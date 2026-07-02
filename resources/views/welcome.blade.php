@@ -490,7 +490,10 @@
             </div>
           @else
             <div style="position:relative;height:260px;">
-              <canvas id="visitsChart"></canvas>
+              <canvas id="visitsChart"
+                data-labels="{{ e(json_encode($visitasPorPais->pluck('pais')->values()->toArray())) }}"
+                data-values="{{ e(json_encode($visitasPorPais->pluck('total')->map(fn($v) => (int)$v)->values()->toArray())) }}">
+              </canvas>
             </div>
           @endif
         </div>
@@ -503,53 +506,3 @@
 
 @endsection
 
-@if($visitasPorPais->isNotEmpty())
-@push('scripts')
-<script>
-window.addEventListener('load', function() {
-    var ctx = document.getElementById('visitsChart');
-    if (!ctx || typeof Chart === 'undefined') return;
-    var labels = @json($visitasPorPais->pluck('pais'));
-    var data   = @json($visitasPorPais->pluck('total')->map(fn($v) => (int) $v));
-    var maxVal = Math.max.apply(null, data) || 1;
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Visitas',
-                data: data,
-                backgroundColor: data.map(function(v) {
-                    var op = 0.45 + 0.55 * (v / maxVal);
-                    return 'rgba(30,58,95,' + op + ')';
-                }),
-                borderColor: 'rgba(37,99,235,0.6)',
-                borderWidth: 1,
-                borderRadius: 6,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    callbacks: {
-                        label: function(c) { return ' ' + c.parsed.y.toLocaleString('pt-PT') + ' visitas'; }
-                    }
-                }
-            },
-            scales: {
-                x: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#4b5563' } },
-                y: {
-                    beginAtZero: true,
-                    grid: { color: 'rgba(0,0,0,0.04)' },
-                    ticks: { font: { size: 11 }, color: '#9ca3af', callback: function(v) { return v.toLocaleString('pt-PT'); } }
-                }
-            }
-        }
-    });
-});
-</script>
-@endpush
-@endif
