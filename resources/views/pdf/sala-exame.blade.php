@@ -74,7 +74,7 @@
             <tbody>
                 @foreach($lista->sortBy('id') as $c)
                 <tr>
-                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ $c->id }}</td>
+                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td class="nome-col">{{ $c->nome }}</td>
                     <td>&nbsp;</td>
                 </tr>

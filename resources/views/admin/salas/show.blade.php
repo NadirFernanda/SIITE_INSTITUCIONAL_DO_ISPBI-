@@ -60,7 +60,7 @@
                 <tbody>
                     @foreach($lista as $c)
                     <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1565c0;">{{ $c->id }}</td>
+                        <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1565c0;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                         <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>

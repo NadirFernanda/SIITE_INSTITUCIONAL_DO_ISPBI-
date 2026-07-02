@@ -77,7 +77,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // Linhas de dados
         foreach ($this->candidaturas as $c) {
-            $rows[] = [$c->id, strtoupper($c->nome), ''];
+            $rows[] = [str_pad($c->id, 5, '0', STR_PAD_LEFT), strtoupper($c->nome), ''];
         }
 
         // Assinatura do Presidente — centrada (merge A:B)

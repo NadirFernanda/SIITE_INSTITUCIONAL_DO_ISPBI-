@@ -75,7 +75,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // Dados — nome em maiúsculas, nota em branco
         foreach ($this->candidaturas as $c) {
-            $rows[] = [$c->id, strtoupper($c->nome), ''];
+            $rows[] = [str_pad($c->id, 5, '0', STR_PAD_LEFT), strtoupper($c->nome), ''];
         }
 
         // Assinatura do Presidente — centrada
