@@ -506,7 +506,7 @@
 @if($visitasPorPais->isNotEmpty())
 @push('scripts')
 <script>
-(function() {
+window.addEventListener('load', function() {
     var ctx = document.getElementById('visitsChart');
     if (!ctx || typeof Chart === 'undefined') return;
     var labels = @json($visitasPorPais->pluck('pais'));
@@ -549,7 +549,7 @@
             }
         }
     });
-})();
+});
 </script>
 @endpush
 @endif
