@@ -25,10 +25,17 @@ class SalaController extends Controller
 
         // Grupos por curso+período (para mostrar na view)
         $grupos = \DB::table('candidaturas')
-            ->selectRaw("TRIM(curso) as curso, LOWER(TRIM(periodo)) as periodo, COUNT(*) as total")
+            ->selectRaw("TRIM(curso) as curso,
+                CASE WHEN LOWER(TRIM(periodo)) IN ('pos-laboral','pós-laboral','pos laboral','pós laboral','poslaboral')
+                     THEN 'pos-laboral' ELSE 'regular' END as periodo,
+                COUNT(*) as total")
             ->whereNotIn('status', ['rejeitada'])
-            ->groupByRaw("TRIM(curso), LOWER(TRIM(periodo))")
-            ->orderByRaw("TRIM(curso), LOWER(TRIM(periodo))")
+            ->groupByRaw("TRIM(curso),
+                CASE WHEN LOWER(TRIM(periodo)) IN ('pos-laboral','pós-laboral','pos laboral','pós laboral','poslaboral')
+                     THEN 'pos-laboral' ELSE 'regular' END")
+            ->orderByRaw("TRIM(curso),
+                CASE WHEN LOWER(TRIM(periodo)) IN ('pos-laboral','pós-laboral','pos laboral','pós laboral','poslaboral')
+                     THEN 'pos-laboral' ELSE 'regular' END")
             ->get();
 
         return view('admin.salas.index', compact(
