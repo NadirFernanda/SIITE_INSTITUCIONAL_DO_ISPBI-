@@ -27,7 +27,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     public function __construct(Sala $sala)
     {
         $this->sala         = $sala;
-        $this->candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
+        $this->candidaturas = $sala->candidaturas()->orderBy('id')->get();
     }
 
     public function title(): string
@@ -77,7 +77,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // Linhas de dados
         foreach ($this->candidaturas as $c) {
-            $rows[] = [$c->numero_lugar, strtoupper($c->nome), ''];
+            $rows[] = [$c->id, strtoupper($c->nome), ''];
         }
 
         // Assinatura do Presidente — centrada (merge A:B)

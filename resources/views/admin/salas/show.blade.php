@@ -51,7 +51,7 @@
             <table style="width:100%;border-collapse:collapse;font-size:0.87rem;">
                 <thead>
                     <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
-                        <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;width:60px;">N.º Lugar</th>
+                        <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;width:60px;">N.º Ficha</th>
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Nome</th>
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">BI</th>
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Sexo</th>
@@ -60,7 +60,7 @@
                 <tbody>
                     @foreach($lista as $c)
                     <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1565c0;">{{ $c->numero_lugar }}</td>
+                        <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1565c0;">{{ $c->id }}</td>
                         <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>

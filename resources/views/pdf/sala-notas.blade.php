@@ -72,9 +72,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($lista->sortBy('numero_lugar') as $c)
+                @foreach($lista->sortBy('id') as $c)
                 <tr>
-                    <td style="text-align:center;font-weight:bold;color:#0e5c2f;">{{ $c->numero_lugar }}</td>
+                    <td style="text-align:center;font-weight:bold;color:#0e5c2f;">{{ $c->id }}</td>
                     <td class="nome-col">{{ $c->nome }}</td>
                     <td>&nbsp;</td>
                 </tr>

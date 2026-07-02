@@ -73,9 +73,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($lista->sortBy('numero_lugar') as $c)
+                @foreach($lista->sortBy('id') as $c)
                 <tr>
-                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ $c->numero_lugar }}</td>
+                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ $c->id }}</td>
                     <td class="nome-col">{{ $c->nome }}</td>
                     <td>{{ $c->bi }}</td>
                     <td style="text-align:center;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
