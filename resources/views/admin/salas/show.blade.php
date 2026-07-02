@@ -27,12 +27,12 @@
             <a href="{{ route('admin.salas.excel-exame', $sala) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#15803d;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                Excel — Lista Exame
+                Excel — Lista de Presença
             </a>
             <a href="{{ route('admin.salas.excel-notas', $sala) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#0e5c2f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                Excel — Lançamento Notas
+                Excel — Pauta
             </a>
         </div>
     </div>
