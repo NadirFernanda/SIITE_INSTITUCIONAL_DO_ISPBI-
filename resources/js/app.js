@@ -8,52 +8,54 @@ window.Alpine = Alpine;
 Alpine.start();
 
 // Gráfico de visitas por país (homepage)
-(function () {
-    const canvas = document.getElementById('visitsChart');
+function initVisitsChart() {
+    var canvas = document.getElementById('visitsChart');
     if (!canvas) return;
+    var labels, values;
     try {
-        const labels = JSON.parse(canvas.dataset.labels || '[]');
-        const values = JSON.parse(canvas.dataset.values || '[]');
-        if (!labels.length) return;
-        const maxVal = Math.max.apply(null, values) || 1;
-        new Chart(canvas, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Visitas',
-                    data: values,
-                    backgroundColor: values.map(function (v) {
-                        return 'rgba(30,58,95,' + (0.45 + 0.55 * (v / maxVal)) + ')';
-                    }),
-                    borderColor: 'rgba(37,99,235,0.6)',
-                    borderWidth: 1,
-                    borderRadius: 6,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function (c) { return ' ' + c.parsed.y.toLocaleString('pt-PT') + ' visitas'; }
-                        }
-                    }
-                },
-                scales: {
-                    x: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#4b5563' } },
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(0,0,0,0.04)' },
-                        ticks: { font: { size: 11 }, color: '#9ca3af', callback: function (v) { return v.toLocaleString('pt-PT'); } }
+        labels = JSON.parse(canvas.dataset.labels || '[]');
+        values = JSON.parse(canvas.dataset.values || '[]');
+    } catch (e) { return; }
+    if (!labels.length) return;
+    var maxVal = Math.max.apply(null, values) || 1;
+    new Chart(canvas, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Visitas',
+                data: values,
+                backgroundColor: values.map(function (v) {
+                    return 'rgba(30,58,95,' + (0.45 + 0.55 * (v / maxVal)) + ')';
+                }),
+                borderColor: 'rgba(37,99,235,0.6)',
+                borderWidth: 1,
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function (c) { return ' ' + c.parsed.y.toLocaleString('pt-PT') + ' visitas'; }
                     }
                 }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#4b5563' } },
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0,0,0,0.04)' },
+                    ticks: { font: { size: 11 }, color: '#9ca3af', callback: function (v) { return v.toLocaleString('pt-PT'); } }
+                }
             }
-        });
-    } catch (e) { /* canvas ou dados inválidos */ }
-}());
+        }
+    });
+}
+window.addEventListener('load', initVisitsChart);
 
 // Fechar dropdowns do navbar ao clicar fora (independente da versão do Alpine)
 document.addEventListener('click', function (e) {
