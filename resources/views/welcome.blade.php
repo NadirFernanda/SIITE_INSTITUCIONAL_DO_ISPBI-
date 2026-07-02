@@ -457,8 +457,7 @@
             </div>
             <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Total de Acessos</p>
             <div class="text-5xl font-extrabold text-[#1e3a5f] leading-none mb-1"
-                 id="visitCounter"
-                 data-target="{{ $totalVisitas }}">{{ number_format($totalVisitas) }}</div>
+                 data-counter data-target="{{ $totalVisitas }}">{{ number_format($totalVisitas) }}</div>
             <p class="text-xs text-gray-400 mt-2">visitas registadas</p>
           </div>
 
@@ -504,33 +503,10 @@
 
 @endsection
 
+@if($visitasPorPais->isNotEmpty())
 @push('scripts')
-{{-- Contador animado: sem dependências externas --}}
 <script>
 (function() {
-    var el = document.getElementById('visitCounter');
-    if (!el) return;
-    var target = parseInt(el.dataset.target) || 0;
-    if (target === 0) return;
-    var duration = 1800, start = null;
-    function step(ts) {
-        if (!start) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var ease = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(ease * target).toLocaleString('pt-PT');
-        if (progress < 1) requestAnimationFrame(step);
-    }
-    var obs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting) { requestAnimationFrame(step); obs.disconnect(); }
-    }, { threshold: 0.3 });
-    obs.observe(el);
-})();
-</script>
-
-@if($visitasPorPais->isNotEmpty())
-{{-- Função de chart definida antes de carregar Chart.js --}}
-<script>
-function renderVisitsChart() {
     var ctx = document.getElementById('visitsChart');
     if (!ctx || typeof Chart === 'undefined') return;
     var labels = @json($visitasPorPais->pluck('pais'));
@@ -564,25 +540,16 @@ function renderVisitsChart() {
                 }
             },
             scales: {
-                x: {
-                    grid: { display: false },
-                    ticks: { font: { size: 11, weight: '600' }, color: '#4b5563' }
-                },
+                x: { grid: { display: false }, ticks: { font: { size: 11, weight: '600' }, color: '#4b5563' } },
                 y: {
                     beginAtZero: true,
                     grid: { color: 'rgba(0,0,0,0.04)' },
-                    ticks: {
-                        font: { size: 11 }, color: '#9ca3af',
-                        callback: function(v) { return v.toLocaleString('pt-PT'); }
-                    }
+                    ticks: { font: { size: 11 }, color: '#9ca3af', callback: function(v) { return v.toLocaleString('pt-PT'); } }
                 }
             }
         }
     });
-}
+})();
 </script>
-{{-- Chart.js do CDN — gráfico renderiza no onload --}}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
-        onload="renderVisitsChart()"></script>
-@endif
 @endpush
+@endif
