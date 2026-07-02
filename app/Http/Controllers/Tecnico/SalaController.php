@@ -22,10 +22,11 @@ class SalaController extends Controller
         $semSala         = $totalCandidatos - $atribuidos;
         $totalLugares    = $salas->sum('capacidade');
 
-        $grupos = Candidatura::whereNotIn('status', ['rejeitada'])
-            ->selectRaw('curso, periodo, COUNT(*) as total')
-            ->groupBy('curso', 'periodo')
-            ->orderBy('curso')->orderBy('periodo')
+        $grupos = \DB::table('candidaturas')
+            ->selectRaw("TRIM(curso) as curso, LOWER(TRIM(periodo)) as periodo, COUNT(*) as total")
+            ->whereNotIn('status', ['rejeitada'])
+            ->groupByRaw("TRIM(curso), LOWER(TRIM(periodo))")
+            ->orderByRaw("TRIM(curso), LOWER(TRIM(periodo))")
             ->get();
 
         return view('tecnico.salas.index', compact(

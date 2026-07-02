@@ -24,10 +24,11 @@ class SalaController extends Controller
         $totalLugares      = $salas->sum('capacidade');
 
         // Grupos por curso+período (para mostrar na view)
-        $grupos = Candidatura::whereNotIn('status', ['rejeitada'])
-            ->selectRaw('curso, periodo, COUNT(*) as total')
-            ->groupBy('curso', 'periodo')
-            ->orderBy('curso')->orderBy('periodo')
+        $grupos = \DB::table('candidaturas')
+            ->selectRaw("TRIM(curso) as curso, LOWER(TRIM(periodo)) as periodo, COUNT(*) as total")
+            ->whereNotIn('status', ['rejeitada'])
+            ->groupByRaw("TRIM(curso), LOWER(TRIM(periodo))")
+            ->orderByRaw("TRIM(curso), LOWER(TRIM(periodo))")
             ->get();
 
         return view('admin.salas.index', compact(
