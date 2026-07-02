@@ -458,7 +458,7 @@
             <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Total de Acessos</p>
             <div class="text-5xl font-extrabold text-[#1e3a5f] leading-none mb-1"
                  id="visitCounter"
-                 data-target="{{ $totalVisitas }}">0</div>
+                 data-target="{{ $totalVisitas }}">{{ number_format($totalVisitas) }}</div>
             <p class="text-xs text-gray-400 mt-2">visitas registadas</p>
           </div>
 
@@ -502,36 +502,40 @@
 
   </main>
 
-@if($visitasPorPais->isNotEmpty())
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+@endsection
+
+@push('scripts')
+{{-- Contador animado: sem dependências externas --}}
 <script>
 (function() {
-    // Contador animado
     var el = document.getElementById('visitCounter');
-    if (el) {
-        var target = parseInt(el.dataset.target) || 0;
-        var duration = 1800;
-        var start = null;
-        function step(ts) {
-            if (!start) start = ts;
-            var progress = Math.min((ts - start) / duration, 1);
-            var ease = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.floor(ease * target).toLocaleString('pt-PT');
-            if (progress < 1) requestAnimationFrame(step);
-        }
-        var obs = new IntersectionObserver(function(entries) {
-            if (entries[0].isIntersecting) { requestAnimationFrame(step); obs.disconnect(); }
-        }, { threshold: 0.3 });
-        obs.observe(el);
+    if (!el) return;
+    var target = parseInt(el.dataset.target) || 0;
+    if (target === 0) return;
+    var duration = 1800, start = null;
+    function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target).toLocaleString('pt-PT');
+        if (progress < 1) requestAnimationFrame(step);
     }
+    var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) { requestAnimationFrame(step); obs.disconnect(); }
+    }, { threshold: 0.3 });
+    obs.observe(el);
+})();
+</script>
 
-    // Gráfico
+@if($visitasPorPais->isNotEmpty())
+{{-- Função de chart definida antes de carregar Chart.js --}}
+<script>
+function renderVisitsChart() {
     var ctx = document.getElementById('visitsChart');
-    if (!ctx) return;
+    if (!ctx || typeof Chart === 'undefined') return;
     var labels = @json($visitasPorPais->pluck('pais'));
-    var data   = @json($visitasPorPais->pluck('total'));
-    var maxVal = Math.max.apply(null, data);
-
+    var data   = @json($visitasPorPais->pluck('total')->map(fn($v) => (int) $v));
+    var maxVal = Math.max.apply(null, data) || 1;
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -540,8 +544,8 @@
                 label: 'Visitas',
                 data: data,
                 backgroundColor: data.map(function(v) {
-                    var opacity = 0.45 + 0.55 * (v / maxVal);
-                    return 'rgba(30,58,95,' + opacity + ')';
+                    var op = 0.45 + 0.55 * (v / maxVal);
+                    return 'rgba(30,58,95,' + op + ')';
                 }),
                 borderColor: 'rgba(37,99,235,0.6)',
                 borderWidth: 1,
@@ -555,7 +559,7 @@
                 legend: { display: false },
                 tooltip: {
                     callbacks: {
-                        label: function(ctx) { return ' ' + ctx.parsed.y.toLocaleString('pt-PT') + ' visitas'; }
+                        label: function(c) { return ' ' + c.parsed.y.toLocaleString('pt-PT') + ' visitas'; }
                     }
                 }
             },
@@ -575,7 +579,10 @@
             }
         }
     });
-})();
+}
 </script>
+{{-- Chart.js do CDN — gráfico renderiza no onload --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+        onload="renderVisitsChart()"></script>
 @endif
-@endsection
+@endpush
