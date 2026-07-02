@@ -167,7 +167,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // ── Assinatura do Presidente ──
         $sheet->getStyle("A{$sigLinha}")->applyFromArray([
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-            'borders'   => ['bottom' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => '000000']]],
         ]);
         $sheet->getRowDimension($sigLinha)->setRowHeight(18);
         $sheet->getStyle("A{$sigNome}")->applyFromArray([
