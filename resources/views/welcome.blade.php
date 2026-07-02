@@ -431,5 +431,151 @@
       </div>
     </div>
   </section>
+
+  {{-- ═══════════════════════════════════════════════════════
+       Secção: Acessos ao site + gráfico por país
+       ═══════════════════════════════════════════════════════ --}}
+  <section class="py-10 sm:py-14 border-t border-gray-100" style="background:#f8fafc;">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {{-- Cabeçalho --}}
+      <div class="mb-8 flex items-center gap-3">
+        <span class="inline-block w-8 h-0.5 bg-[#F05A28]"></span>
+        <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Estatísticas do Site</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+
+        {{-- Card: total de acessos --}}
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 text-center">
+            <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </div>
+            <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Total de Acessos</p>
+            <div class="text-5xl font-extrabold text-[#1e3a5f] leading-none mb-1"
+                 id="visitCounter"
+                 data-target="{{ $totalVisitas }}">0</div>
+            <p class="text-xs text-gray-400 mt-2">visitas registadas</p>
+          </div>
+
+          @if($visitasPorPais->isNotEmpty())
+          <div class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Top Países</p>
+            @foreach($visitasPorPais->take(5) as $v)
+              @php $pct = $visitasPorPais->first()->total > 0 ? round($v->total / $visitasPorPais->first()->total * 100) : 0; @endphp
+              <div class="mb-2.5">
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="font-semibold text-gray-700">{{ $v->pais }}</span>
+                  <span class="text-gray-400">{{ number_format($v->total) }}</span>
+                </div>
+                <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full transition-all duration-700" style="width:{{ $pct }}%;background:linear-gradient(90deg,#1e3a5f,#2563eb);"></div>
+                </div>
+              </div>
+            @endforeach
+          </div>
+          @endif
+        </div>
+
+        {{-- Gráfico de barras por país --}}
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h3 class="text-base font-bold text-[#1e3a5f] mb-5">Acessos por País</h3>
+          @if($visitasPorPais->isEmpty())
+            <div class="flex flex-col items-center justify-center py-14 text-gray-300">
+              <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              <p class="text-sm">Sem dados de visitas ainda.</p>
+            </div>
+          @else
+            <div style="position:relative;height:260px;">
+              <canvas id="visitsChart"></canvas>
+            </div>
+          @endif
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   </main>
+
+@if($visitasPorPais->isNotEmpty())
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(function() {
+    // Contador animado
+    var el = document.getElementById('visitCounter');
+    if (el) {
+        var target = parseInt(el.dataset.target) || 0;
+        var duration = 1800;
+        var start = null;
+        function step(ts) {
+            if (!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(ease * target).toLocaleString('pt-PT');
+            if (progress < 1) requestAnimationFrame(step);
+        }
+        var obs = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) { requestAnimationFrame(step); obs.disconnect(); }
+        }, { threshold: 0.3 });
+        obs.observe(el);
+    }
+
+    // Gráfico
+    var ctx = document.getElementById('visitsChart');
+    if (!ctx) return;
+    var labels = @json($visitasPorPais->pluck('pais'));
+    var data   = @json($visitasPorPais->pluck('total'));
+    var maxVal = Math.max.apply(null, data);
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Visitas',
+                data: data,
+                backgroundColor: data.map(function(v) {
+                    var opacity = 0.45 + 0.55 * (v / maxVal);
+                    return 'rgba(30,58,95,' + opacity + ')';
+                }),
+                borderColor: 'rgba(37,99,235,0.6)',
+                borderWidth: 1,
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) { return ' ' + ctx.parsed.y.toLocaleString('pt-PT') + ' visitas'; }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 11, weight: '600' }, color: '#4b5563' }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0,0,0,0.04)' },
+                    ticks: {
+                        font: { size: 11 }, color: '#9ca3af',
+                        callback: function(v) { return v.toLocaleString('pt-PT'); }
+                    }
+                }
+            }
+        }
+    });
+})();
+</script>
+@endif
 @endsection

@@ -80,7 +80,20 @@ Route::get('/', function () {
     $carrosseis = \App\Models\Carrossel::where('publicado', 1)->orderBy('ordem')->take(5)->get();
     $totalSlides = $carrosseis->count();
     $hero = $carrosseis->first();
-    return view('welcome', compact('testemunhos', 'carrosseis', 'totalSlides', 'hero'));
+
+    // Estatísticas de visitas
+    $totalVisitas = 0;
+    $visitasPorPais = collect();
+    try {
+        $totalVisitas   = \App\Models\SiteVisita::count();
+        $visitasPorPais = \App\Models\SiteVisita::selectRaw('pais, pais_code, COUNT(*) as total')
+            ->groupBy('pais', 'pais_code')
+            ->orderByDesc('total')
+            ->limit(10)
+            ->get();
+    } catch (\Throwable) {}
+
+    return view('welcome', compact('testemunhos', 'carrosseis', 'totalSlides', 'hero', 'totalVisitas', 'visitasPorPais'));
 })->name('welcome');
 
 // Investigação (public) - use closure to guarantee controller is executed and view data provided

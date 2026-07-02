@@ -13,7 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Global rate limit: 200 requests/minute per IP for all web routes.
         // Individual sensitive endpoints (login, contact, alumni, revista) have stricter limits.
-        $middleware->web(append: [\Illuminate\Routing\Middleware\ThrottleRequests::class.':200,1']);
+        $middleware->web(append: [
+            \Illuminate\Routing\Middleware\ThrottleRequests::class.':200,1',
+            \App\Http\Middleware\TrackVisit::class,
+        ]);
         $middleware->append(\App\Http\Middleware\SecureHeaders::class);
         $middleware->alias([
             'admin'   => \App\Http\Middleware\EnsureUserIsAdmin::class,
