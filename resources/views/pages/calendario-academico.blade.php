@@ -4,13 +4,13 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
 @include('partials.page-hero', [
-    'title'      => 'Calendário Académico 2025/2026',
+    'title'      => 'Calendário Académico 2026/2027',
     'subtitle'   => 'Planeie o seu ano lectivo e consulte todas as datas importantes.',
     'breadcrumb' => 'Calendário Académico',
 ])
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Calendário Académico 2025/2026</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Calendário Académico 2026/2027</h2>
           <p class="text-gray-600">Ano lectivo de Fevereiro de 2025 a Novembro de 2026</p>
         </div>
         <a href="#" class="mt-4 md:mt-0 inline-flex items-center bg-[#2563eb] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#0c7a6e] transition-colors">

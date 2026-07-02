@@ -90,7 +90,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
     </div>
     <div class="h-center">
         <div class="h-inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-        <div class="h-sub">Departamento dos Assuntos Académicos &nbsp;·&nbsp; Exame de Acesso 2025/2026</div>
+        <div class="h-sub">Departamento dos Assuntos Académicos &nbsp;·&nbsp; Exame de Acesso 2026/2027</div>
     </div>
     <div class="h-right">
         <div class="h-ficha-label">Ficha N.º</div>

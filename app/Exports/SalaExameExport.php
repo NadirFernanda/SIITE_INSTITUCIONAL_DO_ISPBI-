@@ -45,7 +45,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Cabeçalho (linhas 2-4) — mescladas A:B, centradas
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
         $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
-        $rows[] = ['EXAME DE ACESSO 2025/2026 — LISTA DE EXAME', '', ''];
+        $rows[] = ['EXAME DE ACESSO 2026/2027 — LISTA DE EXAME', '', ''];
 
         // Linha 5 — vazia
         $rows[] = ['', '', ''];

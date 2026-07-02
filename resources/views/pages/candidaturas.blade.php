@@ -179,7 +179,7 @@
 
                                 {{-- Application form --}}
                                 <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-8">
-                                    <h2 class="text-2xl font-bold text-[#2563eb] mb-1">Ficha de Inscrição — Exame de Acesso 2025/2026</h2>
+                                    <h2 class="text-2xl font-bold text-[#2563eb] mb-1">Ficha de Inscrição — Exame de Acesso 2026/2027</h2>
                                     <p class="text-gray-500 text-sm mb-6">Todos os campos são obrigatórios, excepto o Telefone 2 e a Instituição Laboral (apenas se não trabalhar).</p>
 
                                     {{-- Banner de erros de validação --}}

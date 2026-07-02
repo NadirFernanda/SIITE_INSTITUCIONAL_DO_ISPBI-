@@ -60,7 +60,7 @@
 
                 <div>
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Descrição <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span></label>
-                    <input type="text" name="descricao" value="{{ old('descricao') }}" placeholder="Ex: Ano 2025/2026"
+                    <input type="text" name="descricao" value="{{ old('descricao') }}" placeholder="Ex: Ano 2026/2027"
                            style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
                            onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">

@@ -16,7 +16,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between">
         <div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Guia do Estudante 2025/2026</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Guia do Estudante 2026/2027</h2>
           <p class="text-gray-600">Tudo o que precisa saber para ter sucesso no ISP-Bié</p>
         </div>
       </div>
@@ -89,7 +89,7 @@
             </li>
           </ul>
 
-          <h4 class="font-bold text-lg text-gray-900 mb-3">Comparticipações 2025/2026</h4>
+          <h4 class="font-bold text-lg text-gray-900 mb-3">Comparticipações 2026/2027</h4>
           <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-4">
             <p class="text-sm text-blue-800">
               <strong>Nota:</strong> A frequência no ISP-Bié implica a comparticipação financeira dos estudantes por via do pagamento de propinas e emolumentos.

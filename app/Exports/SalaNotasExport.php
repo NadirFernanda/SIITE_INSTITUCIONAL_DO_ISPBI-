@@ -44,7 +44,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Cabeçalho (linhas 2-4) — mescladas A:C, centradas
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
         $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
-        $rows[] = ['EXAME DE ACESSO 2025/2026 — LANÇAMENTO DE NOTAS', '', ''];
+        $rows[] = ['EXAME DE ACESSO 2026/2027 — LANÇAMENTO DE NOTAS', '', ''];
 
         // Linha 5 — vazia
         $rows[] = ['', '', ''];
