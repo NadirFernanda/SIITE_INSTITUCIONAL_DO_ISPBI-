@@ -433,10 +433,10 @@
   </section>
 
   {{-- ═══════════════════════════════════════════════════════
-       Secção: Acessos ao site + gráfico por país
+       Secção: Estatísticas de acessos ao site
        ═══════════════════════════════════════════════════════ --}}
   <section class="py-10 sm:py-14 border-t border-gray-100" style="background:#f8fafc;">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
       {{-- Cabeçalho --}}
       <div class="mb-8 flex items-center gap-3">
@@ -444,72 +444,40 @@
         <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Estatísticas do Site</p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
 
         {{-- Card: total de acessos --}}
-        <div class="lg:col-span-1">
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 text-center">
-            <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
-              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-              </svg>
-            </div>
-            <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Total de Acessos</p>
-            <div class="text-5xl font-extrabold text-[#1e3a5f] leading-none mb-1"
-                 data-counter data-target="{{ $totalVisitas }}">{{ number_format($totalVisitas) }}</div>
-            <p class="text-xs text-gray-400 mt-2">visitas registadas</p>
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 text-center">
+          <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
           </div>
+          <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Total de Acessos</p>
+          <div class="text-5xl font-extrabold text-[#1e3a5f] leading-none mb-1"
+               data-counter data-target="{{ $totalVisitas }}">{{ number_format($totalVisitas) }}</div>
+          <p class="text-xs text-gray-400 mt-2">visitas registadas</p>
+        </div>
 
-          @if($visitasPorPais->isNotEmpty())
-          <div class="mt-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Top Países</p>
-            @foreach($visitasPorPais->take(5) as $v)
-              @php $pct = $visitasPorPais->first()->total > 0 ? round($v->total / $visitasPorPais->first()->total * 100) : 0; @endphp
-              <div class="mb-2.5">
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="font-semibold text-gray-700">{{ $v->pais }}</span>
-                  <span class="text-gray-400">{{ number_format($v->total) }}</span>
-                </div>
-                <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                  <div class="h-full rounded-full transition-all duration-700" style="width:{{ $pct }}%;background:linear-gradient(90deg,#1e3a5f,#2563eb);"></div>
-                </div>
+        {{-- Card: top países --}}
+        @if($visitasPorPais->isNotEmpty())
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Top Países</p>
+          @foreach($visitasPorPais->take(5) as $v)
+            @php $pct = $visitasPorPais->first()->total > 0 ? round($v->total / $visitasPorPais->first()->total * 100) : 0; @endphp
+            <div class="mb-3">
+              <div class="flex justify-between text-xs mb-1">
+                <span class="font-semibold text-gray-700">{{ $v->pais }}</span>
+                <span class="text-gray-400">{{ number_format($v->total) }}</span>
               </div>
-            @endforeach
-          </div>
-          @endif
-        </div>
-
-        {{-- Gráfico de barras por país (SVG server-side) --}}
-        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-          <h3 class="text-base font-bold text-[#1e3a5f] mb-5">Acessos por País</h3>
-          @if($visitasPorPais->isEmpty())
-            <div class="flex flex-col items-center justify-center py-14 text-gray-300">
-              <svg class="w-12 h-12 mb-3" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-              <p class="text-sm">Sem dados de visitas ainda.</p>
+              <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                <div class="h-full rounded-full transition-all duration-700" style="width:{{ $pct }}%;background:linear-gradient(90deg,#1e3a5f,#2563eb);"></div>
+              </div>
             </div>
-          @else
-            @php $maxVal = max(1, $visitasPorPais->max('total')); @endphp
-            <div style="display:flex;align-items:flex-end;gap:8px;height:220px;padding-bottom:28px;position:relative;">
-              {{-- Linhas guia --}}
-              @foreach([25,50,75,100] as $pct)
-                <div style="position:absolute;left:0;right:0;bottom:{{ 28 + ($pct / 100 * 192) }}px;border-top:1px dashed #e5e7eb;"></div>
-              @endforeach
-              @foreach($visitasPorPais as $v)
-                @php
-                  $hPct  = max(3, round($v->total / $maxVal * 100));
-                  $label = mb_strlen($v->pais) > 10 ? mb_substr($v->pais, 0, 9) . '…' : $v->pais;
-                  $alpha = round(0.45 + 0.55 * ($v->total / $maxVal), 2);
-                @endphp
-                <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;">
-                  <span style="font-size:9px;font-weight:700;color:#1e3a5f;margin-bottom:3px;">{{ number_format($v->total) }}</span>
-                  <div style="width:100%;height:{{ $hPct }}%;background:linear-gradient(180deg,#2563eb,#1e3a5f);opacity:{{ $alpha }};border-radius:4px 4px 0 0;"></div>
-                  <span style="position:absolute;bottom:-24px;font-size:9px;font-weight:600;color:#4b5563;white-space:nowrap;overflow:hidden;max-width:100%;text-align:center;">{{ $label }}</span>
-                </div>
-              @endforeach
-            </div>
-          @endif
+          @endforeach
         </div>
+        @endif
 
       </div>
     </div>
