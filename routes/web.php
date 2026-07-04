@@ -127,16 +127,21 @@ Route::get('/', function () {
             ->groupBy('pais_code', 'pais')
             ->get();
 
-        // Agrega em PHP: combina variantes do mesmo país numa só entrada
+        // Mapa reverso: nome português → código ISO (para unificar entradas sem código)
+        $ptCode = array_flip($codePt); // ex: 'África do Sul' => 'ZA'
+
+        // Agrega em PHP: usa código ISO como chave universal
+        // Entradas sem código (pais_code='??') são normalizadas pelo nome → código
         $agregado = [];
         foreach ($rawGrupos as $g) {
             $code = strtoupper(trim($g->pais_code ?? '??'));
             if ($code !== '??') {
-                $key  = $code;
-                $nome = $codePt[$code] ?? ($engPt[$g->pais] ?? $g->pais);
+                // Código conhecido → chave = código ISO
+                $key = $code;
             } else {
-                $nome = $engPt[$g->pais] ?? $g->pais;
-                $key  = $nome; // agrupa pelo nome normalizado
+                // Sem código: normalizar nome inglês → português → código ISO
+                $nomePt = $engPt[$g->pais] ?? $g->pais;
+                $key    = $ptCode[$nomePt] ?? $nomePt; // código se mapeável, senão nome PT
             }
             $agregado[$key] = ($agregado[$key] ?? 0) + (int) $g->subtotal;
         }
@@ -145,7 +150,7 @@ Route::get('/', function () {
         arsort($agregado);
         $visitasPorPais = collect(array_slice($agregado, 0, 10, true))
             ->map(fn($total, $key) => (object)[
-                'pais'  => $codePt[$key] ?? $key,
+                'pais'  => $codePt[$key] ?? $key, // código → nome PT; ou nome literal se desconhecido
                 'total' => $total,
             ])->values();
     } catch (\Throwable) {}
