@@ -460,11 +460,12 @@
           <p class="text-xs text-gray-400 mt-2">visitas registadas</p>
         </div>
 
-        {{-- Card: top países --}}
+        {{-- Card: todos os países --}}
         @if($visitasPorPais->isNotEmpty())
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Top Países</p>
-          @foreach($visitasPorPais->take(5) as $v)
+          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Visitas por País</p>
+          <div style="max-height:320px;overflow-y:auto;padding-right:4px;">
+          @foreach($visitasPorPais as $v)
             @php $pct = $visitasPorPais->first()->total > 0 ? round($v->total / $visitasPorPais->first()->total * 100) : 0; @endphp
             <div class="mb-3">
               <div class="flex justify-between text-xs mb-1">
@@ -476,6 +477,7 @@
               </div>
             </div>
           @endforeach
+          </div>
         </div>
         @endif
 

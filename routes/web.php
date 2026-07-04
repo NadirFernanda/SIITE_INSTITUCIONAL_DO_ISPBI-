@@ -146,9 +146,9 @@ Route::get('/', function () {
             $agregado[$key] = ($agregado[$key] ?? 0) + (int) $g->subtotal;
         }
 
-        // Ordena e toma o top 10 com estrutura compatível com a view
+        // Ordena por total desc — todos os países sem limite
         arsort($agregado);
-        $visitasPorPais = collect(array_slice($agregado, 0, 10, true))
+        $visitasPorPais = collect($agregado)
             ->map(fn($total, $key) => (object)[
                 'pais'  => $codePt[$key] ?? $key, // código → nome PT; ou nome literal se desconhecido
                 'total' => $total,
