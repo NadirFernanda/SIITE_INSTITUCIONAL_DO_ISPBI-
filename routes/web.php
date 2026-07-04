@@ -85,12 +85,37 @@ Route::get('/', function () {
     $totalVisitas = 0;
     $visitasPorPais = collect();
     try {
-        $totalVisitas   = \App\Models\SiteVisita::count();
-        $visitasPorPais = \App\Models\SiteVisita::selectRaw('pais, pais_code, COUNT(*) as total')
-            ->groupBy('pais', 'pais_code')
+        $totalVisitas = \App\Models\SiteVisita::count();
+
+        // Mapa de códigos → nomes em português (fonte única de verdade)
+        $paisNomes = [
+            'AO'=>'Angola','PT'=>'Portugal','BR'=>'Brasil','MZ'=>'Moçambique',
+            'CV'=>'Cabo Verde','ST'=>'São Tomé e Príncipe','GW'=>'Guiné-Bissau',
+            'GQ'=>'Guiné Equatorial','TL'=>'Timor-Leste','US'=>'Estados Unidos',
+            'GB'=>'Reino Unido','FR'=>'França','DE'=>'Alemanha','ES'=>'Espanha',
+            'IT'=>'Itália','CN'=>'China','ZA'=>'África do Sul','NG'=>'Nigéria',
+            'KE'=>'Quénia','GH'=>'Gana','CM'=>'Camarões','CD'=>'RD Congo',
+            'CG'=>'Congo','NA'=>'Namíbia','ZM'=>'Zâmbia','ZW'=>'Zimbabué',
+            'BW'=>'Botswana','NL'=>'Países Baixos','BE'=>'Bélgica','CH'=>'Suíça',
+            'CA'=>'Canadá','AU'=>'Austrália','JP'=>'Japão','SG'=>'Singapura',
+            'IN'=>'Índia','RU'=>'Rússia','KR'=>'Coreia do Sul','ID'=>'Indonésia',
+            'MY'=>'Malásia','TR'=>'Turquia','SA'=>'Arábia Saudita',
+            'AE'=>'Emirados Árabes','EG'=>'Egipto','MA'=>'Marrocos',
+            'TZ'=>'Tanzânia','SN'=>'Senegal','MX'=>'México','AR'=>'Argentina',
+            'CO'=>'Colômbia','PL'=>'Polónia','SE'=>'Suécia','NO'=>'Noruega',
+        ];
+
+        // Agrupa só por pais_code → elimina duplicados por variação de nome
+        $visitasPorPais = \App\Models\SiteVisita::selectRaw('pais_code, COUNT(*) as total')
+            ->where('pais_code', '!=', '??')
+            ->groupBy('pais_code')
             ->orderByDesc('total')
             ->limit(10)
-            ->get();
+            ->get()
+            ->map(function ($v) use ($paisNomes) {
+                $v->pais = $paisNomes[strtoupper($v->pais_code)] ?? $v->pais_code;
+                return $v;
+            });
     } catch (\Throwable) {}
 
     return view('welcome', compact('testemunhos', 'carrosseis', 'totalSlides', 'hero', 'totalVisitas', 'visitasPorPais'));

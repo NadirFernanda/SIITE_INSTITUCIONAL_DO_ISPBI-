@@ -96,7 +96,9 @@ class TrackVisit
             if ($raw) {
                 $data = json_decode($raw, true);
                 if (! empty($data['country'])) {
-                    return [$data['country'], strtoupper($data['countryCode'] ?? '??')];
+                    $code = strtoupper($data['countryCode'] ?? '??');
+                    $name = $this->codeToName($code) ?: $data['country'];
+                    return [$name, $code];
                 }
             }
         } catch (\Throwable) {
@@ -109,17 +111,27 @@ class TrackVisit
     private function codeToName(string $code): string
     {
         $map = [
-            'AO' => 'Angola',       'PT' => 'Portugal',     'BR' => 'Brasil',
-            'MZ' => 'Moçambique',   'CV' => 'Cabo Verde',   'ST' => 'São Tomé e Príncipe',
-            'GW' => 'Guiné-Bissau', 'GQ' => 'Guiné Equatorial', 'TL' => 'Timor-Leste',
-            'US' => 'Estados Unidos','GB' => 'Reino Unido', 'FR' => 'França',
-            'DE' => 'Alemanha',     'ES' => 'Espanha',      'IT' => 'Itália',
-            'CN' => 'China',        'ZA' => 'África do Sul','NG' => 'Nigéria',
-            'KE' => 'Quénia',       'GH' => 'Gana',         'CM' => 'Camarões',
-            'CD' => 'RD Congo',     'CG' => 'Congo',        'NA' => 'Namíbia',
-            'ZM' => 'Zâmbia',       'ZW' => 'Zimbabué',     'BW' => 'Botswana',
-            'NL' => 'Países Baixos','BE' => 'Bélgica',      'CH' => 'Suíça',
-            'CA' => 'Canadá',       'AU' => 'Austrália',    'JP' => 'Japão',
+            'AO' => 'Angola',           'PT' => 'Portugal',         'BR' => 'Brasil',
+            'MZ' => 'Moçambique',       'CV' => 'Cabo Verde',       'ST' => 'São Tomé e Príncipe',
+            'GW' => 'Guiné-Bissau',     'GQ' => 'Guiné Equatorial', 'TL' => 'Timor-Leste',
+            'US' => 'Estados Unidos',   'GB' => 'Reino Unido',      'FR' => 'França',
+            'DE' => 'Alemanha',         'ES' => 'Espanha',          'IT' => 'Itália',
+            'CN' => 'China',            'ZA' => 'África do Sul',    'NG' => 'Nigéria',
+            'KE' => 'Quénia',           'GH' => 'Gana',             'CM' => 'Camarões',
+            'CD' => 'RD Congo',         'CG' => 'Congo',            'NA' => 'Namíbia',
+            'ZM' => 'Zâmbia',           'ZW' => 'Zimbabué',         'BW' => 'Botswana',
+            'NL' => 'Países Baixos',    'BE' => 'Bélgica',          'CH' => 'Suíça',
+            'CA' => 'Canadá',           'AU' => 'Austrália',        'JP' => 'Japão',
+            'SG' => 'Singapura',        'IN' => 'Índia',            'RU' => 'Rússia',
+            'KR' => 'Coreia do Sul',    'ID' => 'Indonésia',        'MY' => 'Malásia',
+            'PK' => 'Paquistão',        'TR' => 'Turquia',          'SA' => 'Arábia Saudita',
+            'AE' => 'Emirados Árabes',  'EG' => 'Egipto',           'MA' => 'Marrocos',
+            'TZ' => 'Tanzânia',         'UG' => 'Uganda',           'ET' => 'Etiópia',
+            'SN' => 'Senegal',          'CI' => 'Costa do Marfim',  'MX' => 'México',
+            'AR' => 'Argentina',        'CO' => 'Colômbia',         'PE' => 'Peru',
+            'CL' => 'Chile',            'PL' => 'Polónia',          'RO' => 'Roménia',
+            'UA' => 'Ucrânia',          'SE' => 'Suécia',           'NO' => 'Noruega',
+            'DK' => 'Dinamarca',        'FI' => 'Finlândia',        'AT' => 'Áustria',
         ];
 
         return $map[strtoupper($code)] ?? strtoupper($code);
