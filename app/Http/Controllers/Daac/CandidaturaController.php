@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Daac;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ComprovatvioConcluido;
+use App\Models\AuditLog;
 use App\Models\Candidatura;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -51,6 +53,15 @@ class CandidaturaController extends Controller
         return view('daac.candidaturas.show', compact('candidatura'));
     }
 
+    public function downloadComprovativo(Candidatura $candidatura)
+    {
+        AuditLog::registar('imprimiu_comprovativo', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
+        $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))->setPaper('a4', 'portrait');
+        return $pdf->download('comprovativo-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf');
+    }
+
     public function assinar(Request $request, Candidatura $candidatura)
     {
         if ($candidatura->isAssinada()) {
@@ -79,10 +90,13 @@ class CandidaturaController extends Controller
 
         $candidatura->update([
             'status'            => 'concluida',
-            'assinado_por'      => Auth::id(),   // ID do utilizador DAAC
+            'assinado_por'      => Auth::id(),
             'assinado_em'       => now(),
             'assinatura_codigo' => $codigo,
         ]);
+
+        AuditLog::registar('assinou_candidatura', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso}) | Código: {$codigo}");
 
         try {
             Mail::to($candidatura->email)
@@ -114,6 +128,9 @@ class CandidaturaController extends Controller
             'status'      => 'rejeitada',
             'notas_admin' => $nota,
         ]);
+
+        AuditLog::registar('rejeitou_candidatura', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
 
         return redirect()->route('daac.candidaturas.index')
             ->with('success', "Candidatura de {$candidatura->nome} rejeitada por " . Auth::user()->name . ".");

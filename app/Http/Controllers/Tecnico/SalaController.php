@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tecnico;
 use App\Exports\SalaExameExport;
 use App\Exports\SalaNotasExport;
 use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
 use App\Models\Candidatura;
 use App\Models\Sala;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -145,14 +146,21 @@ class SalaController extends Controller
 
         $atribuidos = Candidatura::whereNotNull('sala_id')->count();
 
+        AuditLog::registar('distribuiu_salas', null, null,
+            "{$atribuidos} candidatos distribuídos pelas salas");
+
         return redirect()->route('tecnico.salas.index')
             ->with('success', "{$atribuidos} candidatos distribuídos pelas salas.");
     }
 
     public function limpar()
     {
+        $count = Candidatura::whereNotNull('sala_id')->count();
         Candidatura::whereNotNull('sala_id')
                    ->update(['sala_id' => null, 'numero_lugar' => null]);
+
+        AuditLog::registar('limpou_salas', null, null,
+            "Distribuição removida — {$count} candidatos retirados das salas");
 
         return redirect()->route('tecnico.salas.index')
             ->with('success', 'Distribuição removida.');

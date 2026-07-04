@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
 use App\Models\Candidatura;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -62,6 +64,15 @@ class CandidaturaController extends Controller
         return view('admin.candidaturas.show', compact('candidatura'));
     }
 
+    public function downloadComprovativo(Candidatura $candidatura)
+    {
+        AuditLog::registar('imprimiu_comprovativo', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
+        $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))->setPaper('a4', 'portrait');
+        return $pdf->download('comprovativo-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf');
+    }
+
     public function updateStatus(Request $request, Candidatura $candidatura)
     {
         $request->validate([
@@ -69,7 +80,11 @@ class CandidaturaController extends Controller
             'notas_admin' => 'nullable|string|max:2000',
         ]);
 
+        $oldStatus = $candidatura->status;
         $candidatura->update($request->only('status', 'notas_admin'));
+
+        AuditLog::registar('alterou_status', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} {$candidatura->nome}: {$oldStatus} → {$candidatura->status}");
 
         return redirect()->route('admin.candidaturas.show', $candidatura)
             ->with('success', 'Estado atualizado com sucesso.');
@@ -134,12 +149,18 @@ class CandidaturaController extends Controller
 
         $candidatura->update($data);
 
+        AuditLog::registar('editou_candidatura', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome}");
+
         return redirect()->route('admin.candidaturas.show', $candidatura)
             ->with('success', 'Candidatura actualizada com sucesso.');
     }
 
     public function destroy(Candidatura $candidatura)
     {
+        AuditLog::registar('eliminou_candidatura', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
         $candidatura->delete();
         return redirect()->route('admin.candidaturas.index')
             ->with('success', 'Candidatura eliminada.');

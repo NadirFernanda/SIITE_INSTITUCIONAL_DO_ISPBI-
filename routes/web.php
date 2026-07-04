@@ -158,11 +158,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     // Candidaturas admin
     Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
     Route::get('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Admin\CandidaturaController::class, 'downloadComprovativo'])->name('candidaturas.comprovativo');
     Route::get('candidaturas/{candidatura}/edit', [App\Http\Controllers\Admin\CandidaturaController::class, 'edit'])->name('candidaturas.edit');
     Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
     Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
+
+    // Auditoria
+    Route::get('auditoria', [App\Http\Controllers\Admin\AuditLogController::class, 'index'])->name('auditoria');
 
     // Alumni documentos (portal)
     Route::get('alumni-documentos', [App\Http\Controllers\Admin\AlumniDocumentoController::class, 'index'])->name('alumni-documentos.index');
@@ -179,6 +183,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
 Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1'])->group(function () {
     // Candidaturas
     Route::get('candidaturas', [App\Http\Controllers\Daac\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Daac\CandidaturaController::class, 'downloadComprovativo'])->name('candidaturas.comprovativo');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Daac\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::post('candidaturas/{candidatura}/assinar', [App\Http\Controllers\Daac\CandidaturaController::class, 'assinar'])->name('candidaturas.assinar');
     Route::post('candidaturas/{candidatura}/rejeitar', [App\Http\Controllers\Daac\CandidaturaController::class, 'rejeitar'])->name('candidaturas.rejeitar');
@@ -209,6 +214,7 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::get('candidaturas/create', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'create'])->name('candidaturas.create');
     Route::post('candidaturas', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'store'])->name('candidaturas.store');
     Route::get('candidaturas', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'downloadComprovativo'])->name('candidaturas.comprovativo');
     Route::get('candidaturas/{candidatura}/edit', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'edit'])->name('candidaturas.edit');
     Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'show'])->name('candidaturas.show');
