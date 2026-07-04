@@ -87,8 +87,8 @@ Route::get('/', function () {
     try {
         $totalVisitas = \App\Models\SiteVisita::count();
 
-        // Mapa de códigos → nomes em português (fonte única de verdade)
-        $paisNomes = [
+        // Código ISO → nome em português
+        $codePt = [
             'AO'=>'Angola','PT'=>'Portugal','BR'=>'Brasil','MZ'=>'Moçambique',
             'CV'=>'Cabo Verde','ST'=>'São Tomé e Príncipe','GW'=>'Guiné-Bissau',
             'GQ'=>'Guiné Equatorial','TL'=>'Timor-Leste','US'=>'Estados Unidos',
@@ -105,17 +105,49 @@ Route::get('/', function () {
             'CO'=>'Colômbia','PL'=>'Polónia','SE'=>'Suécia','NO'=>'Noruega',
         ];
 
-        // Agrupa só por pais_code → elimina duplicados por variação de nome
-        $visitasPorPais = \App\Models\SiteVisita::selectRaw('pais_code, COUNT(*) as total')
-            ->where('pais_code', '!=', '??')
-            ->groupBy('pais_code')
-            ->orderByDesc('total')
-            ->limit(10)
-            ->get()
-            ->map(function ($v) use ($paisNomes) {
-                $v->pais = $paisNomes[strtoupper($v->pais_code)] ?? $v->pais_code;
-                return $v;
-            });
+        // Nome inglês → nome em português (para registos antigos com pais_code='??')
+        $engPt = [
+            'South Africa'=>'África do Sul','South Korea'=>'Coreia do Sul',
+            'North Korea'=>'Coreia do Norte','United States'=>'Estados Unidos',
+            'United Kingdom'=>'Reino Unido','France'=>'França','Germany'=>'Alemanha',
+            'Spain'=>'Espanha','Italy'=>'Itália','Netherlands'=>'Países Baixos',
+            'Belgium'=>'Bélgica','Switzerland'=>'Suíça','Canada'=>'Canadá',
+            'Australia'=>'Austrália','Japan'=>'Japão','Singapore'=>'Singapura',
+            'India'=>'Índia','Russia'=>'Rússia','Nigeria'=>'Nigéria',
+            'Kenya'=>'Quénia','Ghana'=>'Gana','Cameroon'=>'Camarões',
+            'Mozambique'=>'Moçambique','Cape Verde'=>'Cabo Verde',
+            'Turkey'=>'Turquia','Mexico'=>'México','Colombia'=>'Colômbia',
+            'Poland'=>'Polónia','Sweden'=>'Suécia','Norway'=>'Noruega',
+            'Indonesia'=>'Indonésia','Malaysia'=>'Malásia',
+        ];
+
+        // Busca todos os grupos (pais + pais_code) ignorando apenas "Desconhecido"
+        $rawGrupos = \App\Models\SiteVisita::selectRaw('pais_code, pais, COUNT(*) as subtotal')
+            ->where('pais', '!=', 'Desconhecido')
+            ->groupBy('pais_code', 'pais')
+            ->get();
+
+        // Agrega em PHP: combina variantes do mesmo país numa só entrada
+        $agregado = [];
+        foreach ($rawGrupos as $g) {
+            $code = strtoupper(trim($g->pais_code ?? '??'));
+            if ($code !== '??') {
+                $key  = $code;
+                $nome = $codePt[$code] ?? ($engPt[$g->pais] ?? $g->pais);
+            } else {
+                $nome = $engPt[$g->pais] ?? $g->pais;
+                $key  = $nome; // agrupa pelo nome normalizado
+            }
+            $agregado[$key] = ($agregado[$key] ?? 0) + (int) $g->subtotal;
+        }
+
+        // Ordena e toma o top 10 com estrutura compatível com a view
+        arsort($agregado);
+        $visitasPorPais = collect(array_slice($agregado, 0, 10, true))
+            ->map(fn($total, $key) => (object)[
+                'pais'  => $codePt[$key] ?? $key,
+                'total' => $total,
+            ])->values();
     } catch (\Throwable) {}
 
     return view('welcome', compact('testemunhos', 'carrosseis', 'totalSlides', 'hero', 'totalVisitas', 'visitasPorPais'));
