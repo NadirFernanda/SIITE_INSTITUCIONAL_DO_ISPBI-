@@ -87,22 +87,49 @@ Route::get('/', function () {
     try {
         $totalVisitas = \App\Models\SiteVisita::count();
 
-        // Código ISO → nome em português
+        // Código ISO → nome em português (lista abrangente)
         $codePt = [
-            'AO'=>'Angola','PT'=>'Portugal','BR'=>'Brasil','MZ'=>'Moçambique',
-            'CV'=>'Cabo Verde','ST'=>'São Tomé e Príncipe','GW'=>'Guiné-Bissau',
-            'GQ'=>'Guiné Equatorial','TL'=>'Timor-Leste','US'=>'Estados Unidos',
-            'GB'=>'Reino Unido','FR'=>'França','DE'=>'Alemanha','ES'=>'Espanha',
-            'IT'=>'Itália','CN'=>'China','ZA'=>'África do Sul','NG'=>'Nigéria',
-            'KE'=>'Quénia','GH'=>'Gana','CM'=>'Camarões','CD'=>'RD Congo',
-            'CG'=>'Congo','NA'=>'Namíbia','ZM'=>'Zâmbia','ZW'=>'Zimbabué',
-            'BW'=>'Botswana','NL'=>'Países Baixos','BE'=>'Bélgica','CH'=>'Suíça',
-            'CA'=>'Canadá','AU'=>'Austrália','JP'=>'Japão','SG'=>'Singapura',
-            'IN'=>'Índia','RU'=>'Rússia','KR'=>'Coreia do Sul','ID'=>'Indonésia',
-            'MY'=>'Malásia','TR'=>'Turquia','SA'=>'Arábia Saudita',
-            'AE'=>'Emirados Árabes','EG'=>'Egipto','MA'=>'Marrocos',
-            'TZ'=>'Tanzânia','SN'=>'Senegal','MX'=>'México','AR'=>'Argentina',
-            'CO'=>'Colômbia','PL'=>'Polónia','SE'=>'Suécia','NO'=>'Noruega',
+            // África
+            'AO'=>'Angola','MZ'=>'Moçambique','CV'=>'Cabo Verde','ST'=>'São Tomé e Príncipe',
+            'GW'=>'Guiné-Bissau','GQ'=>'Guiné Equatorial','TL'=>'Timor-Leste',
+            'ZA'=>'África do Sul','NG'=>'Nigéria','KE'=>'Quénia','GH'=>'Gana',
+            'CM'=>'Camarões','CD'=>'RD Congo','CG'=>'Congo','NA'=>'Namíbia',
+            'ZM'=>'Zâmbia','ZW'=>'Zimbabué','BW'=>'Botswana','TZ'=>'Tanzânia',
+            'SN'=>'Senegal','ET'=>'Etiópia','UG'=>'Uganda','CI'=>'Costa do Marfim',
+            'TN'=>'Tunísia','DZ'=>'Argélia','LY'=>'Líbia','SD'=>'Sudão',
+            'RW'=>'Ruanda','ML'=>'Mali','BF'=>'Burquina Faso','MG'=>'Madagáscar',
+            'ZA'=>'África do Sul','EG'=>'Egipto','MA'=>'Marrocos','ZA'=>'África do Sul',
+            // Europa
+            'PT'=>'Portugal','ES'=>'Espanha','FR'=>'França','DE'=>'Alemanha',
+            'IT'=>'Itália','GB'=>'Reino Unido','NL'=>'Países Baixos','BE'=>'Bélgica',
+            'CH'=>'Suíça','SE'=>'Suécia','NO'=>'Noruega','DK'=>'Dinamarca',
+            'FI'=>'Finlândia','PL'=>'Polónia','RO'=>'Roménia','AT'=>'Áustria',
+            'UA'=>'Ucrânia','CZ'=>'Rep. Checa','HU'=>'Hungria','GR'=>'Grécia',
+            'HR'=>'Croácia','SK'=>'Eslováquia','BG'=>'Bulgária','RS'=>'Sérvia',
+            'IE'=>'Irlanda','LU'=>'Luxemburgo','LT'=>'Lituânia','LV'=>'Letónia',
+            'EE'=>'Estónia','SI'=>'Eslovénia','MT'=>'Malta','CY'=>'Chipre',
+            'IS'=>'Islândia','AL'=>'Albânia','BA'=>'Bósnia','MK'=>'Macedónia',
+            'RU'=>'Rússia',
+            // Américas
+            'BR'=>'Brasil','US'=>'Estados Unidos','CA'=>'Canadá','MX'=>'México',
+            'AR'=>'Argentina','CO'=>'Colômbia','CL'=>'Chile','PE'=>'Peru',
+            'VE'=>'Venezuela','EC'=>'Equador','BO'=>'Bolívia','UY'=>'Uruguai',
+            'PY'=>'Paraguai','GT'=>'Guatemala','CR'=>'Costa Rica','PA'=>'Panamá',
+            'CU'=>'Cuba','DO'=>'Rep. Dominicana','HN'=>'Honduras','SV'=>'El Salvador',
+            'JM'=>'Jamaica','TT'=>'Trinidad e Tobago',
+            // Ásia
+            'CN'=>'China','JP'=>'Japão','IN'=>'Índia','KR'=>'Coreia do Sul',
+            'KP'=>'Coreia do Norte','ID'=>'Indonésia','MY'=>'Malásia','SG'=>'Singapura',
+            'TH'=>'Tailândia','VN'=>'Vietname','PH'=>'Filipinas','BD'=>'Bangladesh',
+            'PK'=>'Paquistão','LK'=>'Sri Lanka','NP'=>'Nepal','MM'=>'Mianmar',
+            'KH'=>'Camboja','LA'=>'Laos','TW'=>'Taiwan','HK'=>'Hong Kong',
+            'MO'=>'Macau','MN'=>'Mongólia','KZ'=>'Cazaquistão','UZ'=>'Usbequistão',
+            'SA'=>'Arábia Saudita','AE'=>'Emirados Árabes','TR'=>'Turquia',
+            'IL'=>'Israel','IR'=>'Irão','IQ'=>'Iraque','JO'=>'Jordânia',
+            'LB'=>'Líbano','SY'=>'Síria','YE'=>'Iémen','KW'=>'Kuwait',
+            'QA'=>'Qatar','BH'=>'Bahrain','OM'=>'Omã','AF'=>'Afeganistão',
+            // Oceânia & outros
+            'AU'=>'Austrália','NZ'=>'Nova Zelândia','FJ'=>'Fiji',
         ];
 
         // Nome inglês → nome em português (para registos antigos com pais_code='??')
@@ -118,7 +145,23 @@ Route::get('/', function () {
             'Mozambique'=>'Moçambique','Cape Verde'=>'Cabo Verde',
             'Turkey'=>'Turquia','Mexico'=>'México','Colombia'=>'Colômbia',
             'Poland'=>'Polónia','Sweden'=>'Suécia','Norway'=>'Noruega',
-            'Indonesia'=>'Indonésia','Malaysia'=>'Malásia',
+            'Indonesia'=>'Indonésia','Malaysia'=>'Malásia','Vietnam'=>'Vietname',
+            'Thailand'=>'Tailândia','Philippines'=>'Filipinas','Bangladesh'=>'Bangladesh',
+            'Pakistan'=>'Paquistão','Taiwan'=>'Taiwan','Hong Kong'=>'Hong Kong',
+            'China'=>'China','Argentina'=>'Argentina','Chile'=>'Chile','Peru'=>'Peru',
+            'Venezuela'=>'Venezuela','Ecuador'=>'Equador','Bolivia'=>'Bolívia',
+            'Uruguay'=>'Uruguai','Paraguay'=>'Paraguai','Romania'=>'Roménia',
+            'Ukraine'=>'Ucrânia','Czech Republic'=>'Rep. Checa','Hungary'=>'Hungria',
+            'Greece'=>'Grécia','Croatia'=>'Croácia','Slovakia'=>'Eslováquia',
+            'Bulgaria'=>'Bulgária','Serbia'=>'Sérvia','Ireland'=>'Irlanda',
+            'Denmark'=>'Dinamarca','Finland'=>'Finlândia','Austria'=>'Áustria',
+            'Israel'=>'Israel','Iran'=>'Irão','Iraq'=>'Iraque','Jordan'=>'Jordânia',
+            'Lebanon'=>'Líbano','Qatar'=>'Qatar','Kuwait'=>'Kuwait',
+            'Saudi Arabia'=>'Arábia Saudita','United Arab Emirates'=>'Emirados Árabes',
+            'New Zealand'=>'Nova Zelândia','Egypt'=>'Egipto','Morocco'=>'Marrocos',
+            'Tunisia'=>'Tunísia','Algeria'=>'Argélia','Ethiopia'=>'Etiópia',
+            'Tanzania'=>'Tanzânia','Senegal'=>'Senegal','Ivory Coast'=>'Costa do Marfim',
+            "Côte d'Ivoire"=>'Costa do Marfim','Kazakhstan'=>'Cazaquistão',
         ];
 
         // Busca todos os grupos (pais + pais_code) ignorando apenas "Desconhecido"
