@@ -168,6 +168,8 @@
             <div style="margin-bottom:14px;">
                 @php tc_label('Perfil do Curso de Proveniência') @endphp
                 <select name="perfil" id="tc-perfil"
+                        data-perfis-curso='@json(\App\Models\Candidatura::$perfisCurso)'
+                        data-todos-cursos='@json(\App\Models\Candidatura::$cursos)'
                         style="{{ $inp }}@error('perfil')border-color:#f87171;@enderror">
                     <option value="">— Seleccione o perfil do curso de origem —</option>
                     @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
@@ -227,17 +229,21 @@
                     $tcOldCurso = old('curso', '');
                     $tcOldPerfilV = old('perfil', '');
                     @endphp
-                    <select name="curso" id="tc-curso" required style="{{ $inp }}">
-                        <option value="">— Seleccione primeiro o perfil acima —</option>
-                        @foreach(\App\Models\Candidatura::$cursos as $c)
-                            @php
-                            $tcPerfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
-                            $tcElegivel = empty($tcPerfisC) || !$tcOldPerfilV || in_array($tcOldPerfilV, $tcPerfisC);
-                            @endphp
-                            @if($tcElegivel)
-                                <option value="{{ $c }}" {{ $tcOldCurso === $c ? 'selected' : '' }}>{{ $c }}</option>
-                            @endif
-                        @endforeach
+                    <select name="curso" id="tc-curso" required
+                            data-old-value="{{ old('curso', '') }}"
+                            style="{{ $inp }}">
+                        <option value="">{{ $tcOldPerfilV ? '— Seleccione o curso —' : '— Seleccione primeiro o perfil acima —' }}</option>
+                        @if($tcOldPerfilV)
+                            @foreach(\App\Models\Candidatura::$cursos as $c)
+                                @php
+                                $tcPerfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
+                                $tcElegivel = empty($tcPerfisC) || in_array($tcOldPerfilV, $tcPerfisC);
+                                @endphp
+                                @if($tcElegivel)
+                                    <option value="{{ $c }}" {{ $tcOldCurso === $c ? 'selected' : '' }}>{{ $c }}</option>
+                                @endif
+                            @endforeach
+                        @endif
                     </select>
                     @error('curso')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
@@ -265,48 +271,13 @@
 </div>
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
+<script src="{{ asset('js/perfil-curso.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var prov = document.getElementById('t-provincia');
     var mun  = document.getElementById('t-municipio');
     if (prov) { prov.id = 'select-provincia'; prov.setAttribute('data-old', prov.dataset.old || ''); }
     if (mun)  { mun.id  = 'select-municipio'; mun.setAttribute('data-old', mun.dataset.old || ''); }
-
-    // Perfil → filtra cursos elegíveis
-    var tcPerfisCurso = @json(\App\Models\Candidatura::$perfisCurso);
-    var tcAllCursos   = @json(\App\Models\Candidatura::$cursos);
-    var tcOldCurso    = @json(old('curso', ''));
-    var tcCursoPorPerfil = {};
-    for (var _c in tcPerfisCurso) {
-        tcPerfisCurso[_c].forEach(function(p) {
-            if (!tcCursoPorPerfil[p]) tcCursoPorPerfil[p] = [];
-            tcCursoPorPerfil[p].push(_c);
-        });
-    }
-    var tcCursosLivres = tcAllCursos.filter(function(c) { return !tcPerfisCurso[c] || tcPerfisCurso[c].length === 0; });
-
-    function tcUpdateCursos() {
-        var perfilEl = document.getElementById('tc-perfil');
-        var cursoEl  = document.getElementById('tc-curso');
-        if (!perfilEl || !cursoEl) return;
-        var perfil = perfilEl.value, current = cursoEl.value;
-        var eligible = tcCursosLivres.slice();
-        if (perfil) { (tcCursoPorPerfil[perfil] || []).forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); }); }
-        else { tcAllCursos.forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); }); }
-        cursoEl.innerHTML = '';
-        var ph = document.createElement('option'); ph.value = '';
-        ph.textContent = perfil ? '— Seleccione o curso —' : '— Seleccione primeiro o perfil acima —';
-        cursoEl.appendChild(ph);
-        tcAllCursos.forEach(function(c) {
-            if (eligible.indexOf(c) !== -1) {
-                var o = document.createElement('option'); o.value = c; o.textContent = c;
-                if (c === (current || tcOldCurso)) o.selected = true;
-                cursoEl.appendChild(o);
-            }
-        });
-    }
-    var tcPerfilEl = document.getElementById('tc-perfil');
-    if (tcPerfilEl) { tcPerfilEl.addEventListener('change', tcUpdateCursos); tcUpdateCursos(); }
 });
 </script>
 @endpush

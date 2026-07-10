@@ -369,6 +369,8 @@
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Perfil do Curso de Proveniência <span class="text-red-500">*</span></label>
                                             <select name="perfil" id="perfil-select"
+                                                    data-perfis-curso='@json(\App\Models\Candidatura::$perfisCurso)'
+                                                    data-todos-cursos='@json(\App\Models\Candidatura::$cursos)'
                                                     class="{{ $inp }} @error('perfil') border-red-400 @enderror">
                                                 <option value="">— Seleccione o perfil do seu curso de origem —</option>
                                                 @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
@@ -429,17 +431,21 @@
                                                 $oldCurso = old('curso', '');
                                                 $oldPerfilV = old('perfil', '');
                                                 @endphp
-                                                <select name="curso" id="curso-select" required class="{{ $inp }} @error('curso') border-red-400 @enderror">
-                                                    <option value="">— Seleccione primeiro o seu perfil acima —</option>
-                                                    @foreach(\App\Models\Candidatura::$cursos as $c)
-                                                        @php
-                                                        $perfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
-                                                        $elegivel = empty($perfisC) || !$oldPerfilV || in_array($oldPerfilV, $perfisC);
-                                                        @endphp
-                                                        @if($elegivel)
-                                                            <option value="{{ $c }}" {{ $oldCurso === $c ? 'selected' : '' }}>{{ $c }}</option>
-                                                        @endif
-                                                    @endforeach
+                                                <select name="curso" id="curso-select" required
+                                                        data-old-value="{{ old('curso', '') }}"
+                                                        class="{{ $inp }} @error('curso') border-red-400 @enderror">
+                                                    <option value="">{{ $oldPerfilV ? '— Seleccione o curso —' : '— Seleccione primeiro o seu perfil acima —' }}</option>
+                                                    @if($oldPerfilV)
+                                                        @foreach(\App\Models\Candidatura::$cursos as $c)
+                                                            @php
+                                                            $perfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
+                                                            $elegivel = empty($perfisC) || in_array($oldPerfilV, $perfisC);
+                                                            @endphp
+                                                            @if($elegivel)
+                                                                <option value="{{ $c }}" {{ $oldCurso === $c ? 'selected' : '' }}>{{ $c }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                                 @error('curso')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                             </div>
@@ -477,68 +483,7 @@
 </div>
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
-<script>
-(function() {
-    var perfisCurso = @json(\App\Models\Candidatura::$perfisCurso);
-    var allCursos   = @json(\App\Models\Candidatura::$cursos);
-    var oldCurso    = @json(old('curso', ''));
-
-    // Mapa inverso: perfil → [cursos elegíveis]
-    var cursoPorPerfil = {};
-    for (var c in perfisCurso) {
-        perfisCurso[c].forEach(function(p) {
-            if (!cursoPorPerfil[p]) cursoPorPerfil[p] = [];
-            cursoPorPerfil[p].push(c);
-        });
-    }
-    // Cursos sem restrição de perfil (sempre elegíveis)
-    var cursosLivres = allCursos.filter(function(c) {
-        return !perfisCurso[c] || perfisCurso[c].length === 0;
-    });
-
-    function updateCursos() {
-        var perfilEl = document.getElementById('perfil-select');
-        var cursoEl  = document.getElementById('curso-select');
-        if (!perfilEl || !cursoEl) return;
-        var perfil  = perfilEl.value;
-        var current = cursoEl.value;
-        var eligible = cursosLivres.slice();
-        if (perfil) {
-            (cursoPorPerfil[perfil] || []).forEach(function(c) {
-                if (eligible.indexOf(c) === -1) eligible.push(c);
-            });
-        } else {
-            allCursos.forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); });
-        }
-        cursoEl.innerHTML = '';
-        var ph = document.createElement('option');
-        ph.value = '';
-        ph.textContent = perfil ? '— Seleccione o curso —' : '— Seleccione primeiro o seu perfil acima —';
-        cursoEl.appendChild(ph);
-        allCursos.forEach(function(c) {
-            if (eligible.indexOf(c) !== -1) {
-                var o = document.createElement('option');
-                o.value = c; o.textContent = c;
-                if (c === (current || oldCurso)) o.selected = true;
-                cursoEl.appendChild(o);
-            }
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var perfilEl = document.getElementById('perfil-select');
-        if (perfilEl) { perfilEl.addEventListener('change', updateCursos); updateCursos(); }
-    });
-})();
-</script>
-@if($errors->any())
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var el = document.getElementById('formulario-candidatura');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-</script>
-@endif
+<script src="{{ asset('js/perfil-curso.js') }}"></script>
 @endpush
 @endsection
 

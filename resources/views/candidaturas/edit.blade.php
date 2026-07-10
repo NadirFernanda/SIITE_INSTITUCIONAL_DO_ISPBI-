@@ -191,6 +191,8 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
             <div style="margin-bottom:14px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Perfil do Curso de Proveniência <span style="color:#ef4444">*</span></label>
                 <select name="perfil" id="edit-perfil"
+                        data-perfis-curso='@json(\App\Models\Candidatura::$perfisCurso)'
+                        data-todos-cursos='@json(\App\Models\Candidatura::$cursos)'
                         style="{{ $inp }}@error('perfil')border-color:#f87171;@enderror">
                     <option value="">— Seleccione o perfil do curso de origem —</option>
                     @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
@@ -257,7 +259,9 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                     $editOldCurso  = old('curso', $candidatura->curso ?? '');
                     $editOldPerfilV = old('perfil', $candidatura->perfil ?? '');
                     @endphp
-                    <select name="curso" id="edit-curso" required style="{{ $inp }}">
+                    <select name="curso" id="edit-curso" required
+                            data-old-value="{{ old('curso', $candidatura->curso ?? '') }}"
+                            style="{{ $inp }}">
                         <option value="">— Seleccione o curso —</option>
                         @foreach(\App\Models\Candidatura::$cursos as $c)
                             @php
@@ -304,48 +308,13 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
 </div>
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
+<script src="{{ asset('js/perfil-curso.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var prov = document.getElementById('edit-provincia');
     var mun  = document.getElementById('edit-municipio');
     if (prov) { prov.id = 'select-provincia'; }
     if (mun)  { mun.id  = 'select-municipio'; }
-
-    // Perfil → filtra cursos elegíveis
-    var editPerfisCurso = @json(\App\Models\Candidatura::$perfisCurso);
-    var editAllCursos   = @json(\App\Models\Candidatura::$cursos);
-    var editOldCurso    = @json(old('curso', $candidatura->curso ?? ''));
-    var editCursoPorPerfil = {};
-    for (var _ec in editPerfisCurso) {
-        editPerfisCurso[_ec].forEach(function(p) {
-            if (!editCursoPorPerfil[p]) editCursoPorPerfil[p] = [];
-            editCursoPorPerfil[p].push(_ec);
-        });
-    }
-    var editCursosLivres = editAllCursos.filter(function(c) { return !editPerfisCurso[c] || editPerfisCurso[c].length === 0; });
-
-    function editUpdateCursos() {
-        var perfilEl = document.getElementById('edit-perfil');
-        var cursoEl  = document.getElementById('edit-curso');
-        if (!perfilEl || !cursoEl) return;
-        var perfil = perfilEl.value, current = cursoEl.value;
-        var eligible = editCursosLivres.slice();
-        if (perfil) { (editCursoPorPerfil[perfil] || []).forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); }); }
-        else { editAllCursos.forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); }); }
-        cursoEl.innerHTML = '';
-        var ph = document.createElement('option'); ph.value = '';
-        ph.textContent = '— Seleccione o curso —';
-        cursoEl.appendChild(ph);
-        editAllCursos.forEach(function(c) {
-            if (eligible.indexOf(c) !== -1) {
-                var o = document.createElement('option'); o.value = c; o.textContent = c;
-                if (c === (current || editOldCurso)) o.selected = true;
-                cursoEl.appendChild(o);
-            }
-        });
-    }
-    var editPerfilEl = document.getElementById('edit-perfil');
-    if (editPerfilEl) { editPerfilEl.addEventListener('change', editUpdateCursos); editUpdateCursos(); }
 });
 </script>
 @endpush
