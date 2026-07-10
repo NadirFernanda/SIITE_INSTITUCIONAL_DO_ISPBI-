@@ -5,7 +5,7 @@
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
         <div>
             <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 3px;">Candidaturas para Assinatura</h1>
-            <p style="color:#64748b;font-size:0.92rem;margin:0;">Assine digitalmente as candidaturas aprovadas</p>
+            <p style="color:#64748b;font-size:0.92rem;margin:0;">Apenas candidaturas com pagamento confirmado pela Secretaria</p>
         </div>
     </div>
 

@@ -16,12 +16,14 @@ class CandidaturaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Candidatura::query()->orderByDesc('created_at');
+        // DAAC só vê candidaturas com pagamento confirmado pela Secretaria
+        $query = Candidatura::query()
+            ->where('pagamento_confirmado', true)
+            ->orderByDesc('created_at');
 
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
         }
-        // Sem filtro de status: mostra todas (pendente, em_análise, aprovada, concluída)
 
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
@@ -40,9 +42,9 @@ class CandidaturaController extends Controller
         $candidaturas = $query->paginate(20)->withQueryString();
 
         $totais = [
-            'por_assinar' => Candidatura::whereNull('assinado_em')->count(),
+            'por_assinar' => Candidatura::where('pagamento_confirmado', true)->whereNull('assinado_em')->count(),
             'concluida'   => Candidatura::where('status', 'concluida')->count(),
-            'total'       => Candidatura::count(),
+            'total'       => Candidatura::where('pagamento_confirmado', true)->count(),
         ];
 
         return view('daac.candidaturas.index', compact('candidaturas', 'totais'));

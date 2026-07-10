@@ -72,6 +72,9 @@
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
                         <input type="radio" name="role" value="daac" style="accent-color:#2563eb;"> DAAC <small style="color:#94a3b8;">(assinar comprovativos)</small>
                     </label>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
+                        <input type="radio" name="role" value="secretaria" style="accent-color:#7c3aed;"> Secretaria <small style="color:#94a3b8;">(confirmar pagamentos)</small>
+                    </label>
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:12px;">

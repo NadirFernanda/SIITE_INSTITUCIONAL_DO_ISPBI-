@@ -283,7 +283,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::post('alumni/{id}/revogar', [App\Http\Controllers\AdminAlumniController::class, 'revogar'])->name('alumni.revogar');
 });
 
-// Painel técnico — acesso a utilizadores com role 'tecnico' ou 'admin'
+// Painel Secretaria — confirmação de pagamentos
+Route::prefix('secretaria')->name('secretaria.')->middleware(['auth', 'secretaria', 'throttle:30,1'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('secretaria.candidaturas.index');
+    })->name('dashboard');
+    Route::get('candidaturas', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'show'])->name('candidaturas.show');
+    Route::post('candidaturas/{candidatura}/confirmar-pagamento', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'confirmarPagamento'])->name('candidaturas.confirmar-pagamento');
+    Route::post('candidaturas/{candidatura}/cancelar-pagamento', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'cancelarPagamento'])->name('candidaturas.cancelar-pagamento');
+});
+
 // Painel DAAC — assinar candidaturas digitalmente
 Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1'])->group(function () {
     // Candidaturas

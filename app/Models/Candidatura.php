@@ -15,7 +15,7 @@ class Candidatura extends Model
         'sexo', 'estado_civil', 'necessidade_especial',
         'residencia_municipio', 'residencia_bairro',
         'telefone', 'telefone2', 'email',
-        'habilitacoes', 'escola_origem', 'perfil', 'local_inscricao', 'ano_conclusao',
+        'habilitacoes', 'escola_origem', 'perfil', 'local_inscricao', 'pagamento_confirmado', 'pagamento_confirmado_em', 'pagamento_confirmado_por', 'ano_conclusao',
         'estado_financeiro', 'trabalhador', 'instituicao_laboral',
         'curso', 'periodo', 'observacoes',
         'status', 'notas_admin',
@@ -26,7 +26,9 @@ class Candidatura extends Model
     protected $casts = [
         'data_nascimento'  => 'date',
         'bi_data_emissao'  => 'date',
-        'trabalhador'      => 'boolean',
+        'trabalhador'           => 'boolean',
+        'pagamento_confirmado'  => 'boolean',
+        'pagamento_confirmado_em' => 'datetime',
         'assinado_em'      => 'datetime',
         'created_at'       => 'datetime',
         'updated_at'       => 'datetime',
@@ -170,6 +172,11 @@ class Candidatura extends Model
         }
         ksort($all);
         return array_keys($all);
+    }
+
+    public function confirmadoPor()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'pagamento_confirmado_por');
     }
 
     public function sala()

@@ -87,6 +87,12 @@
             @php daac_campo('Escola de Proveniência', $candidatura->escola_origem); @endphp
             @php daac_campo('Perfil do Curso de Origem', $candidatura->perfil); @endphp
             @php daac_campo('Local de Inscrição', $candidatura->local_inscricao ? (\App\Models\Candidatura::$locaisInscricao[$candidatura->local_inscricao] ?? $candidatura->local_inscricao) : null); @endphp
+            @php
+            $pagLabel = $candidatura->pagamento_confirmado
+                ? 'Confirmado em ' . ($candidatura->pagamento_confirmado_em?->format('d/m/Y H:i') ?? '—')
+                : 'Não confirmado';
+            daac_campo('Pagamento RUP', $pagLabel);
+            @endphp
             @php daac_campo('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php daac_campo('Estado Financeiro da Família', isset($ef[$candidatura->estado_financeiro]) ? $ef[$candidatura->estado_financeiro] : $candidatura->estado_financeiro); @endphp
             @php daac_campo('Trabalhador', $candidatura->trabalhador === null ? '—' : ($candidatura->trabalhador ? 'Sim' : 'Não')); @endphp

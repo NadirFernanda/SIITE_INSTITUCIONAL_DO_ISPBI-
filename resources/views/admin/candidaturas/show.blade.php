@@ -83,6 +83,12 @@
             @php _campo('Escola de Proveniência', $candidatura->escola_origem); @endphp
             @php _campo('Perfil do Curso de Origem', $candidatura->perfil); @endphp
             @php _campo('Local de Inscrição', $candidatura->local_inscricao ? (\App\Models\Candidatura::$locaisInscricao[$candidatura->local_inscricao] ?? $candidatura->local_inscricao) : null); @endphp
+            @php
+            $pagLabel = $candidatura->pagamento_confirmado
+                ? 'Confirmado em ' . ($candidatura->pagamento_confirmado_em?->format('d/m/Y H:i') ?? '—')
+                : 'Não confirmado';
+            _campo('Pagamento RUP', $pagLabel);
+            @endphp
             @php _campo('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php
             $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];

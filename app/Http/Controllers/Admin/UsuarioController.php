@@ -23,7 +23,8 @@ class UsuarioController extends Controller
             'password' => 'required|string|min:10|confirmed',
         ]);
 
-        $role = in_array($request->input('role'), ['tecnico', 'daac'], true)
+        $roleLabels = ['tecnico' => 'Técnico', 'daac' => 'DAAC', 'secretaria' => 'Secretaria'];
+        $role = in_array($request->input('role'), array_keys($roleLabels), true)
             ? $request->input('role')
             : 'tecnico';
 
@@ -33,7 +34,7 @@ class UsuarioController extends Controller
             'password' => Hash::make($request->input('password')),
         ])->forceFill(['role' => $role])->save();
 
-        $roleLabel = $role === 'daac' ? 'DAAC' : 'Técnico';
+        $roleLabel = $roleLabels[$role];
         return redirect()->route('admin.usuarios')->with('success', "{$roleLabel} criado com sucesso.");
     }
 

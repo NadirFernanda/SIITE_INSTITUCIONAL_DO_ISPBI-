@@ -19,10 +19,11 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->append(\App\Http\Middleware\SecureHeaders::class);
         $middleware->alias([
-            'admin'   => \App\Http\Middleware\EnsureUserIsAdmin::class,
-            'tecnico' => \App\Http\Middleware\EnsureUserIsTecnico::class,
-            'daac'    => \App\Http\Middleware\EnsureUserIsDAAC::class,
-            'alumni'  => \App\Http\Middleware\EnsureUserIsAlumni::class,
+            'admin'      => \App\Http\Middleware\EnsureUserIsAdmin::class,
+            'tecnico'    => \App\Http\Middleware\EnsureUserIsTecnico::class,
+            'daac'       => \App\Http\Middleware\EnsureUserIsDAAC::class,
+            'alumni'     => \App\Http\Middleware\EnsureUserIsAlumni::class,
+            'secretaria' => \App\Http\Middleware\EnsureUserIsSecretaria::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
