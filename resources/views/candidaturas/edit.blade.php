@@ -191,8 +191,8 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
             <div style="margin-bottom:14px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Perfil do Curso de Proveniência <span style="color:#ef4444">*</span></label>
                 <select name="perfil" id="edit-perfil"
-                        data-perfis-curso='@json(\App\Models\Candidatura::$perfisCurso)'
-                        data-todos-cursos='@json(\App\Models\Candidatura::$cursos)'
+                        data-perfis-curso="{{ json_encode(\App\Models\Candidatura::$perfisCurso, JSON_UNESCAPED_UNICODE) }}"
+                        data-todos-cursos="{{ json_encode(\App\Models\Candidatura::$cursos, JSON_UNESCAPED_UNICODE) }}"
                         style="{{ $inp }}@error('perfil')border-color:#f87171;@enderror">
                     <option value="">— Seleccione o perfil do curso de origem —</option>
                     @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)

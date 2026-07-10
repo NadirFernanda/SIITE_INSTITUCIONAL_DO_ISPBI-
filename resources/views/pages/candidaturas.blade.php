@@ -369,8 +369,8 @@
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Perfil do Curso de Proveniência <span class="text-red-500">*</span></label>
                                             <select name="perfil" id="perfil-select"
-                                                    data-perfis-curso='@json(\App\Models\Candidatura::$perfisCurso)'
-                                                    data-todos-cursos='@json(\App\Models\Candidatura::$cursos)'
+                                                    data-perfis-curso="{{ json_encode(\App\Models\Candidatura::$perfisCurso, JSON_UNESCAPED_UNICODE) }}"
+                                                    data-todos-cursos="{{ json_encode(\App\Models\Candidatura::$cursos, JSON_UNESCAPED_UNICODE) }}"
                                                     class="{{ $inp }} @error('perfil') border-red-400 @enderror">
                                                 <option value="">— Seleccione o perfil do seu curso de origem —</option>
                                                 @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
