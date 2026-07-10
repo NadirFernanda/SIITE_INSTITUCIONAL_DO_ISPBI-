@@ -358,10 +358,25 @@
                                                 @error('habilitacoes')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                             </div>
                                             <div class="sm:col-span-2">
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Escola e Curso de Proveniência <span class="text-red-500">*</span></label>
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Escola de Proveniência <span class="text-red-500">*</span></label>
                                                 <input type="text" name="escola_origem" value="{{ old('escola_origem') }}" required maxlength="255" class="{{ $inp }} @error('escola_origem') border-red-400 @enderror">
                                                 @error('escola_origem')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                             </div>
+                                        </div>
+
+                                        {{-- 10b. Perfil de Acesso --}}
+                                        @php $oldPerfil = old('perfil', ''); @endphp
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-1">Perfil do Curso de Proveniência <span class="text-red-500">*</span></label>
+                                            <select name="perfil" id="perfil-select"
+                                                    class="{{ $inp }} @error('perfil') border-red-400 @enderror">
+                                                <option value="">— Seleccione o perfil do seu curso de origem —</option>
+                                                @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
+                                                    <option value="{{ $p }}" {{ $oldPerfil === $p ? 'selected' : '' }}>{{ $p }}</option>
+                                                @endforeach
+                                            </select>
+                                            <p class="text-xs text-gray-400 mt-1">Os cursos disponíveis serão filtrados automaticamente com base no seu perfil.</p>
+                                            @error('perfil')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                         </div>
 
                                         {{-- 11. Ano de Conclusão --}}
@@ -410,10 +425,20 @@
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Curso a Inscrever <span class="text-red-500">*</span></label>
-                                                <select name="curso" required class="{{ $inp }} @error('curso') border-red-400 @enderror">
-                                                    <option value="">Seleccione um curso</option>
-                                                    @foreach(\App\Models\Candidatura::$cursos as $curso)
-                                                        <option value="{{ $curso }}" {{ old('curso') === $curso ? 'selected' : '' }}>{{ $curso }}</option>
+                                                @php
+                                                $oldCurso = old('curso', '');
+                                                $oldPerfilV = old('perfil', '');
+                                                @endphp
+                                                <select name="curso" id="curso-select" required class="{{ $inp }} @error('curso') border-red-400 @enderror">
+                                                    <option value="">— Seleccione primeiro o seu perfil acima —</option>
+                                                    @foreach(\App\Models\Candidatura::$cursos as $c)
+                                                        @php
+                                                        $perfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
+                                                        $elegivel = empty($perfisC) || !$oldPerfilV || in_array($oldPerfilV, $perfisC);
+                                                        @endphp
+                                                        @if($elegivel)
+                                                            <option value="{{ $c }}" {{ $oldCurso === $c ? 'selected' : '' }}>{{ $c }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                                 @error('curso')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
@@ -452,6 +477,60 @@
 </div>
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
+<script>
+(function() {
+    var perfisCurso = @json(\App\Models\Candidatura::$perfisCurso);
+    var allCursos   = @json(\App\Models\Candidatura::$cursos);
+    var oldCurso    = @json(old('curso', ''));
+
+    // Mapa inverso: perfil → [cursos elegíveis]
+    var cursoPorPerfil = {};
+    for (var c in perfisCurso) {
+        perfisCurso[c].forEach(function(p) {
+            if (!cursoPorPerfil[p]) cursoPorPerfil[p] = [];
+            cursoPorPerfil[p].push(c);
+        });
+    }
+    // Cursos sem restrição de perfil (sempre elegíveis)
+    var cursosLivres = allCursos.filter(function(c) {
+        return !perfisCurso[c] || perfisCurso[c].length === 0;
+    });
+
+    function updateCursos() {
+        var perfilEl = document.getElementById('perfil-select');
+        var cursoEl  = document.getElementById('curso-select');
+        if (!perfilEl || !cursoEl) return;
+        var perfil  = perfilEl.value;
+        var current = cursoEl.value;
+        var eligible = cursosLivres.slice();
+        if (perfil) {
+            (cursoPorPerfil[perfil] || []).forEach(function(c) {
+                if (eligible.indexOf(c) === -1) eligible.push(c);
+            });
+        } else {
+            allCursos.forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); });
+        }
+        cursoEl.innerHTML = '';
+        var ph = document.createElement('option');
+        ph.value = '';
+        ph.textContent = perfil ? '— Seleccione o curso —' : '— Seleccione primeiro o seu perfil acima —';
+        cursoEl.appendChild(ph);
+        allCursos.forEach(function(c) {
+            if (eligible.indexOf(c) !== -1) {
+                var o = document.createElement('option');
+                o.value = c; o.textContent = c;
+                if (c === (current || oldCurso)) o.selected = true;
+                cursoEl.appendChild(o);
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var perfilEl = document.getElementById('perfil-select');
+        if (perfilEl) { perfilEl.addEventListener('change', updateCursos); updateCursos(); }
+    });
+})();
+</script>
 @if($errors->any())
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -143,6 +143,12 @@ class CandidaturaController extends Controller
     {
         $request->merge(['bi' => strtoupper(trim($request->input('bi', '')))]);
 
+        $curso = $request->input('curso');
+        $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
+        $perfilRules = empty($perfisPermitidos)
+            ? ['nullable', 'string', 'max:150']
+            : ['required', 'string', 'max:150', Rule::in($perfisPermitidos)];
+
         $request->validate([
             'nome'                   => 'required|string|max:255',
             'filiacao_pai'           => 'nullable|string|max:255',
@@ -163,6 +169,7 @@ class CandidaturaController extends Controller
             'email'                  => 'required|email|max:255',
             'habilitacoes'           => 'required|string|max:100',
             'escola_origem'          => 'required|string|max:255',
+            'perfil'                 => $perfilRules,
             'ano_conclusao'          => 'required|integer|min:1990|max:' . date('Y'),
             'estado_financeiro'      => 'required|in:maximo,medio,minimo',
             'trabalhador'            => 'required|in:sim,nao',
@@ -175,6 +182,8 @@ class CandidaturaController extends Controller
             'periodo'                => 'required|in:regular,pos-laboral',
         ], [
             'curso.unique'                    => 'Já existe uma candidatura com este BI para o curso neste período.',
+            'perfil.required'                 => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
+            'perfil.in'                       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
             'data_nascimento.before_or_equal' => 'É necessário ter pelo menos 17 anos.',
         ]);
 
@@ -185,7 +194,7 @@ class CandidaturaController extends Controller
             'sexo', 'estado_civil', 'necessidade_especial',
             'residencia_municipio', 'residencia_bairro',
             'telefone', 'telefone2', 'email',
-            'habilitacoes', 'escola_origem', 'ano_conclusao',
+            'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
             'estado_financeiro', 'instituicao_laboral', 'curso', 'periodo',
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
@@ -218,6 +227,11 @@ class CandidaturaController extends Controller
     {
         $periodo      = $request->input('periodo');
         $periodoLabel = $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
+        $curso        = $request->input('curso');
+        $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
+        $perfilRules  = empty($perfisPermitidos)
+            ? ['nullable', 'string', 'max:150']
+            : ['required', 'string', 'max:150', Rule::in($perfisPermitidos)];
 
         $request->validate([
             'nome'                   => 'required|string|max:255',
@@ -239,6 +253,7 @@ class CandidaturaController extends Controller
             'email'                  => 'required|email|max:255',
             'habilitacoes'           => 'required|string|max:100',
             'escola_origem'          => 'required|string|max:255',
+            'perfil'                 => $perfilRules,
             'ano_conclusao'          => 'required|integer|min:1990|max:' . date('Y'),
             'estado_financeiro'      => 'required|in:maximo,medio,minimo',
             'trabalhador'            => 'required|in:sim,nao',
@@ -252,7 +267,9 @@ class CandidaturaController extends Controller
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
         ], [
-            'curso.unique'                   => "Já existe uma candidatura com este BI para o curso no período {$periodoLabel}.",
+            'curso.unique'                    => "Já existe uma candidatura com este BI para o curso no período {$periodoLabel}.",
+            'perfil.required'                 => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
+            'perfil.in'                       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
             'data_nascimento.before_or_equal' => 'É necessário ter pelo menos 17 anos.',
         ]);
 
@@ -263,7 +280,7 @@ class CandidaturaController extends Controller
             'sexo', 'estado_civil', 'necessidade_especial',
             'residencia_municipio', 'residencia_bairro',
             'telefone', 'telefone2', 'email',
-            'habilitacoes', 'escola_origem', 'ano_conclusao',
+            'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
             'estado_financeiro', 'instituicao_laboral',
             'curso', 'periodo',
         ]);

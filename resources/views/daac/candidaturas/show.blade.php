@@ -84,7 +84,8 @@
         <h2 style="font-size:0.8rem;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">3. Dados Académicos e Socioeconómicos</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
             @php daac_campo('Habilitações Literárias', $candidatura->habilitacoes); @endphp
-            @php daac_campo('Escola e Curso de Proveniência', $candidatura->escola_origem); @endphp
+            @php daac_campo('Escola de Proveniência', $candidatura->escola_origem); @endphp
+            @php daac_campo('Perfil do Curso de Origem', $candidatura->perfil); @endphp
             @php daac_campo('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php daac_campo('Estado Financeiro da Família', isset($ef[$candidatura->estado_financeiro]) ? $ef[$candidatura->estado_financeiro] : $candidatura->estado_financeiro); @endphp
             @php daac_campo('Trabalhador', $candidatura->trabalhador === null ? '—' : ($candidatura->trabalhador ? 'Sim' : 'Não')); @endphp

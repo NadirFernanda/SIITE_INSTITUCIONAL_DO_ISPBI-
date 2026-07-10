@@ -15,7 +15,7 @@ class Candidatura extends Model
         'sexo', 'estado_civil', 'necessidade_especial',
         'residencia_municipio', 'residencia_bairro',
         'telefone', 'telefone2', 'email',
-        'habilitacoes', 'escola_origem', 'ano_conclusao',
+        'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
         'estado_financeiro', 'trabalhador', 'instituicao_laboral',
         'curso', 'periodo', 'observacoes',
         'status', 'notas_admin',
@@ -42,6 +42,101 @@ class Candidatura extends Model
         'Enfermagem',
     ];
 
+    // Perfis de acesso por curso (conforme documento oficial)
+    public static array $perfisCurso = [
+        'Comunicação Social' => [
+            'Língua Portuguesa e EMC',
+            'Ciências Económicas e Jurídicas',
+            'História e Geografia',
+            'Autarquias Locais',
+            'Educação Moral e Cívica',
+            'Ciências Humanas',
+            'Ensino Primário',
+            'Propedêutico',
+            'Educador Social',
+            'Filosofia',
+            'Administração Pública',
+            'Telecomunicações',
+        ],
+        'Contabilidade e Administração' => [
+            'Matemática e Física',
+            'Ciências Físicas e Biológicas',
+            'Comércio',
+            'Técnico de Minas',
+            'Gestão de Recursos Humanos',
+            'Técnico de Contabilidade',
+            'Autarquias',
+            'Ciências Económicas e Jurídicas',
+            'Técnico de Finanças',
+            'Técnico de Gestão Empresarial',
+            'Técnico de Estatística',
+            'Técnico de Secretariado',
+            'Administração Pública',
+            'Instalação Eléctrica',
+            'Construção Civil',
+        ],
+        'Enfermagem' => [
+            'Enfermagem Geral',
+            'Análises Clínicas',
+            'Radiologia',
+            'Ciências Físicas e Biológicas',
+            'Biologia e Química',
+            'Educação Física',
+            'Química',
+            'Produção Vegetal',
+            'Produção Animal',
+        ],
+        'Engenharia em Recursos Hídricos' => [
+            'Matemática e Física',
+            'Ciências Físicas e Biológicas',
+            'Ciências Económicas e Jurídicas',
+            'Técnico de Estatística',
+            'Telecomunicações',
+            'Técnico de Móveis',
+            'Técnico de Minas',
+            'Eletricidade',
+            'Instalação Eléctrica',
+            'Construção Civil',
+            'Máquinas e Motores',
+            'Energias Renováveis',
+            'Mecânica',
+            'Química',
+        ],
+        'Engenharia Informática' => [
+            'Informática de Gestão',
+            'Matemática e Física',
+            'Ciências Económicas e Jurídicas',
+            'Técnico de Estatística',
+            'Técnico de Móveis',
+            'Instalação Eléctrica',
+            'Construção Civil',
+            'Telecomunicações',
+            'Energias Renováveis',
+            'Mecânica',
+            'Eletricidade',
+            'Máquinas e Motores',
+        ],
+        'Psicologia Clínica' => [
+            'Ciências Humanas',
+            'Ciências Económicas e Jurídicas',
+            'História e Geografia',
+            'Ciências Físicas e Biológicas',
+            'Educador Social',
+            'Enfermagem Geral',
+            'Educação Moral e Cívica',
+            'Autarquias Locais',
+            'Ensino Primário',
+            'Propedêutico',
+            'Administração Pública',
+            'Produção Vegetal',
+            'Secretariado',
+            'Química',
+            'Filosofia',
+            'Produção Animal',
+        ],
+        'Engenharia Civil' => [], // Sem restrição de perfil definida
+    ];
+
     // Cursos com prioridade para salas de maior capacidade
     public static array $cursosPrioritarios = ['Enfermagem'];
 
@@ -60,6 +155,19 @@ class Candidatura extends Model
         'rejeitada'  => '#ef4444',
         'concluida'  => '#7c3aed',
     ];
+
+    // Retorna todos os perfis únicos ordenados alfabeticamente
+    public static function todosOsPerfis(): array
+    {
+        $all = [];
+        foreach (static::$perfisCurso as $perfis) {
+            foreach ($perfis as $p) {
+                $all[$p] = true;
+            }
+        }
+        ksort($all);
+        return array_keys($all);
+    }
 
     public function sala()
     {

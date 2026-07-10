@@ -77,7 +77,8 @@
         <h2 style="font-size:0.88rem;font-weight:700;color:#0e5c2f;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Académicos e Socioeconómicos</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;">
             @php _tc('Habilitações Literárias', $candidatura->habilitacoes); @endphp
-            @php _tc('Escola e Curso de Proveniência', $candidatura->escola_origem); @endphp
+            @php _tc('Escola de Proveniência', $candidatura->escola_origem); @endphp
+            @php _tc('Perfil do Curso de Origem', $candidatura->perfil); @endphp
             @php _tc('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php
             $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];

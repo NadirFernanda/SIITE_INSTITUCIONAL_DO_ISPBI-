@@ -180,10 +180,25 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                            required maxlength="100" placeholder="Ex: 12ª Classe" style="{{ $inp }}">
                 </div>
                 <div>
-                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Escola e Curso de Proveniência <span style="color:#ef4444">*</span></label>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Escola de Proveniência <span style="color:#ef4444">*</span></label>
                     <input type="text" name="escola_origem" value="{{ old('escola_origem', $candidatura->escola_origem) }}"
                            required maxlength="255" style="{{ $inp }}">
                 </div>
+            </div>
+
+            {{-- Perfil de Acesso --}}
+            @php $editOldPerf = old('perfil', $candidatura->perfil ?? ''); @endphp
+            <div style="margin-bottom:14px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Perfil do Curso de Proveniência <span style="color:#ef4444">*</span></label>
+                <select name="perfil" id="edit-perfil"
+                        style="{{ $inp }}@error('perfil')border-color:#f87171;@enderror">
+                    <option value="">— Seleccione o perfil do curso de origem —</option>
+                    @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
+                        <option value="{{ $p }}" {{ $editOldPerf === $p ? 'selected' : '' }}>{{ $p }}</option>
+                    @endforeach
+                </select>
+                <p style="font-size:0.74rem;color:#94a3b8;margin-top:4px;">Os cursos disponíveis são filtrados automaticamente pelo perfil.</p>
+                @error('perfil')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;">{{ $message }}</p>@enderror
             </div>
 
             {{-- Ano Conclusão --}}
@@ -238,10 +253,20 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px;">
                 <div>
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Curso <span style="color:#ef4444">*</span></label>
-                    <select name="curso" required style="{{ $inp }}">
-                        <option value="">Seleccione um curso</option>
-                        @foreach(\App\Models\Candidatura::$cursos as $curso)
-                            <option value="{{ $curso }}" {{ old('curso', $candidatura->curso) === $curso ? 'selected' : '' }}>{{ $curso }}</option>
+                    @php
+                    $editOldCurso  = old('curso', $candidatura->curso ?? '');
+                    $editOldPerfilV = old('perfil', $candidatura->perfil ?? '');
+                    @endphp
+                    <select name="curso" id="edit-curso" required style="{{ $inp }}">
+                        <option value="">— Seleccione o curso —</option>
+                        @foreach(\App\Models\Candidatura::$cursos as $c)
+                            @php
+                            $editPerfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
+                            $editElegivel = empty($editPerfisC) || !$editOldPerfilV || in_array($editOldPerfilV, $editPerfisC);
+                            @endphp
+                            @if($editElegivel)
+                                <option value="{{ $c }}" {{ $editOldCurso === $c ? 'selected' : '' }}>{{ $c }}</option>
+                            @endif
                         @endforeach
                     </select>
                     @error('curso')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;">{{ $message }}</p>@enderror
@@ -285,6 +310,42 @@ document.addEventListener('DOMContentLoaded', function() {
     var mun  = document.getElementById('edit-municipio');
     if (prov) { prov.id = 'select-provincia'; }
     if (mun)  { mun.id  = 'select-municipio'; }
+
+    // Perfil → filtra cursos elegíveis
+    var editPerfisCurso = @json(\App\Models\Candidatura::$perfisCurso);
+    var editAllCursos   = @json(\App\Models\Candidatura::$cursos);
+    var editOldCurso    = @json(old('curso', $candidatura->curso ?? ''));
+    var editCursoPorPerfil = {};
+    for (var _ec in editPerfisCurso) {
+        editPerfisCurso[_ec].forEach(function(p) {
+            if (!editCursoPorPerfil[p]) editCursoPorPerfil[p] = [];
+            editCursoPorPerfil[p].push(_ec);
+        });
+    }
+    var editCursosLivres = editAllCursos.filter(function(c) { return !editPerfisCurso[c] || editPerfisCurso[c].length === 0; });
+
+    function editUpdateCursos() {
+        var perfilEl = document.getElementById('edit-perfil');
+        var cursoEl  = document.getElementById('edit-curso');
+        if (!perfilEl || !cursoEl) return;
+        var perfil = perfilEl.value, current = cursoEl.value;
+        var eligible = editCursosLivres.slice();
+        if (perfil) { (editCursoPorPerfil[perfil] || []).forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); }); }
+        else { editAllCursos.forEach(function(c) { if (eligible.indexOf(c) === -1) eligible.push(c); }); }
+        cursoEl.innerHTML = '';
+        var ph = document.createElement('option'); ph.value = '';
+        ph.textContent = '— Seleccione o curso —';
+        cursoEl.appendChild(ph);
+        editAllCursos.forEach(function(c) {
+            if (eligible.indexOf(c) !== -1) {
+                var o = document.createElement('option'); o.value = c; o.textContent = c;
+                if (c === (current || editOldCurso)) o.selected = true;
+                cursoEl.appendChild(o);
+            }
+        });
+    }
+    var editPerfilEl = document.getElementById('edit-perfil');
+    if (editPerfilEl) { editPerfilEl.addEventListener('change', editUpdateCursos); editUpdateCursos(); }
 });
 </script>
 @endpush

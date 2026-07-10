@@ -80,7 +80,8 @@
         <h2 style="font-size:0.95rem;font-weight:700;color:#1565c0;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Dados Académicos e Socioeconómicos</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
             @php _campo('Habilitações Literárias', $candidatura->habilitacoes); @endphp
-            @php _campo('Escola e Curso de Proveniência', $candidatura->escola_origem); @endphp
+            @php _campo('Escola de Proveniência', $candidatura->escola_origem); @endphp
+            @php _campo('Perfil do Curso de Origem', $candidatura->perfil); @endphp
             @php _campo('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php
             $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];

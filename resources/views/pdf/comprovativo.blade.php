@@ -146,6 +146,9 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         <div style="display:table-cell;width:70%;vertical-align:middle;">
             <div class="flabel">Curso Inscrito</div>
             <div style="font-size:11pt;font-weight:bold;color:#2563eb;margin-top:1mm;">{{ $candidatura->curso }}</div>
+            @if($candidatura->perfil)
+            <div style="margin-top:2mm;"><span class="flabel">Perfil de Acesso:</span> <span style="font-size:9pt;font-weight:bold;color:#1a1a2e;">{{ $candidatura->perfil }}</span></div>
+            @endif
         </div>
         <div style="display:table-cell;width:30%;vertical-align:middle;text-align:right;">
             <div class="flabel">Período</div>
