@@ -177,6 +177,7 @@
                     @endforeach
                 </select>
                 <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Os cursos disponíveis são filtrados automaticamente pelo perfil.</p>
+                <div id="tc-perfil-info" style="display:none;margin-top:8px;padding:9px 13px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;font-size:0.8rem;color:#1e40af;line-height:1.5;"></div>
                 @error('perfil')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
             </div>
 

@@ -378,6 +378,7 @@
                                                 @endforeach
                                             </select>
                                             <p class="text-xs text-gray-400 mt-1">Os cursos disponíveis serão filtrados automaticamente com base no seu perfil.</p>
+                                            <div id="perfil-select-info" style="display:none;margin-top:8px;padding:10px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;font-size:0.82rem;color:#1e40af;line-height:1.5;"></div>
                                             @error('perfil')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                         </div>
 

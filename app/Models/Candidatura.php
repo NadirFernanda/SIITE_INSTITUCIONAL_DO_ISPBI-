@@ -38,7 +38,6 @@ class Candidatura extends Model
         'Engenharia em Recursos Hídricos',
         'Comunicação Social',
         'Psicologia Clínica',
-        'Engenharia Civil',
         'Enfermagem',
     ];
 
@@ -134,7 +133,6 @@ class Candidatura extends Model
             'Filosofia',
             'Produção Animal',
         ],
-        'Engenharia Civil' => [], // Sem restrição de perfil definida
     ];
 
     // Cursos com prioridade para salas de maior capacidade

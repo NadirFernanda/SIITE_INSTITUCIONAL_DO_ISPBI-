@@ -2,15 +2,17 @@
     'use strict';
 
     var configs = [
-        { perfilId: 'perfil-select', cursoId: 'curso-select' },
-        { perfilId: 'tc-perfil',     cursoId: 'tc-curso'     },
-        { perfilId: 'edit-perfil',   cursoId: 'edit-curso'   },
+        { perfilId: 'perfil-select', cursoId: 'curso-select', infoId: 'perfil-select-info' },
+        { perfilId: 'tc-perfil',     cursoId: 'tc-curso',     infoId: 'tc-perfil-info'     },
+        { perfilId: 'edit-perfil',   cursoId: 'edit-curso',   infoId: 'edit-perfil-info'   },
     ];
 
     function initConfig(cfg) {
         var perfilEl = document.getElementById(cfg.perfilId);
         var cursoEl  = document.getElementById(cfg.cursoId);
         if (!perfilEl || !cursoEl) return;
+
+        var infoEl = cfg.infoId ? document.getElementById(cfg.infoId) : null;
 
         var perfisCurso = JSON.parse(perfilEl.getAttribute('data-perfis-curso') || '{}');
         var allCursos   = JSON.parse(perfilEl.getAttribute('data-todos-cursos')  || '[]');
@@ -27,15 +29,28 @@
             }
         }
 
-        // Cursos sem restrição de perfil (Engenharia Civil, etc.)
-        var cursosLivres = allCursos.filter(function (c) {
-            return !perfisCurso[c] || perfisCurso[c].length === 0;
-        });
-
         function updateCursos() {
             var perfil  = perfilEl.value;
             var current = cursoEl.value;
 
+            // Cursos elegíveis para este perfil
+            var eligible = (cursoPorPerfil[perfil] || []).slice();
+
+            // Mensagem informativa
+            if (infoEl) {
+                if (perfil && eligible.length > 0) {
+                    var lista = eligible.join(', ');
+                    infoEl.innerHTML = '<strong>O seu perfil permite candidatar-se ao(s) curso(s):</strong> ' + lista + '.';
+                    infoEl.style.display = 'block';
+                } else if (perfil && eligible.length === 0) {
+                    infoEl.innerHTML = '<strong>Atenção:</strong> não foram encontrados cursos compatíveis com este perfil.';
+                    infoEl.style.display = 'block';
+                } else {
+                    infoEl.style.display = 'none';
+                }
+            }
+
+            // Actualiza o select de cursos
             cursoEl.innerHTML = '';
             var ph = document.createElement('option');
             ph.value = '';
@@ -46,13 +61,10 @@
                 return;
             }
 
-            ph.textContent = '— Seleccione o curso —';
+            ph.textContent = eligible.length === 1
+                ? '— Confirme o curso abaixo —'
+                : '— Seleccione o curso —';
             cursoEl.appendChild(ph);
-
-            var eligible = cursosLivres.slice();
-            (cursoPorPerfil[perfil] || []).forEach(function (c) {
-                if (eligible.indexOf(c) === -1) eligible.push(c);
-            });
 
             allCursos.forEach(function (c) {
                 if (eligible.indexOf(c) !== -1) {
@@ -63,6 +75,11 @@
                     cursoEl.appendChild(o);
                 }
             });
+
+            // Se só há um curso elegível, seleccioná-lo automaticamente
+            if (eligible.length === 1 && cursoEl.options.length === 2) {
+                cursoEl.options[1].selected = true;
+            }
         }
 
         perfilEl.addEventListener('change', updateCursos);
