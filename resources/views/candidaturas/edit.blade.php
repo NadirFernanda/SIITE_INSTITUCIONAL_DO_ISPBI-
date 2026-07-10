@@ -292,6 +292,20 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                 </div>
             </div>
 
+            {{-- Local de Inscrição --}}
+            <div style="margin-bottom:24px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Local de Inscrição <span style="color:#ef4444">*</span></label>
+                <div style="display:flex;gap:20px;margin-top:4px;flex-wrap:wrap;">
+                    @foreach(\App\Models\Candidatura::$locaisInscricao as $val => $label)
+                    <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                        <input type="radio" name="local_inscricao" value="{{ $val }}"
+                               {{ old('local_inscricao', $candidatura->local_inscricao) === $val ? 'checked' : '' }} required> {{ $label }}
+                    </label>
+                    @endforeach
+                </div>
+                @error('local_inscricao')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;">{{ $message }}</p>@enderror
+            </div>
+
             <div style="display:flex;gap:10px;">
                 <button type="submit"
                         style="background:{{ $accent }};color:#fff;border:none;border-radius:10px;padding:11px 28px;font-weight:700;cursor:pointer;font-size:0.9rem;"

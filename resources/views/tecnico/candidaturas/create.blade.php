@@ -262,6 +262,20 @@
                 </div>
             </div>
 
+            {{-- Local de Inscrição --}}
+            <div style="margin-bottom:24px;">
+                @php tc_label('Local de Inscrição') @endphp
+                <div style="display:flex;gap:20px;margin-top:4px;flex-wrap:wrap;">
+                    @foreach(\App\Models\Candidatura::$locaisInscricao as $val => $label)
+                    <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                        <input type="radio" name="local_inscricao" value="{{ $val }}"
+                               {{ old('local_inscricao') === $val ? 'checked' : '' }} required> {{ $label }}
+                    </label>
+                    @endforeach
+                </div>
+                @error('local_inscricao')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
             <button type="submit"
                     style="background:#0e5c2f;color:#fff;border:none;border-radius:10px;padding:11px 28px;font-weight:700;cursor:pointer;font-size:0.9rem;"
                     onmouseover="this.style.background='#14532d'" onmouseout="this.style.background='#0e5c2f'">

@@ -59,6 +59,7 @@ class CandidaturaController extends Controller
                 }),
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
+            'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'curso.unique'                   => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
             'perfil.required'                => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
@@ -95,7 +96,7 @@ class CandidaturaController extends Controller
             'telefone', 'telefone2', 'email',
             'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
             'estado_financeiro', 'instituicao_laboral',
-            'curso', 'periodo',
+            'curso', 'periodo', 'local_inscricao',
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 

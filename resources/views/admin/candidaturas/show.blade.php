@@ -82,6 +82,7 @@
             @php _campo('Habilitações Literárias', $candidatura->habilitacoes); @endphp
             @php _campo('Escola de Proveniência', $candidatura->escola_origem); @endphp
             @php _campo('Perfil do Curso de Origem', $candidatura->perfil); @endphp
+            @php _campo('Local de Inscrição', $candidatura->local_inscricao ? (\App\Models\Candidatura::$locaisInscricao[$candidatura->local_inscricao] ?? $candidatura->local_inscricao) : null); @endphp
             @php _campo('Ano de Conclusão', $candidatura->ano_conclusao); @endphp
             @php
             $ef = ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];

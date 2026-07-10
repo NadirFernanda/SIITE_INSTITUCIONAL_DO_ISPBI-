@@ -65,7 +65,7 @@
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
                 Pesquisar
             </button>
-            @if(request()->hasAny(['q','status','curso','periodo']))
+            @if(request()->hasAny(['q','status','curso','periodo','local_inscricao']))
             <a href="{{ route('tecnico.candidaturas.index') }}"
                style="background:#f1f5f9;color:#64748b;border-radius:10px;padding:10px 16px;font-weight:600;font-size:0.88rem;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:5px;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -101,7 +101,16 @@
                     <option value="pos-laboral"{{ request('periodo') === 'pos-laboral'? 'selected' : '' }}>Pós-Laboral</option>
                 </select>
             </div>
-            @if(request()->hasAny(['q','status','curso','periodo']))
+            <div style="min-width:160px;">
+                <label style="display:block;font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Local</label>
+                <select name="local_inscricao" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.88rem;background:#f8fafc;">
+                    <option value="">Todos</option>
+                    @foreach(\App\Models\Candidatura::$locaisInscricao as $val => $label)
+                        <option value="{{ $val }}" {{ request('local_inscricao') === $val ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @if(request()->hasAny(['q','status','curso','periodo','local_inscricao']))
             <div style="padding-bottom:2px;">
                 <span style="font-size:0.8rem;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px;">
                     {{ $candidaturas->total() }} resultado{{ $candidaturas->total() !== 1 ? 's' : '' }}

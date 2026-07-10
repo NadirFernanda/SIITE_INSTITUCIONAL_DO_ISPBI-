@@ -27,6 +27,9 @@ class CandidaturaController extends Controller
         if ($request->filled('periodo')) {
             $query->where('periodo', $request->input('periodo'));
         }
+        if ($request->filled('local_inscricao')) {
+            $query->where('local_inscricao', $request->input('local_inscricao'));
+        }
         if ($request->filled('q')) {
             $q = $request->input('q');
             $query->where(function ($r) use ($q) {
@@ -180,6 +183,7 @@ class CandidaturaController extends Controller
                 )->ignore($candidatura->id),
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
+            'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'curso.unique'                    => 'Já existe uma candidatura com este BI para o curso neste período.',
             'perfil.required'                 => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
@@ -195,7 +199,7 @@ class CandidaturaController extends Controller
             'residencia_municipio', 'residencia_bairro',
             'telefone', 'telefone2', 'email',
             'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
-            'estado_financeiro', 'instituicao_laboral', 'curso', 'periodo',
+            'estado_financeiro', 'instituicao_laboral', 'curso', 'periodo', 'local_inscricao',
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
@@ -266,6 +270,7 @@ class CandidaturaController extends Controller
                 ),
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
+            'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'curso.unique'                    => "Já existe uma candidatura com este BI para o curso no período {$periodoLabel}.",
             'perfil.required'                 => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
@@ -282,7 +287,7 @@ class CandidaturaController extends Controller
             'telefone', 'telefone2', 'email',
             'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
             'estado_financeiro', 'instituicao_laboral',
-            'curso', 'periodo',
+            'curso', 'periodo', 'local_inscricao',
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 

@@ -15,7 +15,7 @@ class Candidatura extends Model
         'sexo', 'estado_civil', 'necessidade_especial',
         'residencia_municipio', 'residencia_bairro',
         'telefone', 'telefone2', 'email',
-        'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
+        'habilitacoes', 'escola_origem', 'perfil', 'local_inscricao', 'ano_conclusao',
         'estado_financeiro', 'trabalhador', 'instituicao_laboral',
         'curso', 'periodo', 'observacoes',
         'status', 'notas_admin',
@@ -133,6 +133,11 @@ class Candidatura extends Model
             'Filosofia',
             'Produção Animal',
         ],
+    ];
+
+    public static array $locaisInscricao = [
+        'dentro' => 'Dentro do ISP_Bié',
+        'fora'   => 'Fora do ISP_Bié',
     ];
 
     // Cursos com prioridade para salas de maior capacidade

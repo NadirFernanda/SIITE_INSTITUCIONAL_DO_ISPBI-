@@ -464,6 +464,21 @@
                                             </div>
                                         </div>
 
+                                        {{-- 15. Local de Inscrição --}}
+                                        <div>
+                                            <label class="block text-sm font-semibold text-gray-700 mb-2">Local de Inscrição <span class="text-red-500">*</span></label>
+                                            <div class="flex gap-6 flex-wrap">
+                                                @foreach(\App\Models\Candidatura::$locaisInscricao as $val => $label)
+                                                <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                                                    <input type="radio" name="local_inscricao" value="{{ $val }}"
+                                                           {{ old('local_inscricao') === $val ? 'checked' : '' }}
+                                                           required class="accent-[#2563eb]"> {{ $label }}
+                                                </label>
+                                                @endforeach
+                                            </div>
+                                            @error('local_inscricao')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                                        </div>
+
                                         <div class="pt-2">
                                             <button type="submit"
                                                     class="w-full sm:w-auto bg-[#2563eb] hover:bg-[#174ea6] text-white font-bold px-10 py-3 rounded-xl transition-colors text-sm">

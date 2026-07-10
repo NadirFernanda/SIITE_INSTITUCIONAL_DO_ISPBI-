@@ -24,6 +24,9 @@ class CandidaturaController extends Controller
         if ($request->filled('periodo')) {
             $query->where('periodo', $request->input('periodo'));
         }
+        if ($request->filled('local_inscricao')) {
+            $query->where('local_inscricao', $request->input('local_inscricao'));
+        }
         if ($request->filled('q')) {
             $q = $request->input('q');
             // Se for número, pesquisa também pelo ID (número de ficha)
@@ -140,6 +143,7 @@ class CandidaturaController extends Controller
                 )->ignore($candidatura->id),
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
+            'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'perfil.required' => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
             'perfil.in'       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
@@ -153,7 +157,7 @@ class CandidaturaController extends Controller
             'residencia_municipio', 'residencia_bairro',
             'telefone', 'telefone2', 'email',
             'habilitacoes', 'escola_origem', 'perfil', 'ano_conclusao',
-            'estado_financeiro', 'instituicao_laboral', 'curso', 'periodo',
+            'estado_financeiro', 'instituicao_laboral', 'curso', 'periodo', 'local_inscricao',
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
