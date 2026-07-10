@@ -138,18 +138,26 @@
                             <span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Técnico</span>
                         @elseif($u->role === 'daac')
                             <span style="background:#ede9fe;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">DAAC</span>
+                        @elseif($u->role === 'secretaria')
+                            <span style="background:#fdf4ff;color:#a21caf;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Secretaria</span>
                         @else
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif
                     </td>
                     <td style="padding:14px 22px;text-align:center;">
-                        @if($u->role === 'tecnico')
-                        <div style="display:flex;gap:8px;justify-content:center;align-items:center;">
+                        @if($u->role !== 'admin')
+                        <div style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;">
                             {{-- Reset password --}}
-                            <button onclick="document.getElementById('reset-{{ $u->id }}').style.display='block';this.closest('tr').nextElementSibling.style.display='table-row';"
+                            <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('pwd-panel-{{ $u->id }}').style.display='block';document.getElementById('sig-panel-{{ $u->id }}').style.display='none';"
                                     style="background:#f59e0b;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
                                     onmouseover="this.style.background='#d97706'" onmouseout="this.style.background='#f59e0b'">
                                 Redefinir password
+                            </button>
+                            {{-- Assinatura digitalizada --}}
+                            <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('sig-panel-{{ $u->id }}').style.display='block';document.getElementById('pwd-panel-{{ $u->id }}').style.display='none';"
+                                    style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
+                                    onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
+                                {{ $u->signature_image ? '✓ Assinatura' : 'Assinatura' }}
                             </button>
                             {{-- Eliminar --}}
                             <form method="POST" action="{{ route('admin.usuarios.destroy', $u) }}"
@@ -167,37 +175,88 @@
                         @endif
                     </td>
                 </tr>
-                {{-- Reset password inline row (hidden) --}}
-                @if($u->role === 'tecnico')
-                <tr style="display:none;background:#fffbeb;" id="reset-{{ $u->id }}">
-                    <td colspan="5" style="padding:16px 22px;">
-                        <form method="POST" action="{{ route('admin.usuarios.password', $u) }}"
-                              autocomplete="off"
-                              style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
-                            @csrf @method('PATCH')
-                            {{-- Campo falso oculto: engana o browser e impede auto-fill nas passwords reais --}}
-                            <input type="text" name="_dummy_user" tabindex="-1" style="display:none;" aria-hidden="true">
-                            <input type="password" name="_dummy_pass" tabindex="-1" style="display:none;" aria-hidden="true">
-                            <div>
-                                <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Nova password (mín. 10)</label>
-                                <input type="password" name="password" required minlength="10" autocomplete="new-password"
-                                       style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                {{-- Painel de acções inline (hidden) --}}
+                @if($u->role !== 'admin')
+                <tr style="display:none;" id="row-actions-{{ $u->id }}">
+                    <td colspan="5" style="padding:0 22px 16px;">
+
+                        {{-- Painel: redefinir password --}}
+                        <div id="pwd-panel-{{ $u->id }}" style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px 18px;margin-top:10px;">
+                            <div style="font-size:0.78rem;font-weight:700;color:#92400e;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em;">Redefinir Password</div>
+                            <form method="POST" action="{{ route('admin.usuarios.password', $u) }}"
+                                  autocomplete="off"
+                                  style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
+                                @csrf @method('PATCH')
+                                <input type="text" name="_dummy_user" tabindex="-1" style="display:none;" aria-hidden="true">
+                                <input type="password" name="_dummy_pass" tabindex="-1" style="display:none;" aria-hidden="true">
+                                <div>
+                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Nova password (mín. 10)</label>
+                                    <input type="password" name="password" required minlength="10" autocomplete="new-password"
+                                           style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                                </div>
+                                <div>
+                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Confirmar</label>
+                                    <input type="password" name="password_confirmation" required minlength="10" autocomplete="new-password"
+                                           style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                                </div>
+                                <button type="submit"
+                                        style="background:#f59e0b;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
+                                    Guardar
+                                </button>
+                                <button type="button"
+                                        onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='none'"
+                                        style="background:#f1f5f9;color:#475569;border:none;border-radius:7px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:0.88rem;">
+                                    Cancelar
+                                </button>
+                            </form>
+                        </div>
+
+                        {{-- Painel: assinatura digitalizada --}}
+                        <div id="sig-panel-{{ $u->id }}" style="display:none;background:#f5f3ff;border:1px solid #c4b5fd;border-radius:10px;padding:16px 18px;margin-top:10px;">
+                            <div style="font-size:0.78rem;font-weight:700;color:#6d28d9;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em;">Assinatura Digitalizada</div>
+                            @if($u->signature_image)
+                            <div style="margin-bottom:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                                <div>
+                                    <div style="font-size:0.72rem;color:#94a3b8;font-weight:600;margin-bottom:4px;text-transform:uppercase;">Assinatura actual</div>
+                                    <div style="background:#fff;border:1px solid #ddd6fe;border-radius:8px;padding:8px 16px;display:inline-block;">
+                                        <img src="{{ $u->signature_image }}" alt="Assinatura de {{ $u->name }}" style="height:48px;max-width:200px;object-fit:contain;display:block;">
+                                    </div>
+                                </div>
+                                <form method="POST" action="{{ route('admin.usuarios.assinatura.remove', $u) }}"
+                                      onsubmit="return confirm('Remover a assinatura de {{ addslashes($u->name) }}?')">
+                                    @csrf @method('DELETE')
+                                    <button type="submit"
+                                            style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;border-radius:7px;padding:6px 14px;font-size:0.8rem;font-weight:600;cursor:pointer;">
+                                        Remover
+                                    </button>
+                                </form>
                             </div>
-                            <div>
-                                <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Confirmar</label>
-                                <input type="password" name="password_confirmation" required minlength="10" autocomplete="new-password"
-                                       style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
-                            </div>
-                            <button type="submit"
-                                    style="background:#f59e0b;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
-                                Guardar
-                            </button>
-                            <button type="button"
-                                    onclick="this.closest('tr').style.display='none'"
-                                    style="background:#f1f5f9;color:#475569;border:none;border-radius:7px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:0.88rem;">
-                                Cancelar
-                            </button>
-                        </form>
+                            @else
+                            <p style="font-size:0.85rem;color:#6d28d9;margin-bottom:12px;">Nenhuma assinatura guardada. Carregue uma imagem PNG/JPG da assinatura manuscrita em papel branco.</p>
+                            @endif
+                            <form method="POST" action="{{ route('admin.usuarios.assinatura', $u) }}"
+                                  enctype="multipart/form-data"
+                                  style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
+                                @csrf
+                                <div>
+                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#6d28d9;margin-bottom:4px;">
+                                        {{ $u->signature_image ? 'Substituir imagem' : 'Carregar imagem' }} (PNG ou JPG, máx. 2 MB)
+                                    </label>
+                                    <input type="file" name="signature_image" accept="image/png,image/jpeg"
+                                           style="border:1px solid #c4b5fd;border-radius:7px;padding:6px 10px;font-size:0.85rem;background:#fff;">
+                                </div>
+                                <button type="submit"
+                                        style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
+                                    Guardar
+                                </button>
+                                <button type="button"
+                                        onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='none'"
+                                        style="background:#f1f5f9;color:#475569;border:none;border-radius:7px;padding:8px 14px;font-weight:600;cursor:pointer;font-size:0.88rem;">
+                                    Cancelar
+                                </button>
+                            </form>
+                        </div>
+
                     </td>
                 </tr>
                 @endif

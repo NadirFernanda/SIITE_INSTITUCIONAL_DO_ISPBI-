@@ -175,12 +175,27 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         Candidatura registada em {{ $candidatura->created_at->format('d/m/Y') }} às {{ $candidatura->created_at->format('H:i') }}.
     </div>
 
+    @php
+        $assinante   = $candidatura->isAssinada() ? $candidatura->assinante : null;
+        $sigImg      = $assinante?->signature_image ?? null;
+    @endphp
+
     {{-- ASSINATURAS: Conferiu (esq) + Candidato(a) (dir) --}}
     <div class="sigs">
         <div class="sig">
-            <div class="sig-line"></div>
-            <div class="sig-label">Conferiu</div>
+            @if($sigImg)
+                <div style="height:14mm;display:flex;align-items:flex-end;justify-content:center;margin-bottom:2mm;">
+                    <img src="{{ $sigImg }}" style="max-height:14mm;max-width:55mm;object-fit:contain;" alt="Assinatura">
+                </div>
+            @else
+                <div class="sig-line"></div>
+            @endif
+            <div class="sig-label">{{ $assinante ? $assinante->name : 'Conferiu' }}</div>
+            @if($assinante)
+            <div style="font-size:7.5pt;color:#7c3aed;">DAAC — ISP-Bié</div>
+            @else
             <div style="height:12pt;"></div>
+            @endif
         </div>
         <div class="sig-gap"></div>
         <div class="sig">
@@ -191,12 +206,21 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
     </div>
 
     @if($candidatura->isAssinada())
-    <div style="background:#f5f3ff;border:1pt solid #c4b5fd;border-radius:6px;padding:4mm 6mm;margin-top:5mm;text-align:center;">
-        <div style="font-size:8pt;font-weight:bold;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2mm;">✓ Assinado Digitalmente pelo DAAC</div>
-        <div style="font-size:8pt;color:#555;">
-            {{ $candidatura->assinante?->name ?? 'DAAC' }} &mdash; {{ $candidatura->assinado_em?->format('d/m/Y \à\s H:i') }}
+    <div style="background:#f5f3ff;border:1pt solid #c4b5fd;border-radius:6px;padding:3mm 6mm;margin-top:4mm;">
+        <div style="display:table;width:100%;">
+            <div style="display:table-cell;vertical-align:middle;width:{{ $sigImg ? '55%' : '100%' }};">
+                <div style="font-size:7.5pt;font-weight:bold;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1.5mm;">✓ Assinado Digitalmente pelo DAAC</div>
+                <div style="font-size:8pt;color:#555;">
+                    {{ $assinante?->name ?? 'DAAC' }} &mdash; {{ $candidatura->assinado_em?->format('d/m/Y \à\s H:i') }}
+                </div>
+                <div style="font-family:monospace;font-size:8.5pt;font-weight:bold;color:#7c3aed;margin-top:1mm;letter-spacing:0.08em;">{{ $candidatura->assinatura_codigo }}</div>
+            </div>
+            @if($sigImg)
+            <div style="display:table-cell;vertical-align:middle;text-align:right;width:45%;">
+                <img src="{{ $sigImg }}" style="max-height:16mm;max-width:60mm;object-fit:contain;" alt="Assinatura digital">
+            </div>
+            @endif
         </div>
-        <div style="font-family:monospace;font-size:9pt;font-weight:bold;color:#7c3aed;margin-top:1.5mm;">{{ $candidatura->assinatura_codigo }}</div>
     </div>
     @endif
 

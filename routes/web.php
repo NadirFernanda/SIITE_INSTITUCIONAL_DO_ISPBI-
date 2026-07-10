@@ -42,6 +42,8 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::get('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('admin.usuarios');
     Route::post('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'store'])->name('admin.usuarios.store');
     Route::patch('/admin/usuarios/{usuario}/password', [App\Http\Controllers\Admin\UsuarioController::class, 'resetPassword'])->name('admin.usuarios.password');
+    Route::post('/admin/usuarios/{usuario}/assinatura', [App\Http\Controllers\Admin\UsuarioController::class, 'uploadSignature'])->name('admin.usuarios.assinatura');
+    Route::delete('/admin/usuarios/{usuario}/assinatura', [App\Http\Controllers\Admin\UsuarioController::class, 'removeSignature'])->name('admin.usuarios.assinatura.remove');
     Route::delete('/admin/usuarios/{usuario}', [App\Http\Controllers\Admin\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');
     Route::get('/admin/configuracoes', function () {
         $configuracoes = [];
