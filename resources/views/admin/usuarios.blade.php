@@ -119,7 +119,11 @@
                     <td style="padding:14px 22px;color:#94a3b8;font-size:0.8rem;">{{ $u->id }}</td>
                     <td style="padding:14px 22px;">
                         <div style="display:flex;align-items:center;gap:11px;">
-                            <div style="width:34px;height:34px;border-radius:50%;background:{{ $u->role === 'admin' ? '#e3f2fd' : '#dcfce7' }};color:{{ $u->role === 'admin' ? '#1565c0' : '#15803d' }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">
+                            @php
+                            $avatarBg  = match($u->role) { 'admin'=>'#e3f2fd','tecnico'=>'#dcfce7','daac'=>'#ede9fe','secretaria'=>'#fdf4ff', default=>'#f1f5f9' };
+                            $avatarClr = match($u->role) { 'admin'=>'#1565c0','tecnico'=>'#15803d','daac'=>'#7c3aed','secretaria'=>'#a21caf', default=>'#64748b' };
+                            @endphp
+                            <div style="width:34px;height:34px;border-radius:50%;background:{{ $avatarBg }};color:{{ $avatarClr }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">
                                 {{ strtoupper(substr($u->name, 0, 1)) }}
                             </div>
                             <div>
@@ -144,21 +148,23 @@
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif
                     </td>
-                    <td style="padding:14px 22px;text-align:center;">
+                    <td style="padding:10px 22px;">
                         @if($u->role !== 'admin')
-                        <div style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;">
-                            {{-- Reset password --}}
+                        <div style="display:inline-flex;flex-direction:column;gap:5px;min-width:160px;">
+                            {{-- Redefinir password --}}
                             <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('pwd-panel-{{ $u->id }}').style.display='block';document.getElementById('sig-panel-{{ $u->id }}').style.display='none';"
-                                    style="background:#f59e0b;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
-                                    onmouseover="this.style.background='#d97706'" onmouseout="this.style.background='#f59e0b'">
+                                    style="display:flex;align-items:center;gap:6px;background:#fffbeb;color:#92400e;border:1px solid #fde68a;border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
+                                    onmouseover="this.style.background='#fef3c7'" onmouseout="this.style.background='#fffbeb'">
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
                                 Redefinir password
                             </button>
                             {{-- Assinatura digitalizada — apenas DAAC --}}
                             @if($u->role === 'daac')
                             <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('sig-panel-{{ $u->id }}').style.display='block';document.getElementById('pwd-panel-{{ $u->id }}').style.display='none';"
-                                    style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
-                                    onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
-                                {{ $u->signature_image ? '✓ Assinatura' : 'Assinatura' }}
+                                    style="display:flex;align-items:center;gap:6px;background:{{ $u->signature_image ? '#f5f3ff' : '#faf5ff' }};color:#6d28d9;border:1px solid {{ $u->signature_image ? '#c4b5fd' : '#ddd6fe' }};border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
+                                    onmouseover="this.style.background='#ede9fe'" onmouseout="this.style.background='{{ $u->signature_image ? '#f5f3ff' : '#faf5ff' }}'">
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H9v-1.414a2 2 0 01.586-1.414z"/></svg>
+                                {{ $u->signature_image ? 'Assinatura ✓' : 'Carregar assinatura' }}
                             </button>
                             @endif
                             {{-- Eliminar --}}
@@ -166,8 +172,9 @@
                                   onsubmit="return confirm('Eliminar o utilizador {{ addslashes($u->name) }}? Esta acção é irreversível.')">
                                 @csrf @method('DELETE')
                                 <button type="submit"
-                                        style="background:#ef4444;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
-                                        onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#ef4444'">
+                                        style="display:flex;align-items:center;gap:6px;background:#fff5f5;color:#b91c1c;border:1px solid #fca5a5;border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
+                                        onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='#fff5f5'">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m-7 0a1 1 0 01-1-1V5a1 1 0 011-1h8a1 1 0 011 1v1a1 1 0 01-1 1H9z"/></svg>
                                     Eliminar
                                 </button>
                             </form>
