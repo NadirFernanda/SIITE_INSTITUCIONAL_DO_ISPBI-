@@ -153,12 +153,14 @@
                                     onmouseover="this.style.background='#d97706'" onmouseout="this.style.background='#f59e0b'">
                                 Redefinir password
                             </button>
-                            {{-- Assinatura digitalizada --}}
+                            {{-- Assinatura digitalizada — apenas DAAC --}}
+                            @if($u->role === 'daac')
                             <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('sig-panel-{{ $u->id }}').style.display='block';document.getElementById('pwd-panel-{{ $u->id }}').style.display='none';"
                                     style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:5px 13px;font-size:0.8rem;font-weight:600;cursor:pointer;"
                                     onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
                                 {{ $u->signature_image ? '✓ Assinatura' : 'Assinatura' }}
                             </button>
+                            @endif
                             {{-- Eliminar --}}
                             <form method="POST" action="{{ route('admin.usuarios.destroy', $u) }}"
                                   onsubmit="return confirm('Eliminar o utilizador {{ addslashes($u->name) }}? Esta acção é irreversível.')">

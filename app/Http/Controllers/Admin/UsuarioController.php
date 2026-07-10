@@ -56,8 +56,8 @@ class UsuarioController extends Controller
 
     public function uploadSignature(Request $request, User $usuario)
     {
-        if (! in_array($usuario->role, ['daac', 'admin', 'tecnico', 'secretaria'], true)) {
-            return redirect()->route('admin.usuarios')->with('error', 'Operação não permitida.');
+        if ($usuario->role !== 'daac') {
+            return redirect()->route('admin.usuarios')->with('error', 'Apenas utilizadores DAAC podem ter assinatura digitalizada.');
         }
 
         $request->validate([
