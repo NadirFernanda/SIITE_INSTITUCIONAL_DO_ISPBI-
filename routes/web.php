@@ -270,6 +270,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
+    Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
     Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
 
     // Auditoria
@@ -294,16 +295,6 @@ Route::prefix('secretaria')->name('secretaria.')->middleware(['auth', 'secretari
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::post('candidaturas/{candidatura}/confirmar-pagamento', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'confirmarPagamento'])->name('candidaturas.confirmar-pagamento');
     Route::post('candidaturas/{candidatura}/cancelar-pagamento', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'cancelarPagamento'])->name('candidaturas.cancelar-pagamento');
-});
-
-// Painel Professor — lançamento de notas (avaliação cega)
-Route::prefix('professor')->name('professor.')->middleware(['auth', 'professor', 'throttle:30,1'])->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('professor.notas.index');
-    })->name('dashboard');
-    Route::get('notas', [App\Http\Controllers\Professor\NotaController::class, 'index'])->name('notas.index');
-    Route::get('notas/{candidatura}', [App\Http\Controllers\Professor\NotaController::class, 'show'])->name('notas.show');
-    Route::post('notas/{candidatura}', [App\Http\Controllers\Professor\NotaController::class, 'store'])->name('notas.store');
 });
 
 // Painel DAAC — assinar candidaturas digitalmente
@@ -346,6 +337,7 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
+    Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
 
     // Salas de exame
     Route::get('salas', [App\Http\Controllers\Tecnico\SalaController::class, 'index'])->name('salas.index');

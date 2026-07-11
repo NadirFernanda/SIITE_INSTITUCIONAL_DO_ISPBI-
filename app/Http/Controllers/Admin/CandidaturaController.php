@@ -7,6 +7,7 @@ use App\Models\AuditLog;
 use App\Models\Candidatura;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class CandidaturaController extends Controller
@@ -64,8 +65,33 @@ class CandidaturaController extends Controller
 
     public function show(Candidatura $candidatura)
     {
-        $candidatura->load(['nota.professor', 'assinante', 'confirmadoPor']);
+        $candidatura->load(['notaLancadaPor', 'assinante', 'confirmadoPor']);
         return view('admin.candidaturas.show', compact('candidatura'));
+    }
+
+    public function updateNota(Request $request, Candidatura $candidatura)
+    {
+        $request->validate([
+            'nota_exame' => 'required|numeric|min:0|max:20',
+        ], [
+            'nota_exame.required' => 'A nota é obrigatória.',
+            'nota_exame.numeric'  => 'A nota deve ser um número.',
+            'nota_exame.min'      => 'A nota mínima é 0.',
+            'nota_exame.max'      => 'A nota máxima é 20.',
+        ]);
+
+        $nota = round((float) $request->input('nota_exame'), 1);
+        $candidatura->update([
+            'nota_exame'      => $nota,
+            'nota_lancada_por' => Auth::id(),
+            'nota_lancada_em'  => now(),
+        ]);
+
+        AuditLog::registar('lancou_nota', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} | Nota: {$nota}");
+
+        return redirect()->route('admin.candidaturas.show', $candidatura)
+            ->with('success', "Nota {$nota} lançada com sucesso.");
     }
 
     public function downloadComprovativo(Candidatura $candidatura)

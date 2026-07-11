@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Candidatura extends Model
 {
@@ -22,21 +21,8 @@ class Candidatura extends Model
         'status', 'notas_admin',
         'sala_id', 'numero_lugar',
         'assinado_por', 'assinado_em', 'assinatura_codigo',
-        'codigo_exame',
+        'nota_exame', 'nota_lancada_por', 'nota_lancada_em',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(function ($candidatura) {
-            if (empty($candidatura->codigo_exame)) {
-                do {
-                    $code = 'EX' . strtoupper(Str::random(8));
-                } while (static::where('codigo_exame', $code)->exists());
-                $candidatura->codigo_exame = $code;
-            }
-        });
-    }
 
     protected $casts = [
         'data_nascimento'  => 'date',
@@ -44,6 +30,8 @@ class Candidatura extends Model
         'trabalhador'           => 'boolean',
         'pagamento_confirmado'  => 'boolean',
         'pagamento_confirmado_em' => 'datetime',
+        'nota_exame'       => 'float',
+        'nota_lancada_em'  => 'datetime',
         'assinado_em'      => 'datetime',
         'created_at'       => 'datetime',
         'updated_at'       => 'datetime',
@@ -204,13 +192,13 @@ class Candidatura extends Model
         return $this->belongsTo(User::class, 'assinado_por');
     }
 
+    public function notaLancadaPor()
+    {
+        return $this->belongsTo(User::class, 'nota_lancada_por');
+    }
+
     public function isAssinada(): bool
     {
         return $this->assinado_em !== null;
-    }
-
-    public function nota()
-    {
-        return $this->hasOne(Nota::class);
     }
 }

@@ -107,34 +107,47 @@
         @endif
     </div>
 
-    {{-- Código de exame e nota --}}
-    @if($candidatura->codigo_exame)
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 26px;margin-bottom:18px;">
-        <h2 style="font-size:0.95rem;font-weight:700;color:#0e7490;margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Exame de Acesso</h2>
-        <div style="background:#fef9c3;border:1px solid #fde047;border-radius:8px;padding:8px 12px;margin-bottom:14px;font-size:0.78rem;color:#713f12;">
-            <strong>Uso interno:</strong> Este código é de uso exclusivo da instituição. Não deve ser comunicado ao candidato — o candidato recebe a folha de exame com o código já imposto no dia do exame.
-        </div>
-        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-            <div>
-                <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Código de Exame</div>
-                <div style="font-family:monospace;font-size:1.3rem;font-weight:800;color:#0e7490;letter-spacing:0.1em;">{{ $candidatura->codigo_exame }}</div>
-            </div>
-            @if($candidatura->nota)
-            <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px 18px;text-align:center;">
-                <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Nota</div>
-                <div style="font-size:1.6rem;font-weight:900;color:{{ $candidatura->nota->nota >= 10 ? '#15803d' : '#dc2626' }};">
-                    {{ number_format($candidatura->nota->nota, 1) }}<span style="font-size:0.85rem;color:#94a3b8;">/20</span>
+    {{-- Nota do Exame --}}
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px 26px;margin-bottom:18px;">
+        <h2 style="font-size:0.95rem;font-weight:700;color:#0e7490;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Nota do Exame de Acesso</h2>
+        @if($candidatura->nota_exame !== null)
+        <div style="display:flex;align-items:center;gap:20px;margin-bottom:16px;flex-wrap:wrap;">
+            <div style="background:{{ $candidatura->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $candidatura->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 20px;text-align:center;">
+                <div style="font-size:2rem;font-weight:900;color:{{ $candidatura->nota_exame >= 10 ? '#15803d' : '#dc2626' }};">
+                    {{ number_format($candidatura->nota_exame, 1) }}<span style="font-size:1rem;color:#94a3b8;">/20</span>
                 </div>
-                <div style="font-size:0.72rem;color:#64748b;margin-top:2px;">
-                    {{ $candidatura->nota->professor?->name }} &mdash; {{ $candidatura->nota->lancada_em->format('d/m/Y H:i') }}
+                <div style="font-size:0.75rem;font-weight:700;color:{{ $candidatura->nota_exame >= 10 ? '#15803d' : '#dc2626' }};">
+                    {{ $candidatura->nota_exame >= 10 ? 'APROVADO' : 'REPROVADO' }}
                 </div>
             </div>
-            @else
-            <div style="color:#94a3b8;font-size:0.88rem;">Nota ainda não lançada</div>
+            @if($candidatura->nota_lancada_em)
+            <div style="font-size:0.8rem;color:#64748b;">
+                Lançada por <strong>{{ $candidatura->notaLancadaPor?->name ?? '—' }}</strong><br>
+                em {{ $candidatura->nota_lancada_em->format('d/m/Y \à\s H:i') }}
+            </div>
             @endif
         </div>
+        @endif
+        <form method="POST" action="{{ route('admin.candidaturas.nota', $candidatura) }}">
+            @csrf @method('PATCH')
+            <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
+                <div>
+                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">
+                        {{ $candidatura->nota_exame !== null ? 'Corrigir nota' : 'Lançar nota' }} (0 – 20)
+                    </label>
+                    <input type="number" name="nota_exame" min="0" max="20" step="0.1"
+                           value="{{ old('nota_exame', $candidatura->nota_exame) }}"
+                           style="border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:1rem;font-weight:700;width:110px;text-align:center;">
+                    @error('nota_exame')<p style="font-size:0.78rem;color:#dc2626;margin-top:4px;">{{ $message }}</p>@enderror
+                </div>
+                <button type="submit"
+                        style="background:#0e7490;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                        onmouseover="this.style.background='#0891b2'" onmouseout="this.style.background='#0e7490'">
+                    Guardar nota
+                </button>
+            </div>
+        </form>
     </div>
-    @endif
 
     {{-- Update status --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:28px;margin-bottom:22px;">
