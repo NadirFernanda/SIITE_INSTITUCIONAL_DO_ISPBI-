@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'daac'       => \App\Http\Middleware\EnsureUserIsDAAC::class,
             'alumni'     => \App\Http\Middleware\EnsureUserIsAlumni::class,
             'secretaria' => \App\Http\Middleware\EnsureUserIsSecretaria::class,
+            'professor'  => \App\Http\Middleware\EnsureUserIsProfessor::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

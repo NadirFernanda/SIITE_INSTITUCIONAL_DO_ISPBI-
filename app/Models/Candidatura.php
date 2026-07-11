@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Candidatura extends Model
 {
@@ -21,7 +22,21 @@ class Candidatura extends Model
         'status', 'notas_admin',
         'sala_id', 'numero_lugar',
         'assinado_por', 'assinado_em', 'assinatura_codigo',
+        'codigo_exame',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($candidatura) {
+            if (empty($candidatura->codigo_exame)) {
+                do {
+                    $code = 'EX' . strtoupper(Str::random(8));
+                } while (static::where('codigo_exame', $code)->exists());
+                $candidatura->codigo_exame = $code;
+            }
+        });
+    }
 
     protected $casts = [
         'data_nascimento'  => 'date',
@@ -192,5 +207,10 @@ class Candidatura extends Model
     public function isAssinada(): bool
     {
         return $this->assinado_em !== null;
+    }
+
+    public function nota()
+    {
+        return $this->hasOne(Nota::class);
     }
 }

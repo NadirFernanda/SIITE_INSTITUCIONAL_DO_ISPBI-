@@ -104,6 +104,30 @@
         @endif
     </div>
 
+    {{-- Código de exame e nota --}}
+    @if($candidatura->codigo_exame)
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:18px;">
+        <h2 style="font-size:0.85rem;font-weight:700;color:#0e7490;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Exame de Acesso</h2>
+        <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
+            <div>
+                <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Código de Exame</div>
+                <div style="font-family:monospace;font-size:1.2rem;font-weight:800;color:#0e7490;letter-spacing:0.1em;">{{ $candidatura->codigo_exame }}</div>
+            </div>
+            @if($candidatura->nota)
+            <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:8px 16px;text-align:center;">
+                <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;margin-bottom:2px;">Nota</div>
+                <div style="font-size:1.4rem;font-weight:900;color:{{ $candidatura->nota->nota >= 10 ? '#15803d' : '#dc2626' }};">
+                    {{ number_format($candidatura->nota->nota, 1) }}<span style="font-size:0.8rem;color:#94a3b8;">/20</span>
+                </div>
+                <div style="font-size:0.7rem;color:#64748b;margin-top:1px;">{{ $candidatura->nota->professor?->name }}</div>
+            </div>
+            @else
+            <div style="color:#94a3b8;font-size:0.85rem;">Nota ainda não lançada</div>
+            @endif
+        </div>
+    </div>
+    @endif
+
     {{-- Atualizar Estado --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">
         <h2 style="font-size:0.9rem;font-weight:700;color:#0e5c2f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Atualizar Estado</h2>

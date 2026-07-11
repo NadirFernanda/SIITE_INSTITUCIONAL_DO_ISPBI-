@@ -64,6 +64,7 @@ class CandidaturaController extends Controller
 
     public function show(Candidatura $candidatura)
     {
+        $candidatura->load(['nota.professor', 'assinante', 'confirmadoPor']);
         return view('admin.candidaturas.show', compact('candidatura'));
     }
 

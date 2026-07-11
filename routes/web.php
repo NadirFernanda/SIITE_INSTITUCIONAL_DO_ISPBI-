@@ -296,6 +296,16 @@ Route::prefix('secretaria')->name('secretaria.')->middleware(['auth', 'secretari
     Route::post('candidaturas/{candidatura}/cancelar-pagamento', [App\Http\Controllers\Secretaria\CandidaturaController::class, 'cancelarPagamento'])->name('candidaturas.cancelar-pagamento');
 });
 
+// Painel Professor — lançamento de notas (avaliação cega)
+Route::prefix('professor')->name('professor.')->middleware(['auth', 'professor', 'throttle:30,1'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('professor.notas.index');
+    })->name('dashboard');
+    Route::get('notas', [App\Http\Controllers\Professor\NotaController::class, 'index'])->name('notas.index');
+    Route::get('notas/{candidatura}', [App\Http\Controllers\Professor\NotaController::class, 'show'])->name('notas.show');
+    Route::post('notas/{candidatura}', [App\Http\Controllers\Professor\NotaController::class, 'store'])->name('notas.store');
+});
+
 // Painel DAAC — assinar candidaturas digitalmente
 Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1'])->group(function () {
     // Candidaturas

@@ -75,6 +75,9 @@
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
                         <input type="radio" name="role" value="secretaria" style="accent-color:#7c3aed;"> Secretaria <small style="color:#94a3b8;">(confirmar pagamentos)</small>
                     </label>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
+                        <input type="radio" name="role" value="professor" style="accent-color:#0891b2;"> Professor <small style="color:#94a3b8;">(lançar notas — avaliação cega)</small>
+                    </label>
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:12px;">
@@ -120,8 +123,8 @@
                     <td style="padding:14px 22px;">
                         <div style="display:flex;align-items:center;gap:11px;">
                             @php
-                            $avatarBg  = match($u->role) { 'admin'=>'#e3f2fd','tecnico'=>'#dcfce7','daac'=>'#ede9fe','secretaria'=>'#fdf4ff', default=>'#f1f5f9' };
-                            $avatarClr = match($u->role) { 'admin'=>'#1565c0','tecnico'=>'#15803d','daac'=>'#7c3aed','secretaria'=>'#a21caf', default=>'#64748b' };
+                            $avatarBg  = match($u->role) { 'admin'=>'#e3f2fd','tecnico'=>'#dcfce7','daac'=>'#ede9fe','secretaria'=>'#fdf4ff','professor'=>'#ecfeff', default=>'#f1f5f9' };
+                            $avatarClr = match($u->role) { 'admin'=>'#1565c0','tecnico'=>'#15803d','daac'=>'#7c3aed','secretaria'=>'#a21caf','professor'=>'#0e7490', default=>'#64748b' };
                             @endphp
                             <div style="width:34px;height:34px;border-radius:50%;background:{{ $avatarBg }};color:{{ $avatarClr }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">
                                 {{ strtoupper(substr($u->name, 0, 1)) }}
@@ -144,6 +147,8 @@
                             <span style="background:#ede9fe;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">DAAC</span>
                         @elseif($u->role === 'secretaria')
                             <span style="background:#fdf4ff;color:#a21caf;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Secretaria</span>
+                        @elseif($u->role === 'professor')
+                            <span style="background:#ecfeff;color:#0e7490;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Professor</span>
                         @else
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif
