@@ -168,19 +168,6 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         de {{ $candidatura->created_at->format('Y') }}.
     </div>
 
-    {{-- CÓDIGO DE EXAME --}}
-    @if($candidatura->codigo_exame)
-    <div style="background:#f0f9ff;border:1pt solid #7dd3fc;border-left:3pt solid #0891b2;padding:4mm 6mm;margin:4mm 0;border-radius:0 4px 4px 0;display:table;width:100%;">
-        <div style="display:table-cell;vertical-align:middle;">
-            <div style="font-size:7pt;font-weight:bold;color:#0369a1;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1mm;">Código de Exame</div>
-            <div style="font-family:monospace;font-size:14pt;font-weight:900;color:#0e7490;letter-spacing:0.12em;">{{ $candidatura->codigo_exame }}</div>
-        </div>
-        <div style="display:table-cell;vertical-align:middle;text-align:right;font-size:7.5pt;color:#64748b;">
-            Apresente este código no dia do exame.<br>O código identifica a sua ficha de forma anónima.
-        </div>
-    </div>
-    @endif
-
     {{-- AVISO --}}
     <div style="background:#fffbeb;border:1pt solid #f6c344;border-left:3pt solid #e6a817;padding:4mm 6mm;margin:4mm 0;border-radius:0 4px 4px 0;">
         <strong style="color:#b45309;">Importante:</strong> Apresente este comprovativo (impresso ou em formato digital) no dia do exame de acesso.

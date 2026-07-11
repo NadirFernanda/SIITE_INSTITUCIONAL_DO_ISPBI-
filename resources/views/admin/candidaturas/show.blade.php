@@ -110,7 +110,10 @@
     {{-- Código de exame e nota --}}
     @if($candidatura->codigo_exame)
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 26px;margin-bottom:18px;">
-        <h2 style="font-size:0.95rem;font-weight:700;color:#0e7490;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Exame de Acesso</h2>
+        <h2 style="font-size:0.95rem;font-weight:700;color:#0e7490;margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Exame de Acesso</h2>
+        <div style="background:#fef9c3;border:1px solid #fde047;border-radius:8px;padding:8px 12px;margin-bottom:14px;font-size:0.78rem;color:#713f12;">
+            <strong>Uso interno:</strong> Este código é de uso exclusivo da instituição. Não deve ser comunicado ao candidato — o candidato recebe a folha de exame com o código já imposto no dia do exame.
+        </div>
         <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
             <div>
                 <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Código de Exame</div>
