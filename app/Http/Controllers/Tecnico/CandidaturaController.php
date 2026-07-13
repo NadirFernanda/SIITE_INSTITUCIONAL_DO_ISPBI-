@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\CandidaturaReceived;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
+use App\Services\WhatsAppService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -91,6 +92,14 @@ class CandidaturaController extends Controller
 
         AuditLog::registar('alterou_status', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} {$candidatura->nome}: {$oldStatus} → {$candidatura->status}");
+
+        if ($oldStatus !== $candidatura->status) {
+            try {
+                app(WhatsAppService::class)->notificarEstadoAlterado($candidatura, $oldStatus);
+            } catch (\Throwable $e) {
+                \Log::error('WhatsApp estado alterado (tecnico): ' . $e->getMessage());
+            }
+        }
 
         return redirect()->route('tecnico.candidaturas.show', $candidatura)
             ->with('success', 'Estado atualizado com sucesso.');

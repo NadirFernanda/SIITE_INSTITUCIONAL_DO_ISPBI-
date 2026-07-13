@@ -116,7 +116,7 @@
             <div style="padding:14px 22px;border-bottom:1px solid #f1f5f9;background:#f8fafc;">
                 <span style="font-size:0.8rem;font-weight:700;color:#64748b;letter-spacing:0.06em;text-transform:uppercase;">Ficheiros</span>
             </div>
-            <div style="padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+            <div style="padding:22px;display:flex;flex-direction:column;gap:18px;">
 
                 {{-- Imagem --}}
                 <div>
@@ -125,7 +125,7 @@
                         <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span>
                     </label>
                     <label for="imagem"
-                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:20px 16px;cursor:pointer;transition:border-color 0.15s;background:#fafafa;"
+                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:20px 16px;cursor:pointer;background:#fafafa;"
                            onmouseover="this.style.borderColor='#1565c0';this.style.background='#eff6ff'"
                            onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -135,24 +135,50 @@
                     </label>
                 </div>
 
-                {{-- PDF --}}
+                {{-- Documentos múltiplos (PDF + Word) --}}
                 <div>
-                    <label for="pdf" style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">
-                        Documento PDF
-                        <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span>
+                    <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">
+                        Documentos anexos
+                        <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional — pode anexar vários)</span>
                     </label>
-                    <label for="pdf"
-                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:20px 16px;cursor:pointer;transition:border-color 0.15s;background:#fafafa;"
-                           onmouseover="this.style.borderColor='#dc2626';this.style.background='#fff5f5'"
+                    <label for="documentos"
+                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:20px 16px;cursor:pointer;background:#fafafa;"
+                           onmouseover="this.style.borderColor='#7c3aed';this.style.background='#f5f3ff'"
                            onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                        <span id="pdf-label" style="font-size:0.82rem;color:#64748b;text-align:center;">Clique para selecionar PDF<br><span style="color:#94a3b8;font-size:0.78rem;">PDF — máx. 5 MB</span></span>
-                        <input type="file" name="pdf" id="pdf" accept="application/pdf" style="display:none;"
-                               onchange="document.getElementById('pdf-label').innerHTML = this.files[0] ? '<strong style=\'color:#dc2626\'>' + this.files[0].name + '</strong>' : 'Clique para selecionar PDF'">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        <span id="docs-label" style="font-size:0.82rem;color:#64748b;text-align:center;">Clique para selecionar documentos<br><span style="color:#94a3b8;font-size:0.78rem;">PDF, DOC, DOCX — máx. 10 MB cada — pode selecionar vários</span></span>
+                        <input type="file" name="documentos[]" id="documentos" multiple
+                               accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                               style="display:none;" onchange="updateDocsLabel(this)">
                     </label>
+                    <div id="docs-preview" style="margin-top:10px;display:flex;flex-direction:column;gap:6px;"></div>
                 </div>
             </div>
         </div>
+
+        <script>
+        function updateDocsLabel(input) {
+            var label = document.getElementById('docs-label');
+            var preview = document.getElementById('docs-preview');
+            preview.innerHTML = '';
+            if (input.files.length > 0) {
+                label.innerHTML = '<strong style="color:#7c3aed">' + input.files.length + ' ficheiro(s) selecionado(s)</strong>';
+                Array.from(input.files).forEach(function(f) {
+                    var ext = f.name.split('.').pop().toUpperCase();
+                    var isWord = ext === 'DOC' || ext === 'DOCX';
+                    var color = isWord ? '#2563eb' : '#dc2626';
+                    var bg = isWord ? '#eff6ff' : '#fff5f5';
+                    preview.innerHTML += '<div style="display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;">'
+                        + '<span style="font-size:0.72rem;font-weight:700;color:' + color + ';background:' + bg + ';padding:2px 6px;border-radius:4px;flex-shrink:0;">' + ext + '</span>'
+                        + '<span style="font-size:0.82rem;color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + f.name + '</span>'
+                        + '<span style="font-size:0.78rem;color:#94a3b8;flex-shrink:0;">' + (f.size/1024/1024).toFixed(1) + ' MB</span>'
+                        + '</div>';
+                });
+            } else {
+                label.innerHTML = 'Clique para selecionar documentos<br><span style="color:#94a3b8;font-size:0.78rem;">PDF, DOC, DOCX — máx. 10 MB cada — pode selecionar vários</span>';
+            }
+        }
+        </script>
 
         {{-- Actions --}}
         <div style="display:flex;align-items:center;justify-content:flex-end;gap:12px;">

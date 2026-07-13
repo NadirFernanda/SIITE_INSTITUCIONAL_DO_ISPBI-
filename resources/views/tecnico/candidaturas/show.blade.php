@@ -104,11 +104,11 @@
         @endif
     </div>
 
-    {{-- Nota do Exame --}}
-    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 22px;margin-bottom:18px;">
-        <h2 style="font-size:0.85rem;font-weight:700;color:#0e7490;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Nota do Exame de Acesso</h2>
-        @if($candidatura->nota_exame !== null)
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;">
+    {{-- Nota do Exame (só leitura — lançamento exclusivo do Professor) --}}
+    @if($candidatura->nota_exame !== null)
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:18px;">
+        <h2 style="font-size:0.85rem;font-weight:700;color:#0e7490;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Nota do Exame de Acesso</h2>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
             <div style="background:{{ $candidatura->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $candidatura->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:8px 18px;text-align:center;">
                 <div style="font-size:1.6rem;font-weight:900;color:{{ $candidatura->nota_exame >= 10 ? '#15803d' : '#dc2626' }};">
                     {{ number_format($candidatura->nota_exame, 1) }}<span style="font-size:0.85rem;color:#94a3b8;">/20</span>
@@ -124,27 +124,8 @@
             </div>
             @endif
         </div>
-        @endif
-        <form method="POST" action="{{ route('tecnico.candidaturas.nota', $candidatura) }}">
-            @csrf @method('PATCH')
-            <div style="display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;">
-                <div>
-                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#475569;margin-bottom:4px;">
-                        {{ $candidatura->nota_exame !== null ? 'Corrigir nota' : 'Lançar nota' }} (0 – 20)
-                    </label>
-                    <input type="number" name="nota_exame" min="0" max="20" step="0.1"
-                           value="{{ old('nota_exame', $candidatura->nota_exame) }}"
-                           style="border:1px solid #e2e8f0;border-radius:8px;padding:8px 11px;font-size:1rem;font-weight:700;width:100px;text-align:center;">
-                    @error('nota_exame')<p style="font-size:0.78rem;color:#dc2626;margin-top:4px;">{{ $message }}</p>@enderror
-                </div>
-                <button type="submit"
-                        style="background:#0e5c2f;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-weight:700;cursor:pointer;font-size:0.88rem;"
-                        onmouseover="this.style.background='#14532d'" onmouseout="this.style.background='#0e5c2f'">
-                    Guardar nota
-                </button>
-            </div>
-        </form>
     </div>
+    @endif
 
     {{-- Atualizar Estado --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">

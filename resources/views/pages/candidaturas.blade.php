@@ -11,12 +11,12 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
                     <div class="lg:col-span-3">
-                        <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg">
+                        <div class="bg-white border-l-4 border-[#2563eb] p-4 sm:p-8 shadow-lg rounded-lg">
                             <div class="prose max-w-none text-gray-700 leading-relaxed space-y-6">
                                 <div class="mb-6">
-                                    <div class="bg-[#F5F5F5] border-l-4 border-[#F05A28] p-6 mb-8">
-                                        <div class="flex items-center">
-                                            <svg class="w-6 h-6 text-[#F05A28] mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <div class="bg-[#F5F5F5] border-l-4 border-[#F05A28] p-4 sm:p-6 mb-8">
+                                        <div class="flex items-start gap-3">
+                                            <svg class="w-6 h-6 text-[#F05A28] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
                                             </svg>
                                             <div>
@@ -26,7 +26,7 @@
                                         </div>
                                     </div>
 
-                                    <h2 class="text-3xl font-bold text-[#2563eb] mb-8">Processo de Candidatura</h2>
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-[#2563eb] mb-6 sm:mb-8">Processo de Candidatura</h2>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
@@ -70,8 +70,8 @@
                                     </div>
                                 </div>
 
-                                <h2 class="text-3xl font-bold text-[#2563eb] mb-8">Documentos Necessários</h2>
-                                <div class="bg-white p-8 rounded-lg shadow-md">
+                                <h2 class="text-2xl sm:text-3xl font-bold text-[#2563eb] mb-6 sm:mb-8">Documentos Necessários</h2>
+                                <div class="bg-white p-4 sm:p-8 rounded-lg shadow-md">
                                     <ul class="space-y-4">
                                         <li class="flex items-start">
                                             <svg class="w-6 h-6 text-[#0E8F81] mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
@@ -152,7 +152,7 @@
                                     </ul>
                                 </div>
 
-                                <h2 class="text-3xl font-bold text-[#2563eb] mb-8 text-center">Cursos Disponíveis</h2>
+                                <h2 class="text-2xl sm:text-3xl font-bold text-[#2563eb] mb-6 sm:mb-8 text-center">Cursos Disponíveis</h2>
                                 <div class="flex flex-wrap justify-center gap-8">
                                     <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-sm md:max-w-xs">
                                         <h3 class="text-xl font-semibold text-gray-900 mb-2">Cursos de Graduação</h3>
@@ -178,8 +178,8 @@
                                 @endif
 
                                 {{-- Application form --}}
-                                <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-8">
-                                    <h2 class="text-2xl font-bold text-[#2563eb] mb-1">Ficha de Inscrição — Exame de Acesso 2026/2027</h2>
+                                <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-4 sm:p-8">
+                                    <h2 class="text-xl sm:text-2xl font-bold text-[#2563eb] mb-1 leading-tight">Ficha de Inscrição — Exame de Acesso 2026/2027</h2>
                                     <p class="text-gray-500 text-sm mb-6">Todos os campos são obrigatórios, excepto o Telefone 2 e a Instituição Laboral (apenas se não trabalhar).</p>
 
                                     {{-- Banner de erros de validação --}}
@@ -393,7 +393,7 @@
                                         {{-- 12. Estado Financeiro --}}
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-2">Estado Financeiro da Família <span class="text-red-500">*</span></label>
-                                            <div class="flex gap-6">
+                                            <div class="flex flex-wrap gap-4 gap-y-2">
                                                 @foreach(['maximo' => 'Máximo', 'medio' => 'Médio', 'minimo' => 'Mínimo'] as $val => $label)
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
                                                     <input type="radio" name="estado_financeiro" value="{{ $val }}" {{ old('estado_financeiro') === $val ? 'checked' : '' }} required class="accent-[#2563eb]"> {{ $label }}

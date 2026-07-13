@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\ComprovatvioConcluido;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
+use App\Services\WhatsAppService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,6 +106,12 @@ class CandidaturaController extends Controller
                 ->send(new ComprovatvioConcluido($candidatura));
         } catch (\Throwable $e) {
             \Log::error('Falha ao enviar email de comprovativo concluído: ' . $e->getMessage());
+        }
+
+        try {
+            app(WhatsAppService::class)->notificarAssinaturaDAAC($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('WhatsApp assinatura DAAC: ' . $e->getMessage());
         }
 
         return redirect()->route('daac.candidaturas.show', $candidatura)

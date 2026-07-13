@@ -115,7 +115,7 @@
             <div style="padding:14px 22px;border-bottom:1px solid #f1f5f9;background:#f8fafc;">
                 <span style="font-size:0.8rem;font-weight:700;color:#64748b;letter-spacing:0.06em;text-transform:uppercase;">Ficheiros</span>
             </div>
-            <div style="padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+            <div style="padding:22px;display:flex;flex-direction:column;gap:18px;">
 
                 {{-- Imagem --}}
                 <div>
@@ -133,7 +133,7 @@
                     </div>
                     @endif
                     <label for="imagem"
-                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:18px 14px;cursor:pointer;transition:border-color 0.15s;background:#fafafa;"
+                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:18px 14px;cursor:pointer;background:#fafafa;"
                            onmouseover="this.style.borderColor='#1565c0';this.style.background='#eff6ff'"
                            onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -143,33 +143,84 @@
                     </label>
                 </div>
 
-                {{-- PDF --}}
+                {{-- Documentos existentes --}}
+                @if($noticia->pdf || $noticia->documentos->isNotEmpty())
                 <div>
-                    <label for="pdf" style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">
-                        Documento PDF
-                        <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span>
+                    <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:8px;">
+                        Documentos actuais
                     </label>
-                    @if($noticia->pdf)
-                    <div style="display:flex;align-items:center;gap:10px;background:#fff5f5;border:1px solid #fecaca;border-radius:8px;padding:10px 12px;margin-bottom:10px;">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                        <div style="flex:1;min-width:0;">
-                            <p style="font-size:0.8rem;color:#374151;font-weight:600;margin:0 0 2px;">PDF atual</p>
-                            <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank" style="font-size:0.78rem;color:#dc2626;text-decoration:none;">Abrir PDF</a>
+                    <div style="display:flex;flex-direction:column;gap:6px;">
+                        {{-- PDF legado --}}
+                        @if($noticia->pdf)
+                        <div style="display:flex;align-items:center;gap:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;">
+                            <span style="font-size:0.72rem;font-weight:700;color:#dc2626;background:#fff5f5;padding:2px 6px;border-radius:4px;flex-shrink:0;">PDF</span>
+                            <span style="flex:1;font-size:0.85rem;color:#374151;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">documento.pdf</span>
+                            <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank"
+                               style="font-size:0.78rem;color:#1565c0;text-decoration:none;flex-shrink:0;">Abrir</a>
                         </div>
+                        @endif
+                        {{-- Documentos novos --}}
+                        @foreach($noticia->documentos as $doc)
+                        <div style="display:flex;align-items:center;gap:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;">
+                            @php $ext = $doc->extensao(); $isWord = in_array($ext, ['DOC','DOCX']); @endphp
+                            <span style="font-size:0.72rem;font-weight:700;color:{{ $isWord ? '#2563eb' : '#dc2626' }};background:{{ $isWord ? '#eff6ff' : '#fff5f5' }};padding:2px 6px;border-radius:4px;flex-shrink:0;">{{ $ext }}</span>
+                            <span style="flex:1;font-size:0.85rem;color:#374151;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="{{ $doc->nome_original }}">{{ $doc->nome_original }}</span>
+                            <a href="{{ asset('storage/' . $doc->caminho) }}" target="_blank"
+                               style="font-size:0.78rem;color:#1565c0;text-decoration:none;flex-shrink:0;margin-right:8px;">Abrir</a>
+                            <form method="POST" action="{{ route('admin.noticias.documento.destroy', $doc->id) }}" style="display:inline;" onsubmit="return confirm('Remover este documento?')">
+                                @csrf @method('DELETE')
+                                <button type="submit" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.78rem;padding:0;">Remover</button>
+                            </form>
+                        </div>
+                        @endforeach
                     </div>
-                    @endif
-                    <label for="pdf"
-                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:18px 14px;cursor:pointer;transition:border-color 0.15s;background:#fafafa;"
-                           onmouseover="this.style.borderColor='#dc2626';this.style.background='#fff5f5'"
-                           onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                        <span id="pdf-label" style="font-size:0.8rem;color:#64748b;text-align:center;">{{ $noticia->pdf ? 'Substituir PDF' : 'Selecionar PDF' }}<br><span style="color:#94a3b8;font-size:0.76rem;">PDF — máx. 5 MB</span></span>
-                        <input type="file" name="pdf" id="pdf" accept="application/pdf" style="display:none;"
-                               onchange="document.getElementById('pdf-label').innerHTML = this.files[0] ? '<strong style=\'color:#dc2626\'>' + this.files[0].name + '</strong>' : '{{ $noticia->pdf ? 'Substituir PDF' : 'Selecionar PDF' }}'">
+                </div>
+                @endif
+
+                {{-- Adicionar documentos --}}
+                <div>
+                    <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">
+                        Adicionar documentos
+                        <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(PDF, DOC, DOCX — pode selecionar vários)</span>
                     </label>
+                    <label for="documentos"
+                           style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:18px 14px;cursor:pointer;background:#fafafa;"
+                           onmouseover="this.style.borderColor='#7c3aed';this.style.background='#f5f3ff'"
+                           onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        <span id="docs-label" style="font-size:0.8rem;color:#64748b;text-align:center;">Clique para adicionar documentos<br><span style="color:#94a3b8;font-size:0.76rem;">PDF, DOC, DOCX — máx. 10 MB cada</span></span>
+                        <input type="file" name="documentos[]" id="documentos" multiple
+                               accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                               style="display:none;" onchange="updateDocsLabel(this)">
+                    </label>
+                    <div id="docs-preview" style="margin-top:10px;display:flex;flex-direction:column;gap:6px;"></div>
                 </div>
             </div>
         </div>
+
+        <script>
+        function updateDocsLabel(input) {
+            var label = document.getElementById('docs-label');
+            var preview = document.getElementById('docs-preview');
+            preview.innerHTML = '';
+            if (input.files.length > 0) {
+                label.innerHTML = '<strong style="color:#7c3aed">' + input.files.length + ' ficheiro(s) selecionado(s)</strong>';
+                Array.from(input.files).forEach(function(f) {
+                    var ext = f.name.split('.').pop().toUpperCase();
+                    var isWord = ext === 'DOC' || ext === 'DOCX';
+                    var color = isWord ? '#2563eb' : '#dc2626';
+                    var bg = isWord ? '#eff6ff' : '#fff5f5';
+                    preview.innerHTML += '<div style="display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;">'
+                        + '<span style="font-size:0.72rem;font-weight:700;color:' + color + ';background:' + bg + ';padding:2px 6px;border-radius:4px;flex-shrink:0;">' + ext + '</span>'
+                        + '<span style="font-size:0.82rem;color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + f.name + '</span>'
+                        + '<span style="font-size:0.78rem;color:#94a3b8;flex-shrink:0;">' + (f.size/1024/1024).toFixed(1) + ' MB</span>'
+                        + '</div>';
+                });
+            } else {
+                label.innerHTML = 'Clique para adicionar documentos<br><span style="color:#94a3b8;font-size:0.76rem;">PDF, DOC, DOCX — máx. 10 MB cada</span>';
+            }
+        }
+        </script>
 
         {{-- Actions --}}
         <div style="display:flex;align-items:center;justify-content:flex-end;gap:12px;">

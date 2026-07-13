@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Secretaria;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
+use App\Services\WhatsAppService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +66,12 @@ class CandidaturaController extends Controller
 
         AuditLog::registar('confirmou_pagamento', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
+        try {
+            app(WhatsAppService::class)->notificarPagamentoConfirmado($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('WhatsApp pagamento confirmado: ' . $e->getMessage());
+        }
 
         return back()->with('success', "Pagamento da Ficha #{$candidatura->id} confirmado com sucesso.");
     }

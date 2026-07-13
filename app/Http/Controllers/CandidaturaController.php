@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\CandidaturaReceived;
 use App\Models\Candidatura;
+use App\Services\WhatsAppService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -106,6 +107,12 @@ class CandidaturaController extends Controller
             Mail::to('geral@isp-bie.ao')->send(new CandidaturaReceived($candidatura));
         } catch (\Throwable $e) {
             \Log::error('Falha ao enviar email de candidatura: ' . $e->getMessage());
+        }
+
+        try {
+            app(WhatsAppService::class)->notificarCandidaturaRecebida($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('WhatsApp candidatura recebida: ' . $e->getMessage());
         }
 
         // URL assinada e com expiração (72h) — só o candidato que acabou de submeter

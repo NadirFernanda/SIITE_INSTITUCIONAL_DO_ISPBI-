@@ -11,6 +11,7 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
             Route::get('/admin/noticias/{id}/edit', [App\Http\Controllers\AdminNoticiaController::class, 'edit'])->name('admin.noticias.edit');
             Route::put('/admin/noticias/{id}', [App\Http\Controllers\AdminNoticiaController::class, 'update'])->name('admin.noticias.update');
             Route::delete('/admin/noticias/{id}', [App\Http\Controllers\AdminNoticiaController::class, 'destroy'])->name('admin.noticias.destroy');
+        Route::delete('/admin/noticias/documento/{documento}', [App\Http\Controllers\AdminNoticiaController::class, 'destroyDocumento'])->name('admin.noticias.documento.destroy');
         Route::post('/admin/noticias/{id}/toggle-publicar', [App\Http\Controllers\AdminNoticiaController::class, 'togglePublicar'])->name('admin.noticias.toggle-publicar');
         Route::get('/admin/noticias', [App\Http\Controllers\AdminNoticiaController::class, 'index'])->name('admin.noticias');
         Route::get('/admin/noticias/create', [App\Http\Controllers\AdminNoticiaController::class, 'create'])->name('admin.noticias.create');
@@ -270,7 +271,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
     Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
-    Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Admin\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
     Route::delete('candidaturas/{candidatura}', [App\Http\Controllers\Admin\CandidaturaController::class, 'destroy'])->name('candidaturas.destroy');
 
     // Auditoria
@@ -337,7 +337,6 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::put('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'update'])->name('candidaturas.update');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/status', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'updateStatus'])->name('candidaturas.status');
-    Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
 
     // Salas de exame
     Route::get('salas', [App\Http\Controllers\Tecnico\SalaController::class, 'index'])->name('salas.index');
@@ -351,6 +350,16 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::get('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'show'])->name('salas.show');
     Route::patch('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'update'])->name('salas.update');
     Route::delete('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'destroy'])->name('salas.destroy');
+});
+
+// Painel Professor — lançamento de notas
+Route::prefix('professor')->name('professor.')->middleware(['auth', 'professor', 'throttle:30,1'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('professor.candidaturas.index');
+    })->name('dashboard');
+    Route::get('candidaturas', [App\Http\Controllers\Professor\CandidaturaController::class, 'index'])->name('candidaturas.index');
+    Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Professor\CandidaturaController::class, 'show'])->name('candidaturas.show');
+    Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Professor\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
 });
 
 // Placeholder routes for later scaffolding

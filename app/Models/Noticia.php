@@ -28,4 +28,9 @@ class Noticia extends Model
         'institucional' => 'boolean',
         'para_alumni'   => 'boolean',
     ];
+
+    public function documentos()
+    {
+        return $this->hasMany(NoticiaDocumento::class);
+    }
 }
