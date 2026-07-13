@@ -17,7 +17,7 @@
             </div>
         @endif
 
-        <div class="p-8">
+        <div class="p-4 sm:p-8">
             <div class="flex items-center gap-3 text-sm text-gray-500 mb-6">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 {{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}
@@ -33,19 +33,19 @@
                     <div class="flex flex-col gap-2">
                         @if($noticia->pdf)
                         <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank"
-                           class="inline-flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 px-5 py-3 rounded-lg hover:bg-red-100 transition font-semibold text-sm">
+                           class="flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg hover:bg-red-100 transition font-semibold text-sm min-w-0">
                             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                            <span class="inline-block bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">PDF</span>
-                            Documento PDF
+                            <span class="inline-block bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded flex-shrink-0">PDF</span>
+                            <span class="truncate">Documento PDF</span>
                         </a>
                         @endif
                         @foreach($noticia->documentos as $doc)
                             @php $ext = $doc->extensao(); $isWord = in_array($ext, ['DOC','DOCX']); @endphp
                             <a href="{{ asset('storage/' . $doc->caminho) }}" target="_blank"
-                               class="inline-flex items-center gap-3 px-5 py-3 rounded-lg border font-semibold text-sm transition {{ $isWord ? 'bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100' : 'bg-red-50 border-red-200 text-red-700 hover:bg-red-100' }}">
+                               class="flex items-center gap-3 px-4 py-3 rounded-lg border font-semibold text-sm transition min-w-0 {{ $isWord ? 'bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100' : 'bg-red-50 border-red-200 text-red-700 hover:bg-red-100' }}">
                                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                <span class="inline-block text-xs font-bold px-2 py-0.5 rounded {{ $isWord ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700' }}">{{ $ext }}</span>
-                                {{ $doc->nome_original }}
+                                <span class="inline-block text-xs font-bold px-2 py-0.5 rounded flex-shrink-0 {{ $isWord ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700' }}">{{ $ext }}</span>
+                                <span class="truncate">{{ $doc->nome_original }}</span>
                             </a>
                         @endforeach
                     </div>
