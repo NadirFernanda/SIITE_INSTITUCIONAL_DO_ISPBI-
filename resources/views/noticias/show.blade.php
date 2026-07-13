@@ -27,13 +27,28 @@
                 {{ $noticia->texto }}
             </div>
 
-            @if($noticia->pdf)
+            @if($noticia->pdf || $noticia->documentos->isNotEmpty())
                 <div class="mt-8">
-                    <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank"
-                       class="inline-flex items-center gap-2 bg-[#2563eb] text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        Ver documento PDF
-                    </a>
+                    <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Documentos anexos</h3>
+                    <div class="flex flex-col gap-2">
+                        @if($noticia->pdf)
+                        <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank"
+                           class="inline-flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 px-5 py-3 rounded-lg hover:bg-red-100 transition font-semibold text-sm">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            <span class="inline-block bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">PDF</span>
+                            Documento PDF
+                        </a>
+                        @endif
+                        @foreach($noticia->documentos as $doc)
+                            @php $ext = $doc->extensao(); $isWord = in_array($ext, ['DOC','DOCX']); @endphp
+                            <a href="{{ asset('storage/' . $doc->caminho) }}" target="_blank"
+                               class="inline-flex items-center gap-3 px-5 py-3 rounded-lg border font-semibold text-sm transition {{ $isWord ? 'bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100' : 'bg-red-50 border-red-200 text-red-700 hover:bg-red-100' }}">
+                                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                <span class="inline-block text-xs font-bold px-2 py-0.5 rounded {{ $isWord ? 'bg-blue-100 text-blue-700' : 'bg-red-100 text-red-700' }}">{{ $ext }}</span>
+                                {{ $doc->nome_original }}
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
             @endif
 

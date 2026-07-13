@@ -14,7 +14,8 @@ class NoticiaController extends Controller
 
     public function show($id)
     {
-        $noticia = Noticia::where('id', $id)
+        $noticia = Noticia::with('documentos')
+            ->where('id', $id)
             ->where('publicada', true)
             ->firstOrFail();
         return view('noticias.show', compact('noticia'));
