@@ -167,10 +167,10 @@
                             <span style="flex:1;font-size:0.85rem;color:#374151;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="{{ $doc->nome_original }}">{{ $doc->nome_original }}</span>
                             <a href="{{ asset('storage/' . $doc->caminho) }}" target="_blank"
                                style="font-size:0.78rem;color:#1565c0;text-decoration:none;flex-shrink:0;margin-right:8px;">Abrir</a>
-                            <form method="POST" action="{{ route('admin.noticias.documento.destroy', $doc->id) }}" style="display:inline;" onsubmit="return confirm('Remover este documento?')">
-                                @csrf @method('DELETE')
-                                <button type="submit" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.78rem;padding:0;">Remover</button>
-                            </form>
+                            {{-- form atributo aponta para form FORA do form principal (evita aninhamento) --}}
+                            <button type="submit" form="del-doc-{{ $doc->id }}"
+                                    onclick="return confirm('Remover este documento?')"
+                                    style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:0.78rem;padding:0;">Remover</button>
                         </div>
                         @endforeach
                     </div>
@@ -235,4 +235,15 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                 Salvar Alterações
             </button>
+        </div>
+    </form>
+
+    {{-- Formulários de eliminação de documento (fora do form principal para evitar aninhamento) --}}
+    @foreach($noticia->documentos as $doc)
+    <form id="del-doc-{{ $doc->id }}" method="POST" action="{{ route('admin.noticias.documento.destroy', $doc->id) }}" style="display:none;">
+        @csrf @method('DELETE')
+    </form>
+    @endforeach
+
+</div>
 @endsection
