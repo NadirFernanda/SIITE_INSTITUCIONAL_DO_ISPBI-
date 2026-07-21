@@ -56,8 +56,8 @@
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">4</span>
                                             </div>
-                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Exame de Acesso</h3>
-                                            <p class="text-sm text-gray-600">Informações sobre exame de acesso e calendário</p>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Impressão do comprovativo de inscrição</h3>
+                                            <p class="text-sm text-gray-600">Guarde o comprovativo para apresentação no dia do exame</p>
                                         </div>
 
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
@@ -97,7 +97,6 @@
                                             </svg>
                                             <div>
                                                 <h3 class="font-semibold text-gray-900">Pasta de processos</h3>
-                                                <p class="text-gray-600">(no caso de inscrição presencial)</p>
                                             </div>
                                         </li>
 
