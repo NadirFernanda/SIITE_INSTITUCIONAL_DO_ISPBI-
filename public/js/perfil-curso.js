@@ -89,10 +89,31 @@
             if (eligible.length === 1 && cursoEl.options.length === 2) {
                 cursoEl.options[1].selected = true;
             }
+
+            // Actualizar campo de observações se existir
+            setObservacoesVal();
+        }
+
+        // Campo de observações (oculto) — preenchido automaticamente quando curso === 'Outro'
+        var obsEl = document.getElementById('observacoes-input');
+        function setObservacoesVal() {
+            if (!obsEl) return;
+            if (cursoEl.value === 'Outro') {
+                obsEl.value = 'Curso não listado; candidato orientado a dirigir-se à instituição';
+            } else {
+                // Não sobrepor observações manualmente preenchidas; limpar apenas se foi preenchido pela regra
+                if (obsEl.value && obsEl.value.indexOf('Curso não listado') === 0) {
+                    obsEl.value = '';
+                }
+            }
         }
 
         perfilEl.addEventListener('change', updateCursos);
         updateCursos();
+        // Also ensure observacoes updates when the curso select changes (user may pick 'Outro')
+        cursoEl.addEventListener && cursoEl.addEventListener('change', function () {
+            try { setObservacoesVal(); } catch (e) { /* ignore */ }
+        });
     }
 
     function init() {

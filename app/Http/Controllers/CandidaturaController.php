@@ -101,6 +101,19 @@ class CandidaturaController extends Controller
             'estado_financeiro', 'instituicao_laboral',
             'curso', 'periodo', 'local_inscricao',
         ]);
+        // Se o candidato escolheu 'Outro' como curso, adicionar observações padrão se estiver vazio
+        if (($data['curso'] ?? '') === 'Outro') {
+            if (empty($request->input('observacoes'))) {
+                $data['observacoes'] = 'Curso não listado; candidato orientado a dirigir-se à instituição';
+            } else {
+                $data['observacoes'] = $request->input('observacoes');
+            }
+        } else {
+            // Se não for 'Outro', preservar observações enviadas (se houver)
+            if ($request->filled('observacoes')) {
+                $data['observacoes'] = $request->input('observacoes');
+            }
+        }
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
         $candidatura = Candidatura::create($data);
