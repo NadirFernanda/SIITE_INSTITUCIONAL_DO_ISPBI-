@@ -6,6 +6,9 @@
     <div style="margin-bottom:24px;">
         <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Lançamento de Notas</h1>
         <p style="color:#64748b;font-size:0.92rem;margin:0;">Selecione uma ficha para lançar ou corrigir a nota do exame de acesso.</p>
+        <div style="margin-top:12px;padding:14px 16px;background:#f8fafc;border:1px solid #dbeafe;border-radius:12px;color:#0f172a;font-size:0.88rem;line-height:1.6;">
+            <strong>Garantia do processo:</strong> use apenas a correspondência oficial da DAAC/secretaria (Sala + Lugar + Código de prova). A validação final deve ser feita no local físico do exame.
+        </div>
     </div>
 
     @if(session('success'))

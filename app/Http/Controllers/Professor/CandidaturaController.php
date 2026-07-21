@@ -13,7 +13,7 @@ class CandidaturaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Candidatura::query()->orderByDesc('created_at');
+        $query = Candidatura::with('sala')->orderByDesc('created_at');
 
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
