@@ -23,6 +23,9 @@ class CandidaturaController extends Controller
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
         }
+        if ($request->filled('perfil')) {
+            $query->where('perfil', $request->input('perfil'));
+        }
         if ($request->filled('periodo')) {
             $query->where('periodo', $request->input('periodo'));
         }
@@ -144,9 +147,10 @@ class CandidaturaController extends Controller
 
         $curso = $request->input('curso');
         $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
+        $perfisValidos = array_merge($perfisPermitidos, ['Outro']);
         $perfilRules = empty($perfisPermitidos)
             ? ['nullable', 'string', 'max:150']
-            : ['required', 'string', 'max:150', \Illuminate\Validation\Rule::in($perfisPermitidos)];
+            : ['required', 'string', 'max:150', \Illuminate\Validation\Rule::in($perfisValidos)];
 
         $request->validate([
             'nome'                   => 'required|string|max:255',
@@ -225,6 +229,9 @@ class CandidaturaController extends Controller
         }
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
+        }
+        if ($request->filled('perfil')) {
+            $query->where('perfil', $request->input('perfil'));
         }
 
         $candidaturas = $query->get();

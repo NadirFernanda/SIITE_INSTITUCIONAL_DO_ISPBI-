@@ -377,6 +377,7 @@
                                                 @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
                                                     <option value="{{ $p }}" {{ $oldPerfil === $p ? 'selected' : '' }}>{{ $p }}</option>
                                                 @endforeach
+                                                <option value="Outro" {{ $oldPerfil === 'Outro' ? 'selected' : '' }}>Outro — Perfil não listado</option>
                                             </select>
                                             <p class="text-xs text-gray-400 mt-1">Os cursos disponíveis serão filtrados automaticamente com base no seu perfil. Se o seu curso não aparecer, dirija-se à instituição.</p>
                                             <div id="perfil-select-info" style="display:none;margin-top:8px;padding:10px 14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;font-size:0.82rem;color:#1e40af;line-height:1.5;"></div>

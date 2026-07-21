@@ -198,6 +198,7 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                     @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
                         <option value="{{ $p }}" {{ $editOldPerf === $p ? 'selected' : '' }}>{{ $p }}</option>
                     @endforeach
+                    <option value="Outro" {{ $editOldPerf === 'Outro' ? 'selected' : '' }}>Outro — Perfil não listado</option>
                 </select>
                 <p style="font-size:0.74rem;color:#94a3b8;margin-top:4px;">Os cursos disponíveis são filtrados automaticamente pelo perfil.</p>
                 <div id="edit-perfil-info" style="display:none;margin-top:8px;padding:9px 13px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;font-size:0.8rem;color:#1e40af;line-height:1.5;"></div>

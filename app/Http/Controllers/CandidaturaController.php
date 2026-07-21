@@ -25,9 +25,13 @@ class CandidaturaController extends Controller
         $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
         // Permitir submissão com opção 'Outro' quando o curso não estiver listado
         $allowedCursos = array_merge(Candidatura::$cursos, ['Outro']);
+        // Permitir que o perfil seja 'Outro'
+        $allowedPerfis = array_merge(Candidatura::todosOsPerfis(), ['Outro']);
+        // Permitir 'Outro' entre os valores válidos para perfil quando aplicável
+        $perfisValidos = array_merge($perfisPermitidos, ['Outro']);
         $perfilRules = empty($perfisPermitidos)
             ? ['nullable', 'string', 'max:150']
-            : ['required', 'string', 'max:150', Rule::in($perfisPermitidos)];
+            : ['required', 'string', 'max:150', Rule::in($perfisValidos)];
 
         $request->validate([
             'nome'                   => 'required|string|max:255',
@@ -101,15 +105,21 @@ class CandidaturaController extends Controller
             'estado_financeiro', 'instituicao_laboral',
             'curso', 'periodo', 'local_inscricao',
         ]);
-        // Se o candidato escolheu 'Outro' como curso, adicionar observações padrão se estiver vazio
-        if (($data['curso'] ?? '') === 'Outro') {
+        // Preencher observações padrão quando o candidato indicar 'Outro' no perfil ou no curso
+        if (($data['perfil'] ?? '') === 'Outro') {
+            if (empty($request->input('observacoes'))) {
+                $data['observacoes'] = 'Perfil não listado; candidato orientado a dirigir-se à instituição';
+            } else {
+                $data['observacoes'] = $request->input('observacoes');
+            }
+        } elseif (($data['curso'] ?? '') === 'Outro') {
             if (empty($request->input('observacoes'))) {
                 $data['observacoes'] = 'Curso não listado; candidato orientado a dirigir-se à instituição';
             } else {
                 $data['observacoes'] = $request->input('observacoes');
             }
         } else {
-            // Se não for 'Outro', preservar observações enviadas (se houver)
+            // Se não for 'Outro' em nenhum dos casos, preservar observações enviadas (se houver)
             if ($request->filled('observacoes')) {
                 $data['observacoes'] = $request->input('observacoes');
             }

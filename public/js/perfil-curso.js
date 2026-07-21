@@ -38,7 +38,10 @@
 
             // Mensagem informativa
             if (infoEl) {
-                if (perfil && eligible.length > 0) {
+                if (perfil && perfil === 'Outro') {
+                    infoEl.innerHTML = '<strong>Atenção:</strong> o seu perfil não está listado. Deve dirigir-se à instituição para confirmação do processo de candidatura.';
+                    infoEl.style.display = 'block';
+                } else if (perfil && eligible.length > 0) {
                     var lista = eligible.join(', ');
                     infoEl.innerHTML = '<strong>O seu perfil permite candidatar-se ao(s) curso(s):</strong> ' + lista + '.';
                     infoEl.style.display = 'block';
@@ -58,6 +61,20 @@
             if (!perfil) {
                 ph.textContent = '— Seleccione primeiro o seu perfil acima —';
                 cursoEl.appendChild(ph);
+                return;
+            }
+
+            // Se o perfil for 'Outro', permitir a opção 'Outro' no curso para submissão
+            if (perfil === 'Outro') {
+                ph.textContent = '— O seu perfil não está listado — seleccione "Outro" abaixo —';
+                cursoEl.appendChild(ph);
+                var outroOption = document.createElement('option');
+                outroOption.value = 'Outro';
+                outroOption.textContent = 'Outro — Perfil não listado';
+                if ((current || oldCurso) === 'Outro') outroOption.selected = true;
+                cursoEl.appendChild(outroOption);
+                // Actualizar observações
+                setObservacoesVal();
                 return;
             }
 
@@ -98,13 +115,18 @@
         var obsEl = document.getElementById('observacoes-input');
         function setObservacoesVal() {
             if (!obsEl) return;
+            // Se o perfil for Outro, preencher observações sobre perfil; se o curso for Outro, preencher sobre curso
+            if (perfilEl.value === 'Outro') {
+                obsEl.value = 'Perfil não listado; candidato orientado a dirigir-se à instituição';
+                return;
+            }
             if (cursoEl.value === 'Outro') {
                 obsEl.value = 'Curso não listado; candidato orientado a dirigir-se à instituição';
-            } else {
-                // Não sobrepor observações manualmente preenchidas; limpar apenas se foi preenchido pela regra
-                if (obsEl.value && obsEl.value.indexOf('Curso não listado') === 0) {
-                    obsEl.value = '';
-                }
+                return;
+            }
+            // Não sobrepor observações manualmente preenchidas; limpar apenas se foi preenchido pela regra
+            if (obsEl.value && (obsEl.value.indexOf('Curso não listado') === 0 || obsEl.value.indexOf('Perfil não listado') === 0)) {
+                obsEl.value = '';
             }
         }
 

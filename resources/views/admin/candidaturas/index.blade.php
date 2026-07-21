@@ -93,10 +93,25 @@
                 </select>
             </div>
 
+            <div style="min-width:200px;">
+                <label style="display:block;font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Perfil</label>
+                <select name="perfil" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.88rem;background:#f8fafc;">
+                    <option value="">Todos</option>
+                    @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
+                        <option value="{{ $p }}" {{ request('perfil') === $p ? 'selected' : '' }}>{{ $p }}</option>
+                    @endforeach
+                    <option value="Outro" {{ request('perfil') === 'Outro' ? 'selected' : '' }}>Outro — Perfil não listado</option>
+                </select>
+            </div>
+
             <div style="align-self:flex-end;">
                 <a href="{{ route('admin.candidaturas.index', array_merge(request()->except('page'), ['curso' => 'Outro'])) }}"
                    style="display:inline-block;background:#f97316;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;margin-left:8px;">
                     Mostrar "Outro"
+                </a>
+                <a href="{{ route('admin.candidaturas.index', array_merge(request()->except('page'), ['perfil' => 'Outro'])) }}"
+                   style="display:inline-block;background:#6b21a8;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;margin-left:8px;">
+                    Mostrar perfil "Outro"
                 </a>
             </div>
             <div style="min-width:140px;">
