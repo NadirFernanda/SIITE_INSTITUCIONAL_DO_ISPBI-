@@ -89,7 +89,15 @@
                     @foreach(\App\Models\Candidatura::$cursos as $c)
                         <option value="{{ $c }}" {{ request('curso') === $c ? 'selected' : '' }}>{{ $c }}</option>
                     @endforeach
+                    <option value="Outro" {{ request('curso') === 'Outro' ? 'selected' : '' }}>Outro — Curso não listado</option>
                 </select>
+            </div>
+
+            <div style="align-self:flex-end;">
+                <a href="{{ route('admin.candidaturas.index', array_merge(request()->except('page'), ['curso' => 'Outro'])) }}"
+                   style="display:inline-block;background:#f97316;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;margin-left:8px;">
+                    Mostrar "Outro"
+                </a>
             </div>
             <div style="min-width:140px;">
                 <label style="display:block;font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Período</label>
