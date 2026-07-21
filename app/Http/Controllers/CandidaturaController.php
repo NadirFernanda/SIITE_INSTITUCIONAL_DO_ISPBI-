@@ -23,6 +23,8 @@ class CandidaturaController extends Controller
 
         $curso = $request->input('curso');
         $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
+        // Permitir submissão com opção 'Outro' quando o curso não estiver listado
+        $allowedCursos = array_merge(Candidatura::$cursos, ['Outro']);
         $perfilRules = empty($perfisPermitidos)
             ? ['nullable', 'string', 'max:150']
             : ['required', 'string', 'max:150', Rule::in($perfisPermitidos)];
@@ -53,7 +55,7 @@ class CandidaturaController extends Controller
             'trabalhador'            => 'required|in:sim,nao',
             'instituicao_laboral'    => 'nullable|required_if:trabalhador,sim|string|max:255',
             'curso'                  => [
-                'required', 'string', 'in:' . implode(',', Candidatura::$cursos),
+                'required', 'string', Rule::in($allowedCursos),
                 Rule::unique('candidaturas')->where(function ($query) use ($request) {
                     return $query->where('bi', $request->input('bi'))
                                  ->where('periodo', $request->input('periodo'));
@@ -64,7 +66,7 @@ class CandidaturaController extends Controller
         ], [
             'curso.unique'                   => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
             'perfil.required'                => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
-            'perfil.in'                      => "O perfil académico seleccionado não é compatível com o curso '{$curso}'. Consulte a tabela de perfis de acesso.",
+            'perfil.in'                      => "O perfil académico seleccionado não é compatível com o curso '{$curso}'. Se o seu curso não aparecer nesta lista, dirija-se à instituição para confirmação.",
             'bi.required'                    => 'O Bilhete de Identidade é obrigatório.',
             'data_nascimento.required'       => 'A data de nascimento é obrigatória.',
             'data_nascimento.before_or_equal'=> 'É necessário ter pelo menos 17 anos para se candidatar.',

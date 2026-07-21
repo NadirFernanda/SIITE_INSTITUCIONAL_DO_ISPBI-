@@ -76,6 +76,15 @@
                 }
             });
 
+            // Se não houver cursos elegíveis, adicionar opção "Outro" para permitir submissão
+            if (eligible.length === 0) {
+                var outroOption = document.createElement('option');
+                outroOption.value = 'Outro';
+                outroOption.textContent = 'Outro — Dirija-se à instituição para confirmação';
+                if ((current || oldCurso) === 'Outro') outroOption.selected = true;
+                cursoEl.appendChild(outroOption);
+            }
+
             // Se só há um curso elegível, seleccioná-lo automaticamente
             if (eligible.length === 1 && cursoEl.options.length === 2) {
                 cursoEl.options[1].selected = true;
