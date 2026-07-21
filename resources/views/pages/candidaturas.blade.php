@@ -27,7 +27,7 @@
                                     </div>
 
                                     <h2 class="text-2xl sm:text-3xl font-bold text-[#2563eb] mb-6 sm:mb-8">Processo de Candidatura</h2>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">1</span>
@@ -299,7 +299,7 @@
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Sexo <span class="text-red-500">*</span></label>
-                                                <div class="flex gap-6">
+                                                <div class="flex flex-col sm:flex-row gap-4">
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
                                                         <input type="radio" name="sexo" value="masculino" {{ old('sexo') === 'masculino' ? 'checked' : '' }} required class="accent-[#2563eb]"> Masculino
                                                     </label>
@@ -415,7 +415,7 @@
                                         {{-- 13. Trabalhador --}}
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-2">Trabalhador <span class="text-red-500">*</span></label>
-                                            <div class="flex gap-6 items-center flex-wrap">
+                                            <div class="flex flex-col sm:flex-row gap-4 items-start">
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
                                                     <input type="radio" name="trabalhador" value="sim" {{ old('trabalhador') === 'sim' ? 'checked' : '' }} required class="accent-[#2563eb]"
                                                            onchange="document.getElementById('inst-laboral').classList.remove('hidden')"> Sim
