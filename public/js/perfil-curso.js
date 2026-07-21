@@ -43,7 +43,7 @@
                     infoEl.innerHTML = '<strong>O seu perfil permite candidatar-se ao(s) curso(s):</strong> ' + lista + '.';
                     infoEl.style.display = 'block';
                 } else if (perfil && eligible.length === 0) {
-                    infoEl.innerHTML = '<strong>Atenção:</strong> não foram encontrados cursos compatíveis com este perfil.';
+                    infoEl.innerHTML = '<strong>Atenção:</strong> não foram encontrados cursos compatíveis com este perfil. Se o seu curso não aparecer nesta lista, deve dirigir-se à instituição para confirmação do processo de candidatura.';
                     infoEl.style.display = 'block';
                 } else {
                     infoEl.style.display = 'none';
@@ -61,9 +61,9 @@
                 return;
             }
 
-            ph.textContent = eligible.length === 1
-                ? '— Confirme o curso abaixo —'
-                : '— Seleccione o curso —';
+            ph.textContent = eligible.length === 0
+                ? '— O seu curso não está aqui? Dirija-se à instituição —'
+                : (eligible.length === 1 ? '— Confirme o curso abaixo —' : '— Seleccione o curso —');
             cursoEl.appendChild(ph);
 
             allCursos.forEach(function (c) {
