@@ -64,6 +64,14 @@
                                             <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
                                                 <span class="text-2xl font-bold text-[#2563eb]">5</span>
                                             </div>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Exame de Acesso</h3>
+                                            <p class="text-sm text-gray-600">Realize o exame conforme o calendário definido</p>
+                                        </div>
+
+                                        <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
+                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#2563eb]">6</span>
+                                            </div>
                                             <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Resultado</h3>
                                             <p class="text-sm text-gray-600">Aguarde a divulgação dos resultados</p>
                                         </div>
