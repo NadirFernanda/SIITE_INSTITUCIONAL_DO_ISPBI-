@@ -51,7 +51,7 @@
                                     </a>
 
                                     <a href="#" class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
-                                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Psicologia Clínica</h3>
+                                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Psicologia</h3>
                                         <p class="text-gray-600 mb-2">25 trabalhos</p>
                                         <span class="text-teal-600 font-medium">Ver todos →</span>
                                     </a>
@@ -80,4 +80,6 @@
 
 </div>
 @endsection
+
+
 

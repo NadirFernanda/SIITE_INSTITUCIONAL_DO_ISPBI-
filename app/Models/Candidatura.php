@@ -42,7 +42,7 @@ class Candidatura extends Model
         'Engenharia Informática',
         'Engenharia em Recursos Hídricos',
         'Comunicação Social',
-        'Psicologia Clínica',
+        'Psicologia',
         'Enfermagem',
     ];
 
@@ -120,7 +120,7 @@ class Candidatura extends Model
             'Eletricidade',
             'Máquinas e Motores',
         ],
-        'Psicologia Clínica' => [
+        'Psicologia' => [
             'Ciências Humanas',
             'Ciências Económicas e Jurídicas',
             'História e Geografia',
@@ -202,3 +202,5 @@ class Candidatura extends Model
         return $this->assinado_em !== null;
     }
 }
+
+

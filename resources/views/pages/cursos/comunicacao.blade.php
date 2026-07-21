@@ -1,4 +1,4 @@
-﻿@extends('layouts.site')
+@extends('layouts.site')
 @section('title', 'Comunicação Social — ISP-Bié')
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
@@ -47,7 +47,7 @@
       <h3 class="text-sm font-bold text-[#1e3a5f] uppercase tracking-widest mb-3">Outros Cursos</h3>
       <nav class="space-y-1 text-sm">
         <a href="{{ route('cursos.enfermagem') }}" class="block py-1.5 px-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-[#F05A28] transition">Enfermagem Geral</a>
-        <a href="{{ route('cursos.psicologia') }}" class="block py-1.5 px-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-[#F05A28] transition">Psicologia Clínica</a>
+        <a href="{{ route('cursos.psicologia') }}" class="block py-1.5 px-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-[#F05A28] transition">Psicologia</a>
         <a href="{{ route('cursos.contabilidade') }}" class="block py-1.5 px-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-[#F05A28] transition">Contabilidade e Administração</a>
         <a href="{{ route('cursos.informatica') }}" class="block py-1.5 px-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-[#F05A28] transition">Engenharia Informática</a>
         <a href="{{ route('cursos.hidricos') }}" class="block py-1.5 px-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-[#F05A28] transition">Eng. em Recursos Hídricos</a>
@@ -57,3 +57,5 @@
 </div>
 </div>
 @endsection
+
+

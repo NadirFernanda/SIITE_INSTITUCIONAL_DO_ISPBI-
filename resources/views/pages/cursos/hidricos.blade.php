@@ -1,4 +1,4 @@
-﻿@extends('layouts.site')
+@extends('layouts.site')
 @section('title', 'Eng. em Recursos Hídricos — ISP-Bié')
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
@@ -104,7 +104,7 @@
         <ul class="space-y-1 text-sm">
           @foreach([
             ['Enfermagem Geral','cursos.enfermagem','#16A34A'],
-            ['Psicologia Clínica','cursos.psicologia','#D03B1F'],
+            ['Psicologia','cursos.psicologia','#D03B1F'],
             ['Comunicação Social','cursos.comunicacao','#C2710C'],
             ['Contabilidade e Administração','cursos.contabilidade','#92680A'],
             ['Engenharia Informática','cursos.informatica','#1D4ED8'],
@@ -122,3 +122,5 @@
   </div>
 </div>
 @endsection
+
+

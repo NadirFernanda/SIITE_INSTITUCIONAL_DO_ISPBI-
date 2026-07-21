@@ -1,4 +1,4 @@
-﻿@extends('layouts.site')
+@extends('layouts.site')
 
 @section('title', 'Cursos — ISP-Bié')
 
@@ -31,7 +31,7 @@ $cursos = [
     [
         'slug'       => 'psicologia',
         'route'      => 'cursos.psicologia',
-        'title'      => 'Psicologia Clínica',
+        'title'      => 'Psicologia',
         'department' => 'Ciências da Saúde',
         'duration'   => '5 anos',
         'vagas'      => 40,
@@ -196,3 +196,5 @@ $cursos = [
 
 </div>
 @endsection
+
+
