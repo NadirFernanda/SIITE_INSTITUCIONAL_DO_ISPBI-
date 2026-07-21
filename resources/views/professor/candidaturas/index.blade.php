@@ -36,8 +36,9 @@
         <form method="GET" style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
             <div>
                 <label style="display:block;font-size:0.75rem;font-weight:600;color:#475569;margin-bottom:4px;">Pesquisa</label>
-                <input type="text" name="q" value="{{ request('q') }}" placeholder="Nome, BI ou Nº ficha"
+                <input type="text" name="q" value="{{ request('q') }}" placeholder="Ficha ou Lugar"
                        style="border:1px solid #e2e8f0;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                <p style="font-size:0.72rem;color:#94a3b8;margin-top:6px;max-width:220px;">Apenas pesquisa por número de ficha ou lugar de exame. Nenhum dado pessoal é exibido.</p>
             </div>
             <div>
                 <label style="display:block;font-size:0.75rem;font-weight:600;color:#475569;margin-bottom:4px;">Curso</label>
@@ -83,7 +84,8 @@
             <thead>
                 <tr style="border-bottom:2px solid #e2e8f0;background:#f8fafc;">
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">#</th>
-                    <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Nome</th>
+                    <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Sala</th>
+                    <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Lugar</th>
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Curso</th>
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Período</th>
                     <th style="padding:12px 20px;text-align:center;font-weight:700;color:#475569;">Nota</th>
@@ -94,7 +96,8 @@
                 @forelse($candidaturas as $c)
                 <tr style="border-bottom:1px solid #f1f5f9;" onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background=''">
                     <td style="padding:13px 20px;color:#94a3b8;font-size:0.8rem;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
-                    <td style="padding:13px 20px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
+                    <td style="padding:13px 20px;color:#475569;">{{ $c->sala?->nome ?? '—' }}</td>
+                    <td style="padding:13px 20px;color:#475569;">{{ $c->numero_lugar ? 'Lugar '.$c->numero_lugar : 'Não atribuído' }}</td>
                     <td style="padding:13px 20px;color:#475569;">{{ $c->curso }}</td>
                     <td style="padding:13px 20px;color:#475569;">{{ ucfirst(str_replace('-',' ',$c->periodo)) }}</td>
                     <td style="padding:13px 20px;text-align:center;">

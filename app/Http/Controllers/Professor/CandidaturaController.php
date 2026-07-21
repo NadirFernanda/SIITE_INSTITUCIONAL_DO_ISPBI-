@@ -30,13 +30,12 @@ class CandidaturaController extends Controller
         }
         if ($request->filled('q')) {
             $q = $request->input('q');
-            $query->where(function ($r) use ($q) {
-                $r->where('nome', 'like', "%{$q}%")
-                  ->orWhere('bi', 'like', "%{$q}%");
-                if (is_numeric($q)) {
-                    $r->orWhere('id', (int) $q);
-                }
-            });
+            if (is_numeric($q)) {
+                $query->where(function ($r) use ($q) {
+                    $r->where('id', (int) $q)
+                      ->orWhere('numero_lugar', (int) $q);
+                });
+            }
         }
 
         $candidaturas = $query->paginate(25)->withQueryString();

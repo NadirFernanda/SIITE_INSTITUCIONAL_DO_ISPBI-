@@ -13,7 +13,7 @@
         <h1 style="font-size:1.4rem;font-weight:700;color:#1a2332;margin:0 0 3px;">
             Ficha #{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}
         </h1>
-        <p style="color:#64748b;font-size:0.88rem;margin:0;">{{ $candidatura->nome }}</p>
+        <p style="color:#64748b;font-size:0.88rem;margin:0;">Identificação anónima — apenas sala e lugar de exame são visíveis.</p>
     </div>
 
     @if(session('success'))
@@ -25,7 +25,7 @@
 
     {{-- Dados da ficha --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px 24px;margin-bottom:18px;">
-        <h2 style="font-size:0.85rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Identificação</h2>
+        <h2 style="font-size:0.85rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Identificação de Exame</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
             @php
             function _pf($label, $value) {
@@ -33,11 +33,14 @@
                 echo '<div><div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">'.$label.'</div><div style="font-size:0.92rem;color:#1a2332;font-weight:500;">'.$v.'</div></div>';
             }
             @endphp
-            @php _pf('Nome Completo', $candidatura->nome); @endphp
-            @php _pf('BI / Passaporte', $candidatura->bi); @endphp
+            @php _pf('Ficha', '#'.str_pad($candidatura->id, 5, '0', STR_PAD_LEFT)); @endphp
+            @php _pf('Sala', $candidatura->sala?->nome ?? null); @endphp
+            @php _pf('Lugar', $candidatura->numero_lugar ? 'Lugar '.$candidatura->numero_lugar : null); @endphp
             @php _pf('Curso', $candidatura->curso); @endphp
             @php _pf('Período', $candidatura->periodo ? ucfirst(str_replace('-',' ',$candidatura->periodo)) : null); @endphp
-            @php _pf('Data de Nascimento', $candidatura->data_nascimento?->format('d/m/Y')); @endphp
+        </div>
+        <div style="margin-top:18px;padding:14px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;font-size:0.85rem;line-height:1.5;">
+            O nome e dados pessoais do candidato não são exibidos nesta interface. O lançamento de notas é feito apenas por ficha, sala e lugar.
         </div>
     </div>
 
