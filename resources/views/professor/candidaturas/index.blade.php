@@ -7,7 +7,7 @@
         <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Lançamento de Notas</h1>
         <p style="color:#64748b;font-size:0.92rem;margin:0;">Selecione uma ficha para lançar ou corrigir a nota do exame de acesso.</p>
         <div style="margin-top:12px;padding:14px 16px;background:#f8fafc;border:1px solid #dbeafe;border-radius:12px;color:#0f172a;font-size:0.88rem;line-height:1.6;">
-            <strong>Garantia do processo:</strong> use apenas a correspondência oficial da DAAC/secretaria (Sala + Lugar + Código de prova). A validação final deve ser feita no local físico do exame.
+            <strong>Garantia do processo:</strong> use apenas a correspondência oficial da DAAC/secretaria (Sala + Código de exame). A validação final deve ser feita no local físico do exame.
         </div>
     </div>
 
@@ -39,9 +39,9 @@
         <form method="GET" style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
             <div>
                 <label style="display:block;font-size:0.75rem;font-weight:600;color:#475569;margin-bottom:4px;">Pesquisa</label>
-                <input type="text" name="q" value="{{ request('q') }}" placeholder="Ficha ou Lugar"
+                <input type="text" name="q" value="{{ request('q') }}" placeholder="Ficha ou Código de Exame"
                        style="border:1px solid #e2e8f0;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
-                <p style="font-size:0.72rem;color:#94a3b8;margin-top:6px;max-width:220px;">Apenas pesquisa por número de ficha ou lugar de exame. Nenhum dado pessoal é exibido.</p>
+                <p style="font-size:0.72rem;color:#94a3b8;margin-top:6px;max-width:220px;">Apenas pesquisa por número de ficha ou código de exame. Nenhum dado pessoal é exibido.</p>
             </div>
             <div>
                 <label style="display:block;font-size:0.75rem;font-weight:600;color:#475569;margin-bottom:4px;">Curso</label>
@@ -88,9 +88,7 @@
                 <tr style="border-bottom:2px solid #e2e8f0;background:#f8fafc;">
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">#</th>
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Sala</th>
-                    <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Lugar</th>
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Curso</th>
-                    <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Período</th>
                     <th style="padding:12px 20px;text-align:center;font-weight:700;color:#475569;">Nota</th>
                     <th style="padding:12px 20px;text-align:center;font-weight:700;color:#475569;">Acção</th>
                 </tr>
@@ -100,10 +98,8 @@
                 <tr style="border-bottom:1px solid #f1f5f9;" onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background=''">
                     <td style="padding:13px 20px;color:#94a3b8;font-size:0.8rem;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td style="padding:13px 20px;color:#475569;">{{ $c->sala?->nome ?? '—' }}</td>
-                    <td style="padding:13px 20px;color:#475569;">{{ $c->numero_lugar ? 'Lugar '.$c->numero_lugar : 'Não atribuído' }}</td>
                     <td style="padding:13px 20px;color:#475569;">{{ $c->curso }}</td>
-                    <td style="padding:13px 20px;color:#475569;">{{ ucfirst(str_replace('-',' ',$c->periodo)) }}</td>
-                    <td style="padding:13px 20px;text-align:center;">
+                    <td style="padding:13px 20px;color:#475569;">
                         @if($c->nota_exame !== null)
                             <span style="background:{{ $c->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $c->nota_exame >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $c->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};padding:3px 10px;border-radius:20px;font-size:0.82rem;font-weight:700;">
                                 {{ number_format($c->nota_exame, 1) }}/20

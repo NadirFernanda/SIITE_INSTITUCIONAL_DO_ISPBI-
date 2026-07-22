@@ -13,15 +13,7 @@
         <h1 style="font-size:1.4rem;font-weight:700;color:#1a2332;margin:0 0 3px;">
             Ficha #{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}
         </h1>
-        <p style="color:#64748b;font-size:0.88rem;margin:0;">Identificação anónima — apenas sala e lugar de exame são visíveis.</p>
-    </div>
-
-    @if(session('success'))
-        <div style="background:#e8f5e9;border:1px solid #a5d6a7;color:#2e7d32;padding:11px 16px;border-radius:10px;margin-bottom:18px;display:flex;align-items:center;gap:9px;">
-            <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            {{ session('success') }}
-        </div>
-    @endif
+            <p style="color:#64748b;font-size:0.88rem;margin:0;">Identificação anónima — apenas sala e código de exame são visíveis.</p>
 
     {{-- Dados da ficha --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px 24px;margin-bottom:18px;">
@@ -35,12 +27,12 @@
             @endphp
             @php _pf('Ficha', '#'.str_pad($candidatura->id, 5, '0', STR_PAD_LEFT)); @endphp
             @php _pf('Sala', $candidatura->sala?->nome ?? null); @endphp
-            @php _pf('Lugar', $candidatura->numero_lugar ? 'Lugar '.$candidatura->numero_lugar : null); @endphp
+            @php _pf('Código Exame', $candidatura->codigo_exame ? $candidatura->codigo_exame : 'Ainda não gerado'); @endphp
             @php _pf('Curso', $candidatura->curso); @endphp
             @php _pf('Período', $candidatura->periodo ? ucfirst(str_replace('-',' ',$candidatura->periodo)) : null); @endphp
         </div>
-        <div style="margin-top:18px;padding:14px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;color:#475569;font-size:0.85rem;line-height:1.5;">
-            O nome e dados pessoais do candidato não são exibidos nesta interface. O lançamento de notas é feito apenas por ficha, sala e lugar.
+        <div style="font-size:0.8rem;color:#64748b;margin-top:14px;line-height:1.6;">
+            Nenhum dado pessoal do candidato é exibido nesta interface. Use o código de exame junto da correspondência física para confirmar que a ficha corresponde ao exame correto.
         </div>
     </div>
 
