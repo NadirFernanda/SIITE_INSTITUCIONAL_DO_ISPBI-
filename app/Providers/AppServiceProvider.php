@@ -62,6 +62,7 @@ class AppServiceProvider extends ServiceProvider
                 $role === 'admin'                          => route('admin'),
                 $role === 'daac'                           => route('daac.candidaturas.index'),
                 $role === 'tecnico'                        => route('tecnico.candidaturas.index'),
+                $role === 'lancamento'                    => route('lancamento.salas.index'),
                 $role === 'alumni' && $user->aprovado      => route('portal.dashboard'),
                 $role === 'alumni' && ! $user->aprovado    => route('portal.pendente'),
                 default                                    => '/',

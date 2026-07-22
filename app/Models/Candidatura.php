@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Candidatura extends Model
 {
@@ -19,7 +20,7 @@ class Candidatura extends Model
         'estado_financeiro', 'trabalhador', 'instituicao_laboral',
         'curso', 'periodo', 'observacoes',
         'status', 'notas_admin',
-        'sala_id', 'numero_lugar',
+        'sala_id', 'numero_lugar', 'codigo_exame',
         'assinado_por', 'assinado_em', 'assinatura_codigo',
         'nota_exame', 'nota_lancada_por', 'nota_lancada_em',
     ];
@@ -30,6 +31,7 @@ class Candidatura extends Model
         'trabalhador'           => 'boolean',
         'pagamento_confirmado'  => 'boolean',
         'pagamento_confirmado_em' => 'datetime',
+        'codigo_exame'      => 'string',
         'nota_exame'       => 'float',
         'nota_lancada_em'  => 'datetime',
         'assinado_em'      => 'datetime',
@@ -200,6 +202,27 @@ class Candidatura extends Model
     public function isAssinada(): bool
     {
         return $this->assinado_em !== null;
+    }
+
+    public static function gerarCodigoExame(): string
+    {
+        do {
+            $code = 'E' . str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+        } while (self::where('codigo_exame', $code)->exists());
+
+        return $code;
+    }
+
+    public function atribuirCodigoExame(): string
+    {
+        if ($this->codigo_exame) {
+            return $this->codigo_exame;
+        }
+
+        $this->codigo_exame = self::gerarCodigoExame();
+        $this->save();
+
+        return $this->codigo_exame;
     }
 }
 

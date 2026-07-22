@@ -27,12 +27,12 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     public function __construct(Sala $sala)
     {
         $this->sala         = $sala;
-        $this->candidaturas = $sala->candidaturas()->orderBy('id')->get();
+        $this->candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
     }
 
     public function title(): string
     {
-        return 'Lista de Presença';
+        return 'Lista de Exame';
     }
 
     public function array(): array
@@ -40,25 +40,19 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows = [];
 
         // Linha 1 — espaço para logo (Drawing)
-        $rows[] = ['', '', ''];
+        $rows[] = ['', ''];
 
         // Cabeçalho (linhas 2-4) — mescladas A:B, centradas
-        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
-        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
-        $rows[] = ['EXAME DE ACESSO 2026/2027 — LISTA DE PRESENÇA', '', ''];
+        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', ''];
+        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', ''];
+        $rows[] = ['EXAME DE ACESSO 2026/2027 — LISTA DE EXAME', ''];
 
         // Linha 5 — vazia
-        $rows[] = ['', '', ''];
+        $rows[] = ['', ''];
 
-        // Linhas 6-7 — info da sala
-        $grupos = $this->candidaturas
-            ->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
-            ->keys()->implode(' / ');
+        $rows[] = ['Sala: ' . $this->sala->nome, ''];
+        $rows[] = ['Candidatos atribuídos: ' . $this->candidaturas->count(), ''];
 
-        $rows[] = ['Sala: ' . $this->sala->nome, '', ''];
-        $rows[] = ['Curso(s) / Período: ' . $grupos, '', ''];
-
-        // Linha 8 — data/horário (sempre, para manter estrutura fixa)
         $dataHorario = '';
         if ($this->sala->data_exame) {
             $dataHorario .= $this->sala->data_exame->format('d/m/Y');
@@ -66,35 +60,33 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($this->sala->horario) {
             $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
         }
-        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), '', ''];
+        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), ''];
 
-        // Linha 9 — vazia
-        $rows[] = ['', '', ''];
+        $rows[] = [''];
 
-        // Linha 10 — cabeçalho da tabela (SEMPRE na linha 10)
         $this->tableRow = 10;
-        $rows[] = ['N.º', 'NOME COMPLETO', 'ASSINATURA'];
+        $rows[] = ['Código Exame'];
 
-        // Linhas de dados
         foreach ($this->candidaturas as $c) {
-            $rows[] = [str_pad($c->id, 5, '0', STR_PAD_LEFT), strtoupper($c->nome), ''];
+            $rows[] = [
+                $c->codigo_exame ?? 'NÃO GERADO',
+            ];
         }
 
-        // Assinatura do Presidente — centrada (merge A:B)
-        $rows[] = ['', '', ''];
-        $rows[] = ['', '', ''];
-        $rows[] = ['', '', ''];
-        $rows[] = ['_________________________________', '', ''];
-        $rows[] = ['Professor Doutor Fernando Maia', '', ''];
-        $rows[] = ['Presidente da Instituição', '', ''];
+        // Assinatura do Presidente — centrada
+        $rows[] = [''];
+        $rows[] = [''];
+        $rows[] = [''];
+        $rows[] = ['_________________________________'];
+        $rows[] = ['Professor Doutor Fernando Maia'];
+        $rows[] = ['Presidente da Instituição'];
 
         return $rows;
     }
 
     public function columnWidths(): array
     {
-        // A4 portrait, 3 colunas: N.º(6) + Nome(65) + Assinatura(34) ≈ 105
-        return ['A' => 6, 'B' => 65, 'C' => 34];
+        return ['A' => 40];
     }
 
     public function styles(Worksheet $sheet): array
@@ -105,15 +97,15 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sigCargo = $sigLinha + 2;
 
         // ── Mesclar cabeçalho ──
-        $sheet->mergeCells('A2:C2');
-        $sheet->mergeCells('A3:C3');
-        $sheet->mergeCells('A4:C4');
-        $sheet->mergeCells('A6:C6');
-        $sheet->mergeCells('A7:C7');
-        $sheet->mergeCells('A8:C8');
-        $sheet->mergeCells("A{$sigLinha}:C{$sigLinha}");
-        $sheet->mergeCells("A{$sigNome}:C{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
+        $sheet->mergeCells('A2:A2');
+        $sheet->mergeCells('A3:A3');
+        $sheet->mergeCells('A4:A4');
+        $sheet->mergeCells('A6:A6');
+        $sheet->mergeCells('A7:A7');
+        $sheet->mergeCells('A8:A8');
+        $sheet->mergeCells("A{$sigLinha}:A{$sigLinha}");
+        $sheet->mergeCells("A{$sigNome}:A{$sigNome}");
+        $sheet->mergeCells("A{$sigCargo}:A{$sigCargo}");
 
         // ── Alturas ──
         $sheet->getRowDimension(1)->setRowHeight(55); // espaço para o logo (Drawing)
@@ -141,7 +133,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // ── Cabeçalho da tabela ──
         $tr = $this->tableRow;
-        $sheet->getStyle("A{$tr}:C{$tr}")->applyFromArray([
+        $sheet->getStyle("A{$tr}:A{$tr}")->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
             'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
@@ -151,7 +143,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // ── Linhas de dados ──
         for ($r = $tr + 1; $r <= $dataEnd; $r++) {
             $bg = ($r % 2 === 0) ? 'EBF3FD' : 'FFFFFF';
-            $sheet->getStyle("A{$r}:C{$r}")->applyFromArray([
+            $sheet->getStyle("A{$r}:A{$r}")->applyFromArray([
                 'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
                 'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'DDDDDD']]],
                 'alignment' => ['vertical' => Alignment::VERTICAL_CENTER],
@@ -207,21 +199,14 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 55;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar logo across colunas A(6)+B(65)+C(34)=105 chars.
-        // Ancoramos em B1 para evitar que offsets grandes sejam ignorados pelo Excel.
-        // Centro total (a 8px/char): (105*8)/2 = 420px desde a esquerda.
-        // Offset desde A1 até B1 = 6*8 = 48px.
-        // => Offset desde B1 até ao centro = 420 - 48 = 372px.
-        $centerFromB1 = (int)(((6 + 65 + 34) * 8 / 2) - (6 * 8));
-        $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
-
+        // Centrar logo na coluna A para layout de uma única coluna.
         $drawing = new Drawing();
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
         $drawing->setHeight($displayH);
         $drawing->setWidth($displayW);
-        $drawing->setCoordinates('B1');
-        $drawing->setOffsetX($offsetX);
+        $drawing->setCoordinates('A1');
+        $drawing->setOffsetX(0);
         $drawing->setOffsetY(3);
 
         return [$drawing];

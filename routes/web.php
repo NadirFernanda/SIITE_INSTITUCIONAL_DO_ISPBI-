@@ -352,6 +352,25 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::delete('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'destroy'])->name('salas.destroy');
 });
 
+Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'lancamento', 'throttle:30,1'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('lancamento.salas.index');
+    })->name('dashboard');
+
+    Route::get('salas', [App\Http\Controllers\Lancamento\SalaController::class, 'index'])->name('salas.index');
+    Route::post('salas', [App\Http\Controllers\Lancamento\SalaController::class, 'store'])->name('salas.store');
+    Route::post('salas/distribuir', [App\Http\Controllers\Lancamento\SalaController::class, 'distribuir'])->name('salas.distribuir');
+    Route::post('salas/limpar', [App\Http\Controllers\Lancamento\SalaController::class, 'limpar'])->name('salas.limpar');
+    Route::get('salas/{sala}/pdf', [App\Http\Controllers\Lancamento\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
+    Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'excelExame'])->name('salas.excel-exame');
+    Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Lancamento\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
+    Route::post('salas/{sala}/codigos', [App\Http\Controllers\Lancamento\SalaController::class, 'gerarCodigos'])->name('salas.codigos');
+    Route::get('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'show'])->name('salas.show');
+    Route::patch('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'update'])->name('salas.update');
+    Route::delete('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'destroy'])->name('salas.destroy');
+});
+
 // Painel Professor — lançamento de notas
 Route::prefix('professor')->name('professor.')->middleware(['auth', 'professor', 'throttle:30,1'])->group(function () {
     Route::get('/', function () {

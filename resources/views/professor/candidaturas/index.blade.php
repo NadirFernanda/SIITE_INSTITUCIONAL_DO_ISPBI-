@@ -118,7 +118,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" style="padding:48px;text-align:center;color:#94a3b8;">Nenhuma ficha encontrada.</td>
+                    <td colspan="5" style="padding:48px;text-align:center;color:#94a3b8;">Nenhuma ficha encontrada.</td>
                 </tr>
                 @endforelse
             </tbody>

@@ -78,6 +78,9 @@
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
                         <input type="radio" name="role" value="professor" style="accent-color:#6d28d9;"> Professor <small style="color:#94a3b8;">(lançar notas)</small>
                     </label>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
+                        <input type="radio" name="role" value="lancamento" style="accent-color:#0f766e;"> Lançamento <small style="color:#94a3b8;">(atribuição sala/lugar)</small>
+                    </label>
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:12px;">
@@ -149,6 +152,8 @@
                             <span style="background:#fdf4ff;color:#a21caf;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Secretaria</span>
                         @elseif($u->role === 'professor')
                             <span style="background:#f5f3ff;color:#6d28d9;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Professor</span>
+                        @elseif($u->role === 'lancamento')
+                            <span style="background:#d1fae5;color:#0f766e;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Lançamento</span>
                         @else
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif

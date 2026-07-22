@@ -12,10 +12,9 @@ class SecureHeaders
      * Route prefixes that should receive no-store cache headers
      * to prevent sensitive data from being cached by browsers/proxies.
      */
-    private array $sensitivePrefixes = ['admin', 'tecnico', 'daac', 'login', 'profile', 'password'];
+    private array $sensitivePrefixes = ['admin', 'tecnico', 'daac', 'lancamento', 'login', 'profile', 'password'];
 
     public function handle(Request $request, Closure $next): Response
-    {
         // Remove PHP version exposure at SAPI level before response is built
         if (function_exists('header_remove')) {
             header_remove('X-Powered-By');
@@ -59,7 +58,7 @@ class SecureHeaders
         // have had inline handlers replaced with Tailwind/Alpine so unsafe-inline is dropped
         // from public script-src.
         $path     = ltrim($request->path(), '/');
-        $isAdmin  = str_starts_with($path, 'admin') || str_starts_with($path, 'tecnico') || str_starts_with($path, 'daac');
+        $isAdmin  = str_starts_with($path, 'admin') || str_starts_with($path, 'tecnico') || str_starts_with($path, 'daac') || str_starts_with($path, 'lancamento');
         $scriptSrc = $isAdmin
             ? "script-src 'self' 'unsafe-inline' 'unsafe-eval';"
             : "script-src 'self' 'unsafe-eval';";

@@ -58,30 +58,20 @@
     @if($candidaturas->isEmpty())
         <p style="text-align:center;color:#666;margin-top:10mm;">Nenhum candidato atribuído a esta sala.</p>
     @else
-        @foreach($candidaturas->groupBy(fn($c) => $c->curso . '|||' . $c->periodo) as $chave => $lista)
-        @php [$curso, $periodo] = explode('|||', $chave); @endphp
-        <div class="grupo-header">
-            {{ $curso }} — {{ $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular' }}
-        </div>
         <table>
             <thead>
                 <tr>
-                    <th style="width:26pt;text-align:center;">N.º</th>
-                    <th>Nome Completo</th>
-                    <th style="width:38%;">Assinatura</th>
+                    <th>Código de Exame</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($lista->sortBy('id') as $c)
+                @foreach($candidaturas as $c)
                 <tr>
-                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
-                    <td class="nome-col">{{ $c->nome }}</td>
-                    <td>&nbsp;</td>
+                    <td style="font-weight:700;letter-spacing:0.08em;">{{ $c->codigo_exame ?? 'NÃO GERADO' }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        @endforeach
     @endif
 
     <div class="assinatura-unica">

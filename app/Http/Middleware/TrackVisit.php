@@ -12,7 +12,7 @@ class TrackVisit
 {
     // Prefixos de rotas a ignorar (painel admin/portal/API)
     private const SKIP_PREFIXES = [
-        'admin', 'tecnico', 'daac', 'portal',
+        'admin', 'tecnico', 'daac', 'lancamento', 'portal',
         '_debugbar', 'telescope', 'horizon', 'up',
     ];
 

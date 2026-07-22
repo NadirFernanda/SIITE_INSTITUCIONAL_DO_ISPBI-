@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $role = $user->role ?? '';
 
-        if (! in_array($role, ['admin', 'tecnico', 'daac', 'alumni'], true)) {
+        if (! in_array($role, ['admin', 'tecnico', 'daac', 'lancamento', 'alumni'], true)) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
@@ -42,9 +42,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $destination = match(true) {
-            $role === 'admin'  => route('admin', absolute: false),
-            $role === 'daac'   => route('daac.candidaturas.index', absolute: false),
-            $role === 'tecnico' => route('tecnico.candidaturas.index', absolute: false),
+            $role === 'admin'      => route('admin', absolute: false),
+            $role === 'daac'       => route('daac.candidaturas.index', absolute: false),
+            $role === 'tecnico'    => route('tecnico.candidaturas.index', absolute: false),
+            $role === 'lancamento' => route('lancamento.salas.index', absolute: false),
             $role === 'alumni' && $user->aprovado  => route('portal.dashboard', absolute: false),
             $role === 'alumni' && ! $user->aprovado => route('portal.pendente', absolute: false),
             default => '/',
