@@ -15,6 +15,7 @@ class SecureHeaders
     private array $sensitivePrefixes = ['admin', 'tecnico', 'daac', 'lancamento', 'login', 'profile', 'password'];
 
     public function handle(Request $request, Closure $next): Response
+    {
         // Remove PHP version exposure at SAPI level before response is built
         if (function_exists('header_remove')) {
             header_remove('X-Powered-By');
