@@ -352,7 +352,7 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::delete('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'destroy'])->name('salas.destroy');
 });
 
-Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'lancamento', 'throttle:30,1'])->group(function () {
+Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomissao_lancamento', 'throttle:30,1'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('lancamento.salas.index');
     })->name('dashboard');
@@ -371,14 +371,28 @@ Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'lancament
     Route::delete('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'destroy'])->name('salas.destroy');
 });
 
-// Painel Professor — lançamento de notas
-Route::prefix('professor')->name('professor.')->middleware(['auth', 'professor', 'throttle:30,1'])->group(function () {
+// Painel Professor (Subcomissão de Correcção) — lançamento de notas
+Route::prefix('professor')->name('professor.')->middleware(['auth', 'subcomissao_correcao', 'throttle:30,1'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('professor.candidaturas.index');
     })->name('dashboard');
     Route::get('candidaturas', [App\Http\Controllers\Professor\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Professor\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Professor\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
+});
+
+// Painel Presidência — impressão de pautas
+Route::prefix('presidencia')->name('presidencia.')->middleware(['auth', 'presidencia', 'throttle:30,1'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('presidencia.salas.index');
+    })->name('dashboard');
+
+    Route::get('salas', [App\Http\Controllers\Presidencia\SalaController::class, 'index'])->name('salas.index');
+    Route::get('salas/{sala}/pdf', [App\Http\Controllers\Presidencia\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
+    Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'excelExame'])->name('salas.excel-exame');
+    Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Presidencia\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
+    Route::get('salas/{sala}', [App\Http\Controllers\Presidencia\SalaController::class, 'show'])->name('salas.show');
 });
 
 // Placeholder routes for later scaffolding

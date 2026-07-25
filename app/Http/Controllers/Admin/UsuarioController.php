@@ -23,7 +23,7 @@ class UsuarioController extends Controller
             'password' => 'required|string|min:10|confirmed',
         ]);
 
-        $roleLabels = ['tecnico' => 'Técnico', 'daac' => 'DAAC', 'secretaria' => 'Secretaria', 'professor' => 'Professor', 'lancamento' => 'Lançamento'];
+        $roleLabels = ['tecnico' => 'Técnico', 'daac' => 'DAAC', 'secretaria' => 'Secretaria', 'subcomissao_correcao' => 'Subcomissão de Correcção', 'subcomissao_lancamento' => 'Subcomissão de Lançamento', 'presidencia' => 'Presidência'];
         $role = in_array($request->input('role'), array_keys($roleLabels), true)
             ? $request->input('role')
             : 'tecnico';

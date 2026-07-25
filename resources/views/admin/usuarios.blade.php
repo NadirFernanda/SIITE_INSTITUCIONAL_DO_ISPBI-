@@ -76,10 +76,13 @@
                         <input type="radio" name="role" value="secretaria" style="accent-color:#7c3aed;"> Secretaria <small style="color:#94a3b8;">(confirmar pagamentos)</small>
                     </label>
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="professor" style="accent-color:#6d28d9;"> Professor <small style="color:#94a3b8;">(lançar notas)</small>
+                        <input type="radio" name="role" value="subcomissao_correcao" style="accent-color:#6d28d9;"> Subcomissão Correcção <small style="color:#94a3b8;">(corrigir notas)</small>
                     </label>
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="lancamento" style="accent-color:#0f766e;"> Lançamento <small style="color:#94a3b8;">(atribuição sala/lugar)</small>
+                        <input type="radio" name="role" value="subcomissao_lancamento" style="accent-color:#0f766e;"> Subcomissão Lançamento <small style="color:#94a3b8;">(editar pautas)</small>
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
+                        <input type="radio" name="role" value="presidencia" style="accent-color:#7c3aed;"> Presidência <small style="color:#94a3b8;">(imprimir pautas)</small>
                     </label>
                 </div>
             </div>
@@ -126,8 +129,8 @@
                     <td style="padding:14px 22px;">
                         <div style="display:flex;align-items:center;gap:11px;">
                             @php
-                            $avatarBg  = match($u->role) { 'admin'=>'#e3f2fd','tecnico'=>'#dcfce7','daac'=>'#ede9fe','secretaria'=>'#fdf4ff','professor'=>'#f5f3ff', default=>'#f1f5f9' };
-                            $avatarClr = match($u->role) { 'admin'=>'#1565c0','tecnico'=>'#15803d','daac'=>'#7c3aed','secretaria'=>'#a21caf','professor'=>'#6d28d9', default=>'#64748b' };
+                            $avatarBg  = match($u->role) { 'admin'=>'#e3f2fd','tecnico'=>'#dcfce7','daac'=>'#ede9fe','secretaria'=>'#fdf4ff','subcomissao_correcao'=>'#f5f3ff','subcomissao_lancamento'=>'#d1fae5','presidencia'=>'#faf5ff', default=>'#f1f5f9' };
+                            $avatarClr = match($u->role) { 'admin'=>'#1565c0','tecnico'=>'#15803d','daac'=>'#7c3aed','secretaria'=>'#a21caf','subcomissao_correcao'=>'#6d28d9','subcomissao_lancamento'=>'#0f766e','presidencia'=>'#7c3aed', default=>'#64748b' };
                             @endphp
                             <div style="width:34px;height:34px;border-radius:50%;background:{{ $avatarBg }};color:{{ $avatarClr }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">
                                 {{ strtoupper(substr($u->name, 0, 1)) }}
@@ -150,10 +153,12 @@
                             <span style="background:#ede9fe;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">DAAC</span>
                         @elseif($u->role === 'secretaria')
                             <span style="background:#fdf4ff;color:#a21caf;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Secretaria</span>
-                        @elseif($u->role === 'professor')
-                            <span style="background:#f5f3ff;color:#6d28d9;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Professor</span>
-                        @elseif($u->role === 'lancamento')
-                            <span style="background:#d1fae5;color:#0f766e;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Lançamento</span>
+                        @elseif($u->role === 'subcomissao_correcao')
+                            <span style="background:#f5f3ff;color:#6d28d9;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Sub. Correcção</span>
+                        @elseif($u->role === 'subcomissao_lancamento')
+                            <span style="background:#d1fae5;color:#0f766e;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Sub. Lançamento</span>
+                        @elseif($u->role === 'presidencia')
+                            <span style="background:#faf5ff;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Presidência</span>
                         @else
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif

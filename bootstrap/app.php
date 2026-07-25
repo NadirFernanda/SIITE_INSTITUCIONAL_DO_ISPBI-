@@ -21,11 +21,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin'      => \App\Http\Middleware\EnsureUserIsAdmin::class,
             'tecnico'    => \App\Http\Middleware\EnsureUserIsTecnico::class,
-            'lancamento' => \App\Http\Middleware\EnsureUserIsLancamento::class,
+            'subcomissao_lancamento' => \App\Http\Middleware\EnsureUserIsSubcomissaoLancamento::class,
             'daac'       => \App\Http\Middleware\EnsureUserIsDAAC::class,
             'alumni'     => \App\Http\Middleware\EnsureUserIsAlumni::class,
             'secretaria' => \App\Http\Middleware\EnsureUserIsSecretaria::class,
-            'professor'  => \App\Http\Middleware\EnsureUserIsProfessor::class,
+            'subcomissao_correcao'  => \App\Http\Middleware\EnsureUserIsSubcomissaoCorrecao::class,
+            'presidencia' => \App\Http\Middleware\EnsureUserIsPresidencia::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
