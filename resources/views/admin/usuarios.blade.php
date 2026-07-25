@@ -65,24 +65,24 @@
             </div>
             <div style="margin-bottom:14px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Tipo de Utilizador <span style="color:#ef4444;">*</span></label>
-                <div style="display:flex;gap:16px;">
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="tecnico" checked style="accent-color:#1565c0;"> Técnico <small style="color:#94a3b8;">(painel candidaturas)</small>
+                <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
+                        <input type="radio" name="role" value="tecnico" checked style="accent-color:#1565c0;flex-shrink:0;"> <span style="white-space:normal;">Técnico <small style="color:#94a3b8;display:block;">(painel candidaturas)</small></span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="daac" style="accent-color:#2563eb;"> DAAC <small style="color:#94a3b8;">(assinar comprovativos)</small>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
+                        <input type="radio" name="role" value="daac" style="accent-color:#2563eb;flex-shrink:0;"> <span style="white-space:normal;">DAAC <small style="color:#94a3b8;display:block;">(assinar comprovativos)</small></span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="secretaria" style="accent-color:#7c3aed;"> Secretaria <small style="color:#94a3b8;">(confirmar pagamentos)</small>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
+                        <input type="radio" name="role" value="secretaria" style="accent-color:#7c3aed;flex-shrink:0;"> <span style="white-space:normal;">Secretaria <small style="color:#94a3b8;display:block;">(confirmar pagamentos)</small></span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="subcomissao_correcao" style="accent-color:#6d28d9;"> Subcomissão Correcção <small style="color:#94a3b8;">(corrigir notas)</small>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
+                        <input type="radio" name="role" value="subcomissao_correcao" style="accent-color:#6d28d9;flex-shrink:0;"> <span style="white-space:normal;">Subcomissão Correcção <small style="color:#94a3b8;display:block;">(corrigir notas)</small></span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="subcomissao_lancamento" style="accent-color:#0f766e;"> Subcomissão Lançamento <small style="color:#94a3b8;">(editar pautas)</small>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
+                        <input type="radio" name="role" value="subcomissao_lancamento" style="accent-color:#0f766e;flex-shrink:0;"> <span style="white-space:normal;">Subcomissão Lançamento <small style="color:#94a3b8;display:block;">(editar pautas)</small></span>
                     </label>
-                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;">
-                        <input type="radio" name="role" value="presidencia" style="accent-color:#7c3aed;"> Presidência <small style="color:#94a3b8;">(imprimir pautas)</small>
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
+                        <input type="radio" name="role" value="presidencia" style="accent-color:#7c3aed;flex-shrink:0;"> <span style="white-space:normal;">Presidência <small style="color:#94a3b8;display:block;">(imprimir pautas)</small></span>
                     </label>
                 </div>
             </div>
