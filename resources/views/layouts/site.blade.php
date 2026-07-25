@@ -91,6 +91,17 @@
     @if($cssFile)
         <link rel="stylesheet" href="{{ asset('build/' . $cssFile) }}">
     @endif
+
+    <style>
+    /* Global responsive table cards for site pages */
+    @media (max-width:768px){
+      main table, main table tbody, main table tr, main table td, main table th { display:block; width:100%; }
+      main table thead { display:none; }
+      main table tr { margin-bottom:12px; border-bottom:1px solid #f1f5f9; padding-bottom:8px; }
+      main table td { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; }
+      main table td:before { content: attr(data-label); font-weight:700; color:#475569; margin-right:8px; flex-shrink:0; }
+    }
+    </style>
 </head>
 
 <body class="bg-white text-gray-900 overflow-x-hidden">
@@ -118,6 +129,22 @@
     @endphp
     <script type="module" src="{{ asset('build/' . $jsFile) }}?v={{ $jsVersion }}"></script>
     <script src="{{ asset('js/security.js') }}"></script>
+
+    <script>
+    (function(){
+      function applyDataLabels(root){
+        document.querySelectorAll(root + ' table').forEach(function(table){
+          var headers = Array.from(table.querySelectorAll('thead th')).map(function(th){ return th.innerText.trim(); });
+          if(headers.length===0) return;
+          table.querySelectorAll('tbody tr').forEach(function(tr){
+            Array.from(tr.querySelectorAll('td')).forEach(function(td, i){ if(!td.hasAttribute('data-label')) td.setAttribute('data-label', headers[i] || ''); });
+          });
+        });
+      }
+      document.addEventListener('DOMContentLoaded', function(){ applyDataLabels('main'); });
+      var t; window.addEventListener('resize', function(){ clearTimeout(t); t=setTimeout(function(){ applyDataLabels('main'); },250); });
+    })();
+    </script>
 
         @stack('scripts')
 
