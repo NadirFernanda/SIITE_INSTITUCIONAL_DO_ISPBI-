@@ -30,6 +30,13 @@
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Comprovativo PDF
             </a>
+            <a href="{{ route('daac.candidaturas.folha-prova', $candidatura) }}"
+               style="display:inline-flex;align-items:center;gap:6px;background:#dc2626;color:#fff;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;text-decoration:none;"
+               onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#dc2626'"
+               title="Imprimir folha de prova com canto rasgável">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Folha de Prova
+            </a>
         </div>
     </div>
 

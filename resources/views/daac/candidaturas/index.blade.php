@@ -32,6 +32,42 @@
         </div>
     </div>
 
+    {{-- Painel de Impressão em Lote --}}
+    <div style="background:linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);border:1.5pt solid #f87171;border-radius:14px;padding:16px 20px;margin-bottom:22px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:#dc2626;flex-shrink:0;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2z"/>
+            </svg>
+            <div>
+                <strong style="color:#dc2626;">Imprimir Folhas de Prova em Lote</strong>
+                <p style="color:#991b1b;font-size:0.85rem;margin:2px 0 0;">Gere folhas de prova para um grupo de candidatos em uma única ação</p>
+            </div>
+        </div>
+        <form method="GET" action="{{ route('daac.candidaturas.folhas-prova-lote') }}" style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+            <div style="flex:1;min-width:180px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#92400e;margin-bottom:5px;">Sala (opcional)</label>
+                <select name="sala_id" style="width:100%;border:1px solid #fca5a5;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
+                    <option value="">Todas as salas</option>
+                    @foreach(\App\Models\Sala::orderBy('nome')->get() as $sala)
+                    <option value="{{ $sala->id }}">{{ $sala->nome }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div style="flex:1;min-width:180px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#92400e;margin-bottom:5px;">Curso (opcional)</label>
+                <select name="curso" style="width:100%;border:1px solid #fca5a5;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
+                    <option value="">Todos os cursos</option>
+                    @foreach(\App\Models\Candidatura::$cursos as $c)
+                    <option value="{{ $c }}">{{ $c }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:8px 20px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#dc2626'">
+                📄 Gerar PDF
+            </button>
+        </form>
+    </div>
+
     {{-- Filtros --}}
     <form method="GET" action="{{ route('daac.candidaturas.index') }}"
           style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">

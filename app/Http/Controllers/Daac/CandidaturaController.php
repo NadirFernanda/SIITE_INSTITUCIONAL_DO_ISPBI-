@@ -144,4 +144,76 @@ class CandidaturaController extends Controller
         return redirect()->route('daac.candidaturas.index')
             ->with('success', "Candidatura de {$candidatura->nome} rejeitada por " . Auth::user()->name . ".");
     }
+
+    public function downloadFolhaProva(Candidatura $candidatura)
+    {
+        // Apenas candidaturas com pagamento confirmado
+        if (!$candidatura->pagamento_confirmado) {
+            return back()->with('error', 'Apenas candidaturas com pagamento confirmado podem ter folhas de prova impressas.');
+        }
+
+        $pdf = Pdf::loadView('pdf.folha-prova', compact('candidatura'))
+                  ->setPaper('a4', 'portrait')
+                  ->setOption('margin-top', 0)
+                  ->setOption('margin-bottom', 0)
+                  ->setOption('margin-left', 0)
+                  ->setOption('margin-right', 0);
+
+        AuditLog::registar('baixou_folha_prova', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
+        return $pdf->download('folha-prova-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '-' . \Str::slug($candidatura->nome) . '.pdf');
+    }
+
+    public function downloadFolhasProvaLote(Request $request)
+    {
+        $request->validate([
+            'sala_id' => 'nullable|exists:salas,id',
+            'curso'   => 'nullable|string|max:255',
+        ]);
+
+        $query = Candidatura::where('pagamento_confirmado', true)
+                             ->whereNotIn('status', ['rejeitada']);
+
+        if ($request->filled('sala_id')) {
+            $query->where('sala_id', $request->input('sala_id'));
+        }
+
+        if ($request->filled('curso')) {
+            $query->where('curso', $request->input('curso'));
+        }
+
+        $candidaturas = $query->orderBy('numero_lugar')->get();
+
+        if ($candidaturas->isEmpty()) {
+            return back()->with('error', 'Nenhum candidato encontrado com os filtros aplicados.');
+        }
+
+        // Criar PDF com múltiplas páginas
+        $html = '';
+        foreach ($candidaturas as $candidatura) {
+            $view = \View::make('pdf.folha-prova', compact('candidatura'))->render();
+            $html .= $view . '<div style="page-break-after: always;"></div>';
+        }
+
+        $pdf = Pdf::loadHTML($html)
+                  ->setPaper('a4', 'portrait')
+                  ->setOption('margin-top', 0)
+                  ->setOption('margin-bottom', 0)
+                  ->setOption('margin-left', 0)
+                  ->setOption('margin-right', 0);
+
+        $filtro = '';
+        if ($request->filled('sala_id')) {
+            $sala = \App\Models\Sala::find($request->input('sala_id'));
+            $filtro = '-sala-' . \Str::slug($sala->nome);
+        } elseif ($request->filled('curso')) {
+            $filtro = '-curso-' . \Str::slug($request->input('curso'));
+        }
+
+        AuditLog::registar('baixou_folhas_prova_lote', null, null,
+            "Lote de {$candidaturas->count()} folhas de prova {$filtro}");
+
+        return $pdf->download('folhas-prova-lote-' . now()->format('YmdHis') . $filtro . '.pdf');
+    }
 }
