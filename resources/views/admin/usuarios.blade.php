@@ -112,7 +112,21 @@
             <p style="color:#94a3b8;font-size:1rem;margin:0;">Nenhum utilizador.</p>
         </div>
         @else
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <style>
+/* Responsive: transform table into stacked cards on small screens */
+@media (max-width: 768px) {
+  .responsive-table { font-size: 0.95rem; }
+  .responsive-table thead { display: none; }
+  .responsive-table, .responsive-table tbody, .responsive-table tr, .responsive-table td, .responsive-table th { display: block; width: 100%; }
+  .responsive-table tr { margin-bottom: 12px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; }
+  .responsive-table td { padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; }
+  .responsive-table td[data-label]:before { content: attr(data-label); font-weight: 700; color: #475569; margin-right: 8px; flex-shrink:0; }
+  .responsive-table td > div, .responsive-table td > span { flex: 1; }
+  .responsive-table .actions-column { display: flex; gap: 8px; flex-direction: row; }
+}
+</style>
+
+<table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.88rem;">
             <thead>
                 <tr style="border-bottom:2px solid #e2e8f0;">
                     <th style="padding:13px 22px;text-align:left;font-weight:700;color:#475569;">#</th>
@@ -125,8 +139,8 @@
             <tbody>
                 @foreach($usuarios as $u)
                 <tr style="border-bottom:1px solid #f1f5f9;" id="row-{{ $u->id }}">
-                    <td style="padding:14px 22px;color:#94a3b8;font-size:0.8rem;">{{ $u->id }}</td>
-                    <td style="padding:14px 22px;">
+                    <td style="padding:14px 22px;color:#94a3b8;font-size:0.8rem;" data-label="ID">{{ $u->id }}</td>
+                    <td style="padding:14px 22px;" data-label="Nome">
                         <div style="display:flex;align-items:center;gap:11px;">
                             @php
                             $avatarBg  = match($u->role) { 'admin'=>'#e3f2fd','tecnico'=>'#dcfce7','daac'=>'#ede9fe','secretaria'=>'#fdf4ff','subcomissao_correcao'=>'#f5f3ff','subcomissao_lancamento'=>'#d1fae5','presidencia'=>'#faf5ff', default=>'#f1f5f9' };
@@ -143,8 +157,8 @@
                             </div>
                         </div>
                     </td>
-                    <td style="padding:14px 22px;color:#475569;">{{ $u->email }}</td>
-                    <td style="padding:14px 22px;">
+                    <td style="padding:14px 22px;color:#475569;" data-label="Email">{{ $u->email }}</td>
+                    <td style="padding:14px 22px;" data-label="Role">
                         @if($u->role === 'admin')
                             <span style="background:#e3f2fd;color:#1565c0;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Admin</span>
                         @elseif($u->role === 'tecnico')
@@ -163,9 +177,9 @@
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif
                     </td>
-                    <td style="padding:10px 22px;">
+                    <td style="padding:10px 22px;" data-label="Ações">
                         @if($u->role !== 'admin')
-                        <div style="display:inline-flex;flex-direction:column;gap:5px;min-width:160px;">
+                        <div class="actions-column" style="display:inline-flex;flex-direction:column;gap:5px;min-width:160px;">
                             {{-- Redefinir password --}}
                             <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('pwd-panel-{{ $u->id }}').style.display='block';document.getElementById('sig-panel-{{ $u->id }}').style.display='none';"
                                     style="display:flex;align-items:center;gap:6px;background:#fffbeb;color:#92400e;border:1px solid #fde68a;border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
