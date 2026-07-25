@@ -83,7 +83,7 @@
 
     {{-- Tabela --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.88rem;">
             <thead>
                 <tr style="border-bottom:2px solid #e2e8f0;background:#f8fafc;">
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">#</th>

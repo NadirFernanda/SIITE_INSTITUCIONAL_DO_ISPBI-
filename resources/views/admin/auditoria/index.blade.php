@@ -49,7 +49,7 @@
     {{-- Tabela --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
         <div style="overflow-x:auto;">
-            <table style="width:100%;border-collapse:collapse;font-size:0.86rem;">
+            <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.86rem;">
                 <thead>
                     <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
                         <th style="padding:12px 16px;text-align:left;font-size:0.72rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;">Data / Hora</th>

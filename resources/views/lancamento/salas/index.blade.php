@@ -87,7 +87,7 @@
             @if($grupos->isEmpty())
                 <p style="color:#94a3b8;font-size:0.9rem;margin:0;">Nenhuma candidatura registada.</p>
             @else
-                <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.85rem;">
                     <thead>
                         <tr style="border-bottom:1px solid #f1f5f9;">
                             <th style="padding:7px 10px;text-align:left;color:#64748b;font-weight:700;">Curso</th>

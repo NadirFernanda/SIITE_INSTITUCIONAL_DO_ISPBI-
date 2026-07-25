@@ -18,7 +18,7 @@
     </div>
 @else
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">
-        <table style="width:100%;border-collapse:collapse;">
+        <table class="responsive-table" style="width:100%;border-collapse:collapse;">
             <thead>
                 <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
                     <th style="padding:14px 20px;text-align:left;font-size:0.75rem;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:0.06em;">Documento</th>

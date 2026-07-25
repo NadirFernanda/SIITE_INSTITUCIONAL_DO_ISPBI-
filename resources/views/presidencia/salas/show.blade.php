@@ -98,7 +98,7 @@
             <div style="background:#7c3aed;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
                 {{ $grupo }} <span style="font-weight:400;opacity:0.8;">({{ $lista->count() }} candidatos)</span>
             </div>
-            <table style="width:100%;border-collapse:collapse;font-size:0.87rem;">
+            <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.87rem;">
                 <thead>
                     <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;width:220px;">Código Exame</th>

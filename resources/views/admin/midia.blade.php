@@ -10,7 +10,7 @@
 	</form>
 </div>
 <div style="overflow-x:auto;">
-<table style="width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(21,101,192,0.06); margin-top: 0;">
+<table class="responsive-table" style="width:100%; border-collapse:separate; border-spacing:0; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(21,101,192,0.06); margin-top: 0;">
 	<thead>
 		<tr style="background:#e3f0fb; color:#1565c0; font-size:1.08rem;">
 			<th style="padding:14px 18px; text-align:left; border-top-left-radius:12px;">ID</th>

@@ -130,7 +130,7 @@
         </div>
     @else
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">
-            <table style="width:100%;border-collapse:collapse;font-size:0.87rem;">
+            <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.87rem;">
                 <thead>
                     <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
                         <th style="padding:13px 16px;text-align:left;font-weight:700;color:#475569;">#</th>

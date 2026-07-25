@@ -5,7 +5,7 @@
 	<h1>Posts</h1>
 	<a href="/admin/posts/create" style="background: #343a40; color: #fff; padding: 8px 18px; border-radius: 4px; text-decoration: none; font-weight: bold;">Novo Post</a>
 </div>
-<table style="width:100%; border-collapse:collapse; margin-top:24px;">
+<table class="responsive-table" style="width:100%; border-collapse:collapse; margin-top:24px;">
 	<thead>
 		<tr style="background:#f3f3f3;">
 			<th style="padding:8px; border:1px solid #ddd;">ID</th>
