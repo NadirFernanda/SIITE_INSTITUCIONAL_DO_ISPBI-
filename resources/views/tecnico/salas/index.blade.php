@@ -101,7 +101,7 @@
             @if($grupos->isEmpty())
                 <p style="color:#94a3b8;font-size:0.9rem;">Nenhuma candidatura registada.</p>
             @else
-                <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.85rem;">
                     <thead>
                         <tr style="border-bottom:1px solid #f1f5f9;">
                             <th style="padding:7px 10px;text-align:left;color:#64748b;font-weight:700;">Curso</th>
@@ -138,7 +138,7 @@
         @if($salas->isEmpty())
             <div style="padding:48px;text-align:center;color:#94a3b8;">Nenhuma sala criada ainda.</div>
         @else
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.88rem;">
             <thead>
                 <tr style="border-bottom:2px solid #e2e8f0;">
                     <th style="padding:13px 20px;text-align:left;font-weight:700;color:#475569;">Sala</th>
@@ -182,7 +182,7 @@
                     </td>
                     <td style="padding:12px 16px;">
                         {{-- Linha 1: acções principais --}}
-                        <div style="display:flex;gap:5px;align-items:center;margin-bottom:6px;">
+                        <div style="display:flex;gap:5px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
                             <a href="{{ route('tecnico.salas.show', $sala) }}" title="Ver detalhe"
                                style="display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
                                 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -202,7 +202,7 @@
                             </a>
                         </div>
                         {{-- Linha 2: editar + eliminar --}}
-                        <div style="display:flex;gap:5px;align-items:center;">
+                        <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;">
                             <button onclick="document.getElementById('edit-{{ $sala->id }}').style.display=document.getElementById('edit-{{ $sala->id }}').style.display==='none'?'block':'none'"
                                     style="display:inline-flex;align-items:center;gap:4px;background:#f59e0b;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;cursor:pointer;white-space:nowrap;">
                                 <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>

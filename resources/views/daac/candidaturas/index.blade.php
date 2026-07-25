@@ -99,7 +99,7 @@
         </div>
     @else
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.87rem;">
+        <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.87rem;">
             <thead>
                 <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
                     <th style="padding:13px 16px;text-align:left;font-weight:700;color:#475569;">Ficha</th>
@@ -128,7 +128,7 @@
                         </span>
                     </td>
                     <td style="padding:13px 16px;text-align:center;">
-                        <div style="display:flex;gap:6px;justify-content:center;">
+                        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
                             <a href="{{ route('candidaturas.pdf', $c) }}"
                                style="display:inline-flex;align-items:center;gap:4px;background:#64748b;color:#fff;padding:5px 11px;border-radius:8px;font-size:0.78rem;font-weight:600;text-decoration:none;"
                                title="Ver comprovativo PDF">

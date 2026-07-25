@@ -117,7 +117,7 @@
             @if($grupos->isEmpty())
                 <p style="color:#94a3b8;font-size:0.9rem;">Nenhuma candidatura registada.</p>
             @else
-                <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.85rem;">
                     <thead>
                         <tr style="border-bottom:1px solid #f1f5f9;">
                             <th style="padding:7px 10px;text-align:left;color:#64748b;font-weight:700;">Curso</th>
@@ -154,7 +154,7 @@
         @if($salas->isEmpty())
             <div style="padding:48px;text-align:center;color:#94a3b8;">Nenhuma sala criada ainda.</div>
         @else
-        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+        <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.88rem;">
             <thead>
                 <tr style="border-bottom:2px solid #e2e8f0;">
                     <th style="padding:13px 20px;text-align:left;font-weight:700;color:#475569;">Sala</th>
@@ -196,7 +196,7 @@
                             <span style="color:#cbd5e1;font-size:0.8rem;">Sem atribuição</span>
                         @endforelse
                     </td>
-                    <td style="padding:14px 20px;text-align:center;">
+                    <td style="padding:14px 20px;text-align:center;" data-label="Ações">
                         <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
                             <a href="{{ route('admin.salas.show', $sala) }}"
                                style="background:#1565c0;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">

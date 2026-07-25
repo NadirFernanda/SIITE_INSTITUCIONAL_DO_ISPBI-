@@ -151,7 +151,7 @@
         </div>
     @else
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">
-            <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+            <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.88rem;">
                 <thead>
                     <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
                         <th style="padding:14px 18px;text-align:left;font-weight:700;color:#475569;">#</th>
@@ -180,7 +180,7 @@
                             </span>
                         </td>
                         <td style="padding:14px 18px;color:#64748b;white-space:nowrap;">{{ $c->created_at->format('d/m/Y') }}</td>
-                        <td style="padding:14px 18px;text-align:center;">
+                        <td style="padding:14px 18px;text-align:center;" data-label="Ações">
                             <a href="{{ route('admin.candidaturas.show', $c) }}"
                                style="display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;padding:6px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;"
                                onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">Ver</a>
