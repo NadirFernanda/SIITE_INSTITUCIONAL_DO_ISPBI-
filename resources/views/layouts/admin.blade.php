@@ -68,6 +68,32 @@
             border-radius: 0 0 18px 18px;
             box-shadow: 0 2px 8px rgba(21,101,192,0.08);
         }
+
+        /* Responsive helpers for inline-styled containers/tables/images
+           Many views use inline `max-width:XXXpx;margin:0 auto;` — this rule
+           ensures they don't overflow on small screens without changing
+           each template file. */
+        .main-content div[style*="max-width"] {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        /* Make tables scrollable and not break layout */
+        .main-content table {
+            width: 100%;
+            overflow-x: auto;
+            display: block;
+            -webkit-overflow-scrolling: touch;
+        }
+        /* Ensure images constrained by inline rules scale down */
+        .main-content img[style*="max-width"] {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
         @media (max-width: 900px) {
             .sidebar {
                 width: 100vw;
