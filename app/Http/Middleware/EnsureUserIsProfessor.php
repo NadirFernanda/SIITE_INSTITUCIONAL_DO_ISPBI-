@@ -14,11 +14,9 @@ class EnsureUserIsProfessor
             abort(403, 'Acesso restrito a membros da Subcomissão de Correcção.');
         }
 
-        $role = (string) Auth::user()->role;
-        $role = mb_strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $role));
-        $role = preg_replace('/[^a-z0-9]/', '', $role);
-
-        if (! in_array($role, ['admin', 'subcomissao_correcao'], true)) {
+        $user = Auth::user();
+        
+        if (! $user->hasRole('correcao') && ! $user->hasRole('admin')) {
             abort(403, 'Acesso restrito a membros da Subcomissão de Correcção.');
         }
 

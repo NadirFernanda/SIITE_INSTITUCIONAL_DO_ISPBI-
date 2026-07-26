@@ -29,9 +29,11 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $role = $user->role ?? '';
 
-        // Normalize role (remove accents, lowercase, strip non-alphanum) to match middleware normalization
-        $normRole = mb_strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', (string) $role));
+        // Normalize role (remove accents, lowercase, strip non-alphanum)
+        $normRole = mb_strtolower(@iconv('UTF-8', 'ASCII//TRANSLIT', (string) $role));
         $normRole = preg_replace('/[^a-z0-9]/', '', $normRole);
+
+        \Log::info("Login: user={$user->email}, rawRole={$role}, normRole={$normRole}");
 
         $allowed = [
             'admin', 'tecnico', 'daac', 'lancamento', 'alumni', 'presidencia', 'secretaria',
@@ -39,6 +41,7 @@ class AuthenticatedSessionController extends Controller
         ];
 
         if (! in_array($normRole, $allowed, true)) {
+            \Log::warning("Login rejected: role '{$normRole}' not in allowed list");
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
@@ -50,22 +53,32 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Resolve destination using normalized role and known mappings
+        // Resolve destination
         $destination = match(true) {
             $normRole === 'admin' => route('admin', absolute: false),
             $normRole === 'daac' => route('daac.candidaturas.index', absolute: false),
             $normRole === 'tecnico' => route('tecnico.candidaturas.index', absolute: false),
-            // both 'lancamento' and 'subcomissaolancamento' map to lancamento panel
             $normRole === 'lancamento' || $normRole === 'subcomissaolancamento' => route('lancamento.salas.index', absolute: false),
-            // professores / subcomissao de correcao map to professor panel
             $normRole === 'professor' || $normRole === 'subcomissaocorrecao' => route('professor.candidaturas.index', absolute: false),
             $normRole === 'presidencia' => route('presidencia.salas.index', absolute: false),
             $normRole === 'secretaria' => route('secretaria.candidaturas.index', absolute: false),
             $normRole === 'alumni' && $user->aprovado => route('portal.dashboard', absolute: false),
             $normRole === 'alumni' && ! $user->aprovado => route('portal.pendente', absolute: false),
-            default => '/',
+            default => null,
         };
 
+        if ($destination === null) {
+            \Log::error("Login: no destination found for role '{$normRole}'");
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'email' => 'Conta sem acesso configurado.',
+            ]);
+        }
+
+        \Log::info("Login success: redirecting to {$destination}");
         return redirect()->intended($destination);
     }
 

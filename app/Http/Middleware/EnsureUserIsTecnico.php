@@ -16,18 +16,12 @@ class EnsureUserIsTecnico
     public function handle(Request $request, Closure $next): Response
     {
         if (! Auth::check()) {
-            Auth::guard('web')->logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-
             return redirect('/');
         }
 
-        $role = (string) Auth::user()->role;
-        $role = mb_strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $role));
-        $role = preg_replace('/[^a-z0-9]/', '', $role);
-
-        if (! in_array($role, ['admin', 'tecnico'], true)) {
+        $user = Auth::user();
+        
+        if (! $user->hasRole('tecnico') && ! $user->hasRole('admin')) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();

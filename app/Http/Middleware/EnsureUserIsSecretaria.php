@@ -12,18 +12,13 @@ class EnsureUserIsSecretaria
     public function handle(Request $request, Closure $next): Response
     {
         if (! Auth::check()) {
-            Auth::guard('web')->logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
             return redirect('/');
         }
 
+        $user = Auth::user();
+        
         // Normalize role to allow case/accents variations stored in DB (e.g., "Presidência" -> "presidencia")
-        $role = (string) Auth::user()->role;
-        $role = mb_strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $role));
-        $role = preg_replace('/[^a-z0-9]/', '', $role);
-
-        if (! in_array($role, ['admin', 'secretaria'], true)) {
+        if (! $user->hasRole('secretaria') && ! $user->hasRole('admin')) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
