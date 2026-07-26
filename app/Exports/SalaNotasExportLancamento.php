@@ -221,7 +221,7 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $drawing->setPath($logoPath);
         $drawing->setHeight($displayH);
         $drawing->setWidth($displayW);
-        $drawing->setCoordinates('A1');
+        $drawing->setCoordinates('B1');
         $drawing->setOffsetX($offsetX);
         $drawing->setOffsetY(3);
 

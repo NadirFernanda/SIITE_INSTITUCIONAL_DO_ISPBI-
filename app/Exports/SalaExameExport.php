@@ -40,18 +40,18 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows = [];
 
         // Linha 1 — espaço para logo (Drawing)
-        $rows[] = ['', ''];
+        $rows[] = ['', '', ''];
 
-        // Cabeçalho (linhas 2-4) — mescladas A:B, centradas
-        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', ''];
-        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', ''];
-        $rows[] = ['EXAME DE ACESSO 2026/2027 — LISTA DE EXAME', ''];
+        // Cabeçalho (linhas 2-4) — mescladas A:C, centradas
+        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
+        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
+        $rows[] = ['EXAME DE ACESSO 2026/2027 — LISTA DE EXAME', '', ''];
 
         // Linha 5 — vazia
-        $rows[] = ['', ''];
+        $rows[] = ['', '', ''];
 
-        $rows[] = ['Sala: ' . $this->sala->nome, ''];
-        $rows[] = ['Candidatos atribuídos: ' . $this->candidaturas->count(), ''];
+        $rows[] = ['Sala: ' . $this->sala->nome, '', ''];
+        $rows[] = ['Candidatos atribuídos: ' . $this->candidaturas->count(), '', ''];
 
         $dataHorario = '';
         if ($this->sala->data_exame) {
@@ -60,33 +60,33 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($this->sala->horario) {
             $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
         }
-        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), ''];
+        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), '', ''];
 
-        $rows[] = [''];
+        $rows[] = ['', '', ''];
 
         $this->tableRow = 10;
-        $rows[] = ['Código Exame'];
+        $rows[] = ['Código Exame', '', ''];
 
         foreach ($this->candidaturas as $c) {
             $rows[] = [
-                $c->codigo_exame ?? 'NÃO GERADO',
+                $c->codigo_exame ?? 'NÃO GERADO', '', '',
             ];
         }
 
         // Assinatura do Presidente — centrada
-        $rows[] = [''];
-        $rows[] = [''];
-        $rows[] = [''];
-        $rows[] = ['_________________________________'];
-        $rows[] = ['Professor Doutor Fernando Maia'];
-        $rows[] = ['Presidente da Instituição'];
+        $rows[] = ['', '', ''];
+        $rows[] = ['', '', ''];
+        $rows[] = ['', '', ''];
+        $rows[] = ['_________________________________', '', ''];
+        $rows[] = ['Professor Doutor Fernando Maia', '', ''];
+        $rows[] = ['Presidente da Instituição', '', ''];
 
         return $rows;
     }
 
     public function columnWidths(): array
     {
-        return ['A' => 40];
+        return ['A' => 20, 'B' => 65, 'C' => 23];
     }
 
     public function styles(Worksheet $sheet): array
@@ -97,15 +97,15 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sigCargo = $sigLinha + 2;
 
         // ── Mesclar cabeçalho ──
-        $sheet->mergeCells('A2:A2');
-        $sheet->mergeCells('A3:A3');
-        $sheet->mergeCells('A4:A4');
-        $sheet->mergeCells('A6:A6');
-        $sheet->mergeCells('A7:A7');
-        $sheet->mergeCells('A8:A8');
-        $sheet->mergeCells("A{$sigLinha}:A{$sigLinha}");
-        $sheet->mergeCells("A{$sigNome}:A{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:A{$sigCargo}");
+        $sheet->mergeCells('A2:C2');
+        $sheet->mergeCells('A3:C3');
+        $sheet->mergeCells('A4:C4');
+        $sheet->mergeCells('A6:C6');
+        $sheet->mergeCells('A7:C7');
+        $sheet->mergeCells('A8:C8');
+        $sheet->mergeCells("A{$sigLinha}:C{$sigLinha}");
+        $sheet->mergeCells("A{$sigNome}:C{$sigNome}");
+        $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
 
         // ── Alturas ──
         $sheet->getRowDimension(1)->setRowHeight(55); // espaço para o logo (Drawing)
@@ -133,7 +133,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // ── Cabeçalho da tabela ──
         $tr = $this->tableRow;
-        $sheet->getStyle("A{$tr}:A{$tr}")->applyFromArray([
+        $sheet->getStyle("A{$tr}:C{$tr}")->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
             'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
@@ -143,13 +143,16 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // ── Linhas de dados ──
         for ($r = $tr + 1; $r <= $dataEnd; $r++) {
             $bg = ($r % 2 === 0) ? 'EBF3FD' : 'FFFFFF';
-            $sheet->getStyle("A{$r}:A{$r}")->applyFromArray([
+            $sheet->getStyle("A{$r}:C{$r}")->applyFromArray([
                 'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
                 'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'DDDDDD']]],
                 'alignment' => ['vertical' => Alignment::VERTICAL_CENTER],
             ]);
             $sheet->getStyle("A{$r}")->applyFromArray([
                 'font'      => ['bold' => true, 'color' => ['rgb' => '1565C0']],
+                'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            ]);
+            $sheet->getStyle("C{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
             $sheet->getRowDimension($r)->setRowHeight(22);
@@ -199,14 +202,17 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 55;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Centrar logo na coluna A para layout de uma única coluna.
+        // Anchor logo to B1 and compute offset to center across A(20)+B(65)+C(23)
+        $centerFromB1 = (int)(((20 + 65 + 23) * 8 / 2) - (20 * 8));
+        $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
+
         $drawing = new Drawing();
         $drawing->setName('Logo ISP-Bié');
         $drawing->setPath($logoPath);
         $drawing->setHeight($displayH);
         $drawing->setWidth($displayW);
-        $drawing->setCoordinates('A1');
-        $drawing->setOffsetX(0);
+        $drawing->setCoordinates('B1');
+        $drawing->setOffsetX($offsetX);
         $drawing->setOffsetY(3);
 
         return [$drawing];
