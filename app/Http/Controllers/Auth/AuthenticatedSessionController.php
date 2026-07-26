@@ -29,7 +29,16 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $role = $user->role ?? '';
 
-        if (! in_array($role, ['admin', 'tecnico', 'daac', 'lancamento', 'alumni'], true)) {
+        // Normalize role (remove accents, lowercase, strip non-alphanum) to match middleware normalization
+        $normRole = mb_strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', (string) $role));
+        $normRole = preg_replace('/[^a-z0-9]/', '', $normRole);
+
+        $allowed = [
+            'admin', 'tecnico', 'daac', 'lancamento', 'alumni', 'presidencia', 'secretaria',
+            'subcomissaocorrecao', 'subcomissaolancamento', 'professor'
+        ];
+
+        if (! in_array($normRole, $allowed, true)) {
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
@@ -41,13 +50,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Resolve destination using normalized role and known mappings
         $destination = match(true) {
-            $role === 'admin'      => route('admin', absolute: false),
-            $role === 'daac'       => route('daac.candidaturas.index', absolute: false),
-            $role === 'tecnico'    => route('tecnico.candidaturas.index', absolute: false),
-            $role === 'lancamento' => route('lancamento.salas.index', absolute: false),
-            $role === 'alumni' && $user->aprovado  => route('portal.dashboard', absolute: false),
-            $role === 'alumni' && ! $user->aprovado => route('portal.pendente', absolute: false),
+            $normRole === 'admin' => route('admin', absolute: false),
+            $normRole === 'daac' => route('daac.candidaturas.index', absolute: false),
+            $normRole === 'tecnico' => route('tecnico.candidaturas.index', absolute: false),
+            // both 'lancamento' and 'subcomissaolancamento' map to lancamento panel
+            $normRole === 'lancamento' || $normRole === 'subcomissaolancamento' => route('lancamento.salas.index', absolute: false),
+            // professores / subcomissao de correcao map to professor panel
+            $normRole === 'professor' || $normRole === 'subcomissaocorrecao' => route('professor.candidaturas.index', absolute: false),
+            $normRole === 'presidencia' => route('presidencia.salas.index', absolute: false),
+            $normRole === 'secretaria' => route('secretaria.candidaturas.index', absolute: false),
+            $normRole === 'alumni' && $user->aprovado => route('portal.dashboard', absolute: false),
+            $normRole === 'alumni' && ! $user->aprovado => route('portal.pendente', absolute: false),
             default => '/',
         };
 
