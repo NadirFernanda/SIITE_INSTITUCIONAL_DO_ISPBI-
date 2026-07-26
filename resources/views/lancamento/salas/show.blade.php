@@ -136,7 +136,15 @@
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
                         <td style="padding:11px 18px;text-align:center;color:#1a2332;font-weight:700;">
-                            {{ $c->nota_exame !== null ? number_format($c->nota_exame, 1) . '/20' : 'Sem nota' }}
+                            @if(auth()->user()->role === 'subcomissao_lancamento')
+                                <form method="POST" action="{{ route('lancamento.candidaturas.nota', $c) }}">
+                                    @csrf @method('PATCH')
+                                    <input type="number" name="nota_exame" min="0" max="20" step="0.1" value="{{ old('nota_exame', $c->nota_exame) }}" style="width:90px;padding:6px;border:1px solid #e2e8f0;border-radius:6px;text-align:center;">
+                                    <button type="submit" style="margin-left:6px;background:#7c3aed;color:#fff;border:none;border-radius:6px;padding:6px 8px;">Guardar</button>
+                                </form>
+                            @else
+                                {{ $c->nota_exame !== null ? number_format($c->nota_exame, 1) . '/20' : 'Sem nota' }}
+                            @endif
                         </td>
                     </tr>
                     @endforeach

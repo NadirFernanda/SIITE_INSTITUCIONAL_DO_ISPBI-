@@ -315,8 +315,13 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1
     })->name('relatorios');
     Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
 
-    // Salas — visualização apenas (sem impressão/exportação)
+    // Salas — visualização + impressão/export (DAAC should be able to export attendance lists)
     Route::get('salas', [App\Http\Controllers\Daac\SalaController::class, 'index'])->name('salas.index');
+    // Expose export routes mapped to the existing Tecnico controller implementations
+    Route::get('salas/{sala}/pdf', [App\Http\Controllers\Tecnico\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
+    Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'excelExame'])->name('salas.excel-exame');
+    Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Tecnico\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
     Route::get('salas/{sala}', [App\Http\Controllers\Daac\SalaController::class, 'show'])->name('salas.show');
 });
 
@@ -369,6 +374,26 @@ Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomiss
     Route::get('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'show'])->name('salas.show');
     Route::patch('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'update'])->name('salas.update');
     Route::delete('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'destroy'])->name('salas.destroy');
+
+    // Permitir que a Subcomissão de Lançamento altere/edite a nota de um candidato
+    Route::patch('candidaturas/{candidatura}/nota', function (\Illuminate\Http\Request $request, \App\Models\Candidatura $candidatura) {
+        $request->validate([
+            'nota_exame' => 'required|numeric|min:0|max:20',
+        ]);
+
+        $nota = round((float) $request->input('nota_exame'), 1);
+        $candidatura->update([
+            'nota_exame'       => $nota,
+            'nota_lancada_por' => auth()->id(),
+            'nota_lancada_em'  => now(),
+        ]);
+
+        \App\Models\AuditLog::registar('lancou_nota', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} | Nota: {$nota}");
+
+        return redirect()->route('lancamento.salas.show', $candidatura->sala_id)
+            ->with('success', "Nota {$nota} actualizada com sucesso.");
+    })->name('candidaturas.nota');
 });
 
 // Painel Professor (Subcomissão de Correcção) — lançamento de notas
