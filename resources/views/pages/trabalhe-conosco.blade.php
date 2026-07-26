@@ -33,7 +33,7 @@
       </div>
 
       @if($concursos->isEmpty())
-        @if(Auth::check() && Auth::user()->role === 'admin')
+        @if(Auth::check() && Auth::user()->hasRole('admin'))
           <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded text-sm text-yellow-800">
             <strong>Diagnóstico (admin):</strong>
             Existem <strong>{{ $allCount }}</strong> concursos no painel administrativo, dos quais <strong>{{ $publishedCount }}</strong> estão marcados como "published".

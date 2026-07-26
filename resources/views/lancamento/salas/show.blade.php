@@ -136,7 +136,7 @@
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
                         <td style="padding:11px 18px;text-align:center;color:#1a2332;font-weight:700;">
-                            @if(auth()->user()->role === 'subcomissao_lancamento')
+                            @if(auth()->user()->hasRole('subcomissao_lancamento'))
                                 <form method="POST" action="{{ route('lancamento.candidaturas.nota', $c) }}">
                                     @csrf @method('PATCH')
                                     <input type="number" name="nota_exame" min="0" max="20" step="0.1" value="{{ old('nota_exame', $c->nota_exame) }}" style="width:90px;padding:6px;border:1px solid #e2e8f0;border-radius:6px;text-align:center;">

@@ -50,7 +50,7 @@ class UsuarioController extends Controller
     public function resetPassword(Request $request, User $usuario)
     {
         // Nunca alterar a própria conta por aqui, e nunca alterar outro admin
-        if ($usuario->id === Auth::id() || $usuario->role === 'admin') {
+        if ($usuario->id === Auth::id() || $usuario->hasRole('admin')) {
             return redirect()->route('admin.usuarios')->with('error', 'Operação não permitida.');
         }
 
@@ -65,7 +65,7 @@ class UsuarioController extends Controller
 
     public function uploadSignature(Request $request, User $usuario)
     {
-        if ($usuario->role !== 'daac') {
+        if (! $usuario->hasRole('daac')) {
             return redirect()->route('admin.usuarios')->with('error', 'Apenas utilizadores DAAC podem ter assinatura digitalizada.');
         }
 

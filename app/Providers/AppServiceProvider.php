@@ -54,18 +54,30 @@ class AppServiceProvider extends ServiceProvider
 
         // Redirecionar utilizadores autenticados que tentam aceder a rotas "guest"
         // (ex: /login) para o painel correcto consoante o seu role.
+        // Normalizar o role para evitar falhas por acentos, espaços ou pontuação.
         RedirectIfAuthenticated::redirectUsing(function (Request $request) {
             $user = Auth::user();
-            $role = $user?->role ?? '';
 
-            return match(true) {
-                $role === 'admin'                          => route('admin'),
-                $role === 'daac'                           => route('daac.candidaturas.index'),
-                $role === 'tecnico'                        => route('tecnico.candidaturas.index'),
-                $role === 'lancamento'                    => route('lancamento.salas.index'),
-                $role === 'alumni' && $user->aprovado      => route('portal.dashboard'),
-                $role === 'alumni' && ! $user->aprovado    => route('portal.pendente'),
-                default                                    => '/',
+            if (! $user) {
+                return '/';
+            }
+
+            // Normalização: translitera para ASCII, passa para minúsculas e remove não-alfanuméricos
+            $roleRaw = (string) ($user->role ?? '');
+            $norm = mb_strtolower(@iconv('UTF-8', 'ASCII//TRANSLIT', $roleRaw));
+            $norm = preg_replace('/[^a-z0-9]/', '', $norm);
+
+            return match (true) {
+                $norm === 'admin'                              => route('admin'),
+                $norm === 'daac'                               => route('daac.candidaturas.index'),
+                $norm === 'tecnico'                            => route('tecnico.candidaturas.index'),
+                str_contains($norm, 'lancamento')              => route('lancamento.salas.index'),
+                $norm === 'alumni' && $user->aprovado          => route('portal.dashboard'),
+                $norm === 'alumni' && ! $user->aprovado        => route('portal.pendente'),
+                str_contains($norm, 'correcao')                => route('professor.candidaturas.index'),
+                str_contains($norm, 'presidencia')             => route('presidencia.salas.index'),
+                $norm === 'secretaria'                         => route('secretaria.candidaturas.index'),
+                default                                        => '/',
             };
         });
 

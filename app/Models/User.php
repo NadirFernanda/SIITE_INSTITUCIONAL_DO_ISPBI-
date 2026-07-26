@@ -47,8 +47,30 @@ class User extends Authenticatable
      * Verifica se o usuário possui determinado papel (role).
      * Exemplo simples: campo 'role' na tabela users.
      */
+    // Normalize a role string to a slug-like lowercase alphanumeric form
+    public static function normalizeRole(string $role): string
+    {
+        $role = (string) $role;
+        $norm = @iconv('UTF-8', 'ASCII//TRANSLIT', $role);
+        $norm = mb_strtolower($norm);
+        return preg_replace('/[^a-z0-9]/', '', $norm);
+    }
+
+    /**
+     * Retorna a versão normalizada (slug) do role armazenado no utilizador.
+     */
+    public function getRoleSlugAttribute(): string
+    {
+        return self::normalizeRole($this->role ?? '');
+    }
+
+    /**
+     * Verifica se o usuário possui determinado papel (role).
+     * Normaliza ambos os lados da comparação para evitar problemas com acentos,
+     * espaços, underscores ou diferença de capitalização.
+     */
     public function hasRole($role): bool
     {
-        return isset($this->role) && $this->role === $role;
+        return self::normalizeRole($this->role ?? '') === self::normalizeRole((string) $role);
     }
 }

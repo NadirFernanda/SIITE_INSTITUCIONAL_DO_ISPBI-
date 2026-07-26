@@ -14,7 +14,7 @@ class AuthController extends Controller
     public function showLogin()
     {
         // Já autenticado como alumni aprovado → portal
-        if (Auth::check() && Auth::user()->role === 'alumni') {
+        if (Auth::check() && Auth::user()->hasRole('alumni')) {
             return Auth::user()->aprovado
                 ? redirect()->route('portal.dashboard')
                 : redirect()->route('portal.pendente');
@@ -50,7 +50,7 @@ class AuthController extends Controller
         $user = Auth::user();
 
         // Só alumni podem entrar pelo portal
-        if ($user->role !== 'alumni') {
+        if (! $user->hasRole('alumni')) {
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();

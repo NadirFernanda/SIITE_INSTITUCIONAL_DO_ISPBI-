@@ -112,13 +112,13 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-3 shrink-0">
                 @auth
-                    @if(Auth::user()->role === 'alumni' && Auth::user()->aprovado)
+                    @if(Auth::user()->hasRole('alumni') && Auth::user()->aprovado)
                         <a href="{{ route('portal.dashboard') }}"
                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-[#1e3a5f] bg-white hover:bg-orange-50 transition-colors whitespace-nowrap">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                             Entrar no Portal
                         </a>
-                    @elseif(Auth::user()->role === 'alumni')
+                    @elseif(Auth::user()->hasRole('alumni'))
                         <span class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white/60 bg-white/10 whitespace-nowrap cursor-not-allowed">
                             A aguardar aprovação
                         </span>

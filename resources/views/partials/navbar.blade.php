@@ -65,7 +65,7 @@
       Resultados de Exames
     </a>
     @auth
-      @if(Auth::user()->role === 'alumni' && Auth::user()->aprovado)
+      @if(Auth::user()->hasRole('alumni') && Auth::user()->aprovado)
         <a href="{{ route('portal.dashboard') }}"
            class="flex items-center gap-1.5 px-3 py-1 rounded-md text-white font-bold text-xs whitespace-nowrap transition-opacity hover:opacity-90"
            style="background:#F05A28;">
@@ -366,7 +366,7 @@
         <p class="px-5 pb-1 text-[10px] font-bold uppercase tracking-widest text-gray-400">Alumni</p>
 
         @auth
-          @if(Auth::user()->role === 'alumni' && Auth::user()->aprovado)
+          @if(Auth::user()->hasRole('alumni') && Auth::user()->aprovado)
             <a href="{{ route('portal.dashboard') }}"
                class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#F05A28] hover:bg-orange-50 transition-colors focus:outline-none focus:bg-orange-50">
               <svg class="w-4 h-4 flex-shrink-0 text-[#F05A28]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
