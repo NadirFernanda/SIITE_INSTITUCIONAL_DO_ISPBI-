@@ -371,24 +371,7 @@ Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomiss
     Route::delete('salas/{sala}', [App\Http\Controllers\Lancamento\SalaController::class, 'destroy'])->name('salas.destroy');
 
     // Permitir que a Subcomissão de Lançamento altere/edite a nota de um candidato
-    Route::patch('candidaturas/{candidatura}/nota', function (\Illuminate\Http\Request $request, \App\Models\Candidatura $candidatura) {
-        $request->validate([
-            'nota_exame' => 'required|numeric|min:0|max:20',
-        ]);
-
-        $nota = round((float) $request->input('nota_exame'), 1);
-        $candidatura->update([
-            'nota_exame'       => $nota,
-            'nota_lancada_por' => auth()->id(),
-            'nota_lancada_em'  => now(),
-        ]);
-
-        \App\Models\AuditLog::registar('lancou_nota', 'candidatura', $candidatura->id,
-            "Ficha #{$candidatura->id} — {$candidatura->nome} | Nota: {$nota}");
-
-        return redirect()->route('lancamento.salas.show', $candidatura->sala_id)
-            ->with('success', "Nota {$nota} actualizada com sucesso.");
-    })->name('candidaturas.nota');
+    Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Lancamento\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
 });
 
 // Painel Professor (Subcomissão de Correcção) — lançamento de notas
