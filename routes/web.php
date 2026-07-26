@@ -41,6 +41,7 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::post('/admin/alumni/{id}/toggle-publicar', [App\Http\Controllers\AdminAlumniController::class, 'togglePublicar'])->name('admin.alumni.toggle-publicar');
     Route::post('/admin/alumni/{id}/toggle-testemunho', [App\Http\Controllers\AdminAlumniController::class, 'toggleTestemunho'])->name('admin.alumni.toggle-testemunho');
     Route::get('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('admin.usuarios');
+    Route::get('/admin/usuarios/{usuario}', [App\Http\Controllers\Admin\UsuarioController::class, 'show'])->name('admin.usuarios.show');
     Route::post('/admin/usuarios', [App\Http\Controllers\Admin\UsuarioController::class, 'store'])->name('admin.usuarios.store');
     Route::patch('/admin/usuarios/{usuario}/password', [App\Http\Controllers\Admin\UsuarioController::class, 'resetPassword'])->name('admin.usuarios.password');
     Route::post('/admin/usuarios/{usuario}/assinatura', [App\Http\Controllers\Admin\UsuarioController::class, 'uploadSignature'])->name('admin.usuarios.assinatura');
@@ -314,12 +315,9 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1
     })->name('relatorios');
     Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
 
-    // Salas — acesso às listas para impressão/exportação
+    // Salas — visualização apenas (sem impressão/exportação)
     Route::get('salas', [App\Http\Controllers\Daac\SalaController::class, 'index'])->name('salas.index');
     Route::get('salas/{sala}', [App\Http\Controllers\Daac\SalaController::class, 'show'])->name('salas.show');
-    Route::get('salas/{sala}/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdf'])->name('salas.pdf');
-    Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExame'])->name('salas.excel-exame');
-    Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Daac\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
 });
 
 Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:30,1'])->group(function () {

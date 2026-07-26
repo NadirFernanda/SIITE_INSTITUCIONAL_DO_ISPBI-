@@ -150,7 +150,7 @@
                                 {{ strtoupper(substr($u->name, 0, 1)) }}
                             </div>
                             <div>
-                                <div style="font-weight:600;color:#1a2332;">{{ $u->name }}</div>
+                                <div style="font-weight:600;color:#1a2332;"><a href="{{ route('admin.usuarios.show', $u) }}" target="_blank" style="color:inherit;text-decoration:none;">{{ $u->name }}</a></div>
                                 @if($u->id === auth()->id())
                                     <div style="font-size:0.72rem;color:#94a3b8;">(a sua conta)</div>
                                 @endif

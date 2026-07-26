@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Lancamento;
 
-use App\Exports\SalaExameExport;
-use App\Exports\SalaNotasExport;
+use App\Exports\SalaExameExportLancamento;
+use App\Exports\SalaNotasExportLancamento;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;

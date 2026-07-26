@@ -15,6 +15,15 @@ class UsuarioController extends Controller
         return view('admin.usuarios', compact('usuarios'));
     }
 
+    /**
+     * Show a single user in a dedicated page so each profile has its own URL
+     * (allows opening multiple profiles in separate browser tabs).
+     */
+    public function show(User $usuario)
+    {
+        return view('admin.usuario', compact('usuario'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
