@@ -15,7 +15,22 @@ class EnsureUserIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! Auth::check() || Auth::user()->role !== 'admin') {
+        if (! Auth::check()) {
+            // Log out any non-admin user that somehow got through 'auth'
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            // Redirect silently rather than returning a 403 that reveals the
+            // admin panel exists at this URL (prevents path enumeration).
+            return redirect('/');
+        }
+
+        $role = (string) Auth::user()->role;
+        $role = mb_strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $role));
+        $role = preg_replace('/[^a-z0-9]/', '', $role);
+
+        if ($role !== 'admin') {
             // Log out any non-admin user that somehow got through 'auth'
             Auth::guard('web')->logout();
             $request->session()->invalidate();

@@ -21,7 +21,11 @@ class EnsureUserIsAlumni
 
         $user = Auth::user();
 
-        if ($user->role !== 'alumni') {
+        $role = (string) $user->role;
+        $role = mb_strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $role));
+        $role = preg_replace('/[^a-z0-9]/', '', $role);
+
+        if ($role !== 'alumni') {
             // Não é alumni — deslogar e enviar para o login do portal
             Auth::logout();
             $request->session()->invalidate();
