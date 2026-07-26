@@ -51,11 +51,11 @@
                     </td>
                     <td style="padding:14px 20px;">
                         <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
-                            <span title="Exportação disponível apenas para Presidência"
-                                  style="background:#e2e8f0;color:#475569;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;display:inline-flex;align-items:center;">PDF</span>
-                            <span title="Exportação disponível apenas para Presidência"
-                                  style="background:#e2e8f0;color:#475569;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;display:inline-flex;align-items:center;">Exame</span>
-                            <span title="Exportação disponível apenas para Presidência"
+                            <a href="{{ route('tecnico.salas.pdf', $sala) }}" title="Lista geral PDF"
+                               style="background:#475569;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">PDF</a>
+                            <a href="{{ route('tecnico.salas.excel-exame', $sala) }}" title="Lista de exame Excel"
+                               style="background:#1565c0;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">Exame</a>
+                            <span title="Exportação de pautas disponível apenas para Presidência"
                                   style="background:#e2e8f0;color:#475569;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;display:inline-flex;align-items:center;">Notas</span>
                         </div>
                     </td>

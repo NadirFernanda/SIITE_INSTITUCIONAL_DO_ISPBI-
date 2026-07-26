@@ -37,9 +37,9 @@
                     Excel — Lançamento Notas
                 </a>
             @else
-                <span class="px-3 py-2 bg-gray-200 text-gray-600 rounded-md text-sm font-semibold" title="Exportação disponível apenas para Presidência">PDF</span>
-                <span class="px-3 py-2 bg-gray-200 text-gray-600 rounded-md text-sm font-semibold" title="Exportação disponível apenas para Presidência">Exame</span>
-                <span class="px-3 py-2 bg-gray-200 text-gray-600 rounded-md text-sm font-semibold" title="Exportação disponível apenas para Presidência">Notas</span>
+                <a href="{{ route('tecnico.salas.pdf', $sala) }}" class="px-3 py-2 bg-slate-700 text-white rounded-md text-sm font-semibold">PDF</a>
+                <a href="{{ route('tecnico.salas.excel-exame', $sala) }}" class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold">Exame</a>
+                <span class="px-3 py-2 bg-gray-200 text-gray-600 rounded-md text-sm font-semibold" title="Exportação de pautas disponível apenas para Presidência">Notas</span>
             @endif
         </div>
     </div>
