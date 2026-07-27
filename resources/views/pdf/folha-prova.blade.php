@@ -354,30 +354,40 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
 <div class="security-pattern"></div>
 
 {{-- CABEÇALHO --}}
-<div class="header">
-    <div class="h-logo">
-        @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
+<div class="header" style="padding:14mm 15mm 8mm 15mm; background:transparent; border-bottom:0;">
+    <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:120px;">
+            @if($logoBase64)
+                <img src="{{ $logoBase64 }}" alt="ISP-Bié" style="width:100%;height:auto;" />
+            @endif
+        </div>
+        <div style="flex:1;text-align:center;">
+            <div style="font-size:18pt;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:#0b2a66;padding-bottom:6px;border-bottom:2px solid #0b2a66;display:inline-block;">
+                INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ
+            </div>
+            <div style="margin-top:8px;font-size:12pt;color:#0b2a66;font-weight:700;">EXAME DE ACESSO 2026/2027</div>
+        </div>
+        <div style="width:140px;text-align:left;">
+            <div style="font-size:10pt;font-weight:700;color:#111;margin-bottom:8px;">N.º Ficha: {{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
+            <div style="font-size:9pt;color:#111;font-weight:700;">Código de Exame: <span style="display:inline-block;width:54px;border-bottom:1px solid #111;margin-left:6px;">&nbsp;</span></div>
+        </div>
     </div>
-    <div class="h-center">
-        <div class="h-inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-        <div class="h-sub">Exame de Acesso 2026/2027</div>
-    </div>
-    <div class="h-right">
-        <div class="h-code">Ficha: {{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
-        <div class="h-exam-label" style="margin-top:4px;font-size:9px;color:#e0e7ff;">Código de Exame:</div>
-        <div class="h-exam-box" style="margin-top:4px;background:#fff;padding:3px 6px;border-radius:4px;color:#1a1a2e;font-weight:700;display:inline-block;min-width:36px;text-align:center;">&nbsp;</div>
-        <div class="h-seat">ASSENTO</div>
+
+    <div style="margin-top:12px;padding-left:6px;">
+        <div style="font-size:11pt;margin-bottom:8px;"><strong>N.º BI</strong> ________________________________</div>
+        <div style="font-size:11pt;margin-bottom:8px;"><strong>CURSO</strong> ________________________________</div>
     </div>
 </div>
 
 {{-- CANTO RASGÁVEL (TEAR-OFF) --}}
-<div class="tear-off-container">
-    <div class="tear-off-label">Candidato(a)</div>
-    <div class="tear-off-name-label">Nome:</div>
-    <div class="tear-off-name-value">{{ strtoupper(substr($candidatura->nome, 0, 30)) }}</div>
-    
-    <div class="tear-off-code-label">Código de Exame:</div>
-    <div class="tear-off-code-value">&nbsp;</div>
+<div style="position:absolute;right:-20mm;top:18mm;width:90mm;transform:rotate(-32deg);transform-origin:top right;">
+    <div style="border-right:2px dashed #000;padding-right:8px;">
+        <div style="font-size:10pt;font-weight:700;margin-bottom:6px;">N.º BI: <span style="float:right;font-weight:600;">{{ $candidatura->bi }}</span></div>
+        <div style="font-size:10pt;font-weight:700;margin-bottom:6px;">Ano Lectivo: <span style="float:right;font-weight:600;">2026/2027</span></div>
+        <div style="font-size:10pt;font-weight:700;margin-bottom:6px;">Curso: <span style="float:right;font-weight:600;">{{ $candidatura->curso }}</span></div>
+        <div style="font-size:10pt;font-weight:700;margin-bottom:6px;">Nome: <span style="float:right;font-weight:600;">{{ strtoupper($candidatura->nome) }}</span></div>
+        <div style="font-size:10pt;font-weight:700;margin-top:6px;">Código de Exame: <span style="float:right;font-weight:600;">&nbsp;</span></div>
+    </div>
 </div>
 
 {{-- CONTEÚDO PRINCIPAL --}}
