@@ -185,6 +185,47 @@ class SalaController extends Controller
 
         $atribuidos = Candidatura::whereNotNull('sala_id')->count();
 
+        // --- Sincronizar disciplinas do curso para cada sala ---
+        try {
+            $salasAssigned = Sala::whereIn('id', Candidatura::whereNotNull('sala_id')->distinct()->pluck('sala_id'))->get();
+            foreach ($salasAssigned as $s) {
+                // obter o primeiro candidato desta sala para inferir o curso
+                $first = $s->candidaturas()->whereNotNull('curso')->first();
+                if (! $first) continue;
+
+                $courseName = trim($first->curso);
+                if (! $courseName) continue;
+
+                // buscar disciplinas do curso (case-insensitive)
+                $courseDisc = \App\Models\CourseDiscipline::whereRaw('LOWER(course_name) = ?', [mb_strtolower($courseName)])->get();
+
+                if ($courseDisc->isEmpty()) {
+                    // tentar sem normalização (exata)
+                    $courseDisc = \App\Models\CourseDiscipline::where('course_name', $courseName)->get();
+                }
+
+                if ($courseDisc->isEmpty()) continue;
+
+                // sincronizar: remover disciplinas da sala que não pertencem ao curso e criar/atualizar as restantes
+                \Illuminate\Support\Facades\DB::transaction(function () use ($s, $courseDisc) {
+                    $incoming = $courseDisc->pluck('discipline')->map(fn($d) => trim($d))->filter()->values()->all();
+
+                    \App\Models\SalaDiscipline::where('sala_id', $s->id)
+                        ->whereNotIn('discipline', $incoming)
+                        ->delete();
+
+                    foreach ($courseDisc as $cd) {
+                        \App\Models\SalaDiscipline::updateOrCreate(
+                            ['sala_id' => $s->id, 'discipline' => $cd->discipline],
+                            ['weight_percent' => (int) $cd->weight_percent]
+                        );
+                    }
+                });
+            }
+        } catch (\Throwable $e) {
+            \Log::error('Erro ao sincronizar disciplinas para salas: ' . $e->getMessage());
+        }
+
         AuditLog::registar('distribuiu_salas', null, null,
             "{$atribuidos} candidatos distribuídos por {$salaIdx} sala(s)");
 
