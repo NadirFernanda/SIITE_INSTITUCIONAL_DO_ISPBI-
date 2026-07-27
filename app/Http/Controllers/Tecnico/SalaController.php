@@ -79,7 +79,10 @@ class SalaController extends Controller
 
     public function show(Sala $sala)
     {
-        $candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
+        $candidaturas = $sala->candidaturas()
+            ->where('pagamento_confirmado', true)
+            ->orderBy('numero_lugar')
+            ->get();
         return view('tecnico.salas.show', compact('sala', 'candidaturas'));
     }
 
@@ -168,7 +171,10 @@ class SalaController extends Controller
 
     public function pdf(Sala $sala)
     {
-        $candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
+        $candidaturas = $sala->candidaturas()
+            ->where('pagamento_confirmado', true)
+            ->orderBy('numero_lugar')
+            ->get();
 
         $pdf = Pdf::loadView('pdf.sala', compact('sala', 'candidaturas'))
                   ->setPaper('a4', 'portrait');
@@ -178,7 +184,10 @@ class SalaController extends Controller
 
     public function pdfExame(Sala $sala)
     {
-        $candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
+        $candidaturas = $sala->candidaturas()
+            ->where('pagamento_confirmado', true)
+            ->orderBy('numero_lugar')
+            ->get();
         $pdf = Pdf::loadView('pdf.sala-exame', compact('sala', 'candidaturas'))
                   ->setPaper('a4', 'portrait');
         return $pdf->download('lista-exame-' . \Str::slug($sala->nome) . '.pdf');

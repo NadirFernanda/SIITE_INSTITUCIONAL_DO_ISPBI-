@@ -27,7 +27,10 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     public function __construct(Sala $sala)
     {
         $this->sala         = $sala;
-        $this->candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
+        $this->candidaturas = $sala->candidaturas()
+            ->where('pagamento_confirmado', true)
+            ->orderBy('numero_lugar')
+            ->get();
     }
 
     public function title(): string

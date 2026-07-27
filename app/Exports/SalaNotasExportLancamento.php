@@ -30,7 +30,10 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
     public function __construct(Sala $sala)
     {
         $this->sala         = $sala;
-        $this->candidaturas = $sala->candidaturas()->orderBy('id')->get();
+        $this->candidaturas = $sala->candidaturas()
+            ->where('pagamento_confirmado', true)
+            ->orderBy('id')
+            ->get();
     }
 
     public function title(): string

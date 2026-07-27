@@ -15,7 +15,10 @@ class SalaController extends Controller
 
     public function show(Sala $sala)
     {
-        $candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
+        $candidaturas = $sala->candidaturas()
+            ->where('pagamento_confirmado', true)
+            ->orderBy('numero_lugar')
+            ->get();
         return view('daac.salas.show', compact('sala', 'candidaturas'));
     }
 

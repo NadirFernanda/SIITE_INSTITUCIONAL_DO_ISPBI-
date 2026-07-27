@@ -11,7 +11,9 @@ class RelatorioController extends Controller
     /** Página de relatórios — filtros + tabela */
     public function index(Request $request, string $layout = 'layouts.admin')
     {
-        $query = Candidatura::query()->orderByDesc('created_at');
+        $query = Candidatura::query()
+            ->where('pagamento_confirmado', true)
+            ->orderByDesc('created_at');
 
         // ── Filtros ──────────────────────────────────────────────────────────
         if ($request->filled('q')) {
@@ -67,7 +69,9 @@ class RelatorioController extends Controller
     /** Export CSV com os mesmos filtros */
     public function export(Request $request)
     {
-        $query = Candidatura::query()->orderByDesc('created_at');
+        $query = Candidatura::query()
+            ->where('pagamento_confirmado', true)
+            ->orderByDesc('created_at');
 
         if ($request->filled('q')) {
             $q = $request->input('q');
