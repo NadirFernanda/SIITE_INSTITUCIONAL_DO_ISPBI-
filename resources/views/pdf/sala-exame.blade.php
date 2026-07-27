@@ -61,21 +61,13 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width:60px;text-align:center;">N.º</th>
-                    <th style="width:120px;">Código</th>
-                    <th>Nome Completo</th>
-                    <th style="width:140px;">BI / Passaporte</th>
-                    <th style="width:70px;text-align:center;">Sexo</th>
+                    <th style="text-align:left;font-weight:700;">N.º Ficha</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($candidaturas as $c)
                 <tr>
-                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
-                    <td style="font-weight:700;letter-spacing:0.06em;">{{ $c->codigo_exame ?? 'NÃO GERADO' }}</td>
-                    <td class="nome-col">{{ strtoupper($c->nome) }}</td>
-                    <td>{{ $c->bi }}</td>
-                    <td style="text-align:center;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
+                    <td style="font-weight:700;letter-spacing:0.08em;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                 </tr>
                 @endforeach
             </tbody>
