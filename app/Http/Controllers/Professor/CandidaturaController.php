@@ -80,6 +80,15 @@ class CandidaturaController extends Controller
             \Log::error('WhatsApp nota lançada: ' . $e->getMessage());
         }
 
+        // If the request included a redirect target (e.g., sala id), return to that pauta
+        if ($request->filled('redirect_to')) {
+            $salaId = $request->input('redirect_to');
+            if (is_numeric($salaId)) {
+                return redirect()->route('professor.salas.show', $salaId)
+                    ->with('success', "Nota {$nota} lançada com sucesso.");
+            }
+        }
+
         return redirect()->route('professor.candidaturas.show', $candidatura)
             ->with('success', "Nota {$nota} lançada com sucesso.");
     }

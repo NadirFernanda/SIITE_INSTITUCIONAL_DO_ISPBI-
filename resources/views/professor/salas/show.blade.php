@@ -112,13 +112,14 @@
 </div>
 
 {{-- Modal para lançamento de nota --}}
-<div id="notaModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:center;justify-content:center;">
+<div id="notaModal" data-sala-id="{{ $sala->id }}" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;display:flex;align-items:center;justify-content:center;">
     <div style="background:#fff;border-radius:16px;padding:32px;max-width:500px;width:90%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1);">
         <h2 style="font-size:1.3rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Lançar Nota</h2>
         <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px;">Código de Exame: <code id="codigoExame" style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-weight:700;"></code></p>
 
         <form id="notaForm" method="POST" style="margin-bottom:20px;">
             @csrf @method('PATCH')
+            <input type="hidden" name="redirect_to" id="redirectInput" value="">
             <div style="margin-bottom:16px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:6px;">Nota (0 – 20)</label>
                 <input type="number" name="nota_exame" id="notaInput" min="0" max="20" step="0.1"

@@ -32,7 +32,14 @@ window.openModal = function(candidaturaId, codigoExame, notaAtual) {
 
     if (codigoElem) codigoElem.textContent = codigoExame;
     if (notaInput) notaInput.value = notaAtual || '';
-    if (notaForm) notaForm.action = '/professor/candidaturas/' + candidaturaId + '/nota';
+    if (notaForm) {
+        notaForm.action = '/professor/candidaturas/' + candidaturaId + '/nota';
+        // populate redirect input with sala id (if present)
+        const redirectInput = document.getElementById('redirectInput');
+        if (redirectInput && notaModal && notaModal.dataset && notaModal.dataset.salaId) {
+            redirectInput.value = notaModal.dataset.salaId;
+        }
+    }
     if (notaModal) notaModal.style.display = 'flex';
     if (notaInput) notaInput.focus();
     updateFeedback();
