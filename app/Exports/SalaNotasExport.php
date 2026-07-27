@@ -71,11 +71,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows[] = ['', '', ''];
 
         // Linha 10 — cabeçalho da tabela (SEMPRE linha 10)
-        $rows[] = ['N.º', 'NOME COMPLETO', 'NOTA (0–20)'];
+        $rows[] = ['CÓDIGO EXAME', 'NOME COMPLETO', 'NOTA (0–20)'];
 
-        // Dados — nome em maiúsculas, nota em branco
+        // Dados — código de exame (único da pauta), nome em maiúsculas, nota em branco
         foreach ($this->candidaturas as $c) {
-            $rows[] = [str_pad($c->id, 5, '0', STR_PAD_LEFT), strtoupper($c->nome), ''];
+            $rows[] = [$c->codigo_exame ?? 'NÃO GERADO', strtoupper($c->nome), ''];
         }
 
         // Assinatura do Presidente — centrada

@@ -65,11 +65,11 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows[] = ['', '', ''];
 
         $this->tableRow = 10;
-        $rows[] = ['Código Exame', '', ''];
+        $rows[] = ['N.º Ficha', '', ''];
 
         foreach ($this->candidaturas as $c) {
             $rows[] = [
-                $c->codigo_exame ?? 'NÃO GERADO', '', '',
+                str_pad($c->id, 5, '0', STR_PAD_LEFT), '', '',
             ];
         }
 
