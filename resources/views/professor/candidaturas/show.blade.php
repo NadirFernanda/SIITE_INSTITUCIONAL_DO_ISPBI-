@@ -13,7 +13,7 @@
         <h1 style="font-size:1.4rem;font-weight:700;color:#1a2332;margin:0 0 3px;">
             Ficha #{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}
         </h1>
-            <p style="color:#64748b;font-size:0.88rem;margin:0;">Identificação anónima — apenas sala e código de exame são visíveis.</p>
+            <p style="color:#64748b;font-size:0.88rem;margin:0;">Identificação anónima — apenas sala e n.º da ficha são visíveis.</p>
 
     {{-- Dados da ficha --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px 24px;margin-bottom:18px;">
@@ -27,7 +27,7 @@
             @endphp
             @php _pf('Ficha', '#'.str_pad($candidatura->id, 5, '0', STR_PAD_LEFT)); @endphp
             @php _pf('Sala', $candidatura->sala?->nome ?? null); @endphp
-            @php _pf('Código Exame', $candidatura->codigo_exame ? $candidatura->codigo_exame : 'Ainda não gerado'); @endphp
+            @php _pf('Ficha', '#'.str_pad($candidatura->id, 5, '0', STR_PAD_LEFT)); @endphp
             @php _pf('Curso', $candidatura->curso); @endphp
             @php _pf('Período', $candidatura->periodo ? ucfirst(str_replace('-',' ',$candidatura->periodo)) : null); @endphp
         </div>
