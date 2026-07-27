@@ -39,13 +39,13 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
 /* ════════════════════════════════════════════════════════════ */
 .tear-off-container {
     position: absolute;
-    top: 15mm;
-    right: 15mm;
-    width: 38mm;
-    height: 65mm;
+    top: 20mm;
+    right: -8mm; /* deslocar para compensar a rotação */
+    width: 62mm; /* largura alongada para o corte diagonal */
+    height: 36mm;
     border: 2pt dashed #e5e7eb;
     background: #f9fafb;
-    padding: 4mm;
+    padding: 4mm 6mm;
     box-shadow: inset 0 0 0 1pt #cbd5e1;
     display: flex;
     flex-direction: column;
@@ -53,19 +53,23 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
     align-items: center;
     text-align: center;
     font-family: 'Courier New', monospace;
+    transform: rotate(-18deg);
+    transform-origin: top right;
 }
 
+/* manter o rótulo legível — rodar de volta */
 .tear-off-container::before {
     content: '✂ DESTAQUE';
     position: absolute;
-    top: -8pt;
-    right: 4mm;
+    top: -7pt;
+    right: 14mm;
     font-size: 8pt;
     font-weight: bold;
     color: #ef4444;
     background: #fff;
     padding: 0 4px;
     letter-spacing: 0.1em;
+    transform: rotate(18deg);
 }
 
 .tear-off-label {
@@ -74,7 +78,7 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
     color: #6b7280;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 3mm;
+    margin-bottom: 2mm;
 }
 
 .tear-off-name-label {
@@ -88,7 +92,7 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
     color: #1f2937;
     border-bottom: 1.5pt solid #1f2937;
     padding-bottom: 2mm;
-    margin-bottom: 6mm;
+    margin-bottom: 4mm;
     min-height: 8mm;
     display: flex;
     align-items: flex-end;
@@ -102,15 +106,15 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
     margin-bottom: 2mm;
 }
 .tear-off-code-value {
-    font-size: 14pt;
+    font-size: 13pt;
     font-weight: bold;
     color: #1565c0;
     letter-spacing: 0.12em;
     border: 2pt solid #1565c0;
-    padding: 4mm 6mm;
+    padding: 3mm 5mm;
     border-radius: 4px;
     background: #f0f6ff;
-    min-width: 28mm;
+    min-width: 26mm;
     text-align: center;
 }
 
@@ -371,7 +375,7 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
     <div class="tear-off-name-value">{{ strtoupper(substr($candidatura->nome, 0, 30)) }}</div>
     
     <div class="tear-off-code-label">Código de Exame:</div>
-    <div class="tear-off-code-value">{{ $candidatura->codigo_exame ?? '_____' }}</div>
+    <div class="tear-off-code-value">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
 </div>
 
 {{-- CONTEÚDO PRINCIPAL --}}
