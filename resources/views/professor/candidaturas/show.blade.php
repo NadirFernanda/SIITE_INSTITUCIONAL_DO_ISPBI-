@@ -36,55 +36,86 @@
         </div>
     </div>
 
-    {{-- Nota do Exame --}}
+    {{-- Nota do Exame / Resumo de Lançamento --}}
     <div style="background:#fff;border:1px solid #ede9fe;border-radius:14px;padding:22px 24px;">
         <h2 style="font-size:0.85rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.05em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">
-            Nota do Exame de Acesso
+            Lançamento — Resumo
         </h2>
 
-        @if($candidatura->nota_exame !== null)
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap;">
-            <div style="background:{{ $candidatura->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $candidatura->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 22px;text-align:center;">
-                <div style="font-size:2rem;font-weight:900;color:{{ $candidatura->nota_exame >= 10 ? '#15803d' : '#dc2626' }};">
-                    {{ number_format($candidatura->nota_exame, 1) }}<span style="font-size:0.9rem;color:#94a3b8;">/20</span>
-                </div>
-                <div style="font-size:0.72rem;font-weight:700;color:{{ $candidatura->nota_exame >= 10 ? '#15803d' : '#dc2626' }};">
-                    {{ $candidatura->nota_exame >= 10 ? 'APROVADO' : 'REPROVADO' }}
-                </div>
-            </div>
-            @if($candidatura->nota_lancada_em)
-            <div style="font-size:0.78rem;color:#64748b;">
-                Lançada por <strong>{{ $candidatura->notaLancadaPor?->name ?? '—' }}</strong><br>
-                em {{ $candidatura->nota_lancada_em->format('d/m/Y \à\s H:i') }}
-            </div>
-            @endif
-        </div>
-        @endif
+        @if(!empty($disciplines) && $disciplines->count())
+            @php
+                $sum = 0.0;
+                $hasAny = false;
+            @endphp
+            <div style="margin-bottom:12px;">
+                {{-- calcular soma ponderada conforme disciplinas definidas na sala --}}
+                @foreach($disciplines as $d)
+                    @php
+                        $discName = $d->discipline;
+                        $notaRow = $notas[$discName] ?? null;
+                        if ($notaRow && $notaRow->nota !== null) {
+                            $hasAny = true;
+                            $sum += ((float)$notaRow->nota) * ((int)$d->weight_percent / 100.0);
+                        }
+                    @endphp
+                @endforeach
 
-        @if(empty($disciplines) || $disciplines->count() === 0)
-        <form method="POST" action="{{ route('professor.candidaturas.nota', $candidatura) }}">
-            @csrf @method('PATCH')
-            <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
-                <div>
-                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#475569;margin-bottom:5px;">
-                        {{ $candidatura->nota_exame !== null ? 'Corrigir nota' : 'Lançar nota' }} (0 – 20)
-                    </label>
-                    <input type="number" name="nota_exame" min="0" max="20" step="0.1"
-                           value="{{ old('nota_exame', $candidatura->nota_exame) }}"
-                           style="border:1px solid #ddd6fe;border-radius:8px;padding:9px 12px;font-size:1.1rem;font-weight:700;width:110px;text-align:center;">
-                    @error('nota_exame')<p style="font-size:0.78rem;color:#dc2626;margin-top:4px;">{{ $message }}</p>@enderror
+                @if($hasAny)
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;">
+                        <div style="background:{{ $sum >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $sum >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 22px;text-align:center;">
+                            <div style="font-size:2rem;font-weight:900;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
+                                {{ number_format($sum, 2) }}<span style="font-size:0.9rem;color:#94a3b8;">/20</span>
+                            </div>
+                            <div style="font-size:0.72rem;font-weight:700;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
+                                {{ $sum >= 10 ? 'APROVADO (pela soma ponderada)' : 'REPROVADO (pela soma ponderada)' }}
+                            </div>
+                        </div>
+                        <div style="font-size:0.78rem;color:#64748b;">A soma ponderada acima é calculada automaticamente a partir das notas por disciplina. A Presidência usará este valor para a pauta final.</div>
+                    </div>
+                @else
+                    <div style="background:#fff8f0;border:1px solid #fde3c7;border-radius:10px;padding:12px;margin-bottom:12px;">
+                        <strong>Atenção:</strong> Esta sala utiliza lançamento por disciplinas. Ainda não existem notas por disciplina introduzidas para este candidato. Use o formulário "Lançamento de Notas por Disciplina" abaixo para inserir as notas.
+                    </div>
+                @endif
+
+                {{-- mostrar resumo das disciplinas e notas atuais --}}
+                <div style="border:1px solid #e6f6f6;border-radius:8px;padding:10px;">
+                    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;font-weight:700;color:#0f172a;margin-bottom:8px;">
+                        <div>Disciplina</div>
+                        <div style="text-align:center;">Peso (%)</div>
+                        <div style="text-align:center;">Nota</div>
+                    </div>
+                    @foreach($disciplines as $d)
+                        @php $dn = $d->discipline; $nr = $notas[$dn] ?? null; @endphp
+                        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #f3f6f5;">
+                            <div style="color:#111827;">{{ $dn }}</div>
+                            <div style="text-align:center;color:#374151;">{{ $d->weight_percent }}</div>
+                            <div style="text-align:center;color:#111827;font-weight:700;">{{ $nr?->nota !== null ? number_format($nr->nota,2) : '—' }}</div>
+                        </div>
+                    @endforeach
                 </div>
-                <button type="submit"
-                        style="background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
-                        onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
-                    Guardar nota
-                </button>
             </div>
-        </form>
         @else
-        <div style="background:#fff8f0;border:1px solid #fde3c7;border-radius:10px;padding:12px;margin-bottom:12px;">
-            <strong>Nota:</strong> Esta sala está configurada para lançamento por disciplinas. Use o formulário "Lançamento de Notas por Disciplina" abaixo — o lançamento de nota global está desactivado para evitar inconsistências.
-        </div>
+            {{-- fallback: sala sem disciplinas definidas — mostrar formulário de nota única --}}
+            <form method="POST" action="{{ route('professor.candidaturas.nota', $candidatura) }}">
+                @csrf @method('PATCH')
+                <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
+                    <div>
+                        <label style="display:block;font-size:0.78rem;font-weight:600;color:#475569;margin-bottom:5px;">
+                            {{ $candidatura->nota_exame !== null ? 'Corrigir nota' : 'Lançar nota' }} (0 – 20)
+                        </label>
+                        <input type="number" name="nota_exame" min="0" max="20" step="0.1"
+                               value="{{ old('nota_exame', $candidatura->nota_exame) }}"
+                               style="border:1px solid #ddd6fe;border-radius:8px;padding:9px 12px;font-size:1.1rem;font-weight:700;width:110px;text-align:center;">
+                        @error('nota_exame')<p style="font-size:0.78rem;color:#dc2626;margin-top:4px;">{{ $message }}</p>@enderror
+                    </div>
+                    <button type="submit"
+                            style="background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                            onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
+                        Guardar nota
+                    </button>
+                </div>
+            </form>
         @endif
     </div>
 

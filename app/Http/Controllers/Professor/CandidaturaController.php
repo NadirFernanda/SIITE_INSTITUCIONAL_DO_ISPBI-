@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Professor;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
+use App\Models\CandidaturaNota;
+use App\Models\SalaDiscipline;
 use App\Services\WhatsAppService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,9 +101,51 @@ class CandidaturaController extends Controller
                 ['nota' => $nota, 'lancada_por' => Auth::id(), 'lancada_em' => now()]
             );
 
-            // opcional: atualizar nota_exame geral se soma completa? Não por enquanto — soma é calculada na exportação
             \App\Models\AuditLog::registar('lancou_nota_disciplina', 'candidatura', $candidatura->id,
                 "Ficha #{$candidatura->id} — {$candidatura->nome} | Disciplina: {$disc} | Nota: {$nota}");
+        }
+
+        // Após atualizar notas individuais, verificar se existem disciplinas definidas para a sala
+        try {
+            $salaId = $candidatura->sala_id;
+            if ($salaId) {
+                $salaDiscs = SalaDiscipline::where('sala_id', $salaId)->get();
+                if ($salaDiscs->count() > 0) {
+                    $complete = true;
+                    $sum = 0.0;
+                    foreach ($salaDiscs as $sd) {
+                        $notaRow = CandidaturaNota::where('candidatura_id', $candidatura->id)
+                            ->where('discipline', $sd->discipline)
+                            ->first();
+                        if (! $notaRow || $notaRow->nota === null) {
+                            $complete = false;
+                            break;
+                        }
+                        $sum += ((float)$notaRow->nota) * ((int)$sd->weight_percent / 100.0);
+                    }
+
+                    if ($complete) {
+                        // Arredondar para 2 decimais ao armazenar; apresentar com 2 casas na exportação
+                        $final = round($sum, 2);
+                        $candidatura->update([
+                            'nota_exame' => $final,
+                            'nota_lancada_por' => Auth::id(),
+                            'nota_lancada_em' => now(),
+                        ]);
+
+                        AuditLog::registar('calculou_soma_ponderada', 'candidatura', $candidatura->id,
+                            "Ficha #{$candidatura->id} — soma ponderada calculada: {$final}");
+
+                        try {
+                            app(WhatsAppService::class)->notificarNotaLancada($candidatura);
+                        } catch (\Throwable $e) {
+                            \Log::error('WhatsApp nota lançada (soma ponderada): ' . $e->getMessage());
+                        }
+                    }
+                }
+            }
+        } catch (\Throwable $e) {
+            \Log::error('Erro ao calcular soma ponderada: ' . $e->getMessage());
         }
 
         return redirect()->route('professor.candidaturas.show', $candidatura)->with('success', 'Notas por disciplina atualizadas.');
