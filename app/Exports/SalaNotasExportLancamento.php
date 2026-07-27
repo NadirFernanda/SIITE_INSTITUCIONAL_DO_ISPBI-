@@ -102,8 +102,8 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
 
     public function columnWidths(): array
     {
-        // Código visível, Nome oculto (0.1), Nota visível, Nota Jovem
-        return ['A' => 20, 'B' => 0.1, 'C' => 23, 'D' => 15];
+        // Match presidência proportions but hide name (B small): Código(7), Nome(65 -> hidden 0.1), Nota(23), Nota Jovem(15)
+        return ['A' => 7, 'B' => 0.1, 'C' => 23, 'D' => 15];
     }
 
     public function styles(Worksheet $sheet): array
@@ -220,7 +220,9 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $displayH = 55;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        $centerFromB1 = (int)(((20 + 0.1 + 23 + 15) * 8 / 2) - (20 * 8));
+        // Center calculation from B1: use character widths (approx 8px per char)
+        // Columns: A(7), B(0.1), C(23), D(15)
+        $centerFromB1 = (int)(((7 + 0.1 + 23 + 15) * 8 / 2) - (7 * 8));
         $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
 
         $drawing = new Drawing();
