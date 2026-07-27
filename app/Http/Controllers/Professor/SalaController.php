@@ -36,6 +36,7 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->select('id', 'sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_por', 'nota_lancada_em')
+            ->whereNotNull('codigo_exame')
             ->orderBy('numero_lugar')
             ->get()
             ->map(function ($c) {
