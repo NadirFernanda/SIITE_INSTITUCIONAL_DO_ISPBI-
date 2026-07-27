@@ -113,6 +113,7 @@
                     <thead>
                         <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
                             <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;width:220px;">Código Exame</th>
+                            <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Nome</th>
                             <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;width:120px;">Lugar</th>
                         </tr>
                     </thead>
@@ -120,6 +121,14 @@
                         @foreach($lista as $c)
                         <tr style="border-bottom:1px solid #f1f5f9;">
                             <td style="padding:11px 18px;font-weight:700;color:#6d28d9;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
+                            <td style="padding:11px 18px;font-weight:600;color:#1a2332;">
+                                @if($c->codigo_exame)
+                                    {{ $c->nome }}
+                                @else
+                                    {{-- Nome oculto até código ser gerado --}} 
+                                    —
+                                @endif
+                            </td>
                             <td style="padding:11px 18px;text-align:center;color:#1a2332;font-weight:700;">{{ $c->numero_lugar ?? '—' }}</td>
                         </tr>
                         @endforeach
