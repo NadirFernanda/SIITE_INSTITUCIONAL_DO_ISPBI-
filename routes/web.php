@@ -386,6 +386,9 @@ Route::prefix('professor')->name('professor.')->middleware(['auth', 'subcomissao
     Route::get('candidaturas', [App\Http\Controllers\Professor\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Professor\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::match(['patch','post'], 'candidaturas/{candidatura}/nota', [App\Http\Controllers\Professor\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
+
+    // Notas por disciplina (correcção por disciplina) — formulário na view de candidatura
+    Route::match(['post','patch'], 'candidaturas/{candidatura}/notas-disciplinas', [App\Http\Controllers\Professor\CandidaturaController::class, 'updateNotasDisciplinas'])->name('candidaturas.notas-disciplinas');
 });
 
 // Painel Presidência — impressão de pautas

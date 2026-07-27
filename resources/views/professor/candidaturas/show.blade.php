@@ -82,5 +82,33 @@
         </form>
     </div>
 
+    {{-- Notas por disciplina (se definidas para o curso) --}}
+    @if(!empty($disciplines) && $disciplines->count())
+    <div style="background:#fff;border:1px solid #e6fffa;border-radius:14px;padding:22px 24px;margin-top:18px;">
+        <h2 style="font-size:0.85rem;font-weight:700;color:#0e7490;text-transform:uppercase;letter-spacing:.05em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #ecfeff;">
+            Lançamento de Notas por Disciplina
+        </h2>
+
+        <form method="POST" action="{{ route('professor.candidaturas.notas-disciplinas', $candidatura) }}">
+            @csrf @method('PATCH')
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+                @foreach($disciplines as $d)
+                @php $discName = $d->discipline; $existing = $notas[$discName] ?? null; @endphp
+                <div style="border:1px solid #e6f6f6;border-radius:8px;padding:12px;">
+                    <div style="font-size:0.72rem;font-weight:700;color:#0f172a;margin-bottom:6px;">{{ $discName }}</div>
+                    <input type="number" name="notas[{{ $discName }}]" min="0" max="20" step="0.01" value="{{ old('notas.'.$discName, $existing?->nota) }}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #e2fdfa;font-weight:700;text-align:center;">
+                </div>
+                @endforeach
+            </div>
+
+            <div style="margin-top:14px;display:flex;gap:12px;align-items:center;">
+                <button type="submit" style="background:#0ea5a4;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;">Guardar notas por disciplina</button>
+                <div style="color:#64748b;font-size:0.85rem;">As notas por disciplina serão usadas na exportação da Presidência para calcular a soma ponderada.</div>
+            </div>
+        </form>
+    </div>
+    @endif
+
 </div>
 @endsection

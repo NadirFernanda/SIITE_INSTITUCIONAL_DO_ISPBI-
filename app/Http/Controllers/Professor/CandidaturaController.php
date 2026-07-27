@@ -51,7 +51,58 @@ class CandidaturaController extends Controller
     public function show(Candidatura $candidatura)
     {
         $candidatura->load(['notaLancadaPor']);
-        return view('professor.candidaturas.show', compact('candidatura'));
+
+        // carregar disciplinas configuradas para o curso (se existirem)
+        $disciplines = [];
+        try {
+            $disciplines = \App\Models\CourseDiscipline::where('course_name', $candidatura->curso)
+                ->orderBy('id')
+                ->get();
+        } catch (\Throwable $e) {
+            $disciplines = collect();
+        }
+
+        // carregar notas já lançadas para esta candidatura
+        $notas = \App\Models\CandidaturaNota::where('candidatura_id', $candidatura->id)->get()->keyBy('discipline');
+
+        return view('professor.candidaturas.show', compact('candidatura', 'disciplines', 'notas'));
+    }
+
+    public function updateNotasDisciplinas(Request $request, Candidatura $candidatura)
+    {
+        $request->validate([
+            'notas' => 'array',
+            'notas.*' => 'nullable|numeric|min:0|max:20',
+        ], [
+            'notas.*.numeric' => 'Cada nota deve ser numérica.',
+            'notas.*.min' => 'A nota mínima é 0.',
+            'notas.*.max' => 'A nota máxima é 20.',
+        ]);
+
+        $dados = $request->input('notas', []);
+
+        foreach ($dados as $disciplina => $valor) {
+            // normalizar disciplina
+            $disc = trim($disciplina);
+            if ($valor === null || $valor === '') {
+                // remover nota existente se vazio
+                \App\Models\CandidaturaNota::where('candidatura_id', $candidatura->id)->where('discipline', $disc)->delete();
+                continue;
+            }
+
+            $nota = round((float) $valor, 2);
+
+            \App\Models\CandidaturaNota::updateOrCreate(
+                ['candidatura_id' => $candidatura->id, 'discipline' => $disc],
+                ['nota' => $nota, 'lancada_por' => Auth::id(), 'lancada_em' => now()]
+            );
+
+            // opcional: atualizar nota_exame geral se soma completa? Não por enquanto — soma é calculada na exportação
+            \App\Models\AuditLog::registar('lancou_nota_disciplina', 'candidatura', $candidatura->id,
+                "Ficha #{$candidatura->id} — {$candidatura->nome} | Disciplina: {$disc} | Nota: {$nota}");
+        }
+
+        return redirect()->route('professor.candidaturas.show', $candidatura)->with('success', 'Notas por disciplina atualizadas.');
     }
 
     public function updateNota(Request $request, Candidatura $candidatura)
