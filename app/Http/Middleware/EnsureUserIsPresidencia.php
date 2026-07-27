@@ -12,7 +12,8 @@ class EnsureUserIsPresidencia
     public function handle(Request $request, Closure $next): Response
     {
         if (! Auth::check()) {
-            return redirect('/');
+            // If not authenticated, redirect guest to login so Laravel preserves the intended URL.
+            return redirect()->guest(route('login'));
         }
 
         $user = Auth::user();
@@ -22,7 +23,8 @@ class EnsureUserIsPresidencia
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            return redirect('/');
+            // Non-authorized users should be sent to login rather than the public root.
+            return redirect()->route('login');
         }
 
         return $next($request);

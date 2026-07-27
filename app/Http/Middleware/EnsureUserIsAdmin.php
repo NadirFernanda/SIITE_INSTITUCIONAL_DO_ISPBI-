@@ -16,9 +16,8 @@ class EnsureUserIsAdmin
     public function handle(Request $request, Closure $next): Response
     {
         if (! Auth::check()) {
-            // Redirect silently rather than returning a 403 that reveals the
-            // admin panel exists at this URL (prevents path enumeration).
-            return redirect('/');
+            // If not authenticated, redirect guest to login so Laravel preserves the intended URL.
+            return redirect()->guest(route('login'));
         }
 
         $user = Auth::user();
@@ -29,9 +28,8 @@ class EnsureUserIsAdmin
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            // Redirect silently rather than returning a 403 that reveals the
-            // admin panel exists at this URL (prevents path enumeration).
-            return redirect('/');
+            // Non-authorized users should be sent to login rather than the public root.
+            return redirect()->route('login');
         }
 
         return $next($request);
