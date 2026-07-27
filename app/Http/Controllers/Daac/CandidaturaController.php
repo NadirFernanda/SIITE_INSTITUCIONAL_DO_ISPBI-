@@ -71,6 +71,15 @@ class CandidaturaController extends Controller
             return back()->with('error', 'Esta candidatura já foi assinada.');
         }
 
+        // Debug log: record incoming sign attempt (temporary)
+        \Log::info('DAAC assinar called', [
+            'user_id' => Auth::id(),
+            'user' => Auth::user()?->email,
+            'candidatura_id' => $candidatura->id,
+            'payload' => $request->only('confirmar'),
+            'ip' => $request->ip(),
+        ]);
+
         $request->validate([
             'confirmar' => 'required|accepted',
         ], [
