@@ -78,7 +78,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // Dados — código de exame (único da pauta), nome em maiúsculas, nota em branco
         foreach ($this->candidaturas as $c) {
-            $rows[] = [$c->codigo_exame ?? 'NÃO GERADO', strtoupper($c->nome), ''];
+            $rows[] = [
+                $c->codigo_exame ?? 'NÃO GERADO',
+                strtoupper($c->nome),
+                $c->nota_exame !== null ? number_format($c->nota_exame, 1) : '',
+            ];
         }
 
         // Assinatura do Presidente — centrada
