@@ -14,7 +14,7 @@
         <div>
             <h1 style="font-size:1.6rem;font-weight:700;color:#1a2332;margin:0 0 6px;">{{ $sala->nome }}</h1>
             <p style="color:#64748b;font-size:0.92rem;margin:0;">
-                📅 {{ $sala->data_exame->format('d/m/Y') }} • ⏰ {{ $sala->horario }} 
+                📅 {{ $sala->data_exame?->format('d/m/Y') }} • ⏰ {{ $sala->horario }} 
                 • <strong>{{ $candidaturas->count() }}</strong> candidatos
             </p>
         </div>
@@ -86,7 +86,7 @@
                         @if($c->nota_exame !== null)
                             <div style="font-size:0.75rem;color:#64748b;">
                                 <strong>Lançada por:</strong> {{ $c->notaLancadaPor?->name ?? 'Sistema' }}<br>
-                                <strong>Em:</strong> {{ $c->nota_lancada_em->format('d/m/Y H:i') }}
+                                <strong>Em:</strong> {{ $c->nota_lancada_em?->format('d/m/Y H:i') }}
                             </div>
                         @else
                             <span style="background:#fff5f5;color:#dc2626;padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:600;">Pendente</span>

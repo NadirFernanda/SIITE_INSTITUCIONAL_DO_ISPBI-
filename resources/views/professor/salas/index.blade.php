@@ -29,7 +29,7 @@
             <div>
                 <h2 style="font-size:1.1rem;font-weight:700;color:#1a2332;margin:0 0 8px;">{{ $sala->nome }}</h2>
                 <p style="color:#64748b;font-size:0.85rem;margin:0;">
-                    📅 {{ $sala->data_exame->format('d/m/Y') }} • ⏰ {{ $sala->horario }}
+                    📅 {{ $sala->data_exame?->format('d/m/Y') }} • ⏰ {{ $sala->horario }}
                 </p>
             </div>
 
