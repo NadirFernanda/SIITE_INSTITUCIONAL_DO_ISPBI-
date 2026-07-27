@@ -9,7 +9,14 @@ class SalaController extends Controller
 {
     public function index()
     {
-        $salas = Sala::withCount('candidaturas')->orderBy('nome')->get();
+        $salas = Sala::query()
+            ->withCount(['candidaturas' => function ($query) {
+                $query->where('pagamento_confirmado', true);
+            }])
+            ->orderBy('nome')
+            ->get()
+            ->filter(fn($sala) => $sala->candidaturas_count > 0);
+        
         return view('daac.salas.index', compact('salas'));
     }
 
