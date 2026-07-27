@@ -93,11 +93,11 @@
                         @endif
                     </td>
                     <td style="padding:13px 18px;text-align:center;">
-                        <button type="button"
-                                onclick="openModal({{ $c->id }}, '{{ $c->codigo_exame }}', {{ $c->nota_exame ?? 'null' }})"
-                                style="background:{{ $c->nota_exame !== null ? '#f5f3ff' : '#ede9fe' }};color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:6px 14px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;"
-                                onmouseover="this.style.background='#ddd6fe';this.style.color='#5b21b6'"
-                                onmouseout="this.style.background='{{ $c->nota_exame !== null ? '#f5f3ff' : '#ede9fe' }}';this.style.color='#6d28d9'">
+                        <button type="button" class="openNotaBtn"
+                                                        data-candidatura-id="{{ $c->id }}"
+                                                        data-codigo-exame="{{ $c->codigo_exame }}"
+                                                        data-nota="{{ $c->nota_exame ?? '' }}"
+                                                        style="background:{{ $c->nota_exame !== null ? '#f5f3ff' : '#ede9fe' }};color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:6px 14px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;">
                             {{ $c->nota_exame !== null ? '✏️ Editar' : '➕ Lançar' }}
                         </button>
                     </td>
@@ -133,11 +133,10 @@
             </div>
 
             <div style="display:flex;gap:12px;">
-                <button type="submit" style="flex:1;background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;"
-                        onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
+                <button type="submit" style="flex:1;background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
                     Guardar Nota
                 </button>
-                <button type="button" onclick="closeModal()" style="flex:1;background:#f1f5f9;color:#475569;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
+                <button type="button" id="notaCancel" style="flex:1;background:#f1f5f9;color:#475569;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
                     Cancelar
                 </button>
             </div>
@@ -145,70 +144,6 @@
     </div>
 </div>
 
-<script>
-(function(){
-function updateFeedback() {
-    const input = document.getElementById('notaInput');
-    const feedback = document.getElementById('notaFeedback');
-    if (!feedback || !input) return;
-
-    const nota = parseFloat(input.value);
-    if (isNaN(nota)) {
-        feedback.style.display = 'none';
-        return;
-    }
-
-    feedback.style.display = 'block';
-    if (nota >= 10) {
-        feedback.style.background = '#f0fdf4';
-        feedback.style.color = '#15803d';
-        feedback.style.borderLeft = '4px solid #22c55e';
-        feedback.textContent = `✓ APROVADO (${nota.toFixed(1)}/20)`;
-    } else {
-        feedback.style.background = '#fff5f5';
-        feedback.style.color = '#dc2626';
-        feedback.style.borderLeft = '4px solid #ef4444';
-        feedback.textContent = `✗ REPROVADO (${nota.toFixed(1)}/20)`;
-    }
-}
-
-window.openModal = function(candidaturaId, codigoExame, notaAtual) {
-    const codigoElem = document.getElementById('codigoExame');
-    const notaInput = document.getElementById('notaInput');
-    const notaForm = document.getElementById('notaForm');
-    const notaModal = document.getElementById('notaModal');
-
-    if (codigoElem) codigoElem.textContent = codigoExame;
-    if (notaInput) notaInput.value = notaAtual || '';
-    if (notaForm) notaForm.action = '/professor/candidaturas/' + candidaturaId + '/nota';
-    if (notaModal) notaModal.style.display = 'flex';
-    if (notaInput) notaInput.focus();
-    updateFeedback();
-};
-
-window.closeModal = function() {
-    const notaModal = document.getElementById('notaModal');
-    const notaForm = document.getElementById('notaForm');
-    if (notaModal) notaModal.style.display = 'none';
-    if (notaForm) notaForm.reset();
-};
-
-document.addEventListener('DOMContentLoaded', function(){
-    const notaInput = document.getElementById('notaInput');
-    if (notaInput) notaInput.addEventListener('input', updateFeedback);
-
-    const notaModal = document.getElementById('notaModal');
-    if (notaModal) {
-        notaModal.addEventListener('click', function(event){
-            if (event.target === this) closeModal();
-        });
-    }
-
-    document.addEventListener('keydown', function(event){
-        if (event.key === 'Escape') closeModal();
-    });
-});
-})();
-</script>
+<script src="{{ asset('js/professor-salas.js') }}"></script>
 
 @endsection
