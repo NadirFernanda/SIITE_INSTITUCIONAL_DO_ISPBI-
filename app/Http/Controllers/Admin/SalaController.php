@@ -125,8 +125,8 @@ class SalaController extends Controller
                              ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
                              ->sortByDesc(fn($g) => $g->count());
 
-        // Merge: prioritários primeiro
-        $grupos = $grupoPrioritario->merge($grupoNormal);
+        // Merge: prioritários primeiro — use union to preserve group keys (avoid Eloquent Collection->merge assumptions)
+        $grupos = $grupoPrioritario->union($grupoNormal);
 
         $totalCandidatos = Candidatura::whereNotIn('status', ['rejeitada'])->count();
         $totalLugares    = $salas->sum('capacidade');
