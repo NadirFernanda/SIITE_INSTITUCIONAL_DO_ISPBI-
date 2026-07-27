@@ -146,29 +146,18 @@
 </div>
 
 <script>
-function openModal(candidaturaId, codigoExame, notaAtual) {
-    document.getElementById('codigoExame').textContent = codigoExame;
-    document.getElementById('notaInput').value = notaAtual || '';
-    document.getElementById('notaForm').action = `/professor/candidaturas/${candidaturaId}/nota`;
-    document.getElementById('notaModal').style.display = 'flex';
-    document.getElementById('notaInput').focus();
-    updateFeedback();
-}
-
-function closeModal() {
-    document.getElementById('notaModal').style.display = 'none';
-    document.getElementById('notaForm').reset();
-}
-
+(function(){
 function updateFeedback() {
-    const nota = parseFloat(document.getElementById('notaInput').value);
+    const input = document.getElementById('notaInput');
     const feedback = document.getElementById('notaFeedback');
-    
+    if (!feedback || !input) return;
+
+    const nota = parseFloat(input.value);
     if (isNaN(nota)) {
         feedback.style.display = 'none';
         return;
     }
-    
+
     feedback.style.display = 'block';
     if (nota >= 10) {
         feedback.style.background = '#f0fdf4';
@@ -183,21 +172,43 @@ function updateFeedback() {
     }
 }
 
-document.getElementById('notaInput').addEventListener('input', updateFeedback);
+window.openModal = function(candidaturaId, codigoExame, notaAtual) {
+    const codigoElem = document.getElementById('codigoExame');
+    const notaInput = document.getElementById('notaInput');
+    const notaForm = document.getElementById('notaForm');
+    const notaModal = document.getElementById('notaModal');
 
-// Fechar modal ao pressionar ESC
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeModal();
-    }
-});
+    if (codigoElem) codigoElem.textContent = codigoExame;
+    if (notaInput) notaInput.value = notaAtual || '';
+    if (notaForm) notaForm.action = '/professor/candidaturas/' + candidaturaId + '/nota';
+    if (notaModal) notaModal.style.display = 'flex';
+    if (notaInput) notaInput.focus();
+    updateFeedback();
+};
 
-// Fechar modal ao clicar fora
-document.getElementById('notaModal').addEventListener('click', function(event) {
-    if (event.target === this) {
-        closeModal();
+window.closeModal = function() {
+    const notaModal = document.getElementById('notaModal');
+    const notaForm = document.getElementById('notaForm');
+    if (notaModal) notaModal.style.display = 'none';
+    if (notaForm) notaForm.reset();
+};
+
+document.addEventListener('DOMContentLoaded', function(){
+    const notaInput = document.getElementById('notaInput');
+    if (notaInput) notaInput.addEventListener('input', updateFeedback);
+
+    const notaModal = document.getElementById('notaModal');
+    if (notaModal) {
+        notaModal.addEventListener('click', function(event){
+            if (event.target === this) closeModal();
+        });
     }
+
+    document.addEventListener('keydown', function(event){
+        if (event.key === 'Escape') closeModal();
+    });
 });
+})();
 </script>
 
 @endsection
