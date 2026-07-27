@@ -12,7 +12,9 @@ class EnsureUserIsDAAC
     public function handle(Request $request, Closure $next): Response
     {
         if (! Auth::check()) {
-            return redirect('/');
+            // If not authenticated, redirect to the login page as a guest so Laravel
+            // stores the intended URL in the session and returns the user there after login.
+            return redirect()->guest(route('login'));
         }
 
         $user = Auth::user();
@@ -21,7 +23,8 @@ class EnsureUserIsDAAC
             Auth::guard('web')->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return redirect('/');
+            // Non-authorized users should be sent to login rather than the public root.
+            return redirect()->route('login');
         }
 
         return $next($request);
