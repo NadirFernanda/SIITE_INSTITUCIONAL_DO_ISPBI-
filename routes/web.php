@@ -385,7 +385,7 @@ Route::prefix('professor')->name('professor.')->middleware(['auth', 'subcomissao
     Route::get('salas/{sala}', [App\Http\Controllers\Professor\SalaController::class, 'show'])->name('salas.show');
     Route::get('candidaturas', [App\Http\Controllers\Professor\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Professor\CandidaturaController::class, 'show'])->name('candidaturas.show');
-    Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Professor\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
+    Route::match(['patch','post'], 'candidaturas/{candidatura}/nota', [App\Http\Controllers\Professor\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');
 });
 
 // Painel Presidência — impressão de pautas
