@@ -52,12 +52,14 @@ class CandidaturaController extends Controller
     {
         $candidatura->load(['notaLancadaPor']);
 
-        // carregar disciplinas configuradas para o curso (se existirem)
-        $disciplines = [];
+        // carregar disciplinas definidas para a SALA — cada sala deve ter as suas próprias disciplinas
+        $disciplines = collect();
         try {
-            $disciplines = \App\Models\CourseDiscipline::where('course_name', $candidatura->curso)
-                ->orderBy('id')
-                ->get();
+            if ($candidatura->sala_id) {
+                $disciplines = \App\Models\SalaDiscipline::where('sala_id', $candidatura->sala_id)
+                    ->orderBy('id')
+                    ->get();
+            }
         } catch (\Throwable $e) {
             $disciplines = collect();
         }
@@ -107,6 +109,21 @@ class CandidaturaController extends Controller
 
     public function updateNota(Request $request, Candidatura $candidatura)
     {
+        // If this candidatura's sala has disciplines defined, disallow single overall nota
+        $hasSalaDisciplines = false;
+        try {
+            if ($candidatura->sala_id) {
+                $hasSalaDisciplines = \App\Models\SalaDiscipline::where('sala_id', $candidatura->sala_id)->exists();
+            }
+        } catch (\Throwable $e) {
+            $hasSalaDisciplines = false;
+        }
+
+        if ($hasSalaDisciplines) {
+            return redirect()->route('professor.candidaturas.show', $candidatura)
+                ->with('error', 'Esta sala está configurada para lançamento por disciplinas. Use o formulário de "Lançamento de Notas por Disciplina".');
+        }
+
         $request->validate([
             'nota_exame' => 'required|numeric|min:0|max:20',
         ], [

@@ -464,6 +464,13 @@ Route::get('/candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Can
 Route::get('/candidaturas/{candidatura}/pdf', [App\Http\Controllers\CandidaturaController::class, 'downloadPdf'])->name('candidaturas.pdf');
 
 // Rotas públicas de Alumni - sem dados sensíveis
+
+// Admin: gestão de disciplinas por sala (UI para configurar disciplinas e pesos)
+Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
+    Route::get('admin/salas/{sala}/disciplinas', [App\Http\Controllers\Admin\SalaDisciplineController::class, 'edit'])->name('admin.salas.disciplines.edit');
+    Route::post('admin/salas/{sala}/disciplinas', [App\Http\Controllers\Admin\SalaDisciplineController::class, 'update'])->name('admin.salas.disciplines.update');
+});
+
 Route::get('/alumni', function () {
     $alumni = App\Models\Alumnus::where('publicado', true)->orderByDesc('created_at')->get();
     return view('pages.alumni', compact('alumni'));

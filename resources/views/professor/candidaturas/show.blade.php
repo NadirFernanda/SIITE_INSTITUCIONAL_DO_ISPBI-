@@ -61,6 +61,7 @@
         </div>
         @endif
 
+        @if(empty($disciplines) || $disciplines->count() === 0)
         <form method="POST" action="{{ route('professor.candidaturas.nota', $candidatura) }}">
             @csrf @method('PATCH')
             <div style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
@@ -80,6 +81,11 @@
                 </button>
             </div>
         </form>
+        @else
+        <div style="background:#fff8f0;border:1px solid #fde3c7;border-radius:10px;padding:12px;margin-bottom:12px;">
+            <strong>Nota:</strong> Esta sala está configurada para lançamento por disciplinas. Use o formulário "Lançamento de Notas por Disciplina" abaixo — o lançamento de nota global está desactivado para evitar inconsistências.
+        </div>
+        @endif
     </div>
 
     {{-- Notas por disciplina (se definidas para o curso) --}}
