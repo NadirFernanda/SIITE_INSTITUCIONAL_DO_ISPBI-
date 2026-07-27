@@ -102,16 +102,17 @@ class CandidaturaController extends Controller
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso}) | Código: {$codigo}");
 
         try {
-            Mail::to($candidatura->email)
-                ->send(new ComprovatvioConcluido($candidatura));
+            // Enfileirar o e-mail para resposta rápida no frontend (requer queue worker configurado)
+            Mail::to($candidatura->email)->queue(new ComprovatvioConcluido($candidatura));
         } catch (\Throwable $e) {
-            \Log::error('Falha ao enviar email de comprovativo concluído: ' . $e->getMessage());
+            \Log::error('Falha ao enfileirar email de comprovativo concluído: ' . $e->getMessage());
         }
 
         try {
-            app(WhatsAppService::class)->notificarAssinaturaDAAC($candidatura);
+            // Despachar uma job para notificar via WhatsApp de forma assíncrona (reduz latency)
+            \App\Jobs\NotifyWhatsAppAssinatura::dispatch($candidatura);
         } catch (\Throwable $e) {
-            \Log::error('WhatsApp assinatura DAAC: ' . $e->getMessage());
+            \Log::error('Falha ao despachar job WhatsApp assinatura DAAC: ' . $e->getMessage());
         }
 
         return redirect()->route('daac.candidaturas.show', $candidatura)
