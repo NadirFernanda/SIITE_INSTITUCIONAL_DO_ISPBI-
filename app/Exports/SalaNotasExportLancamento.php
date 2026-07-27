@@ -76,15 +76,16 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         // Linha 9 — vazia
         $rows[] = ['', '', ''];
 
-        // Linha 10 — cabeçalho da tabela (3 colunas: Código, [OCULTO], Nota)
-        $rows[] = ['CÓDIGO', 'NOME COMPLETO', 'NOTA (0–20)'];
+        // Linha 10 — cabeçalho da tabela (4 colunas: Código, [OCULTO], Nota, Nota Jovem)
+        $rows[] = ['CÓDIGO', 'NOME COMPLETO', 'NOTA (0–20)', 'NOTA JOVEM'];
 
-        // Dados — APENAS CÓDIGO + NOTA (nome oculto via coluna width)
+        // Dados — CÓDIGO + NOTA (nome oculto via coluna width) + campo adicional para "Nota Jovem"
         foreach ($this->candidaturas as $c) {
             $rows[] = [
                 $c->codigo_exame ?? 'NÃO GERADO',
                 '',  // Nome totalmente vazio no lançamento
-                '',  // Nota para preenchimento
+                $c->nota_exame !== null ? number_format($c->nota_exame, 1) : '',  // Nota lançada (se existir)
+                '',  // Nota Jovem (campo adicional)
             ];
         }
 
@@ -101,8 +102,8 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
 
     public function columnWidths(): array
     {
-        // Código visível, Nome oculto (0.1), Nota visível
-        return ['A' => 20, 'B' => 0.1, 'C' => 23];
+        // Código visível, Nome oculto (0.1), Nota visível, Nota Jovem
+        return ['A' => 20, 'B' => 0.1, 'C' => 23, 'D' => 15];
     }
 
     public function styles(Worksheet $sheet): array
@@ -113,16 +114,16 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $sigNome  = $sigLinha + 1;
         $sigCargo = $sigLinha + 2;
 
-        // Mesclar cabeçalho A:C
-        $sheet->mergeCells('A2:C2');
-        $sheet->mergeCells('A3:C3');
-        $sheet->mergeCells('A4:C4');
-        $sheet->mergeCells('A6:C6');
-        $sheet->mergeCells('A7:C7');
-        $sheet->mergeCells('A8:C8');
-        $sheet->mergeCells("A{$sigLinha}:C{$sigLinha}");
-        $sheet->mergeCells("A{$sigNome}:C{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
+        // Mesclar cabeçalho A:D
+        $sheet->mergeCells('A2:D2');
+        $sheet->mergeCells('A3:D3');
+        $sheet->mergeCells('A4:D4');
+        $sheet->mergeCells('A6:D6');
+        $sheet->mergeCells('A7:D7');
+        $sheet->mergeCells('A8:D8');
+        $sheet->mergeCells("A{$sigLinha}:D{$sigLinha}");
+        $sheet->mergeCells("A{$sigNome}:D{$sigNome}");
+        $sheet->mergeCells("A{$sigCargo}:D{$sigCargo}");
 
         // Alturas
         $sheet->getRowDimension(1)->setRowHeight(55);
@@ -149,7 +150,7 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $sheet->getStyle('A6:A8')->applyFromArray(['font' => ['bold' => true, 'size' => 10]]);
 
         // Cabeçalho da tabela (verde)
-        $sheet->getStyle("A{$tr}:C{$tr}")->applyFromArray([
+        $sheet->getStyle("A{$tr}:D{$tr}")->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
             'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '0E5C2F']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
@@ -159,7 +160,7 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         // Linhas de dados
         for ($r = $tr + 1; $r <= $dataEnd; $r++) {
             $bg = ($r % 2 === 0) ? 'EDF7F1' : 'FFFFFF';
-            $sheet->getStyle("A{$r}:C{$r}")->applyFromArray([
+            $sheet->getStyle("A{$r}:D{$r}")->applyFromArray([
                 'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
                 'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
                 'alignment' => ['vertical' => Alignment::VERTICAL_CENTER],
@@ -169,6 +170,9 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
             $sheet->getStyle("C{$r}")->applyFromArray([
+                'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            ]);
+            $sheet->getStyle("D{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
             $sheet->getRowDimension($r)->setRowHeight(22);
@@ -216,7 +220,7 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $displayH = 55;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        $centerFromB1 = (int)(((20 + 0.1 + 23) * 8 / 2) - (20 * 8));
+        $centerFromB1 = (int)(((20 + 0.1 + 23 + 15) * 8 / 2) - (20 * 8));
         $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
 
         $drawing = new Drawing();
