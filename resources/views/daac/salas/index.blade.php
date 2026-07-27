@@ -51,10 +51,16 @@
                     </td>
                     <td style="padding:14px 20px;">
                         <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
-                            <a href="{{ route('daac.salas.pdf', $sala) }}" title="Lista geral PDF"
-                               style="background:#475569;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">PDF</a>
-                            <a href="{{ route('daac.salas.excel-exame', $sala) }}" title="Lista de exame Excel"
-                               style="background:#1565c0;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">Exame</a>
+                            @if($sala->folhas_geradas_em)
+                                <span style="background:#f1f5f9;color:#64748b;padding:7px 12px;border-radius:7px;font-size:0.85rem;font-weight:600;display:inline-flex;align-items:center;">
+                                    As folhas dessa sala já foram geradas em {{ $sala->folhas_geradas_em?->format('d/m/Y H:i') }}
+                                </span>
+                                <a href="{{ route('daac.salas.pdf', $sala) }}" title="Download PDF gerado"
+                                   style="background:#475569;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">Download</a>
+                            @else
+                                <a href="{{ route('daac.salas.show', $sala) }}" title="Ver sala e gerar folhas"
+                                   style="background:#7c3aed;color:#fff;padding:6px 14px;border-radius:7px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;">Ver</a>
+                            @endif
                         </div>
                     </td>
                 </tr>

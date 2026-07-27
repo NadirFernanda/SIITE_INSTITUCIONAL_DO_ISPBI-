@@ -364,6 +364,8 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
     </div>
     <div class="h-right">
         <div class="h-code">Ficha: {{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
+        <div class="h-exam-label" style="margin-top:4px;font-size:9px;color:#e0e7ff;">Código de Exame:</div>
+        <div class="h-exam-box" style="margin-top:4px;background:#fff;padding:3px 6px;border-radius:4px;color:#1a1a2e;font-weight:700;display:inline-block;min-width:36px;text-align:center;">&nbsp;</div>
         <div class="h-seat">ASSENTO</div>
     </div>
 </div>
@@ -375,7 +377,7 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
     <div class="tear-off-name-value">{{ strtoupper(substr($candidatura->nome, 0, 30)) }}</div>
     
     <div class="tear-off-code-label">Código de Exame:</div>
-    <div class="tear-off-code-value">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</div>
+    <div class="tear-off-code-value">&nbsp;</div>
 </div>
 
 {{-- CONTEÚDO PRINCIPAL --}}
