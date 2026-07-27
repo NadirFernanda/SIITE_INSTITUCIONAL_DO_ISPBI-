@@ -153,6 +153,13 @@ class CandidaturaController extends Controller
             return back()->with('error', 'Apenas candidaturas com pagamento confirmado podem ter folhas de prova impressas.');
         }
 
+        // Permitir impressão apenas uma vez
+        if ($candidatura->folha_impressa_em) {
+            $user = optional(\App\Models\User::find($candidatura->folha_impressa_por))->name;
+            $when = $candidatura->folha_impressa_em->format('d/m/Y H:i');
+            return back()->with('error', "Folha de prova já foi impressa em {$when} por " . ($user ?? 'DAAC') . ".");
+        }
+
         $pdf = Pdf::loadView('pdf.folha-prova', compact('candidatura'))
                   ->setPaper('a4', 'portrait')
                   ->setOption('margin-top', 0)
@@ -162,6 +169,18 @@ class CandidaturaController extends Controller
 
         AuditLog::registar('baixou_folha_prova', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
+        // Marcar como impressa antes de devolver o PDF (atomic enough for this flow)
+        try {
+            $candidatura->update([
+                'folha_impressa_por' => \Auth::id(),
+                'folha_impressa_em'  => now(),
+            ]);
+            AuditLog::registar('imprimiu_folha_prova', 'candidatura', $candidatura->id,
+                "Imprimiu folha de prova — Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao marcar folha imprima como impressa: ' . $e->getMessage());
+        }
 
         return $pdf->download('folha-prova-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '-' . \Str::slug($candidatura->nome) . '.pdf');
     }
