@@ -65,11 +65,11 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows[] = ['', '', ''];
 
         $this->tableRow = 10;
-        $rows[] = ['N.º Ficha', '', ''];
+        $rows[] = ['N.º Ficha', 'NOME COMPLETO', ''];
 
         foreach ($this->candidaturas as $c) {
             $rows[] = [
-                str_pad($c->id, 5, '0', STR_PAD_LEFT), '', '',
+                str_pad($c->id, 5, '0', STR_PAD_LEFT), strtoupper($c->nome), '',
             ];
         }
 
@@ -148,10 +148,16 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'DDDDDD']]],
                 'alignment' => ['vertical' => Alignment::VERTICAL_CENTER],
             ]);
+            // Col A: ficha (center, bold & coloured)
             $sheet->getStyle("A{$r}")->applyFromArray([
                 'font'      => ['bold' => true, 'color' => ['rgb' => '1565C0']],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
+            // Col B: nome (esquerda)
+            $sheet->getStyle("B{$r}")->applyFromArray([
+                'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT],
+            ]);
+            // Col C: (reserved, center)
             $sheet->getStyle("C{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
