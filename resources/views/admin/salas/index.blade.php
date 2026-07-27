@@ -228,6 +228,14 @@
                                        style="border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:0.82rem;width:120px;">
                                 <input type="number" name="capacidade" value="{{ $sala->capacidade }}" min="1" required
                                        style="border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:0.82rem;width:80px;">
+                                <input type="date" name="data_exame" value="{{ optional($sala->data_exame)->format('Y-m-d') }}"
+                                       style="border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:0.82rem;width:150px;margin-left:6px;">
+                                <select name="horario" style="border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;font-size:0.82rem;width:150px;margin-left:6px;">
+                                    <option value="">— Sem horário —</option>
+                                    @foreach(\App\Models\Sala::$horarios as $h)
+                                        <option value="{{ $h }}" {{ $sala->horario === $h ? 'selected' : '' }}>{{ $h }}</option>
+                                    @endforeach
+                                </select>
                                 <button type="submit" style="background:#f59e0b;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:0.82rem;font-weight:700;cursor:pointer;">Guardar</button>
                                 <button type="button" onclick="document.getElementById('edit-{{ $sala->id }}').style.display='none'"
                                         style="background:#f1f5f9;color:#475569;border:none;border-radius:6px;padding:6px 10px;font-size:0.82rem;cursor:pointer;">✕</button>
