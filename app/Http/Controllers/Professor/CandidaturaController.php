@@ -13,7 +13,8 @@ class CandidaturaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Candidatura::with('sala')->orderByDesc('created_at');
+        // Only show candidates that have a generated exam code — required for launching grades
+        $query = Candidatura::with('sala')->whereNotNull('codigo_exame')->orderByDesc('created_at');
 
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
