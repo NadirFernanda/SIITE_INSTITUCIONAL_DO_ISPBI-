@@ -317,6 +317,8 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1
 
     // Salas — visualização apenas (DAAC não tem permissão de export/print; apenas visualizar)
     Route::get('salas', [App\Http\Controllers\Daac\SalaController::class, 'index'])->name('salas.index');
+    Route::get('salas/{sala}/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExame'])->name('salas.excel-exame');
     Route::get('salas/{sala}', [App\Http\Controllers\Daac\SalaController::class, 'show'])->name('salas.show');
 });
 

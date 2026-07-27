@@ -51,9 +51,9 @@
                     </td>
                     <td style="padding:14px 20px;">
                         <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
-                            <a href="{{ route('tecnico.salas.pdf', $sala) }}" title="Lista geral PDF"
+                            <a href="{{ route('daac.salas.pdf', $sala) }}" title="Lista geral PDF"
                                style="background:#475569;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">PDF</a>
-                            <a href="{{ route('tecnico.salas.excel-exame', $sala) }}" title="Lista de exame Excel"
+                            <a href="{{ route('daac.salas.excel-exame', $sala) }}" title="Lista de exame Excel"
                                style="background:#1565c0;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">Exame</a>
                         </div>
                     </td>

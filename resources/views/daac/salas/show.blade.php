@@ -37,8 +37,8 @@
                     Excel — Lançamento Notas
                 </a>
             @else
-                <a href="{{ route('tecnico.salas.pdf', $sala) }}" class="px-3 py-2 bg-slate-700 text-white rounded-md text-sm font-semibold">PDF</a>
-                <a href="{{ route('tecnico.salas.excel-exame', $sala) }}" class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold">Exame</a>
+                <a href="{{ route('daac.salas.pdf', $sala) }}" class="px-3 py-2 bg-slate-700 text-white rounded-md text-sm font-semibold">PDF</a>
+                <a href="{{ route('daac.salas.excel-exame', $sala) }}" class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold">Exame</a>
             @endif
         </div>
     </div>
