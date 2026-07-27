@@ -186,13 +186,13 @@ class SalaController extends Controller
 
     public function excelExame(Sala $sala)
     {
-        return Excel::download(new SalaExameExport($sala),
+        return Excel::download(new SalaExameExportLancamento($sala),
             'lista-exame-' . \Str::slug($sala->nome) . '.xlsx');
     }
 
     public function excelNotas(Sala $sala)
     {
-        return Excel::download(new SalaNotasExport($sala),
+        return Excel::download(new SalaNotasExportLancamento($sala),
             'lancamento-notas-' . \Str::slug($sala->nome) . '.xlsx');
     }
 
