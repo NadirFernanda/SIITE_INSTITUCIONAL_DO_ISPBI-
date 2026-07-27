@@ -391,14 +391,11 @@ html, body { width:100%; font-family: 'Segoe UI', Arial, sans-serif; font-size:1
 </div>
 
 {{-- CONTEÚDO PRINCIPAL --}}
-<div class="main-content">
+<div class="main-content" style="height:260mm;"></div>
 
-    {{-- TÍTULO --}}
-    <div class="doc-title">📋 Folha de Prova — Exame de Acesso</div>
+</body>
+</html>
 
-    {{-- BLOCO DADOS DO CANDIDATO --}}
-    <div class="candidate-block">
-        <div class="candidate-field">
             <div class="candidate-label">Nome:</div>
             <div class="candidate-value">{{ strtoupper($candidatura->nome) }}</div>
         </div>
