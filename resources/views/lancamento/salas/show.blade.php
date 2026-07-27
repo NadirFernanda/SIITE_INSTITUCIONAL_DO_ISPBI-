@@ -65,11 +65,6 @@
                style="display:inline-flex;align-items:center;gap:6px;background:#15803d;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 Excel — Lista Exame
             </a>
-            <a href="{{ route('lancamento.salas.excel-notas', $sala) }}"
-               class="print-hidden"
-               style="display:inline-flex;align-items:center;gap:6px;background:#0e5c2f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
-                Excel — Lançamento Notas
-            </a>
             <form method="POST" action="{{ route('lancamento.salas.codigos', $sala) }}" style="margin:0;" class="print-hidden">
                 @csrf
                 <button type="submit"
@@ -77,10 +72,6 @@
                     Gerar códigos de exame
                 </button>
             </form>
-            <button type="button" class="print-hidden" onclick="window.print()"
-                    style="display:inline-flex;align-items:center;gap:6px;background:#f59e0b;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;border:none;cursor:pointer;">
-                Imprimir lista
-            </button>
         </div>
     </div>
 
@@ -119,37 +110,21 @@
                 {{ $grupo }} <span style="font-weight:400;opacity:0.8;">({{ $lista->count() }} candidatos)</span>
             </div>
             <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.87rem;">
-                <thead>
-                    <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
-                        <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;width:220px;">Código Exame</th>
-                        <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Nome</th>
-                        <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">BI</th>
-                        <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Sexo</th>
-                        <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;width:120px;">Nota</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($lista as $c)
-                    <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:11px 18px;font-weight:700;color:#6d28d9;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
-                        <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
-                        <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
-                        <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
-                        <td style="padding:11px 18px;text-align:center;color:#1a2332;font-weight:700;">
-                            @if(auth()->user()->hasRole('subcomissao_lancamento'))
-                                <form method="POST" action="{{ route('lancamento.candidaturas.nota', $c) }}">
-                                    @csrf @method('PATCH')
-                                    <input type="number" name="nota_exame" min="0" max="20" step="0.1" value="{{ old('nota_exame', $c->nota_exame) }}" style="width:90px;padding:6px;border:1px solid #e2e8f0;border-radius:6px;text-align:center;">
-                                    <button type="submit" style="margin-left:6px;background:#7c3aed;color:#fff;border:none;border-radius:6px;padding:6px 8px;">Guardar</button>
-                                </form>
-                            @else
-                                {{ $c->nota_exame !== null ? number_format($c->nota_exame, 1) . '/20' : 'Sem nota' }}
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    <thead>
+                        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
+                            <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;width:220px;">Código Exame</th>
+                            <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;width:120px;">Lugar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($lista as $c)
+                        <tr style="border-bottom:1px solid #f1f5f9;">
+                            <td style="padding:11px 18px;font-weight:700;color:#6d28d9;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
+                            <td style="padding:11px 18px;text-align:center;color:#1a2332;font-weight:700;">{{ $c->numero_lugar ?? '—' }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
         </div>
         @endforeach
     @endif

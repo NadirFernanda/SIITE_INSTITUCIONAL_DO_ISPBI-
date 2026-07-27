@@ -178,10 +178,6 @@
                                style="display:inline-flex;align-items:center;gap:4px;background:#15803d;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
                                 Exame
                             </a>
-                            <a href="{{ route('lancamento.salas.excel-notas', $sala) }}" title="Lançamento de notas Excel"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#0e5c2f;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
-                                Notas
-                            </a>
                         </div>
                     </td>
                 </tr>
