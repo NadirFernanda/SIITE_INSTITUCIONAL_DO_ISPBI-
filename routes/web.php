@@ -381,6 +381,8 @@ Route::prefix('professor')->name('professor.')->middleware(['auth', 'subcomissao
     Route::get('/', function () {
         return redirect()->route('professor.candidaturas.index');
     })->name('dashboard');
+    Route::get('salas', [App\Http\Controllers\Professor\SalaController::class, 'index'])->name('salas.index');
+    Route::get('salas/{sala}', [App\Http\Controllers\Professor\SalaController::class, 'show'])->name('salas.show');
     Route::get('candidaturas', [App\Http\Controllers\Professor\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Professor\CandidaturaController::class, 'show'])->name('candidaturas.show');
     Route::patch('candidaturas/{candidatura}/nota', [App\Http\Controllers\Professor\CandidaturaController::class, 'updateNota'])->name('candidaturas.nota');

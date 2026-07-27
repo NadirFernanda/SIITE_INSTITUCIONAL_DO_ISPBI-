@@ -46,13 +46,20 @@
             <span>Painel Professor</span>
         </div>
         <div style="flex:1;">
+            <a href="{{ route('professor.salas.index') }}"
+               class="{{ request()->routeIs('professor.salas.*') ? 'active' : '' }}">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 017 12V7a2 2 0 012-2z"/>
+                </svg>
+                Por Sala
+            </a>
             <a href="{{ route('professor.candidaturas.index') }}"
                class="{{ request()->routeIs('professor.candidaturas.*') ? 'active' : '' }}">
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <rect x="4" y="3" width="16" height="18" rx="2"/>
                     <path stroke-linecap="round" d="M8 7h8M8 11h8M8 15h5"/>
                 </svg>
-                Lançar Notas
+                Pesquisa Rápida
             </a>
         </div>
         <div style="margin:16px 12px;">
