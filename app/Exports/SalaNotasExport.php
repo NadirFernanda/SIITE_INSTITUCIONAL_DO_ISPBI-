@@ -172,7 +172,14 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A6:{$lastCol}6");
         $sheet->mergeCells("A7:{$lastCol}7");
         $sheet->mergeCells("A8:{$lastCol}8");
+        
+        // Mesclar assinatura (traço, nome e cargo)
+        $sigLinha = $dataEnd + 4;
+        $sigNome = $sigLinha + 1;
+        $sigCargo = $sigLinha + 2;
         $sheet->mergeCells("A{$sigLinha}:{$lastCol}{$sigLinha}");
+        $sheet->mergeCells("A{$sigNome}:{$lastCol}{$sigNome}");
+        $sheet->mergeCells("A{$sigCargo}:{$lastCol}{$sigCargo}");
 
         // Alturas e estilos básicos (similar ao anterior)
         $sheet->getRowDimension(1)->setRowHeight(55);
