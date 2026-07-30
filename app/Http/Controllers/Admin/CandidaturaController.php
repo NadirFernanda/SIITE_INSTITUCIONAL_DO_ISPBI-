@@ -32,6 +32,10 @@ class CandidaturaController extends Controller
         if ($request->filled('local_inscricao')) {
             $query->where('local_inscricao', $request->input('local_inscricao'));
         }
+        // Filtrar por Necessidade de Educação Especial
+        if ($request->filled('necessidade_especial')) {
+            $query->where('necessidade_especial', $request->input('necessidade_especial'));
+        }
         if ($request->filled('q')) {
             $q = $request->input('q');
             // Se for número, pesquisa também pelo ID (número de ficha)
@@ -233,11 +237,15 @@ class CandidaturaController extends Controller
         if ($request->filled('perfil')) {
             $query->where('perfil', $request->input('perfil'));
         }
+        // Aplicar filtro por necessidade_especial também no export
+        if ($request->filled('necessidade_especial')) {
+            $query->where('necessidade_especial', $request->input('necessidade_especial'));
+        }
 
         $candidaturas = $query->get();
 
         $csv  = "\xEF\xBB\xBF"; // UTF-8 BOM for Excel
-        $csv .= "ID,Nome,Email,Telefone,BI,Data Nascimento,Curso,Escola Origem,Ano Conclusão,Status,Data Candidatura\n";
+        $csv .= "ID,Nome,Email,Telefone,BI,Data Nascimento,Curso,Escola Origem,Ano Conclusão,Necessidade Especial,Habilitações Literárias,Status,Data Candidatura\n";
 
         foreach ($candidaturas as $c) {
             $csv .= implode(',', [
@@ -250,6 +258,8 @@ class CandidaturaController extends Controller
                 '"' . str_replace('"', '""', $c->curso) . '"',
                 '"' . str_replace('"', '""', $c->escola_origem ?? '') . '"',
                 $c->ano_conclusao ?? '',
+                '"' . str_replace('"', '""', $c->necessidade_especial ?? '') . '"',
+                '"' . str_replace('"', '""', $c->habilitacoes ?? '') . '"',
                 Candidatura::$statusLabels[$c->status] ?? $c->status,
                 $c->created_at->format('d/m/Y H:i'),
             ]) . "\n";

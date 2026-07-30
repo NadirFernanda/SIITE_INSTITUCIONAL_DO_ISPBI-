@@ -190,8 +190,8 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                     <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Habilitações Literárias <span style="color:#ef4444">*</span></label>
                     <select name="habilitacoes" required style="{{ $inp }}">
                         <option value="">— Seleccione —</option>
-                        <option value="12" {{ old('habilitacoes', $candidatura->habilitacoes) === '12' ? 'selected' : '' }}>12 (Décima Segunda)</option>
-                        <option value="13" {{ old('habilitacoes', $candidatura->habilitacoes) === '13' ? 'selected' : '' }}>13 (Décima Terceira)</option>
+                        <option value="Décima Segunda" {{ old('habilitacoes', $candidatura->habilitacoes) === 'Décima Segunda' ? 'selected' : '' }}>12 (Décima Segunda)</option>
+                                                <option value="Décima Terceira" {{ old('habilitacoes', $candidatura->habilitacoes) === 'Décima Terceira' ? 'selected' : '' }}>13 (Décima Terceira)</option>
                     </select>
                 </div>
                 <div>
