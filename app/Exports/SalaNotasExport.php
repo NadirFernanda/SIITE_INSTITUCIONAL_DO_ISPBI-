@@ -53,7 +53,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // Cabeçalho (linhas 2-4) — mescladas A:.., centradas
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', ''];
-        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', ''];
+        $rows[] = ['COMISSÃO DO EXAME DE ACESSO', ''];
         $rows[] = ['EXAME DE ACESSO 2026/2027 — PAUTA', ''];
 
         // Linha 5 — vazia
@@ -217,6 +217,21 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ]);
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
+
+        // Centralizar assinatura do presidente
+        $sigNome = $sigLinha + 1;
+        $sigCargo = $sigLinha + 2;
+        $sheet->getStyle("A{$sigLinha}:{$lastCol}{$sigLinha}")->applyFromArray([
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
+        $sheet->getStyle("A{$sigNome}:{$lastCol}{$sigNome}")->applyFromArray([
+            'font'      => ['bold' => true, 'size' => 10],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
+        $sheet->getStyle("A{$sigCargo}:{$lastCol}{$sigCargo}")->applyFromArray([
+            'font'      => ['size' => 9, 'italic' => true],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+        ]);
 
         // Impressão A4
         $ps = $sheet->getPageSetup();
