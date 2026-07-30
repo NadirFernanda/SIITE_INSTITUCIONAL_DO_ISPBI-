@@ -113,6 +113,8 @@ class CandidaturaController extends Controller
                 if ($salaDiscs->count() > 0) {
                     $complete = true;
                     $sum = 0.0;
+                    $totalWeight = (int) $salaDiscs->sum('weight_percent');
+
                     foreach ($salaDiscs as $sd) {
                         $notaRow = CandidaturaNota::where('candidatura_id', $candidatura->id)
                             ->where('discipline', $sd->discipline)
@@ -121,12 +123,27 @@ class CandidaturaController extends Controller
                             $complete = false;
                             break;
                         }
-                        $sum += ((float)$notaRow->nota) * ((int)$sd->weight_percent / 100.0);
+                        // accumulate raw notes (will apply weighting logic later)
+                        $sum += (float) $notaRow->nota;
                     }
 
                     if ($complete) {
-                        // Arredondar para 2 decimais ao armazenar; apresentar com 2 casas na exportação
-                        $final = round($sum, 2);
+                        if ($totalWeight === 0) {
+                            // If all weights are zero, use simple sum of discipline notes
+                            $final = round($sum, 2);
+                        } else {
+                            // Compute weighted sum normalized by totalWeight so weights need not sum to 100
+                            $weighted = 0.0;
+                            foreach ($salaDiscs as $sd) {
+                                $notaRow = CandidaturaNota::where('candidatura_id', $candidatura->id)
+                                    ->where('discipline', $sd->discipline)
+                                    ->first();
+                                $w = (int) $sd->weight_percent;
+                                $weighted += ((float) $notaRow->nota) * ($w / (float) $totalWeight);
+                            }
+                            $final = round($weighted, 2);
+                        }
+
                         $candidatura->update([
                             'nota_exame' => $final,
                             'nota_lancada_por' => Auth::id(),

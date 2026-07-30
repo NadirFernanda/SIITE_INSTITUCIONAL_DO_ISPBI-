@@ -78,22 +78,22 @@
                             @php
                                 $discNotas = $c->discipline_notas ?? collect();
                                 $hasAnyDisc = false;
-                                $weighted = 0.0;
+                                $soma = 0.0;
                             @endphp
                             @foreach($salaDiscs as $sd)
                                 @php
                                     $nr = $discNotas[$sd->discipline] ?? null;
                                     if ($nr && $nr->nota !== null) {
                                         $hasAnyDisc = true;
-                                        $weighted += ((float)$nr->nota) * ((int)$sd->weight_percent / 100.0);
+                                        $soma += (float)$nr->nota;
                                     }
                                 @endphp
                             @endforeach
 
                             @if($hasAnyDisc)
                                 <div style="margin-bottom:6px;">
-                                    <span style="background:{{ $weighted >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $weighted >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $weighted >= 10 ? '#86efac' : '#fca5a5' }};padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;">
-                                        {{ number_format($weighted, 2) }}/20
+                                    <span style="background:{{ $soma >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $soma >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $soma >= 10 ? '#86efac' : '#fca5a5' }};padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;">
+                                        {{ number_format($soma, 2) }}/20
                                     </span>
                                 </div>
                                 <div style="font-size:0.78rem;color:#64748b;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">

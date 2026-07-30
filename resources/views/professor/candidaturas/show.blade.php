@@ -46,28 +46,45 @@
             @php
                 $sum = 0.0;
                 $hasAny = false;
+            $totalWeight = $disciplines->sum('weight_percent');
             @endphp
             <div style="margin-bottom:12px;">
-                {{-- calcular soma ponderada conforme disciplinas definidas na sala --}}
-                @foreach($disciplines as $d)
-                    @php
-                        $discName = $d->discipline;
-                        $notaRow = $notas[$discName] ?? null;
-                        if ($notaRow && $notaRow->nota !== null) {
-                            $hasAny = true;
-                            $sum += ((float)$notaRow->nota) * ((int)$d->weight_percent / 100.0);
-                        }
-                    @endphp
-                @endforeach
+            {{-- calcular soma ponderada conforme disciplinas definidas na sala --}}
+            @foreach($disciplines as $d)
+                @php
+                    $discName = $d->discipline;
+                    $notaRow = $notas[$discName] ?? null;
+                    if ($notaRow && $notaRow->nota !== null) {
+                        $hasAny = true;
+                        $sum += (float) $notaRow->nota; // accumulate raw notes
+                    }
+                @endphp
+            @endforeach
 
-                @if($hasAny)
+            @if($hasAny)
+                @php
+                    if ($totalWeight == 0) {
+                        $computed = $sum; // simple sum when weights are all zero
+                    } else {
+                        $weighted = 0.0;
+                        foreach($disciplines as $d) {
+                            $dn = $d->discipline;
+                            $nr = $notas[$dn] ?? null;
+                            $w = (int)$d->weight_percent;
+                            if ($nr && $nr->nota !== null) {
+                                $weighted += ((float)$nr->nota) * ($w / (float)$totalWeight);
+                            }
+                        }
+                        $computed = $weighted;
+                    }
+                @endphp
                     <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;">
-                        <div id="computedWeightedBox" style="background:{{ $sum >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $sum >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 22px;text-align:center;">
-                            <div id="computedWeightedValue" style="font-size:2rem;font-weight:900;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
-                                {{ number_format($sum, 2) }}<span style="font-size:0.9rem;color:#94a3b8;">/20</span>
+                        <div id="computedWeightedBox" style="background:{{ $computed >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $computed >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 22px;text-align:center;">
+                            <div id="computedWeightedValue" style="font-size:2rem;font-weight:900;color:{{ $computed >= 10 ? '#15803d' : '#dc2626' }};">
+                                {{ number_format($computed, 2) }}<span style="font-size:0.9rem;color:#94a3b8;">/20</span>
                             </div>
-                            <div id="computedWeightedStatus" style="font-size:0.72rem;font-weight:700;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
-                                {{ $sum >= 10 ? 'APROVADO (pela soma ponderada)' : 'REPROVADO (pela soma ponderada)' }}
+                            <div id="computedWeightedStatus" style="font-size:0.72rem;font-weight:700;color:{{ $computed >= 10 ? '#15803d' : '#dc2626' }};">
+                                {{ $computed >= 10 ? 'APROVADO (pela soma ponderada)' : 'REPROVADO (pela soma ponderada)' }}
                             </div>
                         </div>
                         <div style="font-size:0.78rem;color:#64748b;">A soma ponderada acima é calculada automaticamente a partir das notas por disciplina. A Presidência usará este valor para a pauta final.</div>
