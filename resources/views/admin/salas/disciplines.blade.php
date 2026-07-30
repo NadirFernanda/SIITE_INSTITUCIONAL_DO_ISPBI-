@@ -11,7 +11,16 @@
         <div style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Disciplinas vinculadas</div>
         <div style="display:flex;flex-wrap:wrap;gap:10px;">
             @foreach($disciplines as $ld)
-                <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:8px 12px;border-radius:8px;font-weight:700;color:#111827;">{{ $ld->discipline }} — {{ $ld->weight_percent }}%</div>
+                @php
+                    $displayWeight = (int) ($ld->weight_percent ?? 0);
+                    if ($displayWeight === 0 && isset($courseDisciplines) && $courseDisciplines->isNotEmpty()) {
+                        $cd = $courseDisciplines->firstWhere('discipline', $ld->discipline);
+                        if ($cd) {
+                            $displayWeight = (int) ($cd->weight_percent ?? 0);
+                        }
+                    }
+                @endphp
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:8px 12px;border-radius:8px;font-weight:700;color:#111827;">{{ $ld->discipline }} — {{ $displayWeight }}%</div>
             @endforeach
         </div>
     </div>

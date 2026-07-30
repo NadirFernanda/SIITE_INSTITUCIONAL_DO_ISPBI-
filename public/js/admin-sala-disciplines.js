@@ -58,14 +58,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const used = getCurrentSelected();
 
             course.forEach(cd => {
-                // include option if not used OR if it's the current name (for editing existing rows)
-                if (!used.has(cd.discipline) || cd.discipline === name) {
-                    const opt = document.createElement('option');
-                    opt.value = cd.discipline;
-                    opt.innerText = cd.discipline + ' — ' + cd.weight + '%';
-                    if (cd.discipline === name) opt.selected = true;
-                    inputName.appendChild(opt);
-                }
+                // Always include all course options so users can see weights even if used elsewhere;
+                // disabling of already-used options is handled by updateUIState to keep them visible.
+                const opt = document.createElement('option');
+                opt.value = cd.discipline;
+                opt.innerText = cd.discipline + ' — ' + cd.weight + '%';
+                if (cd.discipline === name) opt.selected = true;
+                inputName.appendChild(opt);
             });
 
             inputName.addEventListener('change', function () {
