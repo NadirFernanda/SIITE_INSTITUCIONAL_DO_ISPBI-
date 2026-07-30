@@ -150,21 +150,23 @@ class SalaDisciplineController extends Controller
             // Remove existing entries not present in payload
             $incoming = collect($data['disciplines'])->map(fn($d) => trim($d['discipline']))->filter()->values();
 
-            // If incoming is empty, avoid running a whereNotIn([]) which can behave unexpectedly
-            if ($incoming->isNotEmpty()) {
-                SalaDiscipline::where('sala_id', $sala->id)
-                    ->whereNotIn('discipline', $incoming)
-                    ->delete();
-            }
-
+            // TEMPORARY SAFETY: do not delete existing disciplines automatically to avoid accidental data loss
+            // Previously we removed records not present in the incoming payload. That caused existing
+            // disciplines to disappear when the browser sent malformed payloads. Until the UI reliably
+            // sends the full list, only create/update incoming ones.
             foreach ($data['disciplines'] as $d) {
                 $name = trim($d['discipline']);
                 if ($name === '') continue;
                 SalaDiscipline::updateOrCreate(
                     ['sala_id' => $sala->id, 'discipline' => $name],
-                    ['weight_percent' => (int) $d['weight']]
+                    ['weight_percent' => (int) ($d['weight'] ?? 0)]
                 );
             }
+
+            // NOTE: Deletion of disciplines via UI is temporarily disabled to prevent accidental removal.
+            // If explicit deletion is required, an admin can remove rows from the DB or we can add a
+            // dedicated 'deleted' flag that the UI sets when users remove a discipline.
+
         });
 
         // Extra logging to help debug persistence issues: log how many rows exist after save
