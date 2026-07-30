@@ -62,11 +62,11 @@
 
                 @if($hasAny)
                     <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;">
-                        <div style="background:{{ $sum >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $sum >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 22px;text-align:center;">
-                            <div style="font-size:2rem;font-weight:900;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
+                        <div id="computedWeightedBox" style="background:{{ $sum >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $sum >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 22px;text-align:center;">
+                            <div id="computedWeightedValue" style="font-size:2rem;font-weight:900;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
                                 {{ number_format($sum, 2) }}<span style="font-size:0.9rem;color:#94a3b8;">/20</span>
                             </div>
-                            <div style="font-size:0.72rem;font-weight:700;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
+                            <div id="computedWeightedStatus" style="font-size:0.72rem;font-weight:700;color:{{ $sum >= 10 ? '#15803d' : '#dc2626' }};">
                                 {{ $sum >= 10 ? 'APROVADO (pela soma ponderada)' : 'REPROVADO (pela soma ponderada)' }}
                             </div>
                         </div>
@@ -93,6 +93,12 @@
                             <div style="text-align:center;color:#111827;font-weight:700;">{{ $nr?->nota !== null ? number_format($nr->nota,2) : '—' }}</div>
                         </div>
                     @endforeach
+                    <div style="margin-top:8px;font-size:0.82rem;color:#475569;">
+                        Peso total: <strong id="totalWeight">{{ $disciplines->sum('weight_percent') }}%</strong>
+                        <span id="weightWarning" style="margin-left:8px;color:#d97706;display:{{ $disciplines->sum('weight_percent') != 100 ? 'inline' : 'none' }};">
+                            (Aviso: soma de pesos ≠ 100%)
+                        </span>
+                    </div>
                 </div>
             </div>
         @else
@@ -134,7 +140,7 @@
                 @php $discName = $d->discipline; $existing = $notas[$discName] ?? null; @endphp
                 <div style="border:1px solid #e6f6f6;border-radius:8px;padding:12px;">
                     <div style="font-size:0.72rem;font-weight:700;color:#0f172a;margin-bottom:6px;">{{ $discName }}</div>
-                    <input type="number" name="notas[{{ $discName }}]" min="0" max="20" step="0.01" value="{{ old('notas.'.$discName, $existing?->nota) }}" style="width:100%;padding:8px;border-radius:6px;border:1px solid #e2fdfa;font-weight:700;text-align:center;">
+                    <input type="number" name="notas[{{ $discName }}]" data-weight="{{ (int)$d->weight_percent }}" min="0" max="20" step="0.01" value="{{ old('notas.'.$discName, $existing?->nota) }}" class="disc-nota-input" style="width:100%;padding:8px;border-radius:6px;border:1px solid #e2fdfa;font-weight:700;text-align:center;">
                 </div>
                 @endforeach
             </div>
@@ -148,4 +154,5 @@
     @endif
 
 </div>
+<script src="{{ asset('js/professor-candidaturas.js') }}"></script>
 @endsection
