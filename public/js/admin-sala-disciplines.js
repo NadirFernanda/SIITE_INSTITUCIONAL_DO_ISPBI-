@@ -7,12 +7,32 @@ document.addEventListener('DOMContentLoaded', function () {
         row.className = 'disc-row';
         row.style = 'display:flex;gap:8px;align-items:center;';
 
-        const inputName = document.createElement('input');
-        inputName.type = 'text';
-        inputName.name = 'disciplines[][discipline]';
-        inputName.placeholder = 'Nome da disciplina';
-        inputName.value = name;
-        inputName.style = 'flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;';
+        let inputName;
+        if (Array.isArray(window.COURSE_DISCIPLINES) && window.COURSE_DISCIPLINES.length > 0) {
+            inputName = document.createElement('select');
+            inputName.name = 'disciplines[][discipline]';
+            inputName.style = 'flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;';
+
+            const emptyOpt = document.createElement('option');
+            emptyOpt.value = '';
+            emptyOpt.innerText = '— Seleccione disciplina —';
+            inputName.appendChild(emptyOpt);
+
+            window.COURSE_DISCIPLINES.forEach(cd => {
+                const opt = document.createElement('option');
+                opt.value = cd.discipline;
+                opt.innerText = cd.discipline + ' — ' + cd.weight + '%';
+                if (cd.discipline === name) opt.selected = true;
+                inputName.appendChild(opt);
+            });
+        } else {
+            inputName = document.createElement('input');
+            inputName.type = 'text';
+            inputName.name = 'disciplines[][discipline]';
+            inputName.placeholder = 'Nome da disciplina';
+            inputName.value = name;
+            inputName.style = 'flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;';
+        }
 
         const inputWeight = document.createElement('input');
         inputWeight.type = 'number';

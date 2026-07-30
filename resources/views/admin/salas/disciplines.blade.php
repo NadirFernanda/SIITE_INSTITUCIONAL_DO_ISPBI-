@@ -16,13 +16,33 @@
         <div id="disciplines-list" style="display:grid;gap:10px;">
             @forelse($disciplines as $d)
             <div class="disc-row" style="display:flex;gap:8px;align-items:center;">
-                <input type="text" name="disciplines[][discipline]" value="{{ $d->discipline }}" placeholder="Nome da disciplina" style="flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;">
+                @if(isset($courseDisciplines) && $courseDisciplines->isNotEmpty())
+                    <select name="disciplines[][discipline]" style="flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;">
+                        <option value="">— Seleccione disciplina —</option>
+                        @foreach($courseDisciplines as $cd)
+                            <option value="{{ $cd->discipline }}" {{ $cd->discipline === $d->discipline ? 'selected' : '' }}>{{ $cd->discipline }} — {{ $cd->weight_percent }}%</option>
+                        @endforeach
+                    </select>
+                @else
+                    <input type="text" name="disciplines[][discipline]" value="{{ $d->discipline }}" placeholder="Nome da disciplina" style="flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;">
+                @endif
+
                 <input type="number" name="disciplines[][weight]" value="{{ $d->weight_percent }}" min="0" max="100" style="width:110px;padding:8px;border-radius:6px;border:1px solid #e5e7eb;text-align:center;">
                 <button type="button" class="remove-disc" style="background:#fee2e2;border:none;padding:8px 10px;border-radius:6px;color:#b91c1c;cursor:pointer;">Remover</button>
             </div>
             @empty
             <div class="disc-row" style="display:flex;gap:8px;align-items:center;">
-                <input type="text" name="disciplines[][discipline]" value="" placeholder="Nome da disciplina" style="flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;">
+                @if(isset($courseDisciplines) && $courseDisciplines->isNotEmpty())
+                    <select name="disciplines[][discipline]" style="flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;">
+                        <option value="">— Seleccione disciplina —</option>
+                        @foreach($courseDisciplines as $cd)
+                            <option value="{{ $cd->discipline }}">{{ $cd->discipline }} — {{ $cd->weight_percent }}%</option>
+                        @endforeach
+                    </select>
+                @else
+                    <input type="text" name="disciplines[][discipline]" value="" placeholder="Nome da disciplina" style="flex:1;padding:8px;border-radius:6px;border:1px solid #e5e7eb;">
+                @endif
+
                 <input type="number" name="disciplines[][weight]" value="0" min="0" max="100" style="width:110px;padding:8px;border-radius:6px;border:1px solid #e5e7eb;text-align:center;">
                 <button type="button" class="remove-disc" style="background:#fee2e2;border:none;padding:8px 10px;border-radius:6px;color:#b91c1c;cursor:pointer;">Remover</button>
             </div>
@@ -40,5 +60,12 @@
     </form>
 </div>
 
+@if(isset($courseDisciplines))
+<script>
+    window.COURSE_DISCIPLINES = {!! json_encode($courseDisciplines->map(function($c){ return ['discipline' => $c->discipline, 'weight' => (int) $c->weight_percent]; })) !!};
+</script>
+@else
+<script>window.COURSE_DISCIPLINES = [];</script>
+@endif
 <script src="{{ asset('js/admin-sala-disciplines.js') }}"></script>
 @endsection

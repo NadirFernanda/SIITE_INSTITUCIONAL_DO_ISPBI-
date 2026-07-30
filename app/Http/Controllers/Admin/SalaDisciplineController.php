@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Sala;
 use App\Models\SalaDiscipline;
+use App\Models\CourseDiscipline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,20 @@ class SalaDisciplineController extends Controller
     {
         $sala->load(['candidaturas']);
         $disciplines = SalaDiscipline::where('sala_id', $sala->id)->orderBy('id')->get();
-        return view('admin.salas.disciplines', compact('sala', 'disciplines'));
+
+        // Try to determine the main course for this sala from assigned candidaturas
+        $courseName = null;
+        if ($sala->candidaturas->isNotEmpty()) {
+            $courseName = $sala->candidaturas->first()->curso;
+        }
+
+        $courseDisciplines = collect();
+        if ($courseName) {
+            // case-insensitive match for course_name
+            $courseDisciplines = CourseDiscipline::whereRaw('LOWER(course_name) = ?', [strtolower($courseName)])->orderBy('id')->get();
+        }
+
+        return view('admin.salas.disciplines', compact('sala', 'disciplines', 'courseDisciplines'));
     }
 
     public function update(Request $request, Sala $sala)
