@@ -66,13 +66,21 @@ class SalaDisciplineController extends Controller
 
     public function update(Request $request, Sala $sala)
     {
-        $data = $request->validate([
-            'disciplines' => 'required|array',
-            'disciplines.*.discipline' => 'required|string|max:191|distinct',
-            'disciplines.*.weight' => 'required|integer|min:0|max:100',
-        ], [
-            'disciplines.required' => 'Adicione pelo menos uma disciplina.',
-        ]);
+        // Log payload for debugging when saves appear not to persist
+        \Log::info('SalaDiscipline update called for sala '.$sala->id, $request->all());
+
+        try {
+            $data = $request->validate([
+                'disciplines' => 'required|array',
+                'disciplines.*.discipline' => 'required|string|max:191|distinct',
+                'disciplines.*.weight' => 'required|integer|min:0|max:100',
+            ], [
+                'disciplines.required' => 'Adicione pelo menos uma disciplina.',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            \Log::warning('Validation failed saving sala disciplines', ['sala' => $sala->id, 'errors' => $e->validator->errors()->all()]);
+            throw $e;
+        }
 
         DB::transaction(function () use ($sala, $data) {
             // Remove existing entries not present in payload
@@ -91,6 +99,8 @@ class SalaDisciplineController extends Controller
                 );
             }
         });
+
+        \Log::info('SalaDisciplines saved for sala '.$sala->id);
 
         return redirect()->route('admin.salas.disciplines.edit', $sala)
             ->with('success', 'Disciplinas da sala atualizadas com sucesso.');

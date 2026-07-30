@@ -21,6 +21,21 @@
         <div style="background:#ecfdf5;border:1px solid #bbf7d0;padding:10px;border-radius:8px;margin-bottom:12px;color:#065f46;">{{ session('success') }}</div>
     @endif
 
+    @if(session('error'))
+        <div style="background:#fff5f5;border:1px solid #fecaca;padding:10px;border-radius:8px;margin-bottom:12px;color:#b91c1c;">{{ session('error') }}</div>
+    @endif
+
+    @if($errors->any())
+        <div style="background:#fff8f0;border:1px solid #fde3c7;padding:10px;border-radius:8px;margin-bottom:12px;color:#92400e;">
+            <strong>Erros ao guardar:</strong>
+            <ul style="margin:8px 0 0 18px;">
+                @foreach($errors->all() as $err)
+                    <li>{{ $err }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('admin.salas.disciplines.update', $sala) }}" id="sala-disciplines-form">
         @csrf @method('POST')
 
