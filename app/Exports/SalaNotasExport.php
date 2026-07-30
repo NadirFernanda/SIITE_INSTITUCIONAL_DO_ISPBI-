@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Models\Sala;
-use App\Models\CourseDiscipline;
 use App\Models\CandidaturaNota;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -32,18 +31,12 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ->orderBy('id')
             ->get();
 
-        // Assumir que sala tem candidatos de um único curso — pegar o primeiro curso encontrado
-        $first = $this->candidaturas->first();
-        $courseName = $first ? ($first->curso ?? '') : '';
-
-        // Buscar disciplinas definidas para este curso
-        $this->disciplines = CourseDiscipline::where('course_name', $courseName)->orderBy('id')->get()->toArray();
-
-        // fallback: se não existir, tentar forma canonical (lower/trim) — evita diferenças de capitalização
-        if (empty($this->disciplines) && $courseName) {
-            $alt = trim($courseName);
-            $this->disciplines = CourseDiscipline::whereRaw('LOWER(course_name) = ?', [mb_strtolower($alt)])->orderBy('id')->get()->toArray();
-        }
+        // Buscar disciplinas definidas para ESTA SALA (não por curso)
+        $this->disciplines = \App\Models\SalaDiscipline::where('sala_id', $sala->id)
+            ->orderBy('id')
+            ->get()
+            ->map(fn($d) => ['discipline' => $d->discipline, 'weight_percent' => $d->weight_percent])
+            ->toArray();
     }
 
     public function title(): string
