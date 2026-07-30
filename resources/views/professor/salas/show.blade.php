@@ -162,6 +162,7 @@
                                                             data-candidatura-id="{{ $c->id }}"
                                                             data-codigo-exame="{{ $c->codigo_exame }}"
                                                             data-nota="{{ $c->nota_exame ?? '' }}"
+                                                            data-discipline-notas="{{ json_encode($c->discipline_notas->keyBy('discipline')->mapWithKeys(fn($d) => [$d->discipline => $d->nota])->toArray() ?? []) }}"
                                                             style="background:{{ $c->nota_exame !== null ? '#f5f3ff' : '#ede9fe' }};color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;">
                                 {{ $c->nota_exame !== null ? 'Editar' : 'Lançar' }}
                             </button>

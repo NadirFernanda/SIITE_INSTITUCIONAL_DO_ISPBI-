@@ -24,7 +24,7 @@ function updateFeedback() {
     }
 }
 
-window.openModal = function(candidaturaId, codigoExame, notaAtual) {
+window.openModal = function(candidaturaId, codigoExame, notaAtual, disciplineNotas) {
     const codigoElem = document.getElementById('codigoExame');
     const notaInput = document.getElementById('notaInput');
     const notaForm = document.getElementById('notaForm');
@@ -68,7 +68,12 @@ window.openModal = function(candidaturaId, codigoExame, notaAtual) {
                 input.name = 'notas[' + d.discipline + ']';
                 input.min = 0; input.max = 20; input.step = '0.01';
                 input.style = 'width:100%;padding:8px;border-radius:6px;border:1px solid #e2fdfa;font-weight:700;text-align:center;';
-                input.value = '';
+                // Preencher com nota anterior se existir
+                if (disciplineNotas && disciplineNotas[d.discipline]) {
+                    input.value = disciplineNotas[d.discipline];
+                } else {
+                    input.value = '';
+                }
                 wrapper.appendChild(label);
                 wrapper.appendChild(input);
                 discList.appendChild(wrapper);
@@ -121,7 +126,14 @@ function init() {
             const id = this.dataset.candidaturaId;
             const codigo = this.dataset.codigoExame;
             const nota = this.dataset.nota === '' ? null : this.dataset.nota;
-            window.openModal(id, codigo, nota);
+            let disciplineNotas = null;
+            try {
+                const notasJson = this.dataset.disciplineNotas;
+                disciplineNotas = notasJson ? JSON.parse(notasJson) : null;
+            } catch (e) {
+                console.error('Failed to parse discipline notas', e);
+            }
+            window.openModal(id, codigo, nota, disciplineNotas);
         });
     });
 
