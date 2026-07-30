@@ -69,6 +69,23 @@ class SalaDisciplineController extends Controller
         // Log payload for debugging when saves appear not to persist
         \Log::info('SalaDiscipline update called for sala '.$sala->id, $request->all());
 
+        // Pre-process payload: remove fully-empty rows (no discipline AND weight empty/zero)
+        $payload = $request->all();
+        if (isset($payload['disciplines']) && is_array($payload['disciplines'])) {
+            $clean = array_values(array_filter($payload['disciplines'], function ($d) {
+                $name = trim($d['discipline'] ?? '');
+                $weight = isset($d['weight']) ? trim((string) $d['weight']) : '';
+                // remove if both name empty AND weight empty or zero
+                if ($name === '' && ($weight === '' || $weight === '0' || $weight === 0)) {
+                    return false;
+                }
+                return true;
+            }));
+            $payload['disciplines'] = $clean;
+            $request->replace($payload);
+            \Log::info('SalaDiscipline payload cleaned', ['sala' => $sala->id, 'clean_count' => count($clean), 'raw_count' => count($payload['disciplines'])]);
+        }
+
         try {
             $data = $request->validate([
                 'disciplines' => 'required|array',
