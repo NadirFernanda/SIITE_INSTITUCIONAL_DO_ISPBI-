@@ -6,6 +6,17 @@
 
     <h1 style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">Disciplinas — Sala: {{ $sala->nome }}</h1>
 
+    @if(isset($disciplines) && $disciplines->isNotEmpty())
+    <div style="background:#fff;border:1px solid #e6f6f6;border-radius:10px;padding:12px;margin-bottom:12px;">
+        <div style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Disciplinas vinculadas</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            @foreach($disciplines as $ld)
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:8px 12px;border-radius:8px;font-weight:700;color:#111827;">{{ $ld->discipline }} — {{ $ld->weight_percent }}%</div>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
     @if(session('success'))
         <div style="background:#ecfdf5;border:1px solid #bbf7d0;padding:10px;border-radius:8px;margin-bottom:12px;color:#065f46;">{{ session('success') }}</div>
     @endif
