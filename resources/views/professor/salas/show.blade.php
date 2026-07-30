@@ -156,14 +156,14 @@
                         <div style="display:flex;gap:6px;justify-content:center;">
                             <a href="{{ route('professor.candidaturas.show', $c->id) }}"
                                style="background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-block;">
-                                👁️ Ver
+                                Ver
                             </a>
                             <button type="button" class="openNotaBtn"
                                                             data-candidatura-id="{{ $c->id }}"
                                                             data-codigo-exame="{{ $c->codigo_exame }}"
                                                             data-nota="{{ $c->nota_exame ?? '' }}"
                                                             style="background:{{ $c->nota_exame !== null ? '#f5f3ff' : '#ede9fe' }};color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;">
-                                {{ $c->nota_exame !== null ? '✏️ Editar' : '➕ Lançar' }}
+                                {{ $c->nota_exame !== null ? 'Editar' : 'Lançar' }}
                             </button>
                         </div>
                     </td>
