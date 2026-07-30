@@ -156,18 +156,37 @@ document.addEventListener('DOMContentLoaded', function () {
     // validate duplicates before submit
     if (form) {
         form.addEventListener('submit', function (e) {
-            const rows = Array.from(document.querySelectorAll('.disc-row'));
-            const vals = rows.map(r => {
-                const sel = r.querySelector('select[name="disciplines[][discipline]"]');
-                const inp = r.querySelector('input[name="disciplines[][discipline]"]');
-                return (sel ? sel.value : (inp ? inp.value : '')).trim();
-            }).filter(Boolean);
-            const set = new Set(vals);
-            if (set.size !== vals.length) {
-                e.preventDefault();
-                alert('Existem disciplinas repetidas. Remova duplicados antes de gravar.');
-                return false;
+    // Remove any fully-empty rows (no discipline and empty weight)
+    const rows = Array.from(document.querySelectorAll('.disc-row'));
+    rows.forEach(r => {
+        const sel = r.querySelector('select[name="disciplines[][discipline]"]');
+        const inp = r.querySelector('input[name="disciplines[][discipline]"]');
+        const weight = r.querySelector('input[name="disciplines[][weight]"]');
+        const val = (sel ? sel.value : (inp ? inp.value : '')).trim();
+        const wval = weight ? String(weight.value).trim() : '';
+        if (!val && (wval === '' || wval === null)) {
+            r.remove();
+        } else {
+            // ensure weight is present (set to 0 if blank)
+            if (weight && (wval === '' || wval === null)) {
+                weight.value = '0';
             }
+        }
+    });
+
+    // re-collect after pruning
+    const remaining = Array.from(document.querySelectorAll('.disc-row'));
+    const vals = remaining.map(r => {
+        const sel = r.querySelector('select[name="disciplines[][discipline]"]');
+        const inp = r.querySelector('input[name="disciplines[][discipline]"]');
+        return (sel ? sel.value : (inp ? inp.value : '')).trim();
+    }).filter(Boolean);
+    const set = new Set(vals);
+    if (set.size !== vals.length) {
+        e.preventDefault();
+        alert('Existem disciplinas repetidas. Remova duplicados antes de gravar.');
+        return false;
+    }
         });
     }
 

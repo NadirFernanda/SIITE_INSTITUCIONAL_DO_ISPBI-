@@ -86,9 +86,12 @@ class SalaDisciplineController extends Controller
             // Remove existing entries not present in payload
             $incoming = collect($data['disciplines'])->map(fn($d) => trim($d['discipline']))->filter()->values();
 
-            SalaDiscipline::where('sala_id', $sala->id)
-                ->whereNotIn('discipline', $incoming)
-                ->delete();
+            // If incoming is empty, avoid running a whereNotIn([]) which can behave unexpectedly
+            if ($incoming->isNotEmpty()) {
+                SalaDiscipline::where('sala_id', $sala->id)
+                    ->whereNotIn('discipline', $incoming)
+                    ->delete();
+            }
 
             foreach ($data['disciplines'] as $d) {
                 $name = trim($d['discipline']);
@@ -100,7 +103,13 @@ class SalaDisciplineController extends Controller
             }
         });
 
-        \Log::info('SalaDisciplines saved for sala '.$sala->id);
+        // Extra logging to help debug persistence issues: log how many rows exist after save
+        try {
+            $count = SalaDiscipline::where('sala_id', $sala->id)->count();
+            \Log::info('SalaDisciplines saved for sala '.$sala->id, ['rows_after_save' => $count, 'incoming' => $data['disciplines']]);
+        } catch (\Throwable $e) {
+            \Log::error('Could not count SalaDisciplines after save: ' . $e->getMessage());
+        }
 
         return redirect()->route('admin.salas.disciplines.edit', $sala)
             ->with('success', 'Disciplinas da sala atualizadas com sucesso.');
