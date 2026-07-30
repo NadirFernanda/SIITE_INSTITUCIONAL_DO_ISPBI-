@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 
 
 // Rotas do painel administrativo protegidas por autenticação E papel de administrador
-// throttle:30,1 — máximo 30 pedidos/minuto por utilizador no painel (defesa em profundidade)
+// throttle:1000,1 — máximo 1000 pedidos/minuto por utilizador no painel (ajustado para operações internas durante candidaturas)
 Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::resource('/admin/estatisticas', App\Http\Controllers\Admin\EstatisticaController::class)->names('admin.estatisticas');
             Route::get('/admin/noticias/{id}/edit', [App\Http\Controllers\AdminNoticiaController::class, 'edit'])->name('admin.noticias.edit');
@@ -211,7 +211,7 @@ Route::get('/investigacao', function () {
 })->name('investigacao');
 
 // Admin CRUD for projects
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1000,1'])->group(function () {
     Route::resource('projects', AdminProjectController::class)->parameters(['projects' => 'project']);
 
     // Explicit admin routes for concursos that must be registered BEFORE the
@@ -288,7 +288,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:3
 });
 
 // Painel Secretaria — confirmação de pagamentos
-Route::prefix('secretaria')->name('secretaria.')->middleware(['auth', 'secretaria', 'throttle:30,1'])->group(function () {
+Route::prefix('secretaria')->name('secretaria.')->middleware(['auth', 'secretaria', 'throttle:1000,1'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('secretaria.candidaturas.index');
     })->name('dashboard');
@@ -299,7 +299,7 @@ Route::prefix('secretaria')->name('secretaria.')->middleware(['auth', 'secretari
 });
 
 // Painel DAAC — assinar candidaturas digitalmente
-Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1'])->group(function () {
+Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:1000,1'])->group(function () {
     // Candidaturas
     Route::get('candidaturas', [App\Http\Controllers\Daac\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Daac\CandidaturaController::class, 'downloadComprovativo'])->name('candidaturas.comprovativo');
@@ -322,7 +322,7 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:30,1
     Route::get('salas/{sala}', [App\Http\Controllers\Daac\SalaController::class, 'show'])->name('salas.show');
 });
 
-Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:30,1'])->group(function () {
+Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'throttle:1000,1'])->group(function () {
     // Relatórios
     Route::get('relatorios', function (\Illuminate\Http\Request $r) {
         return app(\App\Http\Controllers\RelatorioController::class)->index($r, 'layouts.tecnico');
@@ -354,7 +354,7 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::delete('salas/{sala}', [App\Http\Controllers\Tecnico\SalaController::class, 'destroy'])->name('salas.destroy');
 });
 
-Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomissao_lancamento', 'throttle:30,1'])->group(function () {
+Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomissao_lancamento', 'throttle:1000,1'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('lancamento.salas.index');
     })->name('dashboard');
@@ -377,7 +377,7 @@ Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomiss
 });
 
 // Painel Professor (Subcomissão de Correcção) — lançamento de notas
-Route::prefix('professor')->name('professor.')->middleware(['auth', 'subcomissao_correcao', 'throttle:30,1'])->group(function () {
+Route::prefix('professor')->name('professor.')->middleware(['auth', 'subcomissao_correcao', 'throttle:1000,1'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('professor.candidaturas.index');
     })->name('dashboard');
@@ -392,7 +392,7 @@ Route::prefix('professor')->name('professor.')->middleware(['auth', 'subcomissao
 });
 
 // Painel Presidência — impressão de pautas
-Route::prefix('presidencia')->name('presidencia.')->middleware(['auth', 'presidencia', 'throttle:30,1'])->group(function () {
+Route::prefix('presidencia')->name('presidencia.')->middleware(['auth', 'presidencia', 'throttle:1000,1'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('presidencia.salas.index');
     })->name('dashboard');
@@ -466,7 +466,7 @@ Route::get('/candidaturas/{candidatura}/pdf', [App\Http\Controllers\CandidaturaC
 // Rotas públicas de Alumni - sem dados sensíveis
 
 // Admin: gestão de disciplinas por sala (UI para configurar disciplinas e pesos)
-Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
+Route::middleware(['auth', 'admin', 'throttle:1000,1'])->group(function () {
     Route::get('admin/salas/{sala}/disciplinas', [App\Http\Controllers\Admin\SalaDisciplineController::class, 'edit'])->name('admin.salas.disciplines.edit');
     Route::post('admin/salas/{sala}/disciplinas', [App\Http\Controllers\Admin\SalaDisciplineController::class, 'update'])->name('admin.salas.disciplines.update');
 });
