@@ -66,8 +66,15 @@ class SalaDisciplineController extends Controller
 
     public function update(Request $request, Sala $sala)
     {
-        // Log payload for debugging when saves appear not to persist
-        \Log::info('SalaDiscipline update called for sala '.$sala->id, $request->all());
+        // Log payload for debugging when saves appear not to persist (also write raw payload to file)
+        try {
+            $raw = $request->all();
+            \Log::info('SalaDiscipline update called for sala '.$sala->id, $raw);
+            // append human-readable JSON to dedicated file for inspection
+            @file_put_contents(storage_path('logs/sala_disciplines_payload.log'), date('c') . " - sala {$sala->id} - " . json_encode($raw, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) . PHP_EOL . PHP_EOL, FILE_APPEND | LOCK_EX);
+        } catch (\Throwable $e) {
+            \Log::error('Failed to write sala disciplines raw payload: ' . $e->getMessage());
+        }
 
         // Pre-process payload: remove fully-empty rows (no discipline AND weight empty/zero)
         $payload = $request->all();
