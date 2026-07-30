@@ -127,7 +127,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
             // Se não houver nenhuma nota lançada, soma fica vazia
             $line[] = $hasAny ? number_format($sum, 2, '.', ',') : '';
-            $line[] = $hasAny ? ($sum >= 10 ? 'APROVADO' : 'REPROVADO') : '';
+            $line[] = ''; // Resultado em branco
 
             $rows[] = $line;
         }
