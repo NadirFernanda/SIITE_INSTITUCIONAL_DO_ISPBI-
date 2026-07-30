@@ -31,15 +31,49 @@ window.openModal = function(candidaturaId, codigoExame, notaAtual) {
     const notaModal = document.getElementById('notaModal');
 
     if (codigoElem) codigoElem.textContent = codigoExame;
-    if (notaInput) notaInput.value = notaAtual || '';
-    if (notaForm) {
-        notaForm.action = '/professor/candidaturas/' + candidaturaId + '/nota';
-        // populate redirect input with sala id (if present)
-        const redirectInput = document.getElementById('redirectInput');
-        if (redirectInput && notaModal && notaModal.dataset && notaModal.dataset.salaId) {
-            redirectInput.value = notaModal.dataset.salaId;
+
+    // If sala disciplines are defined, switch to discipline form
+    const salaDisc = Array.isArray(window.SALA_DISCIPLINES) && window.SALA_DISCIPLINES.length > 0 ? window.SALA_DISCIPLINES : null;
+    if (salaDisc) {
+        // hide single nota input
+        const single = document.getElementById('singleNotaContainer');
+        const discCont = document.getElementById('disciplinasContainer');
+        const discList = document.getElementById('disciplinasList');
+        if (single) single.style.display = 'none';
+        if (discCont) discCont.style.display = '';
+        if (discList) {
+            discList.innerHTML = '';
+            salaDisc.forEach(d => {
+                const wrapper = document.createElement('div');
+                wrapper.style = 'border:1px solid #e6f6f6;border-radius:8px;padding:8px;';
+                const label = document.createElement('div');
+                label.style = 'font-size:0.78rem;font-weight:700;color:#0f172a;margin-bottom:6px;';
+                label.innerText = d.discipline + ' — ' + d.weight + '%';
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.name = 'notas[' + d.discipline + ']';
+                input.min = 0; input.max = 20; input.step = '0.01';
+                input.style = 'width:100%;padding:8px;border-radius:6px;border:1px solid #e2fdfa;font-weight:700;text-align:center;';
+                input.value = '';
+                wrapper.appendChild(label);
+                wrapper.appendChild(input);
+                discList.appendChild(wrapper);
+            });
+        }
+        // set form action to notas-disciplinas route
+        if (notaForm) notaForm.action = '/professor/candidaturas/' + candidaturaId + '/notas-disciplinas';
+    } else {
+        if (notaInput) notaInput.value = notaAtual || '';
+        if (notaForm) {
+            notaForm.action = '/professor/candidaturas/' + candidaturaId + '/nota';
+            // populate redirect input with sala id (if present)
+            const redirectInput = document.getElementById('redirectInput');
+            if (redirectInput && notaModal && notaModal.dataset && notaModal.dataset.salaId) {
+                redirectInput.value = notaModal.dataset.salaId;
+            }
         }
     }
+
     if (notaModal) notaModal.style.display = 'flex';
     if (notaInput) notaInput.focus();
     updateFeedback();

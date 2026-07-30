@@ -113,14 +113,16 @@
 
 {{-- Modal para lançamento de nota --}}
 <div id="notaModal" data-sala-id="{{ $sala->id }}" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
-    <div style="background:#fff;border-radius:16px;padding:32px;max-width:500px;width:90%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1);">
+    <div style="background:#fff;border-radius:16px;padding:32px;max-width:700px;width:95%;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1);">
         <h2 style="font-size:1.3rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Lançar Nota</h2>
         <p style="color:#64748b;font-size:0.9rem;margin:0 0 20px;">Código de Exame: <code id="codigoExame" style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-weight:700;"></code></p>
 
+        {{-- Formulário dinâmico: se a sala tiver disciplinas definidas mostramos inputs por disciplina, senão input único --}}
         <form id="notaForm" method="POST" style="margin-bottom:20px;">
             @csrf @method('PATCH')
             <input type="hidden" name="redirect_to" id="redirectInput" value="">
-            <div style="margin-bottom:16px;">
+
+            <div id="singleNotaContainer" style="margin-bottom:16px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:6px;">Nota (0 – 20)</label>
                 <input type="number" name="nota_exame" id="notaInput" min="0" max="20" step="0.1"
                        style="width:100%;border:2px solid #ddd6fe;border-radius:8px;padding:12px;font-size:1.2rem;font-weight:700;text-align:center;box-sizing:border-box;"
@@ -129,12 +131,17 @@
                 <p id="notaError" style="font-size:0.8rem;color:#dc2626;margin-top:6px;display:none;"></p>
             </div>
 
+            <div id="disciplinasContainer" style="display:none;margin-bottom:12px;">
+                <div style="font-size:0.9rem;color:#64748b;margin-bottom:8px;">Lançamento por disciplina — preencha as notas abaixo:</div>
+                <div id="disciplinasList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;"></div>
+            </div>
+
             {{-- Visual feedback de aprovação/reprovação --}}
             <div id="notaFeedback" style="padding:12px;border-radius:8px;font-size:0.85rem;font-weight:600;margin-bottom:20px;text-align:center;display:none;">
             </div>
 
-            <div style="display:flex;gap:12px;">
-                <button type="submit" style="flex:1;background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <button type="submit" id="notaSubmit" style="flex:1;background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
                     Guardar Nota
                 </button>
                 <button type="button" id="notaCancel" style="flex:1;background:#f1f5f9;color:#475569;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
@@ -145,6 +152,13 @@
     </div>
 </div>
 
+@if(isset($salaDiscs))
+<script>
+    window.SALA_DISCIPLINES = {!! json_encode($salaDiscs->map(function($d){ return ['discipline' => $d->discipline, 'weight' => (int)$d->weight_percent]; })) !!};
+</script>
+@else
+<script>window.SALA_DISCIPLINES = [];</script>
+@endif
 <script src="{{ asset('js/professor-salas.js') }}"></script>
 
 @endsection

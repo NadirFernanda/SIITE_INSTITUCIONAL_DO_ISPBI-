@@ -47,6 +47,9 @@ class SalaController extends Controller
                 return $c;
             });
 
-        return view('professor.salas.show', compact('sala', 'candidaturas'));
+        // carregar disciplinas definidas para esta sala (se existirem)
+        $salaDiscs = \App\Models\SalaDiscipline::where('sala_id', $sala->id)->orderBy('id')->get();
+
+        return view('professor.salas.show', compact('sala', 'candidaturas', 'salaDiscs'));
     }
 }
