@@ -118,7 +118,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 $nota = $notaRow ? (float) $notaRow->nota : null;
                 if ($nota !== null) {
                     $hasAny = true;
-                    $sum += ($nota * ((int)$d['weight_percent'] / 100.0));
+                    $sum += $nota;
                     $line[] = number_format($nota, 2, '.', ',');
                 } else {
                     $line[] = '';
@@ -127,7 +127,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
             // Se não houver nenhuma nota lançada, soma fica vazia
             $line[] = $hasAny ? number_format($sum, 2, '.', ',') : '';
-            $line[] = ''; // Resultado em branco (a Presidência pode preencher manualmente)
+            $line[] = $hasAny ? ($sum >= 10 ? 'APROVADO' : 'REPROVADO') : '';
 
             $rows[] = $line;
         }
