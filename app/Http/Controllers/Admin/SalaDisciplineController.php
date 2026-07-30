@@ -68,7 +68,7 @@ class SalaDisciplineController extends Controller
     {
         $data = $request->validate([
             'disciplines' => 'required|array',
-            'disciplines.*.discipline' => 'required|string|max:191',
+            'disciplines.*.discipline' => 'required|string|max:191|distinct',
             'disciplines.*.weight' => 'required|integer|min:0|max:100',
         ], [
             'disciplines.required' => 'Adicione pelo menos uma disciplina.',

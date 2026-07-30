@@ -51,6 +51,7 @@
 
         <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
             <button type="button" id="add-disc" style="background:#7c3aed;color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;">Adicionar Disciplina</button>
+            <div id="all-linked-msg" style="display:none;color:#065f46;font-weight:700;margin-left:6px;">Todas as disciplinas dessa sala já foram vinculadas.</div>
             <div style="color:#6b7280;font-size:0.9rem;">Defina o peso (%) de cada disciplina. A soma total não precisa de ser 100, mas será usada para cálculo ponderado.</div>
         </div>
 
@@ -60,12 +61,16 @@
     </form>
 </div>
 
-@if(isset($courseDisciplines))
+@if(isset($courseDisciplines) || isset($disciplines))
 <script>
-    window.COURSE_DISCIPLINES = {!! json_encode($courseDisciplines->map(function($c){ return ['discipline' => $c->discipline, 'weight' => (int) $c->weight_percent]; })) !!};
+    window.COURSE_DISCIPLINES = {!! json_encode(isset($courseDisciplines) ? $courseDisciplines->map(function($c){ return ['discipline' => $c->discipline, 'weight' => (int) $c->weight_percent]; }) : collect()) !!};
+    window.EXISTING_DISCIPLINES = {!! json_encode(isset($disciplines) ? $disciplines->pluck('discipline')->map(function($s){ return trim($s); })->values() : collect()) !!};
 </script>
 @else
-<script>window.COURSE_DISCIPLINES = [];</script>
+<script>
+    window.COURSE_DISCIPLINES = [];
+    window.EXISTING_DISCIPLINES = [];
+</script>
 @endif
 <script src="{{ asset('js/admin-sala-disciplines.js') }}"></script>
 @endsection
