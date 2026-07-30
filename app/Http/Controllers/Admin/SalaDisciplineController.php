@@ -76,21 +76,61 @@ class SalaDisciplineController extends Controller
             \Log::error('Failed to write sala disciplines raw payload: ' . $e->getMessage());
         }
 
-        // Pre-process payload: remove fully-empty rows (no discipline AND weight empty/zero)
+        // Pre-process payload: normalize malformed pairs (some browsers may send discipline and weight as separate array elements)
         $payload = $request->all();
         if (isset($payload['disciplines']) && is_array($payload['disciplines'])) {
-            $clean = array_values(array_filter($payload['disciplines'], function ($d) {
+            $raw = array_values($payload['disciplines']);
+            $merged = [];
+            for ($i = 0; $i < count($raw); $i++) {
+                $item = $raw[$i];
+                $hasDisc = isset($item['discipline']) && trim((string)$item['discipline']) !== '';
+                $hasWeight = array_key_exists('weight', $item) && trim((string)($item['weight'] ?? '') ) !== '';
+
+                if ($hasDisc && !$hasWeight) {
+                    // try to consume following element if it only contains weight
+                    $next = $raw[$i + 1] ?? null;
+                    if ($next !== null && !isset($next['discipline']) && isset($next['weight'])) {
+                        $merged[] = ['discipline' => trim((string)$item['discipline']), 'weight' => trim((string)$next['weight'])];
+                        $i++; // skip next
+                        continue;
+                    }
+                    // no following weight-only entry, preserve discipline with possible weight (or default to 0)
+                    $merged[] = ['discipline' => trim((string)$item['discipline']), 'weight' => (isset($item['weight']) ? trim((string)$item['weight']) : '0')];
+                    continue;
+                }
+
+                if ($hasWeight && !$hasDisc) {
+                    // weight-only item: if last merged entry lacks weight (rare), attach it; otherwise create placeholder with empty discipline
+                    $lastIdx = count($merged) - 1;
+                    if ($lastIdx >= 0 && (!isset($merged[$lastIdx]['weight']) || trim((string)$merged[$lastIdx]['weight']) === '')) {
+                        $merged[$lastIdx]['weight'] = trim((string)$item['weight']);
+                    } else {
+                        // create an entry with empty discipline (will be filtered later)
+                        $merged[] = ['discipline' => '', 'weight' => trim((string)$item['weight'])];
+                    }
+                    continue;
+                }
+
+                // item contains both or neither; normalize
+                $merged[] = [
+                    'discipline' => isset($item['discipline']) ? trim((string)$item['discipline']) : '',
+                    'weight' => isset($item['weight']) ? trim((string)$item['weight']) : '0',
+                ];
+            }
+
+            // remove fully-empty rows (no discipline AND weight empty/zero)
+            $clean = array_values(array_filter($merged, function ($d) {
                 $name = trim($d['discipline'] ?? '');
                 $weight = isset($d['weight']) ? trim((string) $d['weight']) : '';
-                // remove if both name empty AND weight empty or zero
                 if ($name === '' && ($weight === '' || $weight === '0' || $weight === 0)) {
                     return false;
                 }
                 return true;
             }));
+
             $payload['disciplines'] = $clean;
             $request->replace($payload);
-            \Log::info('SalaDiscipline payload cleaned', ['sala' => $sala->id, 'clean_count' => count($clean), 'raw_count' => count($payload['disciplines'])]);
+            \Log::info('SalaDiscipline payload cleaned', ['sala' => $sala->id, 'clean_count' => count($clean), 'raw_count' => count($raw), 'merged_count' => count($merged)]);
         }
 
         try {
