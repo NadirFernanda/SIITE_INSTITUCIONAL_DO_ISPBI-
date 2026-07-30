@@ -172,8 +172,8 @@
                     @php tc_label('Habilitações Literárias') @endphp
                     <select name="habilitacoes" required style="{{ $inp }}">
                         <option value="">— Seleccione —</option>
-                        <option value="Décima Segunda" {{ old('habilitacoes') === 'Décima Segunda' ? 'selected' : '' }}>12 (Décima Segunda)</option>
-                                                <option value="Décima Terceira" {{ old('habilitacoes') === 'Décima Terceira' ? 'selected' : '' }}>13 (Décima Terceira)</option>
+                        <option value="12ª" {{ old('habilitacoes') === '12ª' ? 'selected' : '' }}>12ª (Décima Segunda)</option>
+                                                <option value="13ª" {{ old('habilitacoes') === '13ª' ? 'selected' : '' }}>13ª (Décima Terceira)</option>
                     </select>
                 </div>
                 <div>

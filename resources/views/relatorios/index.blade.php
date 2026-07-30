@@ -110,6 +110,17 @@
                     @endforeach
                 </select>
             </div>
+            {{-- Necessidade de Educação Especial --}}
+            <div style="min-width:240px;">
+                <label style="display:block;font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Necessidade de Ed. Especial</label>
+                <select name="necessidade_especial" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.87rem;background:#f8fafc;">
+                    <option value="">Todas</option>
+                    <option value="Nenhuma" {{ request('necessidade_especial')==='Nenhuma' ? 'selected':'' }}>Nenhuma</option>
+                    <option value="Filhos de antigos combatentes" {{ request('necessidade_especial')==='Filhos de antigos combatentes' ? 'selected':'' }}>Filhos de antigos combatentes</option>
+                    <option value="Áreas Steam" {{ request('necessidade_especial')==='Áreas Steam' ? 'selected':'' }}>Áreas Steam</option>
+                    <option value="Portadores de deficiência" {{ request('necessidade_especial')==='Portadores de deficiência' ? 'selected':'' }}>Portadores de deficiência</option>
+                </select>
+            </div>
             {{-- Est. Financeiro --}}
             <div style="min-width:130px;">
                 <label style="display:block;font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Est. Financeiro</label>

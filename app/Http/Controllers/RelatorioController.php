@@ -31,7 +31,7 @@ class RelatorioController extends Controller
             });
         }
 
-        foreach (['status','periodo','sexo','curso','estado_financeiro','naturalidade_provincia'] as $filtro) {
+        foreach (['status','periodo','sexo','curso','estado_financeiro','naturalidade_provincia','necessidade_especial'] as $filtro) {
             if ($request->filled($filtro)) {
                 $query->where($filtro, $request->input($filtro));
             }
@@ -80,7 +80,7 @@ class RelatorioController extends Controller
                   ->orWhere('email','like',"%{$q}%");
             });
         }
-        foreach (['status','periodo','sexo','curso','estado_financeiro','naturalidade_provincia'] as $filtro) {
+        foreach (['status','periodo','sexo','curso','estado_financeiro','naturalidade_provincia','necessidade_especial'] as $filtro) {
             if ($request->filled($filtro)) $query->where($filtro, $request->input($filtro));
         }
         if ($request->filled('trabalhador')) {

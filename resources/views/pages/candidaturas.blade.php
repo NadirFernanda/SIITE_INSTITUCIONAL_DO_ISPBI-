@@ -379,8 +379,8 @@
                                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Habilitações Literárias <span class="text-red-500">*</span></label>
                                                 <select name="habilitacoes" required class="{{ $inp }} @error('habilitacoes') border-red-400 @enderror">
                                                     <option value="">— Seleccione —</option>
-                                                    <option value="Décima Segunda" {{ old('habilitacoes') === 'Décima Segunda' ? 'selected' : '' }}>12 (Décima Segunda)</option>
-                                                                                                        <option value="Décima Terceira" {{ old('habilitacoes') === 'Décima Terceira' ? 'selected' : '' }}>13 (Décima Terceira)</option>
+                                                    <option value="12ª" {{ old('habilitacoes') === '12ª' ? 'selected' : '' }}>12ª (Décima Segunda)</option>
+                                                                                                        <option value="13ª" {{ old('habilitacoes') === '13ª' ? 'selected' : '' }}>13ª (Décima Terceira)</option>
                                                 </select>
                                                 @error('habilitacoes')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                             </div>
