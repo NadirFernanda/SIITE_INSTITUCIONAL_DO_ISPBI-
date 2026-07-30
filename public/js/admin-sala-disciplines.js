@@ -156,23 +156,35 @@ document.addEventListener('DOMContentLoaded', function () {
     // validate duplicates before submit
     if (form) {
         form.addEventListener('submit', function (e) {
-    // Remove any fully-empty rows (no discipline and empty weight)
+    // Remove rows where both discipline empty AND weight is empty or zero.
+    // If weight > 0 but discipline empty, block submission and ask user to fill discipline.
     const rows = Array.from(document.querySelectorAll('.disc-row'));
-    rows.forEach(r => {
+    for (const r of rows) {
         const sel = r.querySelector('select[name="disciplines[][discipline]"]');
         const inp = r.querySelector('input[name="disciplines[][discipline]"]');
         const weight = r.querySelector('input[name="disciplines[][weight]"]');
         const val = (sel ? sel.value : (inp ? inp.value : '')).trim();
-        const wval = weight ? String(weight.value).trim() : '';
-        if (!val && (wval === '' || wval === null)) {
-            r.remove();
-        } else {
-            // ensure weight is present (set to 0 if blank)
-            if (weight && (wval === '' || wval === null)) {
-                weight.value = '0';
-            }
+        let wval = 0;
+        if (weight) {
+            wval = Number(String(weight.value).trim() === '' ? 0 : Number(weight.value));
         }
-    });
+
+        if (!val && (wval === 0 || isNaN(wval))) {
+            r.remove();
+            continue;
+        }
+
+        if (!val && wval > 0) {
+            e.preventDefault();
+            alert('Por favor seleccione uma disciplina para o peso definido.');
+            return false;
+        }
+
+        // ensure weight is present (set to 0 if blank)
+        if (weight && (String(weight.value).trim() === '')) {
+            weight.value = '0';
+        }
+    }
 
     // re-collect after pruning
     const remaining = Array.from(document.querySelectorAll('.disc-row'));
