@@ -34,21 +34,29 @@ class SalaController extends Controller
     // Exibir pauta de uma sala com candidatos (anonimato)
     public function show(Sala $sala)
     {
+        // carregar disciplinas definidas para esta sala (se existirem)
+        $salaDiscs = \App\Models\SalaDiscipline::where('sala_id', $sala->id)->orderBy('id')->get();
+
         $candidaturas = $sala->candidaturas()
             ->select('id', 'sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_por', 'nota_lancada_em')
             ->whereNotNull('codigo_exame')
             ->orderBy('numero_lugar')
             ->get()
-            ->map(function ($c) {
+            ->map(function ($c) use ($salaDiscs) {
                 // Carregar dados de quem lançou a nota
                 if ($c->nota_lancada_por) {
                     $c->notaLancadaPor = \App\Models\User::find($c->nota_lancada_por);
                 }
+
+                // Carregar notas por disciplina para esta candidatura (se existirem)
+                try {
+                    $c->discipline_notas = \App\Models\CandidaturaNota::where('candidatura_id', $c->id)->get()->keyBy('discipline');
+                } catch (\Throwable $e) {
+                    $c->discipline_notas = collect();
+                }
+
                 return $c;
             });
-
-        // carregar disciplinas definidas para esta sala (se existirem)
-        $salaDiscs = \App\Models\SalaDiscipline::where('sala_id', $sala->id)->orderBy('id')->get();
 
         return view('professor.salas.show', compact('sala', 'candidaturas', 'salaDiscs'));
     }

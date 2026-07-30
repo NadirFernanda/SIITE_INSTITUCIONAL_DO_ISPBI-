@@ -74,12 +74,48 @@
                         <code style="background:#f1f5f9;padding:4px 8px;border-radius:5px;font-family:monospace;">{{ $c->codigo_exame }}</code>
                     </td>
                     <td style="padding:13px 18px;text-align:center;color:#475569;">
-                        @if($c->nota_exame !== null)
-                            <span style="background:{{ $c->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $c->nota_exame >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $c->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;">
-                                {{ number_format($c->nota_exame, 1) }}/20
-                            </span>
+                        @if(isset($salaDiscs) && $salaDiscs->count())
+                            @php
+                                $discNotas = $c->discipline_notas ?? collect();
+                                $hasAnyDisc = false;
+                                $weighted = 0.0;
+                            @endphp
+                            @foreach($salaDiscs as $sd)
+                                @php
+                                    $nr = $discNotas[$sd->discipline] ?? null;
+                                    if ($nr && $nr->nota !== null) {
+                                        $hasAnyDisc = true;
+                                        $weighted += ((float)$nr->nota) * ((int)$sd->weight_percent / 100.0);
+                                    }
+                                @endphp
+                            @endforeach
+
+                            @if($hasAnyDisc)
+                                <div style="margin-bottom:6px;">
+                                    <span style="background:{{ $weighted >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $weighted >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $weighted >= 10 ? '#86efac' : '#fca5a5' }};padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;">
+                                        {{ number_format($weighted, 2) }}/20
+                                    </span>
+                                </div>
+                                <div style="font-size:0.78rem;color:#64748b;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+                                    @foreach($salaDiscs as $sd)
+                                        @php $nr = $discNotas[$sd->discipline] ?? null; @endphp
+                                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;font-weight:700;color:#0f172a;font-size:0.8rem;">
+                                            <div style="font-size:0.72rem;font-weight:600;color:#64748b;">{{ $sd->discipline }}</div>
+                                            <div style="text-align:center;">{{ $nr?->nota !== null ? number_format($nr->nota,2) : '—' }}</div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <span style="color:#94a3b8;font-size:0.9rem;">—</span>
+                            @endif
                         @else
-                            <span style="color:#94a3b8;font-size:0.9rem;">—</span>
+                            @if($c->nota_exame !== null)
+                                <span style="background:{{ $c->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $c->nota_exame >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $c->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;">
+                                    {{ number_format($c->nota_exame, 1) }}/20
+                                </span>
+                            @else
+                                <span style="color:#94a3b8;font-size:0.9rem;">—</span>
+                            @endif
                         @endif
                     </td>
                     <td style="padding:13px 18px;">
