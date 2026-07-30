@@ -206,6 +206,10 @@
                                style="background:#15803d;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 PDF
                             </a>
+                            <a href="{{ route('admin.salas.disciplines.edit', $sala) }}"
+                               style="background:#7c3aed;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;">
+                                Disciplinas
+                            </a>
                             {{-- Editar capacidade inline --}}
                             <button onclick="document.getElementById('edit-{{ $sala->id }}').style.display='block'"
                                     style="background:#f59e0b;color:#fff;border:none;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;">
