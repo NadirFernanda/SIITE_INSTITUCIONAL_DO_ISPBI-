@@ -68,7 +68,7 @@
             </thead>
             <tbody>
                 @foreach($candidaturas as $i => $c)
-                <tr style="border-bottom:1px solid #f1f5f9;" onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background=''">
+                <tr class="hover-row" style="border-bottom:1px solid #f1f5f9;">
                     <td style="padding:13px 18px;color:#94a3b8;font-weight:600;text-align:center;">{{ $loop->iteration }}</td>
                     <td style="padding:13px 18px;color:#1a2332;font-weight:700;font-size:0.95rem;">
                         <code style="background:#f1f5f9;padding:4px 8px;border-radius:5px;font-family:monospace;">{{ $c->codigo_exame }}</code>

@@ -48,7 +48,12 @@ window.openModal = function(candidaturaId, codigoExame, notaAtual) {
         const single = document.getElementById('singleNotaContainer');
         const discCont = document.getElementById('disciplinasContainer');
         const discList = document.getElementById('disciplinasList');
-        if (single) single.style.display = 'none';
+        if (single) {
+            single.style.display = 'none';
+            // remove required from single input to avoid browser validation blocking
+            const notaInputEl = document.getElementById('notaInput');
+            if (notaInputEl) notaInputEl.removeAttribute('required');
+        }
         if (discCont) discCont.style.display = '';
         if (discList) {
             discList.innerHTML = '';
@@ -72,7 +77,11 @@ window.openModal = function(candidaturaId, codigoExame, notaAtual) {
         // set form action to notas-disciplinas route
         if (notaForm) notaForm.action = '/professor/candidaturas/' + candidaturaId + '/notas-disciplinas';
     } else {
-        if (notaInput) notaInput.value = notaAtual || '';
+        if (notaInput) {
+            notaInput.value = notaAtual || '';
+            // ensure required when using single nota input
+            notaInput.setAttribute('required', 'required');
+        }
         if (notaForm) {
             notaForm.action = '/professor/candidaturas/' + candidaturaId + '/nota';
             // populate redirect input with sala id (if present)
@@ -130,6 +139,13 @@ function init() {
     document.addEventListener('keydown', function(event){
         if (event.key === 'Escape') closeModal();
     });
+
+    // attach hover behavior to rows (replaces inline onmouseover/onmouseout)
+    document.querySelectorAll('.hover-row').forEach(function(row){
+        row.addEventListener('mouseover', function(){ this.style.background = '#fafafa'; });
+        row.addEventListener('mouseout', function(){ this.style.background = ''; });
+    });
 }
+
 
 })();
