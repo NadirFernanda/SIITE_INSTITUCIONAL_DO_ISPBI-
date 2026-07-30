@@ -56,27 +56,14 @@
                     $notaRow = $notas[$discName] ?? null;
                     if ($notaRow && $notaRow->nota !== null) {
                         $hasAny = true;
-                        $sum += (float) $notaRow->nota; // accumulate raw notes
+                        $sum += (float) $notaRow->nota;
                     }
                 @endphp
             @endforeach
 
             @if($hasAny)
                 @php
-                    if ($totalWeight == 0) {
-                        $computed = $sum; // simple sum when weights are all zero
-                    } else {
-                        $weighted = 0.0;
-                        foreach($disciplines as $d) {
-                            $dn = $d->discipline;
-                            $nr = $notas[$dn] ?? null;
-                            $w = (int)$d->weight_percent;
-                            if ($nr && $nr->nota !== null) {
-                                $weighted += ((float)$nr->nota) * ($w / (float)$totalWeight);
-                            }
-                        }
-                        $computed = $weighted;
-                    }
+                    $computed = $sum;
                 @endphp
                     <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;">
                         <div id="computedWeightedBox" style="background:{{ $computed >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $computed >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 22px;text-align:center;">
