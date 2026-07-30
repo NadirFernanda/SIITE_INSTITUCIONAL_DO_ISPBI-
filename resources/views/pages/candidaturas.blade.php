@@ -311,7 +311,16 @@
                                             </div>
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Estado Civil <span class="text-red-500">*</span></label>
-                                                <input type="text" name="estado_civil" value="{{ old('estado_civil') }}" required maxlength="100" placeholder="Ex: Solteiro(a), Casado(a)..." class="{{ $inp }} @error('estado_civil') border-red-400 @enderror">
+                                                <select name="estado_civil" required class="{{ $inp }} @error('estado_civil') border-red-400 @enderror">
+                                                    <option value="">— Seleccione —</option>
+                                                    <option value="Solteiro(a)" {{ old('estado_civil') === 'Solteiro(a)' ? 'selected' : '' }}>Solteiro(a)</option>
+                                                    <option value="Casado(a)" {{ old('estado_civil') === 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
+                                                    <option value="Divorciado(a)" {{ old('estado_civil') === 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
+                                                    <option value="Separado(a)" {{ old('estado_civil') === 'Separado(a)' ? 'selected' : '' }}>Separado(a)</option>
+                                                    <option value="Viúvo(a)" {{ old('estado_civil') === 'Viúvo(a)' ? 'selected' : '' }}>Viúvo(a)</option>
+                                                    <option value="União de Facto" {{ old('estado_civil') === 'União de Facto' ? 'selected' : '' }}>União de Facto</option>
+                                                    <option value="Outro" {{ old('estado_civil') === 'Outro' ? 'selected' : '' }}>Outro</option>
+                                                </select>
                                                 @error('estado_civil')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                             </div>
                                         </div>

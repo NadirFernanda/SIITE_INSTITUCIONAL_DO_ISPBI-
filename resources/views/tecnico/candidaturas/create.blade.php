@@ -113,7 +113,16 @@
                 </div>
                 <div>
                     @php tc_label('Estado Civil') @endphp
-                    <input type="text" name="estado_civil" value="{{ old('estado_civil') }}" required maxlength="100" placeholder="Ex: Solteiro(a)" style="{{ $inp }}">
+                    <select name="estado_civil" required style="{{ $inp }}">
+                        <option value="">— Seleccione —</option>
+                        <option value="Solteiro(a)" {{ old('estado_civil') === 'Solteiro(a)' ? 'selected' : '' }}>Solteiro(a)</option>
+                        <option value="Casado(a)" {{ old('estado_civil') === 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
+                        <option value="Divorciado(a)" {{ old('estado_civil') === 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
+                        <option value="Separado(a)" {{ old('estado_civil') === 'Separado(a)' ? 'selected' : '' }}>Separado(a)</option>
+                        <option value="Viúvo(a)" {{ old('estado_civil') === 'Viúvo(a)' ? 'selected' : '' }}>Viúvo(a)</option>
+                        <option value="União de Facto" {{ old('estado_civil') === 'União de Facto' ? 'selected' : '' }}>União de Facto</option>
+                        <option value="Outro" {{ old('estado_civil') === 'Outro' ? 'selected' : '' }}>Outro</option>
+                    </select>
                 </div>
             </div>
 
