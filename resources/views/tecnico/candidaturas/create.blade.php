@@ -170,7 +170,11 @@
             <div style="display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-bottom:14px;">
                 <div>
                     @php tc_label('Habilitações Literárias') @endphp
-                    <input type="text" name="habilitacoes" value="{{ old('habilitacoes') }}" required maxlength="100" placeholder="Ex: 12ª Classe" style="{{ $inp }}">
+                    <select name="habilitacoes" required style="{{ $inp }}">
+                        <option value="">— Seleccione —</option>
+                        <option value="12" {{ old('habilitacoes') === '12' ? 'selected' : '' }}>12 (Décima Segunda)</option>
+                        <option value="13" {{ old('habilitacoes') === '13' ? 'selected' : '' }}>13 (Décima Terceira)</option>
+                    </select>
                 </div>
                 <div>
                     @php tc_label('Escola de Proveniência') @endphp

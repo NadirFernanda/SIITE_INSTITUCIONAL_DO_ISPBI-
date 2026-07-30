@@ -377,7 +377,11 @@
                                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                             <div>
                                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Habilitações Literárias <span class="text-red-500">*</span></label>
-                                                <input type="text" name="habilitacoes" value="{{ old('habilitacoes') }}" required maxlength="100" placeholder="Ex: 12ª Classe" class="{{ $inp }} @error('habilitacoes') border-red-400 @enderror">
+                                                <select name="habilitacoes" required class="{{ $inp }} @error('habilitacoes') border-red-400 @enderror">
+                                                    <option value="">— Seleccione —</option>
+                                                    <option value="12" {{ old('habilitacoes') === '12' ? 'selected' : '' }}>12 (Décima Segunda)</option>
+                                                    <option value="13" {{ old('habilitacoes') === '13' ? 'selected' : '' }}>13 (Décima Terceira)</option>
+                                                </select>
                                                 @error('habilitacoes')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                             </div>
                                             <div class="sm:col-span-2">
