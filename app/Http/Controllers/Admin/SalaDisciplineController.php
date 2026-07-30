@@ -24,8 +24,41 @@ class SalaDisciplineController extends Controller
 
         $courseDisciplines = collect();
         if ($courseName) {
-            // case-insensitive match for course_name
-            $courseDisciplines = CourseDiscipline::whereRaw('LOWER(course_name) = ?', [strtolower($courseName)])->orderBy('id')->get();
+            // Build a normalized map of course_name => collection to allow robust matching
+            $all = CourseDiscipline::orderBy('id')->get();
+
+            $normalize = function ($s) {
+                // remove accents and non-alphanum, lowercase
+                $s = (string) $s;
+                $s = iconv('UTF-8', 'ASCII//TRANSLIT', $s);
+                $s = strtolower($s);
+                $s = preg_replace('/[^a-z0-9 ]+/', '', $s);
+                $s = trim($s);
+                return $s;
+            };
+
+            $map = [];
+            foreach ($all as $row) {
+                $key = $normalize($row->course_name);
+                $map[$key][] = $row;
+            }
+
+            $candidates = $sala->candidaturas->pluck('curso')->unique()->values();
+            foreach ($candidates as $cn) {
+                $norm = $normalize($cn);
+                // exact normalized match
+                if (isset($map[$norm])) {
+                    $courseDisciplines = collect($map[$norm]);
+                    break;
+                }
+                // partial match: key contains norm or norm contains key
+                foreach ($map as $k => $rows) {
+                    if ($k !== '' && (str_contains($k, $norm) || str_contains($norm, $k))) {
+                        $courseDisciplines = collect($rows);
+                        break 2;
+                    }
+                }
+            }
         }
 
         return view('admin.salas.disciplines', compact('sala', 'disciplines', 'courseDisciplines'));
