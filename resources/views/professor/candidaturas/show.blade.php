@@ -70,11 +70,8 @@
                             <div id="computedWeightedValue" style="font-size:2rem;font-weight:900;color:{{ $computed >= 10 ? '#15803d' : '#dc2626' }};">
                                 {{ number_format($computed, 2) }}<span style="font-size:0.9rem;color:#94a3b8;">/20</span>
                             </div>
-                            <div id="computedWeightedStatus" style="font-size:0.72rem;font-weight:700;color:{{ $computed >= 10 ? '#15803d' : '#dc2626' }};">
-                                {{ $computed >= 10 ? 'APROVADO (pela soma ponderada)' : 'REPROVADO (pela soma ponderada)' }}
-                            </div>
                         </div>
-                        <div style="font-size:0.78rem;color:#64748b;">A soma ponderada acima é calculada automaticamente a partir das notas por disciplina. A Presidência usará este valor para a pauta final.</div>
+                        <div style="font-size:0.78rem;color:#64748b;">A soma das notas por disciplina é calculada automaticamente. A Presidência usará este valor para a pauta final.</div>
                     </div>
                 @else
                     <div style="background:#fff8f0;border:1px solid #fde3c7;border-radius:10px;padding:12px;margin-bottom:12px;">

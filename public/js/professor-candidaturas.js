@@ -23,13 +23,8 @@ function computeWeights(){
     if (weightWarning) weightWarning.style.display = (totalWeight !== 100) ? 'inline' : 'none';
 
     const computedValueEl = document.getElementById('computedWeightedValue');
-    const computedStatusEl = document.getElementById('computedWeightedStatus');
     const computedBox = document.getElementById('computedWeightedBox');
     if (computedValueEl) computedValueEl.innerHTML = fmt(sum) + '<span style="font-size:0.9rem;color:#94a3b8;">/20</span>';
-    if (computedStatusEl) {
-        computedStatusEl.textContent = sum >= 10 ? 'APROVADO (pela soma ponderada)' : 'REPROVADO (pela soma ponderada)';
-        computedStatusEl.style.color = sum >= 10 ? '#15803d' : '#dc2626';
-    }
     if (computedBox) {
         computedBox.style.background = sum >= 10 ? '#f0fdf4' : '#fff5f5';
         computedBox.style.border = '1px solid ' + (sum >= 10 ? '#86efac' : '#fca5a5');

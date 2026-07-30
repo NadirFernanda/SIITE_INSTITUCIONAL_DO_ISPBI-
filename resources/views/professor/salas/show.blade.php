@@ -61,7 +61,8 @@
                 <tr style="border-bottom:2px solid #e2e8f0;background:#f8fafc;">
                     <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:60px;">Lugar</th>
                     <th style="padding:12px 18px;text-align:left;font-weight:700;color:#475569;">Código Exame</th>
-                    <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:120px;">Nota</th>
+                    <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;">Disciplinas</th>
+                    <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:120px;">Soma</th>
                     <th style="padding:12px 18px;text-align:left;font-weight:700;color:#475569;">Status</th>
                     <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:100px;">Acção</th>
                 </tr>
@@ -72,6 +73,40 @@
                     <td style="padding:13px 18px;color:#94a3b8;font-weight:600;text-align:center;">{{ $loop->iteration }}</td>
                     <td style="padding:13px 18px;color:#1a2332;font-weight:700;font-size:0.95rem;">
                         <code style="background:#f1f5f9;padding:4px 8px;border-radius:5px;font-family:monospace;">{{ $c->codigo_exame }}</code>
+                    </td>
+                    <td style="padding:13px 18px;text-align:center;color:#475569;">
+                        @if(isset($salaDiscs) && $salaDiscs->count())
+                            @php
+                                $discNotas = $c->discipline_notas ?? collect();
+                                $hasAnyDisc = false;
+                            @endphp
+                            @foreach($salaDiscs as $sd)
+                                @php
+                                    $nr = $discNotas[$sd->discipline] ?? null;
+                                    if ($nr && $nr->nota !== null) {
+                                        $hasAnyDisc = true;
+                                    }
+                                @endphp
+                            @endforeach
+
+                            @if($hasAnyDisc)
+                                <div style="font-size:0.78rem;color:#64748b;display:flex;gap:4px;flex-wrap:wrap;justify-content:center;">
+                                    @foreach($salaDiscs as $sd)
+                                        @php $nr = $discNotas[$sd->discipline] ?? null; @endphp
+                                        @if($nr?->nota !== null)
+                                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:4px 6px;font-weight:600;color:#0f172a;font-size:0.75rem;">
+                                            <div style="font-size:0.65rem;color:#64748b;">{{ substr($sd->discipline, 0, 3) }}</div>
+                                            <div>{{ number_format($nr->nota,2) }}</div>
+                                        </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @else
+                                <span style="color:#94a3b8;font-size:0.9rem;">—</span>
+                            @endif
+                        @else
+                            <span style="color:#94a3b8;font-size:0.9rem;">—</span>
+                        @endif
                     </td>
                     <td style="padding:13px 18px;text-align:center;color:#475569;">
                         @if(isset($salaDiscs) && $salaDiscs->count())
@@ -91,20 +126,9 @@
                             @endforeach
 
                             @if($hasAnyDisc)
-                                <div style="margin-bottom:6px;">
-                                    <span style="background:{{ $soma >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $soma >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $soma >= 10 ? '#86efac' : '#fca5a5' }};padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;">
-                                        {{ number_format($soma, 2) }}/20
-                                    </span>
-                                </div>
-                                <div style="font-size:0.78rem;color:#64748b;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-                                    @foreach($salaDiscs as $sd)
-                                        @php $nr = $discNotas[$sd->discipline] ?? null; @endphp
-                                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 8px;font-weight:700;color:#0f172a;font-size:0.8rem;">
-                                            <div style="font-size:0.72rem;font-weight:600;color:#64748b;">{{ $sd->discipline }}</div>
-                                            <div style="text-align:center;">{{ $nr?->nota !== null ? number_format($nr->nota,2) : '—' }}</div>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                <span style="background:{{ $soma >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $soma >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $soma >= 10 ? '#86efac' : '#fca5a5' }};padding:4px 12px;border-radius:20px;font-weight:700;font-size:0.85rem;">
+                                    {{ number_format($soma, 2) }}/20
+                                </span>
                             @else
                                 <span style="color:#94a3b8;font-size:0.9rem;">—</span>
                             @endif
