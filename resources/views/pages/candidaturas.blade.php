@@ -319,7 +319,13 @@
                                         {{-- 7. Necessidade de Educação Especial --}}
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Necessidade de Educação Especial <span class="text-red-500">*</span></label>
-                                            <input type="text" name="necessidade_especial" value="{{ old('necessidade_especial') }}" required maxlength="255" placeholder="Escreva 'Nenhuma' se não aplicável" class="{{ $inp }} @error('necessidade_especial') border-red-400 @enderror">
+                                            <select name="necessidade_especial" required class="{{ $inp }} @error('necessidade_especial') border-red-400 @enderror">
+                                                <option value="">— Seleccione —</option>
+                                                <option value="Nenhuma" {{ old('necessidade_especial') === 'Nenhuma' ? 'selected' : '' }}>Nenhuma</option>
+                                                <option value="Filhos de antigos combatentes" {{ old('necessidade_especial') === 'Filhos de antigos combatentes' ? 'selected' : '' }}>Filhos de antigos combatentes</option>
+                                                <option value="Áreas Steam" {{ old('necessidade_especial') === 'Áreas Steam' ? 'selected' : '' }}>Áreas Steam</option>
+                                                <option value="Portadores de deficiência" {{ old('necessidade_especial') === 'Portadores de deficiência' ? 'selected' : '' }}>Portadores de deficiência</option>
+                                            </select>
                                             @error('necessidade_especial')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                         </div>
 

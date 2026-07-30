@@ -134,9 +134,13 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
             {{-- Necessidade Especial --}}
             <div style="margin-bottom:14px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Necessidade de Educação Especial <span style="color:#ef4444">*</span></label>
-                <input type="text" name="necessidade_especial"
-                       value="{{ old('necessidade_especial', $candidatura->necessidade_especial) }}"
-                       required maxlength="255" placeholder="Escreva 'Nenhuma' se não aplicável" style="{{ $inp }}">
+                <select name="necessidade_especial" required style="{{ $inp }}">
+                    <option value="">— Seleccione —</option>
+                    <option value="Nenhuma" {{ old('necessidade_especial', $candidatura->necessidade_especial) === 'Nenhuma' ? 'selected' : '' }}>Nenhuma</option>
+                    <option value="Filhos de antigos combatentes" {{ old('necessidade_especial', $candidatura->necessidade_especial) === 'Filhos de antigos combatentes' ? 'selected' : '' }}>Filhos de antigos combatentes</option>
+                    <option value="Áreas Steam" {{ old('necessidade_especial', $candidatura->necessidade_especial) === 'Áreas Steam' ? 'selected' : '' }}>Áreas Steam</option>
+                    <option value="Portadores de deficiência" {{ old('necessidade_especial', $candidatura->necessidade_especial) === 'Portadores de deficiência' ? 'selected' : '' }}>Portadores de deficiência</option>
+                </select>
             </div>
 
             {{-- Residência --}}

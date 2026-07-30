@@ -120,7 +120,13 @@
             {{-- Necessidade Especial --}}
             <div style="margin-bottom:14px;">
                 @php tc_label('Necessidade de Educação Especial') @endphp
-                <input type="text" name="necessidade_especial" value="{{ old('necessidade_especial') }}" required maxlength="255" placeholder="Escreva 'Nenhuma' se não aplicável" style="{{ $inp }}">
+                <select name="necessidade_especial" required style="{{ $inp }}">
+                    <option value="">— Seleccione —</option>
+                    <option value="Nenhuma" {{ old('necessidade_especial') === 'Nenhuma' ? 'selected' : '' }}>Nenhuma</option>
+                    <option value="Filhos de antigos combatentes" {{ old('necessidade_especial') === 'Filhos de antigos combatentes' ? 'selected' : '' }}>Filhos de antigos combatentes</option>
+                    <option value="Áreas Steam" {{ old('necessidade_especial') === 'Áreas Steam' ? 'selected' : '' }}>Áreas Steam</option>
+                    <option value="Portadores de deficiência" {{ old('necessidade_especial') === 'Portadores de deficiência' ? 'selected' : '' }}>Portadores de deficiência</option>
+                </select>
             </div>
 
             {{-- Residência --}}
