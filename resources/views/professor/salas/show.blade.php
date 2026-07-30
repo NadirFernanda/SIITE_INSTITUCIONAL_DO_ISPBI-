@@ -152,13 +152,7 @@
     </div>
 </div>
 
-@if(isset($salaDiscs))
-<script>
-    window.SALA_DISCIPLINES = {!! json_encode($salaDiscs->map(function($d){ return ['discipline' => $d->discipline, 'weight' => (int)$d->weight_percent]; })) !!};
-</script>
-@else
-<script>window.SALA_DISCIPLINES = [];</script>
-@endif
+<script id="sala-disciplines" type="application/json">{!! json_encode(isset($salaDiscs) ? $salaDiscs->map(function($d){ return ['discipline' => $d->discipline, 'weight' => (int)$d->weight_percent]; }) : []) !!}</script>
 <script src="{{ asset('js/professor-salas.js') }}"></script>
 
 @endsection

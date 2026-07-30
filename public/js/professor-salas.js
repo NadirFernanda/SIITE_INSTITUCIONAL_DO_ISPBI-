@@ -32,8 +32,17 @@ window.openModal = function(candidaturaId, codigoExame, notaAtual) {
 
     if (codigoElem) codigoElem.textContent = codigoExame;
 
-    // If sala disciplines are defined, switch to discipline form
-    const salaDisc = Array.isArray(window.SALA_DISCIPLINES) && window.SALA_DISCIPLINES.length > 0 ? window.SALA_DISCIPLINES : null;
+    // Read sala disciplines from JSON script element (avoids inline script CSP issues)
+    let salaDisc = null;
+    try {
+        const sdElem = document.getElementById('sala-disciplines');
+        const sdJson = sdElem ? sdElem.textContent : null;
+        const sdArr = sdJson ? JSON.parse(sdJson) : [];
+        salaDisc = Array.isArray(sdArr) && sdArr.length > 0 ? sdArr : null;
+    } catch (e) {
+        console.error('Failed to parse sala-disciplines JSON', e);
+        salaDisc = null;
+    }
     if (salaDisc) {
         // hide single nota input
         const single = document.getElementById('singleNotaContainer');
