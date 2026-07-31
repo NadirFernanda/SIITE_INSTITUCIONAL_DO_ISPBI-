@@ -33,6 +33,21 @@
             .main-content,.header{margin-left:0;padding:14px;border-radius:0;}
         }
     </style>
+    <style>
+        /* Emergency override: constrain decorative SVGs inside main/admin areas when Tailwind utilities are not present */
+        .main-content svg,
+        .p-main svg,
+        .p-nav svg,
+        .sidebar svg,
+        .p-dropdown svg,
+        .p-drawer svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            max-width: none !important;
+        }
+        /* Keep logos and explicit hero svgs unaffected when given explicit width/height attributes */
+        svg[width][height], .logo-svg, .hero-svg { width: auto !important; height: auto !important; }
+    </style>
 </head>
 <body>
     <div class="sidebar">
