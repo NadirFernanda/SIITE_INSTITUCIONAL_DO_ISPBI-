@@ -33,12 +33,16 @@ class WhatsAppService
         }
 
         try {
-            Http::timeout(10)
+            $response = Http::timeout(10)
                 ->withHeaders(['apikey' => $this->apiKey])
                 ->post("{$this->baseUrl}/message/sendText/{$this->instance}", [
                     'number' => $numero,
                     'text'   => $mensagem,
                 ]);
+
+            if (! $response->ok()) {
+                Log::error("WhatsApp: resposta inválida ao enviar para {$numero} — status: {$response->status()}, body: " . $response->body());
+            }
         } catch (\Throwable $e) {
             Log::error("WhatsApp: falha ao enviar para {$numero} — " . $e->getMessage());
         }
@@ -145,6 +149,12 @@ class WhatsAppService
             return null;
         }
 
+        // Remover prefixos comuns '+' e '00'
+        $digitos = preg_replace('/^\++/', '', $digitos);
+        if (str_starts_with($digitos, '00')) {
+            $digitos = preg_replace('/^0+/', '', $digitos);
+        }
+
         // Se começa com 0 → substituir por 244 (formato local angolano: 0XXXXXXXXX)
         if (str_starts_with($digitos, '0')) {
             $digitos = '244' . substr($digitos, 1);
@@ -153,6 +163,12 @@ class WhatsAppService
         // Se tem 9 dígitos e começa com 9 → adicionar prefixo 244 (Angola)
         if (strlen($digitos) === 9 && str_starts_with($digitos, '9')) {
             $digitos = '244' . $digitos;
+        }
+
+        // Se começa com '244' e tiver mais que 12 dígitos, tentar remover prefixo '00' já tratado; aceitar também +244 formats
+        if (str_starts_with($digitos, '244') && strlen($digitos) > 12) {
+            // reduzir a últimos 12 dígitos se for algo como 00244xxxx... ou similar
+            $digitos = substr($digitos, -12);
         }
 
         // Validar: deve ter 12 dígitos (244 + 9 dígitos)
