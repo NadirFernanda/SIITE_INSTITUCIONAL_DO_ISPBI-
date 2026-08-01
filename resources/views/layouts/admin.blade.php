@@ -87,6 +87,24 @@
             display: block;
             -webkit-overflow-scrolling: touch;
         }
+
+        /* Compact mode for admin lists (reduces paddings and visual weight) */
+        .main-content .compact table.responsive-table th,
+        .main-content .compact table.responsive-table td {
+            padding: 8px 10px !important;
+            font-size: 0.85rem !important;
+            line-height: 1.25 !important;
+        }
+        .main-content .compact .kpi-value {
+            font-size: 1.25rem !important;
+        }
+        .main-content .compact a[style*="padding"] {
+            padding: 6px 10px !important;
+            font-size: 0.82rem !important;
+        }
+        .main-content .compact .header-small {
+            font-size: 1.2rem !important;
+        }
         /* Ensure images constrained by inline rules scale down */
         .main-content img[style*="max-width"] {
             max-width: 100%;

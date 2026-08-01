@@ -3,6 +3,15 @@
     $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
         ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
         : '';
+
+    // Quebra manual do texto da faixa diagonal em linhas curtas: o wrap automático do
+    // CSS não é fiável dentro de blocos com transform:rotate() no dompdf, por isso
+    // forçamos aqui a largura máxima por linha para garantir que nada ultrapassa a página.
+    $faixaLinha = function (string $label, $valor) {
+        $texto     = trim($label . ' ' . $valor);
+        $quebrado  = wordwrap($texto, 30, "\n", true);
+        return nl2br(e($quebrado));
+    };
 @endphp
 <!DOCTYPE html>
 <html lang="pt">
@@ -13,7 +22,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; font-size:12pt; color:#000; position:relative; }
 
-.pagina { position:relative; width:210mm; height:297mm; padding:15mm; overflow:hidden; }
+.pagina { position:relative; width:210mm; height:297mm; padding:15mm; }
 
 .logo { width:28mm; height:auto; }
 
@@ -34,36 +43,37 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     text-align:center;
     font-weight:bold;
     font-size:19pt;
-    margin-top:22mm;
+    margin-top:30mm;
 }
 
 /* Canto destacável: faixa diagonal entre uma linha contínua e uma tracejada, com os
    campos de identificação, destinada a ser cortada e arquivada separadamente para
-   garantir o anonimato na correcção. Mantida sempre dentro da margem impressa. */
+   garantir o anonimato na correcção. Geometria calculada para nunca ultrapassar a
+   página nem colidir com o título, mesmo com nomes/cursos longos (o texto quebra
+   dentro da faixa em vez de estourar a margem). */
 .canto-destacavel {
     position:absolute;
-    top:2mm;
-    right:-4mm;
-    width:92mm;
-    transform:rotate(-27deg);
+    top:-6mm;
+    right:6mm;
+    width:88mm;
+    transform:rotate(-24deg);
     transform-origin:top right;
 }
 .canto-destacavel .linha-topo {
     border-top:1.3px solid #000;
     width:100%;
-    margin-bottom:2.5mm;
+    margin-bottom:2mm;
 }
 .canto-destacavel .campo {
     font-weight:bold;
-    font-size:10pt;
-    line-height:1.5;
+    font-size:9pt;
+    line-height:1.4;
+    margin-bottom:0.6mm;
 }
-.canto-destacavel .campo .rotulo { white-space:nowrap; }
-.canto-destacavel .valor { font-weight:600; word-wrap:break-word; overflow-wrap:break-word; }
 .canto-destacavel .linha-corte {
     border-top:1.3px dashed #000;
     width:100%;
-    margin-top:2.5mm;
+    margin-top:2mm;
 }
 
 @media print { @page { margin:0; size:A4 portrait; } }
@@ -75,12 +85,12 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 
     <div class="canto-destacavel">
         <div class="linha-topo"></div>
-        <div class="campo"><span class="rotulo">Código de Exame:</span> <span class="valor">{{ $candidatura->codigo_exame }}</span></div>
-        <div class="campo"><span class="rotulo">N.º Ficha:</span> <span class="valor">{{ str_pad($candidatura->id,5,'0',STR_PAD_LEFT) }}</span></div>
-        <div class="campo"><span class="rotulo">N.º BI:</span> <span class="valor">{{ $candidatura->bi }}</span></div>
-        <div class="campo"><span class="rotulo">Ano Lectivo:</span> <span class="valor">2026/2027</span></div>
-        <div class="campo"><span class="rotulo">Curso:</span> <span class="valor">{{ $candidatura->curso }}</span></div>
-        <div class="campo"><span class="rotulo">Nome:</span> <span class="valor">{{ strtoupper($candidatura->nome) }}</span></div>
+        <div class="campo">{!! $faixaLinha('Código de Exame:', $candidatura->codigo_exame) !!}</div>
+        <div class="campo">{!! $faixaLinha('N.º Ficha:', str_pad($candidatura->id,5,'0',STR_PAD_LEFT)) !!}</div>
+        <div class="campo">{!! $faixaLinha('N.º BI:', $candidatura->bi) !!}</div>
+        <div class="campo">{!! $faixaLinha('Ano Lectivo:', '2026/2027') !!}</div>
+        <div class="campo">{!! $faixaLinha('Curso:', $candidatura->curso) !!}</div>
+        <div class="campo">{!! $faixaLinha('Nome:', strtoupper($candidatura->nome)) !!}</div>
         <div class="linha-corte"></div>
     </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div style="padding:32px 24px;max-width:1200px;margin:0 auto;">
+<div class="compact" style="padding:32px 24px;max-width:1200px;margin:0 auto;">
 
     {{-- Header --}}
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px;">
@@ -38,7 +38,7 @@
         @endphp
         @foreach($kpis as $k)
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;text-align:center;">
-            <div style="font-size:2rem;font-weight:800;color:{{ $k['color'] }};line-height:1;">{{ $k['value'] }}</div>
+            <div class="kpi-value" style="font-weight:800;color:{{ $k['color'] }};line-height:1;">{{ $k['value'] }}</div>
             <div style="font-size:0.8rem;color:#64748b;margin-top:6px;font-weight:600;">{{ $k['label'] }}</div>
         </div>
         @endforeach
