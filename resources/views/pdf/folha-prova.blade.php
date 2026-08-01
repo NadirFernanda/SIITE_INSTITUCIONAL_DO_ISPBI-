@@ -113,8 +113,8 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 .canto-destacavel {
     position:absolute;
     top:9mm;
-    left:119mm;
-    width:60mm;
+    left:128mm;
+    width:58mm;
     transform:rotate(-12deg);
     transform-origin:top right;
 }
