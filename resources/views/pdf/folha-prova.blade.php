@@ -35,30 +35,30 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     letter-spacing:0.01em;
 }
 
-.divisor { border-top:1.3pt solid #1B4B9C; margin-top:8mm; width:105mm; }
+.divisor { border-top:0.8px solid #1B4B9C; margin-top:3mm; width:105mm; }
 
 /* Campos de identificação: rótulo e traço na MESMA linha (inline-block lado a
    lado), em vez de tabela com padding-bottom — essa abordagem colocava o traço
    por baixo do rótulo em vez de ao lado, por causa de como o dompdf resolve
    vertical-align em células vazias. Largura fixa no rótulo garante que todos
    os traços começam alinhados na mesma posição vertical. */
-.linha-campo { margin-top:6mm; font-weight:bold; font-size:12pt; }
+.linha-campo { margin-top:3mm; font-weight:bold; font-size:12pt; }
 .linha-campo .rotulo { display:inline-block; width:22mm; white-space:nowrap; }
 .linha-campo .traco { display:inline-block; border-bottom:1px solid #000; padding-bottom:1mm; }
 /* Campos já preenchidos automaticamente (N.º BI, Curso) não levam traço por
    baixo — o traço só faz sentido em linhas em branco para preencher à mão. */
 .linha-campo .traco.preenchido { border-bottom:none; font-weight:600; }
 
-/* Caixa do código de exame com mais espaço (largura e padding maiores) para
-   ficar bem legível e com folga para preencher/confirmar à mão se necessário. */
+/* Código de exame: texto simples e destacado, sem caixa pesada — só um traço
+   fino por baixo, mais discreto do que uma borda grossa à volta. */
 .linha-codigo {
-    margin-top:8mm;
+    margin-top:5mm;
     font-weight:bold;
-    font-size:15pt;
+    font-size:14pt;
     letter-spacing:0.03em;
-    border:1.5px solid #000;
-    width:110mm;
-    padding:4mm 6mm;
+    border-bottom:0.8px solid #000;
+    display:inline-block;
+    padding-bottom:1.5mm;
 }
 
 .titulo-exame {
