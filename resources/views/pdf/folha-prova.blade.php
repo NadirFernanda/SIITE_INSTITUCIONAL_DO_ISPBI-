@@ -43,20 +43,21 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     text-align:center;
     font-weight:bold;
     font-size:19pt;
-    margin-top:30mm;
+    margin-top:32mm;
 }
 
 /* Canto destacável: faixa diagonal entre uma linha contínua e uma tracejada, com os
    campos de identificação, destinada a ser cortada e arquivada separadamente para
-   garantir o anonimato na correcção. Geometria calculada para nunca ultrapassar a
-   página nem colidir com o título, mesmo com nomes/cursos longos (o texto quebra
-   dentro da faixa em vez de estourar a margem). */
+   garantir o anonimato na correcção. Geometria calculada a partir da matriz de rotação
+   (usando "left", não "right" — o dompdf posiciona mal blocos rodados ancorados por
+   "right") para nunca ultrapassar a página nem colidir com o cabeçalho ou o título,
+   mesmo no pior caso de nomes/cursos longos que quebram em várias linhas. */
 .canto-destacavel {
     position:absolute;
-    top:-6mm;
-    right:6mm;
-    width:88mm;
-    transform:rotate(-24deg);
+    top:-2mm;
+    left:119mm;
+    width:60mm;
+    transform:rotate(-12deg);
     transform-origin:top right;
 }
 .canto-destacavel .linha-topo {

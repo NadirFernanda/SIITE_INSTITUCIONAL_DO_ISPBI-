@@ -105,6 +105,16 @@
         .main-content .compact .header-small {
             font-size: 1.2rem !important;
         }
+
+        /* Prevent accidentally huge decorative images/SVGs in content area (e.g., oversized icons) */
+        .main-content svg,
+        .main-content img {
+            max-width: 320px !important;
+            max-height: 160px !important;
+            width: auto !important;
+            height: auto !important;
+            display: inline-block;
+        }
         /* Ensure images constrained by inline rules scale down */
         .main-content img[style*="max-width"] {
             max-width: 100%;
