@@ -42,10 +42,10 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
    garantir o anonimato na correcção. Mantida sempre dentro da margem impressa. */
 .canto-destacavel {
     position:absolute;
-    top:6mm;
-    right:2mm;
+    top:2mm;
+    right:-4mm;
     width:92mm;
-    transform:rotate(-25deg);
+    transform:rotate(-27deg);
     transform-origin:top right;
 }
 .canto-destacavel .linha-topo {
@@ -55,11 +55,11 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 }
 .canto-destacavel .campo {
     font-weight:bold;
-    font-size:10.5pt;
-    line-height:1.6;
-    white-space:nowrap;
+    font-size:10pt;
+    line-height:1.5;
 }
-.canto-destacavel .valor { font-weight:600; }
+.canto-destacavel .campo .rotulo { white-space:nowrap; }
+.canto-destacavel .valor { font-weight:600; word-wrap:break-word; overflow-wrap:break-word; }
 .canto-destacavel .linha-corte {
     border-top:1.3px dashed #000;
     width:100%;
@@ -75,12 +75,12 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 
     <div class="canto-destacavel">
         <div class="linha-topo"></div>
-        <div class="campo">N.º Ficha: <span class="valor">{{ str_pad($candidatura->id,5,'0',STR_PAD_LEFT) }}</span></div>
-        <div class="campo">Nome: <span class="valor">{{ strtoupper($candidatura->nome) }}</span></div>
-        <div class="campo">Curso: <span class="valor">{{ $candidatura->curso }}</span></div>
-        <div class="campo">Ano Lectivo: <span class="valor">2026/2027</span></div>
-        <div class="campo">N.º BI: <span class="valor">{{ $candidatura->bi }}</span></div>
-        <div class="campo">Código de Exame: <span class="valor">{{ $candidatura->codigo_exame }}</span></div>
+        <div class="campo"><span class="rotulo">Código de Exame:</span> <span class="valor">{{ $candidatura->codigo_exame }}</span></div>
+        <div class="campo"><span class="rotulo">N.º Ficha:</span> <span class="valor">{{ str_pad($candidatura->id,5,'0',STR_PAD_LEFT) }}</span></div>
+        <div class="campo"><span class="rotulo">N.º BI:</span> <span class="valor">{{ $candidatura->bi }}</span></div>
+        <div class="campo"><span class="rotulo">Ano Lectivo:</span> <span class="valor">2026/2027</span></div>
+        <div class="campo"><span class="rotulo">Curso:</span> <span class="valor">{{ $candidatura->curso }}</span></div>
+        <div class="campo"><span class="rotulo">Nome:</span> <span class="valor">{{ strtoupper($candidatura->nome) }}</span></div>
         <div class="linha-corte"></div>
     </div>
 
