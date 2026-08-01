@@ -110,15 +110,31 @@ class CandidaturaController extends Controller
         $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))->setPaper('a4', 'portrait');
 
         $filename = 'comprovativo-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf';
-        try {
-            app(WhatsAppService::class)->enviarDocumento(
-                $candidatura->telefone,
-                base64_encode($pdf->output()),
-                $filename,
-                '📄 Comprovativo de candidatura — ISP-Bié'
-            );
-        } catch (\Throwable $e) {
-            \Log::error('Falha ao enviar comprovativo via WhatsApp (admin): ' . $e->getMessage());
+        if (! $candidatura->whatsapp_comprovativo_enviado_at) {
+            try {
+                $mensagem = "📄 *ISP-Bié — Comprovativo de Candidatura*\n\n" .
+                    "Olá *{$candidatura->nome}*,\n\n" .
+                    "Segue em anexo o comprovativo da sua candidatura.\n\n" .
+                    "📋 *Nº de Ficha:* " . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . "\n" .
+                    "📚 *Curso:* {$candidatura->curso}\n" .
+                    "📌 *Estado:* " . (\App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status) . "\n\n" .
+                    "Guarde este documento para consultas futuras.\n\n" .
+                    "— Instituto Superior Politécnico do Bié";
+
+                app(WhatsAppService::class)->enviar($candidatura->telefone, $mensagem);
+
+                app(WhatsAppService::class)->enviarDocumento(
+                    $candidatura->telefone,
+                    base64_encode($pdf->output()),
+                    $filename,
+                    '📄 Comprovativo de candidatura — ISP-Bié'
+                );
+
+                $candidatura->whatsapp_comprovativo_enviado_at = now();
+                $candidatura->save();
+            } catch (\Throwable $e) {
+                \Log::error('Falha ao enviar comprovativo via WhatsApp (admin): ' . $e->getMessage());
+            }
         }
 
         return $pdf->download($filename);
