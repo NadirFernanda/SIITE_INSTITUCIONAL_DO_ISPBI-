@@ -66,7 +66,11 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .linha-codigo span { border-bottom:0.8px solid #000; padding-bottom:1.5mm; }
 
+/* Mesma largura (105mm) do resto do cabeçalho, para o título ficar centrado
+   no mesmo eixo do logótipo/instituto/BI/Curso/Código — a centrar na
+   largura toda da página ficava desalinhado com o resto e parecia torto. */
 .titulo-exame {
+    width:105mm;
     text-align:center;
     font-weight:bold;
     font-size:16pt;
