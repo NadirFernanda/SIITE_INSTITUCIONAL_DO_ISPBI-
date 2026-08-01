@@ -110,14 +110,17 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     transform:rotate(-12deg);
     transform-origin:top right;
 }
-/* Esta linha estende-se para lá da largura da faixa (margin-left negativo)
-   para funcionar também como limite entre o cabeçalho e o canhoto — é a
-   MESMA linha, rodada com o resto do bloco, por isso nunca cruza com mais
-   nada (ao contrário de uma barra à parte com outro ângulo). */
+/* Linha de corte única para TODO o canto superior direito (não só a faixa
+   de texto): estende-se para os dois lados — para a direita, quase até ao
+   canto real da página, e para a esquerda, para lá do cabeçalho — para que
+   fique claro que se rasga o canto inteiro ao longo desta linha, e não
+   apenas uma tira à volta do texto. Tracejada (convenção de "corte aqui"),
+   e continua a ser a MESMA linha rodada com o resto do bloco, por isso
+   nunca cruza com mais nada. */
 .canto-destacavel .linha-topo {
-    border-top:1.3px solid #000;
-    width:115%;
-    margin-left:-15%;
+    border-top:1.3px dashed #000;
+    width:150%;
+    margin-left:-30%;
     margin-bottom:1.5mm;
 }
 .canto-destacavel .campo {
@@ -129,7 +132,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     margin-bottom:0.4mm;
 }
 .canto-destacavel .linha-corte {
-    border-top:1.3px dashed #000;
+    border-top:1px solid #999;
     width:100%;
     margin-top:1.5mm;
 }
