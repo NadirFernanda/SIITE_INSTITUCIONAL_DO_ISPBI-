@@ -32,12 +32,12 @@
         @endforeach
         <!-- Setas de navegação -->
         <button @click="currentSlide = (currentSlide + {{ $totalSlides }} - 1) % {{ $totalSlides }}" class="absolute left-2 sm:left-4 2xl:left-8 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 sm:p-3 shadow focus:outline-none z-20" x-show="{{ $totalSlides }} > 1">
-            <svg class="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg width="24" height="24" class="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
         </button>
         <button @click="currentSlide = (currentSlide + 1) % {{ $totalSlides }}" class="absolute right-2 sm:right-4 2xl:right-8 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 sm:p-3 shadow focus:outline-none z-20" x-show="{{ $totalSlides }} > 1">
-            <svg class="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg width="24" height="24" class="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
         </button>

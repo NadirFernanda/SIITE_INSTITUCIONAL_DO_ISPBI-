@@ -22,28 +22,34 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; font-size:12pt; color:#000; position:relative; }
 
-.pagina { position:relative; width:210mm; height:297mm; padding:15mm; }
+.pagina { position:relative; width:210mm; height:297mm; padding:18mm 16mm; }
 
-.logo { width:28mm; height:auto; }
+.logo { width:24mm; height:auto; display:block; }
 
 .instituto {
-    margin-top:4mm;
+    display:block;
+    margin-top:3mm;
     color:#1B4B9C;
     font-weight:bold;
-    font-size:13pt;
-    text-decoration:underline;
-    display:inline-block;
+    font-size:14pt;
+    letter-spacing:0.02em;
 }
 
-.linha-dados { margin-top:6mm; font-weight:bold; font-size:12pt; }
-.linha-dados .rotulo { white-space:nowrap; }
-.linha-dados .traco { display:inline-block; border-bottom:1px solid #000; width:110mm; height:1px; margin-left:2px; }
+.divisor { border-top:1.3pt solid #1B4B9C; margin-top:8mm; width:105mm; }
+
+/* Campos de identificação em tabela: garante que os dois traços em branco começam
+   exactamente na mesma posição, em vez de larguras improvisadas por campo. */
+.campos-id { width:105mm; border-collapse:collapse; margin-top:9mm; }
+.campos-id td { font-weight:bold; font-size:12pt; padding-bottom:9mm; vertical-align:bottom; }
+.campos-id .campo-rotulo { width:24mm; white-space:nowrap; }
+.campos-id .campo-linha { border-bottom:1px solid #000; }
 
 .titulo-exame {
     text-align:center;
     font-weight:bold;
-    font-size:19pt;
-    margin-top:32mm;
+    font-size:20pt;
+    letter-spacing:0.04em;
+    margin-top:30mm;
 }
 
 /* Canto destacável: faixa diagonal entre uma linha contínua e uma tracejada, com os
@@ -98,15 +104,19 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     @if($logoBase64)
         <img src="{{ $logoBase64 }}" alt="ISP-Bié" class="logo" />
     @endif
+    <span class="instituto">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
+    <div class="divisor"></div>
 
-    <div><span class="instituto">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span></div>
-
-    <div class="linha-dados">
-        <span class="rotulo">N.º BI</span><span class="traco"></span>
-    </div>
-    <div class="linha-dados">
-        <span class="rotulo">CURSO</span><span class="traco" style="width:105mm;"></span>
-    </div>
+    <table class="campos-id">
+        <tr>
+            <td class="campo-rotulo">N.º BI</td>
+            <td class="campo-linha"></td>
+        </tr>
+        <tr>
+            <td class="campo-rotulo">Curso</td>
+            <td class="campo-linha"></td>
+        </tr>
+    </table>
 
     <div class="titulo-exame">EXAME DE ACESSO 2026/2027</div>
 
