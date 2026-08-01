@@ -62,7 +62,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 
 .titulo-exame {
-    text-align:left;
+    text-align:center;
     font-weight:bold;
     font-size:16pt;
     letter-spacing:0.02em;
