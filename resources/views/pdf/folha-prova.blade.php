@@ -24,7 +24,10 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 
 .pagina { position:relative; width:210mm; padding:16mm 16mm 10mm; }
 
-.logo { width:24mm; height:auto; display:block; }
+/* Logótipo e nome do instituto centrados dentro da mesma largura da linha
+   divisória (105mm), em vez de alinhados à esquerda. */
+.cabecalho-instituto { width:105mm; text-align:center; }
+.logo { width:24mm; height:auto; margin:0 auto; display:block; }
 
 .instituto {
     display:block;
@@ -139,10 +142,12 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
         <div class="linha-corte"></div>
     </div>
 
-    @if($logoBase64)
-        <img src="{{ $logoBase64 }}" alt="ISP-Bié" class="logo" />
-    @endif
-    <span class="instituto">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
+    <div class="cabecalho-instituto">
+        @if($logoBase64)
+            <img src="{{ $logoBase64 }}" alt="ISP-Bié" class="logo" />
+        @endif
+        <span class="instituto">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</span>
+    </div>
     <div class="divisor"></div>
 
     <div class="linha-campo">
