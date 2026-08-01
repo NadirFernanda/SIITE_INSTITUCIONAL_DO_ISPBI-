@@ -61,7 +61,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     text-align:center;
     margin-top:5mm;
     font-weight:bold;
-    font-size:14pt;
+    font-size:12pt;
     letter-spacing:0.03em;
 }
 .linha-codigo span { border-bottom:0.8px solid #000; padding-bottom:1.5mm; }
@@ -153,10 +153,10 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     <div class="divisor"></div>
 
     <div class="linha-campo">
-        <span class="rotulo">N.º BI</span><span class="traco preenchido">{{ $candidatura->bi }}</span>
+        <span class="rotulo">N.º BI:</span><span class="traco preenchido">{{ $candidatura->bi }}</span>
     </div>
     <div class="linha-campo">
-        <span class="rotulo">Curso</span><span class="traco preenchido">{{ $candidatura->curso }}</span>
+        <span class="rotulo">Curso:</span><span class="traco preenchido">{{ $candidatura->curso }}</span>
     </div>
 
     <div class="linha-codigo">Código de Exame: <span>{{ $candidatura->codigo_exame ?: '' }}</span></div>
