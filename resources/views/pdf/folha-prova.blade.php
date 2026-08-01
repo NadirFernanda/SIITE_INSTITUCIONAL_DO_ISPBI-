@@ -20,7 +20,7 @@
 <style>
 @page { size: A4 portrait; margin: 0; }
 * { margin:0; padding:0; box-sizing:border-box; }
-html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; font-size:12pt; color:#000; position:relative; }
+html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif; font-size:11pt; color:#000; position:relative; }
 
 .pagina { position:relative; width:210mm; padding:16mm 16mm 10mm; }
 
@@ -95,6 +95,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     top:18mm;
     left:137mm;
     width:58mm;
+    font-family: Helvetica, Arial, sans-serif;
     transform:rotate(-12deg);
     transform-origin:top right;
 }
@@ -105,6 +106,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 }
 .canto-destacavel .campo {
     text-align:left;
+    font-family: Helvetica, Arial, sans-serif;
     font-weight:bold;
     font-size:9pt;
     line-height:1.3;
