@@ -90,19 +90,16 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .rodape table { width:100%; border-collapse:collapse; }
 
-/* Linha diagonal entre o cabeçalho (logótipo/instituto/BI/Curso/Código) e o
-   canhoto destacável, para ficar claro onde acaba a área de escrita e
-   começa a zona que vai ser rasgada — sem isso o candidato podia escrever
-   por cima da zona do canhoto e perder esse conteúdo ao destacá-lo. Usa a
-   mesma inclinação e o mesmo ponto de rotação do canhoto (ver
-   .canto-destacavel), só que mais larga e um pouco mais acima, para correr
-   em paralelo, por fora do texto. */
+/* Linha diagonal ENTRE o cabeçalho (logótipo/instituto/BI/Curso/Código) e o
+   canhoto destacável — tem de atravessar toda a altura das duas zonas
+   (não só o topo), por isso a inclinação é mais acentuada do que a do
+   canhoto, para chegar lá abaixo sem precisar de ser absurdamente larga. */
 .limite-canhoto {
     position:absolute;
-    top:14mm;
-    left:100mm;
-    width:95mm;
-    transform:rotate(-12deg);
+    top:8mm;
+    left:88mm;
+    width:112mm;
+    transform:rotate(-40deg);
     transform-origin:top right;
     border-top:1px solid #999;
 }
