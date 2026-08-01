@@ -55,7 +55,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     font-weight:bold;
     font-size:20pt;
     letter-spacing:0.04em;
-    margin-top:18mm;
+    margin-top:23mm;
 }
 
 /* Área de respostas: pauta de linhas em branco para o candidato escrever,
@@ -85,10 +85,13 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
    da esquerda para a direita — e o bloco inteiro é rodado em conjunto, mantendo
    todas as linhas paralelas na diagonal, tal como numa folha de prova real.
    Largura de 60mm é o máximo que cabe sem tocar no nome do instituto (que é o
-   elemento mais largo do cabeçalho); geometria confirmada por render de teste. */
+   elemento mais largo do cabeçalho); geometria confirmada por render de teste.
+   "top" afastado do canto real da página para deixar margem de papel entre a
+   linha de corte e a borda — sem isso, a ponta fica rente ao canto e não dá
+   para agarrar para rasgar. */
 .canto-destacavel {
     position:absolute;
-    top:-2mm;
+    top:9mm;
     left:119mm;
     width:60mm;
     transform:rotate(-12deg);
