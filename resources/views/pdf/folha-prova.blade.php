@@ -101,7 +101,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 .canto-destacavel {
     position:absolute;
     top:9mm;
-    left:128mm;
+    left:134mm;
     width:58mm;
     transform:rotate(-12deg);
     transform-origin:top right;
@@ -150,10 +150,10 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     <div class="divisor"></div>
 
     <div class="linha-campo">
-        <span class="rotulo">N.º BI</span><span class="traco" style="width:110mm;">&nbsp;</span>
+        <span class="rotulo">N.º BI</span><span class="traco preenchido" style="width:110mm;">{{ $candidatura->bi }}</span>
     </div>
     <div class="linha-campo">
-        <span class="rotulo">Curso</span><span class="traco" style="width:110mm;">&nbsp;</span>
+        <span class="rotulo">Curso</span><span class="traco preenchido" style="width:110mm;">{{ $candidatura->curso }}</span>
     </div>
 
     <div class="linha-codigo">Código de Exame: {{ $candidatura->codigo_exame ?: '' }}</div>
