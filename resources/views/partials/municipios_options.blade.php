@@ -22,14 +22,13 @@ $ANGOLA = [
 
 $province = $province ?? '';
 $selectedMunicipio = $selectedMunicipio ?? null;
+@endphp
 
-if (! $province || ! isset($ANGOLA[$province])) {
-    echo '<option value="">Seleccione primeiro a província</option>';
-    return;
-}
-
-echo '<option value="">Seleccione o município</option>';
-foreach ($ANGOLA[$province] as $m) {
-    $sel = ($selectedMunicipio && $selectedMunicipio === $m) ? ' selected' : '';
-    echo "<option value=\"{$m}\"{$sel}>{$m}</option>";
-}
+@if (! $province || ! isset($ANGOLA[$province]))
+    <option value="">Seleccione primeiro a província</option>
+@else
+    <option value="">Seleccione o município</option>
+    @foreach ($ANGOLA[$province] as $m)
+        <option value="{{ $m }}" {{ $selectedMunicipio && $selectedMunicipio === $m ? 'selected' : '' }}>{{ $m }}</option>
+    @endforeach
+@endif
