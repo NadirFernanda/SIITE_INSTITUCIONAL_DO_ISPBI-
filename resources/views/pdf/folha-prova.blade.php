@@ -22,7 +22,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; font-size:12pt; color:#000; position:relative; }
 
-.pagina { position:relative; width:210mm; height:297mm; padding:18mm 16mm; }
+.pagina { position:relative; width:210mm; padding:16mm 16mm 10mm; }
 
 .logo { width:24mm; height:auto; display:block; }
 
@@ -44,13 +44,39 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 .campos-id .campo-rotulo { width:24mm; white-space:nowrap; }
 .campos-id .campo-linha { border-bottom:1px solid #000; }
 
+.campos-logistica { width:150mm; border-collapse:collapse; margin-top:5mm; }
+.campos-logistica td { font-weight:bold; font-size:11pt; padding-bottom:6mm; vertical-align:bottom; }
+.campos-logistica .campo-rotulo { width:20mm; white-space:nowrap; }
+.campos-logistica .campo-linha { border-bottom:1px solid #000; }
+.campos-logistica .espaco { width:8mm; border:none; }
+
 .titulo-exame {
     text-align:center;
     font-weight:bold;
     font-size:20pt;
     letter-spacing:0.04em;
-    margin-top:30mm;
+    margin-top:18mm;
 }
+
+/* Área de respostas: pauta de linhas em branco para o candidato escrever,
+   preenchendo o espaço restante da página até ao rodapé. Número de linhas
+   calculado para caber sempre numa única página A4, com folga para o rodapé. */
+.area-respostas { margin-top:6mm; }
+.area-respostas .linha { border-bottom:0.8px solid #999; height:9mm; }
+.area-respostas .linha.marco { border-bottom-color:#555; }
+
+/* Rodapé em fluxo normal (não position:absolute) — no dompdf, um bloco fixo ao
+   fundo de uma página com altura explícita causa páginas fantasma quando o
+   conteúdo acima é recalculado; em fluxo normal aparece sempre logo a seguir
+   à pauta de respostas, de forma previsível numa única página A4. */
+.rodape {
+    margin-top:8mm;
+    border-top:1px solid #000;
+    padding-top:3mm;
+    font-size:10pt;
+}
+.rodape table { width:100%; border-collapse:collapse; }
+.rodape .assinatura-linha { border-bottom:1px solid #000; width:70mm; display:inline-block; height:1px; margin-left:2mm; }
 
 /* Canto destacável: faixa diagonal com os campos de identificação do candidato,
    destinada a ser rasgada e arquivada em separado para garantir o anonimato na
@@ -101,6 +127,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
         <div class="campo">{!! $faixaLinha('Ano Lectivo:', '2026/2027') !!}</div>
         <div class="campo">{!! $faixaLinha('Curso:', $candidatura->curso) !!}</div>
         <div class="campo">{!! $faixaLinha('Nome:', strtoupper($candidatura->nome)) !!}</div>
+        <div class="campo">Assinatura: <span style="display:inline-block;width:20mm;border-bottom:1px solid #000;">&nbsp;</span></div>
         <div class="linha-corte"></div>
     </div>
 
@@ -121,7 +148,32 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
         </tr>
     </table>
 
+    <table class="campos-logistica">
+        <tr>
+            <td class="campo-rotulo">Data</td>
+            <td class="campo-linha" style="width:38mm;"></td>
+            <td class="espaco"></td>
+            <td class="campo-rotulo">Duração</td>
+            <td class="campo-linha"></td>
+        </tr>
+    </table>
+
     <div class="titulo-exame">EXAME DE ACESSO 2026/2027</div>
+
+    <div class="area-respostas">
+        @for ($i = 0; $i < 11; $i++)
+            <div class="linha{{ $i % 5 === 4 ? ' marco' : '' }}"></div>
+        @endfor
+    </div>
+
+    <div class="rodape">
+        <table>
+            <tr>
+                <td style="text-align:left;">Fiscal:<span class="assinatura-linha">&nbsp;</span></td>
+                <td style="text-align:right;">Pág. 1 de 1</td>
+            </tr>
+        </table>
+    </div>
 
 </div>
 
