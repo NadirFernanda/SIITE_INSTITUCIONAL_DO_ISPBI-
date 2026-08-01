@@ -64,10 +64,12 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 .titulo-exame {
     text-align:left;
     font-weight:bold;
-    font-size:20pt;
+    font-size:16pt;
     letter-spacing:0.02em;
     margin-top:15mm;
 }
+
+.pagina-branca { page-break-before:always; position:relative; width:210mm; padding:16mm 16mm 10mm; }
 
 /* Rodapé em fluxo normal (não position:absolute) — no dompdf, um bloco fixo ao
    fundo de uma página com altura explícita causa páginas fantasma quando o
@@ -157,11 +159,21 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     <div class="rodape">
         <table>
             <tr>
-                <td style="text-align:right;">Pág. 1 de 1</td>
+                <td style="text-align:right;">Pág. 1 de 2</td>
             </tr>
         </table>
     </div>
 
+</div>
+
+<div class="pagina-branca">
+    <div class="rodape" style="margin-top:260mm;">
+        <table>
+            <tr>
+                <td style="text-align:right;">Pág. 2 de 2</td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 </body>
