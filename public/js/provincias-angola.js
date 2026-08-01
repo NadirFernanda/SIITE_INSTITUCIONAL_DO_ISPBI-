@@ -20,56 +20,71 @@
         'Zaire':           ['Cuimba','M\'banza Kongo','Nóqui','Nzeto','Soio','Tomboco']
     };
 
-    var selProv = document.getElementById('select-provincia');
-    var selMun  = document.getElementById('select-municipio');
+    function findElements() {
+        var selProv = document.getElementById('select-provincia') || document.getElementById('edit-provincia');
+        var selMun  = document.getElementById('select-municipio') || document.getElementById('edit-municipio');
+        return { selProv: selProv, selMun: selMun };
+    }
 
-    if (!selProv || !selMun) return;
-
-    // Preencher províncias (ordenadas, Bié primeiro por ser a do ISP)
-    var provincias = Object.keys(ANGOLA).sort();
-    provincias.forEach(function (p) {
-        var opt = document.createElement('option');
-        opt.value = p;
-        opt.textContent = p;
-        selProv.appendChild(opt);
-    });
-
-    function preencherMunicipios(provincia) {
-        selMun.innerHTML = '';
-        if (!provincia || !ANGOLA[provincia]) {
-            var placeholder = document.createElement('option');
-            placeholder.value = '';
-            placeholder.textContent = 'Seleccione primeiro a província';
-            selMun.appendChild(placeholder);
-            selMun.disabled = true;
-            return;
-        }
-        var primeiro = document.createElement('option');
-        primeiro.value = '';
-        primeiro.textContent = 'Seleccione o município';
-        selMun.appendChild(primeiro);
-        ANGOLA[provincia].forEach(function (m) {
-            var opt = document.createElement('option');
-            opt.value = m;
-            opt.textContent = m;
-            selMun.appendChild(opt);
+    var els = findElements();
+    if (!els.selProv || !els.selMun) {
+        // Se ainda não existem, tentar após DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function () {
+            els = findElements();
+            if (!els.selProv || !els.selMun) return;
+            init(els.selProv, els.selMun);
         });
-        selMun.disabled = false;
-    }
-
-    // Restaurar valores após erro de validação (via data-old no HTML)
-    var oldProv = selProv.dataset.old || '';
-    var oldMun  = selMun.dataset.old  || '';
-
-    if (oldProv) {
-        selProv.value = oldProv;
-        preencherMunicipios(oldProv);
-        if (oldMun) selMun.value = oldMun;
     } else {
-        selMun.disabled = true;
+        init(els.selProv, els.selMun);
     }
 
-    selProv.addEventListener('change', function () {
-        preencherMunicipios(this.value);
-    });
+    function init(selProv, selMun) {
+        // Preencher províncias (ordenadas)
+        var provincias = Object.keys(ANGOLA).sort();
+        provincias.forEach(function (p) {
+            var opt = document.createElement('option');
+            opt.value = p;
+            opt.textContent = p;
+            selProv.appendChild(opt);
+        });
+
+        function preencherMunicipios(provincia) {
+            selMun.innerHTML = '';
+            if (!provincia || !ANGOLA[provincia]) {
+                var placeholder = document.createElement('option');
+                placeholder.value = '';
+                placeholder.textContent = 'Seleccione primeiro a província';
+                selMun.appendChild(placeholder);
+                selMun.disabled = true;
+                return;
+            }
+            var primeiro = document.createElement('option');
+            primeiro.value = '';
+            primeiro.textContent = 'Seleccione o município';
+            selMun.appendChild(primeiro);
+            ANGOLA[provincia].forEach(function (m) {
+                var opt = document.createElement('option');
+                opt.value = m;
+                opt.textContent = m;
+                selMun.appendChild(opt);
+            });
+            selMun.disabled = false;
+        }
+
+        // Restaurar valores após erro de validação (via data-old no HTML)
+        var oldProv = selProv.dataset.old || '';
+        var oldMun  = selMun.dataset.old  || '';
+
+        if (oldProv) {
+            selProv.value = oldProv;
+            preencherMunicipios(oldProv);
+            if (oldMun) selMun.value = oldMun;
+        } else {
+            selMun.disabled = true;
+        }
+
+        selProv.addEventListener('change', function () {
+            preencherMunicipios(this.value);
+        });
+    }
 })();
