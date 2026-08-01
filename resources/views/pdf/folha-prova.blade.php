@@ -66,18 +66,21 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .linha-codigo span { border-bottom:0.8px solid #000; padding-bottom:1.5mm; }
 
-/* Mesma largura (105mm) do resto do cabeçalho, para o título ficar centrado
-   no mesmo eixo do logótipo/instituto/BI/Curso/Código — a centrar na
-   largura toda da página ficava desalinhado com o resto e parecia torto. */
+/* O texto do título fica centrado no mesmo eixo (105mm) do resto do
+   cabeçalho — a centrar na largura toda da página ficava desalinhado com o
+   resto e parecia torto — mas a linha por baixo estende-se de ponta a
+   ponta da página. */
+.titulo-exame-linha {
+    margin-top:15mm;
+    padding-bottom:2mm;
+    border-bottom:0.8px solid #000;
+}
 .titulo-exame {
     width:105mm;
     text-align:center;
     font-weight:bold;
     font-size:16pt;
     letter-spacing:0.02em;
-    margin-top:15mm;
-    padding-bottom:2mm;
-    border-bottom:0.8px solid #000;
 }
 
 .pagina-branca { page-break-before:always; position:relative; width:210mm; padding:16mm 16mm 10mm; }
@@ -150,7 +153,9 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 
     <div class="linha-codigo">Código de Exame: <span>{{ $candidatura->codigo_exame ?: '' }}</span></div>
 
-    <div class="titulo-exame">EXAME DE ACESSO 2026/2027</div>
+    <div class="titulo-exame-linha">
+        <div class="titulo-exame">EXAME DE ACESSO 2026/2027</div>
+    </div>
 
     <div class="rodape">
         <table>
