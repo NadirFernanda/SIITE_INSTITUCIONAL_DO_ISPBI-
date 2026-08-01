@@ -90,20 +90,6 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .rodape table { width:100%; border-collapse:collapse; }
 
-/* Linha diagonal ENTRE o cabeçalho (logótipo/instituto/BI/Curso/Código) e o
-   canhoto destacável — tem de atravessar toda a altura das duas zonas
-   (não só o topo), por isso a inclinação é mais acentuada do que a do
-   canhoto, para chegar lá abaixo sem precisar de ser absurdamente larga. */
-.limite-canhoto {
-    position:absolute;
-    top:8mm;
-    left:88mm;
-    width:112mm;
-    transform:rotate(-40deg);
-    transform-origin:top right;
-    border-top:1px solid #999;
-}
-
 /* Canto destacável: faixa diagonal com os campos de identificação do candidato,
    destinada a ser rasgada e arquivada em separado para garantir o anonimato na
    correcção (quem corrige só vê o código de exame, não o nome). Todo o texto é
@@ -124,9 +110,14 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     transform:rotate(-12deg);
     transform-origin:top right;
 }
+/* Esta linha estende-se para lá da largura da faixa (margin-left negativo)
+   para funcionar também como limite entre o cabeçalho e o canhoto — é a
+   MESMA linha, rodada com o resto do bloco, por isso nunca cruza com mais
+   nada (ao contrário de uma barra à parte com outro ângulo). */
 .canto-destacavel .linha-topo {
     border-top:1.3px solid #000;
-    width:100%;
+    width:115%;
+    margin-left:-15%;
     margin-bottom:1.5mm;
 }
 .canto-destacavel .campo {
@@ -150,8 +141,6 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 
 <div class="pagina">
 
-    <div class="limite-canhoto"></div>
-
     <div class="canto-destacavel">
         <div class="linha-topo"></div>
         <div class="campo">{!! $faixaLinha('Código de Exame:', $candidatura->codigo_exame) !!}</div>
@@ -159,7 +148,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
         <div class="campo">{!! $faixaLinha('N.º BI:', $candidatura->bi) !!}</div>
         <div class="campo">{!! $faixaLinha('Ano Lectivo:', '2026/2027') !!}</div>
         <div class="campo">{!! $faixaLinha('Curso:', $candidatura->curso) !!}</div>
-        <div class="campo">{!! $faixaLinha('Nome:', strtoupper($candidatura->nome)) !!}</div>
+        <div class="campo">{!! $faixaLinha('Nome:', mb_strtoupper($candidatura->nome, 'UTF-8')) !!}</div>
         <div class="campo">Assinatura: <span style="display:inline-block;width:20mm;border-bottom:1px solid #000;">&nbsp;</span></div>
         <div class="linha-corte"></div>
     </div>
