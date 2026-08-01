@@ -45,8 +45,10 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
    por baixo do rótulo em vez de ao lado, por causa de como o dompdf resolve
    vertical-align em células vazias. Largura fixa no rótulo garante que todos
    os traços começam alinhados na mesma posição vertical. */
-.linha-campo { margin-top:3mm; font-weight:bold; font-size:12pt; }
-.linha-campo .rotulo { display:inline-block; width:22mm; white-space:nowrap; }
+/* N.º BI, Curso e Código de Exame centrados na mesma largura (105mm) e
+   posição do logótipo/título do instituto, para ficarem consistentes. */
+.linha-campo { width:105mm; text-align:center; margin-top:3mm; font-weight:bold; font-size:12pt; }
+.linha-campo .rotulo { display:inline-block; width:22mm; text-align:left; white-space:nowrap; }
 .linha-campo .traco { display:inline-block; border-bottom:1px solid #000; padding-bottom:1mm; }
 /* Campos já preenchidos automaticamente (N.º BI, Curso) não levam traço por
    baixo — o traço só faz sentido em linhas em branco para preencher à mão. */
@@ -55,14 +57,14 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 /* Código de exame: texto simples e destacado, sem caixa pesada — só um traço
    fino por baixo, mais discreto do que uma borda grossa à volta. */
 .linha-codigo {
+    width:105mm;
+    text-align:center;
     margin-top:5mm;
     font-weight:bold;
     font-size:14pt;
     letter-spacing:0.03em;
-    border-bottom:0.8px solid #000;
-    display:inline-block;
-    padding-bottom:1.5mm;
 }
+.linha-codigo span { border-bottom:0.8px solid #000; padding-bottom:1.5mm; }
 
 .titulo-exame {
     text-align:center;
@@ -151,13 +153,13 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     <div class="divisor"></div>
 
     <div class="linha-campo">
-        <span class="rotulo">N.º BI</span><span class="traco preenchido" style="width:110mm;">{{ $candidatura->bi }}</span>
+        <span class="rotulo">N.º BI</span><span class="traco preenchido">{{ $candidatura->bi }}</span>
     </div>
     <div class="linha-campo">
-        <span class="rotulo">Curso</span><span class="traco preenchido" style="width:110mm;">{{ $candidatura->curso }}</span>
+        <span class="rotulo">Curso</span><span class="traco preenchido">{{ $candidatura->curso }}</span>
     </div>
 
-    <div class="linha-codigo">Código de Exame: {{ $candidatura->codigo_exame ?: '' }}</div>
+    <div class="linha-codigo">Código de Exame: <span>{{ $candidatura->codigo_exame ?: '' }}</span></div>
 
     <div class="titulo-exame">EXAME DE ACESSO 2026/2027</div>
 
