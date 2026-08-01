@@ -42,10 +42,12 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
    por baixo do rótulo em vez de ao lado, por causa de como o dompdf resolve
    vertical-align em células vazias. Largura fixa no rótulo garante que todos
    os traços começam alinhados na mesma posição vertical. */
-.linha-campo { margin-top:7mm; font-weight:bold; font-size:12pt; }
+.linha-campo { margin-top:10mm; font-weight:bold; font-size:12pt; }
 .linha-campo .rotulo { display:inline-block; width:22mm; white-space:nowrap; }
 .linha-campo .traco { display:inline-block; border-bottom:1px solid #000; padding-bottom:1mm; }
-.linha-campo .traco.preenchido { font-weight:600; }
+/* Campos já preenchidos automaticamente (N.º BI, Curso) não levam traço por
+   baixo — o traço só faz sentido em linhas em branco para preencher à mão. */
+.linha-campo .traco.preenchido { border-bottom:none; font-weight:600; }
 
 /* Caixa do código de exame com mais espaço (largura e padding maiores) para
    ficar bem legível e com folga para preencher/confirmar à mão se necessário. */
@@ -64,7 +66,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     font-weight:bold;
     font-size:20pt;
     letter-spacing:0.04em;
-    margin-top:23mm;
+    margin-top:20mm;
 }
 
 /* Área de respostas: pauta de linhas em branco para o candidato escrever,
@@ -100,7 +102,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
    para agarrar para rasgar. */
 .canto-destacavel {
     position:absolute;
-    top:9mm;
+    top:18mm;
     left:134mm;
     width:58mm;
     transform:rotate(-12deg);
