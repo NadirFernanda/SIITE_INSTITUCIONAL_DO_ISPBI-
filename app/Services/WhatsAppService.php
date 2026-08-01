@@ -34,11 +34,22 @@ class WhatsAppService
 
         try {
             $response = Http::timeout(10)
-                ->withHeaders(['apikey' => $this->apiKey])
-                ->post("{$this->baseUrl}/message/sendText/{$this->instance}", [
-                    'number' => $numero,
-                    'text'   => $mensagem,
-                ]);
+                ->withHeaders([
+                    'apikey' => $this->apiKey,
+                    'Content-Type' => 'application/json',
+                ])
+                ->post(
+                    "{$this->baseUrl}/message/sendText/" . rawurlencode($this->instance),
+                    [
+                        'number' => $numero,
+                        'text'   => $mensagem,
+                    ]
+                );
+
+            Log::info('Evolution WhatsApp resposta', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
 
             if (! $response->ok()) {
                 Log::error("WhatsApp: resposta inválida ao enviar para {$numero} — status: {$response->status()}, body: " . $response->body());
