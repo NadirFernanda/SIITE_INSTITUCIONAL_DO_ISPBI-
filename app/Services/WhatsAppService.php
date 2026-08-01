@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Log;
 
 class WhatsAppService
 {
-    private string $baseUrl;
-    private string $apiKey;
-    private string $instance;
-    private bool   $enabled;
+    private string $baseUrl = '';
+    private string $apiKey = '';
+    private string $instance = '';
+    private bool   $enabled = false;
 
     public function __construct()
     {
