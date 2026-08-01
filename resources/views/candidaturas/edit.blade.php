@@ -76,7 +76,7 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                     <select id="edit-provincia" name="naturalidade_provincia" required
                             data-old="{{ old('naturalidade_provincia', $candidatura->naturalidade_provincia) }}"
                             style="{{ $inp }}">
-                        <option value="">Seleccione a província</option>
+                        @include('partials.provincias_options', ['selectedProvince' => old('naturalidade_provincia', $candidatura->naturalidade_provincia)])
                     </select>
                 </div>
                 <div>
@@ -84,7 +84,7 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                     <select id="edit-municipio" name="naturalidade_municipio" required
                             data-old="{{ old('naturalidade_municipio', $candidatura->naturalidade_municipio) }}"
                             style="{{ $inp }}">
-                        <option value="">Seleccione primeiro a província</option>
+                        @include('partials.municipios_options', ['province' => old('naturalidade_provincia', $candidatura->naturalidade_provincia), 'selectedMunicipio' => old('naturalidade_municipio', $candidatura->naturalidade_municipio)])
                     </select>
                 </div>
             </div>

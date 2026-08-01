@@ -257,7 +257,7 @@
                                                     <select id="select-provincia" name="naturalidade_provincia"
                                                             data-old="{{ old('naturalidade_provincia') }}"
                                                             required class="{{ $inp }} @error('naturalidade_provincia') border-red-400 @enderror">
-                                                        <option value="">Seleccione a província</option>
+                                                        @include('partials.provincias_options', ['selectedProvince' => old('naturalidade_provincia')])
                                                     </select>
                                                     @error('naturalidade_provincia')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                                 </div>
@@ -266,7 +266,7 @@
                                                     <select id="select-municipio" name="naturalidade_municipio"
                                                             data-old="{{ old('naturalidade_municipio') }}"
                                                             required class="{{ $inp }} @error('naturalidade_municipio') border-red-400 @enderror">
-                                                        <option value="">Seleccione primeiro a província</option>
+                                                        @include('partials.municipios_options', ['province' => old('naturalidade_provincia'), 'selectedMunicipio' => old('naturalidade_municipio')])
                                                     </select>
                                                     @error('naturalidade_municipio')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                                 </div>
