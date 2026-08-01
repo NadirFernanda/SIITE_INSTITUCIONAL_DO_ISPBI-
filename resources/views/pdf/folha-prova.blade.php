@@ -66,7 +66,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     font-weight:bold;
     font-size:20pt;
     letter-spacing:0.02em;
-    margin-top:9mm;
+    margin-top:15mm;
 }
 
 /* Rodapé em fluxo normal (não position:absolute) — no dompdf, um bloco fixo ao
@@ -101,19 +101,19 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 .canto-destacavel .linha-topo {
     border-top:1.3px solid #000;
     width:100%;
-    margin-bottom:2mm;
+    margin-bottom:1.5mm;
 }
 .canto-destacavel .campo {
     text-align:left;
     font-weight:bold;
     font-size:9pt;
-    line-height:1.45;
-    margin-bottom:0.7mm;
+    line-height:1.3;
+    margin-bottom:0.4mm;
 }
 .canto-destacavel .linha-corte {
     border-top:1.3px dashed #000;
     width:100%;
-    margin-top:2.5mm;
+    margin-top:1.5mm;
 }
 
 @media print { @page { margin:0; size:A4 portrait; } }
@@ -155,7 +155,6 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     <div class="rodape">
         <table>
             <tr>
-                <td style="text-align:left;">Fiscal:</td>
                 <td style="text-align:right;">Pág. 1 de 1</td>
             </tr>
         </table>
