@@ -51,8 +51,11 @@ class WhatsAppService
                 'body' => $response->body(),
             ]);
 
-            if (! $response->ok()) {
-                Log::error("WhatsApp: resposta inválida ao enviar para {$numero} — status: {$response->status()}, body: " . $response->body());
+            if (! $response->successful()) {
+                Log::error("WhatsApp: resposta inválida ao enviar para {$numero}", [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                ]);
             }
         } catch (\Throwable $e) {
             Log::error("WhatsApp: falha ao enviar para {$numero} — " . $e->getMessage());
@@ -189,5 +192,50 @@ class WhatsAppService
         }
 
         return $digitos;
+    }
+
+    public function enviarDocumento(string $telefone, string $arquivoBase64, string $nome, string $caption = null): void
+    {
+        if (! $this->enabled || ! $this->baseUrl || ! $this->apiKey || ! $this->instance) {
+            return;
+        }
+
+        $numero = $this->normalizarTelefone($telefone);
+        if (! $numero) {
+            return;
+        }
+
+        try {
+            $response = Http::timeout(30)
+                ->withHeaders([
+                    'apikey' => $this->apiKey,
+                    'Content-Type' => 'application/json',
+                ])
+                ->post(
+                    "{$this->baseUrl}/message/sendMedia/" . rawurlencode($this->instance),
+                    [
+                        'number'    => $numero,
+                        'mediatype' => 'document',
+                        'mimetype'  => 'application/pdf',
+                        'caption'   => $caption ?? '📄 Comprovativo de candidatura ISP-Bié',
+                        'media'     => $arquivoBase64,
+                        'fileName'  => $nome,
+                    ]
+                );
+
+            Log::info('Evolution WhatsApp sendMedia resposta', [
+                'status' => $response->status(),
+                'body'   => $response->body(),
+            ]);
+
+            if (! $response->successful()) {
+                Log::error("WhatsApp: falha sendMedia para {$numero}", [
+                    'status' => $response->status(),
+                    'body'   => $response->body(),
+                ]);
+            }
+        } catch (\Throwable $e) {
+            Log::error("WhatsApp: falha sendMedia para {$numero} — " . $e->getMessage());
+        }
     }
 }

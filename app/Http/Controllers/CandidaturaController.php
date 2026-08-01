@@ -175,6 +175,17 @@ class CandidaturaController extends Controller
 
         $filename = 'comprovativo-candidatura-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf';
 
+        try {
+            app(WhatsAppService::class)->enviarDocumento(
+                $candidatura->telefone,
+                base64_encode($pdf->output()),
+                $filename,
+                '📄 Comprovativo de candidatura — ISP-Bié'
+            );
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao enviar comprovativo via WhatsApp (public): ' . $e->getMessage());
+        }
+
         return $pdf->download($filename);
     }
 }
