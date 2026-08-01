@@ -31,8 +31,8 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     margin-top:3mm;
     color:#1B4B9C;
     font-weight:bold;
-    font-size:14pt;
-    letter-spacing:0.02em;
+    font-size:12.5pt;
+    letter-spacing:0.01em;
 }
 
 .divisor { border-top:1.3pt solid #1B4B9C; margin-top:8mm; width:105mm; }
@@ -52,12 +52,14 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     margin-top:30mm;
 }
 
-/* Canto destacável: faixa diagonal entre uma linha contínua e uma tracejada, com os
-   campos de identificação, destinada a ser cortada e arquivada separadamente para
-   garantir o anonimato na correcção. Geometria calculada a partir da matriz de rotação
-   (usando "left", não "right" — o dompdf posiciona mal blocos rodados ancorados por
-   "right") para nunca ultrapassar a página nem colidir com o cabeçalho ou o título,
-   mesmo no pior caso de nomes/cursos longos que quebram em várias linhas. */
+/* Canto destacável: faixa diagonal com os campos de identificação do candidato,
+   destinada a ser rasgada e arquivada em separado para garantir o anonimato na
+   correcção (quem corrige só vê o código de exame, não o nome). Todo o texto é
+   alinhado à esquerda dentro do bloco — cada linha começa no mesmo ponto e lê-se
+   da esquerda para a direita — e o bloco inteiro é rodado em conjunto, mantendo
+   todas as linhas paralelas na diagonal, tal como numa folha de prova real.
+   Largura de 60mm é o máximo que cabe sem tocar no nome do instituto (que é o
+   elemento mais largo do cabeçalho); geometria confirmada por render de teste. */
 .canto-destacavel {
     position:absolute;
     top:-2mm;
@@ -72,15 +74,16 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     margin-bottom:2mm;
 }
 .canto-destacavel .campo {
+    text-align:left;
     font-weight:bold;
     font-size:9pt;
-    line-height:1.4;
-    margin-bottom:0.6mm;
+    line-height:1.45;
+    margin-bottom:0.7mm;
 }
 .canto-destacavel .linha-corte {
     border-top:1.3px dashed #000;
     width:100%;
-    margin-top:2mm;
+    margin-top:2.5mm;
 }
 
 @media print { @page { margin:0; size:A4 portrait; } }

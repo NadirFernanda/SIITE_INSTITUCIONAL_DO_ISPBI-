@@ -185,7 +185,17 @@
                                 @endif
 
                                 {{-- Application form --}}
-                                <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-4 sm:p-8">
+
+                                <!-- Aviso institucional: formulário temporariamente oculto -->
+                                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-xl mb-6">
+                                    <h3 class="font-bold text-yellow-700 text-lg">Aviso Institucional — Abertura do Processo de Candidaturas</h3>
+                                    <p class="mt-3 text-yellow-800">O Instituto Superior Politécnico do Bié informa a todos os candidatos e demais interessados que o período oficial de submissão de candidaturas ainda não se encontra aberto.</p>
+                                    <p class="mt-3 text-yellow-800">O formulário de candidaturas estará disponível a partir do dia <strong>03 de agosto de 2026</strong>, momento a partir do qual os candidatos poderão efetuar regularmente as suas submissões através desta plataforma.</p>
+                                    <p class="mt-3 text-yellow-800">Informa-se ainda que quaisquer candidaturas submetidas antes da data oficial de abertura deverão ser novamente realizadas a partir de <strong>03 de agosto de 2026</strong>, utilizando exclusivamente o formulário disponibilizado após a abertura oficial do processo.</p>
+                                    <p class="mt-3 text-yellow-800">O Instituto Superior Politécnico do Bié agradece a compreensão de todos e recomenda o acompanhamento das comunicações oficiais para atualização de informações relativas ao processo de candidaturas.</p>
+                                </div>
+
+                                <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-4 sm:p-8" style="display:none;">
 
                                     <h2 class="text-xl sm:text-2xl font-bold text-[#2563eb] mb-1 leading-tight">Ficha de Inscrição — Exame de Acesso 2026/2027</h2>
                                     <p class="text-gray-500 text-sm mb-6">Todos os campos são obrigatórios, excepto o Telefone 2 e a Instituição Laboral (apenas se não trabalhar).</p>
