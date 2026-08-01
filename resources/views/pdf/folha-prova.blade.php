@@ -76,6 +76,8 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     font-size:16pt;
     letter-spacing:0.02em;
     margin-top:15mm;
+    padding-bottom:2mm;
+    border-bottom:0.8px solid #000;
 }
 
 .pagina-branca { page-break-before:always; position:relative; width:210mm; padding:16mm 16mm 10mm; }
@@ -110,19 +112,6 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     transform:rotate(-12deg);
     transform-origin:top right;
 }
-/* Linha de corte única para TODO o canto superior direito (não só a faixa
-   de texto): estende-se para os dois lados — para a direita, quase até ao
-   canto real da página, e para a esquerda, para lá do cabeçalho — para que
-   fique claro que se rasga o canto inteiro ao longo desta linha, e não
-   apenas uma tira à volta do texto. Tracejada (convenção de "corte aqui"),
-   e continua a ser a MESMA linha rodada com o resto do bloco, por isso
-   nunca cruza com mais nada. */
-.canto-destacavel .linha-topo {
-    border-top:1.3px dashed #000;
-    width:150%;
-    margin-left:-30%;
-    margin-bottom:1.5mm;
-}
 .canto-destacavel .campo {
     text-align:left;
     font-family: Helvetica, Arial, sans-serif;
@@ -130,11 +119,6 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     font-size:9pt;
     line-height:1.3;
     margin-bottom:0.4mm;
-}
-.canto-destacavel .linha-corte {
-    border-top:1px solid #999;
-    width:100%;
-    margin-top:1.5mm;
 }
 
 @media print { @page { margin:0; size:A4 portrait; } }
@@ -145,15 +129,11 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 <div class="pagina">
 
     <div class="canto-destacavel">
-        <div class="linha-topo"></div>
         <div class="campo">{!! $faixaLinha('Código de Exame:', $candidatura->codigo_exame) !!}</div>
-        <div class="campo">{!! $faixaLinha('N.º Ficha:', str_pad($candidatura->id,5,'0',STR_PAD_LEFT)) !!}</div>
         <div class="campo">{!! $faixaLinha('N.º BI:', $candidatura->bi) !!}</div>
         <div class="campo">{!! $faixaLinha('Ano Lectivo:', '2026/2027') !!}</div>
         <div class="campo">{!! $faixaLinha('Curso:', $candidatura->curso) !!}</div>
         <div class="campo">{!! $faixaLinha('Nome:', mb_strtoupper($candidatura->nome, 'UTF-8')) !!}</div>
-        <div class="campo">Assinatura: <span style="display:inline-block;width:20mm;border-bottom:1px solid #000;">&nbsp;</span></div>
-        <div class="linha-corte"></div>
     </div>
 
     <div class="cabecalho-instituto">
