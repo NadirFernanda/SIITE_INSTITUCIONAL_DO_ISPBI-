@@ -75,12 +75,9 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
    à pauta de respostas, de forma previsível numa única página A4. */
 .rodape {
     margin-top:60mm;
-    border-top:1px solid #000;
-    padding-top:3mm;
     font-size:10pt;
 }
 .rodape table { width:100%; border-collapse:collapse; }
-.rodape .assinatura-linha { border-bottom:1px solid #000; width:70mm; display:inline-block; height:1px; margin-left:2mm; }
 
 /* Canto destacável: faixa diagonal com os campos de identificação do candidato,
    destinada a ser rasgada e arquivada em separado para garantir o anonimato na
@@ -158,7 +155,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     <div class="rodape">
         <table>
             <tr>
-                <td style="text-align:left;">Fiscal:<span class="assinatura-linha">&nbsp;</span></td>
+                <td style="text-align:left;">Fiscal:</td>
                 <td style="text-align:right;">Pág. 1 de 1</td>
             </tr>
         </table>
