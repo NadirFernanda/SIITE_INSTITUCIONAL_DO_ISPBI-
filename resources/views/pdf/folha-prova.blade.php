@@ -42,7 +42,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
    por baixo do rótulo em vez de ao lado, por causa de como o dompdf resolve
    vertical-align em células vazias. Largura fixa no rótulo garante que todos
    os traços começam alinhados na mesma posição vertical. */
-.linha-campo { margin-top:10mm; font-weight:bold; font-size:12pt; }
+.linha-campo { margin-top:6mm; font-weight:bold; font-size:12pt; }
 .linha-campo .rotulo { display:inline-block; width:22mm; white-space:nowrap; }
 .linha-campo .traco { display:inline-block; border-bottom:1px solid #000; padding-bottom:1mm; }
 /* Campos já preenchidos automaticamente (N.º BI, Curso) não levam traço por
@@ -103,7 +103,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 .canto-destacavel {
     position:absolute;
     top:18mm;
-    left:134mm;
+    left:137mm;
     width:58mm;
     transform:rotate(-12deg);
     transform-origin:top right;
