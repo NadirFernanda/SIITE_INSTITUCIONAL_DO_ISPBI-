@@ -13,35 +13,37 @@
 <style>
 @page { size: A4 portrait; margin: 0; }
 * { margin:0; padding:0; box-sizing:border-box; }
-html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:9.5pt; color:#1a1a2e; }
+html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:9.5pt; color:#000; background:#fff }
 
-/* ── CABEÇALHO AZUL ── */
+/* ── CABEÇALHO (PRINT-FRIENDLY) ── */
 .header {
-    background: #2563eb;
-    color: #fff;
+    background: #fff;
+    color: #000;
     padding: 8mm 12mm;
     display: table;
     width: 100%;
+    border-bottom: 1px solid #e6e6e6;
 }
 .h-logo  { display:table-cell; width:22mm; vertical-align:middle; }
-.h-logo img { width:18mm; height:auto; }
+.h-logo img { width:18mm; height:auto; filter:grayscale(100%); opacity:0.95 }
 .h-center { display:table-cell; vertical-align:middle; padding-left:5mm; }
-.h-inst  { font-size:13pt; font-weight:bold; letter-spacing:0.4px; }
-.h-sub   { font-size:8.5pt; color:#cce0f5; margin-top:1.5mm; }
+.h-inst  { font-size:13pt; font-weight:bold; letter-spacing:0.4px; color:#000 }
+.h-sub   { font-size:8.5pt; color:#555; margin-top:1.5mm; }
 .h-right { display:table-cell; width:30mm; text-align:right; vertical-align:middle; }
-.h-ficha-label { font-size:7.5pt; text-transform:uppercase; letter-spacing:0.08em; color:#cce0f5; }
-.h-ficha-num   { font-size:22pt; font-weight:bold; line-height:1.1; }
+.h-ficha-label { font-size:7.5pt; text-transform:uppercase; letter-spacing:0.08em; color:#666; }
+.h-ficha-num   { font-size:22pt; font-weight:bold; line-height:1.1; color:#000 }
 
 /* ── BANNER ── */
 .banner {
-    background: #1d4ed8;
-    color: #fff;
+    background: #fff;
+    color: #000;
     text-align: center;
     padding: 4mm 0;
     font-size: 11pt;
     font-weight: bold;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 /* ── CONTEÚDO ── */
@@ -51,10 +53,10 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 .sec-title {
     font-size: 7.5pt;
     font-weight: bold;
-    color: #2563eb;
+    color: #333;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    border-bottom: 1.5pt solid #2563eb;
+    border-bottom: 0.8pt solid #e6e6e6;
     padding-bottom: 1.5mm;
     margin-bottom: 4mm;
     margin-top: 5mm;
@@ -64,21 +66,21 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 .fields { display: table; width: 100%; margin-bottom: 1mm; }
 .frow   { display: table-row; }
 .fcell  { display: table-cell; vertical-align: top; padding: 0 3mm 4mm 0; }
-.flabel { font-size: 7pt; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5mm; }
-.fval   { font-size: 10pt; font-weight: bold; color: #1a1a2e; border-bottom: 0.5pt solid #ddd; padding-bottom: 1.5mm; min-height: 5mm; }
+.flabel { font-size: 7pt; font-weight: bold; color: #444; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5mm; }
+.fval   { font-size: 10pt; font-weight: bold; color: #000; border-bottom: 0.5pt solid #ddd; padding-bottom: 1.5mm; min-height: 5mm; }
 
 /* badge */
-.badge { display:inline-block; background:#e3f2fd; color:#2563eb; border:0.5pt solid #90caf9; border-radius:3px; font-size:8pt; font-weight:bold; padding:1px 7px; }
+.badge { display:inline-block; background:transparent; color:#444; border:0.6pt solid #ddd; border-radius:2px; font-size:8pt; font-weight:bold; padding:1px 6px; }
 
 /* ── ASSINATURAS ── */
 .sigs { display:table; width:100%; margin-top:8mm; }
 .sig  { display:table-cell; width:42%; text-align:center; vertical-align:top; }
 .sig-gap { display:table-cell; width:16%; }
 .sig-line  { border-bottom:0.8pt solid #333; height:9mm; margin-bottom:2mm; }
-.sig-label { font-size:9.5pt; font-weight:bold; }
+.sig-label { font-size:9.5pt; font-weight:bold; color:#000 }
 
 /* rodapé */
-.footer { text-align:center; font-size:7pt; color:#aaa; margin-top:5mm; border-top:0.5pt solid #eee; padding-top:2.5mm; }
+.footer { text-align:center; font-size:7pt; color:#777; margin-top:5mm; border-top:0.5pt solid #e6e6e6; padding-top:2.5mm; }
 </style>
 </head>
 <body>
@@ -142,17 +144,17 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
 
     {{-- CURSO INSCRITO --}}
     <div class="sec-title">Inscrição</div>
-    <div style="background:#f0f6ff;border-left:3pt solid #2563eb;padding:4mm 6mm;border-radius:0 4px 4px 0;display:table;width:100%;margin-bottom:3mm;">
+    <div style="background:#fff;border-left:3px solid #e6e6e6;padding:4mm 6mm;border-radius:0;display:table;width:100%;margin-bottom:3mm;">
         <div style="display:table-cell;width:70%;vertical-align:middle;">
             <div class="flabel">Curso Inscrito</div>
-            <div style="font-size:11pt;font-weight:bold;color:#2563eb;margin-top:1mm;">{{ $candidatura->curso }}</div>
+            <div style="font-size:11pt;font-weight:bold;color:#000;margin-top:1mm;">{{ $candidatura->curso }}</div>
             @if($candidatura->perfil)
-            <div style="margin-top:2mm;"><span class="flabel">Perfil de Acesso:</span> <span style="font-size:9pt;font-weight:bold;color:#1a1a2e;">{{ $candidatura->perfil }}</span></div>
+            <div style="margin-top:2mm;"><span class="flabel">Perfil de Acesso:</span> <span style="font-size:9pt;font-weight:bold;color:#000;">{{ $candidatura->perfil }}</span></div>
             @endif
         </div>
         <div style="display:table-cell;width:30%;vertical-align:middle;text-align:right;">
             <div class="flabel">Período</div>
-            <div style="font-size:11pt;font-weight:bold;background:#2563eb;color:#fff;padding:2px 10px;border-radius:3px;display:inline-block;margin-top:1mm;">{{ $periodoLabel }}</div>
+            <div style="font-size:11pt;font-weight:bold;background:transparent;color:#000;padding:2px 8px;border:1px solid #ddd;border-radius:3px;display:inline-block;margin-top:1mm;">{{ $periodoLabel }}</div>
         </div>
     </div>
     <div style="margin-bottom:2mm;">
@@ -169,9 +171,9 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
     </div>
 
     {{-- AVISO --}}
-    <div style="background:#fffbeb;border:1pt solid #f6c344;border-left:3pt solid #e6a817;padding:4mm 6mm;margin:4mm 0;border-radius:0 4px 4px 0;">
-        <strong style="color:#b45309;">Importante:</strong> Apresente este comprovativo (impresso ou em formato digital) no dia do exame de acesso.
-        Guarde o número da sua ficha: <strong style="color:#b45309;">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</strong>.
+    <div style="background:#fff;border:1px solid #eee;padding:4mm 6mm;margin:4mm 0;border-radius:0;">
+        <strong style="color:#000;">Importante:</strong> Apresente este comprovativo (impresso ou em formato digital) no dia do exame de acesso.
+        Guarde o número da sua ficha: <strong style="color:#000;">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</strong>.
         Candidatura registada em {{ $candidatura->created_at->format('d/m/Y') }} às {{ $candidatura->created_at->format('H:i') }}.
     </div>
 
@@ -206,18 +208,18 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
     </div>
 
     @if($candidatura->isAssinada())
-    <div style="background:#f5f3ff;border:1pt solid #c4b5fd;border-radius:6px;padding:3mm 6mm;margin-top:4mm;">
+    <div style="background:#fff;border:1px solid #eee;border-radius:6px;padding:3mm 6mm;margin-top:4mm;">
         <div style="display:table;width:100%;">
             <div style="display:table-cell;vertical-align:middle;width:{{ $sigImg ? '55%' : '100%' }};">
-                <div style="font-size:7.5pt;font-weight:bold;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1.5mm;">✓ Assinado Digitalmente pelo DAAC</div>
+                <div style="font-size:7.5pt;font-weight:bold;color:#000;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1.5mm;">✓ Assinado Digitalmente pelo DAAC</div>
                 <div style="font-size:8pt;color:#555;">
                     {{ $assinante?->name ?? 'DAAC' }} &mdash; {{ $candidatura->assinado_em?->format('d/m/Y \à\s H:i') }}
                 </div>
-                <div style="font-family:monospace;font-size:8.5pt;font-weight:bold;color:#7c3aed;margin-top:1mm;letter-spacing:0.08em;">{{ $candidatura->assinatura_codigo }}</div>
+                <div style="font-family:monospace;font-size:8.5pt;font-weight:bold;color:#333;margin-top:1mm;letter-spacing:0.08em;">{{ $candidatura->assinatura_codigo }}</div>
             </div>
             @if($sigImg)
             <div style="display:table-cell;vertical-align:middle;text-align:right;width:45%;">
-                <img src="{{ $sigImg }}" style="max-height:16mm;max-width:60mm;object-fit:contain;" alt="Assinatura digital">
+                <img src="{{ $sigImg }}" style="max-height:16mm;max-width:60mm;object-fit:contain;filter:grayscale(100%);" alt="Assinatura digital">
             </div>
             @endif
         </div>
