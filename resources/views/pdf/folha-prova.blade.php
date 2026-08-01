@@ -90,6 +90,18 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .rodape table { width:100%; border-collapse:collapse; }
 
+/* Barra vertical entre o cabeçalho (logótipo/instituto/BI/Curso/Código) e o
+   canhoto destacável, para ficar claro onde acaba a área de escrita e
+   começa a zona que vai ser rasgada — sem isso o candidato podia escrever
+   por cima da zona do canhoto e perder esse conteúdo ao destacá-lo. */
+.limite-canhoto {
+    position:absolute;
+    top:0; left:120mm;
+    width:0;
+    height:95mm;
+    border-left:1px solid #999;
+}
+
 /* Canto destacável: faixa diagonal com os campos de identificação do candidato,
    destinada a ser rasgada e arquivada em separado para garantir o anonimato na
    correcção (quem corrige só vê o código de exame, não o nome). Todo o texto é
@@ -135,6 +147,8 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 <body>
 
 <div class="pagina">
+
+    <div class="limite-canhoto"></div>
 
     <div class="canto-destacavel">
         <div class="linha-topo"></div>
