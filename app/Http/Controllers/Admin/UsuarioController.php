@@ -80,7 +80,66 @@ class UsuarioController extends Controller
 
         $file = $request->file('signature_image');
         $mime = $file->getMimeType();
-        $base64 = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($file->path()));
+
+        // Tentar remover fundo branco automaticamente (GD) e guardar PNG com transparência
+        try {
+            $src = null;
+            if (in_array($mime, ['image/png', 'image/x-png'])) {
+                $src = imagecreatefrompng($file->path());
+            } elseif (in_array($mime, ['image/jpeg', 'image/jpg'])) {
+                $src = imagecreatefromjpeg($file->path());
+            }
+
+            if ($src !== null) {
+                $w = imagesx($src);
+                $h = imagesy($src);
+                $dst = imagecreatetruecolor($w, $h);
+                imagesavealpha($dst, true);
+                $trans_colour = imagecolorallocatealpha($dst, 0, 0, 0, 127);
+                imagefill($dst, 0, 0, $trans_colour);
+
+                // Limiar: considerar branco pixels com RGB >= 240
+                $threshold = 240;
+
+                for ($y = 0; $y < $h; $y++) {
+                    for ($x = 0; $x < $w; $x++) {
+                        $rgb = imagecolorat($src, $x, $y);
+                        $r = ($rgb >> 16) & 0xFF;
+                        $g = ($rgb >> 8) & 0xFF;
+                        $b = $rgb & 0xFF;
+
+                        if ($r >= $threshold && $g >= $threshold && $b >= $threshold) {
+                            // transparente: já o é por fundo preenchido
+                            // nada a fazer (pixel transparente)
+                            continue;
+                        }
+
+                        $col = imagecolorallocatealpha($dst, $r, $g, $b, 0);
+                        if ($col === false) {
+                            // fallback: usar nearest color
+                            $col = imagecolorallocatealpha($dst, min(255,$r), min(255,$g), min(255,$b), 0);
+                        }
+                        imagesetpixel($dst, $x, $y, $col);
+                    }
+                }
+
+                ob_start();
+                imagepng($dst);
+                $pngData = ob_get_clean();
+
+                imagedestroy($src);
+                imagedestroy($dst);
+
+                $base64 = 'data:image/png;base64,' . base64_encode($pngData);
+            } else {
+                // fallback: store original
+                $base64 = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($file->path()));
+            }
+        } catch (\Throwable $e) {
+            // Em caso de erro, gravar sem processamento
+            $base64 = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($file->path()));
+            \Log::error('Falha ao processar assinatura (remover fundo): ' . $e->getMessage());
+        }
 
         $usuario->forceFill(['signature_image' => $base64])->save();
 
