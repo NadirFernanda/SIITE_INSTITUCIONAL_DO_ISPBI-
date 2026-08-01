@@ -37,27 +37,33 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     margin-top:22mm;
 }
 
-/* Canto destacável: faixa diagonal com traço tracejado e campos de identificação,
-   destinada a ser cortada e arquivada separadamente para garantir o anonimato na correcção. */
+/* Canto destacável: faixa diagonal entre uma linha contínua e uma tracejada, com os
+   campos de identificação, destinada a ser cortada e arquivada separadamente para
+   garantir o anonimato na correcção. Mantida sempre dentro da margem impressa. */
 .canto-destacavel {
     position:absolute;
-    top:1mm;
-    right:-24mm;
-    width:95mm;
-    transform:rotate(-28deg);
+    top:6mm;
+    right:2mm;
+    width:92mm;
+    transform:rotate(-25deg);
     transform-origin:top right;
+}
+.canto-destacavel .linha-topo {
+    border-top:1.3px solid #000;
+    width:100%;
+    margin-bottom:2.5mm;
 }
 .canto-destacavel .campo {
     font-weight:bold;
-    font-size:8.5pt;
+    font-size:10.5pt;
+    line-height:1.6;
     white-space:nowrap;
-    padding-bottom:0.6mm;
 }
 .canto-destacavel .valor { font-weight:600; }
 .canto-destacavel .linha-corte {
-    border-bottom:1.5px dashed #000;
-    margin-top:1.5mm;
+    border-top:1.3px dashed #000;
     width:100%;
+    margin-top:2.5mm;
 }
 
 @media print { @page { margin:0; size:A4 portrait; } }
@@ -68,6 +74,7 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 <div class="pagina">
 
     <div class="canto-destacavel">
+        <div class="linha-topo"></div>
         <div class="campo">N.º Ficha: <span class="valor">{{ str_pad($candidatura->id,5,'0',STR_PAD_LEFT) }}</span></div>
         <div class="campo">Nome: <span class="valor">{{ strtoupper($candidatura->nome) }}</span></div>
         <div class="campo">Curso: <span class="valor">{{ $candidatura->curso }}</span></div>
