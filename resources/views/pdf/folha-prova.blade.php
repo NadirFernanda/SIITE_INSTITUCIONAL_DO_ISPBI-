@@ -12,21 +12,6 @@
         $quebrado  = wordwrap($texto, 30, "\n", true);
         return nl2br(e($quebrado));
     };
-
-    // Data e duração preenchidas automaticamente a partir da sala/horário atribuído
-    // ao candidato; ficam em branco se ainda não houver sala marcada.
-    $sala = $candidatura->sala;
-    $dataExameTxt = $sala && $sala->data_exame ? $sala->data_exame->format('d/m/Y') : '';
-    $duracaoExameTxt = '';
-    if ($sala && $sala->horario && str_contains($sala->horario, '-')) {
-        [$inicio, $fim] = explode('-', $sala->horario, 2);
-        $ini = \DateTime::createFromFormat('H:i', trim($inicio));
-        $fimDt = \DateTime::createFromFormat('H:i', trim($fim));
-        if ($ini && $fimDt) {
-            $mins = ($fimDt->getTimestamp() - $ini->getTimestamp()) / 60;
-            $duracaoExameTxt = sprintf('%dh%02d', intdiv($mins, 60), $mins % 60);
-        }
-    }
 @endphp
 <!DOCTYPE html>
 <html lang="pt">
@@ -62,13 +47,16 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
 .linha-campo .traco { display:inline-block; border-bottom:1px solid #000; padding-bottom:1mm; }
 .linha-campo .traco.preenchido { font-weight:600; }
 
+/* Caixa do código de exame com mais espaço (largura e padding maiores) para
+   ficar bem legível e com folga para preencher/confirmar à mão se necessário. */
 .linha-codigo {
-    margin-top:6mm;
+    margin-top:8mm;
     font-weight:bold;
-    font-size:13pt;
-    border:1.3px solid #000;
-    display:inline-block;
-    padding:2mm 5mm;
+    font-size:15pt;
+    letter-spacing:0.03em;
+    border:1.5px solid #000;
+    width:110mm;
+    padding:4mm 6mm;
 }
 
 .titulo-exame {
@@ -167,12 +155,8 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     <div class="linha-campo">
         <span class="rotulo">Curso</span><span class="traco" style="width:110mm;">&nbsp;</span>
     </div>
-    <div class="linha-campo">
-        <span class="rotulo">Data</span><span class="traco preenchido" style="width:35mm;">{{ $dataExameTxt }}</span>
-        <span class="rotulo" style="width:20mm;margin-left:10mm;">Duração</span><span class="traco preenchido" style="width:35mm;">{{ $duracaoExameTxt }}</span>
-    </div>
 
-    <div class="linha-codigo">Código de Exame: {{ $candidatura->codigo_exame ?: '—' }}</div>
+    <div class="linha-codigo">Código de Exame: {{ $candidatura->codigo_exame ?: '' }}</div>
 
     <div class="titulo-exame">EXAME DE ACESSO 2026/2027</div>
 
