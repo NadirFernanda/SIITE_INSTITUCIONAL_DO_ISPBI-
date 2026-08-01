@@ -23,7 +23,7 @@ $ANGOLA = [
 $selectedProvince = $selectedProvince ?? null;
 $selectedMunicipio = $selectedMunicipio ?? null;
 
-asort($ANGOLA, SORT_STRING);
+ksort($ANGOLA, SORT_STRING);
 @endphp
 <option value="">Seleccione a província</option>
 @foreach($ANGOLA as $prov => $muns)
