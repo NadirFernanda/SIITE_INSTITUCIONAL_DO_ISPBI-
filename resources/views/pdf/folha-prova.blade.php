@@ -145,9 +145,6 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     <div class="divisor"></div>
 
     <div class="linha-campo">
-        <span class="rotulo">N.º BI:</span><span class="traco preenchido">{{ $candidatura->bi }}</span>
-    </div>
-    <div class="linha-campo">
         <span class="rotulo">Curso:</span><span class="traco preenchido">{{ $candidatura->curso }}</span>
     </div>
 
