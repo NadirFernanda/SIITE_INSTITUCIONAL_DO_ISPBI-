@@ -65,23 +65,16 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     text-align:center;
     font-weight:bold;
     font-size:20pt;
-    letter-spacing:0.04em;
-    margin-top:20mm;
+    letter-spacing:0.02em;
+    margin-top:9mm;
 }
-
-/* Área de respostas: pauta de linhas em branco para o candidato escrever,
-   preenchendo o espaço restante da página até ao rodapé. Número de linhas
-   calculado para caber sempre numa única página A4, com folga para o rodapé. */
-.area-respostas { margin-top:6mm; }
-.area-respostas .linha { border-bottom:0.8px solid #999; height:9mm; }
-.area-respostas .linha.marco { border-bottom-color:#555; }
 
 /* Rodapé em fluxo normal (não position:absolute) — no dompdf, um bloco fixo ao
    fundo de uma página com altura explícita causa páginas fantasma quando o
    conteúdo acima é recalculado; em fluxo normal aparece sempre logo a seguir
    à pauta de respostas, de forma previsível numa única página A4. */
 .rodape {
-    margin-top:8mm;
+    margin-top:60mm;
     border-top:1px solid #000;
     padding-top:3mm;
     font-size:10pt;
@@ -161,12 +154,6 @@ html, body { width:100%; height:100%; font-family: 'Times New Roman', serif; fon
     <div class="linha-codigo">Código de Exame: {{ $candidatura->codigo_exame ?: '' }}</div>
 
     <div class="titulo-exame">EXAME DE ACESSO 2026/2027</div>
-
-    <div class="area-respostas">
-        @for ($i = 0; $i < 11; $i++)
-            <div class="linha{{ $i % 5 === 4 ? ' marco' : '' }}"></div>
-        @endfor
-    </div>
 
     <div class="rodape">
         <table>
