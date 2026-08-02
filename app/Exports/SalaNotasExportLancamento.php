@@ -71,7 +71,7 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         if ($this->sala->horario) {
             $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
         }
-        $rows[] = $dataHorario ? ['Data / Horário: ' . $dataHorario, '', ''] : ['', '', ''];
+        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), '', ''];
 
         // Linha 9 — vazia
         $rows[] = ['', '', ''];

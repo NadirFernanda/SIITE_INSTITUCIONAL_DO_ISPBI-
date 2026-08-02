@@ -53,14 +53,13 @@
     <div class="sala-info">
         Capacidade: {{ $sala->capacidade }} lugares &nbsp;|&nbsp;
         Candidatos atribuídos: {{ $candidaturas->count() }}
-        @if($sala->data_exame || $sala->horario)
-            <br>
-            <span style="margin-top:3mm;display:block;">
-                Data/Horário:
-                @if($sala->data_exame) {{ $sala->data_exame->format('d/m/Y') }} @endif
-                @if($sala->horario) &nbsp;|&nbsp; {{ $sala->horario }}h @endif
-            </span>
-        @endif
+        <br>
+        <span style="margin-top:3mm;display:block;">
+            Data/Horário:
+            {{ $sala->data_exame ? $sala->data_exame->format('d/m/Y') : '___________' }}
+            &nbsp;|&nbsp;
+            {{ $sala->horario ? $sala->horario . 'h' : '___________' }}
+        </span>
     </div>
 
     @if($candidaturas->isEmpty())
