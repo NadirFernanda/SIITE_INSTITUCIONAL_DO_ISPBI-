@@ -46,13 +46,21 @@
         @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
         <div class="inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
         <div class="linha-dupla"></div>
-        <div class="sub">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS — EXAME DE ACESSO 2026/2027</div>
+        <div class="sub">COMISSÃO DO EXAME DE ACESSO — EXAME DE ACESSO 2026/2027</div>
     </div>
 
-    <div class="sala-titulo">{{ strtoupper($sala->nome) }}</div>
+    <div class="sala-titulo">{{ mb_strtoupper($sala->nome, 'UTF-8') }}</div>
     <div class="sala-info">
         Capacidade: {{ $sala->capacidade }} lugares &nbsp;|&nbsp;
         Candidatos atribuídos: {{ $candidaturas->count() }}
+        @if($sala->data_exame || $sala->horario)
+            <br>
+            <span style="margin-top:3mm;display:block;">
+                Data/Horário:
+                @if($sala->data_exame) {{ $sala->data_exame->format('d/m/Y') }} @endif
+                @if($sala->horario) &nbsp;|&nbsp; {{ $sala->horario }}h @endif
+            </span>
+        @endif
     </div>
 
     @if($candidaturas->isEmpty())

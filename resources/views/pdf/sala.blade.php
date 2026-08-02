@@ -46,10 +46,10 @@
         @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
         <div class="inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
         <div class="linha-dupla"></div>
-        <div class="sub">DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS — EXAME DE ACESSO 2026/2027</div>
+        <div class="sub">COMISSÃO DO EXAME DE ACESSO — EXAME DE ACESSO 2026/2027</div>
     </div>
 
-    <div class="sala-titulo">{{ strtoupper($sala->nome) }}</div>
+    <div class="sala-titulo">{{ mb_strtoupper($sala->nome, 'UTF-8') }}</div>
     <div class="sala-info">
         Capacidade: {{ $sala->capacidade }} lugares &nbsp;|&nbsp;
         Candidatos atribuídos: {{ $candidaturas->count() }}
@@ -74,7 +74,7 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width:50px;text-align:center;">N.º</th>
+                    <th style="width:70px;text-align:center;">N.º Ficha</th>
                     <th>Nome Completo</th>
                     <th style="width:120px;">BI / Passaporte</th>
                     <th style="width:70px;text-align:center;">Sexo</th>
@@ -83,7 +83,7 @@
             <tbody>
                 @foreach($lista->sortBy('id') as $c)
                 <tr>
-                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ $c->codigo_exame ?? 'NÃO GERADO' }}</td>
+                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td class="nome-col">{{ $c->nome }}</td>
                     <td>{{ $c->bi }}</td>
                     <td style="text-align:center;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>

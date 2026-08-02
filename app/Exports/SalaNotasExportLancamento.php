@@ -50,7 +50,7 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
 
         // Cabeçalho
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
-        $rows[] = ['DEPARTAMENTO DOS ASSUNTOS ACADÉMICOS', '', ''];
+        $rows[] = ['COMISSÃO DO EXAME DE ACESSO', '', ''];
         $rows[] = ['EXAME DE ACESSO 2026/2027 — PAUTA', '', ''];
 
         // Linha 5 — vazia
