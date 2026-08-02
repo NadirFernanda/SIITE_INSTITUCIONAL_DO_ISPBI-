@@ -130,11 +130,14 @@ class CandidaturaController extends Controller
         AuditLog::registar('assinou_candidatura', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso}) | Código: {$codigo}");
 
-        try {
-            // Enfileirar o e-mail para resposta rápida no frontend (requer queue worker configurado)
-            Mail::to($candidatura->email)->queue(new ComprovatvioConcluido($candidatura));
-        } catch (\Throwable $e) {
-            \Log::error('Falha ao enfileirar email de comprovativo concluído: ' . $e->getMessage());
+        // Email é opcional na candidatura — só enviar se o candidato tiver indicado um
+        if ($candidatura->email) {
+            try {
+                // Enfileirar o e-mail para resposta rápida no frontend (requer queue worker configurado)
+                Mail::to($candidatura->email)->queue(new ComprovatvioConcluido($candidatura));
+            } catch (\Throwable $e) {
+                \Log::error('Falha ao enfileirar email de comprovativo concluído: ' . $e->getMessage());
+            }
         }
 
         try {

@@ -50,7 +50,8 @@ class CandidaturaController extends Controller
             'residencia_bairro'      => 'required|string|max:255',
             'telefone'               => 'required|string|max:50',
             'telefone2'              => 'nullable|string|max:50',
-            'email'                  => 'required|email|max:255',
+            'email'                  => 'nullable|email|max:255',
+            'autorizacao_assinatura' => 'required|accepted',
             'habilitacoes'           => 'required|string|max:100',
             'escola_origem'          => 'required|string|max:255',
             'perfil'                 => $perfilRules,
@@ -92,6 +93,8 @@ class CandidaturaController extends Controller
             'trabalhador.required'           => 'Indique se é trabalhador ou não.',
             'instituicao_laboral.required_if'=> 'Indique o nome da instituição onde trabalha.',
             'periodo.required'               => 'O período de inscrição é obrigatório.',
+            'autorizacao_assinatura.required'=> 'Tem de autorizar a geração da assinatura digital para continuar.',
+            'autorizacao_assinatura.accepted'=> 'Tem de autorizar a geração da assinatura digital para continuar.',
         ]);
 
         $data = $request->only([
@@ -125,6 +128,11 @@ class CandidaturaController extends Controller
             }
         }
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
+        // Email é opcional — gravar null em vez de string vazia quando o candidato não o preencher
+        $data['email'] = ($data['email'] ?? '') !== '' ? $data['email'] : null;
+        // Já validado como 'accepted' acima — regista também quando foi dada a autorização
+        $data['autorizacao_assinatura']    = true;
+        $data['autorizacao_assinatura_em'] = now();
 
         try {
             $candidatura = Candidatura::create($data);

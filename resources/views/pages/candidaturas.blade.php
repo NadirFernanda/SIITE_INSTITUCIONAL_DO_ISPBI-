@@ -377,8 +377,8 @@
                                                 <input type="tel" name="telefone2" value="{{ old('telefone2') }}" maxlength="50" class="{{ $inp }}">
                                             </div>
                                             <div>
-                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
-                                                <input type="email" name="email" value="{{ old('email') }}" required maxlength="255" class="{{ $inp }} @error('email') border-red-400 @enderror">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email <span class="text-gray-400 font-normal">(opcional)</span></label>
+                                                <input type="email" name="email" value="{{ old('email') }}" maxlength="255" class="{{ $inp }} @error('email') border-red-400 @enderror">
                                                 @error('email')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                             </div>
                                         </div>
@@ -516,6 +516,20 @@
                                                 @endforeach
                                             </div>
                                             @error('local_inscricao')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                                        </div>
+
+                                        {{-- 16. Autorização para gerar assinatura digital --}}
+                                        <div class="border border-gray-200 rounded-xl p-4 bg-gray-50">
+                                            <label class="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
+                                                <input type="checkbox" name="autorizacao_assinatura" value="1"
+                                                       {{ old('autorizacao_assinatura') ? 'checked' : '' }}
+                                                       required class="mt-1 accent-[#2563eb]">
+                                                <span>
+                                                    Autorizo o Instituto Superior Politécnico do Bié a gerar uma assinatura digital
+                                                    com o meu nome, a usar no comprovativo desta candidatura. <span class="text-red-500">*</span>
+                                                </span>
+                                            </label>
+                                            @error('autorizacao_assinatura')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                                         </div>
 
                                         <div class="pt-2">
