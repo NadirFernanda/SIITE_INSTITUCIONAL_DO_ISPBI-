@@ -81,7 +81,14 @@ class UsuarioController extends Controller
         $file = $request->file('signature_image');
         $mime = $file->getMimeType();
 
-        // Tentar remover fundo branco automaticamente (GD) e guardar PNG com transparência
+        // Remover o fundo (papel/foto/scan) e uniformizar a tinta da assinatura (GD).
+        // Fotos/scans raramente têm fundo branco puro (sombra, papel amarelado, tom
+        // acinzentado da câmara) — um limiar fixo de "branco == RGB>=240" deixava
+        // esse fundo visível como um rectângulo feio à volta da assinatura. Em vez
+        // disso, usamos a luminância de cada pixel: claro = transparente, escuro =
+        // tinta, com uma faixa intermédia suavizada (anti-serrilhado); e forçamos a
+        // tinta para um tom escuro uniforme, para não ficar com o tom acinzentado/
+        // azulado da imagem original.
         try {
             $src = null;
             if (in_array($mime, ['image/png', 'image/x-png'])) {
@@ -94,12 +101,14 @@ class UsuarioController extends Controller
                 $w = imagesx($src);
                 $h = imagesy($src);
                 $dst = imagecreatetruecolor($w, $h);
+                imagealphablending($dst, false);
                 imagesavealpha($dst, true);
                 $trans_colour = imagecolorallocatealpha($dst, 0, 0, 0, 127);
                 imagefill($dst, 0, 0, $trans_colour);
 
-                // Limiar: considerar branco pixels com RGB >= 240
-                $threshold = 240;
+                $darkThreshold  = 120; // luminância <= isto: tinta totalmente opaca
+                $lightThreshold = 205; // luminância >= isto: fundo totalmente transparente
+                [$inkR, $inkG, $inkB] = [26, 35, 50]; // tom escuro uniforme (evita cinza/azulado da foto)
 
                 for ($y = 0; $y < $h; $y++) {
                     for ($x = 0; $x < $w; $x++) {
@@ -107,17 +116,22 @@ class UsuarioController extends Controller
                         $r = ($rgb >> 16) & 0xFF;
                         $g = ($rgb >> 8) & 0xFF;
                         $b = $rgb & 0xFF;
+                        $luminance = (0.299 * $r) + (0.587 * $g) + (0.114 * $b);
 
-                        if ($r >= $threshold && $g >= $threshold && $b >= $threshold) {
-                            // transparente: já o é por fundo preenchido
-                            // nada a fazer (pixel transparente)
-                            continue;
+                        if ($luminance >= $lightThreshold) {
+                            continue; // mantém-se transparente
                         }
 
-                        $col = imagecolorallocatealpha($dst, $r, $g, $b, 0);
+                        if ($luminance <= $darkThreshold) {
+                            $alpha = 0;
+                        } else {
+                            $ratio = ($luminance - $darkThreshold) / ($lightThreshold - $darkThreshold);
+                            $alpha = (int) round($ratio * 127);
+                        }
+
+                        $col = imagecolorallocatealpha($dst, $inkR, $inkG, $inkB, $alpha);
                         if ($col === false) {
-                            // fallback: usar nearest color
-                            $col = imagecolorallocatealpha($dst, min(255,$r), min(255,$g), min(255,$b), 0);
+                            $col = $trans_colour;
                         }
                         imagesetpixel($dst, $x, $y, $col);
                     }
