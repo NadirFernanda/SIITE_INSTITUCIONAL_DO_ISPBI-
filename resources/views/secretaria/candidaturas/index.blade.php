@@ -38,6 +38,28 @@
         </div>
     </div>
 
+    {{-- Separação rápida: confirmadas vs. não confirmadas --}}
+    <div style="display:flex;gap:8px;margin-bottom:16px;border-bottom:2px solid #e2e8f0;">
+        @php
+            $abaAtiva = request('pagamento', '');
+            $abaEstilo = fn($ativa) => $ativa
+                ? 'color:#7c3aed;border-bottom:2px solid #7c3aed;margin-bottom:-2px;'
+                : 'color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;';
+        @endphp
+        <a href="{{ route('secretaria.candidaturas.index', array_filter(['q' => request('q'), 'curso' => request('curso')])) }}"
+           style="padding:10px 16px;font-weight:700;font-size:0.9rem;text-decoration:none;{{ $abaEstilo($abaAtiva === '') }}">
+            Todas ({{ $totais['total'] }})
+        </a>
+        <a href="{{ route('secretaria.candidaturas.index', array_filter(['q' => request('q'), 'curso' => request('curso'), 'pagamento' => 'nao'])) }}"
+           style="padding:10px 16px;font-weight:700;font-size:0.9rem;text-decoration:none;{{ $abaEstilo($abaAtiva === 'nao') }}">
+            Não confirmadas ({{ $totais['pendentes'] }})
+        </a>
+        <a href="{{ route('secretaria.candidaturas.index', array_filter(['q' => request('q'), 'curso' => request('curso'), 'pagamento' => 'sim'])) }}"
+           style="padding:10px 16px;font-weight:700;font-size:0.9rem;text-decoration:none;{{ $abaEstilo($abaAtiva === 'sim') }}">
+            Confirmadas ({{ $totais['confirmados'] }})
+        </a>
+    </div>
+
     {{-- Filtros --}}
     <form method="GET" action="{{ route('secretaria.candidaturas.index') }}"
           style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
