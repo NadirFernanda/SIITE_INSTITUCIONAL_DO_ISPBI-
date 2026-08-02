@@ -37,7 +37,14 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
 
     public function title(): string
     {
-        return 'Lista de Exame';
+        // Ver App\Exports\SalaExameExport::title() — nome único e dentro do
+        // limite de 31 caracteres, necessário quando várias salas são
+        // combinadas num só ficheiro (impressão em lote por horário).
+        $nome = preg_replace('/[\\\\\/\?\*\[\]:]/', '', $this->sala->nome);
+        $sufixo = ' #' . $this->sala->id;
+        $prefixo = 'Exame - ';
+        $maxNome = max(1, 31 - mb_strlen($prefixo) - mb_strlen($sufixo));
+        return $prefixo . mb_substr($nome, 0, $maxNome) . $sufixo;
     }
 
     public function array(): array

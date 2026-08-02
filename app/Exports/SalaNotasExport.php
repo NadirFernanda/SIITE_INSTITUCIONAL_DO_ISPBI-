@@ -41,7 +41,14 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function title(): string
     {
-        return 'Pauta';
+        // Ver App\Exports\SalaExameExport::title() — mesma necessidade de nome
+        // único e dentro do limite de 31 caracteres quando várias salas são
+        // combinadas num só ficheiro (impressão em lote por horário).
+        $nome = preg_replace('/[\\\\\/\?\*\[\]:]/', '', $this->sala->nome);
+        $sufixo = ' #' . $this->sala->id;
+        $prefixo = 'Pauta - ';
+        $maxNome = max(1, 31 - mb_strlen($prefixo) - mb_strlen($sufixo));
+        return $prefixo . mb_substr($nome, 0, $maxNome) . $sufixo;
     }
 
     public function array(): array

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tecnico;
 
 use App\Exports\SalaExameExport;
+use App\Http\Controllers\Concerns\DownloadsSalasEmLote;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
@@ -13,6 +14,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SalaController extends Controller
 {
+    use DownloadsSalasEmLote;
+
     public function index()
     {
         $salas = Sala::withCount('candidaturas')->ordenadaPorHorario()->get();

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Lancamento;
 
 use App\Exports\SalaExameExportLancamento;
+use App\Exports\SalasExameExportLoteLancamento;
+use App\Http\Controllers\Concerns\DownloadsSalasEmLote;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
@@ -13,6 +15,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SalaController extends Controller
 {
+    use DownloadsSalasEmLote;
+
     public function index()
     {
         $salas = Sala::withCount('candidaturas')->ordenadaPorHorario()->get();
@@ -224,6 +228,21 @@ class SalaController extends Controller
     {
         return Excel::download(new SalaExameExportLancamento($sala),
             'lista-exame-' . \Str::slug($sala->nome) . '.xlsx');
+    }
+
+    // Substitui o excelExameLote() do trait DownloadsSalasEmLote — o Lançamento
+    // usa a sua própria variante de exportação (SalaExameExportLancamento), não
+    // a genérica usada pelos outros perfis.
+    public function excelExameLote(Request $request)
+    {
+        $salas = $this->salasDoHorarioComCandidatos($request);
+
+        if ($salas->isEmpty()) {
+            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
+        }
+
+        $filename = 'lista-exame-' . \Str::slug($request->input('horario')) . '.xlsx';
+        return Excel::download(new SalasExameExportLoteLancamento($salas), $filename);
     }
 
     public function gerarCodigos(Sala $sala)

@@ -21,6 +21,40 @@
         </div>
     @endif
 
+    {{-- Painel de Impressão em Lote por Horário --}}
+    <div style="background:linear-gradient(135deg, #eaeff5 0%, #dbe3ee 100%);border:1.5pt solid #a8c4e0;border-radius:14px;padding:16px 20px;margin-bottom:22px;">
+        <div style="margin-bottom:12px;">
+            <strong style="color:#1e3a5f;">Imprimir Pautas em Lote por Horário</strong>
+            <p style="color:#0f1f3d;font-size:0.85rem;margin:2px 0 0;">Gera as listas de todas as salas de um horário de uma só vez, em vez de sala a sala.</p>
+        </div>
+        <form method="GET" style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+            <div style="flex:1;min-width:200px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#0f1f3d;margin-bottom:5px;">Horário</label>
+                <select name="horario" style="width:100%;border:1px solid #a8c4e0;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
+                    @foreach(\App\Models\Sala::$horarios as $h)
+                    <option value="{{ $h }}">{{ $h }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" formaction="{{ route('presidencia.salas.pdf-lote') }}"
+                    style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
+                📄 PDF
+            </button>
+            <button type="submit" formaction="{{ route('presidencia.salas.pdf-exame-lote') }}"
+                    style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
+                📄 PDF Exame
+            </button>
+            <button type="submit" formaction="{{ route('presidencia.salas.excel-exame-lote') }}"
+                    style="background:#059669;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
+                📊 Excel Exame
+            </button>
+            <button type="submit" formaction="{{ route('presidencia.salas.excel-notas-lote') }}"
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
+                📋 Excel Notas
+            </button>
+        </form>
+    </div>
+
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:26px;">
         @php
         $kpis = [
