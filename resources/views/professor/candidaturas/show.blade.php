@@ -71,7 +71,7 @@
                                 {{ number_format($computed, 2) }}<span style="font-size:0.9rem;color:#94a3b8;">/20</span>
                             </div>
                         </div>
-                        <div style="font-size:0.78rem;color:#64748b;">A soma das notas por disciplina é calculada automaticamente. A Presidência usará este valor para a pauta final.</div>
+                        <div style="font-size:0.78rem;color:#64748b;">A Nota Final é calculada automaticamente a partir das notas por disciplina. A Presidência usará este valor na pauta final.</div>
                     </div>
                 @else
                     <div style="background:#fde8e0;border:1px solid #fde8e0;border-radius:10px;padding:12px;margin-bottom:12px;">
@@ -153,7 +153,7 @@
 
             <div style="margin-top:14px;display:flex;gap:12px;align-items:center;">
                 <button type="submit" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;">Guardar notas por disciplina</button>
-                <div style="color:#64748b;font-size:0.85rem;">As notas por disciplina serão usadas na exportação da Presidência para calcular a soma ponderada.</div>
+                <div style="color:#64748b;font-size:0.85rem;">As notas por disciplina serão usadas na exportação da Presidência para calcular a Nota Final.</div>
             </div>
         </form>
     </div>

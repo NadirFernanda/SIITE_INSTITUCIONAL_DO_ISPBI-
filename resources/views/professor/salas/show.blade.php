@@ -62,7 +62,7 @@
                     <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:60px;">Lugar</th>
                     <th style="padding:12px 18px;text-align:left;font-weight:700;color:#475569;">Código Exame</th>
                     <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;">Disciplinas</th>
-                    <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:120px;">Soma</th>
+                    <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:120px;">Nota Final</th>
                     <th style="padding:12px 18px;text-align:left;font-weight:700;color:#475569;">Status</th>
                     <th style="padding:12px 18px;text-align:center;font-weight:700;color:#475569;width:100px;">Acção</th>
                 </tr>

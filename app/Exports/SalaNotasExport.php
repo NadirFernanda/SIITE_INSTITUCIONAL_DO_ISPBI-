@@ -85,7 +85,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         foreach ($this->disciplines as $d) {
             $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
-        $header[] = 'SOMA (0–20)';
+        $header[] = 'NOTA FINAL (0–20)';
         $header[] = 'RESULTADO';
 
         // Garantir que a tabela comece na linha fixa definida
