@@ -11,6 +11,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // O servidor corre atrás do Nginx (reverse proxy na mesma máquina). Sem
+        // confiar nele, o Laravel vê sempre o IP do Nginx (não o do visitante
+        // real) — isso faz com que TODOS os pedidos de TODOS os visitantes caiam
+        // no mesmo "balde" de rate limiting (login, throttle global de 200/min),
+        // causando falhas aleatórias e intermitentes em pedidos legítimos
+        // (incluindo logins) quando há vários utilizadores em simultâneo.
+        $middleware->trustProxies(at: '*');
+
         // Global rate limit: 200 requests/minute per IP for all web routes.
         // Individual sensitive endpoints (login, contact, alumni, revista) have stricter limits.
         $middleware->web(append: [

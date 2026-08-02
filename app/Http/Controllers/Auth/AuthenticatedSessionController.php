@@ -79,7 +79,18 @@ class AuthenticatedSessionController extends Controller
         }
 
         \Log::info("Login success: redirecting to {$destination}");
-        return redirect()->intended($destination);
+
+        // Não usar redirect()->intended() aqui: se o utilizador tinha uma
+        // 'url.intended' antiga na sessão (ex.: uma tentativa anterior de aceder a
+        // uma área doutro perfil, ou um link partilhado que já não corresponde ao
+        // seu papel), intended() enviava-o para essa URL desatualizada em vez do
+        // destino correcto — o middleware de papel dessa página rejeitava-o e
+        // devolvia-o ao login, dando a impressão de que "o login não funcionou à
+        // primeira". Já calculámos o destino certo para este papel, por isso
+        // vamos sempre direto para lá.
+        $request->session()->forget('url.intended');
+
+        return redirect()->to($destination);
     }
 
     /**
