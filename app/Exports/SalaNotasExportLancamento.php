@@ -192,6 +192,9 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
 
+        // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
+        $sheet->freezePane('A' . ($tr + 1));
+
         // Impressão A4
         $ps = $sheet->getPageSetup();
         $ps->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
@@ -200,6 +203,9 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $ps->setFitToWidth(1);
         $ps->setFitToHeight(0);
         $ps->setHorizontalCentered(true);
+        // Repete a linha do cabeçalho da tabela em todas as páginas impressas.
+        $ps->setRowsToRepeatAtTopByStartAndEnd($tr, $tr);
+        $ps->setPrintArea("A1:D{$sigCargo}");
 
         $sheet->getPageMargins()
             ->setHeader(0.2)
@@ -207,6 +213,9 @@ class SalaNotasExportLancamento implements FromArray, WithTitle, WithStyles, Wit
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
+
+        // ── Rodapé com paginação ──
+        $sheet->getHeaderFooter()->setOddFooter('&LISP-Bié — Pauta&CPágina &P de &N&R' . now()->format('d/m/Y'));
 
         return [];
     }

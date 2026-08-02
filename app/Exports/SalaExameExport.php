@@ -12,8 +12,6 @@ use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
-use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooter;
-use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -68,7 +66,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows[] = ['', '', ''];
 
         $this->tableRow = 10;
-        $rows[] = ['N.º Ficha', 'NOME COMPLETO', ''];
+        $rows[] = ['N.º Ficha', 'NOME COMPLETO', 'ASSINATURA'];
 
         foreach ($this->candidaturas as $c) {
             $rows[] = [
@@ -180,8 +178,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
 
-        // ── Sem header de impressão — logo só na página 1 via Drawing ──
-        // Página 2+ fica limpa (só lista + assinatura, sem repetição do logo/cabeçalho)
+        // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
+        $sheet->freezePane('A' . ($tr + 1));
 
         // ── Impressão A4 ──
         $ps = $sheet->getPageSetup();
@@ -191,6 +189,11 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setFitToWidth(1);
         $ps->setFitToHeight(0);
         $ps->setHorizontalCentered(true);
+        // Repete a linha do cabeçalho da tabela (N.º Ficha / Nome / Assinatura) em
+        // todas as páginas impressas — sem isto, uma sala com muitos candidatos
+        // imprimia a página 2+ sem títulos, exigindo edição manual antes de imprimir.
+        $ps->setRowsToRepeatAtTopByStartAndEnd($tr, $tr);
+        $ps->setPrintArea("A1:C{$sigCargo}");
 
         $sheet->getPageMargins()
             ->setHeader(0.2)
@@ -198,6 +201,9 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ->setBottom(0.59)
             ->setLeft(0.39)->setRight(0.39)
             ->setFooter(0.2);
+
+        // ── Rodapé com paginação ──
+        $sheet->getHeaderFooter()->setOddFooter('&LISP-Bié — Lista de Exame&CPágina &P de &N&R' . now()->format('d/m/Y'));
 
         return [];
     }
