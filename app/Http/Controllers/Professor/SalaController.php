@@ -15,7 +15,7 @@ class SalaController extends Controller
             $query->select('sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_em', 'id');
         }])
             ->whereHas('candidaturas')
-            ->orderBy('data_exame')
+            ->ordenadaPorHorario()
             ->get()
             ->map(function ($sala) {
                 $candidaturas = $sala->candidaturas;

@@ -19,7 +19,7 @@ class SalaController extends Controller
             ->withCount(['candidaturas as candidaturas_impressas_count' => function ($query) {
                 $query->where('pagamento_confirmado', true)->whereNotNull('folha_impressa_em');
             }])
-            ->orderBy('nome')
+            ->ordenadaPorHorario()
             ->get()
             ->filter(fn($sala) => $sala->candidaturas_count > 0);
 

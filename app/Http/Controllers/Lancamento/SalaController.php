@@ -15,7 +15,7 @@ class SalaController extends Controller
 {
     public function index()
     {
-        $salas = Sala::withCount('candidaturas')->orderBy('nome')->get();
+        $salas = Sala::withCount('candidaturas')->ordenadaPorHorario()->get();
 
         $totalCandidatos = Candidatura::whereNotIn('status', ['rejeitada'])->count();
         $atribuidos      = Candidatura::whereNotNull('sala_id')->count();

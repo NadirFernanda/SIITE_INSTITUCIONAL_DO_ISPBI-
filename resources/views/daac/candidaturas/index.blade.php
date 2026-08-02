@@ -60,7 +60,7 @@
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#92400e;margin-bottom:5px;">Sala (opcional)</label>
                 <select name="sala_id" style="width:100%;border:1px solid #fca5a5;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
                     <option value="">Todas as salas</option>
-                    @foreach(\App\Models\Sala::orderBy('nome')->get() as $sala)
+                    @foreach(\App\Models\Sala::ordenadaPorHorario()->get() as $sala)
                     <option value="{{ $sala->id }}">{{ $sala->nome }}</option>
                     @endforeach
                 </select>

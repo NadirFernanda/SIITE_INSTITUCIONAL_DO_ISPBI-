@@ -16,7 +16,7 @@ class SalaController extends Controller
 {
     public function index()
     {
-        $salas = Sala::withCount('candidaturas')->orderBy('nome')->get();
+        $salas = Sala::withCount('candidaturas')->ordenadaPorHorario()->get();
 
         // Estatísticas para o painel
         $totalCandidatos   = Candidatura::whereNotIn('status', ['rejeitada'])->count();

@@ -39,6 +39,22 @@ class Sala extends Model
         return $this->hasMany(SalaDiscipline::class);
     }
 
+    /**
+     * Ordena as salas por data e horário do exame (manhã antes de tarde), depois
+     * por nome — em vez de alfabética simples, que misturava os horários de uma
+     * mesma sala (ex.: "Sala 1" das 8h e "Sala 1" das 13h ficavam lado a lado
+     * sem relação com a ordem real do dia). Salas sem horário definido vão para
+     * o fim de cada data. Formato zero-padded (HH:MM) já ordena cronologicamente
+     * como string, por isso não precisa de conversão especial.
+     */
+    public function scopeOrdenadaPorHorario($query)
+    {
+        return $query->orderBy('data_exame')
+            ->orderByRaw('CASE WHEN horario IS NULL THEN 1 ELSE 0 END')
+            ->orderBy('horario')
+            ->orderBy('nome');
+    }
+
     public function totalAtribuido(): int
     {
         return $this->candidaturas()->count();
