@@ -114,6 +114,9 @@
                     <td style="padding:13px 16px;">
                         <div style="font-weight:600;color:#1a2332;">{{ $c->nome }}</div>
                         <div style="font-size:0.78rem;color:#64748b;">BI: {{ $c->bi }} · {{ $c->telefone }}</div>
+                        @if($c->email)
+                        <div style="font-size:0.78rem;color:#64748b;">{{ $c->email }}</div>
+                        @endif
                     </td>
                     <td style="padding:13px 16px;color:#334155;">
                         {{ $c->curso }}<br>

@@ -88,7 +88,7 @@
         <form method="POST" action="{{ route('secretaria.candidaturas.confirmar-pagamento', $candidatura) }}">
             @csrf
             <button type="submit"
-                    onclick="return confirm('Confirmar que o candidato {{ $candidatura->nome }} (Ficha #{{ str_pad($candidatura->id, 5, \'0\', STR_PAD_LEFT) }}) efectuou o pagamento?')"
+                    onclick="return confirm('Confirmar que o candidato {{ $candidatura->nome }} (Ficha #{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}) efectuou o pagamento?')"
                     style="background:#16a34a;color:#fff;border:none;border-radius:10px;padding:12px 28px;font-weight:700;cursor:pointer;font-size:0.95rem;display:inline-flex;align-items:center;gap:8px;">
                 <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Confirmar Pagamento
