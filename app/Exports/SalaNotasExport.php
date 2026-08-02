@@ -83,7 +83,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Construir cabeçalho da tabela dinamicamente
         $header = ['CÓDIGO EXAME', 'NOME COMPLETO'];
         foreach ($this->disciplines as $d) {
-            $header[] = strtoupper($d['discipline']);
+            $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
         $header[] = 'SOMA (0–20)';
         $header[] = 'RESULTADO';
@@ -102,7 +102,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         foreach ($this->candidaturas as $c) {
             $line = [];
             $line[] = $c->codigo_exame ?? 'NÃO GERADO';
-            $line[] = strtoupper($c->nome);
+            $line[] = mb_strtoupper($c->nome, 'UTF-8');
 
             $sum = 0.0;
             $hasAny = false;
@@ -145,7 +145,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         $col = 'C';
         foreach ($this->disciplines as $d) {
-            $widths[$col] = 15;
+            // Largura proporcional ao nome da disciplina (em vez de um valor fixo de 15),
+            // para nomes compridos não ficarem cortados no cabeçalho da pauta. O texto
+            // do cabeçalho também tem "wrapText" activo (ver styles()) como rede de
+            // segurança para nomes muito longos.
+            $widths[$col] = max(15, min(28, mb_strlen($d['discipline']) + 4));
             $col++;
         }
         // Soma
@@ -188,7 +192,10 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->getRowDimension(4)->setRowHeight(18);
         $sheet->getRowDimension(5)->setRowHeight(8);
         $sheet->getRowDimension(9)->setRowHeight(8);
-        $sheet->getRowDimension($tr)->setRowHeight(22);
+        // Cabeçalho mais alto do que o resto da tabela — dá espaço para os nomes das
+        // disciplinas quebrarem em 2 linhas (wrapText) quando são compridos, em vez
+        // de ficarem cortados.
+        $sheet->getRowDimension($tr)->setRowHeight(34);
 
         $sheet->getStyle('A2')->applyFromArray([
             'font'      => ['bold' => true, 'size' => 14, 'color' => ['rgb' => '1565C0']],
@@ -207,7 +214,9 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->getStyle($lastHeaderRange)->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
             'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '0E5C2F']],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
+            // wrapText: nomes de disciplinas compridos quebram para uma segunda linha
+            // dentro da própria célula, em vez de aparecerem cortados.
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER, 'wrapText' => true],
             'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'FFFFFF']]],
         ]);
 

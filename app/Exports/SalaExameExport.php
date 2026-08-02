@@ -70,7 +70,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         foreach ($this->candidaturas as $c) {
             $rows[] = [
-                str_pad($c->id, 5, '0', STR_PAD_LEFT), strtoupper($c->nome), '',
+                str_pad($c->id, 5, '0', STR_PAD_LEFT), mb_strtoupper($c->nome, 'UTF-8'), '',
             ];
         }
 
