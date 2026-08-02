@@ -73,10 +73,6 @@
                     style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
                 📊 Excel Exame
             </button>
-            <button type="submit" formaction="{{ route('admin.salas.excel-notas-lote') }}"
-                    style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📊 Excel Notas
-            </button>
         </form>
     </div>
 

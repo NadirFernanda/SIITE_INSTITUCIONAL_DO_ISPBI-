@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\SalaExameExport;
-use App\Exports\SalaNotasExport;
-use App\Exports\SalasNotasExportLote;
 use App\Http\Controllers\Concerns\DownloadsSalasEmLote;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
@@ -323,21 +321,4 @@ class SalaController extends Controller
         return Excel::download(new SalaExameExport($sala), $filename);
     }
 
-    public function excelNotas(Sala $sala)
-    {
-        $filename = 'lancamento-notas-' . \Str::slug($sala->nome) . '.xlsx';
-        return Excel::download(new SalaNotasExport($sala), $filename);
-    }
-
-    public function excelNotasLote(Request $request)
-    {
-        $salas = $this->salasDoHorarioComCandidatos($request);
-
-        if ($salas->isEmpty()) {
-            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
-        }
-
-        $filename = 'lancamento-notas-' . \Str::slug($request->input('horario')) . '.xlsx';
-        return Excel::download(new SalasNotasExportLote($salas), $filename);
-    }
 }

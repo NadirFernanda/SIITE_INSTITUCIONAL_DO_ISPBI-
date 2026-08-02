@@ -253,11 +253,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1
     Route::get('salas/lote/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdfLote'])->name('salas.pdf-lote');
     Route::get('salas/lote/pdf-exame', [App\Http\Controllers\Admin\SalaController::class, 'pdfExameLote'])->name('salas.pdf-exame-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');
-    Route::get('salas/lote/excel-notas', [App\Http\Controllers\Admin\SalaController::class, 'excelNotasLote'])->name('salas.excel-notas-lote');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdf'])->name('salas.pdf');
     Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Admin\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExame'])->name('salas.excel-exame');
-    Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Admin\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
     Route::get('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'show'])->name('salas.show');
     Route::patch('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'update'])->name('salas.update');
     Route::delete('salas/{sala}', [App\Http\Controllers\Admin\SalaController::class, 'destroy'])->name('salas.destroy');
