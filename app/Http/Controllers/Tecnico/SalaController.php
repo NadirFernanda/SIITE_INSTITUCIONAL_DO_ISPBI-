@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Tecnico;
 
 use App\Exports\SalaExameExport;
-use App\Exports\SalaNotasExport;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
@@ -239,11 +238,5 @@ class SalaController extends Controller
     {
         return Excel::download(new SalaExameExport($sala),
             'lista-exame-' . \Str::slug($sala->nome) . '.xlsx');
-    }
-
-    public function excelNotas(Sala $sala)
-    {
-        return Excel::download(new SalaNotasExport($sala),
-            'lancamento-notas-' . \Str::slug($sala->nome) . '.xlsx');
     }
 }

@@ -196,10 +196,6 @@
                                style="display:inline-flex;align-items:center;gap:4px;background:#15803d;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
                                 Exame
                             </a>
-                            <a href="{{ route('tecnico.salas.excel-notas', $sala) }}" title="Lançamento de notas Excel"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
-                                Notas
-                            </a>
                         </div>
                         {{-- Linha 2: editar + eliminar --}}
                         <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;">
