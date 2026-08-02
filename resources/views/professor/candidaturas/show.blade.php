@@ -138,10 +138,15 @@
 
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
                 @foreach($disciplines as $d)
-                @php $discName = $d->discipline; $existing = $notas[$discName] ?? null; @endphp
+                @php
+                    $discName = $d->discipline;
+                    $existing = $notas[$discName] ?? null;
+                    $maxDisc = round(20 * ((int) $d->weight_percent) / 100, 2);
+                @endphp
                 <div style="border:1px solid #eaeff5;border-radius:8px;padding:12px;">
-                    <div style="font-size:0.72rem;font-weight:700;color:#0f172a;margin-bottom:6px;">{{ $discName }}</div>
-                    <input type="number" name="notas[{{ $discName }}]" data-weight="{{ (int)$d->weight_percent }}" min="0" max="20" step="0.01" value="{{ old('notas.'.$discName, $existing?->nota) }}" class="disc-nota-input" style="width:100%;padding:8px;border-radius:6px;border:1px solid #eaeff5;font-weight:700;text-align:center;">
+                    <div style="font-size:0.72rem;font-weight:700;color:#0f172a;margin-bottom:6px;">{{ $discName }} <span style="font-weight:400;color:#94a3b8;">(máx. {{ $maxDisc }})</span></div>
+                    <input type="number" name="notas[{{ $discName }}]" data-weight="{{ (int)$d->weight_percent }}" min="0" max="{{ $maxDisc }}" step="0.01" value="{{ old('notas.'.$discName, $existing?->nota) }}" class="disc-nota-input" style="width:100%;padding:8px;border-radius:6px;border:1px solid #eaeff5;font-weight:700;text-align:center;">
+                    @error('notas.'.$discName)<p style="font-size:0.72rem;color:#dc2626;margin-top:4px;">{{ $message }}</p>@enderror
                 </div>
                 @endforeach
             </div>

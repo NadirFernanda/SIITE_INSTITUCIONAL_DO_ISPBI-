@@ -81,13 +81,27 @@ class CandidaturaController extends Controller
 
     public function updateNotasDisciplinas(Request $request, Candidatura $candidatura)
     {
-        $request->validate([
-            'notas' => 'array',
-            'notas.*' => 'nullable|numeric|min:0|max:20',
-        ], [
+        // Cada disciplina tem uma pontuação máxima proporcional ao seu peso dentro dos
+        // 20 valores (ex.: peso 60% = até 12 pontos) — a nota final é a SOMA das notas
+        // de cada disciplina, não uma média. Por isso o limite máximo de cada campo
+        // depende do peso dessa disciplina, e não é sempre 20.
+        $salaDiscsForValidation = $candidatura->sala_id
+            ? SalaDiscipline::where('sala_id', $candidatura->sala_id)->get()->keyBy('discipline')
+            : collect();
+
+        $rules = ['notas' => 'array'];
+        $messages = [];
+        foreach ($request->input('notas', []) as $disciplina => $valor) {
+            $disc = trim($disciplina);
+            $sd = $salaDiscsForValidation[$disc] ?? null;
+            $max = $sd ? round(20 * ((int) $sd->weight_percent) / 100, 2) : 20;
+            $rules["notas.{$disciplina}"] = "nullable|numeric|min:0|max:{$max}";
+            $messages["notas.{$disciplina}.max"] = "A nota de \"{$disc}\" não pode exceder {$max} valores (peso desta disciplina).";
+        }
+
+        $request->validate($rules, $messages + [
             'notas.*.numeric' => 'Cada nota deve ser numérica.',
             'notas.*.min' => 'A nota mínima é 0.',
-            'notas.*.max' => 'A nota máxima é 20.',
         ]);
 
         $dados = $request->input('notas', []);
@@ -120,7 +134,6 @@ class CandidaturaController extends Controller
                 if ($salaDiscs->count() > 0) {
                     $complete = true;
                     $sum = 0.0;
-                    $totalWeight = (int) $salaDiscs->sum('weight_percent');
 
                     foreach ($salaDiscs as $sd) {
                         $notaRow = CandidaturaNota::where('candidatura_id', $candidatura->id)
@@ -130,26 +143,15 @@ class CandidaturaController extends Controller
                             $complete = false;
                             break;
                         }
-                        // accumulate raw notes (will apply weighting logic later)
                         $sum += (float) $notaRow->nota;
                     }
 
                     if ($complete) {
-                        if ($totalWeight === 0) {
-                            // If all weights are zero, use simple sum of discipline notes
-                            $final = round($sum, 2);
-                        } else {
-                            // Compute weighted sum normalized by totalWeight so weights need not sum to 100
-                            $weighted = 0.0;
-                            foreach ($salaDiscs as $sd) {
-                                $notaRow = CandidaturaNota::where('candidatura_id', $candidatura->id)
-                                    ->where('discipline', $sd->discipline)
-                                    ->first();
-                                $w = (int) $sd->weight_percent;
-                                $weighted += ((float) $notaRow->nota) * ($w / (float) $totalWeight);
-                            }
-                            $final = round($weighted, 2);
-                        }
+                        // Nota final = SOMA das notas por disciplina (não uma média
+                        // ponderada) — o peso de cada disciplina já limita a pontuação
+                        // máxima que ela pode contribuir (ver validação acima), por
+                        // isso a soma das disciplinas já dá directamente a nota /20.
+                        $final = round($sum, 2);
 
                         $candidatura->update([
                             'nota_exame' => $final,
@@ -157,13 +159,13 @@ class CandidaturaController extends Controller
                             'nota_lancada_em' => now(),
                         ]);
 
-                        AuditLog::registar('calculou_soma_ponderada', 'candidatura', $candidatura->id,
-                            "Ficha #{$candidatura->id} — soma ponderada calculada: {$final}");
+                        AuditLog::registar('calculou_soma_disciplinas', 'candidatura', $candidatura->id,
+                            "Ficha #{$candidatura->id} — soma das disciplinas calculada: {$final}");
 
                         try {
                             app(WhatsAppService::class)->notificarNotaLancada($candidatura);
                         } catch (\Throwable $e) {
-                            \Log::error('WhatsApp nota lançada (soma ponderada): ' . $e->getMessage());
+                            \Log::error('WhatsApp nota lançada (soma disciplinas): ' . $e->getMessage());
                         }
                     }
                 }
