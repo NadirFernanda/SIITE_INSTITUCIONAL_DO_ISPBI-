@@ -149,44 +149,64 @@ class SalaController extends Controller
 
         // Fila de salas com espaço disponível (indexed para controle)
         $salaQueue = $salas->map(fn($s) => [
-            'id'        => $s->id,
-            'capacidade'=> $s->capacidade,
-            'ocupado'   => 0,
+            'id'           => $s->id,
+            'capacidade'   => $s->capacidade,
+            'horario'      => $s->horario,
+            'ocupado'      => 0,
+            'periodo_atual'=> null, // período ao qual a sala está actualmente afecta (evita misturar regular/pós-laboral na mesma sala)
         ])->values()->toArray();
 
-        $salaIdx = 0; // índice da sala actual na fila
+        $horariosPorPeriodo = Sala::$horariosPorPeriodo;
+
+        // Uma sala só serve para o período pedido se: não tiver horário fixo
+        // definido (compatível com qualquer período), ou o horário definido
+        // pertencer ao período em causa; e não pode já estar a servir outro período.
+        $compativel = function (array $sala, string $periodo) use ($horariosPorPeriodo) {
+            if ($sala['horario'] && isset($horariosPorPeriodo[$periodo])
+                && !in_array($sala['horario'], $horariosPorPeriodo[$periodo], true)) {
+                return false;
+            }
+            if ($sala['periodo_atual'] !== null && $sala['periodo_atual'] !== $periodo) {
+                return false;
+            }
+            return true;
+        };
+
+        $ponteiros = []; // um índice de avanço por período — cada período percorre a fila de salas de forma independente
 
         foreach ($grupos as $chave => $candidatos) {
+            [, $periodo] = explode('|||', $chave);
+            $idx   = $ponteiros[$periodo] ?? 0;
             $lugar = 1; // reinicia numeração em cada sala para este grupo
 
             foreach ($candidatos as $candidato) {
-                // Se a sala actual está cheia, avança para a próxima
-                while ($salaIdx < count($salaQueue) &&
-                       $salaQueue[$salaIdx]['ocupado'] >= $salaQueue[$salaIdx]['capacidade']) {
-                    $salaIdx++;
+                // Avança até encontrar uma sala com espaço e compatível com o período (manhã/tarde)
+                while ($idx < count($salaQueue) && (
+                        $salaQueue[$idx]['ocupado'] >= $salaQueue[$idx]['capacidade']
+                        || !$compativel($salaQueue[$idx], $periodo)
+                    )) {
+                    $idx++;
                     $lugar = 1;
                 }
 
-                if ($salaIdx >= count($salaQueue)) break; // segurança
-
-                // Se mudou de grupo E a sala já tinha candidatos de outro grupo,
-                // avança para a próxima sala limpa (salas por curso+período)
-                // Nota: este comportamento garante separação por curso/período
-                // A fila de salas não é reutilizada entre grupos diferentes
+                if ($idx >= count($salaQueue)) break; // segurança — sem salas compatíveis/livres
 
                 Candidatura::where('id', $candidato->id)->update([
-                    'sala_id'      => $salaQueue[$salaIdx]['id'],
+                    'sala_id'      => $salaQueue[$idx]['id'],
                     'numero_lugar' => $lugar,
                 ]);
 
-                $salaQueue[$salaIdx]['ocupado']++;
+                $salaQueue[$idx]['ocupado']++;
+                $salaQueue[$idx]['periodo_atual'] = $periodo;
                 $lugar++;
             }
 
-            // Ao terminar um grupo, avança para sala nova (separação por curso/período)
-            if ($salaIdx < count($salaQueue) && $salaQueue[$salaIdx]['ocupado'] > 0) {
-                $salaIdx++;
-            }
+            // Nota: não força avanço para uma sala nova ao terminar o grupo —
+            // isso desperdiçaria lugares livres numa sala parcialmente ocupada.
+            // A sala só é considerada esgotada para este período quando ocupado>=capacidade
+            // ou o horário não é compatível (ver $compativel); os exports/PDF já agrupam
+            // os candidatos de uma sala por curso+período em sub-tabelas separadas.
+            $ponteiros[$periodo] = $idx;
         }
 
         $atribuidos = Candidatura::whereNotNull('sala_id')->count();

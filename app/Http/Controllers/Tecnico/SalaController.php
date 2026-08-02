@@ -125,33 +125,57 @@ class SalaController extends Controller
                    ->update(['sala_id' => null, 'numero_lugar' => null]);
 
         $salaQueue = $salas->map(fn($s) => [
-            'id'        => $s->id,
-            'capacidade'=> $s->capacidade,
-            'ocupado'   => 0,
+            'id'           => $s->id,
+            'capacidade'   => $s->capacidade,
+            'horario'      => $s->horario,
+            'ocupado'      => 0,
+            'periodo_atual'=> null,
         ])->values()->toArray();
 
-        $salaIdx = 0;
+        $horariosPorPeriodo = Sala::$horariosPorPeriodo;
 
-        foreach ($grupos as $candidatos) {
+        // Uma sala só serve para o período pedido se: não tiver horário fixo
+        // definido, ou o horário pertencer ao período em causa; e não pode já
+        // estar a servir outro período (evita misturar regular/pós-laboral).
+        $compativel = function (array $sala, string $periodo) use ($horariosPorPeriodo) {
+            if ($sala['horario'] && isset($horariosPorPeriodo[$periodo])
+                && !in_array($sala['horario'], $horariosPorPeriodo[$periodo], true)) {
+                return false;
+            }
+            if ($sala['periodo_atual'] !== null && $sala['periodo_atual'] !== $periodo) {
+                return false;
+            }
+            return true;
+        };
+
+        $ponteiros = [];
+
+        foreach ($grupos as $chave => $candidatos) {
+            [, $periodo] = explode('|||', $chave);
+            $idx   = $ponteiros[$periodo] ?? 0;
             $lugar = 1;
             foreach ($candidatos as $candidato) {
-                while ($salaIdx < count($salaQueue) &&
-                       $salaQueue[$salaIdx]['ocupado'] >= $salaQueue[$salaIdx]['capacidade']) {
-                    $salaIdx++;
+                while ($idx < count($salaQueue) && (
+                        $salaQueue[$idx]['ocupado'] >= $salaQueue[$idx]['capacidade']
+                        || !$compativel($salaQueue[$idx], $periodo)
+                    )) {
+                    $idx++;
                     $lugar = 1;
                 }
-                if ($salaIdx >= count($salaQueue)) break;
+                if ($idx >= count($salaQueue)) break;
 
                 Candidatura::where('id', $candidato->id)->update([
-                    'sala_id'      => $salaQueue[$salaIdx]['id'],
+                    'sala_id'      => $salaQueue[$idx]['id'],
                     'numero_lugar' => $lugar,
                 ]);
-                $salaQueue[$salaIdx]['ocupado']++;
+                $salaQueue[$idx]['ocupado']++;
+                $salaQueue[$idx]['periodo_atual'] = $periodo;
                 $lugar++;
             }
-            if ($salaIdx < count($salaQueue) && $salaQueue[$salaIdx]['ocupado'] > 0) {
-                $salaIdx++;
-            }
+            // Não força avanço para sala nova ao terminar o grupo — isso desperdiçaria
+            // lugares livres numa sala parcialmente ocupada; os exports/PDF já agrupam
+            // os candidatos de uma sala por curso+período em sub-tabelas separadas.
+            $ponteiros[$periodo] = $idx;
         }
 
         $atribuidos = Candidatura::whereNotNull('sala_id')->count();
