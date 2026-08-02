@@ -112,7 +112,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         <div class="frow">
             <div class="fcell" style="width:55%">
                 <div class="flabel">Nome Completo</div>
-                <div class="fval">{{ strtoupper($candidatura->nome) }}</div>
+                <div class="fval">{{ mb_strtoupper($candidatura->nome, 'UTF-8') }}</div>
             </div>
             <div class="fcell" style="width:25%">
                 <div class="flabel">Bilhete de Identidade</div>
@@ -204,9 +204,19 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         <div class="sig">
             <div class="sig-line"></div>
             <div class="sig-label">Candidato (a)</div>
-            <div style="font-size:8pt;color:#555;font-style:italic;margin-top:2mm;">{{ strtoupper($candidatura->nome) }}</div>
+            <div style="font-size:8pt;color:#555;font-style:italic;margin-top:2mm;">{{ mb_strtoupper($candidatura->nome, 'UTF-8') }}</div>
         </div>
     </div>
+
+    @if($candidatura->pagamento_confirmado)
+    <div style="background:#fff;border:1px solid #eee;border-radius:6px;padding:3mm 6mm;margin-top:4mm;">
+        <div style="font-size:7.5pt;font-weight:bold;color:#000;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1.5mm;">✓ Pagamento Confirmado</div>
+        <div style="font-size:8pt;color:#555;">
+            {{ $candidatura->confirmadoPor?->name ?? 'Secretaria' }}
+            @if($candidatura->pagamento_confirmado_em) &mdash; {{ $candidatura->pagamento_confirmado_em->format('d/m/Y \à\s H:i') }} @endif
+        </div>
+    </div>
+    @endif
 
     @if($candidatura->isAssinada())
     <div style="background:#fff;border:1px solid #eee;border-radius:6px;padding:3mm 6mm;margin-top:4mm;">
