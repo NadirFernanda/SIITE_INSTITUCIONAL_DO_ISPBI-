@@ -110,24 +110,30 @@ class SalaController extends Controller
                 ->with('error', 'Não existem salas registadas. Crie salas antes de distribuir.');
         }
 
-        // Candidatos a distribuir — Enfermagem vem PRIMEIRO para obter salas maiores
-        $prioritarios = Candidatura::$cursosPrioritarios;
+        // Candidatos a distribuir — cursos em Candidatura::$cursosPrioritarios vêm
+        // primeiro, por ordem (Enfermagem, depois Psicologia), para obter salas maiores
+        $prioridades = Candidatura::$cursosPrioritarios;
 
         $todos = Candidatura::whereNotIn('status', ['rejeitada'])
             ->orderBy('nome')
             ->get();
 
-        // Separar prioritários (Enfermagem) dos restantes
-        $grupoPrioritario = $todos->filter(fn($c) => in_array($c->curso, $prioritarios))
-                                  ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
-                                  ->sortByDesc(fn($g) => $g->count());
-
-        $grupoNormal = $todos->reject(fn($c) => in_array($c->curso, $prioritarios))
-                             ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
-                             ->sortByDesc(fn($g) => $g->count());
-
-        // Merge: prioritários primeiro — use union to preserve group keys (avoid Eloquent Collection->merge assumptions)
-        $grupos = $grupoPrioritario->union($grupoNormal);
+        // Um nível por curso prioritário (na ordem definida), cada um ordenado por
+        // grupo maior primeiro; os restantes cursos ficam no fim, sem prioridade
+        // entre si (o sistema preenche como for mais conveniente)
+        $grupos = collect();
+        foreach ($prioridades as $curso) {
+            $grupos = $grupos->union(
+                $todos->filter(fn($c) => $c->curso === $curso)
+                      ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
+                      ->sortByDesc(fn($g) => $g->count())
+            );
+        }
+        $grupos = $grupos->union(
+            $todos->reject(fn($c) => in_array($c->curso, $prioridades))
+                  ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
+                  ->sortByDesc(fn($g) => $g->count())
+        );
 
         $totalCandidatos = Candidatura::whereNotIn('status', ['rejeitada'])->count();
         $totalLugares    = $salas->sum('capacidade');

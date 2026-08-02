@@ -147,8 +147,9 @@ class Candidatura extends Model
         'fora'   => 'Fora do ISP_Bié',
     ];
 
-    // Cursos com prioridade para salas de maior capacidade
-    public static array $cursosPrioritarios = ['Enfermagem'];
+    // Cursos com prioridade para salas de maior capacidade.
+    // A ordem do array É a ordem de prioridade: Enfermagem primeiro, depois Psicologia.
+    public static array $cursosPrioritarios = ['Enfermagem', 'Psicologia'];
 
     public static array $statusLabels = [
         'pendente'   => 'Pendente',

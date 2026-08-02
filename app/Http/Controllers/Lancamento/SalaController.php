@@ -95,16 +95,23 @@ class SalaController extends Controller
                 ->with('error', 'Não existem salas registadas. Crie salas antes de distribuir.');
         }
 
-        $prioritarios = Candidatura::$cursosPrioritarios;
+        // Cursos prioritários (Enfermagem, depois Psicologia) obtêm salas maiores primeiro
+        $prioridades = Candidatura::$cursosPrioritarios;
         $todos = Candidatura::whereNotIn('status', ['rejeitada'])->orderBy('nome')->get();
 
-        $grupoPrioritario = $todos->filter(fn($c) => in_array($c->curso, $prioritarios))
-                                  ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
-                                  ->sortByDesc(fn($g) => $g->count());
-        $grupoNormal = $todos->reject(fn($c) => in_array($c->curso, $prioritarios))
-                             ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
-                             ->sortByDesc(fn($g) => $g->count());
-        $grupos = $grupoPrioritario->merge($grupoNormal);
+        $grupos = collect();
+        foreach ($prioridades as $curso) {
+            $grupos = $grupos->merge(
+                $todos->filter(fn($c) => $c->curso === $curso)
+                      ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
+                      ->sortByDesc(fn($g) => $g->count())
+            );
+        }
+        $grupos = $grupos->merge(
+            $todos->reject(fn($c) => in_array($c->curso, $prioridades))
+                  ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
+                  ->sortByDesc(fn($g) => $g->count())
+        );
 
         $totalCandidatos = Candidatura::whereNotIn('status', ['rejeitada'])->count();
         $totalLugares    = $salas->sum('capacidade');
