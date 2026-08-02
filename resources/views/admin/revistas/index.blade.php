@@ -22,7 +22,7 @@
             </div>
             <div class="mt-4 flex items-center gap-3 justify-end">
                 <a href="{{ route('revista') }}" target="_blank" class="text-sm text-gray-600 hover:underline">Ver site público</a>
-                <a href="{{ route('admin.revistas') }}" class="inline-flex items-center gap-2 bg-[#2563eb] text-white px-4 py-2 rounded-md shadow-sm hover:bg-[#1f4fb6] text-sm font-medium">
+                <a href="{{ route('admin.revistas') }}" class="inline-flex items-center gap-2 bg-[#1e3a5f] text-white px-4 py-2 rounded-md shadow-sm hover:bg-[#1e3a5f] text-sm font-medium">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" /></svg>
                     <span>Atualizar</span>
                 </a>
@@ -74,7 +74,7 @@
                                 <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="px-4 py-4 text-sm text-gray-700">{{ $s->id }}</td>
                                     <td class="px-4 py-4 text-sm text-gray-700">{{ $s->author }}</td>
-                                    <td class="px-4 py-4 text-sm font-medium text-[#2563eb]"><a href="{{ route('admin.revistas.show', $s->id) }}" class="hover:underline">{{ $s->title }}</a></td>
+                                    <td class="px-4 py-4 text-sm font-medium text-[#1e3a5f]"><a href="{{ route('admin.revistas.show', $s->id) }}" class="hover:underline">{{ $s->title }}</a></td>
                                     <td class="px-4 py-4 text-sm text-gray-700">{{ $s->category ?? '-' }}</td>
                                     <td class="px-4 py-4 text-sm">
                                         @if($s->status === 'published')
@@ -85,7 +85,7 @@
                                     </td>
                                     <td class="px-4 py-4 text-sm text-gray-500">{{ $s->created_at->format('Y-m-d') }}</td>
                                     <td class="px-4 py-4 text-sm text-right flex gap-2 justify-end">
-                                        <a href="{{ route('admin.revistas.edit', $s->id) }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium bg-[#2563eb] text-white rounded-md hover:bg-[#1f4fb6] transition">Editar</a>
+                                        <a href="{{ route('admin.revistas.edit', $s->id) }}" class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium bg-[#1e3a5f] text-white rounded-md hover:bg-[#1e3a5f] transition">Editar</a>
                                         @if($s->status !== 'published')
                                             <form action="{{ route('admin.revistas.publish', $s->id) }}" method="POST" style="display:inline">
                                                 @csrf

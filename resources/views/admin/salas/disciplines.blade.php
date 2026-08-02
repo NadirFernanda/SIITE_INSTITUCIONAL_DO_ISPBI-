@@ -7,7 +7,7 @@
     <h1 style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">Disciplinas — Sala: {{ $sala->nome }}</h1>
 
     @if(isset($disciplines) && $disciplines->isNotEmpty())
-    <div style="background:#fff;border:1px solid #e6f6f6;border-radius:10px;padding:12px;margin-bottom:12px;">
+    <div style="background:#fff;border:1px solid #eaeff5;border-radius:10px;padding:12px;margin-bottom:12px;">
         <div style="font-size:0.9rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Disciplinas vinculadas</div>
         <div style="display:flex;flex-wrap:wrap;gap:10px;">
             @foreach($disciplines as $ld)
@@ -85,13 +85,13 @@
         </div>
 
         <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
-            <button type="button" id="add-disc" style="background:#7c3aed;color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;">Adicionar Disciplina</button>
+            <button type="button" id="add-disc" style="background:#1e3a5f;color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;">Adicionar Disciplina</button>
             <div id="all-linked-msg" style="display:none;color:#065f46;font-weight:700;margin-left:6px;">Todas as disciplinas dessa sala já foram vinculadas.</div>
             <div style="color:#6b7280;font-size:0.9rem;">Defina o peso (%) de cada disciplina. A soma total não precisa de ser 100, mas será usada para cálculo ponderado.</div>
         </div>
 
         <div style="margin-top:16px;">
-            <button type="submit" style="background:#0ea5a4;color:#fff;padding:10px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:700;">Guardar Disciplinas</button>
+            <button type="submit" style="background:#1e3a5f;color:#fff;padding:10px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:700;">Guardar Disciplinas</button>
         </div>
     </form>
 </div>

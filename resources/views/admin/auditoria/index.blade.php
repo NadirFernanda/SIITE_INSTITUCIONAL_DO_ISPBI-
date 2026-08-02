@@ -65,17 +65,17 @@
                     @php
                         $accaoColors = [
                             'criou_candidatura'     => ['bg'=>'#e8f5e9','color'=>'#2e7d32'],
-                            'editou_candidatura'     => ['bg'=>'#e3f2fd','color'=>'#1565c0'],
+                            'editou_candidatura'     => ['bg'=>'#eaeff5','color'=>'#1e3a5f'],
                             'alterou_status'        => ['bg'=>'#fff8e1','color'=>'#f57f17'],
-                            'eliminou_candidatura'  => ['bg'=>'#fce4ec','color'=>'#c62828'],
-                            'assinou_candidatura'   => ['bg'=>'#e8eaf6','color'=>'#283593'],
-                            'rejeitou_candidatura'  => ['bg'=>'#fce4ec','color'=>'#b71c1c'],
-                            'imprimiu_comprovativo' => ['bg'=>'#e0f2f1','color'=>'#00695c'],
-                            'distribuiu_salas'      => ['bg'=>'#fce4ec','color'=>'#880e4f'],
-                            'limpou_salas'          => ['bg'=>'#fff3e0','color'=>'#bf360c'],
-                            'criou_usuario'         => ['bg'=>'#e1f5fe','color'=>'#01579b'],
-                            'eliminou_usuario'      => ['bg'=>'#fce4ec','color'=>'#c62828'],
-                            'resetou_password'      => ['bg'=>'#f3e5f5','color'=>'#6a1b9a'],
+                            'eliminou_candidatura'  => ['bg'=>'#eaeff5','color'=>'#c62828'],
+                            'assinou_candidatura'   => ['bg'=>'#e8eaf6','color'=>'#0f1f3d'],
+                            'rejeitou_candidatura'  => ['bg'=>'#eaeff5','color'=>'#b71c1c'],
+                            'imprimiu_comprovativo' => ['bg'=>'#eaeff5','color'=>'#0f1f3d'],
+                            'distribuiu_salas'      => ['bg'=>'#eaeff5','color'=>'#0f1f3d'],
+                            'limpou_salas'          => ['bg'=>'#fff3e0','color'=>'#F05A28'],
+                            'criou_usuario'         => ['bg'=>'#eaeff5','color'=>'#0f1f3d'],
+                            'eliminou_usuario'      => ['bg'=>'#eaeff5','color'=>'#c62828'],
+                            'resetou_password'      => ['bg'=>'#eaeff5','color'=>'#1e3a5f'],
                         ];
                         $ac = $accaoColors[$log->accao] ?? ['bg'=>'#f1f5f9','color'=>'#475569'];
                     @endphp

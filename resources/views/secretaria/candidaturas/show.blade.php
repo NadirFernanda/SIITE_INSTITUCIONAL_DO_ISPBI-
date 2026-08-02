@@ -3,7 +3,7 @@
 <div style="max-width:820px;margin:0 auto;">
 
     <a href="{{ route('secretaria.candidaturas.index') }}"
-       style="display:inline-flex;align-items:center;gap:6px;color:#7c3aed;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:24px;">
+       style="display:inline-flex;align-items:center;gap:6px;color:#1e3a5f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:24px;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar à lista
     </a>
@@ -41,7 +41,7 @@
             </div>
         @else
             <div style="background:#fef3c7;border:1px solid #fcd34d;border-radius:12px;padding:14px 20px;text-align:center;">
-                <div style="font-size:1rem;font-weight:700;color:#d97706;">Aguardando Pagamento</div>
+                <div style="font-size:1rem;font-weight:700;color:#F05A28;">Aguardando Pagamento</div>
                 <div style="font-size:0.8rem;color:#92400e;margin-top:3px;">Pagamento ainda não confirmado</div>
             </div>
         @endif
@@ -55,7 +55,7 @@
     @endphp
 
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;margin-bottom:20px;">
-        <h2 style="font-size:0.9rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;">Identificação</h2>
+        <h2 style="font-size:0.9rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;">Identificação</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
             {!! $sec('Nome Completo', $candidatura->nome) !!}
             {!! $sec('Bilhete de Identidade', $candidatura->bi) !!}
@@ -67,7 +67,7 @@
     </div>
 
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;margin-bottom:20px;">
-        <h2 style="font-size:0.9rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;">Inscrição</h2>
+        <h2 style="font-size:0.9rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;">Inscrição</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
             {!! $sec('Curso', $candidatura->curso) !!}
             {!! $sec('Período', $candidatura->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular') !!}
@@ -79,7 +79,7 @@
 
     {{-- Acções --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">
-        <h2 style="font-size:0.9rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;">Acção de Pagamento</h2>
+        <h2 style="font-size:0.9rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;">Acção de Pagamento</h2>
 
         @if(! $candidatura->pagamento_confirmado)
         <p style="color:#475569;font-size:0.9rem;margin:0 0 16px;">

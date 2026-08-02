@@ -24,11 +24,11 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:26px;">
         @php
         $kpis = [
-            ['label'=>'Candidatos','value'=>$totalCandidatos,'color'=>'#1565c0','bg'=>'#e3f2fd'],
+            ['label'=>'Candidatos','value'=>$totalCandidatos,'color'=>'#1e3a5f','bg'=>'#eaeff5'],
             ['label'=>'Atribuídos','value'=>$atribuidos,'color'=>'#15803d','bg'=>'#dcfce7'],
             ['label'=>'Sem Sala','value'=>$semSala,'color'=>$semSala>0?'#b45309':'#94a3b8','bg'=>$semSala>0?'#fef3c7':'#f1f5f9'],
-            ['label'=>'Total Lugares','value'=>$totalLugares,'color'=>'#7c3aed','bg'=>'#ede9fe'],
-            ['label'=>'Salas','value'=>$salas->count(),'color'=>'#0e7490','bg'=>'#cffafe'],
+            ['label'=>'Total Lugares','value'=>$totalLugares,'color'=>'#1e3a5f','bg'=>'#eaeff5'],
+            ['label'=>'Salas','value'=>$salas->count(),'color'=>'#1e3a5f','bg'=>'#eaeff5'],
         ];
         @endphp
         @foreach($kpis as $k)
@@ -76,7 +76,7 @@
                     <td style="padding:14px 20px;text-align:center;">
                         <span style="font-weight:700;color:{{ $ocupados > 0 ? '#15803d' : '#94a3b8' }};">{{ $ocupados }}</span>
                         <div style="background:#f1f5f9;border-radius:4px;height:6px;margin-top:4px;overflow:hidden;">
-                            <div style="background:#1565c0;height:100%;width:{{ $pct }}%;border-radius:4px;"></div>
+                            <div style="background:#1e3a5f;height:100%;width:{{ $pct }}%;border-radius:4px;"></div>
                         </div>
                     </td>
                     <td style="padding:14px 20px;text-align:center;color:{{ $livres > 0 ? '#64748b' : '#ef4444' }};font-weight:600;">{{ $livres }}</td>
@@ -93,7 +93,7 @@
                     <td style="padding:12px 16px;">
                         <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
                             <a href="{{ route('presidencia.salas.show', $sala) }}" title="Ver detalhe"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#7c3aed;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
+                               style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
                                 Ver
                             </a>
                             <a href="{{ route('presidencia.salas.pdf', $sala) }}" title="Pauta geral PDF"
@@ -105,7 +105,7 @@
                                 📊 Exame
                             </a>
                             <a href="{{ route('presidencia.salas.excel-notas', $sala) }}" title="Pauta de notas Excel"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#0891b2;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
+                               style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
                                 📋 Notas
                             </a>
                         </div>

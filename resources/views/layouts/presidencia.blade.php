@@ -7,7 +7,7 @@
     <style>
         body { margin:0; font-family:'Segoe UI','Arial',sans-serif; background:#f8fafc; }
         .sidebar {
-            width:220px; background:#7c3aed; color:#fff; height:100vh;
+            width:220px; background:#1e3a5f; color:#fff; height:100vh;
             position:fixed; top:0; left:0; padding-top:20px;
             box-shadow:2px 0 16px rgba(124,58,237,0.15);
             border-radius:0 18px 18px 0;
@@ -17,16 +17,16 @@
             margin:0 24px 28px; font-size:1.1rem; font-weight:700;
             color:#fff; line-height:1.3;
         }
-        .sidebar-logo span { display:block; font-size:0.78rem; font-weight:400; color:#e9d5ff; margin-top:2px; }
+        .sidebar-logo span { display:block; font-size:0.78rem; font-weight:400; color:#a8c4e0; margin-top:2px; }
         .sidebar a {
             color:#fff; text-decoration:none; display:flex; align-items:center;
             gap:8px; padding:11px 26px; font-size:1rem; border-radius:10px;
             margin:2px 12px; transition:background 0.2s; font-weight:500;
         }
-        .sidebar a:hover, .sidebar a.active { background:#6d28d9; }
+        .sidebar a:hover, .sidebar a.active { background:#0f1f3d; }
         .main-content { margin-left:220px; padding:36px 28px; min-height:100vh; }
         .header {
-            background:#7c3aed; padding:18px 36px; margin-left:220px;
+            background:#1e3a5f; padding:18px 36px; margin-left:220px;
             font-size:1.1rem; font-weight:600; color:#fff;
             border-radius:0 0 16px 16px;
             box-shadow:0 2px 8px rgba(124,58,237,0.12);
@@ -59,7 +59,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"
-                        style="width:100%;background:#fff;color:#7c3aed;font-weight:700;padding:9px 0;border:none;border-radius:8px;cursor:pointer;">
+                        style="width:100%;background:#fff;color:#1e3a5f;font-weight:700;padding:9px 0;border:none;border-radius:8px;cursor:pointer;">
                     Sair
                 </button>
             </form>

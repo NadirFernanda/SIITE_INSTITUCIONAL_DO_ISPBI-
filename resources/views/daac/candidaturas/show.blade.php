@@ -7,7 +7,7 @@
 <div style="max-width:900px;margin:0 auto;">
 
     <a href="{{ route('daac.candidaturas.index') }}"
-       style="display:inline-flex;align-items:center;gap:5px;color:#2563eb;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:20px;">
+       style="display:inline-flex;align-items:center;gap:5px;color:#1e3a5f;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:20px;">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar à lista
     </a>
@@ -25,8 +25,8 @@
                 {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}
             </span>
             <a href="{{ route('daac.candidaturas.comprovativo', $candidatura) }}"
-               style="display:inline-flex;align-items:center;gap:6px;background:#0369a1;color:#fff;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;text-decoration:none;"
-               onmouseover="this.style.background='#0284c7'" onmouseout="this.style.background='#0369a1'">
+               style="display:inline-flex;align-items:center;gap:6px;background:#0f1f3d;color:#fff;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;text-decoration:none;"
+               onmouseover="this.style.background='#1e3a5f'" onmouseout="this.style.background='#0f1f3d'">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Comprovativo PDF
             </a>
@@ -64,7 +64,7 @@
 
     {{-- 1. DADOS PESSOAIS --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;margin-bottom:14px;">
-        <h2 style="font-size:0.8rem;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">1. Dados Pessoais</h2>
+        <h2 style="font-size:0.8rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">1. Dados Pessoais</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
             @php daac_campo('Nome Completo', $candidatura->nome); @endphp
             @php daac_campo('BI / Passaporte', $candidatura->bi); @endphp
@@ -83,7 +83,7 @@
 
     {{-- 2. RESIDÊNCIA E CONTACTOS --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;margin-bottom:14px;">
-        <h2 style="font-size:0.8rem;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">2. Residência e Contactos</h2>
+        <h2 style="font-size:0.8rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">2. Residência e Contactos</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
             @php daac_campo('Município de Residência', $candidatura->residencia_municipio); @endphp
             @php daac_campo('Rua / Bairro', $candidatura->residencia_bairro); @endphp
@@ -95,7 +95,7 @@
 
     {{-- 3. DADOS ACADÉMICOS --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:22px;margin-bottom:14px;">
-        <h2 style="font-size:0.8rem;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">3. Dados Académicos e Socioeconómicos</h2>
+        <h2 style="font-size:0.8rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">3. Dados Académicos e Socioeconómicos</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
             @php daac_campo('Habilitações Literárias', $candidatura->habilitacoes); @endphp
             @php daac_campo('Escola de Proveniência', $candidatura->escola_origem); @endphp
@@ -115,8 +115,8 @@
     </div>
 
     {{-- 4. INSCRIÇÃO --}}
-    <div style="background:#f0f6ff;border:1px solid #bfdbfe;border-radius:14px;padding:22px;margin-bottom:14px;">
-        <h2 style="font-size:0.8rem;font-weight:700;color:#2563eb;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #bfdbfe;">4. Inscrição</h2>
+    <div style="background:#eaeff5;border:1px solid #c7d2e0;border-radius:14px;padding:22px;margin-bottom:14px;">
+        <h2 style="font-size:0.8rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #c7d2e0;">4. Inscrição</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
             @php daac_campo('Curso a se Inscrever', $candidatura->curso); @endphp
             @php daac_campo('Período', $candidatura->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'); @endphp
@@ -132,8 +132,8 @@
 
     {{-- ASSINATURA EXISTENTE --}}
     @if($candidatura->isAssinada())
-    <div style="background:#f5f3ff;border:2px solid #c4b5fd;border-radius:14px;padding:22px;margin-bottom:14px;">
-        <h2 style="font-size:0.8rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #ddd6fe;">✓ Assinatura Digital</h2>
+    <div style="background:#eaeff5;border:2px solid #a8c4e0;border-radius:14px;padding:22px;margin-bottom:14px;">
+        <h2 style="font-size:0.8rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:0.06em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #a8c4e0;">✓ Assinatura Digital</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
             <div>
                 <div style="font-size:0.7rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:2px;">Assinado por</div>
@@ -145,15 +145,15 @@
             </div>
             <div style="grid-column:1/-1;">
                 <div style="font-size:0.7rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Código de Assinatura</div>
-                <div style="font-family:monospace;font-size:1.1rem;font-weight:700;color:#7c3aed;background:#ede9fe;padding:6px 14px;border-radius:6px;display:inline-block;">{{ $candidatura->assinatura_codigo }}</div>
+                <div style="font-family:monospace;font-size:1.1rem;font-weight:700;color:#1e3a5f;background:#eaeff5;padding:6px 14px;border-radius:6px;display:inline-block;">{{ $candidatura->assinatura_codigo }}</div>
             </div>
         </div>
     </div>
 
     @else
     {{-- FORMULÁRIO DE ASSINATURA --}}
-    <div style="background:#fff;border:2px solid #2563eb;border-radius:14px;padding:22px;margin-bottom:14px;">
-        <h2 style="font-size:0.9rem;font-weight:700;color:#2563eb;margin:0 0 8px;">Assinar Digitalmente</h2>
+    <div style="background:#fff;border:2px solid #1e3a5f;border-radius:14px;padding:22px;margin-bottom:14px;">
+        <h2 style="font-size:0.9rem;font-weight:700;color:#1e3a5f;margin:0 0 8px;">Assinar Digitalmente</h2>
         <p style="font-size:0.85rem;color:#475569;margin-bottom:4px;">
             A assinar como: <strong>{{ Auth::user()->name }}</strong>
         </p>
@@ -164,7 +164,7 @@
               onsubmit="return confirm('Confirma a assinatura digital desta candidatura em seu nome?')">
             @csrf
             <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:14px;cursor:pointer;">
-                <input type="checkbox" name="confirmar" value="1" style="margin-top:2px;accent-color:#2563eb;">
+                <input type="checkbox" name="confirmar" value="1" style="margin-top:2px;accent-color:#1e3a5f;">
                 <span style="font-size:0.88rem;color:#334155;">
                     Eu, <strong>{{ Auth::user()->name }}</strong>, declaro que verifiquei os dados e documentos desta candidatura e assino digitalmente
                     em nome do DAAC — Departamento dos Assuntos Académicos do ISP-Bié.
@@ -172,7 +172,7 @@
             </label>
             @error('confirmar')<p style="font-size:0.78rem;color:#dc2626;margin:0 0 10px;font-weight:400;">{{ $message }}</p>@enderror
             <button type="submit"
-                    style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:10px 26px;font-weight:700;cursor:pointer;font-size:0.9rem;display:inline-flex;align-items:center;gap:7px;">
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:10px 26px;font-weight:700;cursor:pointer;font-size:0.9rem;display:inline-flex;align-items:center;gap:7px;">
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 Assinar e Concluir
             </button>

@@ -17,8 +17,8 @@
                 Assinantes
             </a>
             <a href="{{ route('admin.concursos.create') }}"
-               style="display:inline-flex;align-items:center;gap:8px;background:#1565c0;color:#fff;font-weight:700;font-size:0.95rem;padding:11px 22px;border-radius:10px;text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
-               onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+               style="display:inline-flex;align-items:center;gap:8px;background:#1e3a5f;color:#fff;font-weight:700;font-size:0.95rem;padding:11px 22px;border-radius:10px;text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
+               onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 Novo Concurso
             </a>
@@ -27,7 +27,7 @@
 
     {{-- Flash --}}
     @if(session('status'))
-    <div style="background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:12px 18px;border-radius:10px;margin-bottom:24px;font-weight:600;display:flex;align-items:center;gap:10px;">
+    <div style="background:#f0fdf4;border:1px solid #86efac;color:#0f1f3d;padding:12px 18px;border-radius:10px;margin-bottom:24px;font-weight:600;display:flex;align-items:center;gap:10px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         {{ session('status') }}
     </div>
@@ -37,7 +37,7 @@
     <div style="background:#fff;border-radius:16px;box-shadow:0 1px 8px rgba(0,0,0,0.07);padding:64px 32px;text-align:center;">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 16px;display:block;"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8l-2 4h12l-2-4z"/></svg>
         <p style="color:#94a3b8;font-size:1.05rem;margin:0;">Nenhum concurso publicado ainda.</p>
-        <a href="{{ route('admin.concursos.create') }}" style="display:inline-block;margin-top:18px;background:#1565c0;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem;">Criar primeiro concurso</a>
+        <a href="{{ route('admin.concursos.create') }}" style="display:inline-block;margin-top:18px;background:#1e3a5f;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem;">Criar primeiro concurso</a>
     </div>
     @else
     <div style="display:grid;gap:14px;">
@@ -49,7 +49,7 @@
                 {{-- Status Badge --}}
                 <div style="flex-shrink:0;margin-top:3px;">
                     @if($c->status === 'published')
-                    <span style="display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;color:#166534;border:1px solid #86efac;border-radius:20px;padding:3px 10px;font-size:0.78rem;font-weight:700;">
+                    <span style="display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;color:#0f1f3d;border:1px solid #86efac;border-radius:20px;padding:3px 10px;font-size:0.78rem;font-weight:700;">
                         <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;"></span>Publicado
                     </span>
                     @else
@@ -67,13 +67,13 @@
                     @endif
                     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
                         @if($c->area)
-                        <span style="font-size:0.78rem;color:#7c3aed;background:#f5f3ff;border:1px solid #ddd6fe;padding:2px 8px;border-radius:6px;font-weight:600;">{{ $c->area }}</span>
+                        <span style="font-size:0.78rem;color:#1e3a5f;background:#eaeff5;border:1px solid #a8c4e0;padding:2px 8px;border-radius:6px;font-weight:600;">{{ $c->area }}</span>
                         @endif
                         <span style="font-size:0.8rem;color:#94a3b8;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>{{ $c->publish_at ? \Illuminate\Support\Carbon::parse($c->publish_at)->format('d/m/Y') : '—' }}
                         </span>
                         @if($c->attachments->count())
-                        <span style="font-size:0.8rem;color:#0ea5e9;">
+                        <span style="font-size:0.8rem;color:#1e3a5f;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px;"><path d="M21.44 11.05L12.17 20.32a5 5 0 01-7.07-7.07l8.83-8.83a3 3 0 014.24 4.24l-8.84 8.84a1 1 0 01-1.414-1.415l7.07-7.07"/></svg>{{ $c->attachments->count() }} anexo{{ $c->attachments->count() !== 1 ? 's' : '' }}
                         </span>
                         @endif
@@ -83,8 +83,8 @@
                 {{-- Actions --}}
                 <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;">
                     <a href="{{ route('admin.concursos.edit', $c) }}" title="Editar"
-                       style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#eff6ff;color:#1d4ed8;text-decoration:none;border:1px solid #bfdbfe;"
-                       onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+                       style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#eaeff5;color:#0f1f3d;text-decoration:none;border:1px solid #c7d2e0;"
+                       onmouseover="this.style.background='#eaeff5'" onmouseout="this.style.background='#eaeff5'">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     </a>
                     <form action="{{ route('admin.concursos.resend-alerts', $c) }}" method="POST" style="display:inline;"

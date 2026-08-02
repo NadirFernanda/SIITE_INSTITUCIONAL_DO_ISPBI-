@@ -40,7 +40,7 @@
 
     <a href="{{ route('lancamento.salas.index') }}"
        class="print-hidden"
-       style="display:inline-flex;align-items:center;gap:6px;color:#1565c0;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
+       style="display:inline-flex;align-items:center;gap:6px;color:#1e3a5f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar às salas
     </a>
@@ -57,7 +57,7 @@
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <a href="{{ route('lancamento.salas.pdf', $sala) }}"
                class="print-hidden"
-               style="display:inline-flex;align-items:center;gap:6px;background:#1565c0;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+               style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 PDF
             </a>
             <a href="{{ route('lancamento.salas.excel-exame', $sala) }}"
@@ -68,7 +68,7 @@
             <form method="POST" action="{{ route('lancamento.salas.codigos', $sala) }}" style="margin:0;" class="print-hidden">
                 @csrf
                 <button type="submit"
-                        style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;border:none;cursor:pointer;">
+                        style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;border:none;cursor:pointer;">
                     Gerar códigos de exame
                 </button>
             </form>
@@ -95,18 +95,18 @@
             $semCodigos = $candidaturas->whereNull('codigo_exame')->count();
         @endphp
         @if($semCodigos > 0)
-            <div style="margin-bottom:18px;padding:16px;border:1px solid #f1c0f1;background:#faf5ff;border-radius:14px;color:#6d28d9;">
+            <div style="margin-bottom:18px;padding:16px;border:1px solid #c7d2e0;background:#eaeff5;border-radius:14px;color:#0f1f3d;">
                 <strong>{{ $semCodigos }} candidato(s) ainda não têm código de exame.</strong>
                 Utilize o botão "Gerar códigos de exame" para atribuir códigos únicos antes do dia do exame.
             </div>
         @else
-            <div style="margin-bottom:18px;padding:16px;border:1px solid #d4f4dd;background:#ecfdf5;border-radius:14px;color:#166534;">
+            <div style="margin-bottom:18px;padding:16px;border:1px solid #d4f4dd;background:#ecfdf5;border-radius:14px;color:#0f1f3d;">
                 Todos os candidatos desta sala têm código de exame gerado. O professor poderá validar o respectivo código sem conhecer identificação pessoal.
             </div>
         @endif
         @foreach($candidaturas->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular')) as $grupo => $lista)
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:18px;">
-            <div style="background:#1565c0;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
+            <div style="background:#1e3a5f;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
                 {{ $grupo }} <span style="font-weight:400;opacity:0.8;">({{ $lista->count() }} candidatos)</span>
             </div>
             <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.87rem;">
@@ -120,7 +120,7 @@
                     <tbody>
                         @foreach($lista as $c)
                         <tr style="border-bottom:1px solid #f1f5f9;">
-                            <td style="padding:11px 18px;font-weight:700;color:#6d28d9;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
+                            <td style="padding:11px 18px;font-weight:700;color:#0f1f3d;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
                             <td style="padding:11px 18px;font-weight:600;color:#1a2332;">
                                 @if($c->codigo_exame)
                                     {{ $c->nome }}

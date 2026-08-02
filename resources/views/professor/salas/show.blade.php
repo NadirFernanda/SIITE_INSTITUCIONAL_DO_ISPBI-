@@ -6,7 +6,7 @@
     {{-- Header com navegação --}}
     <div style="margin-bottom:28px;">
         <a href="{{ route('professor.salas.index') }}"
-           style="display:inline-flex;align-items:center;gap:5px;color:#7c3aed;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:16px;">
+           style="display:inline-flex;align-items:center;gap:5px;color:#1e3a5f;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:16px;">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
             Voltar às salas
         </a>
@@ -34,16 +34,16 @@
             <div style="font-size:1.6rem;font-weight:900;color:#dc2626;">{{ $candidaturas->whereNull('nota_exame')->count() }}</div>
             <div style="font-size:0.72rem;font-weight:600;color:#f87171;text-transform:uppercase;">Sem Nota</div>
         </div>
-        <div style="background:#fff8f0;border:1px solid #fdd5ba;border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:1.6rem;font-weight:900;color:#ea580c;">
+        <div style="background:#fde8e0;border:1px solid #fde8e0;border-radius:10px;padding:14px;text-align:center;">
+            <div style="font-size:1.6rem;font-weight:900;color:#F05A28;">
                 {{ $candidaturas->count() > 0 ? round(($candidaturas->whereNotNull('nota_exame')->count() / $candidaturas->count()) * 100) : 0 }}%
             </div>
-            <div style="font-size:0.72rem;font-weight:600;color:#f97316;text-transform:uppercase;">Progresso</div>
+            <div style="font-size:0.72rem;font-weight:600;color:#F05A28;text-transform:uppercase;">Progresso</div>
         </div>
     </div>
 
     {{-- Informativo de anonimato --}}
-    <div style="margin-bottom:20px;padding:14px 16px;background:#ede9fe;border:1px solid #ddd6fe;border-radius:12px;color:#5b21b6;font-size:0.88rem;line-height:1.6;">
+    <div style="margin-bottom:20px;padding:14px 16px;background:#eaeff5;border:1px solid #a8c4e0;border-radius:12px;color:#0f1f3d;font-size:0.88rem;line-height:1.6;">
         <strong style="display:block;margin-bottom:4px;">🔒 Garantia de Anonimato:</strong>
         Apenas o código de exame é exibido. Nenhum dado pessoal do candidato (nome, BI, etc.) aparece nesta interface. Valide os códigos contra a correspondência física oficial da DAAC/Secretaria.
     </div>
@@ -155,7 +155,7 @@
                     <td style="padding:13px 18px;text-align:center;">
                         <div style="display:flex;gap:6px;justify-content:center;">
                             <a href="{{ route('professor.candidaturas.show', $c->id) }}"
-                               style="background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-block;">
+                               style="background:#eaeff5;color:#0f1f3d;border:1px solid #a8c4e0;border-radius:7px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-block;">
                                 Ver
                             </a>
                             <button type="button" class="openNotaBtn"
@@ -163,7 +163,7 @@
                                                             data-codigo-exame="{{ $c->codigo_exame }}"
                                                             data-nota="{{ $c->nota_exame ?? '' }}"
                                                             data-discipline-notas="{{ json_encode($c->discipline_notas->keyBy('discipline')->mapWithKeys(fn($d) => [$d->discipline => $d->nota])->toArray() ?? []) }}"
-                                                            style="background:{{ $c->nota_exame !== null ? '#f5f3ff' : '#ede9fe' }};color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;">
+                                                            style="background:{{ $c->nota_exame !== null ? '#eaeff5' : '#eaeff5' }};color:#0f1f3d;border:1px solid #a8c4e0;border-radius:7px;padding:6px 12px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;">
                                 {{ $c->nota_exame !== null ? 'Editar' : 'Lançar' }}
                             </button>
                         </div>
@@ -192,7 +192,7 @@
             <div id="singleNotaContainer" style="margin-bottom:16px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:6px;">Nota (0 – 20)</label>
                 <input type="number" name="nota_exame" id="notaInput" min="0" max="20" step="0.1"
-                       style="width:100%;border:2px solid #ddd6fe;border-radius:8px;padding:12px;font-size:1.2rem;font-weight:700;text-align:center;box-sizing:border-box;"
+                       style="width:100%;border:2px solid #a8c4e0;border-radius:8px;padding:12px;font-size:1.2rem;font-weight:700;text-align:center;box-sizing:border-box;"
                        placeholder="Ex: 15.5"
                        required autofocus>
                 <p id="notaError" style="font-size:0.8rem;color:#dc2626;margin-top:6px;display:none;"></p>
@@ -208,7 +208,7 @@
             </div>
 
             <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                <button type="submit" id="notaSubmit" style="flex:1;background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
+                <button type="submit" id="notaSubmit" style="flex:1;background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">
                     Guardar Nota
                 </button>
                 <button type="button" id="notaCancel" style="flex:1;background:#f1f5f9;color:#475569;border:none;border-radius:8px;padding:12px;font-weight:700;cursor:pointer;font-size:0.9rem;">

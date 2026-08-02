@@ -23,11 +23,11 @@
             <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Por assinar</div>
         </div>
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;text-align:center;">
-            <div style="font-size:1.8rem;font-weight:800;color:#7c3aed;line-height:1;">{{ $totais['concluida'] }}</div>
+            <div style="font-size:1.8rem;font-weight:800;color:#1e3a5f;line-height:1;">{{ $totais['concluida'] }}</div>
             <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Concluídas</div>
         </div>
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;text-align:center;">
-            <div style="font-size:1.8rem;font-weight:800;color:#1565c0;line-height:1;">{{ $totais['total'] }}</div>
+            <div style="font-size:1.8rem;font-weight:800;color:#1e3a5f;line-height:1;">{{ $totais['total'] }}</div>
             <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Total</div>
         </div>
         <a href="{{ route('daac.candidaturas.index', array_merge(request()->except('sem_comprovativo'), ['sem_comprovativo' => 1])) }}"
@@ -101,7 +101,7 @@
                 <option value="rejeitada"  {{ request('status') === 'rejeitada'  ? 'selected' : '' }}>Rejeitadas</option>
             </select>
         </div>
-        <button type="submit" style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:600;cursor:pointer;font-size:0.88rem;">Filtrar</button>
+        <button type="submit" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:600;cursor:pointer;font-size:0.88rem;">Filtrar</button>
         @if(request()->hasAny(['q','status','curso']))
         <a href="{{ route('daac.candidaturas.index') }}" style="background:#f1f5f9;color:#475569;border-radius:8px;padding:8px 14px;font-weight:600;font-size:0.88rem;text-decoration:none;">Limpar</a>
         @endif
@@ -128,7 +128,7 @@
                 @foreach($candidaturas as $c)
                 @php $cor = \App\Models\Candidatura::$statusColors[$c->status] ?? '#94a3b8'; @endphp
                 <tr style="border-bottom:1px solid #f1f5f9;">
-                    <td style="padding:13px 16px;font-weight:700;color:#2563eb;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
+                    <td style="padding:13px 16px;font-weight:700;color:#1e3a5f;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td style="padding:13px 16px;">
                         <div style="font-weight:600;color:#1a2332;">{{ $c->nome }}</div>
                         <div style="font-size:0.78rem;color:#64748b;">{{ $c->email }}</div>
@@ -151,7 +151,7 @@
                                 PDF
                             </a>
                             <a href="{{ route('daac.candidaturas.show', $c) }}"
-                               style="display:inline-flex;align-items:center;gap:4px;background:{{ $c->isAssinada() ? '#7c3aed' : '#2563eb' }};color:#fff;padding:5px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;">
+                               style="display:inline-flex;align-items:center;gap:4px;background:{{ $c->isAssinada() ? '#1e3a5f' : '#1e3a5f' }};color:#fff;padding:5px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 {{ $c->isAssinada() ? 'Ver' : 'Assinar' }}
                             </a>
                         </div>

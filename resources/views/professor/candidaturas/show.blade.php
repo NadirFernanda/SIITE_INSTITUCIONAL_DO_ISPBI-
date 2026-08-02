@@ -4,7 +4,7 @@
 <div style="max-width:700px;margin:0 auto;">
 
     <a href="{{ route('professor.candidaturas.index') }}"
-       style="display:inline-flex;align-items:center;gap:5px;color:#7c3aed;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:22px;">
+       style="display:inline-flex;align-items:center;gap:5px;color:#1e3a5f;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:22px;">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar à lista
     </a>
@@ -37,8 +37,8 @@
     </div>
 
     {{-- Nota do Exame / Resumo de Lançamento --}}
-    <div style="background:#fff;border:1px solid #ede9fe;border-radius:14px;padding:22px 24px;">
-        <h2 style="font-size:0.85rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.05em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">
+    <div style="background:#fff;border:1px solid #eaeff5;border-radius:14px;padding:22px 24px;">
+        <h2 style="font-size:0.85rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:.05em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">
             Lançamento — Resumo
         </h2>
 
@@ -74,13 +74,13 @@
                         <div style="font-size:0.78rem;color:#64748b;">A soma das notas por disciplina é calculada automaticamente. A Presidência usará este valor para a pauta final.</div>
                     </div>
                 @else
-                    <div style="background:#fff8f0;border:1px solid #fde3c7;border-radius:10px;padding:12px;margin-bottom:12px;">
+                    <div style="background:#fde8e0;border:1px solid #fde8e0;border-radius:10px;padding:12px;margin-bottom:12px;">
                         <strong>Atenção:</strong> Esta sala utiliza lançamento por disciplinas. Ainda não existem notas por disciplina introduzidas para este candidato. Use o formulário "Lançamento de Notas por Disciplina" abaixo para inserir as notas.
                     </div>
                 @endif
 
                 {{-- mostrar resumo das disciplinas e notas atuais --}}
-                <div style="border:1px solid #e6f6f6;border-radius:8px;padding:10px;">
+                <div style="border:1px solid #eaeff5;border-radius:8px;padding:10px;">
                     <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;font-weight:700;color:#0f172a;margin-bottom:8px;">
                         <div>Disciplina</div>
                         <div style="text-align:center;">Peso (%)</div>
@@ -88,7 +88,7 @@
                     </div>
                     @foreach($disciplines as $d)
                         @php $dn = $d->discipline; $nr = $notas[$dn] ?? null; @endphp
-                        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #f3f6f5;">
+                        <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #eaeff5;">
                             <div style="color:#111827;">{{ $dn }}</div>
                             <div style="text-align:center;color:#374151;">{{ $d->weight_percent }}</div>
                             <div style="text-align:center;color:#111827;font-weight:700;">{{ $nr?->nota !== null ? number_format($nr->nota,2) : '—' }}</div>
@@ -96,7 +96,7 @@
                     @endforeach
                     <div style="margin-top:8px;font-size:0.82rem;color:#475569;">
                         Peso total: <strong id="totalWeight">{{ $disciplines->sum('weight_percent') }}%</strong>
-                        <span id="weightWarning" style="margin-left:8px;color:#d97706;display:{{ $disciplines->sum('weight_percent') != 100 ? 'inline' : 'none' }};">
+                        <span id="weightWarning" style="margin-left:8px;color:#F05A28;display:{{ $disciplines->sum('weight_percent') != 100 ? 'inline' : 'none' }};">
                             (Aviso: soma de pesos ≠ 100%)
                         </span>
                     </div>
@@ -113,12 +113,12 @@
                         </label>
                         <input type="number" name="nota_exame" min="0" max="20" step="0.1"
                                value="{{ old('nota_exame', $candidatura->nota_exame) }}"
-                               style="border:1px solid #ddd6fe;border-radius:8px;padding:9px 12px;font-size:1.1rem;font-weight:700;width:110px;text-align:center;">
+                               style="border:1px solid #a8c4e0;border-radius:8px;padding:9px 12px;font-size:1.1rem;font-weight:700;width:110px;text-align:center;">
                         @error('nota_exame')<p style="font-size:0.78rem;color:#dc2626;margin-top:4px;">{{ $message }}</p>@enderror
                     </div>
                     <button type="submit"
-                            style="background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
-                            onmouseover="this.style.background='#6d28d9'" onmouseout="this.style.background='#7c3aed'">
+                            style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                            onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                         Guardar nota
                     </button>
                 </div>
@@ -128,8 +128,8 @@
 
     {{-- Notas por disciplina (se definidas para o curso) --}}
     @if(!empty($disciplines) && $disciplines->count())
-    <div style="background:#fff;border:1px solid #e6fffa;border-radius:14px;padding:22px 24px;margin-top:18px;">
-        <h2 style="font-size:0.85rem;font-weight:700;color:#0e7490;text-transform:uppercase;letter-spacing:.05em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #ecfeff;">
+    <div style="background:#fff;border:1px solid #eaeff5;border-radius:14px;padding:22px 24px;margin-top:18px;">
+        <h2 style="font-size:0.85rem;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:.05em;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #eaeff5;">
             Lançamento de Notas por Disciplina
         </h2>
 
@@ -139,15 +139,15 @@
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
                 @foreach($disciplines as $d)
                 @php $discName = $d->discipline; $existing = $notas[$discName] ?? null; @endphp
-                <div style="border:1px solid #e6f6f6;border-radius:8px;padding:12px;">
+                <div style="border:1px solid #eaeff5;border-radius:8px;padding:12px;">
                     <div style="font-size:0.72rem;font-weight:700;color:#0f172a;margin-bottom:6px;">{{ $discName }}</div>
-                    <input type="number" name="notas[{{ $discName }}]" data-weight="{{ (int)$d->weight_percent }}" min="0" max="20" step="0.01" value="{{ old('notas.'.$discName, $existing?->nota) }}" class="disc-nota-input" style="width:100%;padding:8px;border-radius:6px;border:1px solid #e2fdfa;font-weight:700;text-align:center;">
+                    <input type="number" name="notas[{{ $discName }}]" data-weight="{{ (int)$d->weight_percent }}" min="0" max="20" step="0.01" value="{{ old('notas.'.$discName, $existing?->nota) }}" class="disc-nota-input" style="width:100%;padding:8px;border-radius:6px;border:1px solid #eaeff5;font-weight:700;text-align:center;">
                 </div>
                 @endforeach
             </div>
 
             <div style="margin-top:14px;display:flex;gap:12px;align-items:center;">
-                <button type="submit" style="background:#0ea5a4;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;">Guardar notas por disciplina</button>
+                <button type="submit" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;">Guardar notas por disciplina</button>
                 <div style="color:#64748b;font-size:0.85rem;">As notas por disciplina serão usadas na exportação da Presidência para calcular a soma ponderada.</div>
             </div>
         </form>

@@ -52,7 +52,7 @@
                         <td style="padding:12px 18px;font-size:0.83rem;color:#64748b;">{{ is_array($a->interests) ? implode(', ', $a->interests) : ($a->interests ?? '—') }}</td>
                         <td style="padding:12px 18px;">
                             @if($a->consent)
-                            <span style="display:inline-flex;align-items:center;gap:4px;background:#f0fdf4;color:#166534;border:1px solid #86efac;border-radius:6px;padding:2px 8px;font-size:0.78rem;font-weight:700;">Sim</span>
+                            <span style="display:inline-flex;align-items:center;gap:4px;background:#f0fdf4;color:#0f1f3d;border:1px solid #86efac;border-radius:6px;padding:2px 8px;font-size:0.78rem;font-weight:700;">Sim</span>
                             @else
                             <span style="display:inline-flex;align-items:center;gap:4px;background:#fff5f5;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:2px 8px;font-size:0.78rem;font-weight:700;">Não</span>
                             @endif

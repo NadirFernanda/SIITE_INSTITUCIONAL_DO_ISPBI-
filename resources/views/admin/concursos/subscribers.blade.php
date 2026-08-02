@@ -4,8 +4,8 @@
 <style>
   .sbk-back-btn:hover { background: #e2e8f0 !important; }
   .sbk-export-btn:hover { background: #15803d !important; }
-  .sbk-search-input:focus { border-color: #1565c0 !important; box-shadow: 0 0 0 3px rgba(21,101,192,0.1) !important; outline: none; }
-  .sbk-search-btn:hover { background: #0d47a1 !important; }
+  .sbk-search-input:focus { border-color: #1e3a5f !important; box-shadow: 0 0 0 3px rgba(21,101,192,0.1) !important; outline: none; }
+  .sbk-search-btn:hover { background: #0f1f3d !important; }
   .sbk-row:hover { background: #f8fafc !important; }
 </style>
 <div style="max-width:1000px;margin:0 auto;padding:36px 24px 48px;">
@@ -41,7 +41,7 @@
                        style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px 10px 38px;font-size:0.9rem;color:#1a202c;">
             </div>
             <button type="submit" class="sbk-search-btn"
-                    style="padding:10px 20px;border-radius:8px;background:#1565c0;color:#fff;font-weight:600;font-size:0.9rem;border:none;cursor:pointer;">Buscar</button>
+                    style="padding:10px 20px;border-radius:8px;background:#1e3a5f;color:#fff;font-weight:600;font-size:0.9rem;border:none;cursor:pointer;">Buscar</button>
         </div>
     </form>
 
@@ -75,7 +75,7 @@
                         <td style="padding:12px 18px;font-size:0.83rem;color:#64748b;">{{ is_array($a->interests) ? implode(', ', $a->interests) : ($a->interests ?? '—') }}</td>
                         <td style="padding:12px 18px;">
                             @if($a->consent)
-                            <span style="background:#f0fdf4;color:#166534;border:1px solid #86efac;border-radius:6px;padding:2px 8px;font-size:0.78rem;font-weight:700;">Sim</span>
+                            <span style="background:#f0fdf4;color:#0f1f3d;border:1px solid #86efac;border-radius:6px;padding:2px 8px;font-size:0.78rem;font-weight:700;">Sim</span>
                             @else
                             <span style="background:#fff5f5;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:2px 8px;font-size:0.78rem;font-weight:700;">Não</span>
                             @endif

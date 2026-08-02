@@ -29,9 +29,9 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:28px;">
         @php
         $kpis = [
-            ['label'=>'Total','value'=>$totais['total'],'color'=>'#1565c0','bg'=>'#e3f2fd'],
+            ['label'=>'Total','value'=>$totais['total'],'color'=>'#1e3a5f','bg'=>'#eaeff5'],
             ['label'=>'Pendentes','value'=>$totais['pendente'],'color'=>'#b45309','bg'=>'#fef3c7'],
-            ['label'=>'Em Análise','value'=>$totais['em_analise'],'color'=>'#1d4ed8','bg'=>'#dbeafe'],
+            ['label'=>'Em Análise','value'=>$totais['em_analise'],'color'=>'#0f1f3d','bg'=>'#eaeff5'],
             ['label'=>'Aprovadas','value'=>$totais['aprovada'],'color'=>'#15803d','bg'=>'#dcfce7'],
             ['label'=>'Rejeitadas','value'=>$totais['rejeitada'],'color'=>'#b91c1c','bg'=>'#fee2e2'],
         ];
@@ -54,11 +54,11 @@
                 <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/></svg>
                 <input type="text" name="q" value="{{ request('q') }}"
                        placeholder="Pesquisar por nome, nº ficha, BI, email, telefone, escola, município, bairro, pai, mãe..."
-                       style="width:100%;border:1.5px solid {{ request('q') ? '#2563eb' : '#e2e8f0' }};border-radius:10px;padding:10px 14px 10px 38px;font-size:0.92rem;box-sizing:border-box;outline:none;transition:border 0.2s;"
-                       onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor=this.value?'#2563eb':'#e2e8f0'">
+                       style="width:100%;border:1.5px solid {{ request('q') ? '#1e3a5f' : '#e2e8f0' }};border-radius:10px;padding:10px 14px 10px 38px;font-size:0.92rem;box-sizing:border-box;outline:none;transition:border 0.2s;"
+                       onfocus="this.style.borderColor='#1e3a5f'" onblur="this.style.borderColor=this.value?'#1e3a5f':'#e2e8f0'">
             </div>
             <button type="submit"
-                    style="background:#1565c0;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.9rem;white-space:nowrap;display:flex;align-items:center;gap:6px;">
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.9rem;white-space:nowrap;display:flex;align-items:center;gap:6px;">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
                 Pesquisar
             </button>
@@ -106,11 +106,11 @@
 
             <div style="align-self:flex-end;">
                 <a href="{{ route('admin.candidaturas.index', array_merge(request()->except('page'), ['curso' => 'Outro'])) }}"
-                   style="display:inline-block;background:#f97316;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;margin-left:8px;">
+                   style="display:inline-block;background:#F05A28;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;margin-left:8px;">
                     Mostrar "Outro"
                 </a>
                 <a href="{{ route('admin.candidaturas.index', array_merge(request()->except('page'), ['perfil' => 'Outro'])) }}"
-                   style="display:inline-block;background:#6b21a8;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;margin-left:8px;">
+                   style="display:inline-block;background:#0f1f3d;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;margin-left:8px;">
                     Mostrar perfil "Outro"
                 </a>
             </div>
@@ -182,8 +182,8 @@
                         <td style="padding:14px 18px;color:#64748b;white-space:nowrap;">{{ $c->created_at->format('d/m/Y') }}</td>
                         <td style="padding:14px 18px;text-align:center;" data-label="Ações">
                             <a href="{{ route('admin.candidaturas.show', $c) }}"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;padding:6px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;"
-                               onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">Ver</a>
+                               style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:6px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;"
+                               onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">Ver</a>
                         </td>
                     </tr>
                     @endforeach

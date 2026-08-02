@@ -40,7 +40,7 @@
 
     <a href="{{ route('presidencia.salas.index') }}"
        class="print-hidden"
-       style="display:inline-flex;align-items:center;gap:6px;color:#7c3aed;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
+       style="display:inline-flex;align-items:center;gap:6px;color:#1e3a5f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar às pautas
     </a>
@@ -67,7 +67,7 @@
             </a>
             <a href="{{ route('presidencia.salas.excel-notas', $sala) }}"
                class="print-hidden"
-               style="display:inline-flex;align-items:center;gap:6px;background:#0891b2;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+               style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 📋 Excel — Notas
             </a>
             <button type="button" class="print-hidden" onclick="window.print()"
@@ -95,7 +95,7 @@
     @else
         @foreach($candidaturas->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular')) as $grupo => $lista)
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:18px;">
-            <div style="background:#7c3aed;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
+            <div style="background:#1e3a5f;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
                 {{ $grupo }} <span style="font-weight:400;opacity:0.8;">({{ $lista->count() }} candidatos)</span>
             </div>
             <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.87rem;">
@@ -111,7 +111,7 @@
                 <tbody>
                     @foreach($lista as $c)
                     <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:11px 18px;font-weight:700;color:#7c3aed;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
+                        <td style="padding:11px 18px;font-weight:700;color:#1e3a5f;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
                         <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>

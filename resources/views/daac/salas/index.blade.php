@@ -33,12 +33,12 @@
                 @foreach($salas as $sala)
                 <tr style="border-bottom:1px solid #f1f5f9;">
                     <td style="padding:14px 20px;font-weight:700;color:#1a2332;">
-                        <a href="{{ route('daac.salas.show', $sala) }}" style="color:#2563eb;text-decoration:none;">
+                        <a href="{{ route('daac.salas.show', $sala) }}" style="color:#1e3a5f;text-decoration:none;">
                             {{ $sala->nome }}
                         </a>
                     </td>
                     <td style="padding:14px 20px;text-align:center;color:#475569;">{{ $sala->capacidade }}</td>
-                    <td style="padding:14px 20px;text-align:center;font-weight:700;color:{{ $sala->candidaturas_count > 0 ? '#2563eb' : '#94a3b8' }};">
+                    <td style="padding:14px 20px;text-align:center;font-weight:700;color:{{ $sala->candidaturas_count > 0 ? '#1e3a5f' : '#94a3b8' }};">
                         {{ $sala->candidaturas_count }}
                     </td>
                     <td style="padding:14px 20px;color:#475569;font-size:0.85rem;">
@@ -63,7 +63,7 @@
                                 </a>
                             @endif
                             <a href="{{ route('daac.salas.show', $sala) }}" title="Ver sala"
-                               style="background:#7c3aed;color:#fff;padding:6px 14px;border-radius:7px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;">Ver</a>
+                               style="background:#1e3a5f;color:#fff;padding:6px 14px;border-radius:7px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;">Ver</a>
                         </div>
                     </td>
                 </tr>

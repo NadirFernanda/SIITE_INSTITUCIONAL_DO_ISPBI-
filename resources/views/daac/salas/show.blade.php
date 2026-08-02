@@ -3,7 +3,7 @@
 <div style="max-width:1000px;margin:0 auto;">
 
     <a href="{{ route('daac.salas.index') }}"
-       style="display:inline-flex;align-items:center;gap:5px;color:#2563eb;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:20px;">
+       style="display:inline-flex;align-items:center;gap:5px;color:#1e3a5f;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:20px;">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar às salas
     </a>
@@ -13,7 +13,7 @@
             <h1 style="font-size:1.4rem;font-weight:700;color:#1a2332;margin:0 0 3px;">{{ $sala->nome }}</h1>
             <p style="color:#64748b;font-size:0.88rem;margin:0;">
                 Capacidade: <strong>{{ $sala->capacidade }}</strong> &nbsp;|&nbsp;
-                Atribuídos: <strong style="color:#2563eb;">{{ $candidaturas->count() }}</strong>
+                Atribuídos: <strong style="color:#1e3a5f;">{{ $candidaturas->count() }}</strong>
                 @if($sala->data_exame || $sala->horario)
                     &nbsp;|&nbsp; {{ $sala->data_exame?->format('d/m/Y') }} {{ $sala->horario }}
                 @endif
@@ -27,12 +27,12 @@
                     PDF — Lista Sala
                 </a>
                 <a href="{{ route('presidencia.salas.excel-exame', $sala) }}"
-                   style="display:inline-flex;align-items:center;gap:6px;background:#1565c0;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+                   style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     Excel — Lista Exame
                 </a>
                 <a href="{{ route('presidencia.salas.excel-notas', $sala) }}"
-                   style="display:inline-flex;align-items:center;gap:6px;background:#2563eb;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+                   style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     Excel — Lançamento Notas
                 </a>
@@ -74,7 +74,7 @@
     @else
         @foreach($candidaturas->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular')) as $grupo => $lista)
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:16px;">
-            <div style="background:#2563eb;padding:11px 18px;color:#fff;font-weight:700;font-size:0.9rem;">
+            <div style="background:#1e3a5f;padding:11px 18px;color:#fff;font-weight:700;font-size:0.9rem;">
                 {{ $grupo }} <span style="font-weight:400;opacity:0.8;">({{ $lista->count() }} candidatos)</span>
             </div>
             <table style="width:100%;border-collapse:collapse;font-size:0.87rem;">
@@ -89,7 +89,7 @@
                 <tbody>
                     @foreach($lista as $c)
                     <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:10px 18px;text-align:center;font-weight:700;color:#2563eb;">{{ $c->numero_lugar }}</td>
+                        <td style="padding:10px 18px;text-align:center;font-weight:700;color:#1e3a5f;">{{ $c->numero_lugar }}</td>
                         <td style="padding:10px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
                         <td style="padding:10px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:10px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>

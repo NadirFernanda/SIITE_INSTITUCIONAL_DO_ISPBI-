@@ -5,7 +5,7 @@
 
     {{-- Back --}}
     <a href="{{ route('admin.candidaturas.index') }}"
-       style="display:inline-flex;align-items:center;gap:6px;color:#1565c0;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:24px;">
+       style="display:inline-flex;align-items:center;gap:6px;color:#1e3a5f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:24px;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar à lista
     </a>
@@ -22,14 +22,14 @@
                 {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}
             </span>
             <a href="{{ route('admin.candidaturas.comprovativo', $candidatura) }}"
-               style="display:inline-flex;align-items:center;gap:6px;background:#0369a1;color:#fff;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;text-decoration:none;"
-               onmouseover="this.style.background='#0284c7'" onmouseout="this.style.background='#0369a1'">
+               style="display:inline-flex;align-items:center;gap:6px;background:#0f1f3d;color:#fff;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;text-decoration:none;"
+               onmouseover="this.style.background='#1e3a5f'" onmouseout="this.style.background='#0f1f3d'">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Comprovativo PDF
             </a>
             <a href="{{ route('admin.candidaturas.edit', $candidatura) }}"
-               style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;text-decoration:none;"
-               onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+               style="display:inline-flex;align-items:center;gap:6px;background:#eaeff5;color:#0f1f3d;border:1px solid #c7d2e0;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;text-decoration:none;"
+               onmouseover="this.style.background='#eaeff5'" onmouseout="this.style.background='#eaeff5'">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 Editar
             </a>
@@ -53,7 +53,7 @@
 
     {{-- Dados Pessoais --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px;margin-bottom:18px;">
-        <h2 style="font-size:0.95rem;font-weight:700;color:#1565c0;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Dados Pessoais</h2>
+        <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Dados Pessoais</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
             @php _campo('Nome Completo', $candidatura->nome); @endphp
             @php _campo('Filiação — Pai', $candidatura->filiacao_pai); @endphp
@@ -77,7 +77,7 @@
 
     {{-- Dados Académicos e Socioeconómicos --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px;margin-bottom:18px;">
-        <h2 style="font-size:0.95rem;font-weight:700;color:#1565c0;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Dados Académicos e Socioeconómicos</h2>
+        <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Dados Académicos e Socioeconómicos</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
             @php _campo('Habilitações Literárias', $candidatura->habilitacoes); @endphp
             @php _campo('Escola de Proveniência', $candidatura->escola_origem); @endphp
@@ -110,7 +110,7 @@
     {{-- Nota do Exame (só leitura — lançamento exclusivo do Professor) --}}
     @if($candidatura->nota_exame !== null)
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 26px;margin-bottom:18px;">
-        <h2 style="font-size:0.95rem;font-weight:700;color:#0e7490;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Nota do Exame de Acesso</h2>
+        <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;">Nota do Exame de Acesso</h2>
         <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
             <div style="background:{{ $candidatura->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $candidatura->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:10px 20px;text-align:center;">
                 <div style="font-size:2rem;font-weight:900;color:{{ $candidatura->nota_exame >= 10 ? '#15803d' : '#dc2626' }};">
@@ -132,7 +132,7 @@
 
     {{-- Update status --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:28px;margin-bottom:22px;">
-        <h2 style="font-size:1rem;font-weight:700;color:#1565c0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">Atualizar Estado</h2>
+        <h2 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">Atualizar Estado</h2>
         <form method="POST" action="{{ route('admin.candidaturas.status', $candidatura) }}">
             @csrf
             @method('PATCH')
@@ -153,8 +153,8 @@
                           placeholder="Notas visíveis apenas para administradores...">{{ $candidatura->notas_admin }}</textarea>
             </div>
             <button type="submit"
-                    style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
-                    onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                 Guardar
             </button>
         </form>

@@ -38,7 +38,7 @@
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Título <span style="color:#dc2626;">*</span></label>
                     <input type="text" name="titulo" value="{{ old('titulo', $estatistica->titulo) }}" required
                            style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                           onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                           onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                 </div>
 
@@ -47,14 +47,14 @@
                         <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Valor <span style="color:#dc2626;">*</span></label>
                         <input type="text" name="valor" value="{{ old('valor', $estatistica->valor) }}" required
                                style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                               onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                               onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                                onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                     </div>
                     <div>
                         <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Ordem</label>
                         <input type="number" name="ordem" value="{{ old('ordem', $estatistica->ordem) }}" min="0"
                                style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                               onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                               onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                                onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Descrição <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span></label>
                     <input type="text" name="descricao" value="{{ old('descricao', $estatistica->descricao) }}"
                            style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                           onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                           onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                 </div>
 
@@ -71,7 +71,7 @@
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Ícone <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span></label>
                     <input type="text" name="icone" value="{{ old('icone', $estatistica->icone) }}"
                            style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                           onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                           onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                 </div>
             </div>
@@ -82,8 +82,8 @@
                style="padding:11px 22px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:#374151;font-weight:600;font-size:0.95rem;text-decoration:none;"
                onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'">Cancelar</a>
             <button type="submit"
-                    style="display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:8px;background:#1565c0;color:#fff;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
-                    onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                    style="display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:8px;background:#1e3a5f;color:#fff;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
+                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                 Salvar Alterações
             </button>

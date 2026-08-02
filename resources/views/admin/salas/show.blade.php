@@ -4,7 +4,7 @@
 <div style="padding:32px 24px;max-width:1000px;margin:0 auto;">
 
     <a href="{{ route('admin.salas.index') }}"
-       style="display:inline-flex;align-items:center;gap:6px;color:#1565c0;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
+       style="display:inline-flex;align-items:center;gap:6px;color:#1e3a5f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar às salas
     </a>
@@ -20,12 +20,12 @@
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <a href="{{ route('admin.salas.pdf', $sala) }}"
-               style="display:inline-flex;align-items:center;gap:6px;background:#1565c0;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+               style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 PDF
             </a>
             <a href="{{ route('admin.salas.disciplines.edit', $sala) }}"
-               style="display:inline-flex;align-items:center;gap:6px;background:#7c3aed;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+               style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 Disciplinas
             </a>
@@ -35,7 +35,7 @@
                 Excel — Lista de Presença
             </a>
             <a href="{{ route('admin.salas.excel-notas', $sala) }}"
-               style="display:inline-flex;align-items:center;gap:6px;background:#0e5c2f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+               style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                 Excel — Pauta
             </a>
@@ -50,7 +50,7 @@
         {{-- Agrupado por curso + período --}}
         @foreach($candidaturas->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular')) as $grupo => $lista)
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:18px;">
-            <div style="background:#1565c0;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
+            <div style="background:#1e3a5f;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
                 {{ $grupo }} <span style="font-weight:400;opacity:0.8;">({{ $lista->count() }} candidatos)</span>
             </div>
             <table class="responsive-table" style="width:100%;border-collapse:collapse;font-size:0.87rem;">
@@ -65,7 +65,7 @@
                 <tbody>
                     @foreach($lista as $c)
                     <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1565c0;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
+                        <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1e3a5f;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                         <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>

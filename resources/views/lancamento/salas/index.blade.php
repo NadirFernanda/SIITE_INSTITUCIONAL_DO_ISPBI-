@@ -13,7 +13,7 @@
                   onsubmit="return confirm('Isto vai redistribuir TODOS os candidatos pelas salas. Continuar?')">
                 @csrf
                 <button type="submit"
-                        style="background:#1565c0;color:#fff;border:none;border-radius:10px;padding:10px 20px;font-weight:700;cursor:pointer;font-size:0.88rem;display:flex;align-items:center;gap:6px;">
+                        style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:10px 20px;font-weight:700;cursor:pointer;font-size:0.88rem;display:flex;align-items:center;gap:6px;">
                     Distribuir Candidatos
                 </button>
             </form>
@@ -42,11 +42,11 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:26px;">
         @php
         $kpis = [
-            ['label'=>'Candidatos','value'=>$totalCandidatos,'color'=>'#1565c0','bg'=>'#e3f2fd'],
+            ['label'=>'Candidatos','value'=>$totalCandidatos,'color'=>'#1e3a5f','bg'=>'#eaeff5'],
             ['label'=>'Atribuídos','value'=>$atribuidos,'color'=>'#15803d','bg'=>'#dcfce7'],
             ['label'=>'Sem Sala','value'=>$semSala,'color'=>$semSala>0?'#b45309':'#94a3b8','bg'=>$semSala>0?'#fef3c7':'#f1f5f9'],
-            ['label'=>'Total Lugares','value'=>$totalLugares,'color'=>'#7c3aed','bg'=>'#ede9fe'],
-            ['label'=>'Salas','value'=>$salas->count(),'color'=>'#0e7490','bg'=>'#cffafe'],
+            ['label'=>'Total Lugares','value'=>$totalLugares,'color'=>'#1e3a5f','bg'=>'#eaeff5'],
+            ['label'=>'Salas','value'=>$salas->count(),'color'=>'#1e3a5f','bg'=>'#eaeff5'],
         ];
         @endphp
         @foreach($kpis as $k)
@@ -59,7 +59,7 @@
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">
-            <h2 style="font-size:0.95rem;font-weight:700;color:#1565c0;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Adicionar Sala</h2>
+            <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Adicionar Sala</h2>
             <form method="POST" action="{{ route('lancamento.salas.store') }}">
                 @csrf
                 <div style="margin-bottom:14px;">
@@ -76,14 +76,14 @@
                     @error('capacidade')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
                 </div>
                 <button type="submit"
-                        style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-weight:700;cursor:pointer;font-size:0.88rem;">
+                        style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-weight:700;cursor:pointer;font-size:0.88rem;">
                     Criar Sala
                 </button>
             </form>
         </div>
 
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">
-            <h2 style="font-size:0.95rem;font-weight:700;color:#1565c0;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Candidatos por Curso / Período</h2>
+            <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Candidatos por Curso / Período</h2>
             @if($grupos->isEmpty())
                 <p style="color:#94a3b8;font-size:0.9rem;margin:0;">Nenhuma candidatura registada.</p>
             @else
@@ -100,11 +100,11 @@
                         <tr style="border-bottom:1px solid #f8fafc;">
                             <td style="padding:7px 10px;color:#334155;">{{ $g->curso }}</td>
                             <td style="padding:7px 10px;">
-                                <span style="background:{{ $g->periodo === 'regular' ? '#dbeafe' : '#fef3c7' }};color:{{ $g->periodo === 'regular' ? '#1d4ed8' : '#92400e' }};padding:2px 8px;border-radius:20px;font-size:0.75rem;font-weight:700;">
+                                <span style="background:{{ $g->periodo === 'regular' ? '#eaeff5' : '#fef3c7' }};color:{{ $g->periodo === 'regular' ? '#0f1f3d' : '#92400e' }};padding:2px 8px;border-radius:20px;font-size:0.75rem;font-weight:700;">
                                     {{ $g->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular' }}
                                 </span>
                             </td>
-                            <td style="padding:7px 10px;text-align:center;font-weight:700;color:#1565c0;">{{ $g->total }}</td>
+                            <td style="padding:7px 10px;text-align:center;font-weight:700;color:#1e3a5f;">{{ $g->total }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -150,7 +150,7 @@
                     <td style="padding:14px 20px;text-align:center;">
                         <span style="font-weight:700;color:{{ $ocupados > 0 ? '#15803d' : '#94a3b8' }};">{{ $ocupados }}</span>
                         <div style="background:#f1f5f9;border-radius:4px;height:6px;margin-top:4px;overflow:hidden;">
-                            <div style="background:#1565c0;height:100%;width:{{ $pct }}%;border-radius:4px;"></div>
+                            <div style="background:#1e3a5f;height:100%;width:{{ $pct }}%;border-radius:4px;"></div>
                         </div>
                     </td>
                     <td style="padding:14px 20px;text-align:center;color:{{ $livres > 0 ? '#64748b' : '#ef4444' }};font-weight:600;">{{ $livres }}</td>
@@ -167,7 +167,7 @@
                     <td style="padding:12px 16px;">
                         <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center;">
                             <a href="{{ route('lancamento.salas.show', $sala) }}" title="Ver detalhe"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#1565c0;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
+                               style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
                                 Ver
                             </a>
                             <a href="{{ route('lancamento.salas.pdf', $sala) }}" title="Lista geral PDF"

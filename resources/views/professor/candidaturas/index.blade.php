@@ -6,7 +6,7 @@
     <div style="margin-bottom:24px;">
         <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Lançamento de Notas</h1>
         <p style="color:#64748b;font-size:0.92rem;margin:0;">Selecione uma ficha para lançar ou corrigir a nota do exame de acesso.</p>
-        <div style="margin-top:12px;padding:14px 16px;background:#f8fafc;border:1px solid #dbeafe;border-radius:12px;color:#0f172a;font-size:0.88rem;line-height:1.6;">
+        <div style="margin-top:12px;padding:14px 16px;background:#f8fafc;border:1px solid #eaeff5;border-radius:12px;color:#0f172a;font-size:0.88rem;line-height:1.6;">
             <strong>Garantia do processo:</strong> use apenas a correspondência oficial da DAAC/secretaria (Sala + Código de exame). A validação final deve ser feita no local físico do exame.
         </div>
     </div>
@@ -69,7 +69,7 @@
                 </select>
             </div>
             <button type="submit"
-                    style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
                 Filtrar
             </button>
             @if(request()->hasAny(['q','curso','periodo','nota']))
@@ -110,8 +110,8 @@
                     </td>
                     <td style="padding:13px 20px;text-align:center;">
                         <a href="{{ route('professor.candidaturas.show', $c) }}"
-                           style="display:inline-flex;align-items:center;gap:5px;background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe;border-radius:7px;padding:5px 14px;font-size:0.82rem;font-weight:700;text-decoration:none;"
-                           onmouseover="this.style.background='#ede9fe'" onmouseout="this.style.background='#f5f3ff'">
+                           style="display:inline-flex;align-items:center;gap:5px;background:#eaeff5;color:#0f1f3d;border:1px solid #a8c4e0;border-radius:7px;padding:5px 14px;font-size:0.82rem;font-weight:700;text-decoration:none;"
+                           onmouseover="this.style.background='#eaeff5'" onmouseout="this.style.background='#eaeff5'">
                             {{ $c->nota_exame !== null ? 'Corrigir' : 'Lançar nota' }}
                         </a>
                     </td>

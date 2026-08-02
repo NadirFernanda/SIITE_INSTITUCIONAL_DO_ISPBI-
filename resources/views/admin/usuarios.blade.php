@@ -24,7 +24,7 @@
 
     {{-- Criar técnico --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px 28px;margin-bottom:28px;">
-        <h2 style="font-size:1rem;font-weight:700;color:#1565c0;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
+        <h2 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
             Criar Novo Técnico
         </h2>
         <form method="POST" action="{{ route('admin.usuarios.store') }}" autocomplete="off">
@@ -67,29 +67,29 @@
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Tipo de Utilizador <span style="color:#ef4444;">*</span></label>
                 <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;">
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
-                        <input type="radio" name="role" value="tecnico" checked style="accent-color:#1565c0;flex-shrink:0;"> <span style="white-space:normal;">Técnico <small style="color:#94a3b8;display:block;">(painel candidaturas)</small></span>
+                        <input type="radio" name="role" value="tecnico" checked style="accent-color:#1e3a5f;flex-shrink:0;"> <span style="white-space:normal;">Técnico <small style="color:#94a3b8;display:block;">(painel candidaturas)</small></span>
                     </label>
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
-                        <input type="radio" name="role" value="daac" style="accent-color:#2563eb;flex-shrink:0;"> <span style="white-space:normal;">DAAC <small style="color:#94a3b8;display:block;">(assinar comprovativos)</small></span>
+                        <input type="radio" name="role" value="daac" style="accent-color:#1e3a5f;flex-shrink:0;"> <span style="white-space:normal;">DAAC <small style="color:#94a3b8;display:block;">(assinar comprovativos)</small></span>
                     </label>
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
-                        <input type="radio" name="role" value="secretaria" style="accent-color:#7c3aed;flex-shrink:0;"> <span style="white-space:normal;">Secretaria <small style="color:#94a3b8;display:block;">(confirmar pagamentos)</small></span>
+                        <input type="radio" name="role" value="secretaria" style="accent-color:#1e3a5f;flex-shrink:0;"> <span style="white-space:normal;">Secretaria <small style="color:#94a3b8;display:block;">(confirmar pagamentos)</small></span>
                     </label>
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
-                        <input type="radio" name="role" value="subcomissao_correcao" style="accent-color:#6d28d9;flex-shrink:0;"> <span style="white-space:normal;">Subcomissão Correcção <small style="color:#94a3b8;display:block;">(corrigir notas)</small></span>
+                        <input type="radio" name="role" value="subcomissao_correcao" style="accent-color:#0f1f3d;flex-shrink:0;"> <span style="white-space:normal;">Subcomissão Correcção <small style="color:#94a3b8;display:block;">(corrigir notas)</small></span>
                     </label>
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
-                        <input type="radio" name="role" value="subcomissao_lancamento" style="accent-color:#0f766e;flex-shrink:0;"> <span style="white-space:normal;">Subcomissão Lançamento <small style="color:#94a3b8;display:block;">(editar pautas)</small></span>
+                        <input type="radio" name="role" value="subcomissao_lancamento" style="accent-color:#1e3a5f;flex-shrink:0;"> <span style="white-space:normal;">Subcomissão Lançamento <small style="color:#94a3b8;display:block;">(editar pautas)</small></span>
                     </label>
                     <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.9rem;min-width:160px;flex:0 0 auto;">
-                        <input type="radio" name="role" value="presidencia" style="accent-color:#7c3aed;flex-shrink:0;"> <span style="white-space:normal;">Presidência <small style="color:#94a3b8;display:block;">(imprimir pautas)</small></span>
+                        <input type="radio" name="role" value="presidencia" style="accent-color:#1e3a5f;flex-shrink:0;"> <span style="white-space:normal;">Presidência <small style="color:#94a3b8;display:block;">(imprimir pautas)</small></span>
                     </label>
                 </div>
             </div>
             <div style="display:flex;align-items:center;gap:12px;">
                 <button type="submit"
-                        style="background:#1565c0;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
-                        onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                        style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:10px 24px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                        onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                     Criar utilizador
                 </button>
             </div>
@@ -143,8 +143,8 @@
                     <td style="padding:14px 22px;" data-label="Nome">
                         <div style="display:flex;align-items:center;gap:11px;">
                             @php
-                            $avatarBg  = match($u->role) { 'admin'=>'#e3f2fd','tecnico'=>'#dcfce7','daac'=>'#ede9fe','secretaria'=>'#fdf4ff','subcomissao_correcao'=>'#f5f3ff','subcomissao_lancamento'=>'#d1fae5','presidencia'=>'#faf5ff', default=>'#f1f5f9' };
-                            $avatarClr = match($u->role) { 'admin'=>'#1565c0','tecnico'=>'#15803d','daac'=>'#7c3aed','secretaria'=>'#a21caf','subcomissao_correcao'=>'#6d28d9','subcomissao_lancamento'=>'#0f766e','presidencia'=>'#7c3aed', default=>'#64748b' };
+                            $avatarBg  = match($u->role) { 'admin'=>'#eaeff5','tecnico'=>'#dcfce7','daac'=>'#eaeff5','secretaria'=>'#eaeff5','subcomissao_correcao'=>'#eaeff5','subcomissao_lancamento'=>'#d1fae5','presidencia'=>'#eaeff5', default=>'#f1f5f9' };
+                            $avatarClr = match($u->role) { 'admin'=>'#1e3a5f','tecnico'=>'#15803d','daac'=>'#1e3a5f','secretaria'=>'#1e3a5f','subcomissao_correcao'=>'#0f1f3d','subcomissao_lancamento'=>'#1e3a5f','presidencia'=>'#1e3a5f', default=>'#64748b' };
                             @endphp
                             <div style="width:34px;height:34px;border-radius:50%;background:{{ $avatarBg }};color:{{ $avatarClr }};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">
                                 {{ strtoupper(substr($u->name, 0, 1)) }}
@@ -160,19 +160,19 @@
                     <td style="padding:14px 22px;color:#475569;" data-label="Email">{{ $u->email }}</td>
                     <td style="padding:14px 22px;" data-label="Role">
                         @if($u->role === 'admin')
-                            <span style="background:#e3f2fd;color:#1565c0;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Admin</span>
+                            <span style="background:#eaeff5;color:#1e3a5f;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Admin</span>
                         @elseif($u->role === 'tecnico')
                             <span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Técnico</span>
                         @elseif($u->role === 'daac')
-                            <span style="background:#ede9fe;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">DAAC</span>
+                            <span style="background:#eaeff5;color:#1e3a5f;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">DAAC</span>
                         @elseif($u->role === 'secretaria')
-                            <span style="background:#fdf4ff;color:#a21caf;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Secretaria</span>
+                            <span style="background:#eaeff5;color:#1e3a5f;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Secretaria</span>
                         @elseif($u->role === 'subcomissao_correcao')
-                            <span style="background:#f5f3ff;color:#6d28d9;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Sub. Correcção</span>
+                            <span style="background:#eaeff5;color:#0f1f3d;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Sub. Correcção</span>
                         @elseif($u->role === 'subcomissao_lancamento')
-                            <span style="background:#d1fae5;color:#0f766e;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Sub. Lançamento</span>
+                            <span style="background:#d1fae5;color:#1e3a5f;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Sub. Lançamento</span>
                         @elseif($u->role === 'presidencia')
-                            <span style="background:#faf5ff;color:#7c3aed;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Presidência</span>
+                            <span style="background:#eaeff5;color:#1e3a5f;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;">Presidência</span>
                         @else
                             <span style="background:#f1f5f9;color:#64748b;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ $u->role }}</span>
                         @endif
@@ -190,8 +190,8 @@
                             {{-- Assinatura digitalizada — apenas DAAC --}}
                             @if($u->role === 'daac')
                             <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('sig-panel-{{ $u->id }}').style.display='block';document.getElementById('pwd-panel-{{ $u->id }}').style.display='none';"
-                                    style="display:flex;align-items:center;gap:6px;background:{{ $u->signature_image ? '#f5f3ff' : '#faf5ff' }};color:#6d28d9;border:1px solid {{ $u->signature_image ? '#c4b5fd' : '#ddd6fe' }};border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
-                                    onmouseover="this.style.background='#ede9fe'" onmouseout="this.style.background='{{ $u->signature_image ? '#f5f3ff' : '#faf5ff' }}'">
+                                    style="display:flex;align-items:center;gap:6px;background:{{ $u->signature_image ? '#eaeff5' : '#eaeff5' }};color:#0f1f3d;border:1px solid {{ $u->signature_image ? '#a8c4e0' : '#a8c4e0' }};border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
+                                    onmouseover="this.style.background='#eaeff5'" onmouseout="this.style.background='{{ $u->signature_image ? '#eaeff5' : '#eaeff5' }}'">
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H9v-1.414a2 2 0 01.586-1.414z"/></svg>
                                 {{ $u->signature_image ? 'Assinatura ✓' : 'Gerar assinatura' }}
                             </button>
@@ -238,7 +238,7 @@
                                            style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
                                 </div>
                                 <button type="submit"
-                                        style="background:#f59e0b;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
+                                        style="background:#1e3a5f;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
                                     Guardar
                                 </button>
                                 <button type="button"
@@ -250,13 +250,13 @@
                         </div>
 
                         {{-- Painel: assinatura digitalizada --}}
-                        <div id="sig-panel-{{ $u->id }}" style="display:none;background:#f5f3ff;border:1px solid #c4b5fd;border-radius:10px;padding:16px 18px;margin-top:10px;">
-                            <div style="font-size:0.78rem;font-weight:700;color:#6d28d9;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em;">Assinatura Digitalizada</div>
+                        <div id="sig-panel-{{ $u->id }}" style="display:none;background:#eaeff5;border:1px solid #a8c4e0;border-radius:10px;padding:16px 18px;margin-top:10px;">
+                            <div style="font-size:0.78rem;font-weight:700;color:#0f1f3d;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em;">Assinatura Digitalizada</div>
                             @if($u->signature_image)
                             <div style="margin-bottom:14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
                                 <div>
                                     <div style="font-size:0.72rem;color:#94a3b8;font-weight:600;margin-bottom:4px;text-transform:uppercase;">Assinatura actual</div>
-                                    <div style="background:#fff;border:1px solid #ddd6fe;border-radius:8px;padding:8px 16px;display:inline-block;">
+                                    <div style="background:#fff;border:1px solid #a8c4e0;border-radius:8px;padding:8px 16px;display:inline-block;">
                                         <img src="{{ $u->signature_image }}" alt="Assinatura de {{ $u->name }}" style="height:48px;max-width:200px;object-fit:contain;display:block;">
                                     </div>
                                 </div>
@@ -270,20 +270,20 @@
                                 </form>
                             </div>
                             @else
-                            <p style="font-size:0.85rem;color:#6d28d9;margin-bottom:12px;">Nenhuma assinatura guardada. Carregue uma imagem PNG/JPG da assinatura manuscrita em papel branco.</p>
+                            <p style="font-size:0.85rem;color:#0f1f3d;margin-bottom:12px;">Nenhuma assinatura guardada. Carregue uma imagem PNG/JPG da assinatura manuscrita em papel branco.</p>
                             @endif
                             <form method="POST" action="{{ route('admin.usuarios.assinatura', $u) }}"
                                   style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
                                 @csrf
                                 <div>
-                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#6d28d9;margin-bottom:4px;">
+                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#0f1f3d;margin-bottom:4px;">
                                         {{ $u->signature_image ? 'Regenerar assinatura (nome a usar)' : 'Nome a usar na assinatura' }}
                                     </label>
                                     <input type="text" name="nome_assinatura" value="{{ $u->name }}" maxlength="100" required
-                                           style="border:1px solid #c4b5fd;border-radius:7px;padding:6px 10px;font-size:0.85rem;background:#fff;">
+                                           style="border:1px solid #a8c4e0;border-radius:7px;padding:6px 10px;font-size:0.85rem;background:#fff;">
                                 </div>
                                 <button type="submit"
-                                        style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
+                                        style="background:#1e3a5f;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
                                     Gerar assinatura
                                 </button>
                                 <button type="button"

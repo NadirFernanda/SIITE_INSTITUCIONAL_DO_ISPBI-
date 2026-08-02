@@ -19,7 +19,7 @@
     @endif
 
     @if(session('error'))
-        <div style="background:#fff3e0;border:1px solid #ffcc80;color:#e65100;padding:12px 18px;border-radius:10px;margin-bottom:20px;">
+        <div style="background:#fff3e0;border:1px solid #ffcc80;color:#F05A28;padding:12px 18px;border-radius:10px;margin-bottom:20px;">
             {{ session('error') }}
         </div>
     @endif
@@ -29,7 +29,7 @@
         <h2 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:0 0 20px;">Carregar Novo Documento</h2>
 
         @if($errors->any())
-            <div style="background:#fff3e0;border:1px solid #ffcc80;color:#e65100;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:0.85rem;">
+            <div style="background:#fff3e0;border:1px solid #ffcc80;color:#F05A28;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:0.85rem;">
                 <strong>Erros:</strong>
                 <ul style="margin:6px 0 0;padding-left:18px;">
                     @foreach($errors->all() as $error)
@@ -64,8 +64,8 @@
             </div>
 
             <button type="submit"
-                style="background:#1565c0;color:#fff;padding:10px 24px;border:none;border-radius:9px;font-size:0.88rem;font-weight:700;cursor:pointer;"
-                onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                style="background:#1e3a5f;color:#fff;padding:10px 24px;border:none;border-radius:9px;font-size:0.88rem;font-weight:700;cursor:pointer;"
+                onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                 Carregar Documento
             </button>
         </form>
@@ -106,7 +106,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        style="background:#fff3e0;color:#e65100;padding:6px 14px;border:none;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;"
+                                        style="background:#fff3e0;color:#F05A28;padding:6px 14px;border:none;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;"
                                         onmouseover="this.style.background='#ffdcc4'" onmouseout="this.style.background='#fff3e0'">
                                         Eliminar
                                     </button>

@@ -4,7 +4,7 @@
 <div style="max-width:820px;margin:0 auto;">
 
     <a href="{{ route('tecnico.candidaturas.index') }}"
-       style="display:inline-flex;align-items:center;gap:5px;color:#0e5c2f;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:22px;">
+       style="display:inline-flex;align-items:center;gap:5px;color:#1e3a5f;font-weight:600;font-size:0.88rem;text-decoration:none;margin-bottom:22px;">
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar à lista
     </a>
@@ -20,8 +20,8 @@
                 {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}
             </span>
             <a href="{{ route('tecnico.candidaturas.comprovativo', $candidatura) }}"
-               style="display:inline-flex;align-items:center;gap:5px;background:#0369a1;color:#fff;border-radius:8px;padding:7px 14px;font-weight:700;font-size:0.84rem;text-decoration:none;"
-               onmouseover="this.style.background='#0284c7'" onmouseout="this.style.background='#0369a1'">
+               style="display:inline-flex;align-items:center;gap:5px;background:#0f1f3d;color:#fff;border-radius:8px;padding:7px 14px;font-weight:700;font-size:0.84rem;text-decoration:none;"
+               onmouseover="this.style.background='#1e3a5f'" onmouseout="this.style.background='#0f1f3d'">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Comprovativo PDF
             </a>
@@ -50,7 +50,7 @@
 
     {{-- Dados Pessoais --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;margin-bottom:18px;">
-        <h2 style="font-size:0.88rem;font-weight:700;color:#0e5c2f;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Pessoais</h2>
+        <h2 style="font-size:0.88rem;font-weight:700;color:#1e3a5f;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Pessoais</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;">
             @php _tc('Nome Completo', $candidatura->nome); @endphp
             @php _tc('Filiação — Pai', $candidatura->filiacao_pai); @endphp
@@ -74,7 +74,7 @@
 
     {{-- Dados Académicos e Socioeconómicos --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;margin-bottom:18px;">
-        <h2 style="font-size:0.88rem;font-weight:700;color:#0e5c2f;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Académicos e Socioeconómicos</h2>
+        <h2 style="font-size:0.88rem;font-weight:700;color:#1e3a5f;margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Dados Académicos e Socioeconómicos</h2>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;">
             @php _tc('Habilitações Literárias', $candidatura->habilitacoes); @endphp
             @php _tc('Escola de Proveniência', $candidatura->escola_origem); @endphp
@@ -107,7 +107,7 @@
     {{-- Nota do Exame (só leitura — lançamento exclusivo do Professor) --}}
     @if($candidatura->nota_exame !== null)
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 22px;margin-bottom:18px;">
-        <h2 style="font-size:0.85rem;font-weight:700;color:#0e7490;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Nota do Exame de Acesso</h2>
+        <h2 style="font-size:0.85rem;font-weight:700;color:#1e3a5f;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Nota do Exame de Acesso</h2>
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
             <div style="background:{{ $candidatura->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};border:1px solid {{ $candidatura->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};border-radius:10px;padding:8px 18px;text-align:center;">
                 <div style="font-size:1.6rem;font-weight:900;color:{{ $candidatura->nota_exame >= 10 ? '#15803d' : '#dc2626' }};">
@@ -129,7 +129,7 @@
 
     {{-- Atualizar Estado --}}
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">
-        <h2 style="font-size:0.9rem;font-weight:700;color:#0e5c2f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Atualizar Estado</h2>
+        <h2 style="font-size:0.9rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;text-transform:uppercase;letter-spacing:0.04em;">Atualizar Estado</h2>
         <form method="POST" action="{{ route('tecnico.candidaturas.status', $candidatura) }}">
             @csrf
             @method('PATCH')
@@ -150,8 +150,8 @@
                           placeholder="Notas visíveis apenas para a equipa técnica...">{{ $candidatura->notas_admin }}</textarea>
             </div>
             <button type="submit"
-                    style="background:#0e5c2f;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-weight:700;cursor:pointer;font-size:0.88rem;"
-                    onmouseover="this.style.background='#14532d'" onmouseout="this.style.background='#0e5c2f'">
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-weight:700;cursor:pointer;font-size:0.88rem;"
+                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                 Guardar
             </button>
         </form>

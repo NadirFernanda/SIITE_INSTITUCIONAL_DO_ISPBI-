@@ -10,7 +10,7 @@
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <a href="{{ route('tecnico.candidaturas.create') }}"
-               style="display:inline-flex;align-items:center;gap:7px;background:#0e5c2f;color:#fff;padding:9px 18px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+               style="display:inline-flex;align-items:center;gap:7px;background:#1e3a5f;color:#fff;padding:9px 18px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
                 Nova Candidatura
             </a>
@@ -33,9 +33,9 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:22px;">
         @php
         $kpis = [
-            ['label'=>'Total',       'value'=>$totais['total'],      'color'=>'#1565c0','bg'=>'#e3f2fd'],
+            ['label'=>'Total',       'value'=>$totais['total'],      'color'=>'#1e3a5f','bg'=>'#eaeff5'],
             ['label'=>'Pendentes',   'value'=>$totais['pendente'],   'color'=>'#b45309','bg'=>'#fef3c7'],
-            ['label'=>'Em Análise',  'value'=>$totais['em_analise'], 'color'=>'#1d4ed8','bg'=>'#dbeafe'],
+            ['label'=>'Em Análise',  'value'=>$totais['em_analise'], 'color'=>'#0f1f3d','bg'=>'#eaeff5'],
             ['label'=>'Aprovadas',   'value'=>$totais['aprovada'],   'color'=>'#15803d','bg'=>'#dcfce7'],
             ['label'=>'Rejeitadas',  'value'=>$totais['rejeitada'],  'color'=>'#b91c1c','bg'=>'#fee2e2'],
         ];
@@ -57,11 +57,11 @@
                 <svg style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35"/></svg>
                 <input type="text" name="q" value="{{ request('q') }}"
                        placeholder="Pesquisar por nome, nº ficha, BI, email, telefone, escola, município, bairro..."
-                       style="width:100%;border:1.5px solid {{ request('q') ? '#0e5c2f' : '#e2e8f0' }};border-radius:10px;padding:10px 14px 10px 38px;font-size:0.92rem;box-sizing:border-box;"
-                       onfocus="this.style.borderColor='#0e5c2f'" onblur="this.style.borderColor=this.value?'#0e5c2f':'#e2e8f0'">
+                       style="width:100%;border:1.5px solid {{ request('q') ? '#1e3a5f' : '#e2e8f0' }};border-radius:10px;padding:10px 14px 10px 38px;font-size:0.92rem;box-sizing:border-box;"
+                       onfocus="this.style.borderColor='#1e3a5f'" onblur="this.style.borderColor=this.value?'#1e3a5f':'#e2e8f0'">
             </div>
             <button type="submit"
-                    style="background:#0e5c2f;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.9rem;white-space:nowrap;display:flex;align-items:center;gap:6px;">
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.9rem;white-space:nowrap;display:flex;align-items:center;gap:6px;">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
                 Pesquisar
             </button>
@@ -161,8 +161,8 @@
                         <td style="padding:13px 16px;color:#64748b;white-space:nowrap;">{{ $c->created_at->format('d/m/Y') }}</td>
                         <td style="padding:13px 16px;text-align:center;">
                             <a href="{{ route('tecnico.candidaturas.show', $c) }}"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#0e5c2f;color:#fff;padding:5px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;"
-                               onmouseover="this.style.background='#14532d'" onmouseout="this.style.background='#0e5c2f'">Ver</a>
+                               style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:5px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;"
+                               onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">Ver</a>
                         </td>
                     </tr>
                     @endforeach

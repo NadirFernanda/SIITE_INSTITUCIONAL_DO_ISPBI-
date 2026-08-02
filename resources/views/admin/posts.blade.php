@@ -27,7 +27,7 @@
 				<td style="padding:8px; border:1px solid #ddd;">{{ $post->titulo }}</td>
 				<td style="padding:8px; border:1px solid #ddd;">{{ $post->conteudo }}</td>
 				<td style="padding:8px; border:1px solid #ddd;">
-					<a href="/admin/posts/{{ $post->id }}/edit" style="background:#2563eb;color:#fff;padding:6px 12px;border-radius:4px;text-decoration:none;margin-right:6px;">Editar</a>
+					<a href="/admin/posts/{{ $post->id }}/edit" style="background:#1e3a5f;color:#fff;padding:6px 12px;border-radius:4px;text-decoration:none;margin-right:6px;">Editar</a>
 					<form action="/admin/posts/{{ $post->id }}" method="POST" style="display:inline-block;">
 						@csrf
 						@method('DELETE')

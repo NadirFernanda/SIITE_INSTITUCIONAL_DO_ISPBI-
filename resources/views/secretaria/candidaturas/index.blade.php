@@ -43,7 +43,7 @@
         @php
             $abaAtiva = request('pagamento', '');
             $abaEstilo = fn($ativa) => $ativa
-                ? 'color:#7c3aed;border-bottom:2px solid #7c3aed;margin-bottom:-2px;'
+                ? 'color:#1e3a5f;border-bottom:2px solid #1e3a5f;margin-bottom:-2px;'
                 : 'color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;';
         @endphp
         <a href="{{ route('secretaria.candidaturas.index', array_filter(['q' => request('q'), 'curso' => request('curso')])) }}"
@@ -84,7 +84,7 @@
                 @endforeach
             </select>
         </div>
-        <button type="submit" style="background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-weight:700;cursor:pointer;font-size:0.9rem;">Pesquisar</button>
+        <button type="submit" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 20px;font-weight:700;cursor:pointer;font-size:0.9rem;">Pesquisar</button>
         @if(request()->hasAny(['q','pagamento','curso']))
         <a href="{{ route('secretaria.candidaturas.index') }}" style="background:#f1f5f9;color:#64748b;border-radius:8px;padding:9px 14px;font-weight:600;font-size:0.88rem;text-decoration:none;">Limpar</a>
         @endif
@@ -110,7 +110,7 @@
             <tbody>
                 @foreach($candidaturas as $c)
                 <tr style="border-bottom:1px solid #f1f5f9;{{ $c->pagamento_confirmado ? '' : 'background:#fffbeb;' }}">
-                    <td style="padding:13px 16px;font-weight:700;color:#7c3aed;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
+                    <td style="padding:13px 16px;font-weight:700;color:#1e3a5f;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td style="padding:13px 16px;">
                         <div style="font-weight:600;color:#1a2332;">{{ $c->nome }}</div>
                         <div style="font-size:0.78rem;color:#64748b;">BI: {{ $c->bi }} · {{ $c->telefone }}</div>
@@ -131,7 +131,7 @@
                             <div style="font-size:0.72rem;color:#94a3b8;margin-top:3px;">{{ $c->pagamento_confirmado_em->format('d/m/Y H:i') }}</div>
                             @endif
                         @else
-                            <span style="background:#fef3c7;color:#d97706;padding:4px 12px;border-radius:20px;font-size:0.76rem;font-weight:700;">
+                            <span style="background:#fef3c7;color:#F05A28;padding:4px 12px;border-radius:20px;font-size:0.76rem;font-weight:700;">
                                 Pendente
                             </span>
                         @endif
@@ -139,7 +139,7 @@
                     <td style="padding:13px 16px;text-align:center;">
                         <div style="display:flex;gap:6px;justify-content:center;align-items:center;">
                             <a href="{{ route('secretaria.candidaturas.show', $c) }}"
-                               style="display:inline-flex;align-items:center;gap:4px;background:#7c3aed;color:#fff;padding:6px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;">
+                               style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:6px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 Ver
                             </a>
                             @if(! $c->pagamento_confirmado)

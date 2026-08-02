@@ -10,8 +10,8 @@
             <p style="color:#64748b;font-size:0.95rem;margin:0;">{{ count($carrosseis) }} slide{{ count($carrosseis) !== 1 ? 's' : '' }} configurado{{ count($carrosseis) !== 1 ? 's' : '' }}</p>
         </div>
         <a href="{{ route('admin.carrossel.create') }}"
-           style="display:inline-flex;align-items:center;gap:8px;background:#1565c0;color:#fff;font-weight:700;font-size:0.95rem;padding:11px 22px;border-radius:10px;text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
-           onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+           style="display:inline-flex;align-items:center;gap:8px;background:#1e3a5f;color:#fff;font-weight:700;font-size:0.95rem;padding:11px 22px;border-radius:10px;text-decoration:none;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
+           onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Novo Slide
         </a>
@@ -19,7 +19,7 @@
 
     {{-- Flash --}}
     @if(session('success') || session('status'))
-    <div style="background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:12px 18px;border-radius:10px;margin-bottom:24px;font-weight:600;display:flex;align-items:center;gap:10px;">
+    <div style="background:#f0fdf4;border:1px solid #86efac;color:#0f1f3d;padding:12px 18px;border-radius:10px;margin-bottom:24px;font-weight:600;display:flex;align-items:center;gap:10px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         {{ session('success') ?? session('status') }}
     </div>
@@ -29,7 +29,7 @@
     <div style="background:#fff;border-radius:16px;box-shadow:0 1px 8px rgba(0,0,0,0.07);padding:64px 32px;text-align:center;">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 16px;display:block;"><rect x="2" y="7" width="20" height="13" rx="2"/><polyline points="2 10 12 17 22 10"/></svg>
         <p style="color:#94a3b8;font-size:1.05rem;margin:0;">Nenhum slide configurado ainda.</p>
-        <a href="{{ route('admin.carrossel.create') }}" style="display:inline-block;margin-top:18px;background:#1565c0;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem;">Criar primeiro slide</a>
+        <a href="{{ route('admin.carrossel.create') }}" style="display:inline-block;margin-top:18px;background:#1e3a5f;color:#fff;font-weight:600;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:0.95rem;">Criar primeiro slide</a>
     </div>
     @else
     <div style="display:grid;gap:14px;">
@@ -49,7 +49,7 @@
             </div>
 
             {{-- Ordem badge --}}
-            <div style="flex-shrink:0;width:36px;height:36px;border-radius:8px;background:#eff6ff;border:1px solid #bfdbfe;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;color:#1d4ed8;">
+            <div style="flex-shrink:0;width:36px;height:36px;border-radius:8px;background:#eaeff5;border:1px solid #c7d2e0;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;color:#0f1f3d;">
                 {{ $carrossel->ordem ?? '–' }}
             </div>
 
@@ -69,7 +69,7 @@
                 @csrf
                 @if($carrossel->publicado)
                 <button type="submit"
-                    style="display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;color:#166534;border:1px solid #86efac;border-radius:20px;padding:4px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;"
+                    style="display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;color:#0f1f3d;border:1px solid #86efac;border-radius:20px;padding:4px 12px;font-size:0.78rem;font-weight:700;cursor:pointer;"
                     onmouseover="this.style.background='#dcfce7'" onmouseout="this.style.background='#f0fdf4'">
                     <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;"></span>Publicado
                 </button>
@@ -85,8 +85,8 @@
             {{-- Actions --}}
             <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
                 <a href="{{ route('admin.carrossel.edit', $carrossel->id) }}" title="Editar"
-                   style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#eff6ff;color:#1d4ed8;text-decoration:none;border:1px solid #bfdbfe;"
-                   onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+                   style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:#eaeff5;color:#0f1f3d;text-decoration:none;border:1px solid #c7d2e0;"
+                   onmouseover="this.style.background='#eaeff5'" onmouseout="this.style.background='#eaeff5'">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 </a>
                 <form action="{{ route('admin.carrossel.destroy', $carrossel->id) }}" method="POST" style="display:inline;"

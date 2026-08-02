@@ -4,13 +4,13 @@
 <div style="max-width:900px;margin:0 auto;">
 
     <a href="{{ route('tecnico.candidaturas.index') }}"
-       style="display:inline-flex;align-items:center;gap:6px;color:#0e5c2f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
+       style="display:inline-flex;align-items:center;gap:6px;color:#1e3a5f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         Voltar à lista
     </a>
 
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:28px;">
-        <h1 style="font-size:1.3rem;font-weight:700;color:#0e5c2f;margin:0 0 4px;">Registar Candidatura</h1>
+        <h1 style="font-size:1.3rem;font-weight:700;color:#1e3a5f;margin:0 0 4px;">Registar Candidatura</h1>
         <p style="color:#64748b;font-size:0.88rem;margin:0 0 24px;">Todos os campos são obrigatórios excepto Telefone 2 e Instituição Laboral (se não trabalhar).</p>
 
         @if($errors->any())
@@ -196,7 +196,7 @@
                     @endforeach
                 </select>
                 <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Os cursos disponíveis são filtrados automaticamente pelo perfil.</p>
-                <div id="tc-perfil-info" style="display:none;margin-top:8px;padding:9px 13px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;font-size:0.8rem;color:#1e40af;line-height:1.5;"></div>
+                <div id="tc-perfil-info" style="display:none;margin-top:8px;padding:9px 13px;background:#eaeff5;border:1px solid #c7d2e0;border-radius:7px;font-size:0.8rem;color:#0f1f3d;line-height:1.5;"></div>
                 @error('perfil')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
             </div>
 
@@ -296,8 +296,8 @@
             </div>
 
             <button type="submit"
-                    style="background:#0e5c2f;color:#fff;border:none;border-radius:10px;padding:11px 28px;font-weight:700;cursor:pointer;font-size:0.9rem;"
-                    onmouseover="this.style.background='#14532d'" onmouseout="this.style.background='#0e5c2f'">
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:11px 28px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                 Registar Candidatura
             </button>
         </form>

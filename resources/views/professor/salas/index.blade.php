@@ -23,7 +23,7 @@
         @foreach($salas as $sala)
         <a href="{{ route('professor.salas.show', $sala) }}"
            style="background:#fff;border:2px solid #e2e8f0;border-radius:14px;padding:20px;text-decoration:none;transition:all 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;"
-           onmouseover="this.style.borderColor='#7c3aed';this.style.boxShadow='0 4px 12px rgba(124,58,237,0.15)';this.style.transform='translateY(-2px)'"
+           onmouseover="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 4px 12px rgba(124,58,237,0.15)';this.style.transform='translateY(-2px)'"
            onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none';this.style.transform='translateY(0)'">
 
             <div>
@@ -52,14 +52,14 @@
 
                 {{-- Barra de progresso --}}
                 <div style="width:100%;height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden;">
-                    <div style="width:{{ $sala->percentual_conclusao }}%;height:100%;background:linear-gradient(90deg, #7c3aed, #6d28d9);transition:width 0.3s ease;"></div>
+                    <div style="width:{{ $sala->percentual_conclusao }}%;height:100%;background:linear-gradient(90deg, #1e3a5f, #0f1f3d);transition:width 0.3s ease;"></div>
                 </div>
                 <p style="font-size:0.72rem;color:#94a3b8;margin:6px 0 0;text-align:right;">{{ $sala->percentual_conclusao }}% concluído</p>
             </div>
 
             {{-- Botão de ação --}}
             <div style="margin-top:14px;padding-top:14px;border-top:1px solid #f1f5f9;">
-                <span style="display:inline-flex;align-items:center;gap:6px;background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe;border-radius:8px;padding:8px 14px;font-size:0.85rem;font-weight:700;">
+                <span style="display:inline-flex;align-items:center;gap:6px;background:#eaeff5;color:#0f1f3d;border:1px solid #a8c4e0;border-radius:8px;padding:8px 14px;font-size:0.85rem;font-weight:700;">
                     Abrir Pauta
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 </span>

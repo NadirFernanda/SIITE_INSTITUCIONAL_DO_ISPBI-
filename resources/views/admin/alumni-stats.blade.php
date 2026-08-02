@@ -8,7 +8,7 @@
     <div style="margin-bottom:28px;">
         <a href="{{ route('admin.alumni') }}"
            style="display:inline-flex;align-items:center;gap:6px;color:#64748b;font-size:0.88rem;text-decoration:none;margin-bottom:12px;"
-           onmouseover="this.style.color='#1565c0'" onmouseout="this.style.color='#64748b'">
+           onmouseover="this.style.color='#1e3a5f'" onmouseout="this.style.color='#64748b'">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
             Voltar à lista
         </a>
@@ -40,7 +40,7 @@
                                value="{{ old('alumni_count', $stats->alumni_count ?? 0) }}"
                                min="0" required
                                style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;box-sizing:border-box;outline:none;"
-                               onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                               onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                                onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                     </div>
 
@@ -50,7 +50,7 @@
                                value="{{ old('employability_percentage', $stats->employability_percentage ?? 0) }}"
                                min="0" max="100" required
                                style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;box-sizing:border-box;outline:none;"
-                               onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                               onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                                onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                     </div>
 
@@ -60,7 +60,7 @@
                                value="{{ old('countries_count', $stats->countries_count ?? 0) }}"
                                min="0" required
                                style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;box-sizing:border-box;outline:none;"
-                               onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                               onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                                onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                     </div>
 
@@ -70,7 +70,7 @@
                                value="{{ old('companies_founded', $stats->companies_founded ?? 0) }}"
                                min="0" required
                                style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;box-sizing:border-box;outline:none;"
-                               onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                               onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                                onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                     </div>
 
@@ -78,8 +78,8 @@
 
                 <div style="margin-top:28px;padding-top:20px;border-top:1px solid #f1f5f9;">
                     <button type="submit"
-                        style="background:#1565c0;color:#fff;padding:11px 28px;border-radius:10px;font-weight:600;font-size:0.95rem;border:none;cursor:pointer;"
-                        onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                        style="background:#1e3a5f;color:#fff;padding:11px 28px;border-radius:10px;font-weight:600;font-size:0.95rem;border:none;cursor:pointer;"
+                        onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                         Salvar Indicadores
                     </button>
                 </div>

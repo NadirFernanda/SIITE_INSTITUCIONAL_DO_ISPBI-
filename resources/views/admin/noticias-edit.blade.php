@@ -46,7 +46,7 @@
                     </label>
                     <input type="text" name="titulo" id="titulo" value="{{ old('titulo', $noticia->titulo) }}" required
                            style="width:100%;box-sizing:border-box;border:1px solid {{ $errors->has('titulo') ? '#fca5a5' : '#d1d5db' }};border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;background:#fff;"
-                           onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                           onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                 </div>
 
@@ -57,7 +57,7 @@
                     </label>
                     <textarea name="texto" id="texto" rows="8" required
                               style="width:100%;box-sizing:border-box;border:1px solid {{ $errors->has('texto') ? '#fca5a5' : '#d1d5db' }};border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;resize:vertical;outline:none;background:#fff;font-family:inherit;"
-                              onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                              onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                               onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">{{ old('texto', $noticia->texto) }}</textarea>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     </label>
                     <input type="date" name="data" id="data" value="{{ old('data', \Carbon\Carbon::parse($noticia->data)->format('Y-m-d')) }}" required
                            style="width:100%;box-sizing:border-box;border:1px solid {{ $errors->has('data') ? '#fca5a5' : '#d1d5db' }};border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;background:#fff;"
-                           onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                           onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                 </div>
 
@@ -88,7 +88,7 @@
                     </label>
                     <select name="institucional" id="institucional"
                             style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;background:#fff;appearance:auto;"
-                            onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                            onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                             onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                         <option value="0" @if(!old('institucional', $noticia->institucional)) selected @endif>Notícia geral</option>
                         <option value="1" @if(old('institucional', $noticia->institucional)) selected @endif>Institucional</option>
@@ -98,11 +98,11 @@
                 {{-- Publicada --}}
                 <div style="grid-column:1/-1;">
                     <label style="display:inline-flex;align-items:center;gap:10px;cursor:pointer;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;background:#f8fafc;width:100%;box-sizing:border-box;"
-                           onmouseover="this.style.background='#eff6ff';this.style.borderColor='#1565c0'"
+                           onmouseover="this.style.background='#eaeff5';this.style.borderColor='#1e3a5f'"
                            onmouseout="this.style.background='#f8fafc';this.style.borderColor='#d1d5db'">
                         <input type="checkbox" name="publicada" value="1"
                                {{ old('publicada', $noticia->publicada ? '1' : '0') === '1' ? 'checked' : '' }}
-                               style="width:18px;height:18px;accent-color:#1565c0;cursor:pointer;">
+                               style="width:18px;height:18px;accent-color:#1e3a5f;cursor:pointer;">
                         <span style="font-size:0.9rem;font-weight:600;color:#374151;">Publicada</span>
                         <span style="font-size:0.8rem;color:#64748b;margin-left:4px;">— visível no site público</span>
                     </label>
@@ -128,18 +128,18 @@
                         <img src="{{ asset('storage/' . $noticia->imagem) }}" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:6px;flex-shrink:0;">
                         <div style="flex:1;min-width:0;">
                             <p style="font-size:0.8rem;color:#374151;font-weight:600;margin:0 0 2px;">Imagem atual</p>
-                            <a href="{{ asset('storage/' . $noticia->imagem) }}" target="_blank" style="font-size:0.78rem;color:#1565c0;text-decoration:none;">Ver em tamanho real</a>
+                            <a href="{{ asset('storage/' . $noticia->imagem) }}" target="_blank" style="font-size:0.78rem;color:#1e3a5f;text-decoration:none;">Ver em tamanho real</a>
                         </div>
                     </div>
                     @endif
                     <label for="imagem"
                            style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:18px 14px;cursor:pointer;background:#fafafa;"
-                           onmouseover="this.style.borderColor='#1565c0';this.style.background='#eff6ff'"
+                           onmouseover="this.style.borderColor='#1e3a5f';this.style.background='#eaeff5'"
                            onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                         <span id="imagem-label" style="font-size:0.8rem;color:#64748b;text-align:center;">{{ $noticia->imagem ? 'Substituir imagem' : 'Selecionar imagem' }}<br><span style="color:#94a3b8;font-size:0.76rem;">JPG, PNG — máx. 2 MB</span></span>
                         <input type="file" name="imagem" id="imagem" accept="image/*" style="display:none;"
-                               onchange="document.getElementById('imagem-label').innerHTML = this.files[0] ? '<strong style=\'color:#1565c0\'>' + this.files[0].name + '</strong>' : '{{ $noticia->imagem ? 'Substituir imagem' : 'Selecionar imagem' }}'">
+                               onchange="document.getElementById('imagem-label').innerHTML = this.files[0] ? '<strong style=\'color:#1e3a5f\'>' + this.files[0].name + '</strong>' : '{{ $noticia->imagem ? 'Substituir imagem' : 'Selecionar imagem' }}'">
                     </label>
                 </div>
 
@@ -156,17 +156,17 @@
                             <span style="font-size:0.72rem;font-weight:700;color:#dc2626;background:#fff5f5;padding:2px 6px;border-radius:4px;flex-shrink:0;">PDF</span>
                             <span style="flex:1;font-size:0.85rem;color:#374151;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">documento.pdf</span>
                             <a href="{{ asset('storage/' . $noticia->pdf) }}" target="_blank"
-                               style="font-size:0.78rem;color:#1565c0;text-decoration:none;flex-shrink:0;">Abrir</a>
+                               style="font-size:0.78rem;color:#1e3a5f;text-decoration:none;flex-shrink:0;">Abrir</a>
                         </div>
                         @endif
                         {{-- Documentos novos --}}
                         @foreach($noticia->documentos as $doc)
                         <div style="display:flex;align-items:center;gap:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;">
                             @php $ext = $doc->extensao(); $isWord = in_array($ext, ['DOC','DOCX']); @endphp
-                            <span style="font-size:0.72rem;font-weight:700;color:{{ $isWord ? '#2563eb' : '#dc2626' }};background:{{ $isWord ? '#eff6ff' : '#fff5f5' }};padding:2px 6px;border-radius:4px;flex-shrink:0;">{{ $ext }}</span>
+                            <span style="font-size:0.72rem;font-weight:700;color:{{ $isWord ? '#1e3a5f' : '#dc2626' }};background:{{ $isWord ? '#eaeff5' : '#fff5f5' }};padding:2px 6px;border-radius:4px;flex-shrink:0;">{{ $ext }}</span>
                             <span style="flex:1;font-size:0.85rem;color:#374151;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="{{ $doc->nome_original }}">{{ $doc->nome_original }}</span>
                             <a href="{{ asset('storage/' . $doc->caminho) }}" target="_blank"
-                               style="font-size:0.78rem;color:#1565c0;text-decoration:none;flex-shrink:0;margin-right:8px;">Abrir</a>
+                               style="font-size:0.78rem;color:#1e3a5f;text-decoration:none;flex-shrink:0;margin-right:8px;">Abrir</a>
                             {{-- form atributo aponta para form FORA do form principal (evita aninhamento) --}}
                             <button type="submit" form="del-doc-{{ $doc->id }}"
                                     onclick="return confirm('Remover este documento?')"
@@ -185,7 +185,7 @@
                     </label>
                     <label for="documentos"
                            style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #d1d5db;border-radius:10px;padding:18px 14px;cursor:pointer;background:#fafafa;"
-                           onmouseover="this.style.borderColor='#7c3aed';this.style.background='#f5f3ff'"
+                           onmouseover="this.style.borderColor='#1e3a5f';this.style.background='#eaeff5'"
                            onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                         <span id="docs-label" style="font-size:0.8rem;color:#64748b;text-align:center;">Clique para adicionar documentos<br><span style="color:#94a3b8;font-size:0.76rem;">PDF, DOC, DOCX — máx. 10 MB cada</span></span>
@@ -204,12 +204,12 @@
             var preview = document.getElementById('docs-preview');
             preview.innerHTML = '';
             if (input.files.length > 0) {
-                label.innerHTML = '<strong style="color:#7c3aed">' + input.files.length + ' ficheiro(s) selecionado(s)</strong>';
+                label.innerHTML = '<strong style="color:#1e3a5f">' + input.files.length + ' ficheiro(s) selecionado(s)</strong>';
                 Array.from(input.files).forEach(function(f) {
                     var ext = f.name.split('.').pop().toUpperCase();
                     var isWord = ext === 'DOC' || ext === 'DOCX';
-                    var color = isWord ? '#2563eb' : '#dc2626';
-                    var bg = isWord ? '#eff6ff' : '#fff5f5';
+                    var color = isWord ? '#1e3a5f' : '#dc2626';
+                    var bg = isWord ? '#eaeff5' : '#fff5f5';
                     preview.innerHTML += '<div style="display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 10px;">'
                         + '<span style="font-size:0.72rem;font-weight:700;color:' + color + ';background:' + bg + ';padding:2px 6px;border-radius:4px;flex-shrink:0;">' + ext + '</span>'
                         + '<span style="font-size:0.82rem;color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + f.name + '</span>'
@@ -230,8 +230,8 @@
                 Cancelar
             </a>
             <button type="submit"
-                    style="display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:8px;background:#1565c0;color:#fff;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(21,101,192,0.25);transition:background 0.15s;"
-                    onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
+                    style="display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:8px;background:#1e3a5f;color:#fff;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(21,101,192,0.25);transition:background 0.15s;"
+                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                 Salvar Alterações
             </button>
