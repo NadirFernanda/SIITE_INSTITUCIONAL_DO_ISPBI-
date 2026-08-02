@@ -186,13 +186,11 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
     {{-- ASSINATURAS: Conferiu (esq) + Candidato(a) (dir) --}}
     <div class="sigs">
         <div class="sig">
-            @if($sigImg)
-                <div style="height:14mm;display:flex;align-items:flex-end;justify-content:center;margin-bottom:2mm;">
-                    <img src="{{ $sigImg }}" style="max-height:14mm;max-width:55mm;object-fit:contain;" alt="Assinatura">
-                </div>
-            @else
-                <div class="sig-line"></div>
-            @endif
+            <div class="sig-line">
+                @if($sigImg)
+                    <img src="{{ $sigImg }}" style="display:block;margin:0 auto;max-height:9mm;max-width:55mm;object-fit:contain;" alt="Assinatura">
+                @endif
+            </div>
             <div class="sig-label">{{ $assinante ? $assinante->name : 'Conferiu' }}</div>
             @if($assinante)
             <div style="font-size:7.5pt;color:#7c3aed;">DAAC — ISP-Bié</div>
