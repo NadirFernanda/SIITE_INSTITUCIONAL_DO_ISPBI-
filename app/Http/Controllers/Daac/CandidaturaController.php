@@ -234,6 +234,7 @@ class CandidaturaController extends Controller
         $request->validate([
             'sala_id' => 'nullable|exists:salas,id',
             'curso'   => 'nullable|string|max:255',
+            'horario' => ['nullable', \Illuminate\Validation\Rule::in(\App\Models\Sala::$horarios)],
         ]);
 
         $query = Candidatura::where('pagamento_confirmado', true)
@@ -247,6 +248,14 @@ class CandidaturaController extends Controller
             $query->where('curso', $request->input('curso'));
         }
 
+        // Imprimir todas as salas de um horário de uma vez — para o DAAC ir
+        // imprimindo horário a horário, em vez de sala a sala.
+        if ($request->filled('horario')) {
+            $query->whereHas('sala', function ($q) use ($request) {
+                $q->where('horario', $request->input('horario'));
+            });
+        }
+
         $totalNoFiltro = (clone $query)->count();
 
         // Cada folha só pode ser impressa uma vez — seja individualmente ou em lote.
@@ -254,7 +263,12 @@ class CandidaturaController extends Controller
         // individual), para nunca sair uma segunda via da mesma folha de exame.
         $query->whereNull('folha_impressa_em');
 
-        $candidaturas = $query->orderBy('numero_lugar')->get();
+        // Agrupado por sala (nome) e depois por lugar — para um lote que abranja
+        // várias salas do mesmo horário sair organizado sala a sala na impressão,
+        // em vez de intercalado (numero_lugar não é único entre salas diferentes).
+        $candidaturas = $query->with('sala')->get()->sortBy(function ($c) {
+            return sprintf('%s|%05d', $c->sala?->nome ?? '', $c->numero_lugar ?? 0);
+        })->values();
 
         if ($candidaturas->isEmpty()) {
             $mensagem = $totalNoFiltro > 0
@@ -280,9 +294,13 @@ class CandidaturaController extends Controller
         $filtro = '';
         if ($request->filled('sala_id')) {
             $sala = \App\Models\Sala::find($request->input('sala_id'));
-            $filtro = '-sala-' . \Str::slug($sala->nome);
-        } elseif ($request->filled('curso')) {
-            $filtro = '-curso-' . \Str::slug($request->input('curso'));
+            $filtro .= '-sala-' . \Str::slug($sala->nome);
+        }
+        if ($request->filled('curso')) {
+            $filtro .= '-curso-' . \Str::slug($request->input('curso'));
+        }
+        if ($request->filled('horario')) {
+            $filtro .= '-horario-' . \Str::slug($request->input('horario'));
         }
 
         // Marcar todas como impressas ANTES de devolver o PDF, para nunca poderem

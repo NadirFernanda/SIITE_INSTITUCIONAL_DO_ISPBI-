@@ -57,11 +57,21 @@
         </div>
         <form method="GET" action="{{ route('daac.candidaturas.folhas-prova-lote') }}" style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
             <div style="flex:1;min-width:180px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#92400e;margin-bottom:5px;">Horário (opcional)</label>
+                <select name="horario" style="width:100%;border:1px solid #fca5a5;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
+                    <option value="">Todos os horários</option>
+                    @foreach(\App\Models\Sala::$horarios as $h)
+                    <option value="{{ $h }}" {{ request('horario') === $h ? 'selected' : '' }}>{{ $h }}</option>
+                    @endforeach
+                </select>
+                <p style="font-size:0.72rem;color:#991b1b;margin-top:4px;">Gera as folhas de todas as salas desse horário de uma vez.</p>
+            </div>
+            <div style="flex:1;min-width:180px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#92400e;margin-bottom:5px;">Sala (opcional)</label>
                 <select name="sala_id" style="width:100%;border:1px solid #fca5a5;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
                     <option value="">Todas as salas</option>
                     @foreach(\App\Models\Sala::ordenadaPorHorario()->get() as $sala)
-                    <option value="{{ $sala->id }}">{{ $sala->nome }}</option>
+                    <option value="{{ $sala->id }}">{{ $sala->nome }}{{ $sala->horario ? ' — ' . $sala->horario : '' }}</option>
                     @endforeach
                 </select>
             </div>
