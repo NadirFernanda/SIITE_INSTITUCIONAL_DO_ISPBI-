@@ -149,47 +149,54 @@ class SalaController extends Controller
 
         // Fila de salas com espaço disponível (indexed para controle)
         $salaQueue = $salas->map(fn($s) => [
-            'id'           => $s->id,
-            'capacidade'   => $s->capacidade,
-            'horario'      => $s->horario,
-            'ocupado'      => 0,
-            'periodo_atual'=> null, // período ao qual a sala está actualmente afecta (evita misturar regular/pós-laboral na mesma sala)
+            'id'         => $s->id,
+            'capacidade' => $s->capacidade,
+            'horario'    => $s->horario,
+            'ocupado'    => 0,
+            'curso_atual'=> null, // curso ao qual a sala está reservada nesta distribuição
         ])->values()->toArray();
 
         $horariosPorPeriodo = Sala::$horariosPorPeriodo;
 
-        // Uma sala só serve para o período pedido se: não tiver horário fixo
-        // definido (compatível com qualquer período), ou o horário definido
-        // pertencer ao período em causa; e não pode já estar a servir outro período.
-        $compativel = function (array $sala, string $periodo) use ($horariosPorPeriodo) {
+        // REGRA CRÍTICA: numa sala só pode haver candidatos de UM curso por horário —
+        // nunca misturar cursos diferentes na mesma sala. Uma sala só serve este grupo se:
+        // 1) não tiver horário fixo definido, ou o horário pertencer ao período pedido; e
+        // 2) ainda não estiver reservada para outro curso (só pode ser reservada para
+        //    o mesmo curso deste grupo, ou estar completamente livre).
+        $compativel = function (array $sala, string $curso, string $periodo) use ($horariosPorPeriodo) {
             if ($sala['horario'] && isset($horariosPorPeriodo[$periodo])
                 && !in_array($sala['horario'], $horariosPorPeriodo[$periodo], true)) {
                 return false;
             }
-            if ($sala['periodo_atual'] !== null && $sala['periodo_atual'] !== $periodo) {
+            if ($sala['curso_atual'] !== null && $sala['curso_atual'] !== $curso) {
                 return false;
             }
             return true;
         };
 
         $ponteiros = []; // um índice de avanço por período — cada período percorre a fila de salas de forma independente
+        $naoAtribuidos = []; // candidatos que não couberam em nenhuma sala compatível/exclusiva
 
         foreach ($grupos as $chave => $candidatos) {
-            [, $periodo] = explode('|||', $chave);
+            [$curso, $periodo] = explode('|||', $chave);
             $idx   = $ponteiros[$periodo] ?? 0;
             $lugar = 1; // reinicia numeração em cada sala para este grupo
 
             foreach ($candidatos as $candidato) {
-                // Avança até encontrar uma sala com espaço e compatível com o período (manhã/tarde)
+                // Avança até encontrar uma sala com espaço, do período certo e
+                // ainda não reservada para outro curso
                 while ($idx < count($salaQueue) && (
                         $salaQueue[$idx]['ocupado'] >= $salaQueue[$idx]['capacidade']
-                        || !$compativel($salaQueue[$idx], $periodo)
+                        || !$compativel($salaQueue[$idx], $curso, $periodo)
                     )) {
                     $idx++;
                     $lugar = 1;
                 }
 
-                if ($idx >= count($salaQueue)) break; // segurança — sem salas compatíveis/livres
+                if ($idx >= count($salaQueue)) {
+                    $naoAtribuidos[] = $chave;
+                    continue; // sem salas livres/exclusivas para este curso+período
+                }
 
                 Candidatura::where('id', $candidato->id)->update([
                     'sala_id'      => $salaQueue[$idx]['id'],
@@ -197,19 +204,19 @@ class SalaController extends Controller
                 ]);
 
                 $salaQueue[$idx]['ocupado']++;
-                $salaQueue[$idx]['periodo_atual'] = $periodo;
+                $salaQueue[$idx]['curso_atual'] = $curso;
                 $lugar++;
             }
 
-            // Nota: não força avanço para uma sala nova ao terminar o grupo —
-            // isso desperdiçaria lugares livres numa sala parcialmente ocupada.
-            // A sala só é considerada esgotada para este período quando ocupado>=capacidade
-            // ou o horário não é compatível (ver $compativel); os exports/PDF já agrupam
-            // os candidatos de uma sala por curso+período em sub-tabelas separadas.
             $ponteiros[$periodo] = $idx;
         }
 
         $atribuidos = Candidatura::whereNotNull('sala_id')->count();
+
+        if (!empty($naoAtribuidos)) {
+            $resumo = collect($naoAtribuidos)->countBy()->map(fn($n, $g) => str_replace('|||', ' — ', $g) . " ({$n})")->implode('; ');
+            \Log::warning("Distribuição: candidatos sem sala por falta de salas exclusivas disponíveis: {$resumo}");
+        }
 
         // --- Sincronizar disciplinas do curso para cada sala ---
         try {
@@ -252,11 +259,21 @@ class SalaController extends Controller
             \Log::error('Erro ao sincronizar disciplinas para salas: ' . $e->getMessage());
         }
 
-        AuditLog::registar('distribuiu_salas', null, null,
-            "{$atribuidos} candidatos distribuídos por {$salaIdx} sala(s)");
+        $totalSalasUsadas = $salasAssigned->count();
 
-        return redirect()->route('admin.salas.index')
-            ->with('success', "{$atribuidos} candidatos distribuídos por " . ($salaIdx) . " sala(s).");
+        AuditLog::registar('distribuiu_salas', null, null,
+            "{$atribuidos} candidatos distribuídos por {$totalSalasUsadas} sala(s)");
+
+        $mensagem = "{$atribuidos} candidatos distribuídos por {$totalSalasUsadas} sala(s).";
+        if (!empty($naoAtribuidos)) {
+            $semSalaCount = $totalCandidatos - $atribuidos;
+            $mensagem .= " ATENÇÃO: {$semSalaCount} candidato(s) ficaram SEM sala — não há salas suficientes para "
+                . "evitar misturar cursos diferentes na mesma sala/horário ({$resumo}). Adicione mais salas/horários "
+                . "e distribua novamente.";
+            return redirect()->route('admin.salas.index')->with('error', $mensagem);
+        }
+
+        return redirect()->route('admin.salas.index')->with('success', $mensagem);
     }
 
     public function limpar()
