@@ -196,7 +196,7 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
             </div>
             <div class="sig-label">{{ $assinante ? $assinante->name : 'Conferiu' }}</div>
             @if($assinante)
-            <div style="font-size:7.5pt;color:#7c3aed;">DAAC — ISP-Bié</div>
+            <div style="font-size:7.5pt;color:#555;">DAAC — ISP-Bié</div>
             @else
             <div style="height:12pt;"></div>
             @endif
@@ -207,7 +207,6 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
                 <img src="{{ $candidatoSigImg }}" style="display:block;margin:0 auto;max-height:9mm;max-width:55mm;object-fit:contain;" alt="Assinatura do candidato">
             </div>
             <div class="sig-label">Candidato (a)</div>
-            <div style="font-size:8pt;color:#555;font-style:italic;margin-top:2mm;">{{ mb_strtoupper($candidatura->nome, 'UTF-8') }}</div>
         </div>
     </div>
 

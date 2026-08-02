@@ -30,7 +30,19 @@
             <div style="font-size:1.8rem;font-weight:800;color:#1565c0;line-height:1;">{{ $totais['total'] }}</div>
             <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Total</div>
         </div>
+        <a href="{{ route('daac.candidaturas.index', array_merge(request()->except('sem_comprovativo'), ['sem_comprovativo' => 1])) }}"
+           style="background:#fff;border:1px solid {{ request()->boolean('sem_comprovativo') ? '#dc2626' : '#e2e8f0' }};border-radius:14px;padding:16px 18px;text-align:center;text-decoration:none;display:block;">
+            <div style="font-size:1.8rem;font-weight:800;color:#dc2626;line-height:1;">{{ $totais['sem_comprovativo'] }}</div>
+            <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Comprovativo não gerado</div>
+        </a>
     </div>
+
+    @if(request()->boolean('sem_comprovativo'))
+    <div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:10px 18px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <span>A mostrar apenas candidatos cujo comprovativo ainda não foi gerado/descarregado por ninguém.</span>
+        <a href="{{ route('daac.candidaturas.index', request()->except('sem_comprovativo')) }}" style="color:#b91c1c;font-weight:700;text-decoration:underline;white-space:nowrap;">Limpar filtro</a>
+    </div>
+    @endif
 
     {{-- Painel de Impressão em Lote --}}
     <div style="background:linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);border:1.5pt solid #f87171;border-radius:14px;padding:16px 20px;margin-bottom:22px;">
@@ -71,6 +83,9 @@
     {{-- Filtros --}}
     <form method="GET" action="{{ route('daac.candidaturas.index') }}"
           style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+        @if(request()->boolean('sem_comprovativo'))
+        <input type="hidden" name="sem_comprovativo" value="1">
+        @endif
         <div style="flex:1;min-width:200px;position:relative;">
             <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#94a3b8;" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Nome, BI ou n.º ficha..."

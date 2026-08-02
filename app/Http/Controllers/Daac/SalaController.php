@@ -6,8 +6,6 @@ use App\Exports\SalaExameExport;
 use App\Http\Controllers\Controller;
 use App\Models\Sala;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SalaController extends Controller
@@ -18,60 +16,27 @@ class SalaController extends Controller
             ->withCount(['candidaturas' => function ($query) {
                 $query->where('pagamento_confirmado', true);
             }])
+            ->withCount(['candidaturas as candidaturas_impressas_count' => function ($query) {
+                $query->where('pagamento_confirmado', true)->whereNotNull('folha_impressa_em');
+            }])
             ->orderBy('nome')
             ->get()
             ->filter(fn($sala) => $sala->candidaturas_count > 0);
-        
+
         return view('daac.salas.index', compact('salas'));
     }
 
     public function show(Sala $sala)
     {
+        // A geração/impressão das folhas de prova desta sala usa o mesmo mecanismo
+        // por-candidato (candidaturas.folha_impressa_em/_por) da impressão individual
+        // — ver Daac\CandidaturaController::downloadFolhasProvaLote(). Isto garante
+        // que cada folha só é impressa uma vez, quer seja por sala, quer seja
+        // individualmente.
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
             ->orderBy('numero_lugar')
             ->get();
-
-        // Se as folhas ainda não foram geradas, gerar e guardar um PDF da sala
-        if (!$sala->folhas_geradas_em) {
-            $html = '';
-            foreach ($candidaturas as $candidatura) {
-                $view = \View::make('pdf.folha-prova', compact('candidatura'))->render();
-                $html .= $view . '<div style="page-break-after: always;"></div>';
-            }
-
-            try {
-                $pdf = Pdf::loadHTML($html)
-                          ->setPaper('a4', 'portrait')
-                          ->setOption('margin-top', 0)
-                          ->setOption('margin-bottom', 0)
-                          ->setOption('margin-left', 0)
-                          ->setOption('margin-right', 0);
-
-                $bytes = $pdf->output();
-                $path = "folhas/sala-{$sala->id}.pdf";
-                Storage::put($path, $bytes);
-
-                // Marcar sala como gerada
-                $sala->update([
-                    'folhas_geradas_por' => Auth::id(),
-                    'folhas_geradas_em'  => now(),
-                ]);
-
-                // Registrar auditoria
-                if (class_exists('\App\Models\AuditLog')) {
-                    \App\Models\AuditLog::registar('gerou_folhas_sala', 'sala', $sala->id,
-                        "Gerou folhas de prova para sala {$sala->nome} ({$sala->id}) — Candidatos: {$candidaturas->count()}");
-                }
-
-            } catch (\Throwable $e) {
-                \Log::error('Falha ao gerar folhas de prova da sala: ' . $e->getMessage());
-                // Não interromper a visualização — apenas logar
-            }
-
-            // Re-load sala to have fresh timestamps
-            $sala->refresh();
-        }
 
         return view('daac.salas.show', compact('sala', 'candidaturas'));
     }

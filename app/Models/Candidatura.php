@@ -23,6 +23,8 @@ class Candidatura extends Model
         'sala_id', 'numero_lugar', 'codigo_exame',
         'assinado_por', 'assinado_em', 'assinatura_codigo',
         'nota_exame', 'nota_lancada_por', 'nota_lancada_em',
+        'folha_impressa_por', 'folha_impressa_em',
+        'comprovativo_gerado_por', 'comprovativo_gerado_em',
     ];
 
     protected $casts = [
@@ -37,6 +39,8 @@ class Candidatura extends Model
         'nota_exame'       => 'float',
         'nota_lancada_em'  => 'datetime',
         'assinado_em'      => 'datetime',
+        'folha_impressa_em'       => 'datetime',
+        'comprovativo_gerado_em'  => 'datetime',
         'created_at'       => 'datetime',
         'updated_at'       => 'datetime',
     ];

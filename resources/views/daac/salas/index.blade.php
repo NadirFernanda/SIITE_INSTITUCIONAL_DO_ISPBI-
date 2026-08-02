@@ -50,17 +50,20 @@
                         @endif
                     </td>
                     <td style="padding:14px 20px;">
-                        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
-                            @if($sala->folhas_geradas_em)
+                        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center;">
+                            @if($sala->candidaturas_count > 0 && $sala->candidaturas_impressas_count === $sala->candidaturas_count)
                                 <span style="background:#f1f5f9;color:#64748b;padding:7px 12px;border-radius:7px;font-size:0.85rem;font-weight:600;display:inline-flex;align-items:center;">
-                                    As folhas dessa sala já foram geradas em {{ $sala->folhas_geradas_em?->format('d/m/Y H:i') }}
+                                    Todas as {{ $sala->candidaturas_count }} folhas já impressas
                                 </span>
-                                <a href="{{ route('daac.salas.pdf', $sala) }}" title="Download PDF gerado"
-                                   style="background:#475569;color:#fff;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;">Download</a>
-                            @else
-                                <a href="{{ route('daac.salas.show', $sala) }}" title="Ver sala e gerar folhas"
-                                   style="background:#7c3aed;color:#fff;padding:6px 14px;border-radius:7px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;">Ver</a>
+                            @elseif($sala->candidaturas_count > 0)
+                                <a href="{{ route('daac.candidaturas.folhas-prova-lote', ['sala_id' => $sala->id]) }}"
+                                   title="Gerar folhas de prova por imprimir desta sala"
+                                   style="background:#dc2626;color:#fff;padding:6px 14px;border-radius:7px;font-size:0.85rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;">
+                                    Gerar Folhas ({{ $sala->candidaturas_count - $sala->candidaturas_impressas_count }} por imprimir)
+                                </a>
                             @endif
+                            <a href="{{ route('daac.salas.show', $sala) }}" title="Ver sala"
+                               style="background:#7c3aed;color:#fff;padding:6px 14px;border-radius:7px;font-size:0.9rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;">Ver</a>
                         </div>
                     </td>
                 </tr>

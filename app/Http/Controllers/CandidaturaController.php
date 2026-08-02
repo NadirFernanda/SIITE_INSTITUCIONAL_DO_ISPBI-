@@ -196,6 +196,13 @@ class CandidaturaController extends Controller
 
         app('translator')->setLocale('pt');
 
+        if (! $candidatura->comprovativo_gerado_em) {
+            $candidatura->forceFill([
+                'comprovativo_gerado_por' => auth()->id(),
+                'comprovativo_gerado_em'  => now(),
+            ])->save();
+        }
+
         $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))
                   ->setPaper('a4', 'portrait');
 

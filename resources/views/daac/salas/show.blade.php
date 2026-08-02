@@ -43,6 +43,30 @@
         </div>
     </div>
 
+    @php
+        $totalCandidatos = $candidaturas->count();
+        $impressas       = $candidaturas->whereNotNull('folha_impressa_em')->count();
+    @endphp
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+            <strong style="color:#1a2332;">Folhas de Prova desta Sala</strong>
+            <p style="color:#64748b;font-size:0.85rem;margin:2px 0 0;">
+                {{ $impressas }} de {{ $totalCandidatos }} folhas já impressas — cada folha só pode ser impressa uma vez.
+            </p>
+        </div>
+        @if($totalCandidatos > 0 && $impressas === $totalCandidatos)
+            <span style="background:#f1f5f9;color:#64748b;padding:8px 16px;border-radius:8px;font-size:0.85rem;font-weight:600;">
+                Todas as folhas já foram impressas
+            </span>
+        @elseif($totalCandidatos > 0)
+            <a href="{{ route('daac.candidaturas.folhas-prova-lote', ['sala_id' => $sala->id]) }}"
+               style="display:inline-flex;align-items:center;gap:6px;background:#dc2626;color:#fff;padding:9px 18px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Gerar Folhas desta Sala ({{ $totalCandidatos - $impressas }} por imprimir)
+            </a>
+        @endif
+    </div>
+
     @if($candidaturas->isEmpty())
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:56px;text-align:center;color:#94a3b8;">
             Nenhum candidato atribuído a esta sala.

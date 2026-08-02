@@ -30,6 +30,10 @@ class CandidaturaController extends Controller
             $query->where('curso', $request->input('curso'));
         }
 
+        if ($request->boolean('sem_comprovativo')) {
+            $query->whereNull('comprovativo_gerado_em');
+        }
+
         if ($request->filled('q')) {
             $q = $request->input('q');
             $query->where(function ($r) use ($q) {
@@ -43,9 +47,10 @@ class CandidaturaController extends Controller
         $candidaturas = $query->paginate(20)->withQueryString();
 
         $totais = [
-            'por_assinar' => Candidatura::where('pagamento_confirmado', true)->whereNull('assinado_em')->count(),
-            'concluida'   => Candidatura::where('status', 'concluida')->count(),
-            'total'       => Candidatura::where('pagamento_confirmado', true)->count(),
+            'por_assinar'      => Candidatura::where('pagamento_confirmado', true)->whereNull('assinado_em')->count(),
+            'concluida'        => Candidatura::where('status', 'concluida')->count(),
+            'total'            => Candidatura::where('pagamento_confirmado', true)->count(),
+            'sem_comprovativo' => Candidatura::where('pagamento_confirmado', true)->whereNull('comprovativo_gerado_em')->count(),
         ];
 
         return view('daac.candidaturas.index', compact('candidaturas', 'totais'));
@@ -60,6 +65,13 @@ class CandidaturaController extends Controller
     {
         AuditLog::registar('imprimiu_comprovativo', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
+        if (! $candidatura->comprovativo_gerado_em) {
+            $candidatura->forceFill([
+                'comprovativo_gerado_por' => Auth::id(),
+                'comprovativo_gerado_em'  => now(),
+            ])->save();
+        }
 
         $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))->setPaper('a4', 'portrait');
 
@@ -235,10 +247,20 @@ class CandidaturaController extends Controller
             $query->where('curso', $request->input('curso'));
         }
 
+        $totalNoFiltro = (clone $query)->count();
+
+        // Cada folha só pode ser impressa uma vez — seja individualmente ou em lote.
+        // Excluir do lote quem já tenha sido impresso antes (por esta via ou pela
+        // individual), para nunca sair uma segunda via da mesma folha de exame.
+        $query->whereNull('folha_impressa_em');
+
         $candidaturas = $query->orderBy('numero_lugar')->get();
 
         if ($candidaturas->isEmpty()) {
-            return back()->with('error', 'Nenhum candidato encontrado com os filtros aplicados.');
+            $mensagem = $totalNoFiltro > 0
+                ? 'Todas as folhas de prova deste filtro já tinham sido impressas anteriormente.'
+                : 'Nenhum candidato encontrado com os filtros aplicados.';
+            return back()->with('error', $mensagem);
         }
 
         // Criar PDF com múltiplas páginas
@@ -262,6 +284,13 @@ class CandidaturaController extends Controller
         } elseif ($request->filled('curso')) {
             $filtro = '-curso-' . \Str::slug($request->input('curso'));
         }
+
+        // Marcar todas como impressas ANTES de devolver o PDF, para nunca poderem
+        // ser reimpressas — nem individualmente, nem noutro lote.
+        Candidatura::whereIn('id', $candidaturas->pluck('id'))->update([
+            'folha_impressa_por' => Auth::id(),
+            'folha_impressa_em'  => now(),
+        ]);
 
         AuditLog::registar('baixou_folhas_prova_lote', null, null,
             "Lote de {$candidaturas->count()} folhas de prova {$filtro}");

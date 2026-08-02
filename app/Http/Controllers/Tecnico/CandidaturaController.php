@@ -76,6 +76,13 @@ class CandidaturaController extends Controller
         AuditLog::registar('imprimiu_comprovativo', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
 
+        if (! $candidatura->comprovativo_gerado_em) {
+            $candidatura->forceFill([
+                'comprovativo_gerado_por' => \Illuminate\Support\Facades\Auth::id(),
+                'comprovativo_gerado_em'  => now(),
+            ])->save();
+        }
+
         $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))->setPaper('a4', 'portrait');
 
         $filename = 'comprovativo-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf';
