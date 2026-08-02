@@ -193,7 +193,7 @@
                                     style="display:flex;align-items:center;gap:6px;background:{{ $u->signature_image ? '#f5f3ff' : '#faf5ff' }};color:#6d28d9;border:1px solid {{ $u->signature_image ? '#c4b5fd' : '#ddd6fe' }};border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
                                     onmouseover="this.style.background='#ede9fe'" onmouseout="this.style.background='{{ $u->signature_image ? '#f5f3ff' : '#faf5ff' }}'">
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-1.414.586H9v-1.414a2 2 0 01.586-1.414z"/></svg>
-                                {{ $u->signature_image ? 'Assinatura ✓' : 'Carregar assinatura' }}
+                                {{ $u->signature_image ? 'Assinatura ✓' : 'Gerar assinatura' }}
                             </button>
                             @endif
                             {{-- Eliminar --}}
@@ -273,19 +273,18 @@
                             <p style="font-size:0.85rem;color:#6d28d9;margin-bottom:12px;">Nenhuma assinatura guardada. Carregue uma imagem PNG/JPG da assinatura manuscrita em papel branco.</p>
                             @endif
                             <form method="POST" action="{{ route('admin.usuarios.assinatura', $u) }}"
-                                  enctype="multipart/form-data"
                                   style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
                                 @csrf
                                 <div>
                                     <label style="display:block;font-size:0.78rem;font-weight:600;color:#6d28d9;margin-bottom:4px;">
-                                        {{ $u->signature_image ? 'Substituir imagem' : 'Carregar imagem' }} (PNG ou JPG, máx. 2 MB)
+                                        {{ $u->signature_image ? 'Regenerar assinatura (nome a usar)' : 'Nome a usar na assinatura' }}
                                     </label>
-                                    <input type="file" name="signature_image" accept="image/png,image/jpeg"
+                                    <input type="text" name="nome_assinatura" value="{{ $u->name }}" maxlength="100" required
                                            style="border:1px solid #c4b5fd;border-radius:7px;padding:6px 10px;font-size:0.85rem;background:#fff;">
                                 </div>
                                 <button type="submit"
                                         style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
-                                    Guardar
+                                    Gerar assinatura
                                 </button>
                                 <button type="button"
                                         onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='none'"

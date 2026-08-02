@@ -70,94 +70,54 @@ class UsuarioController extends Controller
         }
 
         $request->validate([
-            'signature_image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'nome_assinatura' => 'required|string|max:100',
         ], [
-            'signature_image.required' => 'Selecione uma imagem da assinatura.',
-            'signature_image.image'    => 'O ficheiro deve ser uma imagem (PNG ou JPG).',
-            'signature_image.mimes'    => 'Apenas PNG e JPG são aceites.',
-            'signature_image.max'      => 'A imagem não pode exceder 2 MB.',
+            'nome_assinatura.required' => 'Escreva o nome a usar na assinatura.',
         ]);
 
-        $file = $request->file('signature_image');
-        $mime = $file->getMimeType();
+        // Assinatura gerada a partir de texto, numa fonte cursiva (resources/fonts/assinatura.ttf),
+        // em vez de pedir para carregar uma foto/scan da assinatura em papel — essas fotos nunca
+        // tinham fundo branco puro (sombra, papel amarelado, tom da câmara) e ficavam com um
+        // aspecto pouco profissional. Isto dá um resultado limpo, com fundo transparente,
+        // parecido com as assinaturas digitais geradas por aplicações como DocuSign.
+        $texto     = trim($request->input('nome_assinatura'));
+        $fontPath  = resource_path('fonts/assinatura.ttf');
+        $fontSize  = 42;
+        $paddingX  = 20;
+        $paddingY  = 20;
+        [$inkR, $inkG, $inkB] = [26, 35, 50]; // mesmo tom escuro usado no resto do sistema
 
-        // Remover o fundo (papel/foto/scan) e uniformizar a tinta da assinatura (GD).
-        // Fotos/scans raramente têm fundo branco puro (sombra, papel amarelado, tom
-        // acinzentado da câmara) — um limiar fixo de "branco == RGB>=240" deixava
-        // esse fundo visível como um rectângulo feio à volta da assinatura. Em vez
-        // disso, usamos a luminância de cada pixel: claro = transparente, escuro =
-        // tinta, com uma faixa intermédia suavizada (anti-serrilhado); e forçamos a
-        // tinta para um tom escuro uniforme, para não ficar com o tom acinzentado/
-        // azulado da imagem original.
-        try {
-            $src = null;
-            if (in_array($mime, ['image/png', 'image/x-png'])) {
-                $src = imagecreatefrompng($file->path());
-            } elseif (in_array($mime, ['image/jpeg', 'image/jpg'])) {
-                $src = imagecreatefromjpeg($file->path());
-            }
+        $box        = imagettfbbox($fontSize, 0, $fontPath, $texto);
+        $textWidth  = abs($box[2] - $box[0]);
+        $textHeight = $box[1] - $box[7];
 
-            if ($src !== null) {
-                $w = imagesx($src);
-                $h = imagesy($src);
-                $dst = imagecreatetruecolor($w, $h);
-                imagealphablending($dst, false);
-                imagesavealpha($dst, true);
-                $trans_colour = imagecolorallocatealpha($dst, 0, 0, 0, 127);
-                imagefill($dst, 0, 0, $trans_colour);
+        $w = (int) round($textWidth + ($paddingX * 2));
+        $h = (int) round($textHeight + ($paddingY * 2));
 
-                $darkThreshold  = 120; // luminância <= isto: tinta totalmente opaca
-                $lightThreshold = 205; // luminância >= isto: fundo totalmente transparente
-                [$inkR, $inkG, $inkB] = [26, 35, 50]; // tom escuro uniforme (evita cinza/azulado da foto)
+        $img = imagecreatetruecolor($w, $h);
+        imagealphablending($img, false);
+        imagesavealpha($img, true);
+        $transparent = imagecolorallocatealpha($img, 0, 0, 0, 127);
+        imagefill($img, 0, 0, $transparent);
+        imagealphablending($img, true);
 
-                for ($y = 0; $y < $h; $y++) {
-                    for ($x = 0; $x < $w; $x++) {
-                        $rgb = imagecolorat($src, $x, $y);
-                        $r = ($rgb >> 16) & 0xFF;
-                        $g = ($rgb >> 8) & 0xFF;
-                        $b = $rgb & 0xFF;
-                        $luminance = (0.299 * $r) + (0.587 * $g) + (0.114 * $b);
+        $inkColor = imagecolorallocate($img, $inkR, $inkG, $inkB);
 
-                        if ($luminance >= $lightThreshold) {
-                            continue; // mantém-se transparente
-                        }
+        $x = (int) round($paddingX - $box[0]);
+        $y = (int) round($paddingY + abs($box[7]));
 
-                        if ($luminance <= $darkThreshold) {
-                            $alpha = 0;
-                        } else {
-                            $ratio = ($luminance - $darkThreshold) / ($lightThreshold - $darkThreshold);
-                            $alpha = (int) round($ratio * 127);
-                        }
+        imagettftext($img, $fontSize, 0, $x, $y, $inkColor, $fontPath, $texto);
 
-                        $col = imagecolorallocatealpha($dst, $inkR, $inkG, $inkB, $alpha);
-                        if ($col === false) {
-                            $col = $trans_colour;
-                        }
-                        imagesetpixel($dst, $x, $y, $col);
-                    }
-                }
+        ob_start();
+        imagepng($img);
+        $pngData = ob_get_clean();
+        imagedestroy($img);
 
-                ob_start();
-                imagepng($dst);
-                $pngData = ob_get_clean();
-
-                imagedestroy($src);
-                imagedestroy($dst);
-
-                $base64 = 'data:image/png;base64,' . base64_encode($pngData);
-            } else {
-                // fallback: store original
-                $base64 = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($file->path()));
-            }
-        } catch (\Throwable $e) {
-            // Em caso de erro, gravar sem processamento
-            $base64 = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($file->path()));
-            \Log::error('Falha ao processar assinatura (remover fundo): ' . $e->getMessage());
-        }
+        $base64 = 'data:image/png;base64,' . base64_encode($pngData);
 
         $usuario->forceFill(['signature_image' => $base64])->save();
 
-        return redirect()->route('admin.usuarios')->with('success', 'Assinatura digitalizada de ' . $usuario->name . ' guardada com sucesso.');
+        return redirect()->route('admin.usuarios')->with('success', 'Assinatura digital de ' . $usuario->name . ' gerada com sucesso.');
     }
 
     public function removeSignature(User $usuario)
