@@ -459,7 +459,11 @@ Route::view('/cultura', 'pages.cultura')->name('cultura');
 Route::view('/calendario-academico', 'pages.calendario-academico')->name('calendario-academico');
 
 Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
-Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:5,1');
+// Limite mais alto do que o costume: muitos candidatos partilham o mesmo IP
+// (redes de escola/universidade, Wi-Fi de campus, CGNAT de operadoras móveis),
+// e com 3000+ pessoas em simultâneo o limite de 5/min por IP bloquearia
+// candidatos legítimos atrás do mesmo IP.
+Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:30,1');
 Route::get('/candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\CandidaturaController::class, 'comprovativo'])->name('candidaturas.comprovativo');
 Route::get('/candidaturas/{candidatura}/pdf', [App\Http\Controllers\CandidaturaController::class, 'downloadPdf'])->name('candidaturas.pdf');
 

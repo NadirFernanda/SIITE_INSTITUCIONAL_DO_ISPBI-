@@ -126,19 +126,37 @@ class CandidaturaController extends Controller
         }
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
-        $candidatura = Candidatura::create($data);
-
         try {
-            Mail::to('geral@isp-bie.ao')->send(new CandidaturaReceived($candidatura));
-        } catch (\Throwable $e) {
-            \Log::error('Falha ao enviar email de candidatura: ' . $e->getMessage());
+            $candidatura = Candidatura::create($data);
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Backstop para a corrida entre a validação "unique" e o INSERT: se duas
+            // submissões quase simultâneas (ex.: duplo clique) passarem ambas na
+            // validação, a restrição única da base de dados rejeita a segunda — sem
+            // isto, o candidato via um erro 500 em vez da mensagem amigável.
+            if ((int) ($e->errorInfo[1] ?? 0) === 19 || str_contains($e->getMessage(), 'UNIQUE constraint failed')) {
+                return back()->withInput()->withErrors([
+                    'curso' => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
+                ]);
+            }
+            throw $e;
         }
 
-        try {
-            app(WhatsAppService::class)->notificarCandidaturaRecebida($candidatura);
-        } catch (\Throwable $e) {
-            \Log::error('WhatsApp candidatura recebida: ' . $e->getMessage());
-        }
+        // Email e WhatsApp só são despachados DEPOIS da resposta ser enviada ao
+        // candidato — com muita gente a submeter em simultâneo, esperar pela API do
+        // WhatsApp (até 10s) ou pelo SMTP em cada pedido tornaria o site lento/instável.
+        dispatch(function () use ($candidatura) {
+            try {
+                Mail::to('geral@isp-bie.ao')->send(new CandidaturaReceived($candidatura));
+            } catch (\Throwable $e) {
+                \Log::error('Falha ao enviar email de candidatura: ' . $e->getMessage());
+            }
+
+            try {
+                app(WhatsAppService::class)->notificarCandidaturaRecebida($candidatura);
+            } catch (\Throwable $e) {
+                \Log::error('WhatsApp candidatura recebida: ' . $e->getMessage());
+            }
+        })->afterResponse();
 
         // URL assinada e com expiração (72h) — só o candidato que acabou de submeter
         // consegue aceder ao comprovativo. Impede enumeração de IDs por terceiros.

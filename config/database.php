@@ -37,9 +37,13 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-            'busy_timeout' => null,
-            'journal_mode' => null,
-            'synchronous' => null,
+            // WAL permite leituras concorrentes enquanto há uma escrita em curso, e o
+            // busy_timeout faz o SQLite esperar (em vez de falhar logo com "database is
+            // locked") quando duas escritas coincidem — crítico com muitos candidatos em
+            // simultâneo a submeter candidaturas ao mesmo tempo.
+            'busy_timeout' => 10000,
+            'journal_mode' => 'wal',
+            'synchronous' => 'normal',
         ],
 
         'mysql' => [
