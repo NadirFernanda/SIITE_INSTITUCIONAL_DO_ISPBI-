@@ -222,10 +222,9 @@
                                     onmouseover="this.style.background='#eaeff5'" onmouseout="this.style.background='#f1f5f9'">
                                 Editar
                             </button>
-                            {{-- Ação destrutiva: mantida a vermelho por segurança, separada das restantes --}}
-                            <div style="width:1px;height:20px;background:#e2e8f0;margin:0 2px;"></div>
+                            {{-- Ação destrutiva: mantida a vermelho por segurança, sem divisor rígido (evita desalinhar quando a linha quebra) --}}
                             <form method="POST" action="{{ route('admin.salas.destroy', $sala) }}"
-                                  onsubmit="return confirm('Eliminar a sala {{ addslashes($sala->nome) }}?')">
+                                  onsubmit="return confirm('Eliminar a sala {{ addslashes($sala->nome) }}?')" style="margin-left:6px;">
                                 @csrf @method('DELETE')
                                 <button type="submit"
                                         style="background:#fff;color:#dc2626;border:1px solid #fca5a5;padding:5px 12px;border-radius:7px;font-size:0.8rem;font-weight:600;cursor:pointer;"

@@ -147,6 +147,76 @@ class CandidaturaController extends Controller
         return $pdf->download($filename);
     }
 
+    public function downloadFolhaProva(Candidatura $candidatura)
+    {
+        // Ao contrário do DAAC, o admin pode gerar/reimprimir a folha de prova de um
+        // candidato quantas vezes for necessário (ex.: substituir uma folha danificada
+        // ou perdida) — não há limite de uma única impressão aqui.
+        $pdf = Pdf::loadView('pdf.folha-prova', compact('candidatura'))
+                  ->setPaper('a4', 'portrait')
+                  ->setOption('margin-top', 0)
+                  ->setOption('margin-bottom', 0)
+                  ->setOption('margin-left', 0)
+                  ->setOption('margin-right', 0);
+
+        AuditLog::registar('baixou_folha_prova', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso}) [admin, sem limite]");
+
+        return $pdf->download('folha-prova-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '-' . \Str::slug($candidatura->nome) . '.pdf');
+    }
+
+    public function downloadFolhasProvaLote(Request $request)
+    {
+        $request->validate([
+            'sala_id' => 'nullable|exists:salas,id',
+            'curso'   => 'nullable|string|max:255',
+        ]);
+
+        $query = Candidatura::where('pagamento_confirmado', true)
+                             ->whereNotIn('status', ['rejeitada']);
+
+        if ($request->filled('sala_id')) {
+            $query->where('sala_id', $request->input('sala_id'));
+        }
+        if ($request->filled('curso')) {
+            $query->where('curso', $request->input('curso'));
+        }
+
+        // Sem limite de impressão para o admin — inclui todos os candidatos do filtro,
+        // independentemente de já terem sido impressos antes (individualmente ou pelo DAAC).
+        $candidaturas = $query->orderBy('numero_lugar')->get();
+
+        if ($candidaturas->isEmpty()) {
+            return back()->with('error', 'Nenhum candidato encontrado com os filtros aplicados.');
+        }
+
+        $html = '';
+        foreach ($candidaturas as $c) {
+            $view = \View::make('pdf.folha-prova', ['candidatura' => $c])->render();
+            $html .= $view . '<div style="page-break-after: always;"></div>';
+        }
+
+        $pdf = Pdf::loadHTML($html)
+                  ->setPaper('a4', 'portrait')
+                  ->setOption('margin-top', 0)
+                  ->setOption('margin-bottom', 0)
+                  ->setOption('margin-left', 0)
+                  ->setOption('margin-right', 0);
+
+        $filtro = '';
+        if ($request->filled('sala_id')) {
+            $sala = \App\Models\Sala::find($request->input('sala_id'));
+            $filtro = '-sala-' . \Str::slug($sala->nome);
+        } elseif ($request->filled('curso')) {
+            $filtro = '-curso-' . \Str::slug($request->input('curso'));
+        }
+
+        AuditLog::registar('baixou_folhas_prova_lote', null, null,
+            "Lote de {$candidaturas->count()} folhas de prova {$filtro} [admin, sem limite]");
+
+        return $pdf->download('folhas-prova-lote-' . now()->format('YmdHis') . $filtro . '.pdf');
+    }
+
     public function updateStatus(Request $request, Candidatura $candidatura)
     {
         $request->validate([

@@ -39,6 +39,14 @@
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                 Excel — Pauta
             </a>
+            @if($candidaturas->count() > 0)
+            <a href="{{ route('admin.candidaturas.folhas-prova-lote', ['sala_id' => $sala->id]) }}"
+               title="O admin pode gerar as folhas desta sala quantas vezes precisar (sem limite de impressão)"
+               style="display:inline-flex;align-items:center;gap:6px;background:#F05A28;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Gerar Folhas desta Sala
+            </a>
+            @endif
         </div>
     </div>
 
@@ -60,6 +68,7 @@
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Nome</th>
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">BI</th>
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Sexo</th>
+                        <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;">Folha de Prova</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +78,13 @@
                         <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
+                        <td style="padding:11px 18px;text-align:center;">
+                            <a href="{{ route('admin.candidaturas.folha-prova', $c) }}"
+                               title="O admin pode gerar/reimprimir sem limite"
+                               style="display:inline-flex;align-items:center;gap:4px;background:#f1f5f9;color:#1e3a5f;border:1px solid #e2e8f0;padding:4px 10px;border-radius:7px;font-size:0.78rem;font-weight:600;text-decoration:none;">
+                                Gerar
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
