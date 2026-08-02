@@ -179,8 +179,11 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
     </div>
 
     @php
-        $assinante   = $candidatura->isAssinada() ? $candidatura->assinante : null;
-        $sigImg      = $assinante?->signature_image ?? null;
+        $assinante      = $candidatura->isAssinada() ? $candidatura->assinante : null;
+        $sigImg         = $assinante?->signature_image ?? null;
+        // Assinatura do candidato gerada na hora a partir do nome — não fica guardada
+        // em lado nenhum, é recalculada sempre que o comprovativo é gerado.
+        $candidatoSigImg = \App\Services\SignatureImageGenerator::generate($candidatura->nome);
     @endphp
 
     {{-- ASSINATURAS: Conferiu (esq) + Candidato(a) (dir) --}}
@@ -200,7 +203,9 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
         </div>
         <div class="sig-gap"></div>
         <div class="sig">
-            <div class="sig-line"></div>
+            <div class="sig-line">
+                <img src="{{ $candidatoSigImg }}" style="display:block;margin:0 auto;max-height:9mm;max-width:55mm;object-fit:contain;" alt="Assinatura do candidato">
+            </div>
             <div class="sig-label">Candidato (a)</div>
             <div style="font-size:8pt;color:#555;font-style:italic;margin-top:2mm;">{{ mb_strtoupper($candidatura->nome, 'UTF-8') }}</div>
         </div>
