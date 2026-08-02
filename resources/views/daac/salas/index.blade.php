@@ -12,6 +12,37 @@
             {{ session('success') }}
         </div>
     @endif
+    @if(session('error'))
+        <div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:12px 18px;border-radius:10px;margin-bottom:18px;">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    {{-- Painel de Impressão em Lote por Horário --}}
+    <div style="background:linear-gradient(135deg, #eaeff5 0%, #dbe3ee 100%);border:1.5pt solid #a8c4e0;border-radius:14px;padding:16px 20px;margin-bottom:22px;">
+        <div style="margin-bottom:12px;">
+            <strong style="color:#1e3a5f;">Imprimir Listas em Lote por Horário</strong>
+            <p style="color:#0f1f3d;font-size:0.85rem;margin:2px 0 0;">Gera o PDF ou o Excel de Lista de Exame de todas as salas de um horário, de uma só vez.</p>
+        </div>
+        <form method="GET" style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+            <div style="flex:1;min-width:200px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#0f1f3d;margin-bottom:5px;">Horário</label>
+                <select name="horario" id="horarioLote" style="width:100%;border:1px solid #a8c4e0;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
+                    @foreach(\App\Models\Sala::$horarios as $h)
+                    <option value="{{ $h }}">{{ $h }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" formaction="{{ route('daac.salas.pdf-lote') }}"
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
+                📄 Gerar PDF
+            </button>
+            <button type="submit" formaction="{{ route('daac.salas.excel-exame-lote') }}"
+                    style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
+                📊 Gerar Excel Exame
+            </button>
+        </form>
+    </div>
 
     @if($salas->isEmpty())
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:56px;text-align:center;color:#94a3b8;">

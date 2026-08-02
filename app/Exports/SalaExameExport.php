@@ -33,7 +33,16 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function title(): string
     {
-        return 'Lista de Exame';
+        // Nome da folha tem de ser único quando várias salas são combinadas num só
+        // ficheiro (impressão em lote por horário) — Excel não permite duas folhas
+        // com o mesmo nome, e limita a 31 caracteres sem \ / ? * [ ] : — por isso
+        // o ID da sala vai sempre no fim, garantindo unicidade mesmo com nomes
+        // repetidos ou muito parecidos.
+        $nome = preg_replace('/[\\\\\/\?\*\[\]:]/', '', $this->sala->nome);
+        $sufixo = ' #' . $this->sala->id;
+        $prefixo = 'Exame - ';
+        $maxNome = max(1, 31 - mb_strlen($prefixo) - mb_strlen($sufixo));
+        return $prefixo . mb_substr($nome, 0, $maxNome) . $sufixo;
     }
 
     public function array(): array
