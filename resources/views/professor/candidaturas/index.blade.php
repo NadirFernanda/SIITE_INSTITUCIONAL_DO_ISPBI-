@@ -89,7 +89,8 @@
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">#</th>
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Sala</th>
                     <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Curso</th>
-                    <th style="padding:12px 20px;text-align:center;font-weight:700;color:#475569;">Nota</th>
+                    <th style="padding:12px 20px;text-align:left;font-weight:700;color:#475569;">Notas por Disciplina</th>
+                    <th style="padding:12px 20px;text-align:center;font-weight:700;color:#475569;">Nota Final</th>
                     <th style="padding:12px 20px;text-align:center;font-weight:700;color:#475569;">Acção</th>
                 </tr>
             </thead>
@@ -99,6 +100,22 @@
                     <td style="padding:13px 20px;color:#94a3b8;font-size:0.8rem;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td style="padding:13px 20px;color:#475569;">{{ $c->sala?->nome ?? '—' }}</td>
                     <td style="padding:13px 20px;color:#475569;">{{ $c->curso }}</td>
+                    <td style="padding:13px 20px;">
+                        @php $discs = $c->sala?->disciplines ?? collect(); @endphp
+                        @if($discs->isEmpty())
+                            <span style="color:#cbd5e1;font-size:0.8rem;">Sala sem disciplinas definidas</span>
+                        @else
+                            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                                @foreach($discs as $d)
+                                    @php $notaRow = $notasPorCandidatura[$c->id][$d->discipline] ?? null; @endphp
+                                    <span title="Peso: {{ $d->weight_percent }}%"
+                                          style="background:{{ $notaRow ? '#eaeff5' : '#f1f5f9' }};color:{{ $notaRow ? '#0f1f3d' : '#94a3b8' }};padding:2px 9px;border-radius:20px;font-size:0.76rem;font-weight:700;white-space:nowrap;">
+                                        {{ $d->discipline }}: {{ $notaRow?->nota !== null ? number_format($notaRow->nota, 2) : '—' }}
+                                    </span>
+                                @endforeach
+                            </div>
+                        @endif
+                    </td>
                     <td style="padding:13px 20px;color:#475569;">
                         @if($c->nota_exame !== null)
                             <span style="background:{{ $c->nota_exame >= 10 ? '#f0fdf4' : '#fff5f5' }};color:{{ $c->nota_exame >= 10 ? '#15803d' : '#dc2626' }};border:1px solid {{ $c->nota_exame >= 10 ? '#86efac' : '#fca5a5' }};padding:3px 10px;border-radius:20px;font-size:0.82rem;font-weight:700;">
@@ -118,7 +135,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" style="padding:48px;text-align:center;color:#94a3b8;">Nenhuma ficha encontrada.</td>
+                    <td colspan="6" style="padding:48px;text-align:center;color:#94a3b8;">Nenhuma ficha encontrada.</td>
                 </tr>
                 @endforelse
             </tbody>

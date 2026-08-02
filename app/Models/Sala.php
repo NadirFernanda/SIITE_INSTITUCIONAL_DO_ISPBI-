@@ -34,6 +34,11 @@ class Sala extends Model
         return $this->hasMany(Candidatura::class);
     }
 
+    public function disciplines()
+    {
+        return $this->hasMany(SalaDiscipline::class);
+    }
+
     public function totalAtribuido(): int
     {
         return $this->candidaturas()->count();

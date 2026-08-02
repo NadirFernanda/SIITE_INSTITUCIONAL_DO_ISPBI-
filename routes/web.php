@@ -362,7 +362,6 @@ Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomiss
     })->name('dashboard');
 
     Route::get('salas', [App\Http\Controllers\Lancamento\SalaController::class, 'index'])->name('salas.index');
-    Route::post('salas', [App\Http\Controllers\Lancamento\SalaController::class, 'store'])->name('salas.store');
     Route::post('salas/distribuir', [App\Http\Controllers\Lancamento\SalaController::class, 'distribuir'])->name('salas.distribuir');
     Route::post('salas/limpar', [App\Http\Controllers\Lancamento\SalaController::class, 'limpar'])->name('salas.limpar');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Lancamento\SalaController::class, 'pdf'])->name('salas.pdf');

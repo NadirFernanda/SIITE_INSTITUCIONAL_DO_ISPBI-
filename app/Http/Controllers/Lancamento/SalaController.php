@@ -42,20 +42,6 @@ class SalaController extends Controller
         ));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nome'       => 'required|string|max:100|unique:salas,nome',
-            'capacidade' => 'required|integer|min:1|max:1000',
-        ], [
-            'nome.unique' => 'Já existe uma sala com este nome.',
-        ]);
-
-        Sala::create($request->only('nome', 'capacidade', 'data_exame', 'horario'));
-
-        return redirect()->route('lancamento.salas.index')->with('success', 'Sala criada com sucesso.');
-    }
-
     public function update(Request $request, Sala $sala)
     {
         $request->validate([

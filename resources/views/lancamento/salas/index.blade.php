@@ -57,31 +57,7 @@
         @endforeach
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">
-            <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Adicionar Sala</h2>
-            <form method="POST" action="{{ route('lancamento.salas.store') }}">
-                @csrf
-                <div style="margin-bottom:14px;">
-                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Nome da Sala <span style="color:#ef4444">*</span></label>
-                    <input type="text" name="nome" value="{{ old('nome') }}" required maxlength="100"
-                           placeholder="Ex: Sala A, Anfiteatro 1..."
-                           style="width:100%;border:1px solid {{ $errors->has('nome') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;box-sizing:border-box;">
-                    @error('nome')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
-                </div>
-                <div style="margin-bottom:16px;">
-                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Capacidade <span style="color:#ef4444">*</span></label>
-                    <input type="number" name="capacidade" value="{{ old('capacidade') }}" required min="1" max="1000"
-                           style="width:140px;border:1px solid {{ $errors->has('capacidade') ? '#f87171' : '#e2e8f0' }};border-radius:8px;padding:9px 12px;font-size:0.9rem;">
-                    @error('capacidade')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
-                </div>
-                <button type="submit"
-                        style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 22px;font-weight:700;cursor:pointer;font-size:0.88rem;">
-                    Criar Sala
-                </button>
-            </form>
-        </div>
-
+    <div style="margin-bottom:20px;">
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:24px;">
             <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Candidatos por Curso / Período</h2>
             @if($grupos->isEmpty())

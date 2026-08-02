@@ -16,7 +16,7 @@ class CandidaturaController extends Controller
     public function index(Request $request)
     {
         // Only show candidates that have a generated exam code — required for launching grades
-        $query = Candidatura::with('sala')->whereNotNull('codigo_exame')->orderByDesc('created_at');
+        $query = Candidatura::with('sala.disciplines')->whereNotNull('codigo_exame')->orderByDesc('created_at');
 
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
@@ -41,13 +41,20 @@ class CandidaturaController extends Controller
 
         $candidaturas = $query->paginate(25)->withQueryString();
 
+        // Notas por disciplina de todos os candidatos desta página, agrupadas por
+        // candidatura_id para a tabela mostrar a nota de cada disciplina sem N+1 queries.
+        $notasPorCandidatura = CandidaturaNota::whereIn('candidatura_id', $candidaturas->pluck('id'))
+            ->get()
+            ->groupBy('candidatura_id')
+            ->map(fn($notas) => $notas->keyBy('discipline'));
+
         $totais = [
             'total'    => Candidatura::count(),
             'sem_nota' => Candidatura::whereNull('nota_exame')->count(),
             'com_nota' => Candidatura::whereNotNull('nota_exame')->count(),
         ];
 
-        return view('professor.candidaturas.index', compact('candidaturas', 'totais'));
+        return view('professor.candidaturas.index', compact('candidaturas', 'totais', 'notasPorCandidatura'));
     }
 
     public function show(Candidatura $candidatura)
