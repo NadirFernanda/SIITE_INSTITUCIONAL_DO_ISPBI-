@@ -90,6 +90,33 @@ class CandidaturaController extends Controller
         return $pdf->download($filename);
     }
 
+    public function imprimirPresencialComprovativo(Candidatura $candidatura)
+    {
+        if (! $candidatura->isAssinada()) {
+            return back()->with('error', 'Esta candidatura ainda não foi assinada. Assine primeiro — o comprovativo não pode ser impresso.');
+        }
+
+        AuditLog::registar('imprimiu_comprovativo_presencial', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
+
+        $candidatura->forceFill([
+            'comprovativo_impresso_presencialmente_por' => Auth::id(),
+            'comprovativo_impresso_presencialmente_em'  => now(),
+        ])->save();
+
+        if (! $candidatura->comprovativo_gerado_em) {
+            $candidatura->forceFill([
+                'comprovativo_gerado_por' => Auth::id(),
+                'comprovativo_gerado_em'  => now(),
+            ])->save();
+        }
+
+        $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))->setPaper('a4', 'portrait');
+        $filename = 'comprovativo-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf';
+
+        return $pdf->stream($filename);
+    }
+
     public function reenviarComprovativo(Candidatura $candidatura)
     {
         if (! $candidatura->isAssinada()) {

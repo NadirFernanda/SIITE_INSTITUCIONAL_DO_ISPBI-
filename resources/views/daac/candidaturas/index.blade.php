@@ -225,6 +225,14 @@
                                 </button>
                             </form>
                             @endif
+                            @if($c->isAssinada() && ! $c->comprovativo_impresso_presencialmente_em)
+                            <a href="{{ route('daac.candidaturas.imprimir-presencial', $c) }}" target="_blank"
+                               style="display:inline-flex;align-items:center;gap:4px;background:#eaeff5;color:#0f1f3d;border:1px solid #c7d2e0;padding:5px 11px;border-radius:8px;font-size:0.78rem;font-weight:600;text-decoration:none;"
+                               title="Abre o comprovativo para impressão e marca que foi entregue presencialmente ao candidato">
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2z"/></svg>
+                                Imprimir
+                            </a>
+                            @endif
                         </div>
                     </td>
                 </tr>
