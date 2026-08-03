@@ -251,9 +251,18 @@ class WhatsAppService
     /**
      * Envia o comprovativo (texto + PDF) ao candidato via WhatsApp e regista o resultado
      * na própria candidatura. Não reenvia se já tiver sido enviado com sucesso antes.
+     *
+     * Nunca envia um comprovativo de uma candidatura ainda não assinada pelo DAAC — esse
+     * documento é inválido (sem assinatura) e não deve chegar ao candidato como se fosse
+     * o comprovativo oficial. Esta verificação está centralizada aqui para proteger
+     * qualquer ponto de chamada (Admin, Técnico, DAAC, público), não apenas um.
      */
     public function enviarComprovativo(Candidatura $candidatura): bool
     {
+        if (! $candidatura->isAssinada()) {
+            return false;
+        }
+
         if ($candidatura->whatsapp_comprovativo_enviado_at) {
             return true;
         }

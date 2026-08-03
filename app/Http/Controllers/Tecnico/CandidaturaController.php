@@ -59,6 +59,10 @@ class CandidaturaController extends Controller
 
     public function downloadComprovativo(Candidatura $candidatura)
     {
+        if (! $candidatura->isAssinada()) {
+            return back()->with('error', 'Esta candidatura ainda não foi assinada pelo DAAC. O comprovativo só pode ser gerado/enviado depois de assinada.');
+        }
+
         AuditLog::registar('imprimiu_comprovativo', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
 

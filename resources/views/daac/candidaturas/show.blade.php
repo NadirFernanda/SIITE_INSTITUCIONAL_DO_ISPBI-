@@ -24,12 +24,20 @@
             <span style="background:{{ $cor }}20;color:{{ $cor }};padding:5px 14px;border-radius:20px;font-size:0.88rem;font-weight:700;">
                 {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}
             </span>
+            @if($candidatura->isAssinada())
             <a href="{{ route('daac.candidaturas.comprovativo', $candidatura) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#0f1f3d;color:#fff;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;text-decoration:none;"
                onmouseover="this.style.background='#1e3a5f'" onmouseout="this.style.background='#0f1f3d'">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Comprovativo PDF
             </a>
+            @else
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#cbd5e1;color:#64748b;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:not-allowed;"
+                  title="Só disponível depois de assinada — um comprovativo sem assinatura é inválido">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Comprovativo PDF (assine primeiro)
+            </span>
+            @endif
             @if($candidatura->whatsapp_comprovativo_falhou_em)
             <form method="POST" action="{{ route('daac.candidaturas.reenviar-comprovativo', $candidatura) }}" style="display:inline;">
                 @csrf

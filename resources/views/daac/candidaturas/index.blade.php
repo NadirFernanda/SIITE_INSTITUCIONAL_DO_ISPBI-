@@ -196,12 +196,20 @@
                     </td>
                     <td style="padding:13px 16px;text-align:center;">
                         <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;">
-                            <a href="{{ route('candidaturas.pdf', $c) }}"
+                            @if($c->isAssinada())
+                            <a href="{{ route('daac.candidaturas.comprovativo', $c) }}"
                                style="display:inline-flex;align-items:center;gap:4px;background:#64748b;color:#fff;padding:5px 11px;border-radius:8px;font-size:0.78rem;font-weight:600;text-decoration:none;"
                                title="Ver comprovativo PDF">
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                 PDF
                             </a>
+                            @else
+                            <span style="display:inline-flex;align-items:center;gap:4px;background:#cbd5e1;color:#64748b;padding:5px 11px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:not-allowed;"
+                                  title="Só disponível depois de assinada — um comprovativo sem assinatura é inválido">
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                PDF
+                            </span>
+                            @endif
                             <a href="{{ route('daac.candidaturas.show', $c) }}"
                                style="display:inline-flex;align-items:center;gap:4px;background:{{ $c->isAssinada() ? '#1e3a5f' : '#1e3a5f' }};color:#fff;padding:5px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 {{ $c->isAssinada() ? 'Ver' : 'Assinar' }}

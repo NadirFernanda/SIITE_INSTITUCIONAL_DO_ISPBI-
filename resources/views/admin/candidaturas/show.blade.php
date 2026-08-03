@@ -21,12 +21,20 @@
             <span style="background:{{ $color }}20;color:{{ $color }};padding:6px 16px;border-radius:20px;font-size:0.9rem;font-weight:700;">
                 {{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}
             </span>
+            @if($candidatura->isAssinada())
             <a href="{{ route('admin.candidaturas.comprovativo', $candidatura) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#0f1f3d;color:#fff;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;text-decoration:none;"
                onmouseover="this.style.background='#1e3a5f'" onmouseout="this.style.background='#0f1f3d'">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Comprovativo PDF
             </a>
+            @else
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#e2e8f0;color:#64748b;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;cursor:not-allowed;"
+                  title="Só disponível depois de assinada pelo DAAC — um comprovativo sem assinatura é inválido">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Comprovativo PDF (não assinada)
+            </span>
+            @endif
             <a href="{{ route('admin.candidaturas.edit', $candidatura) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#eaeff5;color:#0f1f3d;border:1px solid #c7d2e0;border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.88rem;text-decoration:none;"
                onmouseover="this.style.background='#eaeff5'" onmouseout="this.style.background='#eaeff5'">
