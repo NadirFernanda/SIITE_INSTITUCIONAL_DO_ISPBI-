@@ -111,6 +111,14 @@
                 <option value="rejeitada"  {{ request('status') === 'rejeitada'  ? 'selected' : '' }}>Rejeitadas</option>
             </select>
         </div>
+        <div>
+            <select name="curso" style="border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#f8fafc;">
+                <option value="">Todos os cursos</option>
+                @foreach(\App\Models\Candidatura::$cursos as $c)
+                <option value="{{ $c }}" {{ request('curso') === $c ? 'selected' : '' }}>{{ $c }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:600;cursor:pointer;font-size:0.88rem;">Filtrar</button>
         @if(request()->hasAny(['q','status','curso']))
         <a href="{{ route('daac.candidaturas.index') }}" style="background:#f1f5f9;color:#475569;border-radius:8px;padding:8px 14px;font-weight:600;font-size:0.88rem;text-decoration:none;">Limpar</a>
