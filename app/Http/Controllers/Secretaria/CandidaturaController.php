@@ -16,16 +16,7 @@ class CandidaturaController extends Controller
         $query = Candidatura::query()->orderByDesc('created_at');
 
         if ($request->filled('q')) {
-            $q = $request->input('q');
-            $query->where(function ($r) use ($q) {
-                $r->where('nome',     'like', "%{$q}%")
-                  ->orWhere('email',  'like', "%{$q}%")
-                  ->orWhere('bi',     'like', "%{$q}%")
-                  ->orWhere('telefone', 'like', "%{$q}%");
-                if (is_numeric($q)) {
-                    $r->orWhere('id', (int) $q);
-                }
-            });
+            $query->buscaTexto($request->input('q'), ['nome', 'email', 'bi', 'telefone']);
         }
 
         if ($request->filled('pagamento')) {

@@ -209,6 +209,40 @@ class Candidatura extends Model
         return $this->belongsTo(User::class, 'nota_lancada_por');
     }
 
+    /**
+     * Pesquisa textual case-insensitive, tolerante à ordem das palavras.
+     *
+     * Duas correcções sobre um simples where(...,'like',...):
+     * 1) Em PostgreSQL (produção) o LIKE é case-sensitive por omissão — ao contrário do
+     *    MySQL/SQLite usados noutros ambientes — o que fazia a pesquisa por nome/BI falhar
+     *    sempre que a maiúscula/minúscula não coincidisse exactamente.
+     * 2) O termo é dividido em palavras e cada uma tem de aparecer nalgum dos campos
+     *    (não necessariamente todas no mesmo campo, nem pela ordem exacta), para permitir
+     *    encontrar "João Kalunga" mesmo que o nome completo seja "João André Kalunga".
+     */
+    public function scopeBuscaTexto($query, string $termo, array $camposTexto, bool $incluirId = true)
+    {
+        $termo = trim($termo);
+        if ($termo === '') {
+            return $query;
+        }
+
+        $palavras = preg_split('/\s+/', mb_strtolower($termo, 'UTF-8'));
+
+        return $query->where(function ($r) use ($palavras, $termo, $camposTexto, $incluirId) {
+            foreach ($palavras as $palavra) {
+                $r->where(function ($sub) use ($palavra, $camposTexto) {
+                    foreach ($camposTexto as $campo) {
+                        $sub->orWhereRaw("LOWER({$campo}) LIKE ?", ['%' . $palavra . '%']);
+                    }
+                });
+            }
+            if ($incluirId && is_numeric($termo)) {
+                $r->orWhere('id', (int) $termo);
+            }
+        });
+    }
+
     public function isAssinada(): bool
     {
         return $this->assinado_em !== null;

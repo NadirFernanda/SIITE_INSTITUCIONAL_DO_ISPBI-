@@ -32,11 +32,7 @@ class CandidaturaController extends Controller
             }
         }
         if ($request->filled('q')) {
-            $q = $request->input('q');
-            $query->where(function ($r) use ($q) {
-                $r->where('id', $q)
-                  ->orWhere('codigo_exame', 'like', "%{$q}%");
-            });
+            $query->buscaTexto($request->input('q'), ['codigo_exame']);
         }
 
         $candidaturas = $query->paginate(25)->withQueryString();

@@ -39,13 +39,7 @@ class CandidaturaController extends Controller
         }
 
         if ($request->filled('q')) {
-            $q = $request->input('q');
-            $query->where(function ($r) use ($q) {
-                $r->where('nome', 'like', "%{$q}%")
-                  ->orWhere('email', 'like', "%{$q}%")
-                  ->orWhere('bi', 'like', "%{$q}%");
-                if (is_numeric($q)) $r->orWhere('id', (int) $q);
-            });
+            $query->buscaTexto($request->input('q'), ['nome', 'email', 'bi']);
         }
 
         $candidaturas = $query->paginate(20)->withQueryString();

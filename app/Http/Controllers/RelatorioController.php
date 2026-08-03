@@ -17,18 +17,10 @@ class RelatorioController extends Controller
 
         // ── Filtros ──────────────────────────────────────────────────────────
         if ($request->filled('q')) {
-            $q = $request->input('q');
-            $query->where(function ($r) use ($q) {
-                $r->where('nome',                    'like', "%{$q}%")
-                  ->orWhere('bi',                    'like', "%{$q}%")
-                  ->orWhere('email',                 'like', "%{$q}%")
-                  ->orWhere('telefone',              'like', "%{$q}%")
-                  ->orWhere('escola_origem',         'like', "%{$q}%")
-                  ->orWhere('naturalidade_provincia','like', "%{$q}%")
-                  ->orWhere('naturalidade_municipio','like', "%{$q}%")
-                  ->orWhere('residencia_municipio',  'like', "%{$q}%");
-                if (is_numeric($q)) $r->orWhere('id', (int) $q);
-            });
+            $query->buscaTexto($request->input('q'), [
+                'nome', 'bi', 'email', 'telefone', 'escola_origem',
+                'naturalidade_provincia', 'naturalidade_municipio', 'residencia_municipio',
+            ]);
         }
 
         foreach (['status','periodo','sexo','curso','estado_financeiro','naturalidade_provincia','necessidade_especial'] as $filtro) {
@@ -74,11 +66,7 @@ class RelatorioController extends Controller
             ->orderByDesc('created_at');
 
         if ($request->filled('q')) {
-            $q = $request->input('q');
-            $query->where(function ($r) use ($q) {
-                $r->where('nome','like',"%{$q}%")->orWhere('bi','like',"%{$q}%")
-                  ->orWhere('email','like',"%{$q}%");
-            });
+            $query->buscaTexto($request->input('q'), ['nome', 'bi', 'email']);
         }
         foreach (['status','periodo','sexo','curso','estado_financeiro','naturalidade_provincia','necessidade_especial'] as $filtro) {
             if ($request->filled($filtro)) $query->where($filtro, $request->input($filtro));

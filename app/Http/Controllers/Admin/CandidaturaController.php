@@ -37,26 +37,11 @@ class CandidaturaController extends Controller
             $query->where('necessidade_especial', $request->input('necessidade_especial'));
         }
         if ($request->filled('q')) {
-            $q = $request->input('q');
-            // Se for número, pesquisa também pelo ID (número de ficha)
-            $query->where(function ($r) use ($q) {
-                $r->where('nome',                    'like', "%{$q}%")
-                  ->orWhere('email',                 'like', "%{$q}%")
-                  ->orWhere('bi',                    'like', "%{$q}%")
-                  ->orWhere('telefone',              'like', "%{$q}%")
-                  ->orWhere('telefone2',             'like', "%{$q}%")
-                  ->orWhere('escola_origem',         'like', "%{$q}%")
-                  ->orWhere('estado_civil',          'like', "%{$q}%")
-                  ->orWhere('naturalidade_municipio','like', "%{$q}%")
-                  ->orWhere('naturalidade_provincia','like', "%{$q}%")
-                  ->orWhere('residencia_municipio',  'like', "%{$q}%")
-                  ->orWhere('residencia_bairro',     'like', "%{$q}%")
-                  ->orWhere('filiacao_pai',          'like', "%{$q}%")
-                  ->orWhere('filiacao_mae',          'like', "%{$q}%");
-                if (is_numeric($q)) {
-                    $r->orWhere('id', (int) $q);
-                }
-            });
+            $query->buscaTexto($request->input('q'), [
+                'nome', 'email', 'bi', 'telefone', 'telefone2', 'escola_origem',
+                'estado_civil', 'naturalidade_municipio', 'naturalidade_provincia',
+                'residencia_municipio', 'residencia_bairro', 'filiacao_pai', 'filiacao_mae',
+            ]);
         }
 
         $candidaturas = $query->paginate(20)->withQueryString();
