@@ -38,14 +38,14 @@
                 Comprovativo PDF (assine primeiro)
             </span>
             @endif
-            @if($candidatura->whatsapp_comprovativo_falhou_em)
+            @if($candidatura->isAssinada() && ! $candidatura->whatsapp_comprovativo_enviado_at)
             <form method="POST" action="{{ route('daac.candidaturas.reenviar-comprovativo', $candidatura) }}" style="display:inline;">
                 @csrf
                 <button type="submit"
                         style="display:inline-flex;align-items:center;gap:6px;background:#F05A28;color:#fff;border:none;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;"
-                        title="O envio automático do comprovativo por WhatsApp falhou — clique para reenviar">
+                        title="O candidato ainda não recebeu o comprovativo por WhatsApp — clique para enviar">
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                    Reenviar comprovativo (WhatsApp falhou)
+                    Enviar comprovativo por WhatsApp
                 </button>
             </form>
             @elseif($candidatura->whatsapp_comprovativo_enviado_at)

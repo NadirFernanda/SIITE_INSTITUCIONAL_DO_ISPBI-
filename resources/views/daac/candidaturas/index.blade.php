@@ -38,7 +38,7 @@
         <a href="{{ route('daac.candidaturas.index', array_merge(request()->except('whatsapp_falhou'), ['whatsapp_falhou' => 1])) }}"
            style="background:#fff;border:1px solid {{ request()->boolean('whatsapp_falhou') ? '#F05A28' : '#e2e8f0' }};border-radius:14px;padding:16px 18px;text-align:center;text-decoration:none;display:block;">
             <div style="font-size:1.8rem;font-weight:800;color:#F05A28;line-height:1;">{{ $totais['whatsapp_falhou'] }}</div>
-            <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Envio WhatsApp falhou</div>
+            <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Comprovativo não enviado</div>
         </a>
     </div>
 
@@ -51,7 +51,7 @@
 
     @if(request()->boolean('whatsapp_falhou'))
     <div style="background:#fff1ec;border:1px solid #F05A28;color:#c2410c;padding:10px 18px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <span>A mostrar apenas candidatos cujo envio automático do comprovativo por WhatsApp falhou. Use "Reenviar" na tabela para tentar novamente.</span>
+        <span>A mostrar candidatos já assinados cujo comprovativo ainda não foi enviado por WhatsApp (tentativa falhada ou nunca tentada). Use "Enviar" na tabela para tentar agora.</span>
         <a href="{{ route('daac.candidaturas.index', request()->except('whatsapp_falhou')) }}" style="color:#c2410c;font-weight:700;text-decoration:underline;white-space:nowrap;">Limpar filtro</a>
     </div>
     @endif
@@ -214,14 +214,14 @@
                                style="display:inline-flex;align-items:center;gap:4px;background:{{ $c->isAssinada() ? '#1e3a5f' : '#1e3a5f' }};color:#fff;padding:5px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;">
                                 {{ $c->isAssinada() ? 'Ver' : 'Assinar' }}
                             </a>
-                            @if($c->whatsapp_comprovativo_falhou_em)
+                            @if($c->isAssinada() && ! $c->whatsapp_comprovativo_enviado_at)
                             <form method="POST" action="{{ route('daac.candidaturas.reenviar-comprovativo', $c) }}" style="display:inline;">
                                 @csrf
                                 <button type="submit"
                                         style="display:inline-flex;align-items:center;gap:4px;background:#F05A28;color:#fff;border:none;padding:5px 11px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;"
-                                        title="Envio do comprovativo por WhatsApp falhou — clique para reenviar">
+                                        title="O candidato ainda não recebeu o comprovativo por WhatsApp — clique para enviar">
                                     <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                                    Reenviar
+                                    Enviar
                                 </button>
                             </form>
                             @endif

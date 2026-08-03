@@ -35,7 +35,9 @@ class CandidaturaController extends Controller
         }
 
         if ($request->boolean('whatsapp_falhou')) {
-            $query->whereNotNull('whatsapp_comprovativo_falhou_em');
+            // Abrange tanto tentativas que falharam como assinadas em que o envio nunca
+            // sequer foi tentado (ex.: assinadas antes desta funcionalidade existir).
+            $query->whereNotNull('assinado_em')->whereNull('whatsapp_comprovativo_enviado_at');
         }
 
         if ($request->filled('q')) {
@@ -49,7 +51,7 @@ class CandidaturaController extends Controller
             'concluida'        => Candidatura::where('status', 'concluida')->count(),
             'total'            => Candidatura::where('pagamento_confirmado', true)->count(),
             'sem_comprovativo' => Candidatura::where('pagamento_confirmado', true)->whereNull('comprovativo_gerado_em')->count(),
-            'whatsapp_falhou'  => Candidatura::where('pagamento_confirmado', true)->whereNotNull('whatsapp_comprovativo_falhou_em')->count(),
+            'whatsapp_falhou'  => Candidatura::where('pagamento_confirmado', true)->whereNotNull('assinado_em')->whereNull('whatsapp_comprovativo_enviado_at')->count(),
         ];
 
         return view('daac.candidaturas.index', compact('candidaturas', 'totais'));
