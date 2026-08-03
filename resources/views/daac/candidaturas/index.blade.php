@@ -40,6 +40,11 @@
             <div style="font-size:1.8rem;font-weight:800;color:#F05A28;line-height:1;">{{ $totais['whatsapp_falhou'] }}</div>
             <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Comprovativo não enviado</div>
         </a>
+        <a href="{{ route('daac.candidaturas.index', array_merge(request()->except('whatsapp_enviado'), ['whatsapp_enviado' => 1])) }}"
+           style="background:#fff;border:1px solid {{ request()->boolean('whatsapp_enviado') ? '#15803d' : '#e2e8f0' }};border-radius:14px;padding:16px 18px;text-align:center;text-decoration:none;display:block;">
+            <div style="font-size:1.8rem;font-weight:800;color:#15803d;line-height:1;">{{ $totais['whatsapp_enviado'] }}</div>
+            <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">Comprovativo enviado</div>
+        </a>
     </div>
 
     @if(request()->boolean('sem_comprovativo'))
@@ -53,6 +58,13 @@
     <div style="background:#fff1ec;border:1px solid #F05A28;color:#c2410c;padding:10px 18px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
         <span>A mostrar candidatos já assinados cujo comprovativo ainda não foi enviado por WhatsApp (tentativa falhada ou nunca tentada). Use "Enviar" na tabela para tentar agora.</span>
         <a href="{{ route('daac.candidaturas.index', request()->except('whatsapp_falhou')) }}" style="color:#c2410c;font-weight:700;text-decoration:underline;white-space:nowrap;">Limpar filtro</a>
+    </div>
+    @endif
+
+    @if(request()->boolean('whatsapp_enviado'))
+    <div style="background:#f0fdf4;border:1px solid #86efac;color:#15803d;padding:10px 18px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <span>A mostrar apenas candidatos que já receberam o comprovativo assinado por WhatsApp.</span>
+        <a href="{{ route('daac.candidaturas.index', request()->except('whatsapp_enviado')) }}" style="color:#15803d;font-weight:700;text-decoration:underline;white-space:nowrap;">Limpar filtro</a>
     </div>
     @endif
 
@@ -110,6 +122,9 @@
         @endif
         @if(request()->boolean('whatsapp_falhou'))
         <input type="hidden" name="whatsapp_falhou" value="1">
+        @endif
+        @if(request()->boolean('whatsapp_enviado'))
+        <input type="hidden" name="whatsapp_enviado" value="1">
         @endif
         <div style="flex:1;min-width:200px;position:relative;">
             <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#94a3b8;" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>

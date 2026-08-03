@@ -40,6 +40,10 @@ class CandidaturaController extends Controller
             $query->whereNotNull('assinado_em')->whereNull('whatsapp_comprovativo_enviado_at');
         }
 
+        if ($request->boolean('whatsapp_enviado')) {
+            $query->whereNotNull('whatsapp_comprovativo_enviado_at');
+        }
+
         if ($request->filled('q')) {
             $query->buscaTexto($request->input('q'), ['nome', 'email', 'bi']);
         }
@@ -52,6 +56,7 @@ class CandidaturaController extends Controller
             'total'            => Candidatura::where('pagamento_confirmado', true)->count(),
             'sem_comprovativo' => Candidatura::where('pagamento_confirmado', true)->whereNull('comprovativo_gerado_em')->count(),
             'whatsapp_falhou'  => Candidatura::where('pagamento_confirmado', true)->whereNotNull('assinado_em')->whereNull('whatsapp_comprovativo_enviado_at')->count(),
+            'whatsapp_enviado' => Candidatura::where('pagamento_confirmado', true)->whereNotNull('whatsapp_comprovativo_enviado_at')->count(),
         ];
 
         return view('daac.candidaturas.index', compact('candidaturas', 'totais'));
