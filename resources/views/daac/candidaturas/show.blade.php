@@ -30,6 +30,22 @@
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Comprovativo PDF
             </a>
+            @if($candidatura->whatsapp_comprovativo_falhou_em)
+            <form method="POST" action="{{ route('daac.candidaturas.reenviar-comprovativo', $candidatura) }}" style="display:inline;">
+                @csrf
+                <button type="submit"
+                        style="display:inline-flex;align-items:center;gap:6px;background:#F05A28;color:#fff;border:none;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;cursor:pointer;"
+                        title="O envio automático do comprovativo por WhatsApp falhou — clique para reenviar">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    Reenviar comprovativo (WhatsApp falhou)
+                </button>
+            </form>
+            @elseif($candidatura->whatsapp_comprovativo_enviado_at)
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#e8f5e9;color:#2e7d32;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                Enviado por WhatsApp
+            </span>
+            @endif
             @if($candidatura->folha_impressa_em)
                 <span style="display:inline-flex;align-items:center;gap:8px;background:#f1f5f9;color:#64748b;padding:7px 16px;border-radius:8px;font-weight:600;font-size:0.85rem;">
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>

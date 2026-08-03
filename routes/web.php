@@ -307,6 +307,7 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:1000
     // Candidaturas
     Route::get('candidaturas', [App\Http\Controllers\Daac\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Daac\CandidaturaController::class, 'downloadComprovativo'])->name('candidaturas.comprovativo');
+    Route::post('candidaturas/{candidatura}/reenviar-comprovativo', [App\Http\Controllers\Daac\CandidaturaController::class, 'reenviarComprovativo'])->name('candidaturas.reenviar-comprovativo');
     Route::get('candidaturas/{candidatura}/folha-prova', [App\Http\Controllers\Daac\CandidaturaController::class, 'downloadFolhaProva'])->name('candidaturas.folha-prova');
     Route::get('candidaturas/lote/folhas-prova', [App\Http\Controllers\Daac\CandidaturaController::class, 'downloadFolhasProvaLote'])->name('candidaturas.folhas-prova-lote');
     Route::get('candidaturas/{candidatura}', [App\Http\Controllers\Daac\CandidaturaController::class, 'show'])->name('candidaturas.show');

@@ -34,6 +34,10 @@ class CandidaturaController extends Controller
             $query->whereNull('comprovativo_gerado_em');
         }
 
+        if ($request->boolean('whatsapp_falhou')) {
+            $query->whereNotNull('whatsapp_comprovativo_falhou_em');
+        }
+
         if ($request->filled('q')) {
             $q = $request->input('q');
             $query->where(function ($r) use ($q) {
@@ -51,6 +55,7 @@ class CandidaturaController extends Controller
             'concluida'        => Candidatura::where('status', 'concluida')->count(),
             'total'            => Candidatura::where('pagamento_confirmado', true)->count(),
             'sem_comprovativo' => Candidatura::where('pagamento_confirmado', true)->whereNull('comprovativo_gerado_em')->count(),
+            'whatsapp_falhou'  => Candidatura::where('pagamento_confirmado', true)->whereNotNull('whatsapp_comprovativo_falhou_em')->count(),
         ];
 
         return view('daac.candidaturas.index', compact('candidaturas', 'totais'));
@@ -63,6 +68,10 @@ class CandidaturaController extends Controller
 
     public function downloadComprovativo(Candidatura $candidatura)
     {
+        if (! $candidatura->isAssinada()) {
+            return back()->with('error', 'Esta candidatura ainda não foi assinada. Assine primeiro — o comprovativo não foi enviado ao candidato.');
+        }
+
         AuditLog::registar('imprimiu_comprovativo', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
 
@@ -74,36 +83,35 @@ class CandidaturaController extends Controller
         }
 
         $pdf = Pdf::loadView('pdf.comprovativo', compact('candidatura'))->setPaper('a4', 'portrait');
-
         $filename = 'comprovativo-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf';
-        if (! $candidatura->whatsapp_comprovativo_enviado_at) {
-            try {
-                $mensagem = "📄 *ISP-Bié — Comprovativo de Candidatura*\n\n" .
-                    "Olá *{$candidatura->nome}*,\n\n" .
-                    "Segue em anexo o comprovativo da sua candidatura.\n\n" .
-                    "📋 *Nº de Ficha:* " . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . "\n" .
-                    "📚 *Curso:* {$candidatura->curso}\n" .
-                    "📌 *Estado:* " . (\App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status) . "\n\n" .
-                    "Guarde este documento para consultas futuras.\n\n" .
-                    "— Instituto Superior Politécnico do Bié";
 
-                app(WhatsAppService::class)->enviar($candidatura->telefone, $mensagem);
-
-                app(WhatsAppService::class)->enviarDocumento(
-                    $candidatura->telefone,
-                    base64_encode($pdf->output()),
-                    $filename,
-                    '📄 Comprovativo de candidatura — ISP-Bié'
-                );
-
-                $candidatura->whatsapp_comprovativo_enviado_at = now();
-                $candidatura->save();
-            } catch (\Throwable $e) {
-                \Log::error('Falha ao enviar comprovativo via WhatsApp (daac): ' . $e->getMessage());
-            }
+        try {
+            app(WhatsAppService::class)->enviarComprovativo($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao enviar comprovativo via WhatsApp (daac): ' . $e->getMessage());
         }
 
         return $pdf->download($filename);
+    }
+
+    public function reenviarComprovativo(Candidatura $candidatura)
+    {
+        if (! $candidatura->isAssinada()) {
+            return back()->with('error', 'Esta candidatura ainda não foi assinada. Assine primeiro — o comprovativo não foi enviado ao candidato.');
+        }
+
+        try {
+            $sucesso = app(WhatsAppService::class)->enviarComprovativo($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao reenviar comprovativo via WhatsApp (daac): ' . $e->getMessage());
+            $sucesso = false;
+        }
+
+        if ($sucesso) {
+            return back()->with('success', "Comprovativo reenviado com sucesso para {$candidatura->nome} via WhatsApp.");
+        }
+
+        return back()->with('error', "Não foi possível enviar o comprovativo a {$candidatura->nome} via WhatsApp. Verifique o número de telefone e tente novamente.");
     }
 
     public function assinar(Request $request, Candidatura $candidatura)

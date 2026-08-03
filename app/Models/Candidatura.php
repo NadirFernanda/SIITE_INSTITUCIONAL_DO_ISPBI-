@@ -25,6 +25,7 @@ class Candidatura extends Model
         'nota_exame', 'nota_lancada_por', 'nota_lancada_em',
         'folha_impressa_por', 'folha_impressa_em',
         'comprovativo_gerado_por', 'comprovativo_gerado_em',
+        'whatsapp_comprovativo_enviado_at', 'whatsapp_comprovativo_falhou_em',
     ];
 
     protected $casts = [
@@ -41,6 +42,8 @@ class Candidatura extends Model
         'assinado_em'      => 'datetime',
         'folha_impressa_em'       => 'datetime',
         'comprovativo_gerado_em'  => 'datetime',
+        'whatsapp_comprovativo_enviado_at' => 'datetime',
+        'whatsapp_comprovativo_falhou_em'  => 'datetime',
         'created_at'       => 'datetime',
         'updated_at'       => 'datetime',
     ];

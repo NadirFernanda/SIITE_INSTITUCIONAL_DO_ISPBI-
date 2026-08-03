@@ -38,5 +38,12 @@ class NotifyWhatsAppAssinatura implements ShouldQueue
         } catch (\Throwable $e) {
             \Log::error('Erro na job NotifyWhatsAppAssinatura: ' . $e->getMessage());
         }
+
+        try {
+            app(WhatsAppService::class)->enviarComprovativo($this->candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('Erro ao enviar comprovativo via WhatsApp após assinatura: ' . $e->getMessage());
+            $this->candidatura->forceFill(['whatsapp_comprovativo_falhou_em' => now()])->save();
+        }
     }
 }

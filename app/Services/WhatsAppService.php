@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Candidatura;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -21,15 +22,15 @@ class WhatsAppService
         $this->enabled  = (bool) config('services.evolution.enabled', false);
     }
 
-    public function enviar(string $telefone, string $mensagem): void
+    public function enviar(string $telefone, string $mensagem): bool
     {
         if (! $this->enabled || ! $this->baseUrl || ! $this->apiKey || ! $this->instance) {
-            return;
+            return false;
         }
 
         $numero = $this->normalizarTelefone($telefone);
         if (! $numero) {
-            return;
+            return false;
         }
 
         try {
@@ -56,9 +57,13 @@ class WhatsAppService
                     'status' => $response->status(),
                     'body' => $response->body(),
                 ]);
+                return false;
             }
+
+            return true;
         } catch (\Throwable $e) {
             Log::error("WhatsApp: falha ao enviar para {$numero} — " . $e->getMessage());
+            return false;
         }
     }
 
@@ -194,15 +199,15 @@ class WhatsAppService
         return $digitos;
     }
 
-    public function enviarDocumento(string $telefone, string $arquivoBase64, string $nome, string $caption = null): void
+    public function enviarDocumento(string $telefone, string $arquivoBase64, string $nome, ?string $caption = null): bool
     {
         if (! $this->enabled || ! $this->baseUrl || ! $this->apiKey || ! $this->instance) {
-            return;
+            return false;
         }
 
         $numero = $this->normalizarTelefone($telefone);
         if (! $numero) {
-            return;
+            return false;
         }
 
         try {
@@ -233,9 +238,58 @@ class WhatsAppService
                     'status' => $response->status(),
                     'body'   => $response->body(),
                 ]);
+                return false;
             }
+
+            return true;
         } catch (\Throwable $e) {
             Log::error("WhatsApp: falha sendMedia para {$numero} — " . $e->getMessage());
+            return false;
         }
+    }
+
+    /**
+     * Envia o comprovativo (texto + PDF) ao candidato via WhatsApp e regista o resultado
+     * na própria candidatura. Não reenvia se já tiver sido enviado com sucesso antes.
+     */
+    public function enviarComprovativo(Candidatura $candidatura): bool
+    {
+        if ($candidatura->whatsapp_comprovativo_enviado_at) {
+            return true;
+        }
+
+        $pdf = Pdf::loadView('pdf.comprovativo', ['candidatura' => $candidatura])->setPaper('a4', 'portrait');
+        $filename = 'comprovativo-' . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . '.pdf';
+
+        $mensagem = "📄 *ISP-Bié — Comprovativo de Candidatura*\n\n" .
+            "Olá *{$candidatura->nome}*,\n\n" .
+            "Segue em anexo o comprovativo da sua candidatura.\n\n" .
+            "📋 *Nº de Ficha:* " . str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) . "\n" .
+            "📚 *Curso:* {$candidatura->curso}\n" .
+            "📌 *Estado:* " . (Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status) . "\n\n" .
+            "Guarde este documento para consultas futuras.\n\n" .
+            "— Instituto Superior Politécnico do Bié";
+
+        $this->enviar($candidatura->telefone, $mensagem);
+
+        $sucesso = $this->enviarDocumento(
+            $candidatura->telefone,
+            base64_encode($pdf->output()),
+            $filename,
+            '📄 Comprovativo de candidatura — ISP-Bié'
+        );
+
+        if ($sucesso) {
+            $candidatura->forceFill([
+                'whatsapp_comprovativo_enviado_at' => now(),
+                'whatsapp_comprovativo_falhou_em'  => null,
+            ])->save();
+        } else {
+            $candidatura->forceFill([
+                'whatsapp_comprovativo_falhou_em' => now(),
+            ])->save();
+        }
+
+        return $sucesso;
     }
 }
