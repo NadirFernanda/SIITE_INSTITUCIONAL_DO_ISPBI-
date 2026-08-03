@@ -44,9 +44,43 @@
         @endforeach
     </div>
 
+    {{-- KPIs de notificações WhatsApp --}}
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px;">
+        <a href="{{ route('admin.candidaturas.index', array_merge(request()->except('sem_recebida'), ['sem_recebida' => 1])) }}"
+           style="background:#fff;border:1px solid {{ request()->boolean('sem_recebida') ? '#F05A28' : '#e2e8f0' }};border-radius:14px;padding:14px 18px;text-align:center;text-decoration:none;display:block;">
+            <div style="font-size:1.5rem;font-weight:800;color:#F05A28;line-height:1;">{{ $totais['sem_recebida'] }}</div>
+            <div style="font-size:0.76rem;color:#64748b;margin-top:4px;font-weight:600;">Msg. 1 (Recebida) não enviada</div>
+        </a>
+        <a href="{{ route('admin.candidaturas.index', array_merge(request()->except('sem_pagamento_whatsapp'), ['sem_pagamento_whatsapp' => 1])) }}"
+           style="background:#fff;border:1px solid {{ request()->boolean('sem_pagamento_whatsapp') ? '#F05A28' : '#e2e8f0' }};border-radius:14px;padding:14px 18px;text-align:center;text-decoration:none;display:block;">
+            <div style="font-size:1.5rem;font-weight:800;color:#F05A28;line-height:1;">{{ $totais['sem_pagamento_whatsapp'] }}</div>
+            <div style="font-size:0.76rem;color:#64748b;margin-top:4px;font-weight:600;">Msg. 2 (Pagamento) não enviada</div>
+        </a>
+    </div>
+
+    @if(request()->boolean('sem_recebida'))
+    <div style="background:#fff1ec;border:1px solid #F05A28;color:#c2410c;padding:10px 18px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <span>A mostrar candidatos que ainda não receberam a mensagem de WhatsApp "candidatura recebida".</span>
+        <a href="{{ route('admin.candidaturas.index', request()->except('sem_recebida')) }}" style="color:#c2410c;font-weight:700;text-decoration:underline;white-space:nowrap;">Limpar filtro</a>
+    </div>
+    @endif
+
+    @if(request()->boolean('sem_pagamento_whatsapp'))
+    <div style="background:#fff1ec;border:1px solid #F05A28;color:#c2410c;padding:10px 18px;border-radius:10px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+        <span>A mostrar candidatos com pagamento confirmado que ainda não receberam a mensagem de WhatsApp "pagamento confirmado".</span>
+        <a href="{{ route('admin.candidaturas.index', request()->except('sem_pagamento_whatsapp')) }}" style="color:#c2410c;font-weight:700;text-decoration:underline;white-space:nowrap;">Limpar filtro</a>
+    </div>
+    @endif
+
     {{-- Pesquisa avançada --}}
     <form method="GET" action="{{ route('admin.candidaturas.index') }}"
           style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 24px;margin-bottom:22px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+        @if(request()->boolean('sem_recebida'))
+        <input type="hidden" name="sem_recebida" value="1">
+        @endif
+        @if(request()->boolean('sem_pagamento_whatsapp'))
+        <input type="hidden" name="sem_pagamento_whatsapp" value="1">
+        @endif
 
         {{-- Barra principal de pesquisa --}}
         <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;">

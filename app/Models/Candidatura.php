@@ -27,6 +27,8 @@ class Candidatura extends Model
         'comprovativo_gerado_por', 'comprovativo_gerado_em',
         'whatsapp_comprovativo_enviado_at', 'whatsapp_comprovativo_falhou_em',
         'comprovativo_impresso_presencialmente_por', 'comprovativo_impresso_presencialmente_em',
+        'whatsapp_recebida_enviado_at', 'whatsapp_recebida_falhou_em',
+        'whatsapp_pagamento_enviado_at', 'whatsapp_pagamento_falhou_em',
     ];
 
     protected $casts = [
@@ -46,6 +48,10 @@ class Candidatura extends Model
         'whatsapp_comprovativo_enviado_at' => 'datetime',
         'whatsapp_comprovativo_falhou_em'  => 'datetime',
         'comprovativo_impresso_presencialmente_em' => 'datetime',
+        'whatsapp_recebida_enviado_at'  => 'datetime',
+        'whatsapp_recebida_falhou_em'   => 'datetime',
+        'whatsapp_pagamento_enviado_at' => 'datetime',
+        'whatsapp_pagamento_falhou_em'  => 'datetime',
         'created_at'       => 'datetime',
         'updated_at'       => 'datetime',
     ];

@@ -51,6 +51,12 @@
             {{ session('success') }}
         </div>
     @endif
+    @if(session('error'))
+        <div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:12px 18px;border-radius:10px;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            {{ session('error') }}
+        </div>
+    @endif
 
     @php
     function _campo($label, $value) {
@@ -80,6 +86,41 @@
             @php _campo('Telefone 1', $candidatura->telefone); @endphp
             @php _campo('Telefone 2', $candidatura->telefone2); @endphp
             @php _campo('Email', $candidatura->email); @endphp
+        </div>
+    </div>
+
+    {{-- Notificações WhatsApp --}}
+    @php
+    function _statusMsg($enviadoEm, $falhouEm, $podeReenviar, $rota, $candidatura) {
+        if ($enviadoEm) {
+            echo '<span style="display:inline-flex;align-items:center;gap:6px;background:#e8f5e9;color:#2e7d32;padding:4px 12px;border-radius:20px;font-size:0.82rem;font-weight:600;">Enviada em '.$enviadoEm->format('d/m/Y H:i').'</span>';
+            return;
+        }
+        if (! $podeReenviar) {
+            echo '<span style="display:inline-flex;align-items:center;gap:6px;background:#f1f5f9;color:#94a3b8;padding:4px 12px;border-radius:20px;font-size:0.82rem;font-weight:600;">Ainda não aplicável</span>';
+            return;
+        }
+        $label = $falhouEm ? 'Falhou — Reenviar' : 'Nunca enviada — Enviar';
+        echo '<form method="POST" action="'.$rota.'" style="display:inline;">'.csrf_field().
+             '<button type="submit" style="display:inline-flex;align-items:center;gap:6px;background:#F05A28;color:#fff;border:none;padding:5px 14px;border-radius:20px;font-size:0.82rem;font-weight:600;cursor:pointer;">'.$label.'</button>'.
+             '</form>';
+    }
+    @endphp
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:26px;margin-bottom:18px;">
+        <h2 style="font-size:0.95rem;font-weight:700;color:#1e3a5f;margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid #f1f5f9;">Notificações WhatsApp</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                <span style="font-weight:600;color:#1a2332;font-size:0.88rem;">1. Candidatura recebida</span>
+                @php _statusMsg($candidatura->whatsapp_recebida_enviado_at, $candidatura->whatsapp_recebida_falhou_em, true, route('admin.candidaturas.reenviar-recebida', $candidatura), $candidatura); @endphp
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                <span style="font-weight:600;color:#1a2332;font-size:0.88rem;">2. Pagamento confirmado</span>
+                @php _statusMsg($candidatura->whatsapp_pagamento_enviado_at, $candidatura->whatsapp_pagamento_falhou_em, $candidatura->pagamento_confirmado, route('admin.candidaturas.reenviar-pagamento', $candidatura), $candidatura); @endphp
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">
+                <span style="font-weight:600;color:#1a2332;font-size:0.88rem;">3. Comprovativo assinado (DAAC)</span>
+                @php _statusMsg($candidatura->whatsapp_comprovativo_enviado_at, $candidatura->whatsapp_comprovativo_falhou_em, $candidatura->isAssinada(), route('admin.candidaturas.reenviar-comprovativo', $candidatura), $candidatura); @endphp
+            </div>
         </div>
     </div>
 

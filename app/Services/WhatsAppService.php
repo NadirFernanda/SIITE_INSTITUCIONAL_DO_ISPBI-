@@ -69,10 +69,10 @@ class WhatsAppService
 
     // ── Mensagens predefinidas ──────────────────────────────────────────────
 
-    public function notificarCandidaturaRecebida(Candidatura $c): void
+    public function notificarCandidaturaRecebida(Candidatura $c): bool
     {
         $ficha = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        $this->enviar($c->telefone,
+        return $this->enviar($c->telefone,
             "✅ *ISP-Bié — Candidatura Recebida*\n\n" .
             "Olá *{$c->nome}*,\n" .
             "A sua ficha de inscrição foi registada com sucesso.\n\n" .
@@ -84,10 +84,10 @@ class WhatsAppService
         );
     }
 
-    public function notificarPagamentoConfirmado(Candidatura $c): void
+    public function notificarPagamentoConfirmado(Candidatura $c): bool
     {
         $ficha = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        $this->enviar($c->telefone,
+        return $this->enviar($c->telefone,
             "💳 *ISP-Bié — Pagamento Confirmado*\n\n" .
             "Olá *{$c->nome}*,\n" .
             "O pagamento RUP da sua candidatura foi confirmado.\n\n" .
@@ -98,10 +98,10 @@ class WhatsAppService
         );
     }
 
-    public function notificarAssinaturaDAAC(Candidatura $c): void
+    public function notificarAssinaturaDAAC(Candidatura $c): bool
     {
         $ficha = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        $this->enviar($c->telefone,
+        return $this->enviar($c->telefone,
             "🖊️ *ISP-Bié — Candidatura Concluída*\n\n" .
             "Olá *{$c->nome}*,\n" .
             "A sua candidatura foi analisada e assinada pelo DAAC.\n\n" .

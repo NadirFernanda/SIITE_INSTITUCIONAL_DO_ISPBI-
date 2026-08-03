@@ -44,6 +44,14 @@ class CandidaturaController extends Controller
             ]);
         }
 
+        if ($request->boolean('sem_recebida')) {
+            $query->whereNull('whatsapp_recebida_enviado_at');
+        }
+
+        if ($request->boolean('sem_pagamento_whatsapp')) {
+            $query->where('pagamento_confirmado', true)->whereNull('whatsapp_pagamento_enviado_at');
+        }
+
         $candidaturas = $query->paginate(20)->withQueryString();
         $totais = [
             'total'      => Candidatura::count(),
@@ -51,6 +59,8 @@ class CandidaturaController extends Controller
             'em_analise' => Candidatura::where('status', 'em_analise')->count(),
             'aprovada'   => Candidatura::where('status', 'aprovada')->count(),
             'rejeitada'  => Candidatura::where('status', 'rejeitada')->count(),
+            'sem_recebida'          => Candidatura::whereNull('whatsapp_recebida_enviado_at')->count(),
+            'sem_pagamento_whatsapp' => Candidatura::where('pagamento_confirmado', true)->whereNull('whatsapp_pagamento_enviado_at')->count(),
         ];
 
         return view('admin.candidaturas.index', compact('candidaturas', 'totais'));
@@ -113,6 +123,72 @@ class CandidaturaController extends Controller
         }
 
         return $pdf->download($filename);
+    }
+
+    public function reenviarRecebida(Candidatura $candidatura)
+    {
+        try {
+            $sucesso = app(WhatsAppService::class)->notificarCandidaturaRecebida($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao reenviar notificação de candidatura recebida: ' . $e->getMessage());
+            $sucesso = false;
+        }
+
+        if ($sucesso) {
+            $candidatura->forceFill([
+                'whatsapp_recebida_enviado_at' => now(),
+                'whatsapp_recebida_falhou_em'  => null,
+            ])->save();
+            return back()->with('success', "Mensagem de candidatura recebida reenviada a {$candidatura->nome}.");
+        }
+
+        $candidatura->forceFill(['whatsapp_recebida_falhou_em' => now()])->save();
+        return back()->with('error', "Não foi possível reenviar a mensagem a {$candidatura->nome}. Verifique o número de telefone e a ligação do WhatsApp.");
+    }
+
+    public function reenviarComprovativo(Candidatura $candidatura)
+    {
+        if (! $candidatura->isAssinada()) {
+            return back()->with('error', 'Esta candidatura ainda não foi assinada. Assine primeiro — o comprovativo não foi enviado ao candidato.');
+        }
+
+        try {
+            $sucesso = app(WhatsAppService::class)->enviarComprovativo($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao reenviar comprovativo via WhatsApp (admin): ' . $e->getMessage());
+            $sucesso = false;
+        }
+
+        if ($sucesso) {
+            return back()->with('success', "Comprovativo reenviado com sucesso para {$candidatura->nome} via WhatsApp.");
+        }
+
+        return back()->with('error', "Não foi possível enviar o comprovativo a {$candidatura->nome} via WhatsApp. Verifique o número de telefone e tente novamente.");
+    }
+
+    public function reenviarPagamento(Candidatura $candidatura)
+    {
+        if (! $candidatura->pagamento_confirmado) {
+            return back()->with('error', 'O pagamento desta candidatura ainda não foi confirmado.');
+        }
+
+        try {
+            $sucesso = app(WhatsAppService::class)->notificarPagamentoConfirmado($candidatura);
+        } catch (\Throwable $e) {
+            \Log::error('Falha ao reenviar notificação de pagamento confirmado: ' . $e->getMessage());
+            $sucesso = false;
+        }
+
+        if ($sucesso) {
+            $candidatura->forceFill([
+                'whatsapp_pagamento_enviado_at' => now(),
+                'whatsapp_pagamento_falhou_em'  => null,
+            ])->save();
+            return back()->with('success', "Mensagem de pagamento confirmado reenviada a {$candidatura->nome}.");
+        }
+
+        $candidatura->forceFill(['whatsapp_pagamento_falhou_em' => now()])->save();
+        return back()->with('error', "Não foi possível reenviar a mensagem a {$candidatura->nome}. Verifique o número de telefone e a ligação do WhatsApp.");
     }
 
     public function downloadFolhaProva(Candidatura $candidatura)

@@ -59,9 +59,17 @@ class CandidaturaController extends Controller
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
 
         try {
-            app(WhatsAppService::class)->notificarPagamentoConfirmado($candidatura);
+            if (app(WhatsAppService::class)->notificarPagamentoConfirmado($candidatura)) {
+                $candidatura->forceFill([
+                    'whatsapp_pagamento_enviado_at' => now(),
+                    'whatsapp_pagamento_falhou_em'  => null,
+                ])->save();
+            } else {
+                $candidatura->forceFill(['whatsapp_pagamento_falhou_em' => now()])->save();
+            }
         } catch (\Throwable $e) {
             \Log::error('WhatsApp pagamento confirmado: ' . $e->getMessage());
+            $candidatura->forceFill(['whatsapp_pagamento_falhou_em' => now()])->save();
         }
 
         return back()->with('success', "Pagamento da Ficha #{$candidatura->id} confirmado com sucesso.");

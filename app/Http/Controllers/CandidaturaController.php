@@ -160,9 +160,17 @@ class CandidaturaController extends Controller
             }
 
             try {
-                app(WhatsAppService::class)->notificarCandidaturaRecebida($candidatura);
+                if (app(WhatsAppService::class)->notificarCandidaturaRecebida($candidatura)) {
+                    $candidatura->forceFill([
+                        'whatsapp_recebida_enviado_at' => now(),
+                        'whatsapp_recebida_falhou_em'  => null,
+                    ])->save();
+                } else {
+                    $candidatura->forceFill(['whatsapp_recebida_falhou_em' => now()])->save();
+                }
             } catch (\Throwable $e) {
                 \Log::error('WhatsApp candidatura recebida: ' . $e->getMessage());
+                $candidatura->forceFill(['whatsapp_recebida_falhou_em' => now()])->save();
             }
         })->afterResponse();
 

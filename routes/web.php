@@ -270,6 +270,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1
     Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
     Route::get('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Admin\CandidaturaController::class, 'downloadComprovativo'])->name('candidaturas.comprovativo');
+    Route::post('candidaturas/{candidatura}/reenviar-recebida', [App\Http\Controllers\Admin\CandidaturaController::class, 'reenviarRecebida'])->name('candidaturas.reenviar-recebida');
+    Route::post('candidaturas/{candidatura}/reenviar-pagamento', [App\Http\Controllers\Admin\CandidaturaController::class, 'reenviarPagamento'])->name('candidaturas.reenviar-pagamento');
+    Route::post('candidaturas/{candidatura}/reenviar-comprovativo', [App\Http\Controllers\Admin\CandidaturaController::class, 'reenviarComprovativo'])->name('candidaturas.reenviar-comprovativo');
     Route::get('candidaturas/{candidatura}/folha-prova', [App\Http\Controllers\Admin\CandidaturaController::class, 'downloadFolhaProva'])->name('candidaturas.folha-prova');
     Route::get('candidaturas/lote/folhas-prova', [App\Http\Controllers\Admin\CandidaturaController::class, 'downloadFolhasProvaLote'])->name('candidaturas.folhas-prova-lote');
     Route::get('candidaturas/{candidatura}/edit', [App\Http\Controllers\Admin\CandidaturaController::class, 'edit'])->name('candidaturas.edit');
