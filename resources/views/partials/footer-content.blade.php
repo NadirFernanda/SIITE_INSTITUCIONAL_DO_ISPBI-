@@ -121,7 +121,7 @@
             </a>
           </div>
 
-          <a href="https://wa.me/244945027508" target="_blank" rel="noopener noreferrer"
+          <a href="https://wa.me/244922408061" target="_blank" rel="noopener noreferrer"
              class="inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-1.5 rounded-full transition-all duration-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-green-400 bg-[#25D366] hover:bg-[#1da851] hover:-translate-y-[1px]"
              style="box-shadow:0 4px 14px rgba(37,211,102,0.30);"
              aria-label="Contactar via WhatsApp">
@@ -303,7 +303,7 @@
           </a>
 
           {{-- WhatsApp (shown on mobile, contact strip is desktop-only) --}}
-          <a href="https://wa.me/244945027508"
+          <a href="https://wa.me/244922408061"
              target="_blank" rel="noopener noreferrer"
              class="flex sm:hidden items-center justify-center w-9 h-9 rounded-xl text-gray-500 bg-white/5 border border-white/[0.08] hover:text-white hover:bg-[#25D366] hover:border-[#25D366] hover:-translate-y-[3px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-400"
              aria-label="WhatsApp do ISP-Bié">
