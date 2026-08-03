@@ -178,8 +178,8 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                     <input type="tel" name="telefone2" value="{{ old('telefone2', $candidatura->telefone2) }}" maxlength="50" style="{{ $inp }}">
                 </div>
                 <div>
-                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Email <span style="color:#ef4444">*</span></label>
-                    <input type="email" name="email" value="{{ old('email', $candidatura->email) }}" required maxlength="255" style="{{ $inp }}">
+                    <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Email</label>
+                    <input type="email" name="email" value="{{ old('email', $candidatura->email) }}" maxlength="255" style="{{ $inp }}">
                     @error('email')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;">{{ $message }}</p>@enderror
                 </div>
             </div>

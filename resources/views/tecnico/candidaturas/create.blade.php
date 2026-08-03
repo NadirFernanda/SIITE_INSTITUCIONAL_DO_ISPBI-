@@ -162,7 +162,7 @@
                 </div>
                 <div>
                     @php tc_label('Email') @endphp
-                    <input type="email" name="email" value="{{ old('email') }}" required maxlength="255" style="{{ $inp }}">
+                    <input type="email" name="email" value="{{ old('email') }}" maxlength="255" style="{{ $inp }}">
                 </div>
             </div>
 
