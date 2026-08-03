@@ -141,6 +141,27 @@
         </div>
     </form>
 
+    <script>
+    (function () {
+        var input = document.querySelector('input[name="q"]');
+        if (!input) return;
+        var form = input.closest('form');
+        var timer = null;
+        input.addEventListener('input', function () {
+            clearTimeout(timer);
+            timer = setTimeout(function () { form.submit(); }, 500);
+        });
+        // Mantém o foco e o cursor no fim do texto depois da página recarregar,
+        // para o utilizador poder continuar a escrever sem interrupção.
+        if (input.value) {
+            input.focus();
+            var v = input.value;
+            input.value = '';
+            input.value = v;
+        }
+    })();
+    </script>
+
     {{-- Table --}}
     @if($candidaturas->isEmpty())
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:64px 48px;text-align:center;">
@@ -168,7 +189,7 @@
                     <tr style="border-bottom:1px solid #f1f5f9;">
                         <td style="padding:14px 18px;color:#94a3b8;font-size:0.8rem;">{{ $c->id }}</td>
                         <td style="padding:14px 18px;">
-                            <div style="font-weight:600;color:#1a2332;">{{ $c->nome }}</div>
+                            <div style="font-weight:600;color:#1a2332;">{{ mb_strtoupper($c->nome, 'UTF-8') }}</div>
                             <div style="font-size:0.8rem;color:#64748b;">{{ $c->email }}</div>
                         </td>
                         <td style="padding:14px 18px;color:#334155;">{{ $c->curso }}</td>

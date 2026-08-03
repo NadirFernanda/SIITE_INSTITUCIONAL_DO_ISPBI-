@@ -123,7 +123,7 @@
                             <td style="padding:11px 18px;font-weight:700;color:#0f1f3d;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
                             <td style="padding:11px 18px;font-weight:600;color:#1a2332;">
                                 @if($c->codigo_exame)
-                                    {{ $c->nome }}
+                                    {{ mb_strtoupper($c->nome, 'UTF-8') }}
                                 @else
                                     {{-- Nome oculto até código ser gerado --}} 
                                     —

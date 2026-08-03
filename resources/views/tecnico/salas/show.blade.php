@@ -56,7 +56,7 @@
                     @foreach($lista as $c)
                     <tr style="border-bottom:1px solid #f1f5f9;">
                         <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1e3a5f;">{{ $c->numero_lugar }}</td>
-                        <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ $c->nome }}</td>
+                        <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ mb_strtoupper($c->nome, 'UTF-8') }}</td>
                         <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
                     </tr>

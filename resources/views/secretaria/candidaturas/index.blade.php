@@ -90,6 +90,25 @@
         @endif
     </form>
 
+    <script>
+    (function () {
+        var input = document.querySelector('input[name="q"]');
+        if (!input) return;
+        var form = input.closest('form');
+        var timer = null;
+        input.addEventListener('input', function () {
+            clearTimeout(timer);
+            timer = setTimeout(function () { form.submit(); }, 500);
+        });
+        if (input.value) {
+            input.focus();
+            var v = input.value;
+            input.value = '';
+            input.value = v;
+        }
+    })();
+    </script>
+
     {{-- Tabela --}}
     @if($candidaturas->isEmpty())
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:56px;text-align:center;color:#94a3b8;font-size:0.95rem;">
@@ -112,7 +131,7 @@
                 <tr style="border-bottom:1px solid #f1f5f9;{{ $c->pagamento_confirmado ? '' : 'background:#fffbeb;' }}">
                     <td style="padding:13px 16px;font-weight:700;color:#1e3a5f;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td style="padding:13px 16px;">
-                        <div style="font-weight:600;color:#1a2332;">{{ $c->nome }}</div>
+                        <div style="font-weight:600;color:#1a2332;">{{ mb_strtoupper($c->nome, 'UTF-8') }}</div>
                         <div style="font-size:0.78rem;color:#64748b;">BI: {{ $c->bi }} · {{ $c->telefone }}</div>
                         @if($c->email)
                         <div style="font-size:0.78rem;color:#64748b;">{{ $c->email }}</div>

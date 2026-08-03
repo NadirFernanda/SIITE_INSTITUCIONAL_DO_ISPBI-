@@ -83,7 +83,7 @@
                 @foreach($lista->sortBy('id') as $c)
                 <tr>
                     <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
-                    <td class="nome-col">{{ $c->nome }}</td>
+                    <td class="nome-col">{{ mb_strtoupper($c->nome, 'UTF-8') }}</td>
                     <td>{{ $c->bi }}</td>
                     <td style="text-align:center;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
                 </tr>

@@ -162,6 +162,25 @@
         </div>
     </form>
 
+    <script>
+    (function () {
+        var input = document.querySelector('input[name="q"]');
+        if (!input) return;
+        var form = input.closest('form');
+        var timer = null;
+        input.addEventListener('input', function () {
+            clearTimeout(timer);
+            timer = setTimeout(function () { form.submit(); }, 500);
+        });
+        if (input.value) {
+            input.focus();
+            var v = input.value;
+            input.value = '';
+            input.value = v;
+        }
+    })();
+    </script>
+
     {{-- Tabela --}}
     @if($candidaturas->isEmpty())
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:56px;text-align:center;">
@@ -193,7 +212,7 @@
                 <tr style="border-bottom:1px solid #f1f5f9;">
                     <td style="padding:10px 14px;color:#94a3b8;font-size:0.78rem;font-weight:600;">{{ str_pad($c->id,5,'0',STR_PAD_LEFT) }}</td>
                     <td style="padding:10px 14px;">
-                        <div style="font-weight:600;color:#1a2332;">{{ $c->nome }}</div>
+                        <div style="font-weight:600;color:#1a2332;">{{ mb_strtoupper($c->nome, 'UTF-8') }}</div>
                         <div style="font-size:0.75rem;color:#64748b;">{{ $c->email }}</div>
                     </td>
                     <td style="padding:10px 14px;color:#475569;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
