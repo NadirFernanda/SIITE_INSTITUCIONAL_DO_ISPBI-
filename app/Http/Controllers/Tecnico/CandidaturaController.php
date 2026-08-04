@@ -17,7 +17,11 @@ class CandidaturaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Candidatura::query()->orderByDesc('created_at');
+        // Estados activos primeiro (precisam de acção), concluídas/rejeitadas por
+        // último — dentro de cada grupo, as mais recentes aparecem primeiro.
+        $query = Candidatura::query()
+            ->orderByRaw("CASE WHEN status IN ('concluida','rejeitada') THEN 1 ELSE 0 END")
+            ->orderByDesc('created_at');
 
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));

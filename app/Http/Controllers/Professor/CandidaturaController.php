@@ -16,7 +16,12 @@ class CandidaturaController extends Controller
     public function index(Request $request)
     {
         // Only show candidates that have a generated exam code — required for launching grades
-        $query = Candidatura::with('sala.disciplines')->whereNotNull('codigo_exame')->orderByDesc('created_at');
+        // Sem nota primeiro (precisa de acção), com nota lançada por último — dentro
+        // de cada grupo, as mais recentes aparecem primeiro.
+        $query = Candidatura::with('sala.disciplines')
+            ->whereNotNull('codigo_exame')
+            ->orderByRaw('CASE WHEN nota_exame IS NULL THEN 0 ELSE 1 END')
+            ->orderByDesc('created_at');
 
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));

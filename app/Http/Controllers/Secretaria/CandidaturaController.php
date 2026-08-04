@@ -13,7 +13,11 @@ class CandidaturaController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Candidatura::query()->orderByDesc('created_at');
+        // Não confirmadas primeiro (precisam de acção), confirmadas por último —
+        // dentro de cada grupo, as mais recentes aparecem primeiro.
+        $query = Candidatura::query()
+            ->orderBy('pagamento_confirmado')
+            ->orderByDesc('created_at');
 
         if ($request->filled('q')) {
             $query->buscaTexto($request->input('q'), ['nome', 'email', 'bi', 'telefone']);

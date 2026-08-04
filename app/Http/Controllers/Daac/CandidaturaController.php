@@ -18,8 +18,11 @@ class CandidaturaController extends Controller
     public function index(Request $request)
     {
         // DAAC só vê candidaturas com pagamento confirmado pela Secretaria
+        // Por assinar primeiro (precisa de acção), assinadas por último — dentro de
+        // cada grupo, as mais recentes aparecem primeiro.
         $query = Candidatura::query()
             ->where('pagamento_confirmado', true)
+            ->orderByRaw('CASE WHEN assinado_em IS NULL THEN 0 ELSE 1 END')
             ->orderByDesc('created_at');
 
         if ($request->filled('status')) {
