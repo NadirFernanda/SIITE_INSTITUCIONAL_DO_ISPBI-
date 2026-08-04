@@ -100,6 +100,7 @@ class Candidatura extends Model
             'Construção Civil',
             'Técnico de Informática',
             'Técnico de Gestão Agrícola',
+            'Electromecânica',
         ],
         'Enfermagem' => [
             'Enfermagem Geral',
@@ -128,6 +129,7 @@ class Candidatura extends Model
             'Mecânica',
             'Química',
             'Técnico de Gestão Agrícola',
+            'Electromecânica',
         ],
         'Engenharia Informática' => [
             'Informática de Gestão',
@@ -145,6 +147,7 @@ class Candidatura extends Model
             'Máquinas e Motores',
             'Técnico de Informática',
             'Técnico de Gestão Agrícola',
+            'Electromecânica',
         ],
         'Psicologia' => [
             'Ciências Humanas',
