@@ -80,6 +80,7 @@ class Candidatura extends Model
             'Filosofia',
             'Administração Pública',
             'Telecomunicações',
+            'Técnico de Informática',
         ],
         'Contabilidade e Administração' => [
             'Matemática e Física',
