@@ -79,5 +79,5 @@
         </tbody>
     </table>
 </div>
-<div style="margin-top:16px;">{{ $candidaturas->links() }}</div>
+<div style="margin-top:16px;">{{ $candidaturas->links('partials.pagination') }}</div>
 @endif

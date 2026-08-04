@@ -50,6 +50,6 @@
 
     {{-- Pagination --}}
     <div style="margin-top:20px;">
-        {{ $candidaturas->links() }}
+        {{ $candidaturas->links('partials.pagination') }}
     </div>
 @endif

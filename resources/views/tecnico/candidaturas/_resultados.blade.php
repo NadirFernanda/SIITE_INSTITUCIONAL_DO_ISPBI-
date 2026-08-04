@@ -49,6 +49,6 @@
     </div>
 
     <div style="margin-top:18px;">
-        {{ $candidaturas->links() }}
+        {{ $candidaturas->links('partials.pagination') }}
     </div>
 @endif

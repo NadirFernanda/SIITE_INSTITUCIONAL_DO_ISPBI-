@@ -145,7 +145,7 @@
     {{-- Paginação --}}
     @if($candidaturas->hasPages())
     <div style="margin-top:18px;display:flex;justify-content:center;">
-        {{ $candidaturas->links() }}
+        {{ $candidaturas->links('partials.pagination') }}
     </div>
     @endif
 
