@@ -126,6 +126,7 @@ class Candidatura extends Model
             'Energias Renováveis',
             'Mecânica',
             'Química',
+            'Técnico de Gestão Agrícola',
         ],
         'Engenharia Informática' => [
             'Informática de Gestão',
