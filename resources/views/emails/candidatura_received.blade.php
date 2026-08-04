@@ -35,7 +35,7 @@
         </div>
 
         <p style="margin-top: 28px; font-size: 0.82rem; color: #94a3b8; text-align: center;">
-            Candidatura recebida em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}<br>
+            Candidatura recebida em {{ $candidatura->created_at?->format('d/m/Y \à\s H:i') ?? '—' }}<br>
             Instituto Superior Politécnico do Bié
         </p>
     </div>

@@ -53,7 +53,7 @@
                         {{ \App\Models\Candidatura::$statusLabels[$c->status] ?? $c->status }}
                     </span>
                 </td>
-                <td style="padding:10px 14px;color:#64748b;font-size:0.8rem;white-space:nowrap;">{{ $c->created_at->format('d/m/Y') }}</td>
+                <td style="padding:10px 14px;color:#64748b;font-size:0.8rem;white-space:nowrap;">{{ $c->created_at?->format('d/m/Y') ?? '—' }}</td>
             </tr>
             @endforeach
         </tbody>

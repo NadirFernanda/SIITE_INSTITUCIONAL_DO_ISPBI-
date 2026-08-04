@@ -36,7 +36,7 @@
                             {{ \App\Models\Candidatura::$statusLabels[$c->status] ?? $c->status }}
                         </span>
                     </td>
-                    <td style="padding:14px 18px;color:#64748b;white-space:nowrap;">{{ $c->created_at->format('d/m/Y') }}</td>
+                    <td style="padding:14px 18px;color:#64748b;white-space:nowrap;">{{ $c->created_at?->format('d/m/Y') ?? '—' }}</td>
                     <td style="padding:14px 18px;text-align:center;" data-label="Ações">
                         <a href="{{ route('admin.candidaturas.show', $c) }}"
                            style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:6px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;text-decoration:none;"

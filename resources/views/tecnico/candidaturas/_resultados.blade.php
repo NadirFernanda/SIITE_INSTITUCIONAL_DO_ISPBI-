@@ -36,7 +36,7 @@
                             {{ \App\Models\Candidatura::$statusLabels[$c->status] ?? $c->status }}
                         </span>
                     </td>
-                    <td style="padding:13px 16px;color:#64748b;white-space:nowrap;">{{ $c->created_at->format('d/m/Y') }}</td>
+                    <td style="padding:13px 16px;color:#64748b;white-space:nowrap;">{{ $c->created_at?->format('d/m/Y') ?? '—' }}</td>
                     <td style="padding:13px 16px;text-align:center;">
                         <a href="{{ route('tecnico.candidaturas.show', $c) }}"
                            style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:5px 13px;border-radius:8px;font-size:0.8rem;font-weight:600;text-decoration:none;"

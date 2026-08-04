@@ -18,7 +18,7 @@
             <h1 style="font-size:1.4rem;font-weight:700;color:#1a2332;margin:0 0 3px;">
                 Ficha n.º {{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }} — {{ $candidatura->nome }}
             </h1>
-            <p style="color:#64748b;font-size:0.88rem;margin:0;">Submetida em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}</p>
+            <p style="color:#64748b;font-size:0.88rem;margin:0;">Submetida em {{ $candidatura->created_at?->format('d/m/Y \à\s H:i') ?? '—' }}</p>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
             <span style="background:{{ $cor }}20;color:{{ $cor }};padding:5px 14px;border-radius:20px;font-size:0.88rem;font-weight:700;">

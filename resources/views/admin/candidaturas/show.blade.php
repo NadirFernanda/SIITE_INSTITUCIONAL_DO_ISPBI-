@@ -14,7 +14,7 @@
     <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px;">
         <div>
             <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Candidatura #{{ $candidatura->id }}</h1>
-            <p style="color:#64748b;font-size:0.9rem;margin:0;">Recebida em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}</p>
+            <p style="color:#64748b;font-size:0.9rem;margin:0;">Recebida em {{ $candidatura->created_at?->format('d/m/Y \à\s H:i') ?? '—' }}</p>
         </div>
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
             @php $color = \App\Models\Candidatura::$statusColors[$candidatura->status] ?? '#94a3b8'; @endphp

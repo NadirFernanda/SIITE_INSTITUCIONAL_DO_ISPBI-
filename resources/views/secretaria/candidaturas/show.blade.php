@@ -26,7 +26,7 @@
             <h1 style="font-size:1.4rem;font-weight:700;color:#1a2332;margin:0 0 3px;">
                 Ficha #{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}
             </h1>
-            <p style="color:#64748b;font-size:0.88rem;margin:0;">Candidatura submetida em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}</p>
+            <p style="color:#64748b;font-size:0.88rem;margin:0;">Candidatura submetida em {{ $candidatura->created_at?->format('d/m/Y \à\s H:i') ?? '—' }}</p>
         </div>
         {{-- Estado do pagamento --}}
         @if($candidatura->pagamento_confirmado)

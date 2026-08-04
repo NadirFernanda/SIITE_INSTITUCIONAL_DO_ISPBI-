@@ -158,24 +158,25 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
             <div style="font-size:11pt;font-weight:bold;background:transparent;color:#000;padding:2px 8px;border:1px solid #ddd;border-radius:3px;display:inline-block;margin-top:1mm;">{{ $periodoLabel }}</div>
         </div>
     </div>
+    @php $dataSubmissao = $candidatura->created_at ?? $candidatura->updated_at ?? now(); @endphp
     <div style="margin-bottom:2mm;">
         <span class="badge">{{ \App\Models\Candidatura::$statusLabels[$candidatura->status] ?? $candidatura->status }}</span>
         &nbsp;
-        <span style="font-size:8pt;color:#888;">Submetido em {{ $candidatura->created_at->format('d/m/Y \à\s H:i') }}</span>
+        <span style="font-size:8pt;color:#888;">Submetido em {{ $dataSubmissao->format('d/m/Y \à\s H:i') }}</span>
     </div>
 
     {{-- DATA --}}
     <div style="font-size:10pt;margin-top:4mm;">
-        Cuito, aos <u>&nbsp;&nbsp;{{ $candidatura->created_at->format('d') }}&nbsp;&nbsp;</u>
-        de <u>&nbsp;&nbsp;{{ $candidatura->created_at->translatedFormat('F') }}&nbsp;&nbsp;</u>
-        de {{ $candidatura->created_at->format('Y') }}.
+        Cuito, aos <u>&nbsp;&nbsp;{{ $dataSubmissao->format('d') }}&nbsp;&nbsp;</u>
+        de <u>&nbsp;&nbsp;{{ $dataSubmissao->translatedFormat('F') }}&nbsp;&nbsp;</u>
+        de {{ $dataSubmissao->format('Y') }}.
     </div>
 
     {{-- AVISO --}}
     <div style="background:#fff;border:1px solid #eee;padding:4mm 6mm;margin:4mm 0;border-radius:0;">
         <strong style="color:#000;">Importante:</strong> Apresente este comprovativo (impresso ou em formato digital) no dia do exame de acesso.
         Guarde o número da sua ficha: <strong style="color:#000;">{{ str_pad($candidatura->id, 5, '0', STR_PAD_LEFT) }}</strong>.
-        Candidatura registada em {{ $candidatura->created_at->format('d/m/Y') }} às {{ $candidatura->created_at->format('H:i') }}.
+        Candidatura registada em {{ $dataSubmissao->format('d/m/Y') }} às {{ $dataSubmissao->format('H:i') }}.
     </div>
 
     @php
