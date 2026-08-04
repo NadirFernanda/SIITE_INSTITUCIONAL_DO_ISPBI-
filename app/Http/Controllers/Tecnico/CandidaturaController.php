@@ -228,7 +228,7 @@ class CandidaturaController extends Controller
             'instituicao_laboral'    => 'nullable|required_if:trabalhador,sim|string|max:255',
             'curso'                  => ['required', 'string', 'in:' . implode(',', Candidatura::$cursos),
                 Rule::unique('candidaturas')->where(fn($q) =>
-                    $q->where('bi', $request->input('bi'))->where('periodo', $candidatura->periodo)
+                    $q->where('bi', $request->input('bi'))->where('periodo', $request->input('periodo'))
                 )->ignore($candidatura->id),
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
@@ -252,7 +252,13 @@ class CandidaturaController extends Controller
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
-        $candidatura->update($data);
+        try {
+            $candidatura->update($data);
+        } catch (\Illuminate\Database\UniqueConstraintViolationException $e) {
+            return back()->withInput()->withErrors([
+                'curso' => 'Já existe uma candidatura com este Bilhete de Identidade para o curso e período indicados.',
+            ]);
+        }
 
         AuditLog::registar('editou_candidatura', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome}");
@@ -340,7 +346,13 @@ class CandidaturaController extends Controller
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
-        $candidatura = Candidatura::create($data);
+        try {
+            $candidatura = Candidatura::create($data);
+        } catch (\Illuminate\Database\UniqueConstraintViolationException $e) {
+            return back()->withInput()->withErrors([
+                'curso' => "Já existe uma candidatura com este BI para o curso no período {$periodoLabel}.",
+            ]);
+        }
 
         AuditLog::registar('criou_candidatura', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");

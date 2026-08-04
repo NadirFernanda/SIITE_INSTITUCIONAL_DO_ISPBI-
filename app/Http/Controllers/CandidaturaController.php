@@ -136,17 +136,17 @@ class CandidaturaController extends Controller
 
         try {
             $candidatura = Candidatura::create($data);
-        } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\UniqueConstraintViolationException $e) {
             // Backstop para a corrida entre a validação "unique" e o INSERT: se duas
             // submissões quase simultâneas (ex.: duplo clique) passarem ambas na
             // validação, a restrição única da base de dados rejeita a segunda — sem
             // isto, o candidato via um erro 500 em vez da mensagem amigável.
-            if ((int) ($e->errorInfo[1] ?? 0) === 19 || str_contains($e->getMessage(), 'UNIQUE constraint failed')) {
-                return back()->withInput()->withErrors([
-                    'curso' => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
-                ]);
-            }
-            throw $e;
+            // UniqueConstraintViolationException funciona com qualquer BD (Postgres
+            // em produção, SQLite em desenvolvimento) — ao contrário de verificar o
+            // código/mensagem de erro à mão, que só apanhava o caso do SQLite.
+            return back()->withInput()->withErrors([
+                'curso' => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
+            ]);
         }
 
         // Email e WhatsApp só são despachados DEPOIS da resposta ser enviada ao

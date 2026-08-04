@@ -343,7 +343,7 @@ class CandidaturaController extends Controller
             'instituicao_laboral'    => 'nullable|required_if:trabalhador,sim|string|max:255',
             'curso'                  => ['required', 'string', 'in:' . implode(',', Candidatura::$cursos),
                 \Illuminate\Validation\Rule::unique('candidaturas')->where(fn($q) =>
-                    $q->where('bi', $request->input('bi'))->where('periodo', $candidatura->periodo)
+                    $q->where('bi', $request->input('bi'))->where('periodo', $request->input('periodo'))
                 )->ignore($candidatura->id),
             ],
             'periodo'                => 'required|in:regular,pos-laboral',
@@ -351,6 +351,7 @@ class CandidaturaController extends Controller
         ], [
             'perfil.required' => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
             'perfil.in'       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
+            'curso.unique'    => 'Já existe uma candidatura com este Bilhete de Identidade para o curso e período indicados.',
         ]);
 
         $data = $request->only([
@@ -365,7 +366,15 @@ class CandidaturaController extends Controller
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
-        $candidatura->update($data);
+        try {
+            $candidatura->update($data);
+        } catch (\Illuminate\Database\UniqueConstraintViolationException $e) {
+            // Backstop: a validação "unique" acima só protege contra outro registo já
+            // existente — não contra uma corrida entre dois pedidos em simultâneo.
+            return back()->withInput()->withErrors([
+                'curso' => 'Já existe uma candidatura com este Bilhete de Identidade para o curso e período indicados.',
+            ]);
+        }
 
         AuditLog::registar('editou_candidatura', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome}");
