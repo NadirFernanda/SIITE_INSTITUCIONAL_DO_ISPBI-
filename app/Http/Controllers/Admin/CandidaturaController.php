@@ -323,7 +323,7 @@ class CandidaturaController extends Controller
             'data_nascimento'        => 'required|date|before_or_equal:' . now()->subYears(17)->format('Y-m-d'),
             'naturalidade_municipio' => 'required|string|max:255',
             'naturalidade_provincia' => 'required|string|max:255',
-            'bi'                     => 'required|string|max:20',
+            'bi'                     => ['required', 'string', 'size:14', 'regex:/^.{9}[A-Za-z]{2}.{3}$/'],
             'bi_emitido_em'          => 'required|string|max:255',
             'bi_data_emissao'        => 'required|date|before:today',
             'sexo'                   => 'required|in:masculino,feminino',
@@ -352,6 +352,8 @@ class CandidaturaController extends Controller
             'perfil.required' => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
             'perfil.in'       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
             'curso.unique'    => 'Já existe uma candidatura com este Bilhete de Identidade para o curso e período indicados.',
+            'bi.size'         => 'O Bilhete de Identidade deve ter exactamente 14 caracteres.',
+            'bi.regex'        => 'O Bilhete de Identidade deve ter letras na 10ª e 11ª posição (ex.: 024187059BA057).',
         ]);
 
         $data = $request->only([
