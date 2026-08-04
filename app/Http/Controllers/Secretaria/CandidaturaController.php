@@ -29,6 +29,10 @@ class CandidaturaController extends Controller
 
         $candidaturas = $query->paginate(25)->withQueryString();
 
+        if ($request->ajax()) {
+            return view('secretaria.candidaturas._resultados', compact('candidaturas'));
+        }
+
         $totais = [
             'total'       => Candidatura::count(),
             'confirmados' => Candidatura::where('pagamento_confirmado', true)->count(),

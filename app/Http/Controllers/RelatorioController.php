@@ -40,6 +40,11 @@ class RelatorioController extends Controller
             $query->whereDate('created_at', '<=', $request->input('data_fim'));
         }
 
+        if ($request->ajax()) {
+            $candidaturas = $query->paginate(50)->withQueryString();
+            return view('relatorios._resultados', compact('candidaturas'));
+        }
+
         // ── Estatísticas do resultado filtrado ───────────────────────────────
         $total    = (clone $query)->count();
         $masc     = (clone $query)->where('sexo', 'masculino')->count();

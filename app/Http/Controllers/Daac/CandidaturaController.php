@@ -50,6 +50,10 @@ class CandidaturaController extends Controller
 
         $candidaturas = $query->paginate(20)->withQueryString();
 
+        if ($request->ajax()) {
+            return view('daac.candidaturas._resultados', compact('candidaturas'));
+        }
+
         $totais = [
             'por_assinar'      => Candidatura::where('pagamento_confirmado', true)->whereNull('assinado_em')->count(),
             'concluida'        => Candidatura::where('status', 'concluida')->count(),

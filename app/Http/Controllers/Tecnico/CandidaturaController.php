@@ -40,6 +40,11 @@ class CandidaturaController extends Controller
         }
 
         $candidaturas = $query->paginate(20)->withQueryString();
+
+        if ($request->ajax()) {
+            return view('tecnico.candidaturas._resultados', compact('candidaturas'));
+        }
+
         $totais = [
             'total'      => Candidatura::count(),
             'pendente'   => Candidatura::where('status', 'pendente')->count(),

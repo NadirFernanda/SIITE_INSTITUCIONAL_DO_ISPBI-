@@ -53,6 +53,12 @@ class CandidaturaController extends Controller
         }
 
         $candidaturas = $query->paginate(20)->withQueryString();
+
+        // Pesquisa ao vivo (AJAX): só a tabela de resultados, sem recalcular os KPIs.
+        if ($request->ajax()) {
+            return view('admin.candidaturas._resultados', compact('candidaturas'));
+        }
+
         $totais = [
             'total'      => Candidatura::count(),
             'pendente'   => Candidatura::where('status', 'pendente')->count(),
