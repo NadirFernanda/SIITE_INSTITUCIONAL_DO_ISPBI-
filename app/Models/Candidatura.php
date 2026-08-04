@@ -130,6 +130,7 @@ class Candidatura extends Model
         'Engenharia Informática' => [
             'Informática de Gestão',
             'Matemática e Física',
+            'Ciências Físicas e Biológicas',
             'Ciências Económicas e Jurídicas',
             'Técnico de Estatística',
             'Técnico de Móveis',
