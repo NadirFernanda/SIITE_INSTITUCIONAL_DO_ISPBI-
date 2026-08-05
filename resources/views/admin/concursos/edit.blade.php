@@ -26,7 +26,7 @@
     @endif
 
     @if(session('status'))
-    <div style="background:#f0fdf4;border:1px solid #86efac;color:#0f1f3d;padding:12px 18px;border-radius:10px;margin-bottom:24px;font-weight:600;display:flex;align-items:center;gap:10px;">
+    <div style="background:#f0fdf4;border:1px solid #86efac;color:#166534;padding:12px 18px;border-radius:10px;margin-bottom:24px;font-weight:600;display:flex;align-items:center;gap:10px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         {{ session('status') }}
     </div>
@@ -46,21 +46,21 @@
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Título <span style="color:#dc2626;">*</span></label>
                     <input type="text" name="title" value="{{ old('title', $concurso->title) }}" required
                            style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                           onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                           onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                 </div>
                 <div>
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Resumo <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span></label>
                     <input type="text" name="summary" value="{{ old('summary', $concurso->summary) }}"
                            style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                           onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                           onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                            onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                 </div>
                 <div>
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Corpo <span style="font-weight:400;color:#94a3b8;font-size:0.8rem;">(opcional)</span></label>
                     <textarea name="body" rows="6"
                               style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;resize:vertical;"
-                              onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                              onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                               onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">{{ old('body', $concurso->body) }}</textarea>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                         <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Estado <span style="color:#dc2626;">*</span></label>
                         <select name="status"
                                 style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;background:#fff;"
-                                onfocus="this.style.borderColor='#1e3a5f'" onblur="this.style.borderColor='#d1d5db'">
+                                onfocus="this.style.borderColor='#1565c0'" onblur="this.style.borderColor='#d1d5db'">
                             <option value="draft" {{ (old('status',$concurso->status)==='draft')?'selected':'' }}>Rascunho</option>
                             <option value="published" {{ (old('status',$concurso->status)==='published')?'selected':'' }}>Publicado</option>
                         </select>
@@ -86,7 +86,7 @@
                         <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Data de Publicação</label>
                         <input type="datetime-local" name="publish_at" value="{{ optional($concurso->publish_at)->format('Y-m-d\TH:i') }}"
                                style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;"
-                               onfocus="this.style.borderColor='#1e3a5f';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
+                               onfocus="this.style.borderColor='#1565c0';this.style.boxShadow='0 0 0 3px rgba(21,101,192,0.1)'"
                                onblur="this.style.borderColor='#d1d5db';this.style.boxShadow='none'">
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                     <label style="display:block;font-size:0.875rem;font-weight:600;color:#374151;margin-bottom:6px;">Área / Categoria</label>
                     <select name="area"
                             style="width:100%;box-sizing:border-box;border:1px solid #d1d5db;border-radius:8px;padding:10px 14px;font-size:0.95rem;color:#1a202c;outline:none;background:#fff;"
-                            onfocus="this.style.borderColor='#1e3a5f'" onblur="this.style.borderColor='#d1d5db'">
+                            onfocus="this.style.borderColor='#1565c0'" onblur="this.style.borderColor='#d1d5db'">
                         <option value="">— Selecionar —</option>
                         <option value="Docente" {{ (old('area',$concurso->area)==='Docente')?'selected':'' }}>Docente</option>
                         <option value="Técnico Administrativo" {{ (old('area',$concurso->area)==='Técnico Administrativo')?'selected':'' }}>Técnico Administrativo</option>
@@ -112,7 +112,7 @@
             </div>
             <div style="padding:22px;">
                 <label style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px dashed #cbd5e1;border-radius:10px;padding:28px;cursor:pointer;background:#f8fafc;"
-                       onmouseover="this.style.borderColor='#1e3a5f'" onmouseout="this.style.borderColor='#cbd5e1'">
+                       onmouseover="this.style.borderColor='#1565c0'" onmouseout="this.style.borderColor='#cbd5e1'">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     <span id="drop-text" style="font-size:0.9rem;color:#64748b;font-weight:500;">Clique ou arraste ficheiros PDF/DOC/DOCX</span>
                     <input type="file" name="attachments[]" multiple accept=".pdf,.doc,.docx" style="display:none;"
@@ -126,8 +126,8 @@
                style="padding:11px 22px;border-radius:8px;border:1px solid #d1d5db;background:#fff;color:#374151;font-weight:600;font-size:0.95rem;text-decoration:none;"
                onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#fff'">Cancelar</a>
             <button type="submit"
-                    style="display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:8px;background:#1e3a5f;color:#fff;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
-                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
+                    style="display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:8px;background:#1565c0;color:#fff;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;box-shadow:0 2px 8px rgba(21,101,192,0.25);"
+                    onmouseover="this.style.background='#0d47a1'" onmouseout="this.style.background='#1565c0'">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v14a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
                 Salvar Alterações
             </button>
@@ -146,7 +146,7 @@
                 <div style="display:flex;align-items:center;gap:10px;min-width:0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     <a href="{{ Storage::url($att->path) }}" target="_blank"
-                       style="font-size:0.88rem;color:#1e3a5f;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"
+                       style="font-size:0.88rem;color:#1565c0;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"
                        onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">{{ $att->original_name }}</a>
                 </div>
                 <form action="{{ route('admin.concursos.attachments.destroy', $att->id) }}" method="POST"
