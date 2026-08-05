@@ -195,6 +195,10 @@
         clearTimeout(timer);
         timer = setTimeout(pesquisarAoVivo, 450);
     });
+
+    form.querySelectorAll('select').forEach(function (select) {
+        select.addEventListener('change', pesquisarAoVivo);
+    });
 })();
 </script>
 @endsection

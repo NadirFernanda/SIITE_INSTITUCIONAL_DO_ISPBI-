@@ -203,6 +203,10 @@
         clearTimeout(timer);
         timer = setTimeout(pesquisarAoVivo, 450);
     });
+
+    form.querySelectorAll('select, input[type="date"]').forEach(function (campo) {
+        campo.addEventListener('change', pesquisarAoVivo);
+    });
 })();
 </script>
 @endsection

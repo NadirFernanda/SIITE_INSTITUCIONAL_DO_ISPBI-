@@ -217,8 +217,14 @@
         timer = setTimeout(pesquisarAoVivo, 450);
     });
 
-    // Pesquisa/Limpar continuam a fazer um pedido normal (a pesquisa ao vivo só
-    // substitui a necessidade de clicar Pesquisar depois de escrever).
+    // Os filtros de escolha (Estado, Curso, Perfil, Período, Local) aplicam-se
+    // assim que se muda a selecção, sem precisar de clicar em Pesquisar.
+    form.querySelectorAll('select').forEach(function (select) {
+        select.addEventListener('change', pesquisarAoVivo);
+    });
+
+    // O botão Pesquisar/Limpar continua a fazer um pedido normal — serve de
+    // reforço/atalho de teclado e funciona mesmo sem JavaScript.
 })();
 </script>
 @endsection
