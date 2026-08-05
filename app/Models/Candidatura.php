@@ -60,6 +60,7 @@ class Candidatura extends Model
         'Contabilidade e Administração',
         'Engenharia Informática',
         'Engenharia em Recursos Hídricos',
+        'Gestão do Ambiente',
         'Comunicação Social',
         'Psicologia',
         'Enfermagem',
@@ -130,6 +131,9 @@ class Candidatura extends Model
             'Química',
             'Técnico de Gestão Agrícola',
             'Electromecânica',
+        ],
+        'Gestão do Ambiente' => [
+            'Engenharia em Recursos Hídricos',
         ],
         'Engenharia Informática' => [
             'Informática de Gestão',
