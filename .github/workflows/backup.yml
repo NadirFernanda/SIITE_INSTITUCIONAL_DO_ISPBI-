@@ -14,6 +14,7 @@ jobs:
       - name: Run backup script
         run: bash ./scripts/backup.sh
         env:
+          DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_DATABASE: ${{ secrets.DB_DATABASE }}

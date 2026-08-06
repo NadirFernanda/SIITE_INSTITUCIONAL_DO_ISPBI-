@@ -1,62 +1,61 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Backup diário: dump da base de dados (PostgreSQL/MySQL/SQLite, conforme
+# DB_CONNECTION), storage/app (ficheiros enviados por utilizadores) e uma
+# cópia do .env. Guarda tudo em BACKUP_DIR e apaga automaticamente o que
+# tiver mais de RETENTION_DAYS dias, para não encher o disco.
+#
+# Uso (cron, a correr como root a partir de qualquer directoria):
+#   APP_DIR=/var/www/isp-bie.ao BACKUP_DIR=/var/backups/isp-bie bash scripts/backup.sh
+
+APP_DIR="${APP_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+BACKUP_DIR="${BACKUP_DIR:-/var/backups/isp-bie}"
+RETENTION_DAYS="${RETENTION_DAYS:-14}"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-BACKUP_DIR="${BACKUP_DIR:-backups}"
-mkdir -p "$BACKUP_DIR"
 
-echo "[backup] Starting backup: $TIMESTAMP"
+install -d -m 700 "$BACKUP_DIR"
+echo "[backup] A iniciar backup: $TIMESTAMP"
 
-# Database dump (MySQL) if credentials provided and mysqldump available
-if command -v mysqldump >/dev/null 2>&1 && [ -n "${DB_DATABASE:-}" ]; then
-  echo "[backup] Dumping database ${DB_DATABASE}..."
-  mysqldump -h "${DB_HOST:-localhost}" -P "${DB_PORT:-3306}" -u "${DB_USERNAME:-}" -p"${DB_PASSWORD:-}" "${DB_DATABASE}" > "$BACKUP_DIR/${DB_DATABASE}_$TIMESTAMP.sql"
+# As credenciais de BD normalmente já vêm como variáveis de ambiente (ex.:
+# secrets do GitHub Actions). Se não vierem, lê-las do .env real da app.
+if [ -z "${DB_DATABASE:-}" ] && [ -f "$APP_DIR/.env" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$APP_DIR/.env"
+  set +a
+fi
+
+DB_CONNECTION="${DB_CONNECTION:-pgsql}"
+
+if [ "$DB_CONNECTION" = "pgsql" ] && command -v pg_dump >/dev/null 2>&1 && [ -n "${DB_DATABASE:-}" ]; then
+  echo "[backup] A criar dump PostgreSQL de ${DB_DATABASE}..."
+  PGPASSWORD="${DB_PASSWORD:-}" pg_dump \
+    -h "${DB_HOST:-127.0.0.1}" -p "${DB_PORT:-5432}" \
+    -U "${DB_USERNAME:-postgres}" -Fc \
+    -f "$BACKUP_DIR/${DB_DATABASE}_$TIMESTAMP.dump" \
+    "${DB_DATABASE}"
+elif [ "$DB_CONNECTION" = "mysql" ] && command -v mysqldump >/dev/null 2>&1 && [ -n "${DB_DATABASE:-}" ]; then
+  echo "[backup] A criar dump MySQL de ${DB_DATABASE}..."
+  mysqldump -h "${DB_HOST:-localhost}" -P "${DB_PORT:-3306}" -u "${DB_USERNAME:-}" -p"${DB_PASSWORD:-}" "${DB_DATABASE}" \
+    > "$BACKUP_DIR/${DB_DATABASE}_$TIMESTAMP.sql"
+elif [ "$DB_CONNECTION" = "sqlite" ] && [ -n "${DB_DATABASE:-}" ] && [ -f "$APP_DIR/${DB_DATABASE}" ]; then
+  echo "[backup] A copiar base de dados SQLite..."
+  cp "$APP_DIR/${DB_DATABASE}" "$BACKUP_DIR/database_$TIMESTAMP.sqlite"
 else
-  echo "[backup] Skipping DB dump; mysqldump not found or DB_DATABASE not set."
+  echo "[backup] AVISO: não foi possível fazer dump da base de dados (motor '$DB_CONNECTION' não suportado aqui, ferramenta em falta, ou DB_DATABASE vazio)." >&2
 fi
 
-# Archive storage folder (if present)
-if [ -d storage ]; then
-  echo "[backup] Archiving storage/..."
-  tar -czf "$BACKUP_DIR/storage_${TIMESTAMP}.tar.gz" storage || true
-else
-  echo "[backup] storage/ not found; skipping."
+if [ -d "$APP_DIR/storage/app" ]; then
+  echo "[backup] A arquivar storage/app..."
+  tar -czf "$BACKUP_DIR/storage_${TIMESTAMP}.tar.gz" -C "$APP_DIR" storage/app
 fi
 
-# Save .env if present
-if [ -f .env ]; then
-  echo "[backup] Copying .env"
-  cp .env "$BACKUP_DIR/.env_$TIMESTAMP"
+if [ -f "$APP_DIR/.env" ]; then
+  cp "$APP_DIR/.env" "$BACKUP_DIR/.env_$TIMESTAMP"
 fi
 
-# Create combined site backup (optional)
-echo "[backup] Creating combined archive..."
-cd "$BACKUP_DIR"
-tar -czf "site_backup_$TIMESTAMP.tar.gz" . --remove-files || true
-cd - >/dev/null
+echo "[backup] A limpar backups com mais de ${RETENTION_DAYS} dias..."
+find "$BACKUP_DIR" -maxdepth 1 -type f -mtime "+${RETENTION_DAYS}" -delete
 
-echo "[backup] Backups available in $BACKUP_DIR"
-
-# Upload to S3 if configured
-if [ -n "${BACKUP_S3_BUCKET:-}" ] && [ -n "${AWS_ACCESS_KEY_ID:-}" ]; then
-  if ! command -v aws >/dev/null 2>&1; then
-    echo "[backup] AWS CLI not found; attempting to install via pip..."
-    if command -v pip >/dev/null 2>&1; then
-      pip install --user awscli
-      export PATH="$HOME/.local/bin:$PATH"
-    else
-      echo "[backup] pip not found; please install AWS CLI manually to enable S3 uploads."
-    fi
-  fi
-  if command -v aws >/dev/null 2>&1; then
-    echo "[backup] Uploading backups to s3://${BACKUP_S3_BUCKET}/$TIMESTAMP/"
-    aws s3 cp "$BACKUP_DIR/" "s3://${BACKUP_S3_BUCKET}/$TIMESTAMP/" --recursive
-    echo "[backup] Upload complete."
-  else
-    echo "[backup] AWS CLI still unavailable; skipping upload."
-  fi
-else
-  echo "[backup] S3 upload skipped; BACKUP_S3_BUCKET or AWS credentials not provided."
-fi
-
-echo "[backup] Finished."
+echo "[backup] Concluído. Backups em $BACKUP_DIR"
