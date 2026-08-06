@@ -68,6 +68,7 @@ class Candidatura extends Model
     // Perfis de acesso por curso (conforme documento oficial)
     public static array $perfisCurso = [
         'Comunicação Social' => [
+            'Comunicação Social',
             'Língua Portuguesa e EMC',
             'Ciências Económicas e Jurídicas',
             'História e Geografia',
