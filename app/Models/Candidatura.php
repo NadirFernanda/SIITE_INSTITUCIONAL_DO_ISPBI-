@@ -113,6 +113,7 @@ class Candidatura extends Model
             'Química',
             'Produção Vegetal',
             'Produção Animal',
+            'Fisioterapia',
         ],
         'Engenharia em Recursos Hídricos' => [
             'Matemática e Física',
@@ -150,6 +151,7 @@ class Candidatura extends Model
             'Técnico de Informática',
             'Técnico de Gestão Agrícola',
             'Electromecânica',
+            'Electrónica',
         ],
         'Psicologia' => [
             'Ciências Humanas',
