@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidatura;
+use App\Support\CsvSanitizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -90,18 +91,18 @@ class RelatorioController extends Controller
         foreach ($candidaturas as $c) {
             $csv .= implode(',', [
                 str_pad($c->id, 5, '0', STR_PAD_LEFT),
-                '"' . str_replace('"','""',$c->nome) . '"',
-                '"' . str_replace('"','""',$c->bi ?? '') . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe($c->nome)) . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe($c->bi ?? '')) . '"',
                 $c->sexo ? ucfirst($c->sexo) : '',
                 $c->data_nascimento ? $c->data_nascimento->format('d/m/Y') : '',
-                '"' . str_replace('"','""',collect([$c->naturalidade_municipio,$c->naturalidade_provincia])->filter()->implode(', ')) . '"',
-                '"' . str_replace('"','""',collect([$c->residencia_bairro,$c->residencia_municipio])->filter()->implode(', ')) . '"',
-                '"' . str_replace('"','""',$c->telefone ?? '') . '"',
-                '"' . str_replace('"','""',$c->email ?? '') . '"',
-                '"' . str_replace('"','""',$c->curso) . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe(collect([$c->naturalidade_municipio,$c->naturalidade_provincia])->filter()->implode(', '))) . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe(collect([$c->residencia_bairro,$c->residencia_municipio])->filter()->implode(', '))) . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe($c->telefone ?? '')) . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe($c->email ?? '')) . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe($c->curso)) . '"',
                 $c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular',
-                '"' . str_replace('"','""',$c->habilitacoes ?? '') . '"',
-                '"' . str_replace('"','""',$c->escola_origem ?? '') . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe($c->habilitacoes ?? '')) . '"',
+                '"' . str_replace('"','""',CsvSanitizer::safe($c->escola_origem ?? '')) . '"',
                 $c->ano_conclusao ?? '',
                 isset(Candidatura::$statusLabels[$c->estado_financeiro ?? '']) ? Candidatura::$statusLabels[$c->estado_financeiro] : ($c->estado_financeiro ?? ''),
                 $c->trabalhador ? 'Sim' : 'Não',

@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Sala;
 use App\Models\CandidaturaNota;
+use App\Support\CsvSanitizer;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithTitle;
@@ -109,7 +110,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         foreach ($this->candidaturas as $c) {
             $line = [];
             $line[] = $c->codigo_exame ?? 'NÃO GERADO';
-            $line[] = mb_strtoupper($c->nome, 'UTF-8');
+            $line[] = mb_strtoupper(CsvSanitizer::safe($c->nome), 'UTF-8');
 
             $sum = 0.0;
             $hasAny = false;

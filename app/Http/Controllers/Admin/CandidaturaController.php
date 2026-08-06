@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
 use App\Services\WhatsAppService;
+use App\Support\CsvSanitizer;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -421,16 +422,16 @@ class CandidaturaController extends Controller
         foreach ($candidaturas as $c) {
             $csv .= implode(',', [
                 $c->id,
-                '"' . str_replace('"', '""', $c->nome) . '"',
-                '"' . str_replace('"', '""', $c->email) . '"',
-                '"' . str_replace('"', '""', $c->telefone) . '"',
-                '"' . str_replace('"', '""', $c->bi ?? '') . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->nome)) . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->email)) . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->telefone)) . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->bi ?? '')) . '"',
                 $c->data_nascimento ? $c->data_nascimento->format('d/m/Y') : '',
-                '"' . str_replace('"', '""', $c->curso) . '"',
-                '"' . str_replace('"', '""', $c->escola_origem ?? '') . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->curso)) . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->escola_origem ?? '')) . '"',
                 $c->ano_conclusao ?? '',
-                '"' . str_replace('"', '""', $c->necessidade_especial ?? '') . '"',
-                '"' . str_replace('"', '""', $c->habilitacoes ?? '') . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->necessidade_especial ?? '')) . '"',
+                '"' . str_replace('"', '""', CsvSanitizer::safe($c->habilitacoes ?? '')) . '"',
                 Candidatura::$statusLabels[$c->status] ?? $c->status,
                 $c->created_at->format('d/m/Y H:i'),
             ]) . "\n";
