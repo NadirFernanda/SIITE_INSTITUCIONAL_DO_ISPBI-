@@ -114,6 +114,7 @@ class Candidatura extends Model
             'Produção Vegetal',
             'Produção Animal',
             'Fisioterapia',
+            'Técnico de Farmácia',
         ],
         'Engenharia em Recursos Hídricos' => [
             'Matemática e Física',
