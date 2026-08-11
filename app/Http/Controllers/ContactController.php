@@ -33,13 +33,22 @@ class ContactController extends Controller
         $body .= "<p><strong>Assunto:</strong> " . e($data['assunto'] ?? '-') . "</p>";
         $body .= "<p><strong>Mensagem:</strong></p><p>" . nl2br(e($data['mensagem'])) . "</p>";
 
+        // Defesa em profundidade contra CVE-2026-48019 (bypass da validação
+        // 'email' do Laravel que permite injecção de cabeçalhos) — revalida o
+        // endereço antes de o usar no cabeçalho Reply-To.
+        $replyToEmail = \App\Support\MailAddressSanitizer::clean($data['email']);
+        $replyToNome  = preg_replace('/[\r\n\x00]+/', ' ', $data['nome']);
+
         try {
-            Mail::send([], [], function ($message) use ($to, $subject, $body, $data) {
+            Mail::send([], [], function ($message) use ($to, $subject, $body, $replyToEmail, $replyToNome) {
                 $message->to($to)
                     ->subject($subject)
                     ->from('noreply@isp-bie.ao', 'ISP-Bié Website')
-                    ->replyTo($data['email'], $data['nome'])
                     ->setBody($body, 'text/html');
+
+                if ($replyToEmail) {
+                    $message->replyTo($replyToEmail, $replyToNome);
+                }
             });
         } catch (\Exception $e) {
             return back()->withInput()->with('error', 'Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.');

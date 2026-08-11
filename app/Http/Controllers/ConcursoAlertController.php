@@ -22,10 +22,18 @@ class ConcursoAlertController extends Controller
             'consent' => 'accepted',
         ]);
 
+        // Revalida o email fora da regra 'email' do Laravel (defesa em profundidade
+        // contra CVE-2026-48019, um bypass dessa regra que permite caracteres de
+        // controlo capazes de injectar cabeçalhos de email mais tarde).
+        $emailLimpo = \App\Support\MailAddressSanitizer::clean($data['email']);
+        if ($emailLimpo === null) {
+            return redirect()->back()->withInput()->withErrors(['email' => 'O endereço de email indicado não é válido.']);
+        }
+
         try {
             $alert = ConcursoAlert::create([
                 'name' => $data['name'],
-                'email' => $data['email'],
+                'email' => $emailLimpo,
                 'phone' => $data['phone'] ?? null,
                 'interests' => $data['interests'] ?? null,
                 'consent' => true,

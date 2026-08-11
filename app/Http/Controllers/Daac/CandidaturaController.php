@@ -186,10 +186,11 @@ class CandidaturaController extends Controller
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso}) | Código: {$codigo}");
 
         // Email é opcional na candidatura — só enviar se o candidato tiver indicado um
-        if ($candidatura->email) {
+        $emailDestino = \App\Support\MailAddressSanitizer::clean($candidatura->email);
+        if ($emailDestino) {
             try {
                 // Enfileirar o e-mail para resposta rápida no frontend (requer queue worker configurado)
-                Mail::to($candidatura->email)->queue(new ComprovatvioConcluido($candidatura));
+                Mail::to($emailDestino)->queue(new ComprovatvioConcluido($candidatura));
             } catch (\Throwable $e) {
                 \Log::error('Falha ao enfileirar email de comprovativo concluído: ' . $e->getMessage());
             }

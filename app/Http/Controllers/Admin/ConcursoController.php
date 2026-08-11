@@ -135,21 +135,33 @@ class ConcursoController extends Controller
     }
 
     /**
-     * Queue notification emails to consenting subscribers in batches.
+     * Endereços de subscritores de alertas de concurso, prontos para uso em
+     * cabeçalhos de email: únicos, sem os endereços internos indicados em
+     * $exclude e revalidados por MailAddressSanitizer — defesa em
+     * profundidade contra CVE-2026-48019 (bypass da validação 'email' do
+     * Laravel <12.60/<13.10 que este site ainda não pode adoptar).
+     *
+     * @return \Illuminate\Support\Collection<int, string>
      */
+    protected function subscriberEmails(bool $onlyConsented, array $exclude = ['dpto.rhas@isp-bie.ao', 'geral@isp-bie.ao'])
+    {
+        $query = \App\Models\ConcursoAlert::whereNotNull('email');
+        if ($onlyConsented) {
+            $query->where('consent', true);
+        }
+
+        return $query->pluck('email')
+            ->map(fn ($e) => \App\Support\MailAddressSanitizer::clean($e))
+            ->filter()
+            ->unique()
+            ->reject(fn ($e) => in_array($e, $exclude))
+            ->values();
+    }
+
     protected function queueConcursoAlertsToSubscribers(\App\Models\Concurso $concurso)
     {
         try {
-            $emails = \App\Models\ConcursoAlert::where('consent', true)
-                ->whereNotNull('email')
-                ->pluck('email')
-                ->unique()
-                ->filter()
-                ->values();
-
-            // exclude internal addresses already notified
-            $exclude = ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'];
-            $emails = $emails->reject(function ($e) use ($exclude) { return in_array($e, $exclude); });
+            $emails = $this->subscriberEmails(onlyConsented: true);
 
             $chunkSize = 100; // adjust based on queue/provider limits
             $emails->chunk($chunkSize)->each(function ($chunk) use ($concurso) {
@@ -170,15 +182,7 @@ class ConcursoController extends Controller
     protected function sendConcursoAlertsToSubscribersSync(\App\Models\Concurso $concurso)
     {
         try {
-            $emails = \App\Models\ConcursoAlert::where('consent', true)
-                ->whereNotNull('email')
-                ->pluck('email')
-                ->unique()
-                ->filter()
-                ->values();
-
-            $exclude = ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'];
-            $emails = $emails->reject(function ($e) use ($exclude) { return in_array($e, $exclude); });
+            $emails = $this->subscriberEmails(onlyConsented: true);
 
             $chunkSize = 100;
             $emails->chunk($chunkSize)->each(function ($chunk) use ($concurso) {
@@ -242,14 +246,7 @@ class ConcursoController extends Controller
     public function resendAlertsAll(Concurso $concurso)
     {
         try {
-            $emails = \App\Models\ConcursoAlert::whereNotNull('email')
-                ->pluck('email')
-                ->unique()
-                ->filter()
-                ->values();
-
-            $exclude = ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao'];
-            $emails = $emails->reject(function ($e) use ($exclude) { return in_array($e, $exclude); });
+            $emails = $this->subscriberEmails(onlyConsented: false);
 
             $chunkSize = 100;
             $emails->chunk($chunkSize)->each(function ($chunk) use ($concurso) {
@@ -265,12 +262,7 @@ class ConcursoController extends Controller
             \Log::error('Falha ao reenviar alertas (ALL) para concurso '.$concurso->id.': '.$e->getMessage());
             // fallback: try synchronous send
             try {
-                $emails = \App\Models\ConcursoAlert::whereNotNull('email')
-                    ->pluck('email')
-                    ->unique()
-                    ->filter()
-                    ->values()
-                    ->reject(function ($e) { return in_array($e, ['dpto.rhas@isp-bie.ao','geral@isp-bie.ao']); });
+                $emails = $this->subscriberEmails(onlyConsented: false);
                 $emails->chunk(100)->each(function ($chunk) use ($concurso) {
                     try { Mail::to($chunk->toArray())->send(new ConcursoPublished($concurso)); } catch (\Throwable $e) { \Log::error('Falha no envio sincronico (ALL): '.$e->getMessage()); }
                 });

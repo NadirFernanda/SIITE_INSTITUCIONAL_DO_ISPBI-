@@ -48,7 +48,7 @@ class AdminNoticiaController extends Controller
             'texto'         => 'required|string|max:65535',
             'imagem'        => 'nullable|image|max:2048',
             'documentos'    => 'nullable|array|max:20',
-            'documentos.*'  => 'file|extensions:pdf,doc,docx|max:10240',
+            'documentos.*'  => 'file|mimes:pdf,doc,docx|max:10240',
             'data'          => 'required|date',
             'institucional' => 'required|boolean',
         ], [
@@ -113,7 +113,7 @@ class AdminNoticiaController extends Controller
             'texto'         => 'required|string|max:65535',
             'imagem'        => 'nullable|image|max:2048',
             'documentos'    => 'nullable|array|max:20',
-            'documentos.*'  => 'file|extensions:pdf,doc,docx|max:10240',
+            'documentos.*'  => 'file|mimes:pdf,doc,docx|max:10240',
             'data'          => 'required|date',
             'institucional' => 'required|boolean',
         ], [
