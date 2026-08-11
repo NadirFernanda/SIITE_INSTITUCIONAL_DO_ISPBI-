@@ -17,7 +17,15 @@ return Application::configure(basePath: dirname(__DIR__))
         // no mesmo "balde" de rate limiting (login, throttle global de 200/min),
         // causando falhas aleatórias e intermitentes em pedidos legítimos
         // (incluindo logins) quando há vários utilizadores em simultâneo.
-        $middleware->trustProxies(at: '*');
+        //
+        // IMPORTANTE: confiar em '*' (qualquer proxy) permite que QUALQUER
+        // visitante falsifique o seu próprio IP através do cabeçalho
+        // X-Forwarded-For, contornando por completo o rate-limiting por IP
+        // (login, candidaturas, alertas, alumni, revista). Só o Nginx local
+        // (mesma máquina) deve ser confiado — se no futuro existir um proxy
+        // adicional à frente (ex.: CDN/load balancer noutra máquina), o IP
+        // dele tem de ser adicionado aqui, nunca voltar a usar '*'.
+        $middleware->trustProxies(at: ['127.0.0.1', '::1']);
 
         // Global rate limit: 200 requests/minute per IP for all web routes.
         // Individual sensitive endpoints (login, contact, alumni, revista) have stricter limits.
