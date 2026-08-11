@@ -84,6 +84,7 @@ class Candidatura extends Model
             'Técnico de Informática',
         ],
         'Contabilidade e Administração' => [
+            'Informática de Gestão',
             'Matemática e Física',
             'Ciências Físicas e Biológicas',
             'Comércio',
@@ -155,6 +156,7 @@ class Candidatura extends Model
             'Electrónica',
         ],
         'Psicologia' => [
+            'Análises Clínicas',
             'Ciências Humanas',
             'Ciências Económicas e Jurídicas',
             'História e Geografia',
