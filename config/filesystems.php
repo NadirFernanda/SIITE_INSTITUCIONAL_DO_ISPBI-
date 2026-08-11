@@ -33,7 +33,13 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // 'serve' desligado de propósito: esta app nunca guarda nada neste
+            // disco (todos os uploads usam explicitamente o disco 'public'),
+            // mas 'serve' => true regista uma rota pública SEM autenticação
+            // (GET /storage/{path}) que serviria qualquer ficheiro aqui
+            // colocado. É o disco default do Laravel — bastaria um futuro
+            // Storage::put() sem indicar o disco para expor algo por engano.
+            'serve' => false,
             'throw' => false,
             'report' => false,
         ],
