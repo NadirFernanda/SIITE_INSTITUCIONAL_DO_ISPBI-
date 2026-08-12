@@ -41,8 +41,16 @@ class ReenviarNotificacoesPendentes extends Command
         }
 
         if ($tipo === 'recebida') {
+            // Restrito a quem o texto da mensagem ("aguarde a confirmação do
+            // pagamento") ainda é verdade, e só a falhas reais confirmadas —
+            // exclui candidaturas já avançadas (pagamento confirmado) e as que
+            // podem já ter sido entregues com sucesso mas cujo registo na BD
+            // falhou (whatsapp_recebida_falhou_em nulo também).
             $pendentes = Candidatura::whereNull('whatsapp_recebida_enviado_at')
+                ->whereNotNull('whatsapp_recebida_falhou_em')
                 ->whereNotNull('telefone')
+                ->where('status', 'pendente')
+                ->where('pagamento_confirmado', false)
                 ->orderBy('id')->get();
             $enviarFn = fn ($c) => $whatsapp->notificarCandidaturaRecebida($c);
             $campoEnviado = 'whatsapp_recebida_enviado_at';
