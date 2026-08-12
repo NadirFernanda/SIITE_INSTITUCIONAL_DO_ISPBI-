@@ -321,7 +321,7 @@ class CandidaturaController extends Controller
             'nome'                   => 'required|string|max:255',
             'filiacao_pai'           => 'nullable|string|max:255',
             'filiacao_mae'           => 'nullable|string|max:255',
-            'data_nascimento'        => 'required|date|before_or_equal:' . now()->subYears(17)->format('Y-m-d'),
+            'data_nascimento'        => 'required|date|before_or_equal:' . now()->subYears(17)->endOfYear()->format('Y-m-d'),
             'naturalidade_municipio' => 'required|string|max:255',
             'naturalidade_provincia' => 'required|string|max:255',
             'bi'                     => ['required', 'string', 'size:14', 'regex:/^.{9}[A-Za-z]{2}.{3}$/'],

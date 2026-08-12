@@ -58,7 +58,7 @@
             <div style="margin-bottom:14px;">
                 @php tc_label('Data de Nascimento') @endphp
                 <input type="date" name="data_nascimento" value="{{ old('data_nascimento') }}" required
-                       max="{{ now()->subYears(17)->format('Y-m-d') }}"
+                       max="{{ now()->subYears(17)->endOfYear()->format('Y-m-d') }}"
                        style="{{ $inp }}max-width:200px;">
                 <span style="font-size:0.76rem;color:#94a3b8;margin-left:8px;">Idade mínima: 17 anos</span>
                 @error('data_nascimento')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
