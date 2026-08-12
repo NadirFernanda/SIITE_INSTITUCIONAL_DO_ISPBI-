@@ -69,6 +69,7 @@ class Candidatura extends Model
     public static array $perfisCurso = [
         'Comunicação Social' => [
             'Comunicação Social',
+            'Pré-Escolar',
             'Língua Portuguesa e EMC',
             'Ciências Económicas e Jurídicas',
             'História e Geografia',
@@ -85,6 +86,7 @@ class Candidatura extends Model
         ],
         'Contabilidade e Administração' => [
             'Informática de Gestão',
+            'Pré-Escolar',
             'Matemática e Física',
             'Ciências Físicas e Biológicas',
             'Comércio',
