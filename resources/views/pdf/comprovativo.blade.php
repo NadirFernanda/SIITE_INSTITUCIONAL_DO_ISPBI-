@@ -182,6 +182,13 @@ html, body { width:100%; font-family: DejaVu Sans, Arial, sans-serif; font-size:
     @php
         $assinante      = $candidatura->isAssinada() ? $candidatura->assinante : null;
         $sigImg         = $assinante?->signature_image ?? null;
+        // Se o utilizador do DAAC não tiver uma imagem de assinatura carregada
+        // manualmente (Admin > Utilizadores > Assinatura), gerar uma a partir do
+        // nome — mesmo mecanismo já usado para o candidato, para nunca ficar em
+        // branco só porque ninguém carregou uma assinatura para aquele utilizador.
+        if (! $sigImg && $assinante) {
+            $sigImg = \App\Services\SignatureImageGenerator::generate($assinante->name);
+        }
         // Assinatura do candidato gerada na hora a partir do nome — não fica guardada
         // em lado nenhum, é recalculada sempre que o comprovativo é gerado.
         $candidatoSigImg = \App\Services\SignatureImageGenerator::generate($candidatura->nome);
