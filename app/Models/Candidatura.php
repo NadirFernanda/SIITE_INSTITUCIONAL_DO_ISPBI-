@@ -83,6 +83,7 @@ class Candidatura extends Model
             'Administração Pública',
             'Telecomunicações',
             'Técnico de Informática',
+            'Artes Visuais',
         ],
         'Contabilidade e Administração' => [
             'Informática de Gestão',
@@ -178,6 +179,7 @@ class Candidatura extends Model
             'Química',
             'Filosofia',
             'Produção Animal',
+            'Artes Visuais',
         ],
     ];
 
