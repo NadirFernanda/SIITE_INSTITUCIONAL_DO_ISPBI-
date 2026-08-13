@@ -151,14 +151,6 @@
                 <input type="date" name="data_fim" value="{{ request('data_fim') }}"
                        style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.87rem;box-sizing:border-box;">
             </div>
-            {{-- Contador --}}
-            @if(request()->hasAny(['q','status','periodo','sexo','curso','estado_financeiro','trabalhador','naturalidade_provincia','data_inicio','data_fim']))
-            <div style="display:flex;align-items:flex-end;padding-bottom:2px;">
-                <span style="font-size:0.8rem;color:#64748b;background:#f1f5f9;padding:4px 12px;border-radius:20px;white-space:nowrap;">
-                    {{ $candidaturas->total() }} resultado{{ $candidaturas->total() !== 1 ? 's':'' }}
-                </span>
-            </div>
-            @endif
         </div>
     </form>
 

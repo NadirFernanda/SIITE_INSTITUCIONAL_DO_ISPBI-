@@ -1,6 +1,14 @@
 @php
     $efLabels = $efLabels ?? ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];
 @endphp
+@if(request()->hasAny(['q','status','periodo','sexo','curso','estado_financeiro','trabalhador','naturalidade_provincia','data_inicio','data_fim','necessidade_especial']))
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px;">
+    <div style="background:#fff;border:2px solid #1565c0;border-radius:14px;padding:18px 22px;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;color:#1565c0;line-height:1;">{{ $candidaturas->total() }}</div>
+        <div style="font-size:0.8rem;color:#64748b;margin-top:6px;font-weight:600;">Resultado{{ $candidaturas->total() !== 1 ? 's' : '' }} do filtro</div>
+    </div>
+</div>
+@endif
 {{-- Tabela --}}
 @if($candidaturas->isEmpty())
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:56px;text-align:center;">
