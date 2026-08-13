@@ -1,8 +1,11 @@
-<div style="margin-bottom:12px;">
-    <span style="font-size:0.8rem;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px;">
-        {{ $candidaturas->total() }} resultado{{ $candidaturas->total() !== 1 ? 's' : '' }}
-    </span>
+@if(request()->hasAny(['q','status','curso','periodo','local_inscricao','necessidade_especial']))
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px;">
+    <div style="background:#fff;border:2px solid #1e3a5f;border-radius:14px;padding:18px 22px;text-align:center;">
+        <div class="kpi-value" style="font-weight:800;color:#1e3a5f;line-height:1;">{{ $candidaturas->total() }}</div>
+        <div style="font-size:0.8rem;color:#64748b;margin-top:6px;font-weight:600;">Resultado{{ $candidaturas->total() !== 1 ? 's' : '' }} do filtro</div>
+    </div>
 </div>
+@endif
 
 {{-- Table --}}
 @if($candidaturas->isEmpty())
