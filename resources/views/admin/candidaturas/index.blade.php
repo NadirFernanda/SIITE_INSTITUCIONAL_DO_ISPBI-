@@ -96,7 +96,7 @@
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
                 Pesquisar
             </button>
-            @if(request()->hasAny(['q','status','curso','periodo','local_inscricao']))
+            @if(request()->hasAny(['q','status','curso','periodo','local_inscricao','necessidade_especial']))
             <a href="{{ route('admin.candidaturas.index') }}"
                style="background:#f1f5f9;color:#64748b;border-radius:10px;padding:10px 16px;font-weight:600;font-size:0.88rem;text-decoration:none;white-space:nowrap;display:flex;align-items:center;gap:5px;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -165,7 +165,17 @@
                     @endforeach
                 </select>
             </div>
-            @if(request()->hasAny(['q','status','curso','periodo','local_inscricao']))
+            <div style="min-width:200px;">
+                <label style="display:block;font-size:0.75rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;">Necessidade de Educação Especial</label>
+                <select name="necessidade_especial" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.88rem;background:#f8fafc;">
+                    <option value="">Todas</option>
+                    <option value="Nenhuma" {{ request('necessidade_especial') === 'Nenhuma' ? 'selected' : '' }}>Nenhuma</option>
+                    <option value="Filhos de antigos combatentes" {{ request('necessidade_especial') === 'Filhos de antigos combatentes' ? 'selected' : '' }}>Filhos de antigos combatentes</option>
+                    <option value="Áreas Steam" {{ request('necessidade_especial') === 'Áreas Steam' ? 'selected' : '' }}>Áreas Steam</option>
+                    <option value="Portadores de deficiência" {{ request('necessidade_especial') === 'Portadores de deficiência' ? 'selected' : '' }}>Portadores de deficiência</option>
+                </select>
+            </div>
+            @if(request()->hasAny(['q','status','curso','periodo','local_inscricao','necessidade_especial']))
             <div style="padding-bottom:2px;">
                 <span style="font-size:0.8rem;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px;">
                     {{ $candidaturas->total() }} resultado{{ $candidaturas->total() !== 1 ? 's' : '' }}

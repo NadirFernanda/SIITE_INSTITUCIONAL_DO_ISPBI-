@@ -149,8 +149,17 @@
                 @endforeach
             </select>
         </div>
+        <div>
+            <select name="necessidade_especial" style="border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#f8fafc;">
+                <option value="">Necessidade de Educação Especial: Todas</option>
+                <option value="Nenhuma" {{ request('necessidade_especial') === 'Nenhuma' ? 'selected' : '' }}>Nenhuma</option>
+                <option value="Filhos de antigos combatentes" {{ request('necessidade_especial') === 'Filhos de antigos combatentes' ? 'selected' : '' }}>Filhos de antigos combatentes</option>
+                <option value="Áreas Steam" {{ request('necessidade_especial') === 'Áreas Steam' ? 'selected' : '' }}>Áreas Steam</option>
+                <option value="Portadores de deficiência" {{ request('necessidade_especial') === 'Portadores de deficiência' ? 'selected' : '' }}>Portadores de deficiência</option>
+            </select>
+        </div>
         <button type="submit" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:600;cursor:pointer;font-size:0.88rem;">Filtrar</button>
-        @if(request()->hasAny(['q','status','curso']))
+        @if(request()->hasAny(['q','status','curso','necessidade_especial']))
         <a href="{{ route('daac.candidaturas.index') }}" style="background:#f1f5f9;color:#475569;border-radius:8px;padding:8px 14px;font-weight:600;font-size:0.88rem;text-decoration:none;">Limpar</a>
         @endif
     </form>

@@ -33,6 +33,10 @@ class CandidaturaController extends Controller
             $query->where('curso', $request->input('curso'));
         }
 
+        if ($request->filled('necessidade_especial')) {
+            $query->where('necessidade_especial', $request->input('necessidade_especial'));
+        }
+
         if ($request->boolean('sem_comprovativo')) {
             $query->whereNull('comprovativo_gerado_em');
         }
