@@ -175,13 +175,6 @@
                     <option value="Portadores de deficiência" {{ request('necessidade_especial') === 'Portadores de deficiência' ? 'selected' : '' }}>Portadores de deficiência</option>
                 </select>
             </div>
-            @if(request()->hasAny(['q','status','curso','periodo','local_inscricao','necessidade_especial']))
-            <div style="padding-bottom:2px;">
-                <span style="font-size:0.8rem;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px;">
-                    {{ $candidaturas->total() }} resultado{{ $candidaturas->total() !== 1 ? 's' : '' }}
-                </span>
-            </div>
-            @endif
         </div>
     </form>
 

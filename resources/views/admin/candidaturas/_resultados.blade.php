@@ -1,3 +1,9 @@
+<div style="margin-bottom:12px;">
+    <span style="font-size:0.8rem;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px;">
+        {{ $candidaturas->total() }} resultado{{ $candidaturas->total() !== 1 ? 's' : '' }}
+    </span>
+</div>
+
 {{-- Table --}}
 @if($candidaturas->isEmpty())
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:64px 48px;text-align:center;">
