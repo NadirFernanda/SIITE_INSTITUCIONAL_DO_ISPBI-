@@ -84,6 +84,8 @@ class Candidatura extends Model
             'Telecomunicações',
             'Técnico de Informática',
             'Artes Visuais',
+            'Técnico de Finanças',
+            'Técnico de Contabilidade',
         ],
         'Contabilidade e Administração' => [
             'Informática de Gestão',
