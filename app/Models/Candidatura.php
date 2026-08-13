@@ -106,6 +106,7 @@ class Candidatura extends Model
             'Técnico de Informática',
             'Técnico de Gestão Agrícola',
             'Electromecânica',
+            'Ensino Primário',
         ],
         'Enfermagem' => [
             'Enfermagem Geral',
@@ -157,6 +158,7 @@ class Candidatura extends Model
             'Técnico de Gestão Agrícola',
             'Electromecânica',
             'Electrónica',
+            'Ensino Primário',
         ],
         'Psicologia' => [
             'Análises Clínicas',
@@ -168,7 +170,6 @@ class Candidatura extends Model
             'Enfermagem Geral',
             'Educação Moral e Cívica',
             'Autarquias Locais',
-            'Ensino Primário',
             'Propedêutico',
             'Administração Pública',
             'Produção Vegetal',
