@@ -215,6 +215,7 @@ class Candidatura extends Model
             'Filosofia',
             'Produção Animal',
             'Artes Visuais',
+            'Ensino Primário',
         ],
     ];
 
