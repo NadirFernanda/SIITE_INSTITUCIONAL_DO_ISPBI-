@@ -148,6 +148,7 @@ class Candidatura extends Model
             'Enfermagem Geral',
             'Análises Clínicas',
             'Radiologia',
+            'Ciências Físicas e Biológicas',
             'Biologia e Química',
             'Educação Física',
             'Química',
@@ -158,7 +159,7 @@ class Candidatura extends Model
         ],
         'Engenharia em Recursos Hídricos' => [
             'Matemática e Física',
-            'Ciências Económicas e Jurídicas',
+            'Ciências Físicas e Biológicas',
             'Técnico de Estatística',
             'Telecomunicações',
             'Técnico de Móveis',
@@ -177,7 +178,7 @@ class Candidatura extends Model
         'Engenharia Informática' => [
             'Informática de Gestão',
             'Matemática e Física',
-            'Ciências Económicas e Jurídicas',
+            'Ciências Físicas e Biológicas',
             'Técnico de Estatística',
             'Técnico de Móveis',
             'Instalação Eléctrica',
