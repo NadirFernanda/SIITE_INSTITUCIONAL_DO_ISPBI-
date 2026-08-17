@@ -143,6 +143,7 @@ class Candidatura extends Model
             'Técnico de Gestão Agrícola',
             'Electromecânica',
             'Ensino Primário',
+            'Estomatologia',
         ],
         'Enfermagem' => [
             'Enfermagem Geral',
@@ -193,6 +194,7 @@ class Candidatura extends Model
             'Electromecânica',
             'Electrónica',
             'Ensino Primário',
+            'Estomatologia',
         ],
         'Psicologia' => [
             'Análises Clínicas',
