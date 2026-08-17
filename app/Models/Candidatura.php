@@ -119,6 +119,7 @@ class Candidatura extends Model
             'Técnico de Móveis',
             'Técnico de Secretariado',
             'Telecomunicações',
+            'Técnico Desenhador Projetista',
         ],
         'Contabilidade e Administração' => [
             'Informática de Gestão',
@@ -144,6 +145,7 @@ class Candidatura extends Model
             'Electromecânica',
             'Ensino Primário',
             'Estomatologia',
+            'Técnico Desenhador Projetista',
         ],
         'Enfermagem' => [
             'Enfermagem Geral',
@@ -175,6 +177,7 @@ class Candidatura extends Model
             'Técnico de Gestão Agrícola',
             'Electromecânica',
             'Gestão do Ambiente',
+            'Técnico Desenhador Projetista',
         ],
         'Engenharia Informática' => [
             'Informática de Gestão',
@@ -195,6 +198,7 @@ class Candidatura extends Model
             'Electrónica',
             'Ensino Primário',
             'Estomatologia',
+            'Técnico Desenhador Projetista',
         ],
         'Psicologia' => [
             'Análises Clínicas',
