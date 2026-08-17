@@ -243,7 +243,7 @@
                                             <input type="date" name="data_nascimento"
                                                    value="{{ old('data_nascimento') }}"
                                                    required
-                                                   max="{{ now()->subYears(17)->endOfYear()->format('Y-m-d') }}"
+                                                   max="{{ now()->subYears(17)->endOfYear()->format('Y-m-d') }}" min="{{ now()->subYears(100)->format('Y-m-d') }}"
                                                    class="{{ $inp }} @error('data_nascimento') border-red-400 @enderror" style="max-width:220px;">
                                             <p class="text-xs text-gray-400 mt-1">Idade mínima: 17 anos</p>
                                             @error('data_nascimento')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror

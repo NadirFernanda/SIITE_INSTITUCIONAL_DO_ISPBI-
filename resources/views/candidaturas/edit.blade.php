@@ -63,7 +63,7 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Data de Nascimento <span style="color:#ef4444">*</span></label>
                 <input type="date" name="data_nascimento"
                        value="{{ old('data_nascimento', $candidatura->data_nascimento?->format('Y-m-d')) }}"
-                       required max="{{ now()->subYears(17)->endOfYear()->format('Y-m-d') }}"
+                       required max="{{ now()->subYears(17)->endOfYear()->format('Y-m-d') }}" min="{{ now()->subYears(100)->format('Y-m-d') }}"
                        style="{{ $inp }}max-width:200px;">
                 <span style="font-size:0.76rem;color:#94a3b8;margin-left:8px;">Idade mínima: 17 anos</span>
                 @error('data_nascimento')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;">{{ $message }}</p>@enderror

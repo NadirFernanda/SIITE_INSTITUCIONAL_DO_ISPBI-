@@ -38,8 +38,10 @@ class CandidaturaController extends Controller
             'filiacao_pai'           => 'nullable|string|max:255',
             'filiacao_mae'           => 'nullable|string|max:255',
             // Aceita quem completa 17 anos até ao fim do ano civil da candidatura
-            // (não exige tê-los feitos já na data da submissão).
-            'data_nascimento'        => 'required|date|before_or_equal:' . now()->subYears(17)->endOfYear()->format('Y-m-d'),
+            // (não exige tê-los feitos já na data da submissão). O limite inferior
+            // (100 anos) evita datas manifestamente erradas como "ano 40" digitadas
+            // por engano no campo de ano.
+            'data_nascimento'        => 'required|date|after:' . now()->subYears(100)->format('Y-m-d') . '|before_or_equal:' . now()->subYears(17)->endOfYear()->format('Y-m-d'),
             'naturalidade_municipio' => 'required|string|max:255',
             'naturalidade_provincia' => 'required|string|max:255',
             'bi'                     => ['required', 'string', 'size:14', 'regex:/^.{9}[A-Za-z]{2}.{3}$/'],
@@ -79,6 +81,7 @@ class CandidaturaController extends Controller
             'bi.regex'                       => 'O Bilhete de Identidade deve ter letras na 10ª e 11ª posição (ex.: 024187059BA057).',
             'data_nascimento.required'       => 'A data de nascimento é obrigatória.',
             'data_nascimento.before_or_equal'=> 'É necessário completar 17 anos até ao final deste ano para se candidatar.',
+            'data_nascimento.after'          => 'A data de nascimento indicada não é válida. Verifique se o ano está correcto.',
             'filiacao_pai.required'          => 'O nome do pai é obrigatório.',
             'filiacao_mae.required'          => 'O nome da mãe é obrigatório.',
             'naturalidade_municipio.required'=> 'O município de naturalidade é obrigatório.',

@@ -321,7 +321,7 @@ class CandidaturaController extends Controller
             'nome'                   => 'required|string|max:255',
             'filiacao_pai'           => 'nullable|string|max:255',
             'filiacao_mae'           => 'nullable|string|max:255',
-            'data_nascimento'        => 'required|date|before_or_equal:' . now()->subYears(17)->endOfYear()->format('Y-m-d'),
+            'data_nascimento'        => 'required|date|after:' . now()->subYears(100)->format('Y-m-d') . '|before_or_equal:' . now()->subYears(17)->endOfYear()->format('Y-m-d'),
             'naturalidade_municipio' => 'required|string|max:255',
             'naturalidade_provincia' => 'required|string|max:255',
             'bi'                     => ['required', 'string', 'size:14', 'regex:/^.{9}[A-Za-z]{2}.{3}$/'],
@@ -355,6 +355,8 @@ class CandidaturaController extends Controller
             'curso.unique'    => 'Já existe uma candidatura com este Bilhete de Identidade para o curso e período indicados.',
             'bi.size'         => 'O Bilhete de Identidade deve ter exactamente 14 caracteres.',
             'bi.regex'        => 'O Bilhete de Identidade deve ter letras na 10ª e 11ª posição (ex.: 024187059BA057).',
+            'data_nascimento.before_or_equal' => 'É necessário completar 17 anos até ao final deste ano.',
+            'data_nascimento.after'           => 'A data de nascimento indicada não é válida. Verifique se o ano está correcto.',
         ]);
 
         $data = $request->only([
