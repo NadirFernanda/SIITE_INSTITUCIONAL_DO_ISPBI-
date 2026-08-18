@@ -479,11 +479,11 @@ Route::view('/calendario-academico', 'pages.calendario-academico')->name('calend
 Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
 // Limite bem mais alto do que o costume: muitos candidatos partilham o mesmo IP
 // (redes de escola/universidade, Wi-Fi de campus, CGNAT de operadoras móveis),
-// e com 3000+ pessoas em simultâneo em horário de pico, mesmo 30/min por IP
+// e com 1000+ pessoas em simultâneo em horário de pico, um limite baixo por IP
 // esgotava-se rapidamente e bloqueava candidatos legítimos atrás do mesmo IP
 // (erro 429, obrigando a várias tentativas). A submissão já está protegida
 // contra duplicados a sério pela restrição única de BI+curso+período.
-Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:300,1');
+Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:1000,1');
 Route::get('/candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\CandidaturaController::class, 'comprovativo'])->name('candidaturas.comprovativo');
 Route::get('/candidaturas/{candidatura}/pdf', [App\Http\Controllers\CandidaturaController::class, 'downloadPdf'])->name('candidaturas.pdf');
 
