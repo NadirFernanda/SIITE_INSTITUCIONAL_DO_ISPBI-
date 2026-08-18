@@ -477,11 +477,13 @@ Route::view('/cultura', 'pages.cultura')->name('cultura');
 Route::view('/calendario-academico', 'pages.calendario-academico')->name('calendario-academico');
 
 Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
-// Limite mais alto do que o costume: muitos candidatos partilham o mesmo IP
+// Limite bem mais alto do que o costume: muitos candidatos partilham o mesmo IP
 // (redes de escola/universidade, Wi-Fi de campus, CGNAT de operadoras móveis),
-// e com 3000+ pessoas em simultâneo o limite de 5/min por IP bloquearia
-// candidatos legítimos atrás do mesmo IP.
-Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:30,1');
+// e com 3000+ pessoas em simultâneo em horário de pico, mesmo 30/min por IP
+// esgotava-se rapidamente e bloqueava candidatos legítimos atrás do mesmo IP
+// (erro 429, obrigando a várias tentativas). A submissão já está protegida
+// contra duplicados a sério pela restrição única de BI+curso+período.
+Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class, 'store'])->name('candidaturas.store')->middleware('throttle:300,1');
 Route::get('/candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\CandidaturaController::class, 'comprovativo'])->name('candidaturas.comprovativo');
 Route::get('/candidaturas/{candidatura}/pdf', [App\Http\Controllers\CandidaturaController::class, 'downloadPdf'])->name('candidaturas.pdf');
 
