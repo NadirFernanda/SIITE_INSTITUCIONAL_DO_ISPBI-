@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\CandidaturaReceived;
+use App\Jobs\NotificarCandidaturaRecebida;
 use App\Models\Candidatura;
 use App\Services\WhatsAppService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rule;
 
@@ -156,30 +155,11 @@ class CandidaturaController extends Controller
             ]);
         }
 
-        // Email e WhatsApp só são despachados DEPOIS da resposta ser enviada ao
-        // candidato — com muita gente a submeter em simultâneo, esperar pela API do
-        // WhatsApp (até 10s) ou pelo SMTP em cada pedido tornaria o site lento/instável.
-        dispatch(function () use ($candidatura) {
-            try {
-                Mail::to('geral@isp-bie.ao')->send(new CandidaturaReceived($candidatura));
-            } catch (\Throwable $e) {
-                \Log::error('Falha ao enviar email de candidatura: ' . $e->getMessage());
-            }
-
-            try {
-                if (app(WhatsAppService::class)->notificarCandidaturaRecebida($candidatura)) {
-                    $candidatura->forceFill([
-                        'whatsapp_recebida_enviado_at' => now(),
-                        'whatsapp_recebida_falhou_em'  => null,
-                    ])->save();
-                } else {
-                    $candidatura->forceFill(['whatsapp_recebida_falhou_em' => now()])->save();
-                }
-            } catch (\Throwable $e) {
-                \Log::error('WhatsApp candidatura recebida: ' . $e->getMessage());
-                $candidatura->forceFill(['whatsapp_recebida_falhou_em' => now()])->save();
-            }
-        })->afterResponse();
+        // Email e WhatsApp correm numa fila real (queue worker), não no próprio
+        // processo PHP-FPM que respondeu ao candidato — com muita gente a submeter
+        // em simultâneo, manter cada processo ocupado até 10s à espera da API do
+        // WhatsApp esgotava rapidamente o pool de processos disponíveis.
+        NotificarCandidaturaRecebida::dispatch($candidatura);
 
         // URL assinada e com expiração (72h) — só o candidato que acabou de submeter
         // consegue aceder ao comprovativo. Impede enumeração de IDs por terceiros.
