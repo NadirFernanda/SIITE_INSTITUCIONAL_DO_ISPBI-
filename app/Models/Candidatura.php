@@ -92,6 +92,7 @@ class Candidatura extends Model
             'Ensino Primário',
             'Filosofia',
             'Fisioterapia',
+            'Francês e EMC',
             'Gestão de Recursos Humanos',
             'Gestão do Ambiente',
             'História e Geografia',
