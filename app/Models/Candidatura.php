@@ -304,6 +304,17 @@ class Candidatura extends Model
             return $query;
         }
 
+        // O nº de ficha (ID) é único — se o termo corresponder exactamente a um,
+        // mostra só essa candidatura, em vez de o combinar com a pesquisa textual
+        // e arriscar apanhar também outras fichas cujo BI/telefone contenha essa
+        // sequência de dígitos por coincidência.
+        if ($incluirId && ctype_digit($termo)) {
+            $idExacto = (int) $termo;
+            if (static::where('id', $idExacto)->exists()) {
+                return $query->where('id', $idExacto);
+            }
+        }
+
         $palavras = preg_split('/\s+/', mb_strtolower($termo, 'UTF-8'));
 
         return $query->where(function ($r) use ($palavras, $termo, $camposTexto, $incluirId) {
