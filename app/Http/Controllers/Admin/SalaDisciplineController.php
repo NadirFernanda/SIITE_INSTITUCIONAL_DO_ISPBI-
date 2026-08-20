@@ -78,6 +78,16 @@ class SalaDisciplineController extends Controller
 
         // Pre-process payload: normalize malformed pairs (some browsers may send discipline and weight as separate array elements)
         $payload = $request->all();
+
+        // Quando todas as linhas são removidas na vista, o campo "disciplines"
+        // deixa de ser enviado (em vez de vir como array vazio) — sem isto, a
+        // validação abaixo rejeitava o pedido e a remoção da última disciplina
+        // nunca chegava a gravar-se.
+        if (! isset($payload['disciplines']) || ! is_array($payload['disciplines'])) {
+            $payload['disciplines'] = [];
+            $request->replace($payload);
+        }
+
         if (isset($payload['disciplines']) && is_array($payload['disciplines'])) {
             $raw = array_values($payload['disciplines']);
             $merged = [];
@@ -135,11 +145,9 @@ class SalaDisciplineController extends Controller
 
         try {
             $data = $request->validate([
-                'disciplines' => 'required|array',
+                'disciplines' => 'present|array',
                 'disciplines.*.discipline' => 'required|string|max:191|distinct',
                 'disciplines.*.weight' => 'required|integer|min:0|max:100',
-            ], [
-                'disciplines.required' => 'Adicione pelo menos uma disciplina.',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             \Log::warning('Validation failed saving sala disciplines', ['sala' => $sala->id, 'errors' => $e->validator->errors()->all()]);
@@ -147,13 +155,8 @@ class SalaDisciplineController extends Controller
         }
 
         DB::transaction(function () use ($sala, $data) {
-            // Remove existing entries not present in payload
             $incoming = collect($data['disciplines'])->map(fn($d) => trim($d['discipline']))->filter()->values();
 
-            // TEMPORARY SAFETY: do not delete existing disciplines automatically to avoid accidental data loss
-            // Previously we removed records not present in the incoming payload. That caused existing
-            // disciplines to disappear when the browser sent malformed payloads. Until the UI reliably
-            // sends the full list, only create/update incoming ones.
             foreach ($data['disciplines'] as $d) {
                 $name = trim($d['discipline']);
                 if ($name === '') continue;
@@ -163,10 +166,13 @@ class SalaDisciplineController extends Controller
                 );
             }
 
-            // NOTE: Deletion of disciplines via UI is temporarily disabled to prevent accidental removal.
-            // If explicit deletion is required, an admin can remove rows from the DB or we can add a
-            // dedicated 'deleted' flag that the UI sets when users remove a discipline.
-
+            // Remove as disciplinas que já não vêm na lista submetida — incluindo
+            // apagar todas, se a lista vier vazia (o formulário já permite isso
+            // agora, ao contrário de antes, em que "disciplines" era obrigatório
+            // e não vazio, impedindo remover a última disciplina de uma sala).
+            SalaDiscipline::where('sala_id', $sala->id)
+                ->whereNotIn('discipline', $incoming)
+                ->delete();
         });
 
         // Extra logging to help debug persistence issues: log how many rows exist after save
