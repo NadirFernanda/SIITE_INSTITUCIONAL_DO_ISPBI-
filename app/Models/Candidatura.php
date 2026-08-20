@@ -70,6 +70,7 @@ class Candidatura extends Model
         // Todos os perfis existentes têm acesso a Comunicação Social.
         'Comunicação Social' => [
             'Administração Pública',
+            'Agronomia',
             'Análises Clínicas',
             'Artes Visuais',
             'Autarquias',
@@ -149,6 +150,7 @@ class Candidatura extends Model
             'Técnico Desenhador Projetista',
             'Produção Animal',
             'Produção Vegetal',
+            'Agronomia',
         ],
         'Enfermagem' => [
             'Enfermagem Geral',
@@ -183,6 +185,7 @@ class Candidatura extends Model
             'Técnico Desenhador Projetista',
             'Produção Animal',
             'Produção Vegetal',
+            'Agronomia',
         ],
         'Engenharia Informática' => [
             'Informática de Gestão',
@@ -206,6 +209,7 @@ class Candidatura extends Model
             'Técnico Desenhador Projetista',
             'Produção Animal',
             'Produção Vegetal',
+            'Agronomia',
         ],
         'Psicologia' => [
             'Análises Clínicas',
