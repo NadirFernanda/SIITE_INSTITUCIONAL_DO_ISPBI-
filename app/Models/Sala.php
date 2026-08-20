@@ -52,6 +52,13 @@ class Sala extends Model
         return $query->orderBy('data_exame')
             ->orderByRaw('CASE WHEN horario IS NULL THEN 1 ELSE 0 END')
             ->orderBy('horario')
+            // Ordenação natural do nome ("Sala 1", "Sala 2", ... "Sala 24") em vez
+            // de alfabética simples, que colocava "Sala 10" antes de "Sala 2".
+            // Ordenar primeiro por comprimento do nome e só depois alfabeticamente
+            // funciona como ordenação natural sempre que os números tenham a mesma
+            // quantidade de dígitos dentro do mesmo comprimento de texto — válido
+            // em PostgreSQL, MySQL e SQLite sem precisar de funções específicas.
+            ->orderByRaw('LENGTH(nome)')
             ->orderBy('nome');
     }
 
