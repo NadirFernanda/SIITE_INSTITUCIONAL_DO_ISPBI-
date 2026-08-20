@@ -69,92 +69,37 @@ class WhatsAppService
 
     // ── Mensagens predefinidas ──────────────────────────────────────────────
 
+    /**
+     * Desligado a pedido — só o comprovativo de candidatura (enviarComprovativo)
+     * continua a ser enviado por WhatsApp. As restantes mensagens abaixo ficam
+     * com o envio desactivado aqui, de forma central, para não ser preciso
+     * mexer em cada um dos pontos do código que as chamam (Admin, Secretaria,
+     * Técnico, Professor, jobs, comandos de reenvio). Para reactivar alguma
+     * mais tarde, basta remover o "return false;"/"return;" do respectivo método.
+     */
     public function notificarCandidaturaRecebida(Candidatura $c): bool
     {
-        $ficha = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        return $this->enviar($c->telefone,
-            "✅ *ISP-Bié — Candidatura Recebida*\n\n" .
-            "Olá *{$c->nome}*,\n" .
-            "A sua ficha de inscrição foi registada com sucesso.\n\n" .
-            "📋 *Nº de Ficha:* {$ficha}\n" .
-            "📚 *Curso:* {$c->curso}\n" .
-            "🕐 *Período:* " . ucfirst(str_replace('-', ' ', $c->periodo)) . "\n\n" .
-            "Aguarde a confirmação do pagamento RUP pela Secretaria.\n" .
-            "— Instituto Superior Politécnico do Bié"
-        );
+        return false;
     }
 
     public function notificarPagamentoConfirmado(Candidatura $c): bool
     {
-        $ficha = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        return $this->enviar($c->telefone,
-            "💳 *ISP-Bié — Pagamento Confirmado*\n\n" .
-            "Olá *{$c->nome}*,\n" .
-            "O pagamento RUP da sua candidatura foi confirmado.\n\n" .
-            "📋 *Nº de Ficha:* {$ficha}\n" .
-            "📚 *Curso:* {$c->curso}\n\n" .
-            "A sua candidatura segue agora para análise pelo DAAC.\n" .
-            "— Instituto Superior Politécnico do Bié"
-        );
+        return false;
     }
 
     public function notificarAssinaturaDAAC(Candidatura $c): bool
     {
-        $ficha = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        return $this->enviar($c->telefone,
-            "🖊️ *ISP-Bié — Candidatura Concluída*\n\n" .
-            "Olá *{$c->nome}*,\n" .
-            "A sua candidatura foi analisada e assinada pelo DAAC.\n\n" .
-            "📋 *Nº de Ficha:* {$ficha}\n" .
-            "📚 *Curso:* {$c->curso}\n" .
-            "📌 *Estado:* Concluída\n\n" .
-            "Fique atento aos próximos avisos sobre o Exame de Acesso.\n" .
-            "— Instituto Superior Politécnico do Bié"
-        );
+        return false;
     }
 
     public function notificarNotaLancada(Candidatura $c): void
     {
-        $ficha     = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        $nota      = number_format($c->nota_exame, 1);
-        $resultado = $c->nota_exame >= 10 ? '✅ APROVADO' : '❌ REPROVADO';
-        $this->enviar($c->telefone,
-            "📝 *ISP-Bié — Resultado do Exame de Acesso*\n\n" .
-            "Olá *{$c->nome}*,\n" .
-            "O resultado do seu exame de acesso foi publicado.\n\n" .
-            "📋 *Nº de Ficha:* {$ficha}\n" .
-            "📚 *Curso:* {$c->curso}\n" .
-            "🎯 *Nota:* {$nota}/20\n" .
-            "🏆 *Resultado:* {$resultado}\n\n" .
-            "— Instituto Superior Politécnico do Bié"
-        );
+        return;
     }
 
     public function notificarEstadoAlterado(Candidatura $c, string $estadoAnterior): void
     {
-        $ficha    = str_pad($c->id, 5, '0', STR_PAD_LEFT);
-        $labels   = Candidatura::$statusLabels;
-        $novoLabel = $labels[$c->status] ?? $c->status;
-        $anteLabel = $labels[$estadoAnterior] ?? $estadoAnterior;
-
-        $emoji = match($c->status) {
-            'aprovada'   => '✅',
-            'rejeitada'  => '❌',
-            'em_analise' => '🔍',
-            'concluida'  => '🖊️',
-            default      => '📋',
-        };
-
-        $this->enviar($c->telefone,
-            "{$emoji} *ISP-Bié — Atualização da Candidatura*\n\n" .
-            "Olá *{$c->nome}*,\n" .
-            "O estado da sua candidatura foi actualizado.\n\n" .
-            "📋 *Nº de Ficha:* {$ficha}\n" .
-            "📚 *Curso:* {$c->curso}\n" .
-            "🔄 *Estado anterior:* {$anteLabel}\n" .
-            "📌 *Novo estado:* {$novoLabel}\n\n" .
-            "— Instituto Superior Politécnico do Bié"
-        );
+        return;
     }
 
     // ── Utilitários ─────────────────────────────────────────────────────────
