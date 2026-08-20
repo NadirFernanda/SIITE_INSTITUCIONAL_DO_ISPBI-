@@ -106,9 +106,19 @@ class AuthController extends Controller
             'ano.max'             => 'O ano de conclusão não pode ser superior a 2030.',
         ]);
 
+        // Defesa em profundidade contra CVE-2026-48019 (bypass da validação
+        // 'email' do Laravel <12.60/<13.10) — este endereço fica gravado em
+        // users.email e mais tarde é usado pelas notificações internas do
+        // Laravel (recuperação de password, etc.), por isso é revalidado
+        // aqui antes de ser guardado.
+        $emailLimpo = \App\Support\MailAddressSanitizer::clean($validated['email']);
+        if ($emailLimpo === null) {
+            return back()->withInput()->withErrors(['email' => 'O endereço de e-mail indicado não é válido.']);
+        }
+
         $user = new User();
         $user->name     = $validated['nome'];
-        $user->email    = $validated['email'];
+        $user->email    = $emailLimpo;
         $user->password = Hash::make($validated['password']);
         $user->forceFill([
             'role'     => 'alumni',
