@@ -257,6 +257,8 @@ class CandidaturaController extends Controller
         ]);
         $data['trabalhador'] = $request->input('trabalhador') === 'sim';
 
+        $tinhaSalaAntes = $candidatura->sala_id !== null;
+
         try {
             $candidatura->update($data);
         } catch (\Illuminate\Database\UniqueConstraintViolationException $e) {
@@ -268,8 +270,14 @@ class CandidaturaController extends Controller
         AuditLog::registar('editou_candidatura', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome}");
 
+        $avisoSala = null;
+        if ($tinhaSalaAntes && $candidatura->wasChanged(['curso', 'periodo'])) {
+            $resultado = app(\App\Services\DistribuicaoSalasService::class)->reatribuirCandidato($candidatura);
+            $avisoSala = $resultado['mensagem'];
+        }
+
         return redirect()->route('tecnico.candidaturas.show', $candidatura)
-            ->with('success', 'Candidatura actualizada com sucesso.');
+            ->with('success', 'Candidatura actualizada com sucesso.' . ($avisoSala ? ' ' . $avisoSala : ''));
     }
 
     public function destroy(Candidatura $candidatura)

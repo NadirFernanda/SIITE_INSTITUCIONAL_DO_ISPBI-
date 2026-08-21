@@ -184,6 +184,82 @@ class DistribuicaoSalasService
     }
 
     /**
+     * Realoja um único candidato já distribuído cujo curso/período mudou —
+     * usado quando se edita a candidatura depois de uma distribuição já ter
+     * corrido, para não a deixar "presa" à sala do curso antigo.
+     *
+     * Procura uma sala já existente para o novo curso+bloco com vaga; se não
+     * houver, cria mais uma instância a partir de uma sala-modelo ainda não
+     * usada nesse bloco. Se mesmo assim não houver nenhuma sala disponível,
+     * o candidato fica sem sala (nunca é colocado numa sala de outro curso).
+     *
+     * @return array{ok: bool, mensagem: string}
+     */
+    public function reatribuirCandidato(Candidatura $candidatura): array
+    {
+        $curso   = trim((string) $candidatura->curso);
+        $periodo = $candidatura->periodo;
+        $agenda  = Sala::$agendaExames;
+
+        $slot = $agenda[$curso][$periodo] ?? null;
+        if (! $slot) {
+            $candidatura->forceFill(['sala_id' => null, 'numero_lugar' => null])->save();
+            return ['ok' => false, 'mensagem' => "O curso '{$curso}' não tem data de exame definida na agenda — candidato ficou sem sala."];
+        }
+
+        return DB::transaction(function () use ($candidatura, $curso, $slot) {
+            // Instâncias já criadas para este bloco (data+horário), com o
+            // curso atribuído já inferido do primeiro candidato de cada uma.
+            $instancias = Sala::where('data_exame', $slot['data'])
+                ->where('horario', $slot['horario'])
+                ->withCount('candidaturas')
+                ->orderBy('id')
+                ->get();
+
+            foreach ($instancias as $inst) {
+                if ($inst->id === $candidatura->sala_id) {
+                    continue; // não conta a própria sala actual do candidato
+                }
+                $primeiro = $inst->candidaturas()->whereNotNull('curso')->first();
+                $cursoDaSala = $primeiro ? trim($primeiro->curso) : null;
+                $compativel = $cursoDaSala === null || $cursoDaSala === $curso;
+
+                if ($compativel && $inst->candidaturas_count < $inst->capacidade) {
+                    $numeroLugar = $inst->candidaturas_count + 1;
+                    $candidatura->forceFill(['sala_id' => $inst->id, 'numero_lugar' => $numeroLugar])->save();
+                    $this->sincronizarDisciplinas([$inst]);
+                    return ['ok' => true, 'mensagem' => "Candidato realojado para {$inst->nome} ({$inst->data_exame->format('d/m/Y')}, {$inst->horario})."];
+                }
+            }
+
+            // Nenhuma instância existente tem vaga — tentar criar mais uma a
+            // partir de uma sala-modelo ainda não usada neste bloco.
+            $nomesUsados = $instancias->pluck('nome')->all();
+            $modelo = Sala::whereNull('data_exame')
+                ->whereNotIn('nome', $nomesUsados)
+                ->orderByDesc('capacidade')
+                ->first();
+
+            if ($modelo) {
+                $novaInstancia = Sala::create([
+                    'nome'       => $modelo->nome,
+                    'capacidade' => $modelo->capacidade,
+                    'data_exame' => $slot['data'],
+                    'horario'    => $slot['horario'],
+                ]);
+                $candidatura->forceFill(['sala_id' => $novaInstancia->id, 'numero_lugar' => 1])->save();
+                $this->sincronizarDisciplinas([$novaInstancia]);
+                return ['ok' => true, 'mensagem' => "Candidato realojado para {$novaInstancia->nome} ({$novaInstancia->data_exame->format('d/m/Y')}, {$novaInstancia->horario})."];
+            }
+
+            // Sem nenhuma sala disponível para este curso/bloco — nunca colocar
+            // numa sala de outro curso. Fica sem sala, sinalizado ao admin.
+            $candidatura->forceFill(['sala_id' => null, 'numero_lugar' => null])->save();
+            return ['ok' => false, 'mensagem' => "Não há nenhuma sala com vaga disponível para '{$curso}' neste horário — candidato ficou SEM sala. Adicione mais salas-modelo ou liberte espaço."];
+        });
+    }
+
+    /**
      * Sincroniza as disciplinas de cada sala recém-criada com as disciplinas
      * do curso atribuído (inferido do primeiro candidato colocado nessa sala).
      */
