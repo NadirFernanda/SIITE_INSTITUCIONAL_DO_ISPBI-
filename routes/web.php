@@ -250,6 +250,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1
     Route::post('salas', [App\Http\Controllers\Admin\SalaController::class, 'store'])->name('salas.store');
     Route::post('salas/distribuir', [App\Http\Controllers\Admin\SalaController::class, 'distribuir'])->name('salas.distribuir');
     Route::post('salas/limpar', [App\Http\Controllers\Admin\SalaController::class, 'limpar'])->name('salas.limpar');
+    Route::get('salas/sem-sala', [App\Http\Controllers\Admin\SalaController::class, 'semSala'])->name('salas.sem-sala');
+    Route::post('candidaturas/{candidatura}/atribuir-sala', [App\Http\Controllers\Admin\SalaController::class, 'atribuirManual'])->name('candidaturas.atribuir-sala');
     Route::get('salas/lote/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdfLote'])->name('salas.pdf-lote');
     Route::get('salas/lote/pdf-exame', [App\Http\Controllers\Admin\SalaController::class, 'pdfExameLote'])->name('salas.pdf-exame-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');

@@ -98,6 +98,54 @@ class SalaController extends Controller
     }
 
     /**
+     * Lista os candidatos que a distribuição automática não conseguiu
+     * colocar em nenhuma sala (por falta de capacidade no curso/bloco deles),
+     * para o admin os atribuir manualmente a uma sala à sua escolha — único
+     * caso em que a regra "uma sala, um curso" pode ser ultrapassada
+     * deliberadamente, por decisão humana.
+     */
+    public function semSala()
+    {
+        $candidaturas = Candidatura::whereNull('sala_id')
+            ->whereNotIn('status', ['rejeitada'])
+            ->orderBy('curso')->orderBy('periodo')->orderBy('nome')
+            ->get();
+
+        $salas = Sala::whereNotNull('data_exame')
+            ->withCount('candidaturas')
+            ->ordenadaPorHorario()
+            ->get();
+
+        return view('admin.salas.sem-sala', compact('candidaturas', 'salas'));
+    }
+
+    /**
+     * Atribuição manual de uma sala a um candidato — usada só para os que
+     * ficaram sem sala depois da distribuição automática. O admin escolhe
+     * livremente a sala, mesmo que já tenha outro curso ou esteja cheia; é
+     * uma decisão consciente para casos excepcionais, não a regra geral.
+     */
+    public function atribuirManual(Request $request, Candidatura $candidatura)
+    {
+        $request->validate(['sala_id' => 'required|exists:salas,id']);
+
+        $sala = Sala::findOrFail($request->input('sala_id'));
+        $numeroLugar = $sala->candidaturas()->count() + 1;
+
+        $candidatura->forceFill([
+            'sala_id'      => $sala->id,
+            'numero_lugar' => $numeroLugar,
+        ])->save();
+
+        AuditLog::registar('atribuiu_sala_manual', 'candidatura', $candidatura->id,
+            "Ficha #{$candidatura->id} — {$candidatura->nome} atribuída manualmente a {$sala->nome}"
+            . ($sala->data_exame ? " ({$sala->data_exame->format('d/m/Y')}, {$sala->horario})" : ''));
+
+        return redirect()->route('admin.salas.sem-sala')
+            ->with('success', "{$candidatura->nome} atribuído(a) a {$sala->nome}.");
+    }
+
+    /**
      * Distribui os candidatos pelas salas de acordo com o calendário oficial
      * dos Exames de Acesso (Sala::$agendaExames) — lógica partilhada com os
      * painéis Técnico e Lançamento via DistribuicaoSalasService.

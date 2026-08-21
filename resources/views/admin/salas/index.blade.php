@@ -88,10 +88,17 @@
         ];
         @endphp
         @foreach($kpis as $k)
+        @if($k['label'] === 'Sem Sala' && $k['value'] > 0)
+        <a href="{{ route('admin.salas.sem-sala') }}" style="background:#fff;border:1px solid #F05A28;border-radius:14px;padding:16px 18px;text-align:center;text-decoration:none;display:block;">
+            <div style="font-size:1.8rem;font-weight:800;color:{{ $k['color'] }};line-height:1;">{{ $k['value'] }}</div>
+            <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">{{ $k['label'] }} →</div>
+        </a>
+        @else
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;text-align:center;">
             <div style="font-size:1.8rem;font-weight:800;color:{{ $k['color'] }};line-height:1;">{{ $k['value'] }}</div>
             <div style="font-size:0.78rem;color:#64748b;margin-top:5px;font-weight:600;">{{ $k['label'] }}</div>
         </div>
+        @endif
         @endforeach
     </div>
 
