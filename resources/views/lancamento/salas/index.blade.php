@@ -132,6 +132,7 @@
             <thead>
                 <tr style="border-bottom:2px solid #e2e8f0;">
                     <th style="padding:13px 20px;text-align:left;font-weight:700;color:#475569;">Sala</th>
+                    <th style="padding:13px 20px;text-align:left;font-weight:700;color:#475569;">Data / Horário</th>
                     <th style="padding:13px 20px;text-align:center;font-weight:700;color:#475569;">Capacidade</th>
                     <th style="padding:13px 20px;text-align:center;font-weight:700;color:#475569;">Atribuídos</th>
                     <th style="padding:13px 20px;text-align:center;font-weight:700;color:#475569;">Livres</th>
@@ -152,6 +153,14 @@
                 @endphp
                 <tr style="border-bottom:1px solid #f1f5f9;">
                     <td style="padding:14px 20px;font-weight:700;color:#1a2332;">{{ $sala->nome }}</td>
+                    <td style="padding:14px 20px;color:#475569;">
+                        @if($sala->data_exame)
+                            <div style="font-weight:600;">{{ $sala->data_exame->format('d/m/Y') }}</div>
+                            <div style="font-size:0.78rem;color:#64748b;">{{ $sala->horario }}</div>
+                        @else
+                            <span style="color:#cbd5e1;font-size:0.8rem;">— modelo —</span>
+                        @endif
+                    </td>
                     <td style="padding:14px 20px;text-align:center;color:#475569;">{{ $sala->capacidade }}</td>
                     <td style="padding:14px 20px;text-align:center;">
                         <span style="font-weight:700;color:{{ $ocupados > 0 ? '#15803d' : '#94a3b8' }};">{{ $ocupados }}</span>

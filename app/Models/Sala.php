@@ -10,19 +10,50 @@ class Sala extends Model
 
     protected $fillable = ['nome', 'capacidade', 'data_exame', 'horario'];
 
+    // Cada bloco cobre os dois horários seguidos da mesma sala/turma (ex.: as
+    // duas provas da manhã), já que a mesma sala serve o candidato nos dois —
+    // ver Sala::$agendaExames.
     public static array $horarios = [
-        '08:00-10:00',
-        '10:30-12:30',
-        '13:00-15:00',
-        '15:30-18:00',
+        '08:00-10:00 e 10:30-12:30',
+        '13:00-15:00 e 15:30-17:30',
+        '15:30-17:30',
     ];
 
-    // Período a que cada horário pertence — usado na distribuição automática
-    // para garantir que candidatos do regular só ficam em salas da manhã e
-    // os do pós-laboral só em salas da tarde.
-    public static array $horariosPorPeriodo = [
-        'regular'     => ['08:00-10:00', '10:30-12:30'],
-        'pos-laboral' => ['13:00-15:00', '15:30-18:00'],
+    /**
+     * Calendário oficial dos Exames de Acesso 2026/2027 (Anexo 2) — data e
+     * horário fixos por curso e período, usados pela distribuição automática
+     * de salas (App\Services\DistribuicaoSalasService) para colocar cada
+     * candidato na sala certa, no dia e horário certos.
+     *
+     * A Engenharia em Recursos Hídricos não distingue Regular/Pós-laboral —
+     * ambos os períodos partilham o mesmo horário único (confirmado com a
+     * instituição).
+     */
+    public static array $agendaExames = [
+        'Comunicação Social' => [
+            'regular'     => ['data' => '2026-09-02', 'horario' => '08:00-10:00 e 10:30-12:30'],
+            'pos-laboral' => ['data' => '2026-09-02', 'horario' => '13:00-15:00 e 15:30-17:30'],
+        ],
+        'Engenharia Informática' => [
+            'regular'     => ['data' => '2026-09-02', 'horario' => '08:00-10:00 e 10:30-12:30'],
+            'pos-laboral' => ['data' => '2026-09-02', 'horario' => '13:00-15:00 e 15:30-17:30'],
+        ],
+        'Engenharia em Recursos Hídricos' => [
+            'regular'     => ['data' => '2026-09-02', 'horario' => '15:30-17:30'],
+            'pos-laboral' => ['data' => '2026-09-02', 'horario' => '15:30-17:30'],
+        ],
+        'Contabilidade e Administração' => [
+            'regular'     => ['data' => '2026-09-03', 'horario' => '08:00-10:00 e 10:30-12:30'],
+            'pos-laboral' => ['data' => '2026-09-03', 'horario' => '13:00-15:00 e 15:30-17:30'],
+        ],
+        'Psicologia' => [
+            'regular'     => ['data' => '2026-09-03', 'horario' => '08:00-10:00 e 10:30-12:30'],
+            'pos-laboral' => ['data' => '2026-09-03', 'horario' => '13:00-15:00 e 15:30-17:30'],
+        ],
+        'Enfermagem' => [
+            'regular'     => ['data' => '2026-09-04', 'horario' => '08:00-10:00 e 10:30-12:30'],
+            'pos-laboral' => ['data' => '2026-09-04', 'horario' => '13:00-15:00 e 15:30-17:30'],
+        ],
     ];
 
     protected $casts = [

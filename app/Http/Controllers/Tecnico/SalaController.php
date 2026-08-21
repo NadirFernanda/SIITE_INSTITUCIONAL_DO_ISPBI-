@@ -88,116 +88,16 @@ class SalaController extends Controller
         return view('tecnico.salas.show', compact('sala', 'candidaturas'));
     }
 
-    public function distribuir()
+    /**
+     * Distribui os candidatos pelas salas de acordo com o calendário oficial
+     * dos Exames de Acesso (Sala::$agendaExames) — lógica partilhada com os
+     * painéis Admin e Lançamento via DistribuicaoSalasService.
+     */
+    public function distribuir(\App\Services\DistribuicaoSalasService $service)
     {
-        $salas = Sala::orderByDesc('capacidade')->get();
+        $resultado = $service->distribuir();
 
-        if ($salas->isEmpty()) {
-            return redirect()->route('tecnico.salas.index')
-                ->with('error', 'Não existem salas registadas. Crie salas antes de distribuir.');
-        }
-
-        // Cursos prioritários (Enfermagem, depois Psicologia) obtêm salas maiores primeiro
-        $prioridades = Candidatura::$cursosPrioritarios;
-        $todos = Candidatura::whereNotIn('status', ['rejeitada'])->orderBy('nome')->get();
-
-        $grupos = collect();
-        foreach ($prioridades as $curso) {
-            $grupos = $grupos->merge(
-                $todos->filter(fn($c) => $c->curso === $curso)
-                      ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
-                      ->sortByDesc(fn($g) => $g->count())
-            );
-        }
-        $grupos = $grupos->merge(
-            $todos->reject(fn($c) => in_array($c->curso, $prioridades))
-                  ->groupBy(fn($c) => $c->curso . '|||' . $c->periodo)
-                  ->sortByDesc(fn($g) => $g->count())
-        );
-
-        $totalCandidatos = Candidatura::whereNotIn('status', ['rejeitada'])->count();
-        $totalLugares    = $salas->sum('capacidade');
-
-        if ($totalCandidatos > $totalLugares) {
-            return redirect()->route('tecnico.salas.index')
-                ->with('error', "Capacidade insuficiente: {$totalCandidatos} candidatos mas apenas {$totalLugares} lugares.");
-        }
-
-        Candidatura::whereNotIn('status', ['rejeitada'])
-                   ->update(['sala_id' => null, 'numero_lugar' => null]);
-
-        $salaQueue = $salas->map(fn($s) => [
-            'id'         => $s->id,
-            'capacidade' => $s->capacidade,
-            'horario'    => $s->horario,
-            'ocupado'    => 0,
-            'curso_atual'=> null, // curso ao qual a sala está reservada nesta distribuição
-        ])->values()->toArray();
-
-        $horariosPorPeriodo = Sala::$horariosPorPeriodo;
-
-        // REGRA CRÍTICA: numa sala só pode haver candidatos de UM curso por horário —
-        // nunca misturar cursos diferentes na mesma sala. Uma sala só serve este grupo se:
-        // 1) não tiver horário fixo definido, ou o horário pertencer ao período pedido; e
-        // 2) ainda não estiver reservada para outro curso.
-        $compativel = function (array $sala, string $curso, string $periodo) use ($horariosPorPeriodo) {
-            if ($sala['horario'] && isset($horariosPorPeriodo[$periodo])
-                && !in_array($sala['horario'], $horariosPorPeriodo[$periodo], true)) {
-                return false;
-            }
-            if ($sala['curso_atual'] !== null && $sala['curso_atual'] !== $curso) {
-                return false;
-            }
-            return true;
-        };
-
-        $ponteiros = [];
-        $naoAtribuidos = [];
-
-        foreach ($grupos as $chave => $candidatos) {
-            [$curso, $periodo] = explode('|||', $chave);
-            $idx   = $ponteiros[$periodo] ?? 0;
-            $lugar = 1;
-            foreach ($candidatos as $candidato) {
-                while ($idx < count($salaQueue) && (
-                        $salaQueue[$idx]['ocupado'] >= $salaQueue[$idx]['capacidade']
-                        || !$compativel($salaQueue[$idx], $curso, $periodo)
-                    )) {
-                    $idx++;
-                    $lugar = 1;
-                }
-                if ($idx >= count($salaQueue)) {
-                    $naoAtribuidos[] = $chave;
-                    continue;
-                }
-
-                Candidatura::where('id', $candidato->id)->update([
-                    'sala_id'      => $salaQueue[$idx]['id'],
-                    'numero_lugar' => $lugar,
-                ]);
-                $salaQueue[$idx]['ocupado']++;
-                $salaQueue[$idx]['curso_atual'] = $curso;
-                $lugar++;
-            }
-            $ponteiros[$periodo] = $idx;
-        }
-
-        $atribuidos = Candidatura::whereNotNull('sala_id')->count();
-
-        AuditLog::registar('distribuiu_salas', null, null,
-            "{$atribuidos} candidatos distribuídos pelas salas");
-
-        if (!empty($naoAtribuidos)) {
-            $semSalaCount = $totalCandidatos - $atribuidos;
-            $resumo = collect($naoAtribuidos)->countBy()->map(fn($n, $g) => str_replace('|||', ' — ', $g) . " ({$n})")->implode('; ');
-            return redirect()->route('tecnico.salas.index')->with('error',
-                "{$atribuidos} candidatos distribuídos pelas salas. ATENÇÃO: {$semSalaCount} candidato(s) ficaram "
-                . "SEM sala — não há salas suficientes para evitar misturar cursos diferentes na mesma sala/horário "
-                . "({$resumo}). Adicione mais salas/horários e distribua novamente.");
-        }
-
-        return redirect()->route('tecnico.salas.index')
-            ->with('success', "{$atribuidos} candidatos distribuídos pelas salas.");
+        return redirect()->route('tecnico.salas.index')->with($resultado['tipo'], $resultado['mensagem']);
     }
 
     public function limpar()
