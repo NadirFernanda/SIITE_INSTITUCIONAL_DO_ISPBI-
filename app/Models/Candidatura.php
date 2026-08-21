@@ -257,6 +257,18 @@ class Candidatura extends Model
         'concluida'  => '#7c3aed',
     ];
 
+    // Cursos que só decorrem num único período (ex.: Engenharia em Recursos
+    // Hídricos só tem Regular, sem variante Pós-laboral) — usado para
+    // restringir o período seleccionável na candidatura.
+    public static array $periodosRestritos = [
+        'Engenharia em Recursos Hídricos' => ['regular'],
+    ];
+
+    public static function periodosPermitidos(?string $curso): array
+    {
+        return static::$periodosRestritos[$curso] ?? ['regular', 'pos-laboral'];
+    }
+
     // Retorna todos os perfis únicos ordenados alfabeticamente
     public static function todosOsPerfis(): array
     {

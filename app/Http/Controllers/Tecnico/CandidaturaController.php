@@ -232,12 +232,13 @@ class CandidaturaController extends Controller
                     $q->where('bi', $request->input('bi'))->where('periodo', $request->input('periodo'))
                 )->ignore($candidatura->id),
             ],
-            'periodo'                => 'required|in:regular,pos-laboral',
+            'periodo'                => ['required', Rule::in(Candidatura::periodosPermitidos($curso))],
             'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'curso.unique'                    => 'Já existe uma candidatura com este BI para o curso neste período.',
             'perfil.required'                 => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
             'perfil.in'                       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
+            'periodo.in'                      => "O curso '{$curso}' só tem período Regular — não tem Pós-laboral.",
             'bi.size'                         => 'O Bilhete de Identidade deve ter exactamente 14 caracteres.',
             'bi.regex'                        => 'O Bilhete de Identidade deve ter letras na 10ª e 11ª posição (ex.: 024187059BA057).',
             'data_nascimento.before_or_equal' => 'É necessário completar 17 anos até ao final deste ano.',
@@ -328,7 +329,7 @@ class CandidaturaController extends Controller
                       ->where('periodo', $request->input('periodo'))
                 ),
             ],
-            'periodo'                => 'required|in:regular,pos-laboral',
+            'periodo'                => ['required', Rule::in(Candidatura::periodosPermitidos($curso))],
             'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'curso.unique'                    => "Já existe uma candidatura com este BI para o curso no período {$periodoLabel}.",
@@ -336,6 +337,7 @@ class CandidaturaController extends Controller
             'bi.regex'                        => 'O Bilhete de Identidade deve ter letras na 10ª e 11ª posição (ex.: 024187059BA057).',
             'perfil.required'                 => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
             'perfil.in'                       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
+            'periodo.in'                      => "O curso '{$curso}' só tem período Regular — não tem Pós-laboral.",
             'data_nascimento.before_or_equal' => 'É necessário completar 17 anos até ao final deste ano.',
             'data_nascimento.after'           => 'A data de nascimento indicada não é válida. Verifique se o ano está correcto.',
         ]);

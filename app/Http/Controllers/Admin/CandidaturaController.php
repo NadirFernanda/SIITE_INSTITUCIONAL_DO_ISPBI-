@@ -347,11 +347,12 @@ class CandidaturaController extends Controller
                     $q->where('bi', $request->input('bi'))->where('periodo', $request->input('periodo'))
                 )->ignore($candidatura->id),
             ],
-            'periodo'                => 'required|in:regular,pos-laboral',
+            'periodo'                => ['required', \Illuminate\Validation\Rule::in(Candidatura::periodosPermitidos($curso))],
             'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'perfil.required' => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
             'perfil.in'       => "O perfil seleccionado não é compatível com o curso '{$curso}'.",
+            'periodo.in'      => "O curso '{$curso}' só tem período Regular — não tem Pós-laboral.",
             'curso.unique'    => 'Já existe uma candidatura com este Bilhete de Identidade para o curso e período indicados.',
             'bi.size'         => 'O Bilhete de Identidade deve ter exactamente 14 caracteres.',
             'bi.regex'        => 'O Bilhete de Identidade deve ter letras na 10ª e 11ª posição (ex.: 024187059BA057).',

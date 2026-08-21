@@ -69,10 +69,11 @@ class CandidaturaController extends Controller
                                  ->where('periodo', $request->input('periodo'));
                 }),
             ],
-            'periodo'                => 'required|in:regular,pos-laboral',
+            'periodo'                => ['required', Rule::in(Candidatura::periodosPermitidos($curso))],
             'local_inscricao'        => 'required|in:dentro,fora',
         ], [
             'curso.unique'                   => "Já existe uma candidatura com este Bilhete de Identidade para o curso indicado no período {$periodoLabel}. Pode candidatar-se ao mesmo curso no outro período, ou escolher um curso diferente.",
+            'periodo.in'                     => "O curso '{$curso}' só tem período Regular — não tem Pós-laboral.",
             'perfil.required'                => 'O perfil do curso de origem é obrigatório para o curso seleccionado.',
             'perfil.in'                      => "O perfil académico seleccionado não é compatível com o curso '{$curso}'. Se o seu curso não aparecer nesta lista, dirija-se à instituição para confirmação.",
             'bi.required'                    => 'O Bilhete de Identidade é obrigatório.',
