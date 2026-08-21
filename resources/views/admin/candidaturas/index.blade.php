@@ -9,12 +9,20 @@
             <h1 style="font-size:1.6rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Candidaturas Online</h1>
             <p style="color:#64748b;font-size:0.95rem;margin:0;">Gestão das candidaturas recebidas</p>
         </div>
-        <a href="{{ route('admin.candidaturas.export') }}{{ request()->getQueryString() ? '?' . request()->getQueryString() : '' }}"
-           style="display:inline-flex;align-items:center;gap:8px;background:#22c55e;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
-           onmouseover="this.style.background='#16a34a'" onmouseout="this.style.background='#22c55e'">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-            Exportar CSV
-        </a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="{{ route('admin.candidaturas.create') }}"
+               style="display:inline-flex;align-items:center;gap:8px;background:#1e3a5f;color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:0.9rem;text-decoration:none;"
+               onmouseover="this.style.background='#162d4a'" onmouseout="this.style.background='#1e3a5f'">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+                Nova Candidatura
+            </a>
+            <a href="{{ route('admin.candidaturas.export') }}{{ request()->getQueryString() ? '?' . request()->getQueryString() : '' }}"
+               style="display:inline-flex;align-items:center;gap:8px;background:#22c55e;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
+               onmouseover="this.style.background='#16a34a'" onmouseout="this.style.background='#22c55e'">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                Exportar CSV
+            </a>
+        </div>
     </div>
 
     {{-- Flash --}}

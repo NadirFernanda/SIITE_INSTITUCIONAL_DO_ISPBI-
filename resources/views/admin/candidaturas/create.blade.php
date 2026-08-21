@@ -1,0 +1,309 @@
+@extends('layouts.admin')
+
+@section('content')
+<div style="max-width:900px;margin:0 auto;">
+
+    <a href="{{ route('admin.candidaturas.index') }}"
+       style="display:inline-flex;align-items:center;gap:6px;color:#1e3a5f;font-weight:600;font-size:0.9rem;text-decoration:none;margin-bottom:22px;">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        Voltar à lista
+    </a>
+
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:28px;">
+        <h1 style="font-size:1.3rem;font-weight:700;color:#1e3a5f;margin:0 0 4px;">Registar Candidatura</h1>
+        <p style="color:#64748b;font-size:0.88rem;margin:0 0 24px;">Todos os campos são obrigatórios excepto Telefone 2 e Instituição Laboral (se não trabalhar).</p>
+
+        @if($errors->any())
+        <div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:12px 18px;border-radius:10px;margin-bottom:20px;">
+            <strong>Corrija os seguintes erros:</strong>
+            <ul style="margin:6px 0 0 16px;font-size:0.88rem;">
+                @foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach
+            </ul>
+        </div>
+        @endif
+
+        @php $inp = 'width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.88rem;box-sizing:border-box;'; @endphp
+
+        <form method="POST" action="{{ route('admin.candidaturas.store') }}" novalidate>
+            @csrf
+
+            @php
+            function ac_label($text, $req = true) {
+                $star = $req ? ' <span style="color:#ef4444">*</span>' : '';
+                echo '<label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">'.$text.$star.'</label>';
+            }
+            @endphp
+
+            {{-- Nome --}}
+            <div style="margin-bottom:14px;">
+                @php ac_label('Nome Completo') @endphp
+                <input type="text" name="nome" value="{{ old('nome') }}" required maxlength="255" style="{{ $inp }}@error('nome')border-color:#f87171;@enderror">
+                @error('nome')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
+            {{-- Filiação --}}
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                <div>
+                    @php ac_label('Filho(a) de (pai)') @endphp
+                    <input type="text" name="filiacao_pai" value="{{ old('filiacao_pai') }}" required maxlength="255" style="{{ $inp }}">
+                </div>
+                <div>
+                    @php ac_label('e de (mãe)') @endphp
+                    <input type="text" name="filiacao_mae" value="{{ old('filiacao_mae') }}" required maxlength="255" style="{{ $inp }}">
+                </div>
+            </div>
+
+            {{-- Data Nascimento --}}
+            <div style="margin-bottom:14px;">
+                @php ac_label('Data de Nascimento') @endphp
+                <input type="date" name="data_nascimento" value="{{ old('data_nascimento') }}" required
+                       max="{{ now()->subYears(17)->endOfYear()->format('Y-m-d') }}" min="{{ now()->subYears(100)->format('Y-m-d') }}"
+                       style="{{ $inp }}max-width:200px;">
+                <span style="font-size:0.76rem;color:#94a3b8;margin-left:8px;">Idade mínima: 17 anos</span>
+                @error('data_nascimento')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
+            {{-- Naturalidade --}}
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                <div>
+                    @php ac_label('Província de Naturalidade') @endphp
+                    <select id="select-provincia" name="naturalidade_provincia" required data-old="{{ old('naturalidade_provincia') }}" style="{{ $inp }}">
+                        <option value="">Seleccione a província</option>
+                    </select>
+                </div>
+                <div>
+                    @php ac_label('Município de Naturalidade') @endphp
+                    <select id="select-municipio" name="naturalidade_municipio" required data-old="{{ old('naturalidade_municipio') }}" style="{{ $inp }}">
+                        <option value="">Seleccione primeiro a província</option>
+                    </select>
+                </div>
+            </div>
+
+            {{-- BI --}}
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
+                <div>
+                    @php ac_label('BI / Passaporte N.º') @endphp
+                    <input type="text" name="bi" value="{{ old('bi') }}" required maxlength="20" style="{{ $inp }}">
+                    @error('bi')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    @php ac_label('Emitido em (local)') @endphp
+                    <input type="text" name="bi_emitido_em" value="{{ old('bi_emitido_em') }}" required maxlength="255" style="{{ $inp }}">
+                </div>
+                <div>
+                    @php ac_label('Data de Emissão') @endphp
+                    <input type="date" name="bi_data_emissao" value="{{ old('bi_data_emissao') }}" required style="{{ $inp }}">
+                </div>
+            </div>
+
+            {{-- Sexo + Estado Civil --}}
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                <div>
+                    @php ac_label('Sexo') @endphp
+                    <div style="display:flex;gap:18px;margin-top:2px;">
+                        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                            <input type="radio" name="sexo" value="masculino" {{ old('sexo')==='masculino'?'checked':'' }} required> Masculino
+                        </label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                            <input type="radio" name="sexo" value="feminino" {{ old('sexo')==='feminino'?'checked':'' }}> Feminino
+                        </label>
+                    </div>
+                    @error('sexo')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    @php ac_label('Estado Civil') @endphp
+                    <select name="estado_civil" required style="{{ $inp }}">
+                        <option value="">— Seleccione —</option>
+                        <option value="Solteiro(a)" {{ old('estado_civil') === 'Solteiro(a)' ? 'selected' : '' }}>Solteiro(a)</option>
+                        <option value="Casado(a)" {{ old('estado_civil') === 'Casado(a)' ? 'selected' : '' }}>Casado(a)</option>
+                        <option value="Divorciado(a)" {{ old('estado_civil') === 'Divorciado(a)' ? 'selected' : '' }}>Divorciado(a)</option>
+                        <option value="Separado(a)" {{ old('estado_civil') === 'Separado(a)' ? 'selected' : '' }}>Separado(a)</option>
+                        <option value="Viúvo(a)" {{ old('estado_civil') === 'Viúvo(a)' ? 'selected' : '' }}>Viúvo(a)</option>
+                        <option value="União de Facto" {{ old('estado_civil') === 'União de Facto' ? 'selected' : '' }}>União de Facto</option>
+                        <option value="Outro" {{ old('estado_civil') === 'Outro' ? 'selected' : '' }}>Outro</option>
+                    </select>
+                </div>
+            </div>
+
+            {{-- Necessidade Especial --}}
+            <div style="margin-bottom:14px;">
+                @php ac_label('Necessidade de Educação Especial') @endphp
+                <select name="necessidade_especial" required style="{{ $inp }}">
+                    <option value="">— Seleccione —</option>
+                    <option value="Nenhuma" {{ old('necessidade_especial') === 'Nenhuma' ? 'selected' : '' }}>Nenhuma</option>
+                    <option value="Filhos de antigos combatentes" {{ old('necessidade_especial') === 'Filhos de antigos combatentes' ? 'selected' : '' }}>Filhos de antigos combatentes</option>
+                    <option value="Áreas Steam" {{ old('necessidade_especial') === 'Áreas Steam' ? 'selected' : '' }}>Áreas Steam</option>
+                    <option value="Portadores de deficiência" {{ old('necessidade_especial') === 'Portadores de deficiência' ? 'selected' : '' }}>Portadores de deficiência</option>
+                </select>
+            </div>
+
+            {{-- Residência --}}
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                <div>
+                    @php ac_label('Residência — Município') @endphp
+                    <input type="text" name="residencia_municipio" value="{{ old('residencia_municipio') }}" required maxlength="255" style="{{ $inp }}">
+                </div>
+                <div>
+                    @php ac_label('Residência — Rua/Bairro') @endphp
+                    <input type="text" name="residencia_bairro" value="{{ old('residencia_bairro') }}" required maxlength="255" style="{{ $inp }}">
+                </div>
+            </div>
+
+            {{-- Contactos --}}
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
+                <div>
+                    @php ac_label('Telefone 1') @endphp
+                    <input type="tel" name="telefone" value="{{ old('telefone') }}" required maxlength="50" style="{{ $inp }}">
+                </div>
+                <div>
+                    @php ac_label('Telefone 2', false) @endphp
+                    <input type="tel" name="telefone2" value="{{ old('telefone2') }}" maxlength="50" style="{{ $inp }}">
+                </div>
+                <div>
+                    @php ac_label('Email') @endphp
+                    <input type="email" name="email" value="{{ old('email') }}" maxlength="255" style="{{ $inp }}">
+                </div>
+            </div>
+
+            {{-- Habilitações --}}
+            <div style="display:grid;grid-template-columns:1fr 2fr;gap:12px;margin-bottom:14px;">
+                <div>
+                    @php ac_label('Habilitações Literárias') @endphp
+                    <select name="habilitacoes" required style="{{ $inp }}">
+                        <option value="">— Seleccione —</option>
+                        <option value="12ª" {{ old('habilitacoes') === '12ª' ? 'selected' : '' }}>12ª (Décima Segunda)</option>
+                        <option value="13ª" {{ old('habilitacoes') === '13ª' ? 'selected' : '' }}>13ª (Décima Terceira)</option>
+                    </select>
+                </div>
+                <div>
+                    @php ac_label('Escola de Proveniência') @endphp
+                    <input type="text" name="escola_origem" value="{{ old('escola_origem') }}" required maxlength="255" style="{{ $inp }}">
+                </div>
+            </div>
+
+            {{-- Perfil de Acesso --}}
+            @php $acOldPerf = old('perfil', ''); @endphp
+            <div style="margin-bottom:14px;">
+                @php ac_label('Perfil do Curso de Proveniência') @endphp
+                <select name="perfil" id="tc-perfil"
+                        data-perfis-curso="{{ json_encode(\App\Models\Candidatura::$perfisCurso, JSON_UNESCAPED_UNICODE) }}"
+                        data-todos-cursos="{{ json_encode(\App\Models\Candidatura::$cursos, JSON_UNESCAPED_UNICODE) }}"
+                        style="{{ $inp }}@error('perfil')border-color:#f87171;@enderror">
+                    <option value="">— Seleccione o perfil do curso de origem —</option>
+                    @foreach(\App\Models\Candidatura::todosOsPerfis() as $p)
+                        <option value="{{ $p }}" {{ $acOldPerf === $p ? 'selected' : '' }}>{{ $p }}</option>
+                    @endforeach
+                </select>
+                <p style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Os cursos disponíveis são filtrados automaticamente pelo perfil.</p>
+                <div id="tc-perfil-info" style="display:none;margin-top:8px;padding:9px 13px;background:#eaeff5;border:1px solid #c7d2e0;border-radius:7px;font-size:0.8rem;color:#0f1f3d;line-height:1.5;"></div>
+                @error('perfil')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
+            {{-- Ano Conclusão --}}
+            <div style="margin-bottom:14px;">
+                @php ac_label('Ano de Conclusão') @endphp
+                <input type="number" name="ano_conclusao" value="{{ old('ano_conclusao') }}" required min="1990" max="{{ date('Y') }}" style="width:140px;border:1px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:0.88rem;">
+                @error('ano_conclusao')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
+            {{-- Estado Financeiro --}}
+            <div style="margin-bottom:14px;">
+                @php ac_label('Estado Financeiro da Família') @endphp
+                <div style="display:flex;gap:18px;margin-top:2px;">
+                    @foreach(['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'] as $v=>$l)
+                    <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                        <input type="radio" name="estado_financeiro" value="{{ $v }}" {{ old('estado_financeiro')===$v?'checked':'' }} required> {{ $l }}
+                    </label>
+                    @endforeach
+                </div>
+                @error('estado_financeiro')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
+            {{-- Trabalhador --}}
+            <div style="margin-bottom:14px;">
+                @php ac_label('Trabalhador') @endphp
+                <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:2px;">
+                    <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                        <input type="radio" name="trabalhador" value="sim" {{ old('trabalhador')==='sim'?'checked':'' }} required
+                               onchange="document.getElementById('ac-inst').style.display='block'"> Sim
+                    </label>
+                    <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                        <input type="radio" name="trabalhador" value="nao" {{ old('trabalhador')==='nao'?'checked':'' }}
+                               onchange="document.getElementById('ac-inst').style.display='none'"> Não
+                    </label>
+                    <div id="ac-inst" style="display:{{ old('trabalhador')==='sim'?'block':'none' }};flex:1;min-width:220px;">
+                        <input type="text" name="instituicao_laboral" value="{{ old('instituicao_laboral') }}" maxlength="255"
+                               placeholder="Nome da Instituição Laboral" style="{{ $inp }}">
+                        @error('instituicao_laboral')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+                @error('trabalhador')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
+            {{-- Curso + Período --}}
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+                <div>
+                    @php ac_label('Curso') @endphp
+                    @php
+                    $acOldCurso = old('curso', '');
+                    $acOldPerfilV = old('perfil', '');
+                    @endphp
+                    <select name="curso" id="tc-curso" required
+                            data-old-value="{{ old('curso', '') }}"
+                            style="{{ $inp }}">
+                        <option value="">{{ $acOldPerfilV ? '— Seleccione o curso —' : '— Seleccione primeiro o perfil acima —' }}</option>
+                        @if($acOldPerfilV)
+                            @foreach(\App\Models\Candidatura::$cursos as $c)
+                                @php
+                                $acPerfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
+                                $acElegivel = empty($acPerfisC) || in_array($acOldPerfilV, $acPerfisC);
+                                @endphp
+                                @if($acElegivel)
+                                    <option value="{{ $c }}" {{ $acOldCurso === $c ? 'selected' : '' }}>{{ $c }}</option>
+                                @endif
+                            @endforeach
+                        @endif
+                    </select>
+                    @error('curso')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    @php ac_label('Período') @endphp
+                    <div style="display:flex;gap:18px;margin-top:4px;">
+                        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                            <input type="radio" name="periodo" value="regular" {{ old('periodo')==='regular'?'checked':'' }} required> Regular
+                        </label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                            <input type="radio" name="periodo" value="pos-laboral" {{ old('periodo')==='pos-laboral'?'checked':'' }}> Pós-laboral
+                        </label>
+                    </div>
+                    @error('periodo')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+                </div>
+            </div>
+
+            {{-- Local de Inscrição --}}
+            <div style="margin-bottom:24px;">
+                @php ac_label('Local de Inscrição') @endphp
+                <div style="display:flex;gap:20px;margin-top:4px;flex-wrap:wrap;">
+                    @foreach(\App\Models\Candidatura::$locaisInscricao as $val => $label)
+                    <label style="display:flex;align-items:center;gap:6px;font-size:0.88rem;cursor:pointer;">
+                        <input type="radio" name="local_inscricao" value="{{ $val }}"
+                               {{ old('local_inscricao') === $val ? 'checked' : '' }} required> {{ $label }}
+                    </label>
+                    @endforeach
+                </div>
+                @error('local_inscricao')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
+            </div>
+
+            <button type="submit"
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:10px;padding:11px 28px;font-weight:700;cursor:pointer;font-size:0.9rem;"
+                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
+                Registar Candidatura
+            </button>
+        </form>
+    </div>
+</div>
+@push('scripts')
+<script src="{{ asset('js/provincias-angola.js') }}"></script>
+<script src="{{ asset('js/perfil-curso.js') }}"></script>
+@endpush
+@endsection

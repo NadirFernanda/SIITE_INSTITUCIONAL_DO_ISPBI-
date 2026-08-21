@@ -270,6 +270,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1
 
     // Candidaturas admin
     Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
+    Route::get('candidaturas/create', [App\Http\Controllers\Admin\CandidaturaController::class, 'create'])->name('candidaturas.create');
+    Route::post('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'store'])->name('candidaturas.store');
     Route::get('candidaturas', [App\Http\Controllers\Admin\CandidaturaController::class, 'index'])->name('candidaturas.index');
     Route::get('candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\Admin\CandidaturaController::class, 'downloadComprovativo'])->name('candidaturas.comprovativo');
     Route::post('candidaturas/{candidatura}/reenviar-recebida', [App\Http\Controllers\Admin\CandidaturaController::class, 'reenviarRecebida'])->name('candidaturas.reenviar-recebida');
