@@ -25,9 +25,11 @@ class Sala extends Model
      * de salas (App\Services\DistribuicaoSalasService) para colocar cada
      * candidato na sala certa, no dia e horário certos.
      *
-     * A Engenharia em Recursos Hídricos não distingue Regular/Pós-laboral —
-     * ambos os períodos partilham o mesmo horário único (confirmado com a
-     * instituição).
+     * A Engenharia em Recursos Hídricos tem período único (Regular) — não tem
+     * variante Pós-laboral. Uma candidatura deste curso com período
+     * "pos-laboral" é uma anomalia de dados e fica sinalizada como "sem
+     * correspondência no calendário" pela distribuição, em vez de ser
+     * assumida silenciosamente como Regular.
      */
     public static array $agendaExames = [
         'Comunicação Social' => [
@@ -39,8 +41,7 @@ class Sala extends Model
             'pos-laboral' => ['data' => '2026-09-02', 'horario' => '13:00-15:00 e 15:30-17:30'],
         ],
         'Engenharia em Recursos Hídricos' => [
-            'regular'     => ['data' => '2026-09-02', 'horario' => '15:30-17:30'],
-            'pos-laboral' => ['data' => '2026-09-02', 'horario' => '15:30-17:30'],
+            'regular' => ['data' => '2026-09-02', 'horario' => '15:30-17:30'],
         ],
         'Contabilidade e Administração' => [
             'regular'     => ['data' => '2026-09-03', 'horario' => '08:00-10:00 e 10:30-12:30'],
