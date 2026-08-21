@@ -95,5 +95,6 @@
     <div class="main-content">
         @yield('content')
     </div>
+    @stack('scripts')
 </body>
 </html>
