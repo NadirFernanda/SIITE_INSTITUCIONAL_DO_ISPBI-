@@ -160,7 +160,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     top:0;
     left:-55mm;
     width:225mm;
-    border-top:1px dashed #444;
+    border-top:3px dashed #000;
 }
 /* O "top" (negativo) é calculado em PHP, proporcional ao número real de
    linhas do texto (ver $offsetCanto) — dompdf não posiciona de forma
