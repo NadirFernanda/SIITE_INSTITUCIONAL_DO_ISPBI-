@@ -44,9 +44,25 @@
         </form>
     </div>
 
+    <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+        <form method="GET" style="display:flex;align-items:center;gap:8px;">
+            <label style="font-size:0.85rem;font-weight:600;color:#475569;">Filtrar por curso</label>
+            <select name="curso" onchange="this.form.submit()"
+                    style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
+                <option value="">— Todos os cursos —</option>
+                @foreach($cursosDisponiveis as $c)
+                    <option value="{{ $c }}" {{ $cursoFiltro === $c ? 'selected' : '' }}>{{ $c }}</option>
+                @endforeach
+            </select>
+            @if($cursoFiltro)
+                <a href="{{ route('daac.salas.index') }}" style="font-size:0.8rem;color:#94a3b8;text-decoration:none;">Limpar ✕</a>
+            @endif
+        </form>
+    </div>
+
     @if($salas->isEmpty())
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:56px;text-align:center;color:#94a3b8;">
-            Nenhuma sala registada.
+            Nenhuma sala {{ $cursoFiltro ? 'encontrada para este curso' : 'registada' }}.
         </div>
     @else
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">

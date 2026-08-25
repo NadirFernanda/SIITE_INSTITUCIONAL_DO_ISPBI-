@@ -12,20 +12,32 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class SalaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $salas = Sala::query()
+        $cursoFiltro = $request->query('curso');
+
+        $salasQuery = Sala::query()
             ->withCount(['candidaturas' => function ($query) {
                 $query->where('pagamento_confirmado', true);
             }])
             ->withCount(['candidaturas as candidaturas_impressas_count' => function ($query) {
                 $query->where('pagamento_confirmado', true)->whereNotNull('folha_impressa_em');
-            }])
-            ->ordenadaPorHorario()
-            ->get()
+            }]);
+
+        if ($cursoFiltro) {
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('curso', $cursoFiltro));
+        }
+
+        $salas = $salasQuery->ordenadaPorHorario()->get()
             ->filter(fn($sala) => $sala->candidaturas_count > 0);
 
-        return view('daac.salas.index', compact('salas'));
+        $cursosDisponiveis = \App\Models\Candidatura::where('pagamento_confirmado', true)
+            ->whereNotNull('curso')
+            ->distinct()
+            ->orderBy('curso')
+            ->pluck('curso');
+
+        return view('daac.salas.index', compact('salas', 'cursosDisponiveis', 'cursoFiltro'));
     }
 
     public function show(Sala $sala)
