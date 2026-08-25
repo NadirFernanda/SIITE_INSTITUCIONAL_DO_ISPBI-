@@ -18,11 +18,19 @@ class SalaController extends Controller
 
     public function index(Request $request)
     {
-        $cursoFiltro = $request->query('curso');
+        $cursoFiltro   = $request->query('curso');
+        $horarioFiltro = $request->query('horario_filtro');
+        $dataFiltro    = $request->query('data_filtro');
 
         $salasQuery = Sala::withCount('candidaturas')->ordenadaPorHorario();
         if ($cursoFiltro) {
             $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('curso', $cursoFiltro));
+        }
+        if ($horarioFiltro) {
+            $salasQuery->where('horario', $horarioFiltro);
+        }
+        if ($dataFiltro) {
+            $salasQuery->whereDate('data_exame', $dataFiltro);
         }
         $salas = $salasQuery->get();
 
@@ -31,6 +39,32 @@ class SalaController extends Controller
             ->distinct()
             ->orderBy('curso')
             ->pluck('curso');
+
+        $datasDisponiveis = Sala::whereNotNull('data_exame')
+            ->distinct()
+            ->orderBy('data_exame')
+            ->pluck('data_exame');
+
+        // Resumo de candidatos por curso/período/data/horário, já filtrado
+        // pelos mesmos critérios da lista de salas acima — só conta quem já
+        // está atribuído a uma sala (sala_id preenchido).
+        $resumoQuery = \DB::table('candidaturas')
+            ->join('salas', 'salas.id', '=', 'candidaturas.sala_id')
+            ->selectRaw("candidaturas.curso, candidaturas.periodo, salas.data_exame, salas.horario, COUNT(*) as total")
+            ->whereNotIn('candidaturas.status', ['rejeitada']);
+        if ($cursoFiltro) {
+            $resumoQuery->where('candidaturas.curso', $cursoFiltro);
+        }
+        if ($horarioFiltro) {
+            $resumoQuery->where('salas.horario', $horarioFiltro);
+        }
+        if ($dataFiltro) {
+            $resumoQuery->whereDate('salas.data_exame', $dataFiltro);
+        }
+        $resumo = $resumoQuery
+            ->groupByRaw('candidaturas.curso, candidaturas.periodo, salas.data_exame, salas.horario')
+            ->orderBy('salas.data_exame')->orderBy('salas.horario')->orderBy('candidaturas.curso')
+            ->get();
 
         // Estatísticas para o painel
         $totalCandidatos   = Candidatura::whereNotIn('status', ['rejeitada'])->count();
@@ -55,7 +89,7 @@ class SalaController extends Controller
 
         return view('admin.salas.index', compact(
             'salas', 'totalCandidatos', 'atribuidos', 'semSala', 'totalLugares', 'grupos',
-            'cursosDisponiveis', 'cursoFiltro'
+            'cursosDisponiveis', 'cursoFiltro', 'datasDisponiveis', 'horarioFiltro', 'dataFiltro', 'resumo'
         ));
     }
 

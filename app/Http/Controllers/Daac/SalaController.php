@@ -14,7 +14,9 @@ class SalaController extends Controller
 {
     public function index(Request $request)
     {
-        $cursoFiltro = $request->query('curso');
+        $cursoFiltro   = $request->query('curso');
+        $horarioFiltro = $request->query('horario_filtro');
+        $dataFiltro    = $request->query('data_filtro');
 
         $salasQuery = Sala::query()
             ->withCount(['candidaturas' => function ($query) {
@@ -27,6 +29,12 @@ class SalaController extends Controller
         if ($cursoFiltro) {
             $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('curso', $cursoFiltro));
         }
+        if ($horarioFiltro) {
+            $salasQuery->where('horario', $horarioFiltro);
+        }
+        if ($dataFiltro) {
+            $salasQuery->whereDate('data_exame', $dataFiltro);
+        }
 
         $salas = $salasQuery->ordenadaPorHorario()->get()
             ->filter(fn($sala) => $sala->candidaturas_count > 0);
@@ -37,7 +45,34 @@ class SalaController extends Controller
             ->orderBy('curso')
             ->pluck('curso');
 
-        return view('daac.salas.index', compact('salas', 'cursosDisponiveis', 'cursoFiltro'));
+        $datasDisponiveis = Sala::whereNotNull('data_exame')
+            ->distinct()
+            ->orderBy('data_exame')
+            ->pluck('data_exame');
+
+        // Resumo de candidatos por curso/período/data/horário, com os mesmos
+        // filtros aplicados à lista de salas acima.
+        $resumoQuery = \DB::table('candidaturas')
+            ->join('salas', 'salas.id', '=', 'candidaturas.sala_id')
+            ->selectRaw("candidaturas.curso, candidaturas.periodo, salas.data_exame, salas.horario, COUNT(*) as total")
+            ->where('candidaturas.pagamento_confirmado', true);
+        if ($cursoFiltro) {
+            $resumoQuery->where('candidaturas.curso', $cursoFiltro);
+        }
+        if ($horarioFiltro) {
+            $resumoQuery->where('salas.horario', $horarioFiltro);
+        }
+        if ($dataFiltro) {
+            $resumoQuery->whereDate('salas.data_exame', $dataFiltro);
+        }
+        $resumo = $resumoQuery
+            ->groupByRaw('candidaturas.curso, candidaturas.periodo, salas.data_exame, salas.horario')
+            ->orderBy('salas.data_exame')->orderBy('salas.horario')->orderBy('candidaturas.curso')
+            ->get();
+
+        return view('daac.salas.index', compact(
+            'salas', 'cursosDisponiveis', 'cursoFiltro', 'datasDisponiveis', 'horarioFiltro', 'dataFiltro', 'resumo'
+        ));
     }
 
     public function show(Sala $sala)
