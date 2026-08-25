@@ -98,19 +98,34 @@ class DistribuicaoSalasService
                     continue;
                 }
 
-                $blocoChave = $slot['data'] . '|' . $slot['horario'];
-                $instanciasPorBloco[$blocoChave] ??= [];
-                $proximoModeloIdx[$blocoChave]   ??= 0;
-
-                $instIdx = 0;
+                // Um período pode ter vários turnos no mesmo dia (ex.: manhã
+                // cedo e depois manhã tarde), cada um com a sua própria
+                // capacidade cheia das 24 salas — candidatos diferentes em
+                // cada turno. Preenchemos o primeiro turno até à capacidade
+                // máxima antes de passar candidatos para o seguinte.
+                $horarios = $slot['horarios'];
+                $horIdx   = 0;
+                $instIdx  = 0;
 
                 foreach ($candidatos as $candidato) {
                     while (true) {
+                        if (! isset($horarios[$horIdx])) {
+                            // Esgotaram-se TODOS os turnos deste curso/período.
+                            break 2;
+                        }
+
+                        $blocoChave = $slot['data'] . '|' . $horarios[$horIdx];
+                        $instanciasPorBloco[$blocoChave] ??= [];
+                        $proximoModeloIdx[$blocoChave]   ??= 0;
+
                         if (! isset($instanciasPorBloco[$blocoChave][$instIdx])) {
                             $mIdx = $proximoModeloIdx[$blocoChave];
                             if (! isset($modelos[$mIdx])) {
-                                // Esgotaram-se as salas disponíveis para este bloco.
-                                break 2;
+                                // Esgotaram-se as salas deste turno — passar
+                                // para o turno seguinte do mesmo dia, se houver.
+                                $horIdx++;
+                                $instIdx = 0;
+                                continue;
                             }
                             $modelo = $modelos[$mIdx];
                             $proximoModeloIdx[$blocoChave]++;
@@ -119,7 +134,7 @@ class DistribuicaoSalasService
                                 'nome'       => $modelo->nome,
                                 'capacidade' => $modelo->capacidade,
                                 'data_exame' => $slot['data'],
-                                'horario'    => $slot['horario'],
+                                'horario'    => $horarios[$horIdx],
                             ]);
                             $instanciasCriadas[] = $instancia;
 
@@ -136,6 +151,7 @@ class DistribuicaoSalasService
                         $instIdx++;
                     }
 
+                    $blocoChave  = $slot['data'] . '|' . $horarios[$horIdx];
                     $numeroLugar = $instanciasPorBloco[$blocoChave][$instIdx]['ocupado'] + 1;
 
                     Candidatura::where('id', $candidato->id)->update([
@@ -208,54 +224,61 @@ class DistribuicaoSalasService
         }
 
         return DB::transaction(function () use ($candidatura, $curso, $slot) {
-            // Instâncias já criadas para este bloco (data+horário), com o
-            // curso atribuído já inferido do primeiro candidato de cada uma.
-            $instancias = Sala::where('data_exame', $slot['data'])
-                ->where('horario', $slot['horario'])
-                ->withCount('candidaturas')
-                ->orderBy('id')
-                ->get();
+            // Um período pode ter vários turnos no mesmo dia — procurar vaga
+            // em cada um deles, pela ordem do calendário.
+            foreach ($slot['horarios'] as $horario) {
+                $instancias = Sala::where('data_exame', $slot['data'])
+                    ->where('horario', $horario)
+                    ->withCount('candidaturas')
+                    ->orderBy('id')
+                    ->get();
 
-            foreach ($instancias as $inst) {
-                if ($inst->id === $candidatura->sala_id) {
-                    continue; // não conta a própria sala actual do candidato
-                }
-                $primeiro = $inst->candidaturas()->whereNotNull('curso')->first();
-                $cursoDaSala = $primeiro ? trim($primeiro->curso) : null;
-                $compativel = $cursoDaSala === null || $cursoDaSala === $curso;
+                foreach ($instancias as $inst) {
+                    if ($inst->id === $candidatura->sala_id) {
+                        continue; // não conta a própria sala actual do candidato
+                    }
+                    $primeiro = $inst->candidaturas()->whereNotNull('curso')->first();
+                    $cursoDaSala = $primeiro ? trim($primeiro->curso) : null;
+                    $compativel = $cursoDaSala === null || $cursoDaSala === $curso;
 
-                if ($compativel && $inst->candidaturas_count < $inst->capacidade) {
-                    $numeroLugar = $inst->candidaturas_count + 1;
-                    $candidatura->forceFill(['sala_id' => $inst->id, 'numero_lugar' => $numeroLugar])->save();
-                    $this->sincronizarDisciplinas([$inst]);
-                    return ['ok' => true, 'mensagem' => "Candidato realojado para {$inst->nome} ({$inst->data_exame->format('d/m/Y')}, {$inst->horario})."];
+                    if ($compativel && $inst->candidaturas_count < $inst->capacidade) {
+                        $numeroLugar = $inst->candidaturas_count + 1;
+                        $candidatura->forceFill(['sala_id' => $inst->id, 'numero_lugar' => $numeroLugar])->save();
+                        $this->sincronizarDisciplinas([$inst]);
+                        return ['ok' => true, 'mensagem' => "Candidato realojado para {$inst->nome} ({$inst->data_exame->format('d/m/Y')}, {$inst->horario})."];
+                    }
                 }
+
+                // Nenhuma instância existente tem vaga neste turno — tentar
+                // criar mais uma a partir de uma sala-modelo ainda não usada
+                // neste turno específico.
+                $nomesUsados = $instancias->pluck('nome')->all();
+                $modelo = Sala::whereNull('data_exame')
+                    ->whereNotIn('nome', $nomesUsados)
+                    ->orderByDesc('capacidade')
+                    ->first();
+
+                if ($modelo) {
+                    $novaInstancia = Sala::create([
+                        'nome'       => $modelo->nome,
+                        'capacidade' => $modelo->capacidade,
+                        'data_exame' => $slot['data'],
+                        'horario'    => $horario,
+                    ]);
+                    $candidatura->forceFill(['sala_id' => $novaInstancia->id, 'numero_lugar' => 1])->save();
+                    $this->sincronizarDisciplinas([$novaInstancia]);
+                    return ['ok' => true, 'mensagem' => "Candidato realojado para {$novaInstancia->nome} ({$novaInstancia->data_exame->format('d/m/Y')}, {$novaInstancia->horario})."];
+                }
+
+                // Este turno está mesmo esgotado (sem vaga e sem modelo livre)
+                // — tentar o turno seguinte do mesmo dia, se houver.
             }
 
-            // Nenhuma instância existente tem vaga — tentar criar mais uma a
-            // partir de uma sala-modelo ainda não usada neste bloco.
-            $nomesUsados = $instancias->pluck('nome')->all();
-            $modelo = Sala::whereNull('data_exame')
-                ->whereNotIn('nome', $nomesUsados)
-                ->orderByDesc('capacidade')
-                ->first();
-
-            if ($modelo) {
-                $novaInstancia = Sala::create([
-                    'nome'       => $modelo->nome,
-                    'capacidade' => $modelo->capacidade,
-                    'data_exame' => $slot['data'],
-                    'horario'    => $slot['horario'],
-                ]);
-                $candidatura->forceFill(['sala_id' => $novaInstancia->id, 'numero_lugar' => 1])->save();
-                $this->sincronizarDisciplinas([$novaInstancia]);
-                return ['ok' => true, 'mensagem' => "Candidato realojado para {$novaInstancia->nome} ({$novaInstancia->data_exame->format('d/m/Y')}, {$novaInstancia->horario})."];
-            }
-
-            // Sem nenhuma sala disponível para este curso/bloco — nunca colocar
-            // numa sala de outro curso. Fica sem sala, sinalizado ao admin.
+            // Sem nenhuma sala disponível em nenhum turno para este
+            // curso/período — nunca colocar numa sala de outro curso. Fica
+            // sem sala, sinalizado ao admin.
             $candidatura->forceFill(['sala_id' => null, 'numero_lugar' => null])->save();
-            return ['ok' => false, 'mensagem' => "Não há nenhuma sala com vaga disponível para '{$curso}' neste horário — candidato ficou SEM sala. Adicione mais salas-modelo ou liberte espaço."];
+            return ['ok' => false, 'mensagem' => "Não há nenhuma sala com vaga disponível para '{$curso}' em nenhum turno — candidato ficou SEM sala. Adicione mais salas-modelo ou liberte espaço."];
         });
     }
 
