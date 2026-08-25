@@ -145,7 +145,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     position:absolute;
     top:38mm;
     left:150mm;
-    width:110mm;
+    width:170mm;
     transform:rotate(35deg);
     transform-origin:top left;
 }
