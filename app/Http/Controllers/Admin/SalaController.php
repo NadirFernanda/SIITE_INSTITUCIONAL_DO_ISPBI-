@@ -16,9 +16,21 @@ class SalaController extends Controller
 {
     use DownloadsSalasEmLote;
 
-    public function index()
+    public function index(Request $request)
     {
-        $salas = Sala::withCount('candidaturas')->ordenadaPorHorario()->get();
+        $cursoFiltro = $request->query('curso');
+
+        $salasQuery = Sala::withCount('candidaturas')->ordenadaPorHorario();
+        if ($cursoFiltro) {
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('curso', $cursoFiltro));
+        }
+        $salas = $salasQuery->get();
+
+        $cursosDisponiveis = Candidatura::whereNotIn('status', ['rejeitada'])
+            ->whereNotNull('curso')
+            ->distinct()
+            ->orderBy('curso')
+            ->pluck('curso');
 
         // Estatísticas para o painel
         $totalCandidatos   = Candidatura::whereNotIn('status', ['rejeitada'])->count();
@@ -42,7 +54,8 @@ class SalaController extends Controller
             ->get();
 
         return view('admin.salas.index', compact(
-            'salas', 'totalCandidatos', 'atribuidos', 'semSala', 'totalLugares', 'grupos'
+            'salas', 'totalCandidatos', 'atribuidos', 'semSala', 'totalLugares', 'grupos',
+            'cursosDisponiveis', 'cursoFiltro'
         ));
     }
 
