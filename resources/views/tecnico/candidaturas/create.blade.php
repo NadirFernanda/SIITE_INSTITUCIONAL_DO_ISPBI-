@@ -68,13 +68,13 @@
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
                 <div>
                     @php tc_label('Província de Naturalidade') @endphp
-                    <select id="t-provincia" name="naturalidade_provincia" required data-old="{{ old('naturalidade_provincia') }}" style="{{ $inp }}">
+                    <select id="select-provincia" name="naturalidade_provincia" required data-old="{{ old('naturalidade_provincia') }}" style="{{ $inp }}">
                         <option value="">Seleccione a província</option>
                     </select>
                 </div>
                 <div>
                     @php tc_label('Município de Naturalidade') @endphp
-                    <select id="t-municipio" name="naturalidade_municipio" required data-old="{{ old('naturalidade_municipio') }}" style="{{ $inp }}">
+                    <select id="select-municipio" name="naturalidade_municipio" required data-old="{{ old('naturalidade_municipio') }}" style="{{ $inp }}">
                         <option value="">Seleccione primeiro a província</option>
                     </select>
                 </div>
@@ -306,13 +306,5 @@
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
 <script src="{{ asset('js/perfil-curso.js') }}"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var prov = document.getElementById('t-provincia');
-    var mun  = document.getElementById('t-municipio');
-    if (prov) { prov.id = 'select-provincia'; prov.setAttribute('data-old', prov.dataset.old || ''); }
-    if (mun)  { mun.id  = 'select-municipio'; mun.setAttribute('data-old', mun.dataset.old || ''); }
-});
-</script>
 @endpush
 @endsection
