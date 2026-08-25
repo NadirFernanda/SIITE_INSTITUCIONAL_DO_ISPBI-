@@ -58,10 +58,11 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 .linha-campo .traco.preenchido { border-bottom:none; font-weight:600; }
 
 /* Código de exame: texto simples e destacado, sem caixa pesada — só um traço
-   fino por baixo, mais discreto do que uma borda grossa à volta. */
+   fino por baixo, mais discreto do que uma borda grossa à volta. Alinhado à
+   esquerda, na mesma margem do nome do instituto e do curso. */
 .linha-codigo {
     width:105mm;
-    text-align:center;
+    text-align:left;
     margin-top:5mm;
     font-weight:bold;
     font-size:12pt;
@@ -69,10 +70,9 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .linha-codigo span { border-bottom:0.8px solid #000; padding-bottom:1.5mm; }
 
-/* O texto do título fica centrado no mesmo eixo (105mm) do resto do
-   cabeçalho — a centrar na largura toda da página ficava desalinhado com o
-   resto e parecia torto — mas a linha por baixo estende-se de ponta a
-   ponta da página. */
+/* Título também alinhado à esquerda, na mesma margem do resto do cabeçalho
+   (instituto, curso, código de exame) — a linha por baixo continua a
+   estender-se de ponta a ponta da página. */
 .titulo-exame-linha {
     margin-top:15mm;
     padding-bottom:2mm;
@@ -80,7 +80,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .titulo-exame {
     width:100%;
-    text-align:center;
+    text-align:left;
     font-weight:bold;
     font-size:16pt;
     letter-spacing:0.02em;
