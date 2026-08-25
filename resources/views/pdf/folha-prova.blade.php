@@ -97,7 +97,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
    bloco seguinte e desviava o texto para a direita. */
 .titulo-exame-linha {
     width:178mm;
-    margin-top:15mm;
+    margin-top:7mm;
     padding-bottom:2mm;
 }
 .titulo-exame {
