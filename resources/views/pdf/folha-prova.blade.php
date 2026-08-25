@@ -24,10 +24,11 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 
 .pagina { position:relative; width:210mm; padding:16mm 16mm 10mm; }
 
-/* Logótipo e nome do instituto centrados dentro da mesma largura da linha
-   divisória (105mm), em vez de alinhados à esquerda. */
-.cabecalho-instituto { width:105mm; text-align:center; }
-.logo { width:24mm; height:auto; margin:0 auto; display:block; }
+/* Logótipo e nome do instituto alinhados à esquerda (canto superior esquerdo
+   da folha), conforme o modelo oficial — antes ficavam centrados dentro do
+   bloco, o que não corresponde ao layout de referência. */
+.cabecalho-instituto { width:105mm; text-align:left; }
+.logo { width:24mm; height:auto; display:block; }
 
 .instituto {
     display:block;
@@ -45,11 +46,13 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
    por baixo do rótulo em vez de ao lado, por causa de como o dompdf resolve
    vertical-align em células vazias. Largura fixa no rótulo garante que todos
    os traços começam alinhados na mesma posição vertical. */
-/* N.º BI, Curso e Código de Exame centrados na mesma largura (105mm) e
-   posição do logótipo/título do instituto, para ficarem consistentes. */
-.linha-campo { width:105mm; text-align:center; margin-top:3mm; font-weight:bold; font-size:12pt; }
-.linha-campo .rotulo { display:inline-block; width:22mm; text-align:left; white-space:nowrap; }
-.linha-campo .traco { display:inline-block; border-bottom:1px solid #000; padding-bottom:1mm; }
+/* N.º BI e Curso alinhados à esquerda, por baixo do nome do instituto —
+   mesmo layout do modelo oficial de referência. */
+.linha-campo { width:105mm; text-align:left; margin-top:3mm; font-weight:bold; font-size:12pt; }
+.linha-campo .rotulo { display:inline-block; width:22mm; text-align:left; white-space:nowrap; vertical-align:top; }
+/* max-width impede que um curso com nome longo ultrapasse a largura da
+   página — quebra para a linha seguinte em vez de sair do bloco de 105mm. */
+.linha-campo .traco { display:inline-block; max-width:83mm; border-bottom:1px solid #000; padding-bottom:1mm; word-wrap:break-word; vertical-align:top; }
 /* Campos já preenchidos automaticamente (N.º BI, Curso) não levam traço por
    baixo — o traço só faz sentido em linhas em branco para preencher à mão. */
 .linha-campo .traco.preenchido { border-bottom:none; font-weight:600; }
@@ -76,7 +79,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     border-bottom:0.8px solid #000;
 }
 .titulo-exame {
-    width:105mm;
+    width:100%;
     text-align:center;
     font-weight:bold;
     font-size:16pt;
@@ -148,7 +151,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     <div class="divisor"></div>
 
     <div class="linha-campo">
-        <span class="rotulo">Curso:</span><span class="traco preenchido">{{ $candidatura->curso }}</span>
+        <span class="rotulo">CURSO</span><span class="traco preenchido">{{ $candidatura->curso }}</span>
     </div>
 
     <div class="linha-codigo">Código de Exame: <span>{{ $candidatura->codigo_exame ?: '' }}</span></div>
