@@ -91,13 +91,17 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .linha-codigo span { border-bottom:0.8px solid #000; padding-bottom:1.5mm; }
 
-/* Título centrado na página, sem linha por baixo. */
+/* Título centrado na página, sem linha por baixo. Largura explícita em mm
+   (em vez de 100%/auto) — testado que, a seguir a um bloco com largura fixa
+   (.linha-codigo, 105mm), o dompdf calculava mal a largura "auto/100%" do
+   bloco seguinte e desviava o texto para a direita. */
 .titulo-exame-linha {
+    width:178mm;
     margin-top:15mm;
     padding-bottom:2mm;
 }
 .titulo-exame {
-    width:100%;
+    width:178mm;
     text-align:center;
     font-weight:bold;
     font-size:16pt;
