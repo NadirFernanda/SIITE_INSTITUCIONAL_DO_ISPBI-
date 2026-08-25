@@ -7,11 +7,32 @@
     // Quebra manual do texto da faixa diagonal em linhas curtas: o wrap automático do
     // CSS não é fiável dentro de blocos com transform:rotate() no dompdf, por isso
     // forçamos aqui a largura máxima por linha para garantir que nada ultrapassa a página.
-    $faixaLinha = function (string $label, $valor) {
+    //
+    // O bloco de identificação tem de ficar sempre à mesma distância da linha de
+    // corte, seja qual for o número de linhas (nomes/cursos compridos quebram para
+    // 2 linhas) — uma margem fixa não serve porque cada linha extra "come" o espaço
+    // reservado. Por isso contamos aqui quantas linhas o texto vai realmente ocupar
+    // e calculamos o deslocamento (top negativo) proporcional a esse total, em vez
+    // de adivinhar um valor fixo.
+    $totalLinhasDiagonal = 0;
+    $faixaLinha = function (string $label, $valor) use (&$totalLinhasDiagonal) {
         $texto     = trim($label . ' ' . $valor);
         $quebrado  = wordwrap($texto, 30, "\n", true);
+        $totalLinhasDiagonal += substr_count($quebrado, "\n") + 1;
         return nl2br(e($quebrado));
     };
+
+    // Pré-computar as 5 linhas primeiro (para contar o total antes de definir o
+    // "top"), depois montar o offset em mm: altura por linha (~4.15mm, a 8.5pt
+    // com entrelinha 1.25 + margem) × nº de linhas, mais 3mm de folga até à linha.
+    $camposCanto = [
+        $faixaLinha('Código de Exame:', $candidatura->codigo_exame),
+        $faixaLinha('N.º BI:', $candidatura->bi),
+        $faixaLinha('Ano Lectivo:', '2026/2027'),
+        $faixaLinha('Curso:', $candidatura->curso),
+        $faixaLinha('Nome:', mb_strtoupper($candidatura->nome, 'UTF-8')),
+    ];
+    $offsetCanto = -1 * round(($totalLinhasDiagonal * 4.15) + 3, 1);
 @endphp
 <!DOCTYPE html>
 <html lang="pt">
@@ -122,7 +143,7 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
    renders de teste (nome/curso longos incluídos). */
 .canto-corte {
     position:absolute;
-    top:15mm;
+    top:38mm;
     left:150mm;
     width:110mm;
     transform:rotate(35deg);
@@ -132,9 +153,14 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
     border-top:1px dashed #444;
     width:100%;
 }
+/* O "top" (negativo) é calculado em PHP, proporcional ao número real de
+   linhas do texto (ver $offsetCanto) — dompdf não posiciona de forma
+   fiável um bloco position:absolute por "bottom" quando o contentor não
+   tem altura definida (testado: o bloco saltava para o fundo da página),
+   por isso a distância certa até à linha de corte tem de vir por "top"
+   calculado antecipadamente, não por margem fixa nem por "bottom". */
 .canto-destacavel {
     position:absolute;
-    top:-18mm;
     left:0;
     width:100%;
     font-family: Helvetica, Arial, sans-serif;
@@ -156,12 +182,10 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 <div class="pagina">
 
     <div class="canto-corte">
-        <div class="canto-destacavel">
-            <div class="campo">{!! $faixaLinha('Código de Exame:', $candidatura->codigo_exame) !!}</div>
-            <div class="campo">{!! $faixaLinha('N.º BI:', $candidatura->bi) !!}</div>
-            <div class="campo">{!! $faixaLinha('Ano Lectivo:', '2026/2027') !!}</div>
-            <div class="campo">{!! $faixaLinha('Curso:', $candidatura->curso) !!}</div>
-            <div class="campo">{!! $faixaLinha('Nome:', mb_strtoupper($candidatura->nome, 'UTF-8')) !!}</div>
+        <div class="canto-destacavel" style="top:{{ $offsetCanto }}mm;">
+            @foreach($camposCanto as $linhaCampo)
+                <div class="campo">{!! $linhaCampo !!}</div>
+            @endforeach
         </div>
         <div class="linha-de-corte"></div>
     </div>
