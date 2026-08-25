@@ -194,10 +194,14 @@ class SalaController extends Controller
         return $pdf->download('lista-exame-' . \Str::slug($sala->nome) . '.pdf');
     }
 
-    public function excelExame(Sala $sala)
+    public function excelExame(Request $request, Sala $sala)
     {
-        $filename = 'lista-exame-' . \Str::slug($sala->nome) . '.xlsx';
-        return Excel::download(new SalaExameExport($sala), $filename);
+        $necessidadeEspecial = $request->query('necessidade_especial');
+
+        $sufixo = $necessidadeEspecial ? '-' . \Str::slug($necessidadeEspecial) : '';
+        $filename = 'lista-exame-' . \Str::slug($sala->nome) . $sufixo . '.xlsx';
+
+        return Excel::download(new SalaExameExport($sala, $necessidadeEspecial), $filename);
     }
 
 }

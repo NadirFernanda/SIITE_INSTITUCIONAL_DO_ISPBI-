@@ -269,6 +269,23 @@ class Candidatura extends Model
         return static::$periodosRestritos[$curso] ?? ['regular', 'pos-laboral'];
     }
 
+    // Categorias de necessidade especial que cada curso deve ter como lista
+    // separada (além da lista geral) — usado para gerar listas de presença
+    // por categoria em vez de uma só lista misturada. "Áreas Steam" só faz
+    // sentido nos cursos de engenharia; os restantes cursos só separam
+    // Filhos de Antigos Combatentes e Portadores de Deficiência.
+    public static array $categoriasEspeciaisPorCurso = [
+        'Engenharia Informática'          => ['Filhos de antigos combatentes', 'Portadores de deficiência', 'Áreas Steam'],
+        'Engenharia em Recursos Hídricos' => ['Filhos de antigos combatentes', 'Portadores de deficiência', 'Áreas Steam'],
+    ];
+
+    public static array $categoriasEspeciaisPadrao = ['Filhos de antigos combatentes', 'Portadores de deficiência'];
+
+    public static function categoriasEspeciaisPermitidas(?string $curso): array
+    {
+        return static::$categoriasEspeciaisPorCurso[$curso] ?? static::$categoriasEspeciaisPadrao;
+    }
+
     // Retorna todos os perfis únicos ordenados alfabeticamente
     public static function todosOsPerfis(): array
     {

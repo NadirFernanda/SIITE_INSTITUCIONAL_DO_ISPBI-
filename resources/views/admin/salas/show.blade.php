@@ -29,11 +29,23 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 Disciplinas
             </a>
+            @php
+                $cursoSala = $candidaturas->first()->curso ?? null;
+                $categoriasSala = \App\Models\Candidatura::categoriasEspeciaisPermitidas($cursoSala);
+            @endphp
             <a href="{{ route('admin.salas.excel-exame', $sala) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#15803d;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                Excel — Lista de Presença
+                Excel — Lista Geral
             </a>
+            @foreach($categoriasSala as $categoria)
+            <a href="{{ route('admin.salas.excel-exame', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
+               title="Lista de presença só com candidatos desta categoria"
+               style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#15803d;border:1px solid #15803d;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Excel — {{ $categoria }}
+            </a>
+            @endforeach
             @if($candidaturas->count() > 0)
             <a href="{{ route('admin.candidaturas.folhas-prova-lote', ['sala_id' => $sala->id]) }}"
                title="O admin pode gerar as folhas desta sala quantas vezes precisar (sem limite de impressão)"

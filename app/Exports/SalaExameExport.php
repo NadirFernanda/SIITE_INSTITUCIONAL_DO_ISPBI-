@@ -22,14 +22,21 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     protected Sala $sala;
     protected Collection $candidaturas;
     protected int $tableRow; // linha onde começa a tabela (depende de existir data/horário)
+    protected ?string $necessidadeEspecial;
 
-    public function __construct(Sala $sala)
+    public function __construct(Sala $sala, ?string $necessidadeEspecial = null)
     {
-        $this->sala         = $sala;
-        $this->candidaturas = $sala->candidaturas()
-            ->where('pagamento_confirmado', true)
-            ->orderBy('numero_lugar')
-            ->get();
+        $this->sala                = $sala;
+        $this->necessidadeEspecial = $necessidadeEspecial;
+
+        $query = $sala->candidaturas()
+            ->where('pagamento_confirmado', true);
+
+        if ($necessidadeEspecial !== null) {
+            $query->where('necessidade_especial', $necessidadeEspecial);
+        }
+
+        $this->candidaturas = $query->orderBy('numero_lugar')->get();
     }
 
     public function title(): string
@@ -40,7 +47,13 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // o ID da sala vai sempre no fim, garantindo unicidade mesmo com nomes
         // repetidos ou muito parecidos.
         $nome = preg_replace('/[\\\\\/\?\*\[\]:]/', '', $this->sala->nome);
-        $sufixo = ' #' . $this->sala->id;
+        $categoriaAbrev = match ($this->necessidadeEspecial) {
+            'Filhos de antigos combatentes' => ' - Combatentes',
+            'Portadores de deficiência'     => ' - Deficiência',
+            'Áreas Steam'                   => ' - Steam',
+            default                          => '',
+        };
+        $sufixo = $categoriaAbrev . ' #' . $this->sala->id;
         $prefixo = 'Exame - ';
         $maxNome = max(1, 31 - mb_strlen($prefixo) - mb_strlen($sufixo));
         return $prefixo . mb_substr($nome, 0, $maxNome) . $sufixo;
@@ -56,7 +69,10 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Cabeçalho (linhas 2-4) — mescladas A:C, centradas
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
         $rows[] = ['COMISSÃO DO EXAME DE ACESSO', '', ''];
-        $rows[] = ['EXAME DE ACESSO 2026/2027 — LISTA DE EXAME', '', ''];
+        $tituloLista = $this->necessidadeEspecial
+            ? 'EXAME DE ACESSO 2026/2027 — LISTA: ' . mb_strtoupper($this->necessidadeEspecial, 'UTF-8')
+            : 'EXAME DE ACESSO 2026/2027 — LISTA GERAL';
+        $rows[] = [$tituloLista, '', ''];
 
         // Linha 5 — vazia
         $rows[] = ['', '', ''];
