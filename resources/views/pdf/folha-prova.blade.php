@@ -98,32 +98,53 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .rodape table { width:100%; border-collapse:collapse; }
 
-/* Canto destacável: faixa diagonal com os campos de identificação do candidato,
-   destinada a ser rasgada e arquivada em separado para garantir o anonimato na
-   correcção (quem corrige só vê o código de exame, não o nome). Todo o texto é
-   alinhado à esquerda dentro do bloco — cada linha começa no mesmo ponto e lê-se
-   da esquerda para a direita — e o bloco inteiro é rodado em conjunto, mantendo
-   todas as linhas paralelas na diagonal, tal como numa folha de prova real.
-   Largura de 60mm é o máximo que cabe sem tocar no nome do instituto (que é o
-   elemento mais largo do cabeçalho); geometria confirmada por render de teste.
-   "top" afastado do canto real da página para deixar margem de papel entre a
-   linha de corte e a borda — sem isso, a ponta fica rente ao canto e não dá
-   para agarrar para rasgar. */
+/* Canto destacável: recorta o canto superior direito da folha, para ser
+   rasgado e arquivado à parte, garantindo o anonimato na correcção (quem
+   corrige só vê o código de exame, nunca o nome). Para isto funcionar como
+   um rasgão real:
+   1) tem de haver uma LINHA DE CORTE desenhada que atravesse a folha de uma
+      margem à outra (do topo até à direita — única orientação geometricamente
+      possível para recortar o canto superior direito, desce da esquerda para
+      a direita);
+   2) TODO o texto de identificação tem de ficar geometricamente do lado do
+      canto (o pedaço que se destaca), nunca do lado do conteúdo principal;
+   3) a linha e o texto têm de ficar bem afastados do resto do cabeçalho
+      (nome do instituto, título), para não os atravessar.
+
+   A linha (.linha-de-corte) fica ancorada exactamente na origem do
+   contentor rodado — por isso o seu comprimento é previsível e chega
+   sempre à margem direita, independentemente do texto. O texto
+   (.canto-destacavel) é posicionado à parte, deslocado para cima dessa
+   mesma origem (top negativo fixo), para nunca empurrar nem tocar a linha,
+   sejam quantas linhas de texto forem. Ambos rodam em conjunto porque são
+   filhos do mesmo contentor — por isso ficam sempre no ângulo certo um em
+   relação ao outro. Geometria e posição confirmadas visualmente por vários
+   renders de teste (nome/curso longos incluídos). */
+.canto-corte {
+    position:absolute;
+    top:15mm;
+    left:150mm;
+    width:110mm;
+    transform:rotate(35deg);
+    transform-origin:top left;
+}
+.canto-corte .linha-de-corte {
+    border-top:1px dashed #444;
+    width:100%;
+}
 .canto-destacavel {
     position:absolute;
-    top:18mm;
-    left:137mm;
-    width:58mm;
+    top:-18mm;
+    left:0;
+    width:100%;
     font-family: Helvetica, Arial, sans-serif;
-    transform:rotate(-12deg);
-    transform-origin:top right;
 }
 .canto-destacavel .campo {
     text-align:left;
     font-family: Helvetica, Arial, sans-serif;
     font-weight:bold;
-    font-size:9pt;
-    line-height:1.3;
+    font-size:8.5pt;
+    line-height:1.25;
     margin-bottom:0.4mm;
 }
 
@@ -134,12 +155,15 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 
 <div class="pagina">
 
-    <div class="canto-destacavel">
-        <div class="campo">{!! $faixaLinha('Código de Exame:', $candidatura->codigo_exame) !!}</div>
-        <div class="campo">{!! $faixaLinha('N.º BI:', $candidatura->bi) !!}</div>
-        <div class="campo">{!! $faixaLinha('Ano Lectivo:', '2026/2027') !!}</div>
-        <div class="campo">{!! $faixaLinha('Curso:', $candidatura->curso) !!}</div>
-        <div class="campo">{!! $faixaLinha('Nome:', mb_strtoupper($candidatura->nome, 'UTF-8')) !!}</div>
+    <div class="canto-corte">
+        <div class="canto-destacavel">
+            <div class="campo">{!! $faixaLinha('Código de Exame:', $candidatura->codigo_exame) !!}</div>
+            <div class="campo">{!! $faixaLinha('N.º BI:', $candidatura->bi) !!}</div>
+            <div class="campo">{!! $faixaLinha('Ano Lectivo:', '2026/2027') !!}</div>
+            <div class="campo">{!! $faixaLinha('Curso:', $candidatura->curso) !!}</div>
+            <div class="campo">{!! $faixaLinha('Nome:', mb_strtoupper($candidatura->nome, 'UTF-8')) !!}</div>
+        </div>
+        <div class="linha-de-corte"></div>
     </div>
 
     <div class="cabecalho-instituto">
