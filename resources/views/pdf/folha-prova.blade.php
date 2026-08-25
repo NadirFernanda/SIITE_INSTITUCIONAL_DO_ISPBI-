@@ -91,17 +91,14 @@ html, body { width:100%; height:100%; font-family: Helvetica, Arial, sans-serif;
 }
 .linha-codigo span { border-bottom:0.8px solid #000; padding-bottom:1.5mm; }
 
-/* Título também alinhado à esquerda, na mesma margem do resto do cabeçalho
-   (instituto, curso, código de exame) — a linha por baixo continua a
-   estender-se de ponta a ponta da página. */
+/* Título centrado na página, sem linha por baixo. */
 .titulo-exame-linha {
     margin-top:15mm;
     padding-bottom:2mm;
-    border-bottom:0.8px solid #000;
 }
 .titulo-exame {
     width:100%;
-    text-align:left;
+    text-align:center;
     font-weight:bold;
     font-size:16pt;
     letter-spacing:0.02em;
