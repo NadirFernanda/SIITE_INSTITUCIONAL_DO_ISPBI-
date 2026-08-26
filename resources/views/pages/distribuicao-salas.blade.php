@@ -3,7 +3,7 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
 @include('partials.page-hero', [
-    'title'      => 'Distribuição de Salas — Exame de Acesso',
+    'title'      => 'Lista Provisória dos Candidatos Inscritos — Exame de Acesso 2026/2027',
     'subtitle'   => 'Consulte a sala, data e horário do seu exame, organizados por curso e período.',
     'breadcrumb' => 'Distribuição de Salas',
 ])
