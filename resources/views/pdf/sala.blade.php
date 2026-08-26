@@ -9,15 +9,17 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    /* Margem definida em @page (não em padding do .page) — o dompdf só aplica
-       padding de um div uma vez, no início do conteúdo; quando a tabela é
-       longa e continua automaticamente para outra folha, essa folha nova
-       nascia sem margem nenhuma. @page margin repete-se em TODAS as páginas
-       físicas, incluindo as criadas por overflow de conteúdo. */
-    @page { margin: 15mm 18mm; }
+    /* Margem via padding de <td> de uma tabela exterior, não via @page nem via
+       padding de <div>. Testado empiricamente: quando a tabela de candidatos
+       é longa e o dompdf continua automaticamente para outra folha, ele NÃO
+       repete a margem do @page nem o padding de um <div> nas folhas seguintes
+       (ficam coladas às bordas) — só o padding de uma <td> de tabela se repete
+       correctamente em todas as páginas geradas por overflow. */
+    @page { size: A4 portrait; margin: 0; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
-    .page { padding:0; }
+    table.pagina-externa { width:100%; border-collapse:collapse; }
+    table.pagina-externa > tbody > tr > td { padding:15mm 18mm; }
 
     .header { text-align:center; margin-bottom:8mm; }
     .header img { height:18mm; }
@@ -46,7 +48,7 @@
 </style>
 </head>
 <body>
-<div class="page">
+<table class="pagina-externa"><tbody><tr><td>
 
     <div class="header">
         @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
@@ -107,6 +109,6 @@
         Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno
     </div>
 
-</div>
+</td></tr></tbody></table>
 </body>
 </html>

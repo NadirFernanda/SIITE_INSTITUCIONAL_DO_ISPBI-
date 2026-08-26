@@ -9,13 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    /* Margem em @page, não em padding do .page — ver pdf/sala.blade.php para
-       a explicação: padding de div não se repete nas páginas criadas por
-       overflow automático de uma tabela longa, @page margin sim. */
-    @page { margin: 15mm 18mm; }
+    /* Margem via padding de <td> de uma tabela exterior — ver pdf/sala.blade.php
+       para a explicação: testado empiricamente que nem @page margin nem
+       padding de <div> se repetem nas páginas criadas por overflow automático
+       de uma tabela longa no dompdf; só o padding de uma <td> se repete. */
+    @page { size: A4 portrait; margin: 0; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
-    .page { padding:0; }
+    table.pagina-externa { width:100%; border-collapse:collapse; }
+    table.pagina-externa > tbody > tr > td { padding:15mm 18mm; }
 
     .header { text-align:center; margin-bottom:8mm; }
     .header img { height:18mm; }
@@ -44,7 +46,7 @@
 </style>
 </head>
 <body>
-<div class="page">
+<table class="pagina-externa"><tbody><tr><td>
 
     <div class="header">
         @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
@@ -95,6 +97,6 @@
         Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno
     </div>
 
-</div>
+</td></tr></tbody></table>
 </body>
 </html>
