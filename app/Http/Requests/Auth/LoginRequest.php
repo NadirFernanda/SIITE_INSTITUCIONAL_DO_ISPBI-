@@ -44,8 +44,13 @@ class LoginRequest extends FormRequest
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
+            // Mensagem fixa em português em vez de trans('auth.failed') —
+            // testado que, se o APP_LOCALE do servidor não resolver para
+            // "pt" (ex.: cache de configuração desactualizada), o Laravel
+            // mostra a própria chave de tradução ("auth.failed") em vez da
+            // frase, o que já aconteceu em produção.
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'As credenciais fornecidas estão incorretas.',
             ]);
         }
 
@@ -68,10 +73,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => "Muitas tentativas de login. Tente novamente dentro de {$seconds} segundos.",
         ]);
     }
 

@@ -47,7 +47,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerateToken();
 
             throw \Illuminate\Validation\ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                'email' => 'As credenciais fornecidas estão incorretas.',
             ]);
         }
 

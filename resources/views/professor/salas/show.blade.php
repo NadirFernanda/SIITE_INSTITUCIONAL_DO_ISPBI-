@@ -45,7 +45,7 @@
     {{-- Informativo de anonimato --}}
     <div style="margin-bottom:20px;padding:14px 16px;background:#eaeff5;border:1px solid #a8c4e0;border-radius:12px;color:#0f1f3d;font-size:0.88rem;line-height:1.6;">
         <strong style="display:block;margin-bottom:4px;">🔒 Garantia de Anonimato:</strong>
-        Apenas o código de exame é exibido. Nenhum dado pessoal do candidato (nome, BI, etc.) aparece nesta interface. Valide os códigos contra a correspondência física oficial da DAAC/Secretaria.
+        Apenas o código de exame é exibido. Nenhum dado pessoal do candidato (nome, BI, etc.) aparece nesta interface. Valide os códigos com o código que consta na folha de prova física.
     </div>
 
     {{-- Tabela com pauta --}}

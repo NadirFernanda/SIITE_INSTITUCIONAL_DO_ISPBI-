@@ -117,7 +117,7 @@
             </div>
             <div class="divide-y">
               @foreach($salas as $sala)
-              <div class="px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+              <div class="px-6 py-4 flex flex-col gap-3">
                 <div>
                   <div class="font-semibold text-gray-900">{{ $sala->nome }}</div>
                   <div class="text-sm text-gray-500">
