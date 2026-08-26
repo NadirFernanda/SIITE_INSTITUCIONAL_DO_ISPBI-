@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -41,16 +42,26 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
+        // Verificar separadamente se o e-mail existe, para dizer ao
+        // utilizador exactamente qual dos dois campos está errado — a
+        // pedido, mesmo sabendo que isto revela se um e-mail está
+        // registado ou não. Aceitável aqui: é um painel interno com um
+        // número reduzido de contas de staff, não um registo público.
+        $user = User::where('email', $this->input('email'))->first();
+
+        if (! $user) {
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'email' => 'Este e-mail não está registado.',
+            ]);
+        }
+
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
-            // Mensagem fixa em português em vez de trans('auth.failed') —
-            // testado que, se o APP_LOCALE do servidor não resolver para
-            // "pt" (ex.: cache de configuração desactualizada), o Laravel
-            // mostra a própria chave de tradução ("auth.failed") em vez da
-            // frase, o que já aconteceu em produção.
             throw ValidationException::withMessages([
-                'email' => 'O e-mail ou a palavra-passe estão incorretos.',
+                'password' => 'A palavra-passe está incorreta.',
             ]);
         }
 
