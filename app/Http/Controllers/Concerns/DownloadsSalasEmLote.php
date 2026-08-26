@@ -36,6 +36,19 @@ trait DownloadsSalasEmLote
             ->get();
     }
 
+    /**
+     * Logótipo em base64, calculado uma única vez e partilhado por todas as
+     * salas do lote (evita reler/recodificar o ficheiro por sala).
+     */
+    protected function logoBase64ParaLote(): string
+    {
+        $logoPath = public_path('images/logo.png');
+
+        return (file_exists($logoPath) && filesize($logoPath) > 0)
+            ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
+            : '';
+    }
+
     public function pdfLote(Request $request)
     {
         $salas = $this->salasDoHorarioComCandidatos($request);
@@ -44,16 +57,24 @@ trait DownloadsSalasEmLote
             return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
         }
 
-        $html = '';
-        foreach ($salas as $sala) {
+        // Um único documento <html>/<body> com o conteúdo de todas as salas
+        // — concatenar vários documentos completos (um <html> por sala) é
+        // HTML inválido e fazia o dompdf inserir páginas em branco a mais
+        // entre salas (testado empiricamente). Ver pdf/_sala-wrapper-lote.
+        $logoBase64 = $this->logoBase64ParaLote();
+        $conteudo = '';
+        foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
                 ->orderBy('numero_lugar')
                 ->get();
-            $html .= \View::make('pdf.sala', compact('sala', 'candidaturas'))->render()
-                . '<div style="page-break-after: always;"></div>';
+            $conteudo .= \View::make('pdf._sala-conteudo', [
+                'sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64,
+                'primeiroDoDocumento' => $i === 0,
+            ])->render();
         }
 
+        $html = \View::make('pdf._sala-wrapper-lote', ['conteudo' => $conteudo, 'paddingCelula' => '5px 10px'])->render();
         $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
 
         return $pdf->download('salas-' . \Str::slug($request->input('horario')) . '.pdf');
@@ -67,16 +88,20 @@ trait DownloadsSalasEmLote
             return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
         }
 
-        $html = '';
-        foreach ($salas as $sala) {
+        $logoBase64 = $this->logoBase64ParaLote();
+        $conteudo = '';
+        foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
                 ->orderBy('numero_lugar')
                 ->get();
-            $html .= \View::make('pdf.sala-exame', compact('sala', 'candidaturas'))->render()
-                . '<div style="page-break-after: always;"></div>';
+            $conteudo .= \View::make('pdf._sala-exame-conteudo', [
+                'sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64,
+                'primeiroDoDocumento' => $i === 0,
+            ])->render();
         }
 
+        $html = \View::make('pdf._sala-wrapper-lote', ['conteudo' => $conteudo, 'paddingCelula' => '8px 10px'])->render();
         $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
 
         return $pdf->download('lista-exame-' . \Str::slug($request->input('horario')) . '.pdf');

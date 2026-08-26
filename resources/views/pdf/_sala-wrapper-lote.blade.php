@@ -1,15 +1,16 @@
-@php
-    $logoPath = public_path('images/logo.png');
-    $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
-        ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
-        : '';
-@endphp
+{{--
+    Wrapper único para a impressão em lote (todas as salas de um horário
+    num só PDF) — concatenar vários documentos <html>/<body> completos
+    (um por sala) é HTML inválido e fazia o dompdf inserir páginas em
+    branco a mais entre salas. Aqui só há UM <html>/<body>; cada sala
+    contribui apenas o seu conteúdo (pdf/_sala-conteudo.blade.php), já
+    com a paginação manual própria.
+--}}
 <!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <style>
-    {{-- Paginação manual — ver pdf/_sala-exame-conteudo.blade.php. --}}
     @page { size: A4 portrait; margin: 0; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
@@ -31,7 +32,7 @@
     table { width:100%; border-collapse:collapse; margin-top:1mm; }
     thead tr { background:#f0f0f0; }
     th { padding:5px 10px; text-align:left; font-size:9pt; font-weight:bold; border:1px solid #ccc; text-transform:uppercase; letter-spacing:0.04em; }
-    td { padding:8px 10px; font-size:9.5pt; border:1px solid #ddd; }
+    td { padding:{{ $paddingCelula }}; font-size:9.5pt; border:1px solid #ddd; }
     td.nome-col { text-transform:uppercase; }
     tr:nth-child(even) { background:#f9f9f9; }
 
@@ -44,8 +45,6 @@
 </style>
 </head>
 <body>
-
-@include('pdf._sala-exame-conteudo', ['sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64, 'primeiroDoDocumento' => true])
-
+{!! $conteudo !!}
 </body>
 </html>

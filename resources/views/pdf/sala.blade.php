@@ -9,17 +9,18 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    /* Margem via padding de <td> de uma tabela exterior, não via @page nem via
-       padding de <div>. Testado empiricamente: quando a tabela de candidatos
-       é longa e o dompdf continua automaticamente para outra folha, ele NÃO
-       repete a margem do @page nem o padding de um <div> nas folhas seguintes
-       (ficam coladas às bordas) — só o padding de uma <td> de tabela se repete
-       correctamente em todas as páginas geradas por overflow. */
+    {{-- Paginação manual: cada bloco é um <div class="pagina"> independente
+         que cabe sempre numa única folha — testado empiricamente que o
+         dompdf não repete de forma fiável a margem/padding nas folhas
+         criadas por overflow automático de uma tabela longa (comportamento
+         não determinístico entre execuções). Ver pdf/_sala-conteudo.blade.php
+         para a lógica de divisão em blocos. --}}
     @page { size: A4 portrait; margin: 0; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
-    table.pagina-externa { width:100%; border-collapse:collapse; }
-    table.pagina-externa > tbody > tr > td { padding:15mm 18mm; }
+
+    .pagina { padding:15mm 18mm; }
+    .pagina.seguinte { page-break-before: always; }
 
     .header { text-align:center; margin-bottom:8mm; }
     .header img { height:18mm; }
@@ -48,67 +49,8 @@
 </style>
 </head>
 <body>
-<table class="pagina-externa"><tbody><tr><td>
 
-    <div class="header">
-        @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
-        <div class="inst">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-        <div class="linha-dupla"></div>
-        <div class="sub">COMISSÃO DO EXAME DE ACESSO — EXAME DE ACESSO 2026/2027</div>
-    </div>
+@include('pdf._sala-conteudo', ['sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64, 'primeiroDoDocumento' => true])
 
-    <div class="sala-titulo">{{ mb_strtoupper($sala->nome, 'UTF-8') }}</div>
-    <div class="sala-info">
-        Capacidade: {{ $sala->capacidade }} lugares &nbsp;|&nbsp;
-        Candidatos atribuídos: {{ $candidaturas->count() }}
-        <br>
-        <span style="margin-top:3mm;display:block;">
-            Data/Horário:
-            {{ $sala->data_exame ? $sala->data_exame->format('d/m/Y') : '___________' }}
-            &nbsp;|&nbsp;
-            {{ $sala->horario ? $sala->horario . 'h' : '___________' }}
-        </span>
-    </div>
-
-    @if($candidaturas->isEmpty())
-        <p style="text-align:center;color:#666;margin-top:10mm;">Nenhum candidato atribuído a esta sala.</p>
-    @else
-        @foreach($candidaturas->groupBy(fn($c) => $c->curso . '|||' . $c->periodo) as $chave => $lista)
-        @php [$curso, $periodo] = explode('|||', $chave); @endphp
-        <div class="grupo-header">
-            {{ $curso }} — {{ $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular' }}
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width:70px;text-align:center;">N.º Ficha</th>
-                    <th>Nome Completo</th>
-                    <th style="width:70px;text-align:center;">Sexo</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($lista->sortBy('id') as $c)
-                <tr>
-                    <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
-                    <td class="nome-col">{{ mb_strtoupper($c->nome, 'UTF-8') }}</td>
-                    <td style="text-align:center;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        @endforeach
-    @endif
-
-    <div class="assinatura-unica">
-        <div class="linha"></div>
-        <div class="label">Professor Doutor Fernando Maia</div>
-        <div class="sublabel">Presidente da Instituição</div>
-    </div>
-
-    <div class="footer">
-        Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno
-    </div>
-
-</td></tr></tbody></table>
 </body>
 </html>
