@@ -120,11 +120,87 @@
     </div>
 
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-top:22px;">
-        <div style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:14px 22px;">
+        <div style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
             <span style="font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;">
                 Salas registadas ({{ $salas->count() }})
             </span>
+            <form method="GET" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <label style="font-size:0.8rem;font-weight:600;color:#475569;">Curso</label>
+                <select name="curso" onchange="this.form.submit()"
+                        style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
+                    <option value="">— Todos —</option>
+                    @foreach($cursosDisponiveis as $c)
+                        <option value="{{ $c }}" {{ $cursoFiltro === $c ? 'selected' : '' }}>{{ $c }}</option>
+                    @endforeach
+                </select>
+                <label style="font-size:0.8rem;font-weight:600;color:#475569;">Período</label>
+                <select name="periodo_filtro" onchange="this.form.submit()"
+                        style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
+                    <option value="">— Todos —</option>
+                    <option value="regular" {{ $periodoFiltro === 'regular' ? 'selected' : '' }}>Regular</option>
+                    <option value="pos-laboral" {{ $periodoFiltro === 'pos-laboral' ? 'selected' : '' }}>Pós-Laboral</option>
+                </select>
+                <label style="font-size:0.8rem;font-weight:600;color:#475569;">Data</label>
+                <select name="data_filtro" onchange="this.form.submit()"
+                        style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
+                    <option value="">— Todas —</option>
+                    @foreach($datasDisponiveis as $d)
+                        <option value="{{ $d->format('Y-m-d') }}" {{ $dataFiltro === $d->format('Y-m-d') ? 'selected' : '' }}>{{ $d->format('d/m/Y') }}</option>
+                    @endforeach
+                </select>
+                <label style="font-size:0.8rem;font-weight:600;color:#475569;">Horário</label>
+                <select name="horario_filtro" onchange="this.form.submit()"
+                        style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
+                    <option value="">— Todos —</option>
+                    @foreach(\App\Models\Sala::$horarios as $h)
+                        <option value="{{ $h }}" {{ $horarioFiltro === $h ? 'selected' : '' }}>{{ $h }}</option>
+                    @endforeach
+                </select>
+                @if($cursoFiltro || $dataFiltro || $horarioFiltro || $periodoFiltro)
+                    <a href="{{ route('lancamento.salas.index') }}" style="font-size:0.8rem;color:#94a3b8;text-decoration:none;">Limpar ✕</a>
+                @endif
+            </form>
         </div>
+
+        @if($cursoFiltro || $dataFiltro || $horarioFiltro || $periodoFiltro)
+        <div style="padding:16px 22px;border-bottom:1px solid #e2e8f0;background:#fafbfc;">
+            <div style="font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">
+                Candidatos por curso / período / data / horário (com estes filtros)
+            </div>
+            @if($resumo->isEmpty())
+                <p style="color:#94a3b8;font-size:0.85rem;margin:0;">Nenhum candidato atribuído com estes filtros.</p>
+            @else
+                <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+                    <thead>
+                        <tr style="border-bottom:1px solid #e2e8f0;">
+                            <th style="padding:6px 10px;text-align:left;color:#64748b;">Curso</th>
+                            <th style="padding:6px 10px;text-align:left;color:#64748b;">Período</th>
+                            <th style="padding:6px 10px;text-align:left;color:#64748b;">Data</th>
+                            <th style="padding:6px 10px;text-align:left;color:#64748b;">Horário</th>
+                            <th style="padding:6px 10px;text-align:center;color:#64748b;">Candidatos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php $totalResumo = 0; @endphp
+                        @foreach($resumo as $r)
+                        @php $totalResumo += $r->total; @endphp
+                        <tr style="border-bottom:1px solid #f1f5f9;">
+                            <td style="padding:6px 10px;color:#334155;">{{ $r->curso }}</td>
+                            <td style="padding:6px 10px;color:#334155;">{{ $r->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular' }}</td>
+                            <td style="padding:6px 10px;color:#334155;">{{ \Illuminate\Support\Carbon::parse($r->data_exame)->format('d/m/Y') }}</td>
+                            <td style="padding:6px 10px;color:#334155;">{{ $r->horario }}</td>
+                            <td style="padding:6px 10px;text-align:center;font-weight:700;color:#1e3a5f;">{{ $r->total }}</td>
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td colspan="4" style="padding:8px 10px;font-weight:700;color:#1e3a5f;">Total</td>
+                            <td style="padding:8px 10px;text-align:center;font-weight:700;color:#1e3a5f;">{{ $totalResumo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            @endif
+        </div>
+        @endif
         @if($salas->isEmpty())
             <div style="padding:48px;text-align:center;color:#94a3b8;">Nenhuma sala criada ainda.</div>
         @else
