@@ -83,8 +83,15 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Linha 5 — vazia
         $rows[] = ['', '', ''];
 
+        // Curso(s) / Período em vez de "Candidatos atribuídos" — mesmo padrão
+        // já usado em App\Exports\SalaNotasExport, para as duas listas Excel
+        // ficarem consistentes e nunca sairem sem indicar o curso.
+        $grupos = $this->candidaturas
+            ->groupBy(fn ($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
+            ->keys()->implode(' / ');
+
         $rows[] = ['Sala: ' . $this->sala->nome, '', ''];
-        $rows[] = ['Candidatos atribuídos: ' . $this->candidaturas->count(), '', ''];
+        $rows[] = ['Curso(s) / Período: ' . $grupos, '', ''];
 
         $dataHorario = '';
         if ($this->sala->data_exame) {

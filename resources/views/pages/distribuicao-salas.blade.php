@@ -109,6 +109,7 @@
             </div>
             <div class="divide-y">
               @foreach($salas as $sala)
+              @php $categoriasSala = \App\Models\Candidatura::categoriasEspeciaisPermitidas($sala->curso_grupo); @endphp
               <div class="px-6 py-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <div class="font-semibold text-gray-900">{{ $sala->nome }}</div>
@@ -117,13 +118,25 @@
                     &nbsp;|&nbsp; {{ $sala->candidaturas_count }} candidato(s)
                   </div>
                 </div>
-                <a href="{{ route('distribuicao-salas.pdf', $sala) }}"
-                   class="inline-flex items-center gap-2 bg-[#1e3a5f] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0f1f3d] transition-colors">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                  </svg>
-                  Baixar PDF
-                </a>
+                <div class="flex flex-wrap gap-2">
+                  <a href="{{ route('distribuicao-salas.pdf', $sala) }}"
+                     class="inline-flex items-center gap-2 bg-[#1e3a5f] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0f1f3d] transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    PDF — Lista Geral
+                  </a>
+                  @foreach($categoriasSala as $categoria)
+                  <a href="{{ route('distribuicao-salas.pdf', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
+                     title="Lista de presença só com candidatos desta categoria"
+                     class="inline-flex items-center gap-2 bg-white text-[#1e3a5f] border border-[#1e3a5f] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    PDF — {{ $categoria }}
+                  </a>
+                  @endforeach
+                </div>
               </div>
               @endforeach
             </div>

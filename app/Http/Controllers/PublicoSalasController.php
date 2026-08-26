@@ -82,18 +82,22 @@ class PublicoSalasController extends Controller
         return ['status' => 'encontrado', 'candidatura' => $candidatura];
     }
 
-    public function pdf(Sala $sala)
+    public function pdf(Request $request, Sala $sala)
     {
         abort_unless($sala->data_exame, 404);
 
-        $candidaturas = $sala->candidaturas()
-            ->where('pagamento_confirmado', true)
-            ->orderBy('numero_lugar')
-            ->get();
+        $necessidadeEspecial = $request->query('necessidade_especial');
+
+        $query = $sala->candidaturas()->where('pagamento_confirmado', true);
+        if ($necessidadeEspecial) {
+            $query->where('necessidade_especial', $necessidadeEspecial);
+        }
+        $candidaturas = $query->orderBy('numero_lugar')->get();
 
         $pdf = Pdf::loadView('pdf.sala', compact('sala', 'candidaturas'))
                   ->setPaper('a4', 'portrait');
 
-        return $pdf->download('sala-' . \Str::slug($sala->nome) . '-' . $sala->data_exame->format('Y-m-d') . '.pdf');
+        $sufixo = $necessidadeEspecial ? '-' . \Str::slug($necessidadeEspecial) : '';
+        return $pdf->download('sala-' . \Str::slug($sala->nome) . $sufixo . '-' . $sala->data_exame->format('Y-m-d') . '.pdf');
     }
 }
