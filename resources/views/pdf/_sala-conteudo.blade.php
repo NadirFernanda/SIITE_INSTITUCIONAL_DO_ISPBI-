@@ -16,7 +16,13 @@
     $blocos = [];
     foreach ($candidaturas->groupBy(fn ($c) => $c->curso . '|||' . $c->periodo) as $chave => $lista) {
         [$curso, $periodo] = explode('|||', $chave);
-        foreach ($lista->sortBy('id')->values()->chunk($linhasPorPagina) as $i => $chunk) {
+        // Ordem alfabética por nome em vez de por número de ficha — mais fácil
+        // para o candidato encontrar-se na lista impressa. iconv//TRANSLIT
+        // remove os acentos só para a comparação (não altera o nome exibido):
+        // testado que o sortBy() normal compara bytes UTF-8 directamente, o
+        // que põe nomes acentuados (ex.: "Álvaro") depois de "Z" em vez de
+        // pela letra base.
+        foreach ($lista->sortBy(fn ($c) => strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $c->nome)))->values()->chunk($linhasPorPagina) as $i => $chunk) {
             $blocos[] = [
                 'curso'        => trim($curso),
                 'periodo'      => $periodo,
