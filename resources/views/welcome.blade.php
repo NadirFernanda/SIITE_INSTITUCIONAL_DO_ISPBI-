@@ -192,6 +192,30 @@
   </div>
 
   {{-- ─────────────────────────────────────────────────────────────────
+       BANNER — Distribuição de Salas do Exame de Acesso
+  ───────────────────────────────────────────────────────────────────── --}}
+  <section class="py-5 sm:py-6" style="background:#F05A28;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3 text-center sm:text-left">
+          <span class="hidden sm:flex items-center justify-center w-11 h-11 rounded-full bg-white/20 flex-shrink-0">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m-6 4h6m-6 4h4M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+          </span>
+          <div>
+            <div class="text-white font-extrabold text-lg sm:text-xl leading-tight">Exame de Acesso 2026/2027 — Distribuição de Salas</div>
+            <div class="text-white/90 text-sm">Consulte já a sua sala, data e horário do exame</div>
+          </div>
+        </div>
+        <a href="{{ route('distribuicao-salas') }}"
+           class="inline-flex items-center gap-2 bg-white text-[#F05A28] px-6 sm:px-8 py-3 rounded-full font-extrabold text-sm sm:text-base shadow-xl hover:scale-[1.05] hover:shadow-2xl transition-all duration-200 flex-shrink-0 animate-pulse">
+          Ver a Minha Sala
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {{-- ─────────────────────────────────────────────────────────────────
        NOTÍCIAS EM DESTAQUE
   ───────────────────────────────────────────────────────────────────── --}}
   <section class="py-8 sm:py-14 bg-white">

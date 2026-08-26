@@ -16,7 +16,8 @@
         </svg>
         <p class="text-gray-700">
           Procure o seu curso e período abaixo, descarregue o PDF da(s) sala(s) correspondente(s)
-          e confirme o seu nome, número de ficha e sala. Leve um documento de identificação no dia do exame.
+          e confirme o seu nome, número de ficha e sala. <strong>No dia do exame, leve o comprovativo de inscrição</strong> —
+          não é necessário documento de identificação.
         </p>
       </div>
     </div>
