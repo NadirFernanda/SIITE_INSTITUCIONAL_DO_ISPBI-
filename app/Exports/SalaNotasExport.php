@@ -27,10 +27,13 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     public function __construct(Sala $sala)
     {
         $this->sala         = $sala;
+        // Ordem alfabética por nome — ver App\Exports\SalaExameExport para a
+        // explicação de por que a ordenação é feita em PHP, não via ORDER BY.
         $this->candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
-            ->orderBy('id')
-            ->get();
+            ->get()
+            ->sortBy(fn ($c) => strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $c->nome)))
+            ->values();
 
         // Buscar disciplinas definidas para ESTA SALA (não por curso)
         $this->disciplines = \App\Models\SalaDiscipline::where('sala_id', $sala->id)

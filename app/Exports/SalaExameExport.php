@@ -36,7 +36,13 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $query->where('necessidade_especial', $necessidadeEspecial);
         }
 
-        $this->candidaturas = $query->orderBy('numero_lugar')->get();
+        // Ordem alfabética por nome em vez de por lugar — mais fácil de
+        // encontrar um candidato na lista de presença impressa. Ordenado em
+        // PHP (não via ORDER BY) porque o Postgres compara bytes UTF-8 por
+        // omissão, o que põe nomes acentuados (ex.: "Álvaro") depois de "Z".
+        $this->candidaturas = $query->get()
+            ->sortBy(fn ($c) => strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $c->nome)))
+            ->values();
     }
 
     public function title(): string
