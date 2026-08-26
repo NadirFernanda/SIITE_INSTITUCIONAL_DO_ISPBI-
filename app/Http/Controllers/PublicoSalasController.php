@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Candidatura;
 use App\Models\Sala;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 
 /**
  * Página pública de distribuição de salas do Exame de Acesso — permite aos
@@ -13,7 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
  */
 class PublicoSalasController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Nota: um eager-load com ->limit() por si só não limita "por sala"
         // no Eloquent (o limite aplica-se ao total combinado da query, não
@@ -36,7 +38,48 @@ class PublicoSalasController extends Controller
             return $doCurso->groupBy('periodo_grupo');
         });
 
-        return view('pages.distribuicao-salas', compact('grupos'));
+        $resultado = null;
+        $pesquisado = trim((string) $request->query('ficha'));
+        if ($pesquisado !== '') {
+            $resultado = $this->pesquisarPorFicha($pesquisado);
+        }
+
+        return view('pages.distribuicao-salas', compact('grupos', 'pesquisado', 'resultado'));
+    }
+
+    /**
+     * Procura o candidato pelo número de ficha (o próprio ID, tal como
+     * impresso nas listas — "00061" corresponde ao ID 61) e devolve os
+     * dados da sua sala, se já tiver sido atribuída.
+     *
+     * @return array{status: string, candidatura?: Candidatura}
+     */
+    private function pesquisarPorFicha(string $ficha): array
+    {
+        $id = (int) ltrim($ficha, '0');
+        if ($id <= 0) {
+            return ['status' => 'invalido'];
+        }
+
+        $candidatura = Candidatura::with('sala')->find($id);
+        if (! $candidatura || $candidatura->status === 'rejeitada') {
+            return ['status' => 'nao_encontrado'];
+        }
+
+        // A sala só é atribuída de facto a candidatos com pagamento
+        // confirmado (ver Admin\SalaController::show/pdf) — um candidato com
+        // sala_id preenchido mas sem pagamento confirmado não aparece na
+        // lista impressa da sala, por isso não faz sentido mostrá-lo como
+        // "encontrado" aqui.
+        if (! $candidatura->pagamento_confirmado) {
+            return ['status' => 'pagamento_pendente', 'candidatura' => $candidatura];
+        }
+
+        if (! $candidatura->sala_id || ! $candidatura->sala) {
+            return ['status' => 'sem_sala', 'candidatura' => $candidatura];
+        }
+
+        return ['status' => 'encontrado', 'candidatura' => $candidatura];
     }
 
     public function pdf(Sala $sala)
