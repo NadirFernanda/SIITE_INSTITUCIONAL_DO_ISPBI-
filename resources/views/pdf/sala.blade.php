@@ -9,9 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <style>
+    /* Margem definida em @page (não em padding do .page) — o dompdf só aplica
+       padding de um div uma vez, no início do conteúdo; quando a tabela é
+       longa e continua automaticamente para outra folha, essa folha nova
+       nascia sem margem nenhuma. @page margin repete-se em TODAS as páginas
+       físicas, incluindo as criadas por overflow de conteúdo. */
+    @page { margin: 15mm 18mm; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
-    .page { padding:15mm 18mm; }
+    .page { padding:0; }
 
     .header { text-align:center; margin-bottom:8mm; }
     .header img { height:18mm; }
@@ -75,7 +81,6 @@
                 <tr>
                     <th style="width:70px;text-align:center;">N.º Ficha</th>
                     <th>Nome Completo</th>
-                    <th style="width:120px;">BI / Passaporte</th>
                     <th style="width:70px;text-align:center;">Sexo</th>
                 </tr>
             </thead>
@@ -84,7 +89,6 @@
                 <tr>
                     <td style="text-align:center;font-weight:bold;color:#1a4e8a;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                     <td class="nome-col">{{ mb_strtoupper($c->nome, 'UTF-8') }}</td>
-                    <td>{{ $c->bi }}</td>
                     <td style="text-align:center;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
                 </tr>
                 @endforeach

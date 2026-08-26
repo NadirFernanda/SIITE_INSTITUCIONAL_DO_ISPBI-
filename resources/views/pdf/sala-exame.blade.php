@@ -9,9 +9,13 @@
 <head>
 <meta charset="UTF-8">
 <style>
+    /* Margem em @page, não em padding do .page — ver pdf/sala.blade.php para
+       a explicação: padding de div não se repete nas páginas criadas por
+       overflow automático de uma tabela longa, @page margin sim. */
+    @page { margin: 15mm 18mm; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
-    .page { padding:15mm 18mm; }
+    .page { padding:0; }
 
     .header { text-align:center; margin-bottom:8mm; }
     .header img { height:18mm; }

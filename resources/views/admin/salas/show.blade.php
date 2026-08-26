@@ -73,7 +73,6 @@
                     <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc;">
                         <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;width:60px;">N.º Ficha</th>
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Nome</th>
-                        <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">BI</th>
                         <th style="padding:11px 18px;text-align:left;font-weight:700;color:#475569;">Sexo</th>
                         <th style="padding:11px 18px;text-align:center;font-weight:700;color:#475569;">Folha de Prova</th>
                     </tr>
@@ -83,7 +82,6 @@
                     <tr style="border-bottom:1px solid #f1f5f9;">
                         <td style="padding:11px 18px;text-align:center;font-weight:700;color:#1e3a5f;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
                         <td style="padding:11px 18px;font-weight:600;color:#1a2332;">{{ mb_strtoupper($c->nome, 'UTF-8') }}</td>
-                        <td style="padding:11px 18px;color:#475569;">{{ $c->bi }}</td>
                         <td style="padding:11px 18px;color:#64748b;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
                         <td style="padding:11px 18px;text-align:center;">
                             <a href="{{ route('admin.candidaturas.folha-prova', $c) }}"
