@@ -24,7 +24,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     protected int $tableRow; // linha onde começa a tabela (depende de existir data/horário)
     protected ?string $necessidadeEspecial;
 
-    public function __construct(Sala $sala, ?string $necessidadeEspecial = null)
+    public function __construct(Sala $sala, ?string $necessidadeEspecial = null, bool $listaGeralExcluiCategorias = false)
     {
         $this->sala                = $sala;
         $this->necessidadeEspecial = $necessidadeEspecial;
@@ -34,6 +34,16 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         if ($necessidadeEspecial !== null) {
             $query->where('necessidade_especial', $necessidadeEspecial);
+        } elseif ($listaGeralExcluiCategorias) {
+            // Quando a Lista Geral é oferecida ao lado de listas por
+            // categoria (Admin), um candidato de uma categoria especial não
+            // deve também aparecer na Lista Geral — senão fica duplicado
+            // entre as duas listas. Sem este parâmetro (ex.: DAAC, que só
+            // tem esta única lista, sem categorias em separado), a Lista
+            // Geral continua a incluir toda a gente.
+            $query->where(function ($q) {
+                $q->whereNull('necessidade_especial')->orWhere('necessidade_especial', 'Nenhuma');
+            });
         }
 
         // Ordem alfabética por nome em vez de por lugar — mais fácil de

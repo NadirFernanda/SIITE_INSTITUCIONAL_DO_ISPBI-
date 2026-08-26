@@ -72,7 +72,15 @@
               <div class="text-gray-500">Data / Horário</div>
               <div class="font-semibold text-gray-900 text-right">{{ $sala->data_exame->format('d/m/Y') }} — {{ $sala->horario }}</div>
             </div>
-            <a href="{{ route('distribuicao-salas.pdf', $sala) }}"
+            @php
+                // A Lista Geral já não inclui candidatos de categorias
+                // especiais (ver PublicoSalasController::pdf) — se este
+                // candidato tiver uma, o link tem de apontar para a lista
+                // certa, senão o PDF que ele próprio descarrega não o lista.
+                $temCategoria = $c->necessidade_especial && $c->necessidade_especial !== 'Nenhuma';
+                $linkPdf = route('distribuicao-salas.pdf', $sala) . ($temCategoria ? '?necessidade_especial=' . urlencode($c->necessidade_especial) : '');
+            @endphp
+            <a href="{{ $linkPdf }}"
                class="mt-4 w-full inline-flex items-center justify-center gap-2 bg-[#1e3a5f] text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#0f1f3d] transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>

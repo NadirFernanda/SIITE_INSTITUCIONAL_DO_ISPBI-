@@ -106,6 +106,14 @@ class PublicoSalasController extends Controller
         $query = $sala->candidaturas()->where('pagamento_confirmado', true);
         if ($necessidadeEspecial) {
             $query->where('necessidade_especial', $necessidadeEspecial);
+        } else {
+            // A Lista Geral é oferecida ao lado das listas por categoria
+            // nesta página — um candidato de uma categoria especial não deve
+            // também aparecer na Lista Geral, senão fica duplicado entre as
+            // duas listas.
+            $query->where(function ($q) {
+                $q->whereNull('necessidade_especial')->orWhere('necessidade_especial', 'Nenhuma');
+            });
         }
         $candidaturas = $query->orderBy('numero_lugar')->get();
 
