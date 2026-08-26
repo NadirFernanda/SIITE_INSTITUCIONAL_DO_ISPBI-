@@ -50,7 +50,7 @@ class LoginRequest extends FormRequest
             // mostra a própria chave de tradução ("auth.failed") em vez da
             // frase, o que já aconteceu em produção.
             throw ValidationException::withMessages([
-                'email' => 'As credenciais fornecidas estão incorretas.',
+                'email' => 'O e-mail ou a palavra-passe estão incorretos.',
             ]);
         }
 

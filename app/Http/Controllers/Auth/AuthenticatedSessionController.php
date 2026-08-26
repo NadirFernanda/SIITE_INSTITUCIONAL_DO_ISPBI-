@@ -46,8 +46,12 @@ class AuthenticatedSessionController extends Controller
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
+            // Aqui o e-mail e a palavra-passe estavam certos — o problema é
+            // que esta conta não tem nenhum perfil de acesso reconhecido.
+            // Mensagem diferente da de credenciais erradas, para não induzir
+            // o utilizador a tentar adivinhar outra password sem motivo.
             throw \Illuminate\Validation\ValidationException::withMessages([
-                'email' => 'As credenciais fornecidas estão incorretas.',
+                'email' => 'Esta conta ainda não tem um perfil de acesso configurado. Contacte o administrador.',
             ]);
         }
 
