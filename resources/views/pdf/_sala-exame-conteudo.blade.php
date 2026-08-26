@@ -39,9 +39,10 @@
         <p style="text-align:center;color:#666;margin-top:10mm;">Nenhum candidato atribuído a esta sala.</p>
 
         <div class="assinatura-unica">
+            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
             <div class="linha"></div>
             <div class="label">Professor Doutor Fernando Maia</div>
-            <div class="sublabel">Presidente da Instituição</div>
+            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
         </div>
 
         <div class="footer">
@@ -92,9 +93,10 @@
 
         @if($idx === $totalBlocos - 1)
         <div class="assinatura-unica">
+            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
             <div class="linha"></div>
             <div class="label">Professor Doutor Fernando Maia</div>
-            <div class="sublabel">Presidente da Instituição</div>
+            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
         </div>
 
         <div class="footer">

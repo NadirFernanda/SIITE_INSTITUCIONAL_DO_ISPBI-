@@ -491,6 +491,12 @@ Route::post('/candidaturas', [App\Http\Controllers\CandidaturaController::class,
 Route::get('/candidaturas/{candidatura}/comprovativo', [App\Http\Controllers\CandidaturaController::class, 'comprovativo'])->name('candidaturas.comprovativo');
 Route::get('/candidaturas/{candidatura}/pdf', [App\Http\Controllers\CandidaturaController::class, 'downloadPdf'])->name('candidaturas.pdf');
 
+// Distribuição de salas do Exame de Acesso — página pública para os candidatos
+// verem em que sala/data/horário vão fazer a prova, organizada por curso e
+// período, com download em PDF por sala.
+Route::get('/distribuicao-salas', [App\Http\Controllers\PublicoSalasController::class, 'index'])->name('distribuicao-salas');
+Route::get('/distribuicao-salas/{sala}/pdf', [App\Http\Controllers\PublicoSalasController::class, 'pdf'])->name('distribuicao-salas.pdf')->middleware('throttle:60,1');
+
 // Rotas públicas de Alumni - sem dados sensíveis
 
 // Admin: gestão de disciplinas por sala (UI para configurar disciplinas e pesos)

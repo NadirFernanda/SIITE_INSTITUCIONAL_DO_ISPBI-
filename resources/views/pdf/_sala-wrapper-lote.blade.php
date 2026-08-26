@@ -37,7 +37,8 @@
     tr:nth-child(even) { background:#f9f9f9; }
 
     .assinatura-unica { text-align:center; margin-top:14mm; }
-    .assinatura-unica .linha { border-bottom:1px solid #000; width:70mm; margin:0 auto 2mm; height:8mm; }
+    .assinatura-unica .assinatura-img { display:block; margin:0 auto; max-height:14mm; max-width:65mm; filter:grayscale(100%); }
+    .assinatura-unica .linha { border-bottom:1px solid #000; width:70mm; margin:2mm auto 2mm; }
     .assinatura-unica .label { font-size:9pt; font-weight:bold; }
     .assinatura-unica .sublabel { font-size:8.5pt; color:#333; margin-top:1mm; }
 
