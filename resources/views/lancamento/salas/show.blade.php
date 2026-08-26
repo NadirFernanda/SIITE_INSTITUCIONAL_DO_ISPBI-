@@ -122,12 +122,7 @@
                         <tr style="border-bottom:1px solid #f1f5f9;">
                             <td style="padding:11px 18px;font-weight:700;color:#0f1f3d;">{{ $c->codigo_exame ?? 'Não gerado' }}</td>
                             <td style="padding:11px 18px;font-weight:600;color:#1a2332;">
-                                @if($c->codigo_exame)
-                                    {{ mb_strtoupper($c->nome, 'UTF-8') }}
-                                @else
-                                    {{-- Nome oculto até código ser gerado --}} 
-                                    —
-                                @endif
+                                {{ mb_strtoupper($c->nome, 'UTF-8') }}
                             </td>
                             <td style="padding:11px 18px;text-align:center;color:#1a2332;font-weight:700;">{{ $c->numero_lugar ?? '—' }}</td>
                         </tr>
