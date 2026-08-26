@@ -31,6 +31,21 @@ class PublicoSalasController extends Controller
                 $primeiro = $sala->candidaturas()->whereNotNull('curso')->first();
                 $sala->curso_grupo = $primeiro ? trim($primeiro->curso) : 'Outro';
                 $sala->periodo_grupo = $primeiro->periodo ?? 'regular';
+
+                // Só mostrar o botão de uma categoria se esta sala tiver mesmo
+                // pelo menos um candidato (com pagamento confirmado, que é o
+                // que entra de facto no PDF) nessa categoria — senão gerava
+                // um PDF vazio, sem sentido para quem descarrega.
+                $categoriasPermitidas = Candidatura::categoriasEspeciaisPermitidas($sala->curso_grupo);
+                $categoriasPresentes = $sala->candidaturas()
+                    ->where('pagamento_confirmado', true)
+                    ->whereIn('necessidade_especial', $categoriasPermitidas)
+                    ->distinct()
+                    ->pluck('necessidade_especial');
+                $sala->categorias_disponiveis = collect($categoriasPermitidas)
+                    ->filter(fn ($cat) => $categoriasPresentes->contains($cat))
+                    ->values();
+
                 return $sala;
             });
 

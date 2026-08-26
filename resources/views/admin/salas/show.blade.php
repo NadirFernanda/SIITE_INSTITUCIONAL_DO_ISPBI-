@@ -31,7 +31,12 @@
             </a>
             @php
                 $cursoSala = $candidaturas->first()->curso ?? null;
-                $categoriasSala = \App\Models\Candidatura::categoriasEspeciaisPermitidas($cursoSala);
+                // Só mostra o botão de uma categoria se esta sala tiver mesmo
+                // pelo menos um candidato nela — senão gerava um Excel vazio,
+                // sem sentido nenhum para quem descarrega.
+                $categoriasSala = collect(\App\Models\Candidatura::categoriasEspeciaisPermitidas($cursoSala))
+                    ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
+                    ->values();
             @endphp
             <a href="{{ route('admin.salas.excel-exame', $sala) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#15803d;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">

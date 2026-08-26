@@ -109,7 +109,6 @@
             </div>
             <div class="divide-y">
               @foreach($salas as $sala)
-              @php $categoriasSala = \App\Models\Candidatura::categoriasEspeciaisPermitidas($sala->curso_grupo); @endphp
               <div class="px-6 py-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <div class="font-semibold text-gray-900">{{ $sala->nome }}</div>
@@ -126,7 +125,7 @@
                     </svg>
                     PDF — Lista Geral
                   </a>
-                  @foreach($categoriasSala as $categoria)
+                  @foreach($sala->categorias_disponiveis as $categoria)
                   <a href="{{ route('distribuicao-salas.pdf', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
                      title="Lista de presença só com candidatos desta categoria"
                      class="inline-flex items-center gap-2 bg-white text-[#1e3a5f] border border-[#1e3a5f] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors">
