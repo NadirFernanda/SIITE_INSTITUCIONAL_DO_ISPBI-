@@ -27,11 +27,11 @@
   <section class="py-10 bg-white border-b">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-lg font-bold text-gray-900 mb-3 text-center">Encontre a sua sala pelo número de ficha</h2>
-      <form method="GET" action="{{ route('distribuicao-salas') }}" class="flex gap-2">
+      <form method="GET" action="{{ route('distribuicao-salas') }}" class="flex flex-col sm:flex-row gap-2">
         <input type="text" name="ficha" value="{{ $pesquisado }}" placeholder="Ex: 01839" inputmode="numeric"
-               class="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:border-transparent">
+               class="min-w-0 flex-1 border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:border-transparent">
         <button type="submit"
-                class="bg-[#F05A28] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#d44d20] transition-colors flex-shrink-0">
+                class="w-full sm:w-auto bg-[#F05A28] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#d44d20] transition-colors flex-shrink-0">
           Pesquisar
         </button>
       </form>
