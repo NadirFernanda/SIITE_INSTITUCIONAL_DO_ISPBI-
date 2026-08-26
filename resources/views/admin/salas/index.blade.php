@@ -198,6 +198,13 @@
                         <option value="{{ $c }}" {{ $cursoFiltro === $c ? 'selected' : '' }}>{{ $c }}</option>
                     @endforeach
                 </select>
+                <label style="font-size:0.8rem;font-weight:600;color:#475569;">Período</label>
+                <select name="periodo_filtro" onchange="this.form.submit()"
+                        style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
+                    <option value="">— Todos —</option>
+                    <option value="regular" {{ $periodoFiltro === 'regular' ? 'selected' : '' }}>Regular</option>
+                    <option value="pos-laboral" {{ $periodoFiltro === 'pos-laboral' ? 'selected' : '' }}>Pós-Laboral</option>
+                </select>
                 <label style="font-size:0.8rem;font-weight:600;color:#475569;">Data</label>
                 <select name="data_filtro" onchange="this.form.submit()"
                         style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
@@ -214,13 +221,13 @@
                         <option value="{{ $h }}" {{ $horarioFiltro === $h ? 'selected' : '' }}>{{ $h }}</option>
                     @endforeach
                 </select>
-                @if($cursoFiltro || $dataFiltro || $horarioFiltro)
+                @if($cursoFiltro || $dataFiltro || $horarioFiltro || $periodoFiltro)
                     <a href="{{ route('admin.salas.index') }}" style="font-size:0.8rem;color:#94a3b8;text-decoration:none;">Limpar ✕</a>
                 @endif
             </form>
         </div>
 
-        @if($cursoFiltro || $dataFiltro || $horarioFiltro)
+        @if($cursoFiltro || $dataFiltro || $horarioFiltro || $periodoFiltro)
         <div style="padding:16px 22px;border-bottom:1px solid #e2e8f0;background:#fafbfc;">
             <div style="font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">
                 Candidatos por curso / período / data / horário (com estes filtros)

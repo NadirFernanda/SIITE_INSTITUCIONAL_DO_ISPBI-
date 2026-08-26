@@ -21,10 +21,14 @@ class SalaController extends Controller
         $cursoFiltro   = $request->query('curso');
         $horarioFiltro = $request->query('horario_filtro');
         $dataFiltro    = $request->query('data_filtro');
+        $periodoFiltro = $request->query('periodo_filtro');
 
         $salasQuery = Sala::withCount('candidaturas')->ordenadaPorHorario();
         if ($cursoFiltro) {
             $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('curso', $cursoFiltro));
+        }
+        if ($periodoFiltro) {
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('periodo', $periodoFiltro));
         }
         if ($horarioFiltro) {
             $salasQuery->where('horario', $horarioFiltro);
@@ -54,6 +58,9 @@ class SalaController extends Controller
             ->whereNotIn('candidaturas.status', ['rejeitada']);
         if ($cursoFiltro) {
             $resumoQuery->where('candidaturas.curso', $cursoFiltro);
+        }
+        if ($periodoFiltro) {
+            $resumoQuery->where('candidaturas.periodo', $periodoFiltro);
         }
         if ($horarioFiltro) {
             $resumoQuery->where('salas.horario', $horarioFiltro);
@@ -89,7 +96,8 @@ class SalaController extends Controller
 
         return view('admin.salas.index', compact(
             'salas', 'totalCandidatos', 'atribuidos', 'semSala', 'totalLugares', 'grupos',
-            'cursosDisponiveis', 'cursoFiltro', 'datasDisponiveis', 'horarioFiltro', 'dataFiltro', 'resumo'
+            'cursosDisponiveis', 'cursoFiltro', 'datasDisponiveis', 'horarioFiltro', 'dataFiltro',
+            'periodoFiltro', 'resumo'
         ));
     }
 

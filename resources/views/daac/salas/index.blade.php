@@ -62,6 +62,13 @@
                     <option value="{{ $d->format('Y-m-d') }}" {{ $dataFiltro === $d->format('Y-m-d') ? 'selected' : '' }}>{{ $d->format('d/m/Y') }}</option>
                 @endforeach
             </select>
+            <label style="font-size:0.85rem;font-weight:600;color:#475569;">Período</label>
+            <select name="periodo_filtro" onchange="this.form.submit()"
+                    style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
+                <option value="">— Todos —</option>
+                <option value="regular" {{ $periodoFiltro === 'regular' ? 'selected' : '' }}>Regular</option>
+                <option value="pos-laboral" {{ $periodoFiltro === 'pos-laboral' ? 'selected' : '' }}>Pós-Laboral</option>
+            </select>
             <label style="font-size:0.85rem;font-weight:600;color:#475569;">Horário</label>
             <select name="horario_filtro" onchange="this.form.submit()"
                     style="border:1px solid #e2e8f0;border-radius:8px;padding:7px 12px;font-size:0.85rem;background:#fff;">
@@ -70,13 +77,13 @@
                     <option value="{{ $h }}" {{ $horarioFiltro === $h ? 'selected' : '' }}>{{ $h }}</option>
                 @endforeach
             </select>
-            @if($cursoFiltro || $dataFiltro || $horarioFiltro)
+            @if($cursoFiltro || $dataFiltro || $horarioFiltro || $periodoFiltro)
                 <a href="{{ route('daac.salas.index') }}" style="font-size:0.8rem;color:#94a3b8;text-decoration:none;">Limpar ✕</a>
             @endif
         </form>
     </div>
 
-    @if($cursoFiltro || $dataFiltro || $horarioFiltro)
+    @if($cursoFiltro || $dataFiltro || $horarioFiltro || $periodoFiltro)
     <div style="background:#fafbfc;border:1px solid #e2e8f0;border-radius:14px;padding:16px 20px;margin-bottom:18px;">
         <div style="font-size:0.75rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">
             Candidatos por curso / período / data / horário (com estes filtros)
@@ -118,7 +125,7 @@
 
     @if($salas->isEmpty())
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:56px;text-align:center;color:#94a3b8;">
-            Nenhuma sala {{ ($cursoFiltro || $dataFiltro || $horarioFiltro) ? 'encontrada com estes filtros' : 'registada' }}.
+            Nenhuma sala {{ ($cursoFiltro || $dataFiltro || $horarioFiltro || $periodoFiltro) ? 'encontrada com estes filtros' : 'registada' }}.
         </div>
     @else
     <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;">

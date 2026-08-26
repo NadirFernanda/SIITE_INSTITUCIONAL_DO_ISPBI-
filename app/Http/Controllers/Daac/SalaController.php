@@ -17,6 +17,7 @@ class SalaController extends Controller
         $cursoFiltro   = $request->query('curso');
         $horarioFiltro = $request->query('horario_filtro');
         $dataFiltro    = $request->query('data_filtro');
+        $periodoFiltro = $request->query('periodo_filtro');
 
         $salasQuery = Sala::query()
             ->withCount(['candidaturas' => function ($query) {
@@ -28,6 +29,9 @@ class SalaController extends Controller
 
         if ($cursoFiltro) {
             $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('curso', $cursoFiltro));
+        }
+        if ($periodoFiltro) {
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('periodo', $periodoFiltro));
         }
         if ($horarioFiltro) {
             $salasQuery->where('horario', $horarioFiltro);
@@ -59,6 +63,9 @@ class SalaController extends Controller
         if ($cursoFiltro) {
             $resumoQuery->where('candidaturas.curso', $cursoFiltro);
         }
+        if ($periodoFiltro) {
+            $resumoQuery->where('candidaturas.periodo', $periodoFiltro);
+        }
         if ($horarioFiltro) {
             $resumoQuery->where('salas.horario', $horarioFiltro);
         }
@@ -71,7 +78,8 @@ class SalaController extends Controller
             ->get();
 
         return view('daac.salas.index', compact(
-            'salas', 'cursosDisponiveis', 'cursoFiltro', 'datasDisponiveis', 'horarioFiltro', 'dataFiltro', 'resumo'
+            'salas', 'cursosDisponiveis', 'cursoFiltro', 'datasDisponiveis', 'horarioFiltro', 'dataFiltro',
+            'periodoFiltro', 'resumo'
         ));
     }
 
