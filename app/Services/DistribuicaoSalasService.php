@@ -45,7 +45,14 @@ class DistribuicaoSalasService
         $agenda      = Sala::$agendaExames;
         $prioridades = Candidatura::$cursosPrioritarios;
 
-        $todos = Candidatura::whereNotIn('status', ['rejeitada'])->orderBy('nome')->get();
+        // Ordenado por id (nº de ficha), não por nome — se a lista de
+        // candidatos a distribuir já vier ordenada alfabeticamente, as
+        // salas são preenchidas sequencialmente por essa ordem e cada uma
+        // acaba só com uma fatia estreita do alfabeto (ex.: Sala 1 só com
+        // "A"/"B", Sala 2 só com "C"/"D"...). A ordem alfabética deve
+        // aplicar-se só à lista impressa de cada sala (ver
+        // pdf/_sala-conteudo.blade.php), não a quem vai para qual sala.
+        $todos = Candidatura::whereNotIn('status', ['rejeitada'])->orderBy('id')->get();
 
         $comAgenda = $todos->filter(fn ($c) => isset($agenda[trim((string) $c->curso)]));
         $semAgendaCount = $todos->count() - $comAgenda->count();
