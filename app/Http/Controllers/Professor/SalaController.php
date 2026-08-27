@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Professor;
 use App\Http\Controllers\Controller;
 use App\Models\Sala;
 use App\Models\Candidatura;
+use Illuminate\Http\Request;
 
 class SalaController extends Controller
 {
@@ -32,14 +33,26 @@ class SalaController extends Controller
     }
 
     // Exibir pauta de uma sala com candidatos (anonimato)
-    public function show(Sala $sala)
+    public function show(Request $request, Sala $sala)
     {
         // carregar disciplinas definidas para esta sala (se existirem)
         $salaDiscs = \App\Models\SalaDiscipline::where('sala_id', $sala->id)->orderBy('id')->get();
 
-        $candidaturas = $sala->candidaturas()
-            ->select('id', 'sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_por', 'nota_lancada_em')
-            ->whereNotNull('codigo_exame')
+        // Filtro por categoria especial — nunca mostra nomes, só permite ao
+        // professor separar os códigos de uma categoria (ex.: Portadores de
+        // deficiência, que pode ter critérios/tempo diferentes) sem quebrar
+        // o anonimato da interface.
+        $categoriaFiltro = $request->query('necessidade_especial');
+
+        $query = $sala->candidaturas()
+            ->select('id', 'sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_por', 'nota_lancada_em', 'necessidade_especial', 'curso')
+            ->whereNotNull('codigo_exame');
+
+        if ($categoriaFiltro) {
+            $query->where('necessidade_especial', $categoriaFiltro);
+        }
+
+        $candidaturas = $query
             ->orderBy('numero_lugar')
             ->get()
             ->map(function ($c) use ($salaDiscs) {
@@ -58,6 +71,11 @@ class SalaController extends Controller
                 return $c;
             });
 
-        return view('professor.salas.show', compact('sala', 'candidaturas', 'salaDiscs'));
+        $cursoSala = $sala->candidaturas()->whereNotNull('curso')->value('curso');
+        $categoriasSala = collect(Candidatura::categoriasEspeciaisPermitidas($cursoSala))
+            ->filter(fn ($cat) => $sala->candidaturas()->whereNotNull('codigo_exame')->where('necessidade_especial', $cat)->exists())
+            ->values();
+
+        return view('professor.salas.show', compact('sala', 'candidaturas', 'salaDiscs', 'categoriasSala', 'categoriaFiltro'));
     }
 }

@@ -48,6 +48,26 @@
         Apenas o código de exame é exibido. Nenhum dado pessoal do candidato (nome, BI, etc.) aparece nesta interface. Valide os códigos com o código que consta na folha de prova física.
     </div>
 
+    {{-- Filtro por categoria especial — filtra só os códigos, nunca mostra
+         nomes; útil para tratar em bloco quem precisa de critérios/tempo
+         diferentes (ex.: Portadores de deficiência). --}}
+    @if($categoriasSala->isNotEmpty())
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+        <a href="{{ route('professor.salas.show', $sala) }}"
+           style="display:inline-block;padding:8px 16px;border-radius:20px;font-size:0.85rem;font-weight:700;text-decoration:none;
+                  {{ ! $categoriaFiltro ? 'background:#1e3a5f;color:#fff;' : 'background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;' }}">
+            Lista Geral
+        </a>
+        @foreach($categoriasSala as $categoria)
+        <a href="{{ route('professor.salas.show', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
+           style="display:inline-block;padding:8px 16px;border-radius:20px;font-size:0.85rem;font-weight:700;text-decoration:none;
+                  {{ $categoriaFiltro === $categoria ? 'background:#1e3a5f;color:#fff;' : 'background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;' }}">
+            {{ $categoria }}
+        </a>
+        @endforeach
+    </div>
+    @endif
+
     {{-- Tabela com pauta --}}
     @if($candidaturas->isEmpty())
     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:40px;text-align:center;color:#64748b;">
