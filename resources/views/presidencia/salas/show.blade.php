@@ -63,8 +63,16 @@
             <a href="{{ route('presidencia.salas.excel-exame', $sala) }}"
                class="print-hidden"
                style="display:inline-flex;align-items:center;gap:6px;background:#059669;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
-                📊 Excel — Exame
+                📊 Excel — Lista Geral
             </a>
+            @foreach($categoriasSala as $categoria)
+            <a href="{{ route('presidencia.salas.excel-exame', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
+               class="print-hidden"
+               title="Lista de presença só com candidatos desta categoria"
+               style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#059669;border:1px solid #059669;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+                📊 Excel — {{ $categoria }}
+            </a>
+            @endforeach
             <a href="{{ route('presidencia.salas.excel-notas', $sala) }}"
                class="print-hidden"
                style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">

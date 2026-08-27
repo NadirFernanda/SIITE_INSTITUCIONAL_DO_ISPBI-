@@ -27,8 +27,16 @@
             <a href="{{ route('tecnico.salas.excel-exame', $sala) }}"
                style="display:inline-flex;align-items:center;gap:6px;background:#15803d;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                Excel — Lista Exame
+                Excel — Lista Geral
             </a>
+            @foreach($categoriasSala as $categoria)
+            <a href="{{ route('tecnico.salas.excel-exame', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
+               title="Lista de presença só com candidatos desta categoria"
+               style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#15803d;border:1px solid #15803d;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                Excel — {{ $categoria }}
+            </a>
+            @endforeach
         </div>
     </div>
 

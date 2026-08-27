@@ -38,7 +38,12 @@
                 </a>
             @else
                 <a href="{{ route('daac.salas.pdf', $sala) }}" class="px-3 py-2 bg-slate-700 text-white rounded-md text-sm font-semibold">PDF</a>
-                <a href="{{ route('daac.salas.excel-exame', $sala) }}" class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold">Exame</a>
+                <a href="{{ route('daac.salas.excel-exame', $sala) }}" class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-semibold">Excel — Lista Geral</a>
+                @foreach($categoriasSala as $categoria)
+                <a href="{{ route('daac.salas.excel-exame', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
+                   title="Lista de presença só com candidatos desta categoria"
+                   class="px-3 py-2 bg-white text-blue-600 border border-blue-600 rounded-md text-sm font-semibold">Excel — {{ $categoria }}</a>
+                @endforeach
             @endif
         </div>
     </div>

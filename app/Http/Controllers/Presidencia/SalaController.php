@@ -100,7 +100,13 @@ class SalaController extends Controller
     public function show(Sala $sala)
     {
         $candidaturas = $sala->candidaturas()->orderBy('numero_lugar')->get();
-        return view('presidencia.salas.show', compact('sala', 'candidaturas'));
+
+        $cursoSala = $candidaturas->first()->curso ?? null;
+        $categoriasSala = collect(Candidatura::categoriasEspeciaisPermitidas($cursoSala))
+            ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
+            ->values();
+
+        return view('presidencia.salas.show', compact('sala', 'candidaturas', 'categoriasSala'));
     }
 
     public function pdf(Sala $sala)
@@ -121,10 +127,12 @@ class SalaController extends Controller
         return $pdf->download('lista-exame-' . \Str::slug($sala->nome) . '.pdf');
     }
 
-    public function excelExame(Sala $sala)
+    public function excelExame(Request $request, Sala $sala)
     {
-        return Excel::download(new SalaExameExport($sala),
-            'lista-exame-' . \Str::slug($sala->nome) . '.xlsx');
+        $necessidadeEspecial = $request->query('necessidade_especial');
+        $sufixo = $necessidadeEspecial ? '-' . \Str::slug($necessidadeEspecial) : '';
+        return Excel::download(new SalaExameExport($sala, $necessidadeEspecial, true),
+            'lista-exame-' . \Str::slug($sala->nome) . $sufixo . '.xlsx');
     }
 
     public function excelNotas(Sala $sala)

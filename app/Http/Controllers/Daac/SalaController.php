@@ -95,7 +95,14 @@ class SalaController extends Controller
             ->orderBy('numero_lugar')
             ->get();
 
-        return view('daac.salas.show', compact('sala', 'candidaturas'));
+        // Só mostra o botão de uma categoria se esta sala tiver mesmo pelo
+        // menos um candidato nela — mesmo padrão já usado no Admin.
+        $cursoSala = $candidaturas->first()->curso ?? null;
+        $categoriasSala = collect(\App\Models\Candidatura::categoriasEspeciaisPermitidas($cursoSala))
+            ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
+            ->values();
+
+        return view('daac.salas.show', compact('sala', 'candidaturas', 'categoriasSala'));
     }
 
     public function pdf(Sala $sala)
@@ -111,10 +118,12 @@ class SalaController extends Controller
         return $pdf->download('sala-' . \Str::slug($sala->nome) . '.pdf');
     }
 
-    public function excelExame(Sala $sala)
+    public function excelExame(Request $request, Sala $sala)
     {
-        $filename = 'lista-exame-' . \Str::slug($sala->nome) . '.xlsx';
-        return Excel::download(new SalaExameExport($sala), $filename);
+        $necessidadeEspecial = $request->query('necessidade_especial');
+        $sufixo = $necessidadeEspecial ? '-' . \Str::slug($necessidadeEspecial) : '';
+        $filename = 'lista-exame-' . \Str::slug($sala->nome) . $sufixo . '.xlsx';
+        return Excel::download(new SalaExameExport($sala, $necessidadeEspecial, true), $filename);
     }
 
     /**
