@@ -26,35 +26,7 @@
     document.addEventListener('keydown', blockKeys, true);
     document.addEventListener('keyup',   blockKeys, true);
 
-    // 3. Detectar DevTools via console getter (Image id trick)
-    var devOpen = false;
-    var img = new Image();
-    Object.defineProperty(img, 'id', {
-        get: function () { devOpen = true; }
-    });
-
-    // 4. Detectar DevTools via tamanho da janela
-    function checkSize() {
-        var widthDiff  = window.outerWidth  - window.innerWidth;
-        var heightDiff = window.outerHeight - window.innerHeight;
-        if (widthDiff > 200 || heightDiff > 200) {
-            document.documentElement.innerHTML = '';
-            window.location.replace('/');
-        }
-    }
-
-    setInterval(function () {
-        devOpen = false;
-        console.log('%c', img);
-        console.clear();
-        if (devOpen) {
-            document.documentElement.innerHTML = '';
-            window.location.replace('/');
-        }
-        checkSize();
-    }, 800);
-
-    // 5. Desactivar selecção de texto e arrastamento
+    // 3. Desactivar selecção de texto e arrastamento
     document.addEventListener('selectstart', function (e) { e.preventDefault(); }, true);
     document.addEventListener('dragstart',   function (e) { e.preventDefault(); }, true);
 })();
