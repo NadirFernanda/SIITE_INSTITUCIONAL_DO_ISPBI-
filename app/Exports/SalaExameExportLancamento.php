@@ -94,7 +94,7 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $rows[] = ['', '', ''];
         $rows[] = ['_________________________________', '', ''];
         $rows[] = ['Professor Doutor Fernando Maia', '', ''];
-        $rows[] = ['Presidente da Instituição', '', ''];
+        $rows[] = ['Presidente da Comissão do Exame de Acesso', '', ''];
 
         return $rows;
     }
@@ -181,6 +181,28 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
             'font'      => ['size' => 9, 'italic' => true],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
+
+        // ── Imagem da assinatura digital do Presidente, por cima da linha ──
+        $gdAssinatura = \App\Services\SignatureImageGenerator::generateGd('Fernando Maia');
+        $imgW = imagesx($gdAssinatura);
+        $imgH = imagesy($gdAssinatura);
+        $assDisplayH = 28;
+        $assDisplayW = (int) ($imgW * $assDisplayH / $imgH);
+
+        $larguraTotal = array_sum($this->columnWidths());
+        $assOffsetX = max(0, (int) ($larguraTotal * 8 / 2) - (int) ($assDisplayW / 2));
+
+        $assinaturaDrawing = new \PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing();
+        $assinaturaDrawing->setName('Assinatura Presidente');
+        $assinaturaDrawing->setImageResource($gdAssinatura);
+        $assinaturaDrawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
+        $assinaturaDrawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
+        $assinaturaDrawing->setHeight($assDisplayH);
+        $assinaturaDrawing->setWidth($assDisplayW);
+        $assinaturaDrawing->setCoordinates('A' . ($sigLinha - 2));
+        $assinaturaDrawing->setOffsetX($assOffsetX);
+        $assinaturaDrawing->setOffsetY(2);
+        $assinaturaDrawing->setWorksheet($sheet);
 
         // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
         $sheet->freezePane('A' . ($tr + 1));

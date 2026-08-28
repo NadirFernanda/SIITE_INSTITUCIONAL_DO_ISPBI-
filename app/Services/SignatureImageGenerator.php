@@ -14,6 +14,27 @@ class SignatureImageGenerator
      */
     public static function generate(string $texto, int $fontSize = 42): string
     {
+        $img = self::generateGd($texto, $fontSize);
+
+        ob_start();
+        imagepng($img);
+        $pngData = ob_get_clean();
+        imagedestroy($img);
+
+        return 'data:image/png;base64,' . base64_encode($pngData);
+    }
+
+    /**
+     * Mesma assinatura de generate(), mas devolvida como recurso GD (imagem
+     * em memória, ainda não destruída) em vez de data URI já codificada —
+     * usado para inserir directamente como imagem numa folha Excel
+     * (PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing), sem ter de
+     * codificar para base64 só para a folha voltar a descodificar.
+     *
+     * @return \GdImage
+     */
+    public static function generateGd(string $texto, int $fontSize = 42)
+    {
         $texto    = trim($texto);
         $fontPath = resource_path('fonts/assinatura.ttf');
         $paddingX = 20;
@@ -41,11 +62,6 @@ class SignatureImageGenerator
 
         imagettftext($img, $fontSize, 0, $x, $y, $inkColor, $fontPath, $texto);
 
-        ob_start();
-        imagepng($img);
-        $pngData = ob_get_clean();
-        imagedestroy($img);
-
-        return 'data:image/png;base64,' . base64_encode($pngData);
+        return $img;
     }
 }
