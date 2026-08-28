@@ -76,7 +76,7 @@ jobs:
           lighthouse "$SITE_URL" --only-categories=accessibility,performance,seo,best-practices --chrome-flags="--headless" --output=json --output-path=./lighthouse_report.json || true
 
       - name: Upload Lighthouse report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lighthouse-report
           path: lighthouse_report.json
