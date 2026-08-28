@@ -169,7 +169,13 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
-        // Assinatura
+        // Assinatura — as duas primeiras linhas em branco ficam pequenas (só
+        // espaçamento); a terceira (logo acima da linha) fica maior, para a
+        // assinatura ficar colada à linha em vez de perdida no meio do
+        // espaço em branco.
+        $sheet->getRowDimension($sigLinha - 3)->setRowHeight(8);
+        $sheet->getRowDimension($sigLinha - 2)->setRowHeight(8);
+        $sheet->getRowDimension($sigLinha - 1)->setRowHeight(30);
         $sheet->getStyle("A{$sigLinha}")->applyFromArray([
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
@@ -199,7 +205,7 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $assinaturaDrawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
         $assinaturaDrawing->setHeight($assDisplayH);
         $assinaturaDrawing->setWidth($assDisplayW);
-        $assinaturaDrawing->setCoordinates('A' . ($sigLinha - 2));
+        $assinaturaDrawing->setCoordinates('A' . ($sigLinha - 1));
         $assinaturaDrawing->setOffsetX($assOffsetX);
         $assinaturaDrawing->setOffsetY(2);
         $assinaturaDrawing->setWorksheet($sheet);
