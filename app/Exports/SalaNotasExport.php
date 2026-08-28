@@ -21,7 +21,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 {
     protected Sala $sala;
     protected Collection $candidaturas;
-    protected int $tableRow = 10; // sempre linha 10 (estrutura fixa igual ao SalaExameExport)
+    protected int $tableRow = 5; // sempre linha 5 (estrutura fixa igual ao SalaExameExport)
     protected array $disciplines = [];
 
     public function __construct(Sala $sala)
@@ -62,23 +62,20 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Linha 1 — espaço mínimo (logo está no cabeçalho de impressão)
         $rows[] = ['', ''];
 
-        // Cabeçalho (linhas 2-4) — mescladas A:.., centradas
+        // Linha 2 — nome da instituição
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', ''];
-        $rows[] = ['COMISSÃO DO EXAME DE ACESSO', ''];
-        $rows[] = ['EXAME DE ACESSO 2026/2027 — PAUTA', ''];
 
-        // Linha 5 — vazia
-        $rows[] = ['', ''];
+        // Linha 3 — comissão + título da pauta, combinados numa só linha
+        $rows[] = ['COMISSÃO DO EXAME DE ACESSO   —   EXAME DE ACESSO 2026/2027 — PAUTA', ''];
 
-        // Linhas 6-7 — info da sala
+        // Linha 4 — sala, curso(s)/período e data/horário combinados numa só
+        // linha. O cabeçalho institucional inteiro fica "congelado" (freeze
+        // pane) ao rolar a pauta — quanto menos linhas ocupar, mais espaço
+        // sobra no ecrã para ver candidatos ao rolar.
         $grupos = $this->candidaturas
             ->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
             ->keys()->implode(' / ');
 
-        $rows[] = ['Sala: ' . $this->sala->nome, ''];
-        $rows[] = ['Curso(s) / Período: ' . $grupos, ''];
-
-        // Linha 8 — data/horário
         $dataHorario = '';
         if ($this->sala->data_exame) {
             $dataHorario .= method_exists($this->sala->data_exame, 'format') ? $this->sala->data_exame->format('d/m/Y') : (string)$this->sala->data_exame;
@@ -86,10 +83,12 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($this->sala->horario) {
             $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
         }
-        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), ''];
-
-        // Linha vazia
-        $rows[] = ['', ''];
+        $rows[] = [
+            'Sala: ' . $this->sala->nome
+                . '     |     Curso(s)/Período: ' . $grupos
+                . '     |     Data/Horário: ' . ($dataHorario ?: '___________  |  ___________'),
+            '',
+        ];
 
         // Construir cabeçalho da tabela dinamicamente
         $header = ['CÓDIGO EXAME', 'NOME COMPLETO'];
@@ -184,10 +183,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A2:{$lastCol}2");
         $sheet->mergeCells("A3:{$lastCol}3");
         $sheet->mergeCells("A4:{$lastCol}4");
-        $sheet->mergeCells("A6:{$lastCol}6");
-        $sheet->mergeCells("A7:{$lastCol}7");
-        $sheet->mergeCells("A8:{$lastCol}8");
-        
+
         // Mesclar assinatura (traço, nome e cargo)
         $sigLinha = $dataEnd + 4;
         $sigNome = $sigLinha + 1;
@@ -196,29 +192,30 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A{$sigNome}:{$lastCol}{$sigNome}");
         $sheet->mergeCells("A{$sigCargo}:{$lastCol}{$sigCargo}");
 
-        // Alturas e estilos básicos (similar ao anterior)
-        $sheet->getRowDimension(1)->setRowHeight(55);
-        $sheet->getRowDimension(2)->setRowHeight(22);
+        // Alturas e estilos básicos — cabeçalho institucional compactado ao
+        // mínimo (4 linhas em vez de 9): como fica todo "congelado" (freeze
+        // pane) ao rolar a pauta, quanto mais alto for, menos candidatos
+        // cabem no ecrã ao rolar para baixo.
+        $sheet->getRowDimension(1)->setRowHeight(34);
+        $sheet->getRowDimension(2)->setRowHeight(18);
         $sheet->getRowDimension(3)->setRowHeight(16);
-        $sheet->getRowDimension(4)->setRowHeight(18);
-        $sheet->getRowDimension(5)->setRowHeight(8);
-        $sheet->getRowDimension(9)->setRowHeight(8);
+        $sheet->getRowDimension(4)->setRowHeight(16);
         // Cabeçalho mais alto do que o resto da tabela — dá espaço para os nomes das
         // disciplinas quebrarem em 2 linhas (wrapText) quando são compridos, em vez
         // de ficarem cortados.
         $sheet->getRowDimension($tr)->setRowHeight(34);
 
         $sheet->getStyle('A2')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 14, 'color' => ['rgb' => '1565C0']],
+            'font'      => ['bold' => true, 'size' => 13, 'color' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
         $sheet->getStyle('A3')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 11],
+            'font'      => ['bold' => true, 'size' => 10],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
         $sheet->getStyle('A4')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 12, 'color' => ['rgb' => '0E5C2F']],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            'font'      => ['bold' => true, 'size' => 9, 'color' => ['rgb' => '0E5C2F']],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT],
         ]);
 
         $lastHeaderRange = "A{$tr}:{$lastCol}{$tr}";
@@ -296,7 +293,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
 
         [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 55;
+        $displayH = 34;
         $displayW = (int)($logoW * $displayH / $logoH);
 
         $centerFromB1 = (int)(((7 + 65 + 23) * 8 / 2) - (7 * 8));
@@ -309,7 +306,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $drawing->setWidth($displayW);
         $drawing->setCoordinates('B1');
         $drawing->setOffsetX($offsetX);
-        $drawing->setOffsetY(3);
+        $drawing->setOffsetY(2);
 
         return [$drawing];
     }

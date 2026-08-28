@@ -82,26 +82,22 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Linha 1 — espaço para logo (Drawing)
         $rows[] = ['', '', ''];
 
-        // Cabeçalho (linhas 2-4) — mescladas A:C, centradas
+        // Linha 2 — nome da instituição
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
-        $rows[] = ['COMISSÃO DO EXAME DE ACESSO', '', ''];
+
+        // Linha 3 — comissão + título da lista, combinados numa só linha
         $tituloLista = $this->necessidadeEspecial
             ? 'EXAME DE ACESSO 2026/2027 — LISTA: ' . mb_strtoupper($this->necessidadeEspecial, 'UTF-8')
             : 'EXAME DE ACESSO 2026/2027 — LISTA GERAL';
-        $rows[] = [$tituloLista, '', ''];
+        $rows[] = ['COMISSÃO DO EXAME DE ACESSO   —   ' . $tituloLista, '', ''];
 
-        // Linha 5 — vazia
-        $rows[] = ['', '', ''];
-
-        // Curso(s) / Período em vez de "Candidatos atribuídos" — mesmo padrão
-        // já usado em App\Exports\SalaNotasExport, para as duas listas Excel
-        // ficarem consistentes e nunca sairem sem indicar o curso.
+        // Linha 4 — sala, curso(s)/período e data/horário combinados numa só
+        // linha. O cabeçalho institucional inteiro fica "congelado" (freeze
+        // pane) ao rolar a lista de candidatos — quanto menos linhas ocupar,
+        // mais espaço do ecrã sobra para ver candidatos ao rolar.
         $grupos = $this->candidaturas
             ->groupBy(fn ($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular'))
             ->keys()->implode(' / ');
-
-        $rows[] = ['Sala: ' . $this->sala->nome, '', ''];
-        $rows[] = ['Curso(s) / Período: ' . $grupos, '', ''];
 
         $dataHorario = '';
         if ($this->sala->data_exame) {
@@ -110,11 +106,14 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($this->sala->horario) {
             $dataHorario .= ($dataHorario ? '  |  ' : '') . $this->sala->horario . 'h';
         }
-        $rows[] = ['Data / Horário: ' . ($dataHorario ?: '___________  |  ___________'), '', ''];
+        $rows[] = [
+            'Sala: ' . $this->sala->nome
+                . '     |     Curso(s)/Período: ' . $grupos
+                . '     |     Data/Horário: ' . ($dataHorario ?: '___________  |  ___________'),
+            '', '',
+        ];
 
-        $rows[] = ['', '', ''];
-
-        $this->tableRow = 10;
+        $this->tableRow = 5;
         $rows[] = ['N.º Ficha', 'NOME COMPLETO', 'ASSINATURA'];
 
         foreach ($this->candidaturas as $c) {
@@ -150,36 +149,33 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells('A2:C2');
         $sheet->mergeCells('A3:C3');
         $sheet->mergeCells('A4:C4');
-        $sheet->mergeCells('A6:C6');
-        $sheet->mergeCells('A7:C7');
-        $sheet->mergeCells('A8:C8');
         $sheet->mergeCells("A{$sigLinha}:C{$sigLinha}");
         $sheet->mergeCells("A{$sigNome}:C{$sigNome}");
         $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
 
         // ── Alturas ──
-        $sheet->getRowDimension(1)->setRowHeight(55); // espaço para o logo (Drawing)
-        $sheet->getRowDimension(2)->setRowHeight(22);
+        // Cabeçalho institucional compactado ao mínimo (4 linhas em vez de 9):
+        // como fica todo "congelado" (freeze pane) ao rolar a lista, quanto
+        // mais alto for, menos candidatos cabem no ecrã ao rolar para baixo.
+        $sheet->getRowDimension(1)->setRowHeight(34); // espaço para o logo (Drawing)
+        $sheet->getRowDimension(2)->setRowHeight(18);
         $sheet->getRowDimension(3)->setRowHeight(16);
-        $sheet->getRowDimension(4)->setRowHeight(18);
-        $sheet->getRowDimension(5)->setRowHeight(8);
-        $sheet->getRowDimension(9)->setRowHeight(8);
+        $sheet->getRowDimension(4)->setRowHeight(16);
         $sheet->getRowDimension($this->tableRow)->setRowHeight(22);
 
         // ── Estilos do cabeçalho ──
         $sheet->getStyle('A2')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 14, 'color' => ['rgb' => '1565C0']],
+            'font'      => ['bold' => true, 'size' => 13, 'color' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
         $sheet->getStyle('A3')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 11],
+            'font'      => ['bold' => true, 'size' => 10],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
         $sheet->getStyle('A4')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 12],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            'font'      => ['bold' => true, 'size' => 9],
+            'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT],
         ]);
-        $sheet->getStyle('A6:A8')->applyFromArray(['font' => ['bold' => true, 'size' => 10]]);
 
         // ── Cabeçalho da tabela ──
         $tr = $this->tableRow;
@@ -263,7 +259,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
 
         [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 55;
+        $displayH = 34;
         $displayW = (int)($logoW * $displayH / $logoH);
 
         // Anchor logo to B1 and compute offset to center across A(20)+B(65)+C(23)
@@ -277,7 +273,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $drawing->setWidth($displayW);
         $drawing->setCoordinates('B1');
         $drawing->setOffsetX($offsetX);
-        $drawing->setOffsetY(3);
+        $drawing->setOffsetY(2);
 
         return [$drawing];
     }
