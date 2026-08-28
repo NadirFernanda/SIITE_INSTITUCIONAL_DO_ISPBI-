@@ -8,11 +8,10 @@
     Espera: $sala, $candidaturas, $logoBase64, $primeiroDoDocumento (bool).
 --}}
 @php
-    // Testado empiricamente: até 16 candidatos cabem numa única página com
-    // cabeçalho + rodapé; 17 já transborda para uma 2ª página.
-    $linhasPorPagina = 16;
+    // Testado empiricamente: até 13 candidatos cabem numa única página, já
+    // com o espaço reservado para o rodapé fixo (assinatura) em baixo.
+    $linhasPorPagina = 13;
     $blocos = $candidaturas->values()->chunk($linhasPorPagina);
-    $totalBlocos = $blocos->count();
 @endphp
 
 @if($candidaturas->isEmpty())
@@ -38,17 +37,6 @@
         </div>
 
         <p style="text-align:center;color:#666;margin-top:10mm;">Nenhum candidato atribuído a esta sala.</p>
-
-        <div class="assinatura-unica">
-            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
-            <div class="linha"></div>
-            <div class="label">Professor Doutor Fernando Maia</div>
-            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
-        </div>
-
-        <div class="footer">
-            Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno
-        </div>
     </div>
 @else
     @foreach($blocos as $idx => $bloco)
@@ -91,19 +79,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        @if($idx === $totalBlocos - 1)
-        <div class="assinatura-unica">
-            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
-            <div class="linha"></div>
-            <div class="label">Professor Doutor Fernando Maia</div>
-            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
-        </div>
-
-        <div class="footer">
-            Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno
-        </div>
-        @endif
     </div>
     @endforeach
 @endif

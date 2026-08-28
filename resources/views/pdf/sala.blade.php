@@ -19,7 +19,9 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
 
-    .pagina { padding:15mm 18mm; }
+    {{-- Espaço reservado em baixo para o rodapé fixo (assinatura), que se
+         repete em todas as páginas — não só na última. --}}
+    .pagina { padding:15mm 18mm 40mm 18mm; }
     .pagina.seguinte { page-break-before: always; }
 
     .header { text-align:center; margin-bottom:8mm; }
@@ -43,16 +45,27 @@
     td.nome-col { text-transform:uppercase; }
     tr:nth-child(even) { background:#f9f9f9; }
 
-    .assinatura-unica { text-align:center; margin-top:14mm; }
-    .assinatura-unica .assinatura-img { display:block; margin:0 auto; max-height:14mm; max-width:65mm; filter:grayscale(100%); }
-    .assinatura-unica .linha { border-bottom:1px solid #000; width:70mm; margin:2mm auto 2mm; }
-    .assinatura-unica .label { font-size:9pt; font-weight:bold; }
-    .assinatura-unica .sublabel { font-size:8.5pt; color:#333; margin-top:1mm; }
-
-    .footer { text-align:center; font-size:8pt; color:#666; margin-top:8mm; border-top:1px solid #ddd; padding-top:4mm; }
+    {{-- Rodapé fixo: a assinatura funciona como um rodapé e repete-se em
+         todas as páginas do documento (via position:fixed do dompdf), em
+         vez de aparecer só na última — evita também depender da paginação
+         automática do dompdf para encaixar a assinatura na última página. --}}
+    .rodape-fixo { position:fixed; bottom:8mm; left:18mm; right:18mm; text-align:center; }
+    .rodape-fixo .assinatura-img { display:block; margin:0 auto; max-height:12mm; max-width:60mm; filter:grayscale(100%); }
+    .rodape-fixo .linha { border-bottom:1px solid #000; width:65mm; margin:1mm auto 1.5mm; }
+    .rodape-fixo .label { font-size:9pt; font-weight:bold; }
+    .rodape-fixo .sublabel { font-size:8.5pt; color:#333; margin-top:0.5mm; }
+    .rodape-fixo .texto-gerado { font-size:7.5pt; color:#666; margin-top:2mm; border-top:1px solid #ddd; padding-top:2mm; }
 </style>
 </head>
 <body>
+
+<div class="rodape-fixo">
+    <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
+    <div class="linha"></div>
+    <div class="label">Professor Doutor Fernando Maia</div>
+    <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
+    <div class="texto-gerado">Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno</div>
+</div>
 
 @include('pdf._sala-conteudo', ['sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64, 'primeiroDoDocumento' => true])
 

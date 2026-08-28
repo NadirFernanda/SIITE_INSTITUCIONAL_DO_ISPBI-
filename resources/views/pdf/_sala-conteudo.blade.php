@@ -12,7 +12,7 @@
     página 1 sem precisar de quebra de página antes).
 --}}
 @php
-    $linhasPorPagina = 19;
+    $linhasPorPagina = 16;
     $blocos = [];
     foreach ($candidaturas->groupBy(fn ($c) => $c->curso . '|||' . $c->periodo) as $chave => $lista) {
         [$curso, $periodo] = explode('|||', $chave);
@@ -31,7 +31,6 @@
             ];
         }
     }
-    $totalBlocos = count($blocos);
 @endphp
 
 @if($candidaturas->isEmpty())
@@ -57,17 +56,6 @@
         </div>
 
         <p style="text-align:center;color:#666;margin-top:10mm;">Nenhum candidato atribuído a esta sala.</p>
-
-        <div class="assinatura-unica">
-            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
-            <div class="linha"></div>
-            <div class="label">Professor Doutor Fernando Maia</div>
-            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
-        </div>
-
-        <div class="footer">
-            Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno
-        </div>
     </div>
 @else
     @foreach($blocos as $idx => $bloco)
@@ -117,19 +105,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        @if($idx === $totalBlocos - 1)
-        <div class="assinatura-unica">
-            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
-            <div class="linha"></div>
-            <div class="label">Professor Doutor Fernando Maia</div>
-            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
-        </div>
-
-        <div class="footer">
-            Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno
-        </div>
-        @endif
     </div>
     @endforeach
 @endif
