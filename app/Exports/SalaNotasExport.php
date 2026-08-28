@@ -85,7 +85,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         }
         $rows[] = [
             'Sala: ' . $this->sala->nome
-                . '     |     Curso(s)/Período: ' . $grupos
+                . '     |     Curso/Período: ' . $grupos
                 . '     |     Data/Horário: ' . ($dataHorario ?: '___________  |  ___________'),
             '',
         ];

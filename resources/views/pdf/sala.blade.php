@@ -43,7 +43,6 @@
     th { padding:5px 10px; text-align:left; font-size:9pt; font-weight:bold; border:1px solid #ccc; text-transform:uppercase; letter-spacing:0.04em; }
     td { padding:5px 10px; font-size:9.5pt; border:1px solid #ddd; }
     td.nome-col { text-transform:uppercase; }
-    tr:nth-child(even) { background:#f9f9f9; }
 
     {{-- Rodapé fixo: a assinatura funciona como um rodapé e repete-se em
          todas as páginas do documento (via position:fixed do dompdf), em

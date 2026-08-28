@@ -66,7 +66,7 @@
 
         <div class="sala-titulo">{{ mb_strtoupper($sala->nome, 'UTF-8') }}</div>
         <div class="sala-info">
-            Curso(s)/Período: {{ $grupos }}
+            Curso/Período: {{ $grupos }}
             <br>
             <span style="margin-top:2mm;display:block;">
                 Data/Horário:

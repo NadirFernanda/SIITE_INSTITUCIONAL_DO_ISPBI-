@@ -36,7 +36,6 @@
     th { padding:5px 10px; text-align:left; font-size:9pt; font-weight:bold; border:1px solid #ccc; text-transform:uppercase; letter-spacing:0.04em; }
     td { padding:{{ $paddingCelula }}; font-size:9.5pt; border:1px solid #ddd; }
     td.nome-col { text-transform:uppercase; }
-    tr:nth-child(even) { background:#f9f9f9; }
 
     .rodape-fixo { position:fixed; bottom:8mm; left:18mm; right:18mm; text-align:center; }
     .rodape-fixo .assinatura-img { display:block; margin:0 auto; max-height:12mm; max-width:60mm; filter:grayscale(100%); }
