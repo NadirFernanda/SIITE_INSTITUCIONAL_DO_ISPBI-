@@ -122,7 +122,7 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         // Alturas — cabeçalho institucional compactado ao mínimo (4 linhas em
         // vez de 9): como fica todo "congelado" (freeze pane) ao rolar a
         // lista, quanto mais alto for, menos linhas cabem no ecrã ao rolar.
-        $sheet->getRowDimension(1)->setRowHeight(34);
+        $sheet->getRowDimension(1)->setRowHeight(48);
         $sheet->getRowDimension(2)->setRowHeight(18);
         $sheet->getRowDimension(3)->setRowHeight(16);
         $sheet->getRowDimension(4)->setRowHeight(16);
@@ -216,7 +216,7 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
 
         [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 34;
+        $displayH = 44;
         $displayW = (int)($logoW * $displayH / $logoH);
 
         $centerFromB1 = (int)(((20 + 65 + 23) * 8 / 2) - (20 * 8));

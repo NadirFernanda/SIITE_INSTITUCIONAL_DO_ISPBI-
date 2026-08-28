@@ -164,7 +164,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Cabeçalho institucional compactado ao mínimo (4 linhas em vez de 9):
         // como fica todo "congelado" (freeze pane) ao rolar a lista, quanto
         // mais alto for, menos candidatos cabem no ecrã ao rolar para baixo.
-        $sheet->getRowDimension(1)->setRowHeight(34); // espaço para o logo (Drawing)
+        $sheet->getRowDimension(1)->setRowHeight(48); // espaço para o logo (Drawing)
         $sheet->getRowDimension(2)->setRowHeight(18);
         $sheet->getRowDimension(3)->setRowHeight(16);
         $sheet->getRowDimension(4)->setRowHeight(16);
@@ -266,7 +266,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if (!file_exists($logoPath) || filesize($logoPath) === 0) return [];
 
         [$logoW, $logoH] = getimagesize($logoPath);
-        $displayH = 34;
+        $displayH = 44;
         $displayW = (int)($logoW * $displayH / $logoH);
 
         // Anchor logo to B1 and compute offset to center across A(20)+B(65)+C(23)
