@@ -20,9 +20,9 @@
 
     .header { text-align:center; margin-bottom:8mm; }
     .header img { height:18mm; }
-    .header .inst { font-size:14pt; font-weight:bold; color:#1a4e8a; margin-top:3mm; letter-spacing:0.5px; }
-    .header .sub { font-size:10pt; font-weight:bold; margin-top:2mm; }
-    .linha-dupla { border-top:3px double #000; border-bottom:1px solid #000; height:4px; margin:3mm 0; }
+    .header .inst { font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-size:15pt; font-weight:bold; color:#1565C0; margin-top:3mm; letter-spacing:0.3px; }
+    .header .sub { font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; font-size:10pt; font-weight:bold; color:#333; margin-top:3mm; }
+    .linha-dupla { display:none; }
 
     .sala-titulo { font-size:16pt; font-weight:bold; text-align:center; margin:4mm 0 1mm; }
     .sala-info { text-align:center; font-size:10pt; color:#333; margin-bottom:6mm; }
