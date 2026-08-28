@@ -334,10 +334,13 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:1000
     // Salas
     Route::get('salas', [App\Http\Controllers\Daac\SalaController::class, 'index'])->name('salas.index');
     Route::get('salas/lote/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdfLote'])->name('salas.pdf-lote');
+    Route::get('salas/lote/pdf-exame', [App\Http\Controllers\Daac\SalaController::class, 'pdfExameLote'])->name('salas.pdf-exame-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');
     Route::get('salas/lote-curso/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdfLotePorCurso'])->name('salas.pdf-lote-curso');
+    Route::get('salas/lote-curso/pdf-exame', [App\Http\Controllers\Daac\SalaController::class, 'pdfExameLotePorCurso'])->name('salas.pdf-exame-lote-curso');
     Route::get('salas/lote-curso/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExameLotePorCurso'])->name('salas.excel-exame-lote-curso');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdf'])->name('salas.pdf');
+    Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Daac\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExame'])->name('salas.excel-exame');
     Route::get('salas/{sala}', [App\Http\Controllers\Daac\SalaController::class, 'show'])->name('salas.show');
 });

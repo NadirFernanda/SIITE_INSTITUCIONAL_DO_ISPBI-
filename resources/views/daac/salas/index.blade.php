@@ -37,6 +37,10 @@
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
                 📄 Gerar PDF
             </button>
+            <button type="submit" formaction="{{ route('daac.salas.pdf-exame-lote') }}"
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
+                📄 Gerar PDF Exame
+            </button>
             <button type="submit" formaction="{{ route('daac.salas.excel-exame-lote') }}"
                     style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
                 📊 Gerar Excel Exame
@@ -62,6 +66,10 @@
             <button type="submit" formaction="{{ route('daac.salas.pdf-lote-curso') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
                 📄 Gerar PDF
+            </button>
+            <button type="submit" formaction="{{ route('daac.salas.pdf-exame-lote-curso') }}"
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
+                📄 Gerar PDF Exame
             </button>
             <button type="submit" formaction="{{ route('daac.salas.excel-exame-lote-curso') }}"
                     style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
