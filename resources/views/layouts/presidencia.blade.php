@@ -54,6 +54,13 @@
                 </svg>
                 Pautas de Exame
             </a>
+            <a href="{{ route('presidencia.resultados.index') }}"
+               class="{{ request()->routeIs('presidencia.resultados.*') ? 'active' : '' }}">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 3l2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 15.27l-4.8 2.49.92-5.34-3.88-3.78 5.36-.78L12 3z" stroke-linejoin="round"/>
+                </svg>
+                Resultados
+            </a>
         </div>
         <div style="margin:16px 12px;">
             <form method="POST" action="{{ route('logout') }}">

@@ -448,6 +448,12 @@ Route::prefix('presidencia')->name('presidencia.')->middleware(['auth', 'preside
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'excelExame'])->name('salas.excel-exame');
     Route::get('salas/{sala}/excel-notas', [App\Http\Controllers\Presidencia\SalaController::class, 'excelNotas'])->name('salas.excel-notas');
     Route::get('salas/{sala}', [App\Http\Controllers\Presidencia\SalaController::class, 'show'])->name('salas.show');
+
+    // Resultados de admissão (nota de corte por curso/período) — exclusivo de Admin e Presidência, o DAAC não tem acesso.
+    Route::get('resultados', [App\Http\Controllers\Presidencia\ResultadosController::class, 'index'])->name('resultados.index');
+    Route::post('resultados/vagas', [App\Http\Controllers\Presidencia\ResultadosController::class, 'actualizarVagas'])->name('resultados.vagas');
+    Route::post('resultados/calcular', [App\Http\Controllers\Presidencia\ResultadosController::class, 'calcular'])->name('resultados.calcular');
+    Route::get('resultados/detalhe', [App\Http\Controllers\Presidencia\ResultadosController::class, 'show'])->name('resultados.show');
 });
 
 // Placeholder routes for later scaffolding
