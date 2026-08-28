@@ -24,13 +24,20 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     protected int $tableRow; // linha onde começa a tabela (depende de existir data/horário)
     protected ?string $necessidadeEspecial;
 
-    public function __construct(Sala $sala, ?string $necessidadeEspecial = null, bool $listaGeralExcluiCategorias = false)
+    public function __construct(Sala $sala, ?string $necessidadeEspecial = null, bool $listaGeralExcluiCategorias = false, ?string $cursoFiltro = null)
     {
         $this->sala                = $sala;
         $this->necessidadeEspecial = $necessidadeEspecial;
 
         $query = $sala->candidaturas()
             ->where('pagamento_confirmado', true);
+
+        if ($cursoFiltro !== null) {
+            // Usado nos downloads em lote por curso — uma sala pode ter
+            // candidatos de mais do que um curso, e o ficheiro dessa sala
+            // dentro do lote só deve mostrar os do curso pedido.
+            $query->where('curso', $cursoFiltro);
+        }
 
         if ($necessidadeEspecial !== null) {
             $query->where('necessidade_especial', $necessidadeEspecial);

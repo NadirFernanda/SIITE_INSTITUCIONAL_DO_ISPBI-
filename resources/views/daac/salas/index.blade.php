@@ -44,6 +44,32 @@
         </form>
     </div>
 
+    {{-- Painel de Impressão em Lote por Curso --}}
+    <div style="background:linear-gradient(135deg, #eaeff5 0%, #dbe3ee 100%);border:1.5pt solid #a8c4e0;border-radius:14px;padding:16px 20px;margin-bottom:22px;">
+        <div style="margin-bottom:12px;">
+            <strong style="color:#1e3a5f;">Imprimir Listas em Lote por Curso</strong>
+            <p style="color:#0f1f3d;font-size:0.85rem;margin:2px 0 0;">Gera o PDF ou o Excel de todas as salas de um curso de uma só vez (independentemente do horário), para facilitar a impressão.</p>
+        </div>
+        <form method="GET" style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+            <div style="flex:1;min-width:200px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#0f1f3d;margin-bottom:5px;">Curso</label>
+                <select name="curso" style="width:100%;border:1px solid #a8c4e0;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
+                    @foreach($cursosDisponiveis as $c)
+                    <option value="{{ $c }}">{{ $c }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button type="submit" formaction="{{ route('daac.salas.pdf-lote-curso') }}"
+                    style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
+                📄 Gerar PDF
+            </button>
+            <button type="submit" formaction="{{ route('daac.salas.excel-exame-lote-curso') }}"
+                    style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;">
+                📊 Gerar Excel Exame
+            </button>
+        </form>
+    </div>
+
     <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
         <form method="GET" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
             <label style="font-size:0.85rem;font-weight:600;color:#475569;">Curso</label>

@@ -144,6 +144,24 @@ class SalaController extends Controller
             ->get();
     }
 
+    /**
+     * Salas com pelo menos um candidato de um curso, com pagamento confirmado.
+     * Ver App\Http\Controllers\Concerns\DownloadsSalasEmLote::salasDoCursoComCandidatos
+     * (equivalente usado pelos outros perfis através do trait partilhado).
+     */
+    protected function salasDoCurso(Request $request)
+    {
+        $request->validate([
+            'curso' => ['required', 'string'],
+        ], [
+            'curso.required' => 'Escolha um curso para gerar a lista em lote.',
+        ]);
+
+        return Sala::whereHas('candidaturas', fn($q) => $q->where('pagamento_confirmado', true)->where('curso', $request->input('curso')))
+            ->ordenadaPorHorario()
+            ->get();
+    }
+
     public function pdfLote(Request $request)
     {
         $salas = $this->salasDoHorario($request);
@@ -189,5 +207,51 @@ class SalaController extends Controller
 
         $filename = 'lista-exame-' . \Str::slug($request->input('horario')) . '.xlsx';
         return Excel::download(new SalasExameExportLote($salas), $filename);
+    }
+
+    public function pdfLotePorCurso(Request $request)
+    {
+        $salas = $this->salasDoCurso($request);
+
+        if ($salas->isEmpty()) {
+            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse curso.');
+        }
+
+        $curso = $request->input('curso');
+        $logoPath = public_path('images/logo.png');
+        $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
+            ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
+            : '';
+
+        $conteudo = '';
+        foreach ($salas as $i => $sala) {
+            $candidaturas = $sala->candidaturas()
+                ->where('pagamento_confirmado', true)
+                ->where('curso', $curso)
+                ->orderBy('numero_lugar')
+                ->get();
+            $conteudo .= \View::make('pdf._sala-conteudo', [
+                'sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64,
+                'primeiroDoDocumento' => $i === 0,
+            ])->render();
+        }
+
+        $html = \View::make('pdf._sala-wrapper-lote', ['conteudo' => $conteudo, 'paddingCelula' => '5px 10px'])->render();
+        $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
+
+        return $pdf->download('salas-' . \Str::slug($curso) . '.pdf');
+    }
+
+    public function excelExameLotePorCurso(Request $request)
+    {
+        $salas = $this->salasDoCurso($request);
+
+        if ($salas->isEmpty()) {
+            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse curso.');
+        }
+
+        $curso = $request->input('curso');
+        $filename = 'lista-exame-' . \Str::slug($curso) . '.xlsx';
+        return Excel::download(new SalasExameExportLote($salas, $curso), $filename);
     }
 }

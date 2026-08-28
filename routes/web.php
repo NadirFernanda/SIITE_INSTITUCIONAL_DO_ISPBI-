@@ -255,6 +255,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1
     Route::get('salas/lote/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdfLote'])->name('salas.pdf-lote');
     Route::get('salas/lote/pdf-exame', [App\Http\Controllers\Admin\SalaController::class, 'pdfExameLote'])->name('salas.pdf-exame-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');
+    Route::get('salas/lote-curso/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdfLotePorCurso'])->name('salas.pdf-lote-curso');
+    Route::get('salas/lote-curso/pdf-exame', [App\Http\Controllers\Admin\SalaController::class, 'pdfExameLotePorCurso'])->name('salas.pdf-exame-lote-curso');
+    Route::get('salas/lote-curso/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExameLotePorCurso'])->name('salas.excel-exame-lote-curso');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Admin\SalaController::class, 'pdf'])->name('salas.pdf');
     Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Admin\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Admin\SalaController::class, 'excelExame'])->name('salas.excel-exame');
@@ -332,6 +335,8 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:1000
     Route::get('salas', [App\Http\Controllers\Daac\SalaController::class, 'index'])->name('salas.index');
     Route::get('salas/lote/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdfLote'])->name('salas.pdf-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');
+    Route::get('salas/lote-curso/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdfLotePorCurso'])->name('salas.pdf-lote-curso');
+    Route::get('salas/lote-curso/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExameLotePorCurso'])->name('salas.excel-exame-lote-curso');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Daac\SalaController::class, 'pdf'])->name('salas.pdf');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Daac\SalaController::class, 'excelExame'])->name('salas.excel-exame');
     Route::get('salas/{sala}', [App\Http\Controllers\Daac\SalaController::class, 'show'])->name('salas.show');
@@ -363,6 +368,9 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
     Route::get('salas/lote/pdf', [App\Http\Controllers\Tecnico\SalaController::class, 'pdfLote'])->name('salas.pdf-lote');
     Route::get('salas/lote/pdf-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'pdfExameLote'])->name('salas.pdf-exame-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');
+    Route::get('salas/lote-curso/pdf', [App\Http\Controllers\Tecnico\SalaController::class, 'pdfLotePorCurso'])->name('salas.pdf-lote-curso');
+    Route::get('salas/lote-curso/pdf-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'pdfExameLotePorCurso'])->name('salas.pdf-exame-lote-curso');
+    Route::get('salas/lote-curso/excel-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'excelExameLotePorCurso'])->name('salas.excel-exame-lote-curso');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Tecnico\SalaController::class, 'pdf'])->name('salas.pdf');
     Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Tecnico\SalaController::class, 'excelExame'])->name('salas.excel-exame');
@@ -382,6 +390,9 @@ Route::prefix('lancamento')->name('lancamento.')->middleware(['auth', 'subcomiss
     Route::get('salas/lote/pdf', [App\Http\Controllers\Lancamento\SalaController::class, 'pdfLote'])->name('salas.pdf-lote');
     Route::get('salas/lote/pdf-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'pdfExameLote'])->name('salas.pdf-exame-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');
+    Route::get('salas/lote-curso/pdf', [App\Http\Controllers\Lancamento\SalaController::class, 'pdfLotePorCurso'])->name('salas.pdf-lote-curso');
+    Route::get('salas/lote-curso/pdf-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'pdfExameLotePorCurso'])->name('salas.pdf-exame-lote-curso');
+    Route::get('salas/lote-curso/excel-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'excelExameLotePorCurso'])->name('salas.excel-exame-lote-curso');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Lancamento\SalaController::class, 'pdf'])->name('salas.pdf');
     Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Lancamento\SalaController::class, 'excelExame'])->name('salas.excel-exame');
@@ -420,6 +431,9 @@ Route::prefix('presidencia')->name('presidencia.')->middleware(['auth', 'preside
     Route::get('salas/lote/pdf-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfExameLote'])->name('salas.pdf-exame-lote');
     Route::get('salas/lote/excel-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'excelExameLote'])->name('salas.excel-exame-lote');
     Route::get('salas/lote/excel-notas', [App\Http\Controllers\Presidencia\SalaController::class, 'excelNotasLote'])->name('salas.excel-notas-lote');
+    Route::get('salas/lote-curso/pdf', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfLotePorCurso'])->name('salas.pdf-lote-curso');
+    Route::get('salas/lote-curso/pdf-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfExameLotePorCurso'])->name('salas.pdf-exame-lote-curso');
+    Route::get('salas/lote-curso/excel-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'excelExameLotePorCurso'])->name('salas.excel-exame-lote-curso');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Presidencia\SalaController::class, 'pdf'])->name('salas.pdf');
     Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'excelExame'])->name('salas.excel-exame');
