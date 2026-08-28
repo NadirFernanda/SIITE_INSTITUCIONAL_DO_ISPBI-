@@ -198,6 +198,11 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="13" rx="2" stroke="#fff" stroke-width="2" fill="none"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2" stroke="#fff" stroke-width="2"/><path d="M12 12v4M10 14h4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
                 </span>Salas de Exame
             </a>
+            <a href="{{ route('admin.resultados.index') }}">
+                <span style="vertical-align:middle;margin-right:8px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 15.27l-4.8 2.49.92-5.34-3.88-3.78 5.36-.78L12 3z" stroke="#fff" stroke-width="2" stroke-linejoin="round" fill="none"/></svg>
+                </span>Resultados
+            </a>
             <a href="{{ route('admin.relatorios') }}">
                 <span style="vertical-align:middle;margin-right:8px;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v5" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M9 17l2 2 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>

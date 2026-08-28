@@ -291,6 +291,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1
     // Auditoria
     Route::get('auditoria', [App\Http\Controllers\Admin\AuditLogController::class, 'index'])->name('auditoria');
 
+    // Resultados de admissão (nota de corte por curso/período, com reserva de vagas por categoria especial)
+    Route::get('resultados', [App\Http\Controllers\Admin\ResultadosController::class, 'index'])->name('resultados.index');
+    Route::post('resultados/vagas', [App\Http\Controllers\Admin\ResultadosController::class, 'actualizarVagas'])->name('resultados.vagas');
+    Route::post('resultados/calcular', [App\Http\Controllers\Admin\ResultadosController::class, 'calcular'])->name('resultados.calcular');
+    Route::get('resultados/detalhe', [App\Http\Controllers\Admin\ResultadosController::class, 'show'])->name('resultados.show');
+
     // Alumni documentos (portal)
     Route::get('alumni-documentos', [App\Http\Controllers\Admin\AlumniDocumentoController::class, 'index'])->name('alumni-documentos.index');
     Route::post('alumni-documentos', [App\Http\Controllers\Admin\AlumniDocumentoController::class, 'store'])->name('alumni-documentos.store');

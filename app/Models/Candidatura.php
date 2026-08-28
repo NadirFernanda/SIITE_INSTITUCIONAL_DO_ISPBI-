@@ -23,6 +23,7 @@ class Candidatura extends Model
         'sala_id', 'numero_lugar', 'codigo_exame',
         'assinado_por', 'assinado_em', 'assinatura_codigo',
         'nota_exame', 'nota_lancada_por', 'nota_lancada_em',
+        'resultado_admissao', 'resultado_calculado_por', 'resultado_calculado_em',
         'folha_impressa_por', 'folha_impressa_em',
         'comprovativo_gerado_por', 'comprovativo_gerado_em',
         'whatsapp_comprovativo_enviado_at', 'whatsapp_comprovativo_falhou_em',
@@ -42,6 +43,7 @@ class Candidatura extends Model
         'codigo_exame'      => 'string',
         'nota_exame'       => 'float',
         'nota_lancada_em'  => 'datetime',
+        'resultado_calculado_em' => 'datetime',
         'assinado_em'      => 'datetime',
         'folha_impressa_em'       => 'datetime',
         'comprovativo_gerado_em'  => 'datetime',
@@ -286,6 +288,11 @@ class Candidatura extends Model
         return static::$categoriasEspeciaisPorCurso[$curso] ?? static::$categoriasEspeciaisPadrao;
     }
 
+    public static array $resultadoAdmissaoLabels = [
+        'admitido'     => 'Admitido',
+        'nao_admitido' => 'Não Admitido',
+    ];
+
     // Retorna todos os perfis únicos ordenados alfabeticamente
     public static function todosOsPerfis(): array
     {
@@ -317,6 +324,11 @@ class Candidatura extends Model
     public function notaLancadaPor()
     {
         return $this->belongsTo(User::class, 'nota_lancada_por');
+    }
+
+    public function resultadoCalculadoPor()
+    {
+        return $this->belongsTo(User::class, 'resultado_calculado_por');
     }
 
     /**
