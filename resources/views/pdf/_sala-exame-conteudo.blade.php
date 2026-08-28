@@ -50,6 +50,14 @@
         </div>
 
         <p style="text-align:center;color:#666;margin-top:10mm;">Nenhum candidato nesta lista.</p>
+
+        <div class="rodape-fixo">
+            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
+            <div class="linha"></div>
+            <div class="label">Professor Doutor Fernando Maia</div>
+            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
+            <div class="texto-gerado">Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno</div>
+        </div>
     </div>
 @else
     @foreach($blocos as $idx => $bloco)
@@ -95,6 +103,16 @@
                 @endforeach
             </tbody>
         </table>
+
+        @if($loop->last)
+        <div class="rodape-fixo">
+            <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
+            <div class="linha"></div>
+            <div class="label">Professor Doutor Fernando Maia</div>
+            <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
+            <div class="texto-gerado">Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno</div>
+        </div>
+        @endif
     </div>
     @endforeach
 @endif

@@ -15,9 +15,16 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
 
-    {{-- Espaço reservado em baixo para o rodapé fixo (assinatura), que se
-         repete em todas as páginas de todas as salas do lote. --}}
-    .pagina { padding:15mm 18mm 40mm 18mm; }
+    {{-- .pagina fica position:relative para servir de referência ao
+         rodapé/assinatura (position:absolute; top:257mm), que assim fica
+         ancorado ao topo desta página específica (o top-left de .pagina
+         coincide sempre com o topo físico da página) em vez de repetir em
+         todas as páginas do documento, mesmo dentro de um lote com várias
+         salas. Usa-se top em vez de bottom porque .pagina tem altura
+         automática — forçar uma altura fixa (297mm) para poder usar bottom
+         fazia o dompdf inserir uma página em branco a mais, por
+         arredondamento. --}}
+    .pagina { position:relative; padding:15mm 18mm 40mm 18mm; }
     .pagina.seguinte { page-break-before: always; }
 
     .header { text-align:center; margin-bottom:8mm; }
@@ -37,7 +44,7 @@
     td { padding:{{ $paddingCelula }}; font-size:9.5pt; border:1px solid #ddd; }
     td.nome-col { text-transform:uppercase; }
 
-    .rodape-fixo { position:fixed; bottom:8mm; left:18mm; right:18mm; text-align:center; }
+    .rodape-fixo { position:absolute; top:257mm; left:18mm; right:18mm; text-align:center; }
     .rodape-fixo .assinatura-img { display:block; margin:0 auto; max-height:12mm; max-width:60mm; filter:grayscale(100%); }
     .rodape-fixo .linha { border-bottom:1px solid #000; width:65mm; margin:1mm auto 1.5mm; }
     .rodape-fixo .label { font-size:9pt; font-weight:bold; }
@@ -46,14 +53,6 @@
 </style>
 </head>
 <body>
-
-<div class="rodape-fixo">
-    <img class="assinatura-img" src="{{ \App\Services\SignatureImageGenerator::generate('Fernando Maia') }}" alt="Assinatura">
-    <div class="linha"></div>
-    <div class="label">Professor Doutor Fernando Maia</div>
-    <div class="sublabel">Presidente da Comissão do Exame de Acesso</div>
-    <div class="texto-gerado">Documento gerado em {{ now()->format('d/m/Y H:i') }} — ISP-Bié — Uso interno</div>
-</div>
 
 {!! $conteudo !!}
 </body>
