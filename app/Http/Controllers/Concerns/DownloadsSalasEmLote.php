@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Concerns;
 
 use App\Exports\SalaExameExport;
 use App\Exports\SalasExameExportLote;
+use App\Models\Candidatura;
 use App\Models\Sala;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -107,23 +109,7 @@ trait DownloadsSalasEmLote
             return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
         }
 
-        $logoBase64 = $this->logoBase64ParaLote();
-        $conteudo = '';
-        foreach ($salas as $i => $sala) {
-            $candidaturas = $sala->candidaturas()
-                ->where('pagamento_confirmado', true)
-                ->orderBy('numero_lugar')
-                ->get();
-            $conteudo .= \View::make('pdf._sala-exame-conteudo', [
-                'sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64,
-                'primeiroDoDocumento' => $i === 0,
-            ])->render();
-        }
-
-        $html = \View::make('pdf._sala-wrapper-lote', ['conteudo' => $conteudo, 'paddingCelula' => '8px 10px'])->render();
-        $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
-
-        return $pdf->download('lista-exame-' . \Str::slug($request->input('horario')) . '.pdf');
+        return $this->gerarPdfExameLote($salas, null, 'lista-exame-' . \Str::slug($request->input('horario')) . '.pdf');
     }
 
     public function excelExameLote(Request $request)
@@ -176,24 +162,57 @@ trait DownloadsSalasEmLote
         }
 
         $curso = $request->input('curso');
+        return $this->gerarPdfExameLote($salas, $curso, 'lista-exame-' . \Str::slug($curso) . '.pdf');
+    }
+
+    /**
+     * Gera o PDF Exame em lote — por cada sala, uma secção "Lista Geral"
+     * (sem candidatos de categoria especial) mais uma secção por cada
+     * categoria presente nessa sala, exactamente como o Excel Exame em lote
+     * (App\Exports\SalasExameExportLote::sheets) — a única diferença entre
+     * os dois deve ser o formato do ficheiro, não o conteúdo.
+     */
+    protected function gerarPdfExameLote(Collection $salas, ?string $cursoFiltro, string $nomeFicheiro)
+    {
         $logoBase64 = $this->logoBase64ParaLote();
         $conteudo = '';
-        foreach ($salas as $i => $sala) {
-            $candidaturas = $sala->candidaturas()
-                ->where('pagamento_confirmado', true)
-                ->where('curso', $curso)
-                ->orderBy('numero_lugar')
-                ->get();
+        $primeiro = true;
+
+        foreach ($salas as $sala) {
+            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
+            if ($cursoFiltro !== null) {
+                $candidaturasQuery->where('curso', $cursoFiltro);
+            }
+            $candidaturas = $candidaturasQuery->get();
+
+            $cursoSala = $candidaturas->first()->curso ?? null;
+            $categoriasSala = collect(Candidatura::categoriasEspeciaisPermitidas($cursoSala))
+                ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
+                ->values();
+
+            $listaGeral = $candidaturas
+                ->filter(fn ($c) => empty($c->necessidade_especial) || $c->necessidade_especial === 'Nenhuma')
+                ->values();
+
             $conteudo .= \View::make('pdf._sala-exame-conteudo', [
-                'sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64,
-                'primeiroDoDocumento' => $i === 0,
+                'sala' => $sala, 'candidaturas' => $listaGeral, 'logoBase64' => $logoBase64,
+                'primeiroDoDocumento' => $primeiro, 'necessidadeEspecial' => null,
             ])->render();
+            $primeiro = false;
+
+            foreach ($categoriasSala as $categoria) {
+                $candidatosCategoria = $candidaturas->filter(fn ($c) => $c->necessidade_especial === $categoria)->values();
+                $conteudo .= \View::make('pdf._sala-exame-conteudo', [
+                    'sala' => $sala, 'candidaturas' => $candidatosCategoria, 'logoBase64' => $logoBase64,
+                    'primeiroDoDocumento' => false, 'necessidadeEspecial' => $categoria,
+                ])->render();
+            }
         }
 
         $html = \View::make('pdf._sala-wrapper-lote', ['conteudo' => $conteudo, 'paddingCelula' => '8px 10px'])->render();
         $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
 
-        return $pdf->download('lista-exame-' . \Str::slug($curso) . '.pdf');
+        return $pdf->download($nomeFicheiro);
     }
 
     public function excelExameLotePorCurso(Request $request)

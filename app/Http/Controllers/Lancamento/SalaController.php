@@ -165,15 +165,74 @@ class SalaController extends Controller
         return $pdf->download('sala-' . \Str::slug($sala->nome) . '.pdf');
     }
 
+    // Usa o parcial ANÓNIMO (só N.º Ficha, sem nome) — o Lançamento lança
+    // notas por código sem ver os nomes dos candidatos, ao contrário dos
+    // outros perfis, cujo "PDF Exame" mostra nome e assinatura (ver
+    // pdf/_sala-exame-conteudo.blade.php).
     public function pdfExame(Sala $sala)
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
             ->orderBy('numero_lugar')
             ->get();
-        $pdf = Pdf::loadView('pdf.sala-exame', compact('sala', 'candidaturas'))
+        $pdf = Pdf::loadView('pdf.sala-exame-codigos', compact('sala', 'candidaturas'))
                   ->setPaper('a4', 'portrait');
         return $pdf->download('lista-exame-' . \Str::slug($sala->nome) . '.pdf');
+    }
+
+    // Substitui o pdfExameLote()/pdfExameLotePorCurso() do trait
+    // DownloadsSalasEmLote — pela mesma razão de excelExameLote() abaixo: o
+    // Lançamento mantém a lista de exame anónima (só código), sem nome nem
+    // separação por categoria especial (que revelaria informação sobre o
+    // candidato mesmo sem mostrar o nome).
+    public function pdfExameLote(Request $request)
+    {
+        $salas = $this->salasDoHorarioComCandidatos($request);
+
+        if ($salas->isEmpty()) {
+            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
+        }
+
+        return $this->gerarPdfExameLoteCodigos($salas, 'lista-exame-' . \Str::slug($request->input('horario')) . '.pdf');
+    }
+
+    public function pdfExameLotePorCurso(Request $request)
+    {
+        $salas = $this->salasDoCursoComCandidatos($request);
+
+        if ($salas->isEmpty()) {
+            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse curso.');
+        }
+
+        $curso = $request->input('curso');
+
+        return $this->gerarPdfExameLoteCodigos($salas, 'lista-exame-' . \Str::slug($curso) . '.pdf', $curso);
+    }
+
+    private function gerarPdfExameLoteCodigos($salas, string $nomeFicheiro, ?string $cursoFiltro = null)
+    {
+        $logoPath = public_path('images/logo.png');
+        $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
+            ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
+            : '';
+
+        $conteudo = '';
+        foreach ($salas as $i => $sala) {
+            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
+            if ($cursoFiltro !== null) {
+                $candidaturasQuery->where('curso', $cursoFiltro);
+            }
+            $candidaturas = $candidaturasQuery->orderBy('numero_lugar')->get();
+            $conteudo .= \View::make('pdf._sala-exame-codigos-conteudo', [
+                'sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64,
+                'primeiroDoDocumento' => $i === 0,
+            ])->render();
+        }
+
+        $html = \View::make('pdf._sala-wrapper-lote', ['conteudo' => $conteudo, 'paddingCelula' => '8px 10px'])->render();
+        $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
+
+        return $pdf->download($nomeFicheiro);
     }
 
     public function excelExame(Sala $sala)

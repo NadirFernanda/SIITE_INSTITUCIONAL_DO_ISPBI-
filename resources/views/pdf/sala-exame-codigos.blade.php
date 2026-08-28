@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-    {{-- Paginação manual — ver pdf/_sala-exame-conteudo.blade.php. --}}
+    {{-- Paginação manual — ver pdf/_sala-exame-codigos-conteudo.blade.php. --}}
     @page { size: A4 portrait; margin: 0; }
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:"Times New Roman", Times, serif; font-size:11pt; color:#000; }
@@ -26,13 +26,10 @@
     .sala-titulo { font-size:16pt; font-weight:bold; text-align:center; margin:4mm 0 1mm; }
     .sala-info { text-align:center; font-size:10pt; color:#333; margin-bottom:6mm; }
 
-    .grupo-header { background:#1a4e8a; color:#fff; font-weight:bold; font-size:10pt; padding:4px 10px; margin-top:5mm; }
-
     table { width:100%; border-collapse:collapse; margin-top:1mm; }
     thead tr { background:#f0f0f0; }
     th { padding:5px 10px; text-align:left; font-size:9pt; font-weight:bold; border:1px solid #ccc; text-transform:uppercase; letter-spacing:0.04em; }
     td { padding:8px 10px; font-size:9.5pt; border:1px solid #ddd; }
-    td.nome-col { text-transform:uppercase; }
     tr:nth-child(even) { background:#f9f9f9; }
 
     .assinatura-unica { text-align:center; margin-top:14mm; }
@@ -46,7 +43,7 @@
 </head>
 <body>
 
-@include('pdf._sala-exame-conteudo', ['sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64, 'primeiroDoDocumento' => true, 'necessidadeEspecial' => $necessidadeEspecial ?? null])
+@include('pdf._sala-exame-codigos-conteudo', ['sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64, 'primeiroDoDocumento' => true])
 
 </body>
 </html>
