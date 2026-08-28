@@ -93,9 +93,9 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width:70px;text-align:center;">N.º Ficha</th>
-                    <th>Nome Completo</th>
-                    <th style="width:110px;text-align:center;">Assinatura</th>
+                    <th style="width:12%;text-align:center;">N.º Ficha</th>
+                    <th style="width:42%;">Nome Completo</th>
+                    <th style="width:46%;text-align:center;">Assinatura</th>
                 </tr>
             </thead>
             <tbody>
