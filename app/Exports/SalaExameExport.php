@@ -142,7 +142,11 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
     public function columnWidths(): array
     {
-        return ['A' => 20, 'B' => 65, 'C' => 23];
+        // Nome mais estreito e Assinatura bem mais larga do que antes: nomes
+        // reais raramente enchem uma coluna de 65, sobrando espaço vazio, e
+        // isso "roubava" largura à assinatura — que precisa de espaço real
+        // para uma pessoa assinar à mão (à lapiseira) no dia do exame.
+        return ['A' => 12, 'B' => 42, 'C' => 46];
     }
 
     public function styles(Worksheet $sheet): array
@@ -269,8 +273,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 44;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Anchor logo to B1 and compute offset to center across A(20)+B(65)+C(23)
-        $centerFromB1 = (int)(((20 + 65 + 23) * 8 / 2) - (20 * 8));
+        // Anchor logo to B1 and compute offset to center across A(12)+B(42)+C(46)
+        $centerFromB1 = (int)(((12 + 42 + 46) * 8 / 2) - (12 * 8));
         $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
 
         $drawing = new Drawing();
