@@ -24,7 +24,20 @@ class SalaController extends Controller
         $dataFiltro    = $request->query('data_filtro');
         $periodoFiltro = $request->query('periodo_filtro');
 
-        $salasQuery = Sala::withCount('candidaturas')->ordenadaPorHorario();
+        $salasQuery = Sala::query()
+            ->withCount(['candidaturas as candidaturas_count' => function ($query) use ($cursoFiltro, $periodoFiltro) {
+                $query->whereNotIn('status', ['rejeitada']);
+
+                if ($cursoFiltro) {
+                    $query->where('curso', $cursoFiltro);
+                }
+
+                if ($periodoFiltro) {
+                    $query->where('periodo', $periodoFiltro);
+                }
+            }])
+            ->ordenadaPorHorario();
+
         if ($cursoFiltro) {
             $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('curso', $cursoFiltro));
         }
