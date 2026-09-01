@@ -206,6 +206,7 @@
                     $livres   = $sala->capacidade - $ocupados;
                     $pct      = $sala->capacidade > 0 ? round($ocupados / $sala->capacidade * 100) : 0;
                     $cursosNaSala = $sala->candidaturas()
+                        ->where('pagamento_confirmado', true)
                         ->when($cursoFiltro, fn ($query) => $query->where('curso', $cursoFiltro))
                         ->when($periodoFiltro, fn ($query) => $query->where('periodo', $periodoFiltro))
                         ->whereNotIn('status', ['rejeitada'])

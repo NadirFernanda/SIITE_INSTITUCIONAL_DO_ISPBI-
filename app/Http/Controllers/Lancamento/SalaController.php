@@ -26,7 +26,8 @@ class SalaController extends Controller
 
         $salasQuery = Sala::query()
             ->withCount(['candidaturas as candidaturas_count' => function ($query) use ($cursoFiltro, $periodoFiltro) {
-                $query->whereNotIn('status', ['rejeitada']);
+                $query->where('pagamento_confirmado', true)
+                    ->whereNotIn('status', ['rejeitada']);
 
                 if ($cursoFiltro) {
                     $query->where('curso', $cursoFiltro);
@@ -39,10 +40,10 @@ class SalaController extends Controller
             ->ordenadaPorHorario();
 
         if ($cursoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('curso', $cursoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('curso', $cursoFiltro));
         }
         if ($periodoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('periodo', $periodoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('periodo', $periodoFiltro));
         }
         if ($horarioFiltro) {
             $salasQuery->where('horario', $horarioFiltro);
