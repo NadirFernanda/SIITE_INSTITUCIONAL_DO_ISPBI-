@@ -1,96 +1,46 @@
-/* Ajustes Responsivos Globais para Mobile */
+/*
+ * Shared responsive safeguards.
+ * Keep these rules scoped to layout components so page-specific spacing,
+ * typography, and controls are not unexpectedly overwritten.
+ */
 
-/* Ajustes para textos em dispositivos móveis */
-@media (max-width: 640px) {
-  /* Reduz tamanhos de fonte em cards e seções */
-  h1 {
-    font-size: 1.5rem !important;
-  }
-  
-  h2 {
-    font-size: 1.25rem !important;
-  }
-  
-  h3 {
-    font-size: 1.125rem !important;
-  }
-  
-  /* Ajusta padding de cards */
-  .card {
-    padding: 1rem !important;
-  }
-  
-  /* Ajusta espaçamento de seções */
-  section {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
-  }
-  
-  /* Oculta elementos desnecessários em mobile */
-  .mobile-hidden {
-    display: none !important;
-  }
-  
-  /* Botões responsivos */
-  button, .btn {
-    font-size: 0.875rem !important;
-    padding: 0.5rem 1rem !important;
-  }
-  
-  /* Links e navegação */
-  a {
-    font-size: 0.875rem;
-  }
-  
-  /* Grid responsivo */
-  .grid {
-    gap: 0.5rem !important;
-  }
-  
-  /* Imagens responsivas */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  /* Container com padding reduzido */
-  .container-mobile {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
-  }
-}
-
-/* Ajustes para tablets */
-@media (min-width: 641px) and (max-width: 1024px) {
-  h1 {
-    font-size: 1.875rem !important;
-  }
-  
-  h2 {
-    font-size: 1.5rem !important;
-  }
-  
-  h3 {
-    font-size: 1.25rem !important;
-  }
-}
-
-/* Fix para navbar fixed que causa sobreposição */
+html,
 body {
-  padding-top: 0;
-}
-
-/* Overflow horizontal fix */
-* {
-  box-sizing: border-box;
-}
-
-html, body {
+  width: 100%;
   overflow-x: hidden;
-  max-width: 100vw;
 }
 
-/* Garantir que nenhum elemento ultrapasse a largura da tela */
-section, div, article, main {
+img,
+video,
+canvas,
+iframe {
   max-width: 100%;
+}
+
+table {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main-content,
+  .page-content,
+  .content-container {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .main-content table,
+  .page-content table,
+  .content-container table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .main-content pre,
+  .page-content pre,
+  .content-container pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
 }

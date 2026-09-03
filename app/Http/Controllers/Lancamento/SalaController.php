@@ -136,7 +136,7 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
-            ->orderBy('numero_lugar')
+            ->orderBy('nome')
             ->get();
         return view('lancamento.salas.show', compact('sala', 'candidaturas'));
     }

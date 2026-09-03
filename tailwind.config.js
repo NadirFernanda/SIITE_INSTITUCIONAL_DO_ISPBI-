@@ -11,6 +11,13 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                ispbie: {
+                    blue: '#1e3a5f',
+                    dark: '#0f1f3d',
+                    orange: '#f05a28',
+                },
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

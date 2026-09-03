@@ -1,4 +1,6 @@
 
+@import "./responsive.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,10 +12,26 @@
    BASE
 ========================= */
 @layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   html, body {
+    margin: 0;
+    min-width: 320px;
     overflow-x: hidden;
     max-width: 100vw;
     background-color: #fff;
+  }
+
+  body {
+    font-family: theme('fontFamily.sans');
+    color: #111827;
+    line-height: 1.5;
+  }
+
+  img, video, canvas, svg {
+    max-width: 100%;
   }
 }
 
