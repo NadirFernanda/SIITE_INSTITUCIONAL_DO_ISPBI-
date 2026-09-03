@@ -13,14 +13,18 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 class SalasExameExportLoteLancamento implements WithMultipleSheets
 {
     protected Collection $salas;
+    protected ?string $cursoFiltro;
 
-    public function __construct(Collection $salas)
+    public function __construct(Collection $salas, ?string $cursoFiltro = null)
     {
         $this->salas = $salas;
+        $this->cursoFiltro = $cursoFiltro;
     }
 
     public function sheets(): array
     {
-        return $this->salas->map(fn(Sala $sala) => new SalaExameExportLancamento($sala))->all();
+        return $this->salas
+            ->map(fn(Sala $sala) => new SalaExameExportLancamento($sala, $this->cursoFiltro))
+            ->all();
     }
 }

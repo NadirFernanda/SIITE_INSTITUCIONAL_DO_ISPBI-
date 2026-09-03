@@ -236,7 +236,7 @@ class SalaController extends Controller
         foreach ($salas as $i => $sala) {
             $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
             if ($cursoFiltro !== null) {
-                $candidaturasQuery->where('curso', $cursoFiltro);
+                $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
             }
             $candidaturas = $candidaturasQuery
                 ->orderByRaw('LOWER(nome) ASC')
@@ -273,6 +273,23 @@ class SalaController extends Controller
 
         $filename = 'lista-exame-' . \Str::slug($request->input('horario')) . '.xlsx';
         return Excel::download(new SalasExameExportLoteLancamento($salas), $filename);
+    }
+
+    public function excelExameLotePorCurso(Request $request)
+    {
+        $salas = $this->salasDoCursoComCandidatos($request);
+
+        if ($salas->isEmpty()) {
+            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse curso.');
+        }
+
+        $curso = trim($request->input('curso'));
+        $filename = 'lista-exame-' . \Str::slug($curso) . '.xlsx';
+
+        return Excel::download(
+            new SalasExameExportLoteLancamento($salas, $curso),
+            $filename
+        );
     }
 
     public function gerarCodigos(Sala $sala)

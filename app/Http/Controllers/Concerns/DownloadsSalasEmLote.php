@@ -52,7 +52,12 @@ trait DownloadsSalasEmLote
             'curso.required' => 'Escolha um curso para gerar a lista em lote.',
         ]);
 
-        return Sala::whereHas('candidaturas', fn($q) => $q->where('pagamento_confirmado', true)->where('curso', $request->input('curso')))
+        $curso = trim($request->input('curso'));
+
+        return Sala::whereHas('candidaturas', function ($q) use ($curso) {
+                $q->where('pagamento_confirmado', true)
+                    ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [$curso]);
+            })
             ->ordenadaPorHorario()
             ->get();
     }
@@ -138,7 +143,7 @@ trait DownloadsSalasEmLote
         foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
-                ->where('curso', $curso)
+                ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($curso)])
                 ->orderBy('numero_lugar')
                 ->get();
             $conteudo .= \View::make('pdf._sala-conteudo', [
@@ -181,7 +186,7 @@ trait DownloadsSalasEmLote
         foreach ($salas as $sala) {
             $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
             if ($cursoFiltro !== null) {
-                $candidaturasQuery->where('curso', $cursoFiltro);
+                $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
             }
             $candidaturas = $candidaturasQuery->get();
 
