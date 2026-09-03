@@ -55,10 +55,10 @@
             </p>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="{{ route('lancamento.salas.pdf', $sala) }}"
+            <a href="{{ route('lancamento.salas.pdf-exame', $sala) }}"
                class="print-hidden"
                style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
-                PDF
+                PDF — Lista com códigos
             </a>
             <a href="{{ route('lancamento.salas.excel-exame', $sala) }}"
                class="print-hidden"

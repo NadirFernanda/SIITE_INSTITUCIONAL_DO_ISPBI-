@@ -1,9 +1,9 @@
 {{--
-    Conteúdo de uma sala para a Lista de Exame ANÓNIMA (só N.º Ficha, sem
-    nome) — usado exclusivamente pelo perfil Lançamento, que lança notas por
-    código sem ver os nomes dos candidatos (garantia de anonimato na
-    correcção). Não confundir com pdf/_sala-exame-conteudo.blade.php, que
-    mostra nome e assinatura para os restantes perfis.
+    Conteúdo de uma sala para a Lista de Exame ANÓNIMA (só código, sem nome)
+    — usado exclusivamente pelo perfil Lançamento, que lança notas por código
+    sem ver os nomes dos candidatos (garantia de anonimato na correcção). Não
+    confundir com pdf/_sala-exame-conteudo.blade.php, que mostra nome e
+    assinatura para os restantes perfis.
 
     Espera: $sala, $candidaturas, $logoBase64, $primeiroDoDocumento (bool).
 --}}
@@ -76,13 +76,13 @@
         <table>
             <thead>
                 <tr>
-                    <th style="text-align:left;font-weight:700;">N.º Ficha</th>
+                    <th style="text-align:left;font-weight:700;">Código Exame</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($bloco as $c)
                 <tr>
-                    <td style="font-weight:700;letter-spacing:0.08em;">{{ str_pad($c->id, 5, '0', STR_PAD_LEFT) }}</td>
+                    <td style="font-weight:700;letter-spacing:0.08em;">{{ $c->codigo_exame ?? 'NÃO GERADO' }}</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -188,7 +188,8 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
-            ->orderBy('numero_lugar')
+            ->orderByRaw('LOWER(nome) ASC')
+            ->orderBy('id')
             ->get();
         $pdf = Pdf::loadView('pdf.sala-exame-codigos', compact('sala', 'candidaturas'))
                   ->setPaper('a4', 'portrait');
@@ -237,7 +238,10 @@ class SalaController extends Controller
             if ($cursoFiltro !== null) {
                 $candidaturasQuery->where('curso', $cursoFiltro);
             }
-            $candidaturas = $candidaturasQuery->orderBy('numero_lugar')->get();
+            $candidaturas = $candidaturasQuery
+                ->orderByRaw('LOWER(nome) ASC')
+                ->orderBy('id')
+                ->get();
             $conteudo .= \View::make('pdf._sala-exame-codigos-conteudo', [
                 'sala' => $sala, 'candidaturas' => $candidaturas, 'logoBase64' => $logoBase64,
                 'primeiroDoDocumento' => $i === 0,

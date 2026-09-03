@@ -31,7 +31,8 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
         $this->sala         = $sala;
         $this->candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
-            ->orderBy('numero_lugar')
+            ->orderByRaw('LOWER(nome) ASC')
+            ->orderBy('id')
             ->get();
     }
 
