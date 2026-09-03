@@ -171,11 +171,8 @@ trait DownloadsSalasEmLote
     }
 
     /**
-     * Gera o PDF Exame em lote — por cada sala, uma secção "Lista Geral"
-     * (sem candidatos de categoria especial) mais uma secção por cada
-     * categoria presente nessa sala, exactamente como o Excel Exame em lote
-     * (App\Exports\SalasExameExportLote::sheets) — a única diferença entre
-     * os dois deve ser o formato do ficheiro, não o conteúdo.
+     * Gera o PDF Exame em lote com lista geral e folhas separadas para as
+     * categorias especiais, mantendo o mesmo critério de filtragem do Excel.
      */
     protected function gerarPdfExameLote(Collection $salas, ?string $cursoFiltro, string $nomeFicheiro)
     {
@@ -194,7 +191,6 @@ trait DownloadsSalasEmLote
             $categoriasSala = collect(Candidatura::categoriasEspeciaisPermitidas($cursoSala))
                 ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
                 ->values();
-
             $listaGeral = $candidaturas
                 ->filter(fn ($c) => empty($c->necessidade_especial) || $c->necessidade_especial === 'Nenhuma')
                 ->values();

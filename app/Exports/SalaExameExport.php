@@ -36,7 +36,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             // Usado nos downloads em lote por curso — uma sala pode ter
             // candidatos de mais do que um curso, e o ficheiro dessa sala
             // dentro do lote só deve mostrar os do curso pedido.
-            $query->where('curso', $cursoFiltro);
+            $query->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
         }
 
         if ($necessidadeEspecial !== null) {
