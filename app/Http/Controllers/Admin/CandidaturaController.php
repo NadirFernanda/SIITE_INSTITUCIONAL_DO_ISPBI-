@@ -275,11 +275,14 @@ class CandidaturaController extends Controller
     public function updateStatus(Request $request, Candidatura $candidatura)
     {
         $request->validate([
-            'status'      => 'required|in:pendente,em_analise,aprovada,rejeitada',
+            'status'      => 'required|in:pendente,em_analise,aprovada,rejeitada,concluida',
             'notas_admin' => 'nullable|string|max:2000',
         ]);
 
         $oldStatus = $candidatura->status;
+        if ($oldStatus === 'concluida' && $request->input('status') !== 'concluida') {
+            return back()->with('error', 'Candidaturas concluídas não podem voltar para um estado anterior.');
+        }
         $candidatura->update($request->only('status', 'notas_admin'));
 
         AuditLog::registar('alterou_status', 'candidatura', $candidatura->id,
@@ -496,6 +499,10 @@ class CandidaturaController extends Controller
 
     public function destroy(Candidatura $candidatura)
     {
+        if ($candidatura->status === 'concluida') {
+            return back()->with('error', 'Candidaturas concluídas não podem ser eliminadas.');
+        }
+
         AuditLog::registar('eliminou_candidatura', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} ({$candidatura->curso})");
 

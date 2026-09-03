@@ -145,7 +145,7 @@
                 <div>
                     <label style="display:block;font-size:0.78rem;font-weight:600;color:#475569;margin-bottom:5px;">Estado</label>
                     <select name="status" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:9px 11px;font-size:0.88rem;">
-                        @foreach(['pendente' => 'Pendente', 'em_analise' => 'Em Análise', 'aprovada' => 'Aprovada'] as $val => $label)
+                        @foreach(['pendente' => 'Pendente', 'em_analise' => 'Em Análise', 'aprovada' => 'Aprovada', 'rejeitada' => 'Rejeitada', 'concluida' => 'Concluída'] as $val => $label)
                             <option value="{{ $val }}" {{ $candidatura->status === $val ? 'selected' : '' }}>{{ $label }}</option>
                         @endforeach
                     </select>
