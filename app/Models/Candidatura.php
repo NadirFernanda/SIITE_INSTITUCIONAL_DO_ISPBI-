@@ -291,6 +291,32 @@ class Candidatura extends Model
         return static::$categoriasEspeciaisPorCurso[$curso] ?? static::$categoriasEspeciaisPadrao;
     }
 
+    public static function regraNecessidadeEspecial(?string $curso, ?string $sexo): \Closure
+    {
+        return function ($attribute, $value, $fail) use ($curso, $sexo) {
+            $categoria = mb_strtolower(trim((string) $value), 'UTF-8');
+            $cursoNormalizado = mb_strtolower(trim((string) $curso), 'UTF-8');
+
+            if ($categoria !== mb_strtolower('Áreas Steam', 'UTF-8')) {
+                return;
+            }
+
+            $cursosEngenharia = [
+                mb_strtolower('Engenharia Informática', 'UTF-8'),
+                mb_strtolower('Engenharia em Recursos Hídricos', 'UTF-8'),
+            ];
+
+            if (! in_array($cursoNormalizado, $cursosEngenharia, true)) {
+                $fail('A categoria Áreas Steam só está disponível para os cursos de Engenharia.');
+                return;
+            }
+
+            if (mb_strtolower(trim((string) $sexo), 'UTF-8') !== 'feminino') {
+                $fail('A categoria Áreas Steam é exclusiva para candidatas do sexo feminino.');
+            }
+        };
+    }
+
     public static array $resultadoAdmissaoLabels = [
         'admitido'     => 'Admitido',
         'nao_admitido' => 'Não Admitido',
@@ -405,4 +431,3 @@ class Candidatura extends Model
         return $this->codigo_exame;
     }
 }
-

@@ -305,5 +305,6 @@
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
 <script src="{{ asset('js/perfil-curso.js') }}"></script>
+<script src="{{ asset('js/categorias-especiais.js') }}"></script>
 @endpush
 @endsection

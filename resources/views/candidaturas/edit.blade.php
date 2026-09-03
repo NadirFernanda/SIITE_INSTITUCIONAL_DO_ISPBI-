@@ -340,6 +340,7 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
 @push('scripts')
 <script src="{{ asset('js/provincias-angola.js') }}"></script>
 <script src="{{ asset('js/perfil-curso.js') }}"></script>
+<script src="{{ asset('js/categorias-especiais.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var prov = document.getElementById('edit-provincia');

@@ -48,7 +48,7 @@ class CandidaturaController extends Controller
             'bi_data_emissao'        => 'required|date|before:today',
             'sexo'                   => 'required|in:masculino,feminino',
             'estado_civil'           => 'required|string|max:100',
-            'necessidade_especial'   => 'required|string|max:255',
+            'necessidade_especial'   => ['required', 'string', 'max:255', Candidatura::regraNecessidadeEspecial($curso, $request->input('sexo'))],
             'residencia_municipio'   => 'required|string|max:255',
             'residencia_bairro'      => 'required|string|max:255',
             'telefone'               => 'required|string|max:50',
