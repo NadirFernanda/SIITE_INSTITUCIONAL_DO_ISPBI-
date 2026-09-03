@@ -18,7 +18,7 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 /**
  * Exportação de lista de exame para o perfil LANÇAMENTO
- * Mostra APENAS códigos (sem dados dos candidatos)
+ * Mostra os códigos de exame e os nomes dos candidatos.
  */
 class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -79,13 +79,15 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
             '', '',
         ];
 
-        // Tabela — APENAS CÓDIGO (sem dados)
+        // Tabela — código e nome do candidato
         $this->tableRow = 5;
-        $rows[] = ['Código Exame', '', ''];
+        $rows[] = ['Código Exame', 'Nome', ''];
 
         foreach ($this->candidaturas as $c) {
             $rows[] = [
-                $c->codigo_exame ?? 'NÃO GERADO', '', '',
+                $c->codigo_exame ?? 'NÃO GERADO',
+                mb_strtoupper($c->nome ?? '', 'UTF-8'),
+                '',
             ];
         }
 
