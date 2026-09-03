@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Candidatura;
 use App\Models\Sala;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
@@ -38,9 +37,11 @@ class SalasExameExportLote implements WithMultipleSheets
             }
             $candidaturas = $candidaturasQuery->get();
 
-            $cursoSala = $candidaturas->first()->curso ?? null;
-            $categoriasSala = collect(Candidatura::categoriasEspeciaisPermitidas($cursoSala))
-                ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
+            $categoriasSala = $candidaturas
+                ->pluck('necessidade_especial')
+                ->filter(fn ($cat) => $cat !== null && trim((string) $cat) !== '' && mb_strtolower(trim((string) $cat)) !== 'nenhuma')
+                ->map(fn ($cat) => trim((string) $cat))
+                ->unique(fn ($cat) => mb_strtolower($cat))
                 ->values();
 
             $folhas = [new SalaExameExport($sala, null, true, $this->cursoFiltro)];

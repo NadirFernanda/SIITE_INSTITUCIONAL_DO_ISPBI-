@@ -40,7 +40,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         }
 
         if ($necessidadeEspecial !== null) {
-            $query->where('necessidade_especial', $necessidadeEspecial);
+            $query->whereRaw('LOWER(TRIM(necessidade_especial)) = LOWER(?)', [trim($necessidadeEspecial)]);
         } elseif ($listaGeralExcluiCategorias) {
             // Quando a Lista Geral é oferecida ao lado de listas por
             // categoria (Admin), um candidato de uma categoria especial não
@@ -49,7 +49,9 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             // tem esta única lista, sem categorias em separado), a Lista
             // Geral continua a incluir toda a gente.
             $query->where(function ($q) {
-                $q->whereNull('necessidade_especial')->orWhere('necessidade_especial', 'Nenhuma');
+                $q->whereNull('necessidade_especial')
+                    ->orWhereRaw("TRIM(necessidade_especial) = ''")
+                    ->orWhereRaw("LOWER(TRIM(necessidade_especial)) = 'nenhuma'");
             });
         }
 

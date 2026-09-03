@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Concerns;
 
 use App\Exports\SalaExameExport;
 use App\Exports\SalasExameExportLote;
-use App\Models\Candidatura;
 use App\Models\Sala;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -187,12 +186,16 @@ trait DownloadsSalasEmLote
             }
             $candidaturas = $candidaturasQuery->get();
 
-            $cursoSala = $candidaturas->first()->curso ?? null;
-            $categoriasSala = collect(Candidatura::categoriasEspeciaisPermitidas($cursoSala))
-                ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
+            $categoriasSala = $candidaturas
+                ->pluck('necessidade_especial')
+                ->filter(fn ($cat) => $cat !== null && trim((string) $cat) !== '' && mb_strtolower(trim((string) $cat)) !== 'nenhuma')
+                ->map(fn ($cat) => trim((string) $cat))
+                ->unique(fn ($cat) => mb_strtolower($cat))
                 ->values();
             $listaGeral = $candidaturas
-                ->filter(fn ($c) => empty($c->necessidade_especial) || $c->necessidade_especial === 'Nenhuma')
+                ->filter(fn ($c) => $c->necessidade_especial === null
+                    || trim((string) $c->necessidade_especial) === ''
+                    || mb_strtolower(trim((string) $c->necessidade_especial)) === 'nenhuma')
                 ->values();
 
             $conteudo .= \View::make('pdf._sala-exame-conteudo', [
@@ -202,7 +205,10 @@ trait DownloadsSalasEmLote
             $primeiro = false;
 
             foreach ($categoriasSala as $categoria) {
-                $candidatosCategoria = $candidaturas->filter(fn ($c) => $c->necessidade_especial === $categoria)->values();
+                $candidatosCategoria = $candidaturas
+                    ->filter(fn ($c) => $c->necessidade_especial !== null
+                        && mb_strtolower(trim((string) $c->necessidade_especial)) === mb_strtolower($categoria))
+                    ->values();
                 $conteudo .= \View::make('pdf._sala-exame-conteudo', [
                     'sala' => $sala, 'candidaturas' => $candidatosCategoria, 'logoBase64' => $logoBase64,
                     'primeiroDoDocumento' => false, 'necessidadeEspecial' => $categoria,
