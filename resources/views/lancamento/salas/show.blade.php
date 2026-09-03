@@ -105,6 +105,12 @@
             </div>
         @endif
         @foreach($candidaturas->groupBy(fn($c) => $c->curso . ' — ' . ($c->periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular')) as $grupo => $lista)
+        @php
+            $lista = $lista->sortBy(
+                fn ($c) => mb_strtolower(trim($c->nome ?? ''), 'UTF-8'),
+                SORT_NATURAL
+            )->values();
+        @endphp
         <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;margin-bottom:18px;">
             <div style="background:#1e3a5f;padding:12px 20px;color:#fff;font-weight:700;font-size:0.9rem;">
                 {{ $grupo }} <span style="font-weight:400;opacity:0.8;">({{ $lista->count() }} candidatos)</span>
