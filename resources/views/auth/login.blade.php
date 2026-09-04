@@ -15,14 +15,14 @@
             <input id="email" name="email" type="email" required autofocus autocomplete="username"
                    value="{{ old('email') }}"
                    placeholder="nome@isp-bie.ao"
-                   class="w-full px-4 py-3 rounded-lg border {{ $errors->has('email') ? 'border-red-400 focus:ring-red-500' : 'border-gray-300 focus:ring-[#1e3a5f]' }} bg-gray-50 text-base focus:outline-none focus:ring-2 focus:border-transparent transition">
+                   class="auth-input w-full px-4 py-3 rounded-lg border {{ $errors->has('email') ? 'border-red-400 focus:ring-red-500' : 'border-gray-300 focus:ring-[#1e3a5f]' }} bg-gray-50 text-gray-900 placeholder-gray-500 text-base focus:outline-none focus:ring-2 focus:border-transparent transition">
         </div>
 
         <div>
             <label for="password" class="block text-sm font-semibold text-gray-700 mb-1.5">Palavra-passe</label>
             <input id="password" name="password" type="password" required autocomplete="current-password"
                    placeholder="••••••••"
-                   class="w-full px-4 py-3 rounded-lg border {{ $errors->has('password') ? 'border-red-400 focus:ring-red-500' : 'border-gray-300 focus:ring-[#1e3a5f]' }} bg-gray-50 text-base focus:outline-none focus:ring-2 focus:border-transparent transition">
+                   class="auth-input w-full px-4 py-3 rounded-lg border {{ $errors->has('password') ? 'border-red-400 focus:ring-red-500' : 'border-gray-300 focus:ring-[#1e3a5f]' }} bg-gray-50 text-gray-900 placeholder-gray-500 text-base focus:outline-none focus:ring-2 focus:border-transparent transition">
         </div>
 
         <div class="flex items-center justify-between">

@@ -124,7 +124,7 @@ trait DownloadsSalasEmLote
             return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
         }
 
-        $filename = 'lista-exame-' . \Str::slug($request->input('horario')) . '.xlsx';
+        $filename = 'pauta-' . \Str::slug($request->input('horario')) . '.xlsx';
         return Excel::download(new SalasExameExportLote($salas), $filename);
     }
 
@@ -231,7 +231,7 @@ trait DownloadsSalasEmLote
         }
 
         $curso = $request->input('curso');
-        $filename = 'lista-exame-' . \Str::slug($curso) . '.xlsx';
+        $filename = 'pauta-' . \Str::slug($curso) . '.xlsx';
         return Excel::download(new SalasExameExportLote($salas, $curso), $filename);
     }
 }

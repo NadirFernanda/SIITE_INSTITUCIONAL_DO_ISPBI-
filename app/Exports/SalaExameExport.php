@@ -79,7 +79,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             default                          => '',
         };
         $sufixo = $categoriaAbrev . ' #' . $this->sala->id;
-        $prefixo = 'Exame - ';
+        $prefixo = 'Pauta - ';
         $maxNome = max(1, 31 - mb_strlen($prefixo) - mb_strlen($sufixo));
         return $prefixo . mb_substr($nome, 0, $maxNome) . $sufixo;
     }
@@ -89,16 +89,16 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows = [];
 
         // Linha 1 — espaço para logo (Drawing)
-        $rows[] = ['', '', ''];
+        $rows[] = ['', '', '', ''];
 
         // Linha 2 — nome da instituição
-        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', ''];
+        $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', '', '', ''];
 
-        // Linha 3 — comissão + título da lista, combinados numa só linha
+        // Linha 3 — comissão + título da pauta, combinados numa só linha
         $tituloLista = $this->necessidadeEspecial
-            ? 'EXAME DE ACESSO 2026/2027 — LISTA: ' . mb_strtoupper($this->necessidadeEspecial, 'UTF-8')
-            : 'EXAME DE ACESSO 2026/2027 — LISTA GERAL';
-        $rows[] = ['COMISSÃO DO EXAME DE ACESSO   —   ' . $tituloLista, '', ''];
+            ? 'EXAME DE ACESSO 2026/2027 — PAUTA: ' . mb_strtoupper($this->necessidadeEspecial, 'UTF-8')
+            : 'EXAME DE ACESSO 2026/2027 — PAUTA GERAL';
+        $rows[] = ['COMISSÃO DO EXAME DE ACESSO   —   ' . $tituloLista, '', '', ''];
 
         // Linha 4 — sala, curso(s)/período e data/horário combinados numa só
         // linha. O cabeçalho institucional inteiro fica "congelado" (freeze
@@ -119,37 +119,38 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'Sala: ' . $this->sala->nome
                 . '     |     Curso/Período: ' . $grupos
                 . '     |     Data/Horário: ' . ($dataHorario ?: '___________  |  ___________'),
-            '', '',
+            '', '', '',
         ];
 
         $this->tableRow = 5;
-        $rows[] = ['N.º Ficha', 'NOME COMPLETO', 'ASSINATURA'];
+        $rows[] = ['N.º Ficha', 'NOME COMPLETO', 'NOTA', 'RESULTADO'];
 
         foreach ($this->candidaturas as $c) {
             $rows[] = [
-                str_pad($c->id, 5, '0', STR_PAD_LEFT), mb_strtoupper(CsvSanitizer::safe($c->nome), 'UTF-8'), '',
+                str_pad($c->id, 5, '0', STR_PAD_LEFT),
+                mb_strtoupper(CsvSanitizer::safe($c->nome), 'UTF-8'),
+                '',
+                '',
             ];
         }
 
         // Assinatura do Presidente — centrada (a imagem da assinatura digital
         // é inserida por cima da linha em styles(), nas linhas em branco)
-        $rows[] = ['', '', ''];
-        $rows[] = ['', '', ''];
-        $rows[] = ['', '', ''];
-        $rows[] = ['_________________________________', '', ''];
-        $rows[] = ['Professor Doutor Fernando Maia', '', ''];
-        $rows[] = ['Presidente da Comissão do Exame de Acesso', '', ''];
+        $rows[] = ['', '', '', ''];
+        $rows[] = ['', '', '', ''];
+        $rows[] = ['', '', '', ''];
+        $rows[] = ['_________________________________', '', '', ''];
+        $rows[] = ['Professor Doutor Fernando Maia', '', '', ''];
+        $rows[] = ['Presidente da Comissão do Exame de Acesso', '', '', ''];
 
         return $rows;
     }
 
     public function columnWidths(): array
     {
-        // Nome mais estreito e Assinatura bem mais larga do que antes: nomes
-        // reais raramente enchem uma coluna de 65, sobrando espaço vazio, e
-        // isso "roubava" largura à assinatura — que precisa de espaço real
-        // para uma pessoa assinar à mão (à lapiseira) no dia do exame.
-        return ['A' => 12, 'B' => 42, 'C' => 46];
+        // A coluna de nota fica compacta para reservar espaço à coluna de
+        // resultado, mantendo a pauta legível em A4.
+        return ['A' => 12, 'B' => 42, 'C' => 14, 'D' => 18];
     }
 
     public function styles(Worksheet $sheet): array
@@ -160,12 +161,12 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sigCargo = $sigLinha + 2;
 
         // ── Mesclar cabeçalho ──
-        $sheet->mergeCells('A2:C2');
-        $sheet->mergeCells('A3:C3');
-        $sheet->mergeCells('A4:C4');
-        $sheet->mergeCells("A{$sigLinha}:C{$sigLinha}");
-        $sheet->mergeCells("A{$sigNome}:C{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:C{$sigCargo}");
+        $sheet->mergeCells('A2:D2');
+        $sheet->mergeCells('A3:D3');
+        $sheet->mergeCells('A4:D4');
+        $sheet->mergeCells("A{$sigLinha}:D{$sigLinha}");
+        $sheet->mergeCells("A{$sigNome}:D{$sigNome}");
+        $sheet->mergeCells("A{$sigCargo}:D{$sigCargo}");
 
         // ── Alturas ──
         // Cabeçalho institucional compactado ao mínimo (4 linhas em vez de 9):
@@ -193,7 +194,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         // ── Cabeçalho da tabela ──
         $tr = $this->tableRow;
-        $sheet->getStyle("A{$tr}:C{$tr}")->applyFromArray([
+        $sheet->getStyle("A{$tr}:D{$tr}")->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
             'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '1565C0']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
@@ -203,7 +204,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // ── Linhas de dados ──
         for ($r = $tr + 1; $r <= $dataEnd; $r++) {
             $bg = ($r % 2 === 0) ? 'EBF3FD' : 'FFFFFF';
-            $sheet->getStyle("A{$r}:C{$r}")->applyFromArray([
+            $sheet->getStyle("A{$r}:D{$r}")->applyFromArray([
                 'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
                 'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'DDDDDD']]],
                 'alignment' => ['vertical' => Alignment::VERTICAL_CENTER],
@@ -217,8 +218,11 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getStyle("B{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT],
             ]);
-            // Col C: (reserved, center)
+            // Col C/D: nota e resultado (preenchidos posteriormente)
             $sheet->getStyle("C{$r}")->applyFromArray([
+                'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            ]);
+            $sheet->getStyle("D{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
             $sheet->getRowDimension($r)->setRowHeight(22);
@@ -282,11 +286,11 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $ps->setFitToWidth(1);
         $ps->setFitToHeight(0);
         $ps->setHorizontalCentered(true);
-        // Repete a linha do cabeçalho da tabela (N.º Ficha / Nome / Assinatura) em
+        // Repete a linha do cabeçalho da tabela (N.º Ficha / Nome / Nota / Resultado) em
         // todas as páginas impressas — sem isto, uma sala com muitos candidatos
         // imprimia a página 2+ sem títulos, exigindo edição manual antes de imprimir.
         $ps->setRowsToRepeatAtTopByStartAndEnd($tr, $tr);
-        $ps->setPrintArea("A1:C{$sigCargo}");
+        $ps->setPrintArea("A1:D{$sigCargo}");
 
         $sheet->getPageMargins()
             ->setHeader(0.2)
@@ -310,8 +314,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $displayH = 44;
         $displayW = (int)($logoW * $displayH / $logoH);
 
-        // Anchor logo to B1 and compute offset to center across A(12)+B(42)+C(46)
-        $centerFromB1 = (int)(((12 + 42 + 46) * 8 / 2) - (12 * 8));
+        // Anchor logo to B1 and compute offset to center across all columns.
+        $centerFromB1 = (int)(((12 + 42 + 14 + 18) * 8 / 2) - (12 * 8));
         $offsetX = max(0, $centerFromB1 - (int)($displayW / 2));
 
         $drawing = new Drawing();

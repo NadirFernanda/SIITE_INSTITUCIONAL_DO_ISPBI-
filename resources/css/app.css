@@ -30,6 +30,20 @@
     line-height: 1.5;
   }
 
+  .auth-input {
+    color: #111827 !important;
+    background-color: #fff;
+  }
+
+  .auth-input::placeholder {
+    color: #6b7280 !important;
+    opacity: 1;
+  }
+
+  .auth-input:focus {
+    color: #111827 !important;
+  }
+
   img, video, canvas, svg {
     max-width: 100%;
   }
