@@ -134,8 +134,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ];
         }
 
-        // Assinatura do Presidente — centrada (a imagem da assinatura digital
-        // é inserida por cima da linha em styles(), nas linhas em branco)
+        // Espaço para assinatura manual do Presidente.
         $rows[] = ['', '', '', ''];
         $rows[] = ['', '', '', ''];
         $rows[] = ['', '', '', ''];
@@ -246,34 +245,6 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'font'      => ['size' => 9, 'italic' => true],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
-
-        // ── Imagem da assinatura digital do Presidente, por cima da linha ──
-        // Mesmo gerador usado no comprovativo e nos PDFs de sala (assinatura
-        // cursiva a partir do nome) — antes disto só havia a linha em branco
-        // e o nome escrito, sem assinatura nenhuma.
-        $gdAssinatura = \App\Services\SignatureImageGenerator::generateGd('Fernando Maia');
-        $imgW = imagesx($gdAssinatura);
-        $imgH = imagesy($gdAssinatura);
-        $assDisplayH = 28;
-        $assDisplayW = (int) ($imgW * $assDisplayH / $imgH);
-
-        $larguraTotal = array_sum($this->columnWidths());
-        $assOffsetX = max(0, (int) ($larguraTotal * 8 / 2) - (int) ($assDisplayW / 2));
-
-        $assinaturaDrawing = new \PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing();
-        $assinaturaDrawing->setName('Assinatura Presidente');
-        $assinaturaDrawing->setImageResource($gdAssinatura);
-        $assinaturaDrawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
-        $assinaturaDrawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
-        $assinaturaDrawing->setHeight($assDisplayH);
-        $assinaturaDrawing->setWidth($assDisplayW);
-        // Ancorada na linha imediatamente acima da linha de assinatura (que
-        // foi alargada para 30pt só para isto), para a imagem ficar colada à
-        // linha em vez de perdida no meio do espaço em branco.
-        $assinaturaDrawing->setCoordinates('A' . ($sigLinha - 1));
-        $assinaturaDrawing->setOffsetX($assOffsetX);
-        $assinaturaDrawing->setOffsetY(2);
-        $assinaturaDrawing->setWorksheet($sheet);
 
         // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
         $sheet->freezePane('A' . ($tr + 1));
