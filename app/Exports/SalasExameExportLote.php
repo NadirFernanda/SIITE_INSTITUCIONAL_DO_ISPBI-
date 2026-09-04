@@ -11,11 +11,10 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
  * para descarregar todas as salas de um horário ou de um curso de uma só
  * vez, em vez de sala a sala.
  *
- * Por cada sala gera uma folha "Lista Geral" (sem os candidatos de categoria
- * especial) e mais uma folha por cada categoria especial presente nessa sala
- * — o mesmo padrão já usado nos botões Excel da página individual da sala.
- * Sem isto, os candidatos de categoria especial ficavam escondidos,
- * misturados na lista geral sem nenhuma separação.
+ * Por cada sala gera uma folha "Pauta Geral" com todos os candidatos
+ * confirmados e mais uma folha por cada categoria especial presente nessa
+ * sala. As folhas por categoria são complementares; a pauta geral permanece
+ * completa para garantir que nenhum candidato fica fora do lote.
  */
 class SalasExameExportLote implements WithMultipleSheets
 {
@@ -44,7 +43,10 @@ class SalasExameExportLote implements WithMultipleSheets
                 ->unique(fn ($cat) => mb_strtolower($cat))
                 ->values();
 
-            $folhas = [new SalaExameExport($sala, null, true, $this->cursoFiltro)];
+            // A pauta geral deve conter todos os candidatos confirmados.
+            // As folhas por categoria são complementares e não podem fazer
+            // com que um candidato desapareça da lista principal.
+            $folhas = [new SalaExameExport($sala, null, false, $this->cursoFiltro)];
             foreach ($categoriasSala as $categoria) {
                 $folhas[] = new SalaExameExport($sala, $categoria, false, $this->cursoFiltro);
             }
