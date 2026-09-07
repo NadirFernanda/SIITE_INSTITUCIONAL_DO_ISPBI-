@@ -20,6 +20,8 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
+    private const PRINT_ROWS_PER_PAGE = 36;
+
     protected Sala $sala;
     protected Collection $candidaturas;
     protected int $tableRow = 5; // sempre linha 5 (estrutura fixa igual ao SalaExameExport)
@@ -176,11 +178,14 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $rows[] = $line;
         }
 
-        // O espaçamento e a assinatura seguem exatamente o modelo da lista
-        // de Exame; a paginação fica a cargo do mesmo layout A4.
-        $rows[] = array_fill(0, count($header), '');
-        $rows[] = array_fill(0, count($header), '');
-        $rows[] = array_fill(0, count($header), '');
+        // Reservar o bloco final no fundo da última página A4. A largura da
+        // pauta de notas altera a escala vertical do Excel, portanto a
+        // assinatura precisa de uma grelha de páginas própria.
+        $dataEnd = $this->tableRow + $this->candidaturas->count();
+        $sigLinha = $this->signatureRow();
+        while (count($rows) < $sigLinha - 1) {
+            $rows[] = array_fill(0, count($header), '');
+        }
         $rows[] = ['_________________________________', ''] + array_fill(0, max(0, count($header) - 2), '');
         $rows[] = ['Professor Doutor Fernando Maia', ''] + array_fill(0, max(0, count($header) - 2), '');
         $rows[] = ['Presidente da Comissão do Exame de Acesso', ''] + array_fill(0, max(0, count($header) - 2), '');
@@ -217,7 +222,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $tr = $this->tableRow;
         $dataEnd = $tr + $this->candidaturas->count();
-        $sigLinha = $dataEnd + 4;
+        $sigLinha = $this->signatureRow();
 
         // Mesclar cabeçalho principal nas colunas usadas
         $lastCol = chr( ord('A') + (1 + count($this->disciplines) + 2) );
@@ -227,7 +232,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A4:{$lastCol}4");
 
         // Mesclar assinatura (traço, nome e cargo)
-        $sigLinha = $dataEnd + 4;
+        $sigLinha = $this->signatureRow();
         $sigNome = $sigLinha + 1;
         $sigCargo = $sigLinha + 2;
         $sheet->mergeCells("A{$sigLinha}:{$lastCol}{$sigLinha}");
@@ -333,6 +338,14 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->getHeaderFooter()->setOddFooter('&LISP-Bié — Lista de Notas&CPágina &P de &N&R' . now()->format('d/m/Y'));
 
         return [];
+    }
+
+    private function signatureRow(): int
+    {
+        $dataEnd = $this->tableRow + $this->candidaturas->count();
+        $lastSignatureRow = (int) (ceil(($dataEnd + 3) / self::PRINT_ROWS_PER_PAGE) * self::PRINT_ROWS_PER_PAGE) - 1;
+
+        return max($dataEnd + 4, $lastSignatureRow - 2);
     }
 
     public function drawings()
