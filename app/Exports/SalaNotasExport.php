@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
@@ -136,7 +137,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         foreach ($this->disciplines as $d) {
             $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
-        $header[] = 'NOTA FINAL (0–20)';
+        $header[] = 'MÉDIA FINAL (0–20)';
         $header[] = 'RESULTADO';
 
         // Garantir que a tabela comece na linha fixa definida
@@ -150,27 +151,34 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $rows[] = $header;
 
         // Dados
-        foreach ($this->candidaturas as $c) {
+        $firstDisciplineColumn = 3; // C
+        $lastDisciplineColumn = $firstDisciplineColumn + count($this->disciplines) - 1;
+
+        foreach ($this->candidaturas as $index => $c) {
             $line = [];
             $line[] = $c->id;
             $line[] = mb_strtoupper(CsvSanitizer::safe($c->nome), 'UTF-8');
 
-            $sum = 0.0;
-            $hasAny = false;
             foreach ($this->disciplines as $d) {
                 $notaRow = CandidaturaNota::where('candidatura_id', $c->id)->where('discipline', $d['discipline'])->first();
                 $nota = $notaRow ? (float) $notaRow->nota : null;
-                if ($nota !== null) {
-                    $hasAny = true;
-                    $sum += $nota;
-                    $line[] = number_format($nota, 2, '.', ',');
-                } else {
-                    $line[] = '';
-                }
+                $line[] = $nota !== null ? $nota : '';
             }
 
-            // Se não houver nenhuma nota lançada, soma fica vazia
-            $line[] = $hasAny ? number_format($sum, 2, '.', ',') : '';
+            $excelRow = $this->tableRow + 1 + $index;
+            if ($this->disciplines === []) {
+                $line[] = '';
+            } else {
+                $firstColumn = Coordinate::stringFromColumnIndex($firstDisciplineColumn);
+                $lastColumn = Coordinate::stringFromColumnIndex($lastDisciplineColumn);
+                $line[] = sprintf(
+                    '=IF(COUNT(%1$s%2$d:%3$s%2$d)=%4$d,SUM(%1$s%2$d:%3$s%2$d),"")',
+                    $firstColumn,
+                    $excelRow,
+                    $lastColumn,
+                    count($this->disciplines)
+                );
+            }
             $line[] = ''; // Resultado em branco
 
             $rows[] = $line;
@@ -263,6 +271,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 'font'      => ['bold' => true, 'color' => ['rgb' => '0E5C2F']],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
+            if ($this->disciplines !== []) {
+                $lastNumericColumn = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
+                $sheet->getStyle("C{$r}:{$lastNumericColumn}{$r}")
+                    ->getNumberFormat()->setFormatCode('0.00');
+            }
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
