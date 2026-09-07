@@ -20,6 +20,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
+use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -341,8 +342,9 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ]);
             $mediaCell = $sheet->getCell("{$finalGradeColumnLetter}{$r}");
             if (is_string($mediaCell->getValue()) && str_starts_with($mediaCell->getValue(), '=')) {
-                $sheet->getComment("{$finalGradeColumnLetter}{$r}")->setText($mediaCell->getValue());
-                $sheet->getComment("{$finalGradeColumnLetter}{$r}")->setVisible(false);
+                $formulaNote = new RichText();
+                $formulaNote->createText($mediaCell->getValue());
+                $sheet->getComment("{$finalGradeColumnLetter}{$r}")->setText($formulaNote)->setVisible(false);
             }
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
