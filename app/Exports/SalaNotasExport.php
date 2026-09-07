@@ -176,16 +176,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $rows[] = $line;
         }
 
-        // Manter a assinatura no rodapé visual da página, e não colada à
-        // tabela quando a sala tem poucos candidatos.
-        $dataEnd = $this->tableRow + $this->candidaturas->count();
-        $linhasPorPagina = 40;
-        $paginaAssinatura = (int) ceil(($dataEnd + 3) / $linhasPorPagina);
-        $sigLinha = max(38, $paginaAssinatura * $linhasPorPagina - 2);
-        $linhasVazias = max(3, $sigLinha - $dataEnd - 1);
-        for ($i = 0; $i < $linhasVazias; $i++) {
-            $rows[] = array_fill(0, count($header), '');
-        }
+        // O espaçamento e a assinatura seguem exatamente o modelo da lista
+        // de Exame; a paginação fica a cargo do mesmo layout A4.
+        $rows[] = array_fill(0, count($header), '');
+        $rows[] = array_fill(0, count($header), '');
+        $rows[] = array_fill(0, count($header), '');
         $rows[] = ['_________________________________', ''] + array_fill(0, max(0, count($header) - 2), '');
         $rows[] = ['Professor Doutor Fernando Maia', ''] + array_fill(0, max(0, count($header) - 2), '');
         $rows[] = ['Presidente da Comissão do Exame de Acesso', ''] + array_fill(0, max(0, count($header) - 2), '');
@@ -222,9 +217,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $tr = $this->tableRow;
         $dataEnd = $tr + $this->candidaturas->count();
-        $linhasPorPagina = 40;
-        $paginaAssinatura = (int) ceil(($dataEnd + 3) / $linhasPorPagina);
-        $sigLinha = max(38, $paginaAssinatura * $linhasPorPagina - 2);
+        $sigLinha = $dataEnd + 4;
 
         // Mesclar cabeçalho principal nas colunas usadas
         $lastCol = chr( ord('A') + (1 + count($this->disciplines) + 2) );
@@ -234,9 +227,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A4:{$lastCol}4");
 
         // Mesclar assinatura (traço, nome e cargo)
-        $linhasPorPagina = 40;
-        $paginaAssinatura = (int) ceil(($dataEnd + 3) / $linhasPorPagina);
-        $sigLinha = max(38, $paginaAssinatura * $linhasPorPagina - 2);
+        $sigLinha = $dataEnd + 4;
         $sigNome = $sigLinha + 1;
         $sigCargo = $sigLinha + 2;
         $sheet->mergeCells("A{$sigLinha}:{$lastCol}{$sigLinha}");

@@ -136,16 +136,10 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ];
         }
 
-        // Manter a assinatura no rodapé visual da página, e não colada à
-        // tabela quando a sala tem poucos candidatos.
-        $dataEnd = $this->tableRow + $this->candidaturas->count();
-        $linhasPorPagina = 40;
-        $paginaAssinatura = (int) ceil(($dataEnd + 3) / $linhasPorPagina);
-        $sigLinha = max(38, $paginaAssinatura * $linhasPorPagina - 2);
-        $linhasVazias = max(3, $sigLinha - $dataEnd - 1);
-        for ($i = 0; $i < $linhasVazias; $i++) {
-            $rows[] = ['', '', '', ''];
-        }
+        // Espaço para assinatura manual do Presidente.
+        $rows[] = ['', '', '', ''];
+        $rows[] = ['', '', '', ''];
+        $rows[] = ['', '', '', ''];
         $rows[] = ['_________________________________', '', '', ''];
         $rows[] = ['Professor Doutor Fernando Maia', '', '', ''];
         $rows[] = ['Presidente da Comissão do Exame de Acesso', '', '', ''];
@@ -163,9 +157,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     public function styles(Worksheet $sheet): array
     {
         $dataEnd = $this->tableRow + $this->candidaturas->count();
-        $linhasPorPagina = 40;
-        $paginaAssinatura = (int) ceil(($dataEnd + 3) / $linhasPorPagina);
-        $sigLinha = max(38, $paginaAssinatura * $linhasPorPagina - 2);
+        $sigLinha = $dataEnd + 4;
         $sigNome  = $sigLinha + 1;
         $sigCargo = $sigLinha + 2;
 
