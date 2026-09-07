@@ -20,7 +20,6 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
-use PhpOffice\PhpSpreadsheet\Style\Protection;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -402,33 +401,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             . '&RPágina &P de &N  ' . now()->format('d/m/Y');
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
-
-        // Excel protege a folha para conseguir bloquear células individuais.
-        // Todas as células de lançamento são desbloqueadas explicitamente;
-        // somente a coluna Média Final permanece bloqueada.
-        $lastColumnIndex = Coordinate::columnIndexFromString($lastCol);
-        for ($row = 1; $row <= $dataEnd; $row++) {
-            for ($column = 1; $column <= $lastColumnIndex; $column++) {
-                $sheet->getCellByColumnAndRow($column, $row)
-                    ->getStyle()
-                    ->getProtection()
-                    ->setLocked(false);
-            }
-        }
-
-        $finalGradeColumnIndex = 3 + count($this->disciplines);
-        for ($row = $tr + 1; $row <= $dataEnd; $row++) {
-            $sheet->getCellByColumnAndRow($finalGradeColumnIndex, $row)
-                ->getStyle()
-                ->getProtection()
-                ->setLocked(true);
-        }
-
-        $sheet->getProtection()
-            ->setSheet(true)
-            ->setPassword('notas')
-            ->setSelectLockedCells(false)
-            ->setSelectUnlockedCells(true);
 
         return [];
     }
