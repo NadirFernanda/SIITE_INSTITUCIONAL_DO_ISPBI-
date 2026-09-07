@@ -182,8 +182,8 @@
                         <div class="actions-column" style="display:inline-flex;flex-direction:column;gap:5px;min-width:160px;">
                             {{-- Redefinir password --}}
                             <button onclick="document.getElementById('row-actions-{{ $u->id }}').style.display='table-row';document.getElementById('pwd-panel-{{ $u->id }}').style.display='block';document.getElementById('sig-panel-{{ $u->id }}').style.display='none';"
-                                    style="display:flex;align-items:center;gap:6px;background:#fffbeb;color:#92400e;border:1px solid #fde68a;border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
-                                    onmouseover="this.style.background='#fef3c7'" onmouseout="this.style.background='#fffbeb'">
+                                    style="display:flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;border:1px solid #1e3a5f;border-radius:7px;padding:5px 12px;font-size:0.8rem;font-weight:600;cursor:pointer;width:100%;text-align:left;"
+                                    onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
                                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path stroke-linecap="round" d="M7 11V7a5 5 0 0110 0v4"/></svg>
                                 Redefinir password
                             </button>
@@ -219,8 +219,8 @@
                     <td colspan="5" style="padding:0 22px 16px;">
 
                         {{-- Painel: redefinir password --}}
-                        <div id="pwd-panel-{{ $u->id }}" style="background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px 18px;margin-top:10px;">
-                            <div style="font-size:0.78rem;font-weight:700;color:#92400e;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em;">Redefinir Password</div>
+                        <div id="pwd-panel-{{ $u->id }}" style="background:#1e3a5f;border:1px solid #0f1f3d;border-radius:10px;padding:16px 18px;margin-top:10px;">
+                            <div style="font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em;">Redefinir Password</div>
                             <form method="POST" action="{{ route('admin.usuarios.password', $u) }}"
                                   autocomplete="off"
                                   style="display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;">
@@ -228,14 +228,14 @@
                                 <input type="text" name="_dummy_user" tabindex="-1" style="display:none;" aria-hidden="true">
                                 <input type="password" name="_dummy_pass" tabindex="-1" style="display:none;" aria-hidden="true">
                                 <div>
-                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Nova password (mín. 10)</label>
+                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#fff;margin-bottom:4px;">Nova password (mín. 10)</label>
                                     <input type="password" name="password" required minlength="10" autocomplete="new-password"
-                                           style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                                           style="border:1px solid #a8c4e0;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
                                 </div>
                                 <div>
-                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#92400e;margin-bottom:4px;">Confirmar</label>
+                                    <label style="display:block;font-size:0.78rem;font-weight:600;color:#fff;margin-bottom:4px;">Confirmar</label>
                                     <input type="password" name="password_confirmation" required minlength="10" autocomplete="new-password"
-                                           style="border:1px solid #fcd34d;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
+                                           style="border:1px solid #a8c4e0;border-radius:7px;padding:7px 11px;font-size:0.88rem;width:200px;">
                                 </div>
                                 <button type="submit"
                                         style="background:#1e3a5f;color:#fff;border:none;border-radius:7px;padding:8px 18px;font-weight:700;cursor:pointer;font-size:0.88rem;">
