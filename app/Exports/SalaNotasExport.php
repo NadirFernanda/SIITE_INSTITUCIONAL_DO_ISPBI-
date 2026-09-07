@@ -99,7 +99,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         ];
 
         // Construir cabeçalho da tabela dinamicamente
-        $header = ['NÚMERO DA FICHA', 'NOME COMPLETO'];
+        $header = ['NÚMERO DA FICHA', 'NOME COMPLETO', 'NECESSIDADE ESPECIAL'];
         foreach ($this->disciplines as $d) {
             $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
@@ -121,6 +121,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $line = [];
             $line[] = $c->id;
             $line[] = mb_strtoupper(CsvSanitizer::safe($c->nome), 'UTF-8');
+            $line[] = $c->necessidade_especial ?: 'Nenhuma';
 
             $sum = 0.0;
             $hasAny = false;
@@ -161,7 +162,9 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $widths['A'] = 12;
         $widths['B'] = 50;
 
-        $col = 'C';
+        $widths['C'] = 28;
+
+        $col = 'D';
         foreach ($this->disciplines as $d) {
             // Largura proporcional ao nome da disciplina (em vez de um valor fixo de 15),
             // para nomes compridos não ficarem cortados no cabeçalho da pauta. O texto
@@ -186,7 +189,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sigLinha = $dataEnd + 4;
 
         // Mesclar cabeçalho principal nas colunas usadas
-        $lastCol = chr( ord('A') + (1 + count($this->disciplines) + 2) );
+        $lastCol = chr( ord('A') + (1 + count($this->disciplines) + 3) );
         // safe fallback if lastCol beyond 'Z' — avoid complex logic; only small number of disciplines expected
         $sheet->mergeCells("A2:{$lastCol}2");
         $sheet->mergeCells("A3:{$lastCol}3");

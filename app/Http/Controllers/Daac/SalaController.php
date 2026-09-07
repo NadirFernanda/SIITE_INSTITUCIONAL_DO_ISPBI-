@@ -125,7 +125,7 @@ class SalaController extends Controller
         $necessidadeEspecial = $request->query('necessidade_especial');
         $sufixo = $necessidadeEspecial ? '-' . \Str::slug($necessidadeEspecial) : '';
         $filename = 'lista-exame-' . \Str::slug($sala->nome) . $sufixo . '.xlsx';
-        return Excel::download(new SalaExameExport($sala, $necessidadeEspecial, true), $filename);
+        return Excel::download(new SalaExameExport($sala, $necessidadeEspecial, false), $filename);
     }
 
     public function pdfExame(Request $request, Sala $sala)
@@ -133,9 +133,7 @@ class SalaController extends Controller
         $necessidadeEspecial = $request->query('necessidade_especial');
         $query = $sala->candidaturas()->where('pagamento_confirmado', true);
         if ($necessidadeEspecial) {
-            $query->where('necessidade_especial', $necessidadeEspecial);
-        } else {
-            $query->where(fn ($q) => $q->whereNull('necessidade_especial')->orWhere('necessidade_especial', 'Nenhuma'));
+            $query->whereRaw('LOWER(TRIM(necessidade_especial)) = LOWER(?)', [trim($necessidadeEspecial)]);
         }
         $candidaturas = $query->get();
         $pdf = Pdf::loadView('pdf.sala-exame', compact('sala', 'candidaturas', 'necessidadeEspecial'))
