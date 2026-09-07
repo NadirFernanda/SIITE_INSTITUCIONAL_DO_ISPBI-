@@ -182,7 +182,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                     count($this->disciplines)
                 );
                 $line[] = sprintf(
-                    '=IF(%1$s%2$d="","",IF(%1$s%2$d>=10,"APROVADO","NÃO APROVADO"))',
+                    '=IF(%1$s%2$d="","",IF(%1$s%2$d>=10,"APROVADO","REPROVADO"))',
                     $finalGradeColumnLetter,
                     $excelRow
                 );
