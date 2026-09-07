@@ -20,6 +20,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -402,23 +403,24 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
 
+        // O Excel só consegue impedir apagar uma fórmula através da proteção
+        // da folha. Todas as células ficam desbloqueadas, excepto a Média Final.
+        $sheet->getStyle("A1:{$lastCol}{$dataEnd}")
+            ->getProtection()
+            ->setLocked(Protection::PROTECTION_UNPROTECTED);
+
         $finalGradeColumnLetter = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
         if ($dataEnd >= $tr + 1) {
-            // Sem proteger a folha: a validação rejeita qualquer tentativa de
-            // escrever manualmente na coluna calculada.
-            $mediaValidation = new DataValidation();
-            $mediaValidation->setType(DataValidation::TYPE_CUSTOM);
-            $mediaValidation->setErrorStyle(DataValidation::STYLE_STOP);
-            $mediaValidation->setAllowBlank(true);
-            $mediaValidation->setShowErrorMessage(true);
-            $mediaValidation->setErrorTitle('Campo calculado');
-            $mediaValidation->setError('A Média Final é calculada automaticamente. Lance as notas nas disciplinas.');
-            $mediaValidation->setFormula1('=FALSE');
-            $sheet->setDataValidation(
-                "{$finalGradeColumnLetter}" . ($tr + 1) . ":{$finalGradeColumnLetter}{$dataEnd}",
-                $mediaValidation
-            );
+            $sheet->getStyle("{$finalGradeColumnLetter}" . ($tr + 1) . ":{$finalGradeColumnLetter}{$dataEnd}")
+                ->getProtection()
+                ->setLocked(Protection::PROTECTION_PROTECTED);
         }
+
+        $sheet->getProtection()
+            ->setSheet(true)
+            ->setPassword('notas')
+            ->setSelectLockedCells(false)
+            ->setSelectUnlockedCells(true);
 
         return [];
     }
