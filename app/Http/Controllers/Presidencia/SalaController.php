@@ -158,7 +158,7 @@ class SalaController extends Controller
     public function excelNotas(Sala $sala)
     {
         return Excel::download(new SalasNotasExportLote(collect([$sala])),
-            'lancamento-notas-' . \Str::slug($sala->nome) . '.xlsx');
+            'lancamento-notas-' . \Str::slug($sala->nome) . '.xlsm');
     }
 
     public function excelNotasLote(Request $request)
@@ -169,7 +169,7 @@ class SalaController extends Controller
             return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse horário.');
         }
 
-        $filename = 'lancamento-notas-' . \Str::slug($request->input('horario')) . '.xlsx';
+        $filename = 'lancamento-notas-' . \Str::slug($request->input('horario')) . '.xlsm';
         return Excel::download(new SalasNotasExportLote($salas), $filename);
     }
 }

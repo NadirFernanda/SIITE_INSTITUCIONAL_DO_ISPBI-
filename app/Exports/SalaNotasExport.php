@@ -280,6 +280,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $tr = $this->tableRow;
         $dataEnd = $tr + $this->candidaturas->count();
         $lastDisciplineColumnLetter = Coordinate::stringFromColumnIndex(2 + count($this->disciplines));
+        $finalGradeColumnLetter = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
 
         // Mesclar cabeçalho principal nas colunas usadas
         $lastCol = chr( ord('A') + (1 + count($this->disciplines) + 2) );
@@ -338,6 +339,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getStyle("C{$r}:{$lastCol}{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
+            $mediaCell = $sheet->getCell("{$finalGradeColumnLetter}{$r}");
+            if (is_string($mediaCell->getValue()) && str_starts_with($mediaCell->getValue(), '=')) {
+                $mediaCell->getComment()->setText($mediaCell->getValue());
+                $mediaCell->getComment()->setVisible(false);
+            }
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 

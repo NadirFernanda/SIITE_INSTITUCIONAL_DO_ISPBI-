@@ -6,13 +6,15 @@ use App\Models\Sala;
 use App\Models\Candidatura;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\BeforeExport;
 
 /**
  * Combina a Pauta (notas) de várias salas num único ficheiro Excel (uma folha
  * por sala) — usado para imprimir todas as salas de um horário de uma só vez.
  * Só a presidência (e o admin) têm acesso a esta pauta.
  */
-class SalasNotasExportLote implements WithMultipleSheets
+class SalasNotasExportLote implements WithMultipleSheets, WithEvents
 {
     protected Collection $salas;
     protected ?string $cursoFiltro;
@@ -32,6 +34,7 @@ class SalasNotasExportLote implements WithMultipleSheets
             if ($this->cursoFiltro !== null) {
                 $query->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($this->cursoFiltro)]);
             }
+
             if ($this->periodoFiltro !== null) {
                 $query->where('periodo', $this->periodoFiltro);
             }
@@ -48,6 +51,19 @@ class SalasNotasExportLote implements WithMultipleSheets
             }
             return $folhas;
         })->all();
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            BeforeExport::class => function (BeforeExport $event): void {
+                $macroPath = app_path('Exports/Macros/notas-vbaProject.bin');
+                if (!is_file($macroPath)) {
+                    throw new \RuntimeException('Projeto VBA das pautas de notas não encontrado.');
+                }
+                $event->writer->getDelegate()->setMacrosCode(file_get_contents($macroPath));
+            },
+        ];
     }
 
     private function categoriaPermitida($candidatura): bool
