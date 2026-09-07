@@ -20,6 +20,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -401,6 +402,26 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             . '&RPágina &P de &N  ' . now()->format('d/m/Y');
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
+
+        // O Excel só permite proteger células individuais através da proteção
+        // da folha. Desbloqueamos explicitamente toda a pauta e bloqueamos
+        // somente a coluna calculada da Média Final.
+        $sheet->getStyle("A1:{$lastCol}{$dataEnd}")
+            ->getProtection()
+            ->setLocked(Protection::PROTECTION_UNPROTECTED);
+
+        $finalGradeColumnLetter = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
+        if ($dataEnd >= $tr + 1) {
+            $sheet->getStyle("{$finalGradeColumnLetter}" . ($tr + 1) . ":{$finalGradeColumnLetter}{$dataEnd}")
+                ->getProtection()
+                ->setLocked(Protection::PROTECTION_PROTECTED);
+        }
+
+        $sheet->getProtection()
+            ->setSheet(true)
+            ->setPassword('notas')
+            ->setSelectLockedCells(false)
+            ->setSelectUnlockedCells(true);
 
         return [];
     }
