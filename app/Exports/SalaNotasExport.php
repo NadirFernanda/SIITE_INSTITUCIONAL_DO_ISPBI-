@@ -137,7 +137,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         foreach ($this->disciplines as $d) {
             $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
-        $header[] = 'NOTA FINAL (0–20)';
+        $header[] = 'NOTA FINAL';
         $header[] = 'RESULTADO';
 
         // Garantir que a tabela comece na linha fixa definida
@@ -153,6 +153,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Dados
         $firstDisciplineColumn = 3; // C
         $lastDisciplineColumn = $firstDisciplineColumn + count($this->disciplines) - 1;
+        $finalGradeColumn = $lastDisciplineColumn + 1;
 
         foreach ($this->candidaturas as $index => $c) {
             $line = [];
@@ -168,9 +169,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $excelRow = $this->tableRow + 1 + $index;
             if ($this->disciplines === []) {
                 $line[] = '';
+                $line[] = '';
             } else {
                 $firstColumn = Coordinate::stringFromColumnIndex($firstDisciplineColumn);
                 $lastColumn = Coordinate::stringFromColumnIndex($lastDisciplineColumn);
+                $finalGradeColumnLetter = Coordinate::stringFromColumnIndex($finalGradeColumn);
                 $line[] = sprintf(
                     '=IF(COUNT(%1$s%2$d:%3$s%2$d)=%4$d,SUM(%1$s%2$d:%3$s%2$d),"")',
                     $firstColumn,
@@ -178,8 +181,12 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                     $lastColumn,
                     count($this->disciplines)
                 );
+                $line[] = sprintf(
+                    '=IF(%1$s%2$d="","",IF(%1$s%2$d>=10,"APROVADO","NÃO APROVADO"))',
+                    $finalGradeColumnLetter,
+                    $excelRow
+                );
             }
-            $line[] = ''; // Resultado em branco
 
             $rows[] = $line;
         }
