@@ -341,8 +341,8 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ]);
             $mediaCell = $sheet->getCell("{$finalGradeColumnLetter}{$r}");
             if (is_string($mediaCell->getValue()) && str_starts_with($mediaCell->getValue(), '=')) {
-                $mediaCell->getComment()->setText($mediaCell->getValue());
-                $mediaCell->getComment()->setVisible(false);
+                $sheet->getComment("{$finalGradeColumnLetter}{$r}")->setText($mediaCell->getValue());
+                $sheet->getComment("{$finalGradeColumnLetter}{$r}")->setVisible(false);
             }
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
