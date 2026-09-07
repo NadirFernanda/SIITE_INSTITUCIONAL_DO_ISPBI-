@@ -42,6 +42,12 @@ class SalasExameExportLote implements WithMultipleSheets
             $candidaturas = $candidaturasQuery->get();
 
             $categoriasSala = $candidaturas
+                ->filter(fn ($c) => collect(\App\Models\Candidatura::categoriasEspeciaisPermitidas($c->curso))
+                    ->contains(fn ($categoria) => mb_strtolower(trim($categoria), 'UTF-8') === mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8'))
+                    && (
+                    mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8') !== mb_strtolower('Áreas Steam', 'UTF-8')
+                    || mb_strtolower(trim((string) $c->sexo), 'UTF-8') === 'feminino'
+                ))
                 ->pluck('necessidade_especial')
                 ->filter(fn ($cat) => $cat !== null && trim((string) $cat) !== '' && mb_strtolower(trim((string) $cat)) !== 'nenhuma')
                 ->map(fn ($cat) => trim((string) $cat))
@@ -51,7 +57,7 @@ class SalasExameExportLote implements WithMultipleSheets
             // A pauta geral deve conter todos os candidatos confirmados.
             // As folhas por categoria são complementares e não podem fazer
             // com que um candidato desapareça da lista principal.
-            $folhas = [new SalaExameExport($sala, null, false, $this->cursoFiltro, $this->periodoFiltro)];
+            $folhas = [new SalaExameExport($sala, null, true, $this->cursoFiltro, $this->periodoFiltro)];
             foreach ($categoriasSala as $categoria) {
                 $folhas[] = new SalaExameExport($sala, $categoria, false, $this->cursoFiltro, $this->periodoFiltro);
             }

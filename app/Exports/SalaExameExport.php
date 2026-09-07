@@ -44,6 +44,9 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
 
         if ($necessidadeEspecial !== null) {
             $query->whereRaw('LOWER(TRIM(necessidade_especial)) = LOWER(?)', [trim($necessidadeEspecial)]);
+            if (mb_strtolower(trim($necessidadeEspecial), 'UTF-8') === mb_strtolower('Áreas Steam', 'UTF-8')) {
+                $query->whereRaw('LOWER(TRIM(sexo)) = LOWER(?)', ['feminino']);
+            }
         } elseif ($listaGeralExcluiCategorias) {
             // Quando a Lista Geral é oferecida ao lado de listas por
             // categoria (Admin), um candidato de uma categoria especial não

@@ -199,6 +199,12 @@ trait DownloadsSalasEmLote
             $candidaturas = $candidaturasQuery->get();
 
             $categoriasSala = $candidaturas
+                ->filter(fn ($c) => collect(\App\Models\Candidatura::categoriasEspeciaisPermitidas($c->curso))
+                    ->contains(fn ($categoria) => mb_strtolower(trim($categoria), 'UTF-8') === mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8'))
+                    && (
+                    mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8') !== mb_strtolower('Áreas Steam', 'UTF-8')
+                    || mb_strtolower(trim((string) $c->sexo), 'UTF-8') === 'feminino'
+                ))
                 ->pluck('necessidade_especial')
                 ->filter(fn ($cat) => $cat !== null && trim((string) $cat) !== '' && mb_strtolower(trim((string) $cat)) !== 'nenhuma')
                 ->map(fn ($cat) => trim((string) $cat))
@@ -219,6 +225,12 @@ trait DownloadsSalasEmLote
             foreach ($categoriasSala as $categoria) {
                 $candidatosCategoria = $candidaturas
                     ->filter(fn ($c) => $c->necessidade_especial !== null
+                        && collect(\App\Models\Candidatura::categoriasEspeciaisPermitidas($c->curso))
+                            ->contains(fn ($categoriaPermitida) => mb_strtolower(trim($categoriaPermitida), 'UTF-8') === mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8'))
+                        && (
+                            mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8') !== mb_strtolower('Áreas Steam', 'UTF-8')
+                            || mb_strtolower(trim((string) $c->sexo), 'UTF-8') === 'feminino'
+                        )
                         && mb_strtolower(trim((string) $c->necessidade_especial)) === mb_strtolower($categoria))
                     ->values();
                 $conteudo .= \View::make('pdf._sala-exame-conteudo', [

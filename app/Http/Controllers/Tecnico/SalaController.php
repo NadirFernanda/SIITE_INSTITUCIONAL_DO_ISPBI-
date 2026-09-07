@@ -216,7 +216,7 @@ class SalaController extends Controller
     {
         $necessidadeEspecial = $request->query('necessidade_especial');
         $sufixo = $necessidadeEspecial ? '-' . \Str::slug($necessidadeEspecial) : '';
-        return Excel::download(new SalaExameExport($sala, $necessidadeEspecial, false),
+        return Excel::download(new SalaExameExport($sala, $necessidadeEspecial, true),
             'lista-exame-' . \Str::slug($sala->nome) . $sufixo . '.xlsx');
     }
 }
