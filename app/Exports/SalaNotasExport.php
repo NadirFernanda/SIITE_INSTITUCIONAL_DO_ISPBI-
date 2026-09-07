@@ -278,6 +278,9 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 'font'      => ['bold' => true, 'color' => ['rgb' => '0E5C2F']],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
+            $sheet->getStyle("C{$r}:{$lastCol}{$r}")->applyFromArray([
+                'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+            ]);
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
