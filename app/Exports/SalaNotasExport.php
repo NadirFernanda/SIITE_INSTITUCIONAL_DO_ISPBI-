@@ -322,11 +322,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'FFFFFF']]],
         ]);
 
-        // A proteção da folha serve apenas para preservar a coluna calculada;
-        // todo o restante conteúdo da pauta continua editável.
-        $sheet->getStyle("A1:{$lastCol}{$dataEnd}")
-            ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
-
         for ($r = $tr + 1; $r <= $dataEnd; $r++) {
             $bg = ($r % 2 === 0) ? 'EDF7F1' : 'FFFFFF';
             $sheet->getStyle("A{$r}:{$lastCol}{$r}")->applyFromArray([
@@ -341,13 +336,13 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getStyle("C{$r}:{$lastCol}{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
-            $sheet->getStyle("A{$r}:{$lastCol}{$r}")
-                ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
-        // Só a coluna calculada da Média Final fica protegida; as disciplinas,
-        // identificação e Resultado permanecem editáveis.
+        // Desbloqueia explicitamente toda a pauta e bloqueia depois somente as
+        // células calculadas da Média Final.
+        $sheet->getStyle("A1:{$lastCol}{$dataEnd}")
+            ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
         $finalGradeColumnLetter = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
         if ($dataEnd >= $tr + 1) {
             $sheet->getStyle("{$finalGradeColumnLetter}" . ($tr + 1) . ":{$finalGradeColumnLetter}{$dataEnd}")
