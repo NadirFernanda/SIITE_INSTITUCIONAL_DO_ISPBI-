@@ -20,8 +20,6 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
-    private const PRINT_ROWS_PER_PAGE = 36;
-
     protected Sala $sala;
     protected Collection $candidaturas;
     protected int $tableRow = 5; // sempre linha 5 (estrutura fixa igual ao SalaExameExport)
@@ -178,18 +176,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $rows[] = $line;
         }
 
-        // Reservar o bloco final no fundo da última página A4. A largura da
-        // pauta de notas altera a escala vertical do Excel, portanto a
-        // assinatura precisa de uma grelha de páginas própria.
-        $dataEnd = $this->tableRow + $this->candidaturas->count();
-        $sigLinha = $this->signatureRow();
-        while (count($rows) < $sigLinha - 1) {
-            $rows[] = array_fill(0, count($header), '');
-        }
-        $rows[] = ['_________________________________', ''] + array_fill(0, max(0, count($header) - 2), '');
-        $rows[] = ['Professor Doutor Fernando Maia', ''] + array_fill(0, max(0, count($header) - 2), '');
-        $rows[] = ['Presidente da Comissão do Exame de Acesso', ''] + array_fill(0, max(0, count($header) - 2), '');
-
         return $rows;
     }
 
@@ -222,7 +208,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $tr = $this->tableRow;
         $dataEnd = $tr + $this->candidaturas->count();
-        $sigLinha = $this->signatureRow();
 
         // Mesclar cabeçalho principal nas colunas usadas
         $lastCol = chr( ord('A') + (1 + count($this->disciplines) + 2) );
@@ -230,14 +215,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->mergeCells("A2:{$lastCol}2");
         $sheet->mergeCells("A3:{$lastCol}3");
         $sheet->mergeCells("A4:{$lastCol}4");
-
-        // Mesclar assinatura (traço, nome e cargo)
-        $sigLinha = $this->signatureRow();
-        $sigNome = $sigLinha + 1;
-        $sigCargo = $sigLinha + 2;
-        $sheet->mergeCells("A{$sigLinha}:{$lastCol}{$sigLinha}");
-        $sheet->mergeCells("A{$sigNome}:{$lastCol}{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:{$lastCol}{$sigCargo}");
 
         // Alturas e estilos básicos — cabeçalho institucional compactado ao
         // mínimo (4 linhas em vez de 9): como fica todo "congelado" (freeze
@@ -289,27 +266,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
-        // Centralizar assinatura do presidente — as duas primeiras linhas em
-        // branco ficam pequenas (só espaçamento); a terceira (logo acima da
-        // linha) fica maior, para a assinatura ficar colada à linha em vez
-        // de perdida no meio do espaço em branco.
-        $sigNome = $sigLinha + 1;
-        $sigCargo = $sigLinha + 2;
-        $sheet->getRowDimension($sigLinha - 3)->setRowHeight(8);
-        $sheet->getRowDimension($sigLinha - 2)->setRowHeight(8);
-        $sheet->getRowDimension($sigLinha - 1)->setRowHeight(30);
-        $sheet->getStyle("A{$sigLinha}:{$lastCol}{$sigLinha}")->applyFromArray([
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-        $sheet->getStyle("A{$sigNome}:{$lastCol}{$sigNome}")->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 10],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-        $sheet->getStyle("A{$sigCargo}:{$lastCol}{$sigCargo}")->applyFromArray([
-            'font'      => ['size' => 9, 'italic' => true],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-
         // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
         $sheet->freezePane('A' . ($tr + 1));
 
@@ -325,27 +281,25 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // em todas as páginas impressas — sem isto, uma pauta com muitos candidatos
         // imprimia a página 2+ sem títulos, exigindo edição manual antes de imprimir.
         $ps->setRowsToRepeatAtTopByStartAndEnd($tr, $tr);
-        $ps->setPrintArea("A1:{$lastCol}{$sigCargo}");
+        $ps->setPrintArea("A1:{$lastCol}{$dataEnd}");
 
         $sheet->getPageMargins()
             ->setHeader(0.2)
             ->setTop(0.6)
-            ->setBottom(0.59)
+            ->setBottom(0.85)
             ->setLeft(0.39)->setRight(0.39)
-            ->setFooter(0.2);
+            ->setFooter(0.35);
 
         // ── Rodapé com paginação ──
-        $sheet->getHeaderFooter()->setOddFooter('&LISP-Bié — Lista de Notas&CPágina &P de &N&R' . now()->format('d/m/Y'));
+        $rodape = '&LISP-Bié — Lista de Notas'
+            . "&C&12_________________________________\n"
+            . "Professor Doutor Fernando Maia\n"
+            . "&9Presidente da Comissão do Exame de Acesso"
+            . '&RPágina &P de &N  ' . now()->format('d/m/Y');
+        $sheet->getHeaderFooter()->setOddFooter($rodape);
+        $sheet->getHeaderFooter()->setEvenFooter($rodape);
 
         return [];
-    }
-
-    private function signatureRow(): int
-    {
-        $dataEnd = $this->tableRow + $this->candidaturas->count();
-        $lastSignatureRow = (int) (ceil(($dataEnd + 3) / self::PRINT_ROWS_PER_PAGE) * self::PRINT_ROWS_PER_PAGE) - 1;
-
-        return max($dataEnd + 4, $lastSignatureRow - 2);
     }
 
     public function drawings()
