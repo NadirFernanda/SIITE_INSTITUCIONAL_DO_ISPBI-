@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Sala;
 use App\Models\CandidaturaNota;
+use App\Models\Candidatura;
 use App\Support\CsvSanitizer;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -23,10 +24,18 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     protected Collection $candidaturas;
     protected int $tableRow = 5; // sempre linha 5 (estrutura fixa igual ao SalaExameExport)
     protected array $disciplines = [];
+    protected ?string $necessidadeEspecial;
 
-    public function __construct(Sala $sala, ?string $cursoFiltro = null, ?string $periodoFiltro = null)
+    public function __construct(
+        Sala $sala,
+        ?string $cursoFiltro = null,
+        ?string $periodoFiltro = null,
+        ?string $necessidadeEspecial = null,
+        bool $listaGeralExcluiCategorias = false
+    )
     {
         $this->sala         = $sala;
+        $this->necessidadeEspecial = $necessidadeEspecial;
         // Ordem alfabética por nome — ver App\Exports\SalaExameExport para a
         // explicação de por que a ordenação é feita em PHP, não via ORDER BY.
         $query = $sala->candidaturas()
@@ -38,8 +47,21 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($periodoFiltro !== null) {
             $query->where('periodo', $periodoFiltro);
         }
+        if ($necessidadeEspecial !== null) {
+            $query->whereRaw('LOWER(TRIM(necessidade_especial)) = LOWER(?)', [trim($necessidadeEspecial)]);
+            if (mb_strtolower(trim($necessidadeEspecial), 'UTF-8') === mb_strtolower('Áreas Steam', 'UTF-8')) {
+                $query->whereIn(\DB::raw('LOWER(TRIM(curso))'), [
+                    mb_strtolower('Engenharia Informática', 'UTF-8'),
+                    mb_strtolower('Engenharia em Recursos Hídricos', 'UTF-8'),
+                ]);
+                $query->whereRaw('LOWER(TRIM(sexo)) = LOWER(?)', ['feminino']);
+            }
+        }
 
         $this->candidaturas = $query->get()
+            ->when($listaGeralExcluiCategorias, function ($items) {
+                return $items->filter(fn ($candidatura) => Candidatura::pertenceListaGeral($candidatura));
+            })
             ->sortBy(fn ($c) => strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $c->nome)))
             ->values();
 
@@ -58,6 +80,14 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // combinadas num só ficheiro (impressão em lote por horário).
         $nome = preg_replace('/[\\\\\/\?\*\[\]:]/', '', $this->sala->nome);
         $sufixo = ' #' . $this->sala->id;
+        if ($this->necessidadeEspecial !== null) {
+            $sufixo = ' - ' . match ($this->necessidadeEspecial) {
+                'Filhos de antigos combatentes' => 'Combatentes',
+                'Portadores de deficiência' => 'Deficiência',
+                'Áreas Steam' => 'Steam',
+                default => mb_substr($this->necessidadeEspecial, 0, 10),
+            } . $sufixo;
+        }
         $prefixo = 'Pauta - ';
         $maxNome = max(1, 31 - mb_strlen($prefixo) - mb_strlen($sufixo));
         return $prefixo . mb_substr($nome, 0, $maxNome) . $sufixo;
@@ -270,28 +300,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'font'      => ['size' => 9, 'italic' => true],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
-
-        // ── Imagem da assinatura digital do Presidente, por cima da linha ──
-        $gdAssinatura = \App\Services\SignatureImageGenerator::generateGd('Fernando Maia');
-        $imgW = imagesx($gdAssinatura);
-        $imgH = imagesy($gdAssinatura);
-        $assDisplayH = 28;
-        $assDisplayW = (int) ($imgW * $assDisplayH / $imgH);
-
-        $larguraTotal = array_sum($this->columnWidths());
-        $assOffsetX = max(0, (int) ($larguraTotal * 8 / 2) - (int) ($assDisplayW / 2));
-
-        $assinaturaDrawing = new \PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing();
-        $assinaturaDrawing->setName('Assinatura Presidente');
-        $assinaturaDrawing->setImageResource($gdAssinatura);
-        $assinaturaDrawing->setRenderingFunction(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::RENDERING_PNG);
-        $assinaturaDrawing->setMimeType(\PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing::MIMETYPE_DEFAULT);
-        $assinaturaDrawing->setHeight($assDisplayH);
-        $assinaturaDrawing->setWidth($assDisplayW);
-        $assinaturaDrawing->setCoordinates('A' . ($sigLinha - 1));
-        $assinaturaDrawing->setOffsetX($assOffsetX);
-        $assinaturaDrawing->setOffsetY(2);
-        $assinaturaDrawing->setWorksheet($sheet);
 
         // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
         $sheet->freezePane('A' . ($tr + 1));

@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Sala;
+use App\Models\Candidatura;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
@@ -42,12 +43,7 @@ class SalasExameExportLote implements WithMultipleSheets
             $candidaturas = $candidaturasQuery->get();
 
             $categoriasSala = $candidaturas
-                ->filter(fn ($c) => collect(\App\Models\Candidatura::categoriasEspeciaisPermitidas($c->curso))
-                    ->contains(fn ($categoria) => mb_strtolower(trim($categoria), 'UTF-8') === mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8'))
-                    && (
-                    mb_strtolower(trim((string) $c->necessidade_especial), 'UTF-8') !== mb_strtolower('Áreas Steam', 'UTF-8')
-                    || mb_strtolower(trim((string) $c->sexo), 'UTF-8') === 'feminino'
-                ))
+                ->filter(fn ($c) => Candidatura::categoriaEspecialAplicavel($c->necessidade_especial, $c->curso, $c->sexo))
                 ->pluck('necessidade_especial')
                 ->filter(fn ($cat) => $cat !== null && trim((string) $cat) !== '' && mb_strtolower(trim((string) $cat)) !== 'nenhuma')
                 ->map(fn ($cat) => trim((string) $cat))

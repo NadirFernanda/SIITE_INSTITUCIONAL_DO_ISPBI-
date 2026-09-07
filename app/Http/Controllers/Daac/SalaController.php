@@ -101,7 +101,14 @@ class SalaController extends Controller
         // menos um candidato nela — mesmo padrão já usado no Admin.
         $cursoSala = $candidaturas->first()->curso ?? null;
         $categoriasSala = collect(\App\Models\Candidatura::categoriasEspeciaisPermitidas($cursoSala))
-            ->filter(fn ($cat) => $candidaturas->contains('necessidade_especial', $cat))
+            ->filter(fn ($cat) => $candidaturas->contains(
+                fn ($candidatura) => \App\Models\Candidatura::categoriaEspecialAplicavel(
+                    $candidatura->necessidade_especial,
+                    $candidatura->curso,
+                    $candidatura->sexo
+                ) && mb_strtolower(trim((string) $candidatura->necessidade_especial), 'UTF-8')
+                    === mb_strtolower($cat, 'UTF-8')
+            ))
             ->values();
 
         return view('daac.salas.show', compact('sala', 'candidaturas', 'categoriasSala'));
@@ -268,9 +275,7 @@ class SalaController extends Controller
             $candidaturas = $candidaturasQuery->get();
 
             $listaGeral = $candidaturas
-                ->filter(fn ($c) => $c->necessidade_especial === null
-                    || trim((string) $c->necessidade_especial) === ''
-                    || mb_strtolower(trim((string) $c->necessidade_especial)) === 'nenhuma')
+                ->filter(fn ($c) => \App\Models\Candidatura::pertenceListaGeral($c))
                 ->values();
 
             $conteudo .= \View::make('pdf._sala-exame-conteudo', [
@@ -280,6 +285,7 @@ class SalaController extends Controller
             $primeiro = false;
 
             $categoriasSala = $candidaturas
+                ->filter(fn ($c) => \App\Models\Candidatura::categoriaEspecialAplicavel($c->necessidade_especial, $c->curso, $c->sexo))
                 ->pluck('necessidade_especial')
                 ->filter(fn ($cat) => $cat !== null && trim((string) $cat) !== '' && mb_strtolower(trim((string) $cat)) !== 'nenhuma')
                 ->map(fn ($cat) => trim((string) $cat))
@@ -287,7 +293,7 @@ class SalaController extends Controller
                 ->values();
             foreach ($categoriasSala as $categoria) {
                 $candidatosCategoria = $candidaturas
-                    ->filter(fn ($c) => $c->necessidade_especial !== null
+                    ->filter(fn ($c) => \App\Models\Candidatura::categoriaEspecialAplicavel($c->necessidade_especial, $c->curso, $c->sexo)
                         && mb_strtolower(trim((string) $c->necessidade_especial)) === mb_strtolower($categoria))
                     ->values();
                 $conteudo .= \View::make('pdf._sala-exame-conteudo', [

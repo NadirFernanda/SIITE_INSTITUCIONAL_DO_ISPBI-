@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Sala;
+use App\Models\Candidatura;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
@@ -26,8 +27,35 @@ class SalasNotasExportLote implements WithMultipleSheets
 
     public function sheets(): array
     {
-        return $this->salas
-            ->map(fn(Sala $sala) => new SalaNotasExport($sala, $this->cursoFiltro, $this->periodoFiltro))
-            ->all();
+        return $this->salas->flatMap(function (Sala $sala) {
+            $query = $sala->candidaturas()->where('pagamento_confirmado', true);
+            if ($this->cursoFiltro !== null) {
+                $query->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($this->cursoFiltro)]);
+            }
+            if ($this->periodoFiltro !== null) {
+                $query->where('periodo', $this->periodoFiltro);
+            }
+            $candidaturas = $query->get();
+            $categorias = $candidaturas
+                ->filter(fn ($c) => $this->categoriaPermitida($c))
+                ->pluck('necessidade_especial')
+                ->unique(fn ($cat) => mb_strtolower(trim((string) $cat), 'UTF-8'))
+                ->values();
+
+            $folhas = [new SalaNotasExport($sala, $this->cursoFiltro, $this->periodoFiltro, null, true)];
+            foreach ($categorias as $categoria) {
+                $folhas[] = new SalaNotasExport($sala, $this->cursoFiltro, $this->periodoFiltro, $categoria, false);
+            }
+            return $folhas;
+        })->all();
+    }
+
+    private function categoriaPermitida($candidatura): bool
+    {
+        return Candidatura::categoriaEspecialAplicavel(
+            $candidatura->necessidade_especial,
+            $candidatura->curso,
+            $candidatura->sexo
+        );
     }
 }

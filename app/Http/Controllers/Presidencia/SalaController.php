@@ -157,7 +157,7 @@ class SalaController extends Controller
 
     public function excelNotas(Sala $sala)
     {
-        return Excel::download(new SalaNotasExport($sala),
+        return Excel::download(new SalasNotasExportLote(collect([$sala])),
             'lancamento-notas-' . \Str::slug($sala->nome) . '.xlsx');
     }
 

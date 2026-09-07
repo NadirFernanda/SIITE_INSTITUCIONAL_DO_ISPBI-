@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Sala;
+use App\Models\Candidatura;
 use App\Support\CsvSanitizer;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -45,20 +46,12 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         if ($necessidadeEspecial !== null) {
             $query->whereRaw('LOWER(TRIM(necessidade_especial)) = LOWER(?)', [trim($necessidadeEspecial)]);
             if (mb_strtolower(trim($necessidadeEspecial), 'UTF-8') === mb_strtolower('Áreas Steam', 'UTF-8')) {
+                $query->whereIn(\DB::raw('LOWER(TRIM(curso))'), [
+                    mb_strtolower('Engenharia Informática', 'UTF-8'),
+                    mb_strtolower('Engenharia em Recursos Hídricos', 'UTF-8'),
+                ]);
                 $query->whereRaw('LOWER(TRIM(sexo)) = LOWER(?)', ['feminino']);
             }
-        } elseif ($listaGeralExcluiCategorias) {
-            // Quando a Lista Geral é oferecida ao lado de listas por
-            // categoria (Admin), um candidato de uma categoria especial não
-            // deve também aparecer na Lista Geral — senão fica duplicado
-            // entre as duas listas. Sem este parâmetro (ex.: DAAC, que só
-            // tem esta única lista, sem categorias em separado), a Lista
-            // Geral continua a incluir toda a gente.
-            $query->where(function ($q) {
-                $q->whereNull('necessidade_especial')
-                    ->orWhereRaw("TRIM(necessidade_especial) = ''")
-                    ->orWhereRaw("LOWER(TRIM(necessidade_especial)) = 'nenhuma'");
-            });
         }
 
         // Ordem alfabética por nome em vez de por lugar — mais fácil de
@@ -66,6 +59,9 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // PHP (não via ORDER BY) porque o Postgres compara bytes UTF-8 por
         // omissão, o que põe nomes acentuados (ex.: "Álvaro") depois de "Z".
         $this->candidaturas = $query->get()
+            ->when($listaGeralExcluiCategorias, function ($items) {
+                return $items->filter(fn ($candidatura) => Candidatura::pertenceListaGeral($candidatura));
+            })
             ->sortBy(fn ($c) => strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $c->nome)))
             ->values();
     }

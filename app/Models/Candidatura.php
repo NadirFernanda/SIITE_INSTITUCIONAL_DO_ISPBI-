@@ -291,6 +291,36 @@ class Candidatura extends Model
         return static::$categoriasEspeciaisPorCurso[$curso] ?? static::$categoriasEspeciaisPadrao;
     }
 
+    public static function categoriaEspecialAplicavel(?string $categoria, ?string $curso, ?string $sexo): bool
+    {
+        $categoriaNormalizada = mb_strtolower(trim((string) $categoria), 'UTF-8');
+
+        if ($categoriaNormalizada === '' || $categoriaNormalizada === 'nenhuma') {
+            return false;
+        }
+
+        if ($categoriaNormalizada !== mb_strtolower('Áreas Steam', 'UTF-8')) {
+            return true;
+        }
+
+        $cursosEngenharia = array_map(
+            fn ($cursoEngenharia) => mb_strtolower($cursoEngenharia, 'UTF-8'),
+            ['Engenharia Informática', 'Engenharia em Recursos Hídricos']
+        );
+
+        return in_array(mb_strtolower(trim((string) $curso), 'UTF-8'), $cursosEngenharia, true)
+            && mb_strtolower(trim((string) $sexo), 'UTF-8') === 'feminino';
+    }
+
+    public static function pertenceListaGeral($candidatura): bool
+    {
+        return ! static::categoriaEspecialAplicavel(
+            $candidatura->necessidade_especial ?? null,
+            $candidatura->curso ?? null,
+            $candidatura->sexo ?? null
+        );
+    }
+
     public static function regraNecessidadeEspecial(?string $curso, ?string $sexo): \Closure
     {
         return function ($attribute, $value, $fail) use ($curso, $sexo) {
