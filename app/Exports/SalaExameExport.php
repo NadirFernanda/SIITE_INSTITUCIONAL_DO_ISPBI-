@@ -136,14 +136,6 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ];
         }
 
-        // Espaço para assinatura manual do Presidente.
-        $rows[] = ['', '', '', ''];
-        $rows[] = ['', '', '', ''];
-        $rows[] = ['', '', '', ''];
-        $rows[] = ['_________________________________', '', '', ''];
-        $rows[] = ['Professor Doutor Fernando Maia', '', '', ''];
-        $rows[] = ['Presidente da Comissão do Exame de Acesso', '', '', ''];
-
         return $rows;
     }
 
@@ -157,17 +149,11 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     public function styles(Worksheet $sheet): array
     {
         $dataEnd = $this->tableRow + $this->candidaturas->count();
-        $sigLinha = $dataEnd + 4;
-        $sigNome  = $sigLinha + 1;
-        $sigCargo = $sigLinha + 2;
 
         // ── Mesclar cabeçalho ──
         $sheet->mergeCells('A2:D2');
         $sheet->mergeCells('A3:D3');
         $sheet->mergeCells('A4:D4');
-        $sheet->mergeCells("A{$sigLinha}:D{$sigLinha}");
-        $sheet->mergeCells("A{$sigNome}:D{$sigNome}");
-        $sheet->mergeCells("A{$sigCargo}:D{$sigCargo}");
 
         // ── Alturas ──
         // Cabeçalho institucional compactado ao mínimo (4 linhas em vez de 9):
@@ -229,25 +215,6 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
-        // ── Assinatura do Presidente ──
-        // As duas primeiras linhas em branco ficam pequenas (só espaçamento);
-        // a terceira (logo acima da linha) fica maior, para a assinatura
-        // ficar colada à linha em vez de perdida no meio do espaço em branco.
-        $sheet->getRowDimension($sigLinha - 3)->setRowHeight(8);
-        $sheet->getRowDimension($sigLinha - 2)->setRowHeight(8);
-        $sheet->getRowDimension($sigLinha - 1)->setRowHeight(30);
-        $sheet->getStyle("A{$sigLinha}")->applyFromArray([
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-        $sheet->getStyle("A{$sigNome}")->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 10],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-        $sheet->getStyle("A{$sigCargo}")->applyFromArray([
-            'font'      => ['size' => 9, 'italic' => true],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
-        ]);
-
         // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
         $sheet->freezePane('A' . ($tr + 1));
 
@@ -263,17 +230,23 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // todas as páginas impressas — sem isto, uma sala com muitos candidatos
         // imprimia a página 2+ sem títulos, exigindo edição manual antes de imprimir.
         $ps->setRowsToRepeatAtTopByStartAndEnd($tr, $tr);
-        $ps->setPrintArea("A1:D{$sigCargo}");
+        $ps->setPrintArea("A1:D{$dataEnd}");
 
         $sheet->getPageMargins()
             ->setHeader(0.2)
             ->setTop(0.6)
-            ->setBottom(0.59)
+            ->setBottom(0.85)
             ->setLeft(0.39)->setRight(0.39)
-            ->setFooter(0.2);
+            ->setFooter(0.35);
 
         // ── Rodapé com paginação ──
-        $sheet->getHeaderFooter()->setOddFooter('&LISP-Bié — Lista de Exame&CPágina &P de &N&R' . now()->format('d/m/Y'));
+        $rodape = '&LISP-Bié — Lista de Exame'
+            . "&C&12_________________________________\n"
+            . "Professor Doutor Fernando Maia\n"
+            . "&9Presidente da Comissão do Exame de Acesso"
+            . '&RPágina &P de &N  ' . now()->format('d/m/Y');
+        $sheet->getHeaderFooter()->setOddFooter($rodape);
+        $sheet->getHeaderFooter()->setEvenFooter($rodape);
 
         return [];
     }
