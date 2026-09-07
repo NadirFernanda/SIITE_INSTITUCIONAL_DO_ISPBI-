@@ -137,7 +137,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         foreach ($this->disciplines as $d) {
             $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
-        $header[] = 'MÉDIA FINAL (0–20)';
+        $header[] = 'NOTA FINAL (0–20)';
         $header[] = 'RESULTADO';
 
         // Garantir que a tabela comece na linha fixa definida
@@ -271,11 +271,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 'font'      => ['bold' => true, 'color' => ['rgb' => '0E5C2F']],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
-            if ($this->disciplines !== []) {
-                $lastNumericColumn = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
-                $sheet->getStyle("C{$r}:{$lastNumericColumn}{$r}")
-                    ->getNumberFormat()->setFormatCode('0.00');
-            }
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
