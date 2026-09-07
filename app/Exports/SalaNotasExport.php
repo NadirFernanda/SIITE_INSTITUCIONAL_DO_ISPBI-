@@ -19,6 +19,7 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -275,6 +276,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     {
         $tr = $this->tableRow;
         $dataEnd = $tr + $this->candidaturas->count();
+        $lastDisciplineColumnLetter = Coordinate::stringFromColumnIndex(2 + count($this->disciplines));
 
         // Mesclar cabeçalho principal nas colunas usadas
         $lastCol = chr( ord('A') + (1 + count($this->disciplines) + 2) );
@@ -333,6 +335,10 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getStyle("C{$r}:{$lastCol}{$r}")->applyFromArray([
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
+            if ($this->disciplines !== []) {
+                $sheet->getStyle("C{$r}:{$lastDisciplineColumnLetter}{$r}")
+                    ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
+            }
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
@@ -376,6 +382,15 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             . '&RPágina &P de &N  ' . now()->format('d/m/Y');
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
+
+        // Apenas as células das disciplinas são editáveis. Média Final e
+        // Resultado permanecem protegidos para que as fórmulas não sejam
+        // substituídas acidentalmente.
+        $sheet->getProtection()
+            ->setSheet(true)
+            ->setPassword('notas')
+            ->setSelectLockedCells(false)
+            ->setSelectUnlockedCells(true);
 
         return [];
     }
