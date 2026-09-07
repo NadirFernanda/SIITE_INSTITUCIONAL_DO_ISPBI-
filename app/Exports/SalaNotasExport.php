@@ -214,18 +214,24 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 $firstColumn = Coordinate::stringFromColumnIndex($firstDisciplineColumn);
                 $lastColumn = Coordinate::stringFromColumnIndex($lastDisciplineColumn);
                 $finalGradeColumnLetter = Coordinate::stringFromColumnIndex($finalGradeColumn);
-                $weightedTerms = [];
-                foreach ($this->weights as $offset => $weight) {
+                $normalizedTerms = [];
+                for ($offset = 0; $offset < count($this->disciplines); $offset++) {
                     $column = Coordinate::stringFromColumnIndex($firstDisciplineColumn + $offset);
-                    $weightedTerms[] = "{$column}{$excelRow}*" . ((float) $weight / 100);
+                    // Aceita notas introduzidas como número ou como texto com
+                    // vírgula decimal (por exemplo, "7,6").
+                    $normalizedTerms[] = "IFERROR(NUMBERVALUE({$column}{$excelRow},\",\",\".\"),0)";
                 }
                 $line[] = sprintf(
-                    '=IF(COUNT(%1$s%2$d:%3$s%2$d)=%4$d,%5$s,"")',
+                    '=IF(COUNTA(%1$s%2$d:%3$s%2$d)=%4$d,%5$s,"")',
                     $firstColumn,
                     $excelRow,
                     $lastColumn,
                     count($this->disciplines),
-                    implode('+', $weightedTerms)
+                    implode('+', array_map(
+                        fn ($term, $offset) => $term . '*' . ((float) $this->weights[$offset] / 100),
+                        $normalizedTerms,
+                        array_keys($normalizedTerms)
+                    ))
                 );
                 $line[] = sprintf(
                     '=IF(%1$s%2$d="","",IF(%1$s%2$d>=10,"APROVADO","REPROVADO"))',
