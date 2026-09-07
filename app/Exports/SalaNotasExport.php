@@ -20,6 +20,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -398,6 +399,22 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             . '&RPágina &P de &N  ' . now()->format('d/m/Y');
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
+
+        // Desbloqueia toda a pauta e protege apenas as células com a fórmula
+        // da Média Final. Assim, as disciplinas continuam disponíveis para
+        // lançamento, sem permitir substituir o cálculo.
+        $sheet->getStyle("A1:{$lastCol}{$dataEnd}")
+            ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
+        $finalGradeColumnLetter = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
+        if ($dataEnd >= $tr + 1) {
+            $sheet->getStyle("{$finalGradeColumnLetter}" . ($tr + 1) . ":{$finalGradeColumnLetter}{$dataEnd}")
+                ->getProtection()->setLocked(Protection::PROTECTION_PROTECTED);
+        }
+        $sheet->getProtection()
+            ->setSheet(true)
+            ->setPassword('notas')
+            ->setSelectLockedCells(false)
+            ->setSelectUnlockedCells(true);
 
         return [];
     }
