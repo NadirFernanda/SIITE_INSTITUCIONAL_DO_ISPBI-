@@ -403,17 +403,27 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
 
-        // O Excel só consegue impedir apagar uma fórmula através da proteção
-        // da folha. Todas as células ficam desbloqueadas, excepto a Média Final.
-        $sheet->getStyle("A1:{$lastCol}{$dataEnd}")
-            ->getProtection()
-            ->setLocked(Protection::PROTECTION_UNPROTECTED);
+        // O Excel exige proteção da folha para impedir apagar fórmulas. O
+        // estilo padrão e cada célula da pauta são desbloqueados explicitamente;
+        // somente as células calculadas da Média Final ficam protegidas.
+        $sheet->getParent()->getDefaultStyle()
+            ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
+        $lastColumnIndex = Coordinate::columnIndexFromString($lastCol);
+        for ($row = 1; $row <= $dataEnd; $row++) {
+            for ($column = 1; $column <= $lastColumnIndex; $column++) {
+                $sheet->getCellByColumnAndRow($column, $row)
+                    ->getStyle()->getProtection()
+                    ->setLocked(Protection::PROTECTION_UNPROTECTED);
+            }
+        }
 
-        $finalGradeColumnLetter = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
+        $finalGradeColumnIndex = 3 + count($this->disciplines);
         if ($dataEnd >= $tr + 1) {
-            $sheet->getStyle("{$finalGradeColumnLetter}" . ($tr + 1) . ":{$finalGradeColumnLetter}{$dataEnd}")
-                ->getProtection()
-                ->setLocked(Protection::PROTECTION_PROTECTED);
+            for ($row = $tr + 1; $row <= $dataEnd; $row++) {
+                $sheet->getCellByColumnAndRow($finalGradeColumnIndex, $row)
+                    ->getStyle()->getProtection()
+                    ->setLocked(Protection::PROTECTION_PROTECTED);
+            }
         }
 
         $sheet->getProtection()
