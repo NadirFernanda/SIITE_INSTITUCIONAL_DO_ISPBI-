@@ -20,6 +20,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Style\Protection;
+use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -340,6 +341,26 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                     ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
             }
             $sheet->getRowDimension($r)->setRowHeight(22);
+        }
+
+        if ($this->disciplines !== [] && $dataEnd >= $tr + 1) {
+            $validation = new DataValidation();
+            $validation->setType(DataValidation::TYPE_DECIMAL);
+            $validation->setErrorStyle(DataValidation::STYLE_STOP);
+            $validation->setAllowBlank(true);
+            $validation->setShowInputMessage(true);
+            $validation->setShowErrorMessage(true);
+            $validation->setErrorTitle('Nota inválida');
+            $validation->setError('Introduza apenas um número entre 0 e 20.');
+            $validation->setPromptTitle('Nota da disciplina');
+            $validation->setPrompt('Introduza uma nota numérica entre 0 e 20.');
+            $validation->setOperator(DataValidation::OPERATOR_BETWEEN);
+            $validation->setFormula1('0');
+            $validation->setFormula2('20');
+            $sheet->setDataValidation(
+                "C" . ($tr + 1) . ":{$lastDisciplineColumnLetter}{$dataEnd}",
+                $validation
+            );
         }
 
         $reprovado = new Conditional();
