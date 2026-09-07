@@ -103,8 +103,11 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Linha 2 — nome da instituição
         $rows[] = ['INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ', ''];
 
-        // Linha 3 — comissão + título da pauta, combinados numa só linha
-        $rows[] = ['COMISSÃO DO EXAME DE ACESSO   —   EXAME DE ACESSO 2026/2027 — PAUTA', ''];
+        // Linha 3 — comissão + categoria da lista, combinados numa só linha
+        $tituloLista = $this->necessidadeEspecial
+            ? 'EXAME DE ACESSO 2026/2027 — LISTA DE NOTAS: ' . mb_strtoupper($this->necessidadeEspecial, 'UTF-8')
+            : 'EXAME DE ACESSO 2026/2027 — LISTA DE NOTAS GERAL';
+        $rows[] = ['COMISSÃO DO EXAME DE ACESSO   —   ' . $tituloLista, ''];
 
         // Linha 4 — sala, curso(s)/período e data/horário combinados numa só
         // linha. O cabeçalho institucional inteiro fica "congelado" (freeze
