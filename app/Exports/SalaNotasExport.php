@@ -26,6 +26,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     protected Collection $candidaturas;
     protected int $tableRow = 5; // sempre linha 5 (estrutura fixa igual ao SalaExameExport)
     protected array $disciplines = [];
+    protected array $weights = [];
     protected ?string $necessidadeEspecial;
 
     public function __construct(
@@ -73,6 +74,44 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ->get()
             ->map(fn($d) => ['discipline' => $d->discipline, 'weight_percent' => $d->weight_percent])
             ->toArray();
+        $this->weights = $this->weightsForCourse($this->candidaturas->first()?->curso);
+    }
+
+    private function weightsForCourse(?string $course): array
+    {
+        $courseKey = $this->normalize($course);
+        $disciplineWeights = match ($courseKey) {
+            'enfermagem' => [
+                'biologia' => 35, 'quimica' => 25, 'matematica' => 30, 'lingua portuguesa' => 10,
+            ],
+            'contabilidade e administracao' => [
+                'matematica' => 60, 'lingua portuguesa' => 40,
+            ],
+            'psicologia' => [
+                'psicologia geral' => 60, 'lingua portuguesa' => 40,
+            ],
+            'comunicacao social' => [
+                'lingua portuguesa' => 60, 'cultura geral' => 40,
+            ],
+            'engenharia informatica' => [
+                'matematica' => 40, 'fisica' => 30, 'lingua portuguesa' => 30,
+            ],
+            'engenharia em recursos hidricos' => [
+                'matematica' => 30, 'fisica' => 30, 'quimica' => 20, 'lingua portuguesa' => 20,
+            ],
+            default => [],
+        };
+
+        return array_map(
+            fn ($discipline) => $disciplineWeights[$this->normalize($discipline['discipline'])]
+                ?? (float) $discipline['weight_percent'],
+            $this->disciplines
+        );
+    }
+
+    private function normalize(?string $value): string
+    {
+        return mb_strtolower(trim((string) iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value)), 'UTF-8');
     }
 
     public function title(): string
@@ -138,7 +177,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         foreach ($this->disciplines as $d) {
             $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
-        $header[] = 'NOTA FINAL';
+        $header[] = 'MÉDIA FINAL';
         $header[] = 'RESULTADO';
 
         // Garantir que a tabela comece na linha fixa definida
@@ -175,12 +214,18 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                 $firstColumn = Coordinate::stringFromColumnIndex($firstDisciplineColumn);
                 $lastColumn = Coordinate::stringFromColumnIndex($lastDisciplineColumn);
                 $finalGradeColumnLetter = Coordinate::stringFromColumnIndex($finalGradeColumn);
+                $weightedTerms = [];
+                foreach ($this->weights as $offset => $weight) {
+                    $column = Coordinate::stringFromColumnIndex($firstDisciplineColumn + $offset);
+                    $weightedTerms[] = "{$column}{$excelRow}*" . ((float) $weight / 100);
+                }
                 $line[] = sprintf(
-                    '=IF(COUNT(%1$s%2$d:%3$s%2$d)=%4$d,SUM(%1$s%2$d:%3$s%2$d),"")',
+                    '=IF(COUNT(%1$s%2$d:%3$s%2$d)=%4$d,%5$s,"")',
                     $firstColumn,
                     $excelRow,
                     $lastColumn,
-                    count($this->disciplines)
+                    count($this->disciplines),
+                    implode('+', $weightedTerms)
                 );
                 $line[] = sprintf(
                     '=IF(%1$s%2$d="","",IF(%1$s%2$d>=10,"APROVADO","REPROVADO"))',

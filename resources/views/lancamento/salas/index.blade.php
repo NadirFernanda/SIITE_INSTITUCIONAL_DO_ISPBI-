@@ -84,6 +84,14 @@
                     @endforeach
                 </select>
             </div>
+            <div style="min-width:150px;">
+                <label style="display:block;font-size:0.8rem;font-weight:600;color:#0f1f3d;margin-bottom:5px;">Período</label>
+                <select name="periodo" style="width:100%;border:1px solid #a8c4e0;border-radius:8px;padding:8px 12px;font-size:0.88rem;background:#fff;box-sizing:border-box;">
+                    <option value="">Todos</option>
+                    <option value="regular">Regular</option>
+                    <option value="pos-laboral">Pós-Laboral</option>
+                </select>
+            </div>
             <button type="submit" formaction="{{ route('lancamento.salas.pdf-lote-curso') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
                 📄 PDF

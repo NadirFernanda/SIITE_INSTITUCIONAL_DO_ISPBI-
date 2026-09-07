@@ -176,15 +176,20 @@ class SalaController extends Controller
     {
         $request->validate([
             'curso' => ['required', 'string'],
+            'periodo' => ['nullable', \Illuminate\Validation\Rule::in(['regular', 'pos-laboral'])],
         ], [
             'curso.required' => 'Escolha um curso para gerar a lista em lote.',
         ]);
 
         $curso = trim($request->input('curso'));
+        $periodo = $request->input('periodo');
 
-        return Sala::whereHas('candidaturas', function ($q) use ($curso) {
+        return Sala::whereHas('candidaturas', function ($q) use ($curso, $periodo) {
                 $q->where('pagamento_confirmado', true)
                     ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [$curso]);
+                if ($periodo) {
+                    $q->where('periodo', $periodo);
+                }
             })
             ->ordenadaPorHorario()
             ->get();
@@ -257,7 +262,7 @@ class SalaController extends Controller
      * App\Http\Controllers\Concerns\DownloadsSalasEmLote::gerarPdfExameLote
      * (o Daac não usa o trait, por ter a sua própria implementação em lote).
      */
-    protected function gerarPdfExameLote(Collection $salas, ?string $cursoFiltro, string $nomeFicheiro)
+    protected function gerarPdfExameLote(Collection $salas, ?string $cursoFiltro, string $nomeFicheiro, ?string $periodoFiltro = null)
     {
         $logoPath = public_path('images/logo.png');
         $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
@@ -271,6 +276,9 @@ class SalaController extends Controller
             $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
             if ($cursoFiltro !== null) {
                 $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
+            }
+            if ($periodoFiltro !== null) {
+                $candidaturasQuery->where('periodo', $periodoFiltro);
             }
             $candidaturas = $candidaturasQuery->get();
 
@@ -318,6 +326,7 @@ class SalaController extends Controller
         }
 
         $curso = $request->input('curso');
+        $periodo = $request->input('periodo');
         $logoPath = public_path('images/logo.png');
         $logoBase64 = (file_exists($logoPath) && filesize($logoPath) > 0)
             ? 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath))
@@ -328,6 +337,7 @@ class SalaController extends Controller
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
                 ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($curso)])
+                ->when($periodo, fn ($q) => $q->where('periodo', $periodo))
                 ->orderBy('numero_lugar')
                 ->get();
             $conteudo .= \View::make('pdf._sala-conteudo', [
@@ -351,8 +361,9 @@ class SalaController extends Controller
         }
 
         $curso = $request->input('curso');
-        $filename = 'lista-exame-' . \Str::slug($curso) . '.xlsx';
-        return Excel::download(new SalasExameExportLote($salas, $curso), $filename);
+        $periodo = $request->input('periodo');
+        $filename = 'lista-exame-' . \Str::slug($curso) . ($periodo ? '-' . \Str::slug($periodo) : '') . '.xlsx';
+        return Excel::download(new SalasExameExportLote($salas, $curso, $periodo), $filename);
     }
 
     public function pdfExameLotePorCurso(Request $request)
@@ -364,6 +375,7 @@ class SalaController extends Controller
         }
 
         $curso = $request->input('curso');
-        return $this->gerarPdfExameLote($salas, $curso, 'lista-exame-' . \Str::slug($curso) . '.pdf');
+        $periodo = $request->input('periodo');
+        return $this->gerarPdfExameLote($salas, $curso, 'lista-exame-' . \Str::slug($curso) . ($periodo ? '-' . \Str::slug($periodo) : '') . '.pdf', $periodo);
     }
 }
