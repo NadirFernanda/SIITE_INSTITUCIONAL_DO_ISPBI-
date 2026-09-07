@@ -219,7 +219,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
                     $column = Coordinate::stringFromColumnIndex($firstDisciplineColumn + $offset);
                     // Aceita notas introduzidas como número ou como texto com
                     // vírgula decimal (por exemplo, "7,6").
-                    $normalizedTerms[] = "IFERROR(NUMBERVALUE({$column}{$excelRow},\",\",\".\"),0)";
+                    $normalizedTerms[] = "IF(ISNUMBER({$column}{$excelRow}),{$column}{$excelRow},IFERROR(NUMBERVALUE({$column}{$excelRow},\",\",\".\"),0))";
                 }
                 $line[] = sprintf(
                     '=IF(COUNTA(%1$s%2$d:%3$s%2$d)=%4$d,%5$s,"")',
