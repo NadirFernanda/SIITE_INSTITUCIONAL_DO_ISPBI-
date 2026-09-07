@@ -19,7 +19,6 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
-use PhpOffice\PhpSpreadsheet\Style\Protection;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
@@ -339,16 +338,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
 
-        // Desbloqueia explicitamente toda a pauta e bloqueia depois somente as
-        // células calculadas da Média Final.
-        $sheet->getStyle("A1:{$lastCol}{$dataEnd}")
-            ->getProtection()->setLocked(Protection::PROTECTION_UNPROTECTED);
-        $finalGradeColumnLetter = Coordinate::stringFromColumnIndex(3 + count($this->disciplines));
-        if ($dataEnd >= $tr + 1) {
-            $sheet->getStyle("{$finalGradeColumnLetter}" . ($tr + 1) . ":{$finalGradeColumnLetter}{$dataEnd}")
-                ->getProtection()->setLocked(Protection::PROTECTION_PROTECTED);
-        }
-
         if ($this->disciplines !== [] && $dataEnd >= $tr + 1) {
             $validation = new DataValidation();
             $validation->setType(DataValidation::TYPE_DECIMAL);
@@ -409,15 +398,6 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             . '&RPágina &P de &N  ' . now()->format('d/m/Y');
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
-
-        // Apenas as células das disciplinas são editáveis. Média Final e
-        // Resultado permanecem protegidos para que as fórmulas não sejam
-        // substituídas acidentalmente.
-        $sheet->getProtection()
-            ->setSheet(true)
-            ->setPassword('notas')
-            ->setSelectLockedCells(false)
-            ->setSelectUnlockedCells(true);
 
         return [];
     }
