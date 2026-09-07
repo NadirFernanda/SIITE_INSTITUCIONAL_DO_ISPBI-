@@ -329,7 +329,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ->setFooter(0.2);
 
         // ── Rodapé com paginação ──
-        $sheet->getHeaderFooter()->setOddFooter('&LISP-Bié — Pauta&CPágina &P de &N&R' . now()->format('d/m/Y'));
+        $sheet->getHeaderFooter()->setOddFooter('&LISP-Bié — Lista de Notas&CPágina &P de &N&R' . now()->format('d/m/Y'));
 
         return [];
     }
