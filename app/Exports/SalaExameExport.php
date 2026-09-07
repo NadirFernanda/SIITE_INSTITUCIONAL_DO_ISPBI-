@@ -189,7 +189,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
         ]);
         $sheet->getStyle('A4')->applyFromArray([
-            'font'      => ['bold' => true, 'size' => 9],
+            'font'      => ['bold' => true, 'size' => 9, 'color' => ['rgb' => '0E5C2F']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT],
         ]);
 
@@ -197,14 +197,14 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $tr = $this->tableRow;
         $sheet->getStyle("A{$tr}:D{$tr}")->applyFromArray([
             'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
-            'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '1565C0']],
+            'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '0E5C2F']],
             'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
             'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'FFFFFF']]],
         ]);
 
         // ── Linhas de dados ──
         for ($r = $tr + 1; $r <= $dataEnd; $r++) {
-            $bg = ($r % 2 === 0) ? 'EBF3FD' : 'FFFFFF';
+            $bg = ($r % 2 === 0) ? 'EDF7F1' : 'FFFFFF';
             $sheet->getStyle("A{$r}:D{$r}")->applyFromArray([
                 'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $bg]],
                 'borders'   => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'DDDDDD']]],
@@ -212,7 +212,7 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ]);
             // Col A: ficha (center, bold & coloured)
             $sheet->getStyle("A{$r}")->applyFromArray([
-                'font'      => ['bold' => true, 'color' => ['rgb' => '1565C0']],
+                'font'      => ['bold' => true, 'color' => ['rgb' => '0E5C2F']],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
             // Col B: nome (esquerda)
