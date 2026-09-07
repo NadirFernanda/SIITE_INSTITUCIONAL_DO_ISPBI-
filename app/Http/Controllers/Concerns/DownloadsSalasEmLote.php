@@ -257,7 +257,7 @@ trait DownloadsSalasEmLote
 
         $curso = $request->input('curso');
         $periodo = $request->input('periodo');
-        $filename = 'lancamento-notas-' . \Str::slug($curso) . ($periodo ? '-' . \Str::slug($periodo) : '') . '.xlsx';
+        $filename = 'lancamento-notas-' . \Str::slug($curso) . ($periodo ? '-' . \Str::slug($periodo) : '') . '.xlsm';
         return Excel::download(new SalasNotasExportLote($salas, $curso, $periodo), $filename);
     }
 }
