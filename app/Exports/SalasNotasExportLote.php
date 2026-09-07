@@ -14,14 +14,20 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 class SalasNotasExportLote implements WithMultipleSheets
 {
     protected Collection $salas;
+    protected ?string $cursoFiltro;
+    protected ?string $periodoFiltro;
 
-    public function __construct(Collection $salas)
+    public function __construct(Collection $salas, ?string $cursoFiltro = null, ?string $periodoFiltro = null)
     {
-        $this->salas = $salas;
+        $this->salas       = $salas;
+        $this->cursoFiltro = $cursoFiltro;
+        $this->periodoFiltro = $periodoFiltro;
     }
 
     public function sheets(): array
     {
-        return $this->salas->map(fn(Sala $sala) => new SalaNotasExport($sala))->all();
+        return $this->salas
+            ->map(fn(Sala $sala) => new SalaNotasExport($sala, $this->cursoFiltro, $this->periodoFiltro))
+            ->all();
     }
 }

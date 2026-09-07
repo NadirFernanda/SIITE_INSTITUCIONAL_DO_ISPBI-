@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Concerns;
 
 use App\Exports\SalaExameExport;
 use App\Exports\SalasExameExportLote;
+use App\Exports\SalasNotasExportLote;
 use App\Models\Sala;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -47,15 +48,20 @@ trait DownloadsSalasEmLote
     {
         $request->validate([
             'curso' => ['required', 'string'],
+            'periodo' => ['nullable', Rule::in(['regular', 'pos-laboral'])],
         ], [
             'curso.required' => 'Escolha um curso para gerar a lista em lote.',
         ]);
 
         $curso = trim($request->input('curso'));
+        $periodo = $request->input('periodo');
 
-        return Sala::whereHas('candidaturas', function ($q) use ($curso) {
+        return Sala::whereHas('candidaturas', function ($q) use ($curso, $periodo) {
                 $q->where('pagamento_confirmado', true)
                     ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [$curso]);
+                if ($periodo) {
+                    $q->where('periodo', $periodo);
+                }
             })
             ->ordenadaPorHorario()
             ->get();
@@ -137,12 +143,14 @@ trait DownloadsSalasEmLote
         }
 
         $curso = $request->input('curso');
+        $periodo = $request->input('periodo');
         $logoBase64 = $this->logoBase64ParaLote();
         $conteudo = '';
         foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
                 ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($curso)])
+                ->when($periodo, fn ($q) => $q->where('periodo', $periodo))
                 ->orderBy('numero_lugar')
                 ->get();
             $conteudo .= \View::make('pdf._sala-conteudo', [
@@ -166,14 +174,15 @@ trait DownloadsSalasEmLote
         }
 
         $curso = $request->input('curso');
-        return $this->gerarPdfExameLote($salas, $curso, 'lista-exame-' . \Str::slug($curso) . '.pdf');
+        $periodo = $request->input('periodo');
+        return $this->gerarPdfExameLote($salas, $curso, 'lista-exame-' . \Str::slug($curso) . ($periodo ? '-' . \Str::slug($periodo) : '') . '.pdf', $periodo);
     }
 
     /**
      * Gera o PDF Exame em lote com lista geral e folhas separadas para as
      * categorias especiais, mantendo o mesmo critério de filtragem do Excel.
      */
-    protected function gerarPdfExameLote(Collection $salas, ?string $cursoFiltro, string $nomeFicheiro)
+    protected function gerarPdfExameLote(Collection $salas, ?string $cursoFiltro, string $nomeFicheiro, ?string $periodoFiltro = null)
     {
         $logoBase64 = $this->logoBase64ParaLote();
         $conteudo = '';
@@ -183,6 +192,9 @@ trait DownloadsSalasEmLote
             $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
             if ($cursoFiltro !== null) {
                 $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
+            }
+            if ($periodoFiltro !== null) {
+                $candidaturasQuery->where('periodo', $periodoFiltro);
             }
             $candidaturas = $candidaturasQuery->get();
 
@@ -231,7 +243,22 @@ trait DownloadsSalasEmLote
         }
 
         $curso = $request->input('curso');
-        $filename = 'pauta-' . \Str::slug($curso) . '.xlsx';
-        return Excel::download(new SalasExameExportLote($salas, $curso), $filename);
+        $periodo = $request->input('periodo');
+        $filename = 'pauta-' . \Str::slug($curso) . ($periodo ? '-' . \Str::slug($periodo) : '') . '.xlsx';
+        return Excel::download(new SalasExameExportLote($salas, $curso, $periodo), $filename);
+    }
+
+    public function excelNotasLotePorCurso(Request $request)
+    {
+        $salas = $this->salasDoCursoComCandidatos($request);
+
+        if ($salas->isEmpty()) {
+            return back()->with('error', 'Nenhuma sala com candidatos encontrada para esse curso.');
+        }
+
+        $curso = $request->input('curso');
+        $periodo = $request->input('periodo');
+        $filename = 'lancamento-notas-' . \Str::slug($curso) . ($periodo ? '-' . \Str::slug($periodo) : '') . '.xlsx';
+        return Excel::download(new SalasNotasExportLote($salas, $curso, $periodo), $filename);
     }
 }

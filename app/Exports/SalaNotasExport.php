@@ -24,14 +24,22 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
     protected int $tableRow = 5; // sempre linha 5 (estrutura fixa igual ao SalaExameExport)
     protected array $disciplines = [];
 
-    public function __construct(Sala $sala)
+    public function __construct(Sala $sala, ?string $cursoFiltro = null, ?string $periodoFiltro = null)
     {
         $this->sala         = $sala;
         // Ordem alfabética por nome — ver App\Exports\SalaExameExport para a
         // explicação de por que a ordenação é feita em PHP, não via ORDER BY.
-        $this->candidaturas = $sala->candidaturas()
-            ->where('pagamento_confirmado', true)
-            ->get()
+        $query = $sala->candidaturas()
+            ->where('pagamento_confirmado', true);
+
+        if ($cursoFiltro !== null) {
+            $query->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
+        }
+        if ($periodoFiltro !== null) {
+            $query->where('periodo', $periodoFiltro);
+        }
+
+        $this->candidaturas = $query->get()
             ->sortBy(fn ($c) => strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $c->nome)))
             ->values();
 
@@ -91,7 +99,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         ];
 
         // Construir cabeçalho da tabela dinamicamente
-        $header = ['CÓDIGO EXAME', 'NOME COMPLETO'];
+        $header = ['NÚMERO DA FICHA', 'NOME COMPLETO'];
         foreach ($this->disciplines as $d) {
             $header[] = mb_strtoupper($d['discipline'], 'UTF-8');
         }
@@ -111,7 +119,7 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Dados
         foreach ($this->candidaturas as $c) {
             $line = [];
-            $line[] = $c->codigo_exame ?? 'NÃO GERADO';
+            $line[] = $c->id;
             $line[] = mb_strtoupper(CsvSanitizer::safe($c->nome), 'UTF-8');
 
             $sum = 0.0;

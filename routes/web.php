@@ -443,6 +443,7 @@ Route::prefix('presidencia')->name('presidencia.')->middleware(['auth', 'preside
     Route::get('salas/lote-curso/pdf', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfLotePorCurso'])->name('salas.pdf-lote-curso');
     Route::get('salas/lote-curso/pdf-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfExameLotePorCurso'])->name('salas.pdf-exame-lote-curso');
     Route::get('salas/lote-curso/excel-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'excelExameLotePorCurso'])->name('salas.excel-exame-lote-curso');
+    Route::get('salas/lote-curso/excel-notas', [App\Http\Controllers\Presidencia\SalaController::class, 'excelNotasLotePorCurso'])->name('salas.excel-notas-lote-curso');
     Route::get('salas/{sala}/pdf', [App\Http\Controllers\Presidencia\SalaController::class, 'pdf'])->name('salas.pdf');
     Route::get('salas/{sala}/pdf-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'pdfExame'])->name('salas.pdf-exame');
     Route::get('salas/{sala}/excel-exame', [App\Http\Controllers\Presidencia\SalaController::class, 'excelExame'])->name('salas.excel-exame');
