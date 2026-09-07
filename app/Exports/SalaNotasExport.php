@@ -20,6 +20,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Conditional;
 use PhpOffice\PhpSpreadsheet\Cell\DataValidation;
+use PhpOffice\PhpSpreadsheet\Style\Protection;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -401,6 +402,33 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             . '&RPágina &P de &N  ' . now()->format('d/m/Y');
         $sheet->getHeaderFooter()->setOddFooter($rodape);
         $sheet->getHeaderFooter()->setEvenFooter($rodape);
+
+        // A proteção do Excel é necessária para impedir apagar a fórmula.
+        // Todas as células da pauta ficam explicitamente desbloqueadas e
+        // somente as células calculadas da Média Final ficam protegidas.
+        $lastColumnIndex = Coordinate::columnIndexFromString($lastCol);
+        for ($row = 1; $row <= $dataEnd; $row++) {
+            for ($column = 1; $column <= $lastColumnIndex; $column++) {
+                $sheet->getCellByColumnAndRow($column, $row)
+                    ->getStyle()
+                    ->getProtection()
+                    ->setLocked(Protection::PROTECTION_UNPROTECTED);
+            }
+        }
+
+        $finalGradeColumnIndex = 3 + count($this->disciplines);
+        for ($row = $tr + 1; $row <= $dataEnd; $row++) {
+            $sheet->getCellByColumnAndRow($finalGradeColumnIndex, $row)
+                ->getStyle()
+                ->getProtection()
+                ->setLocked(Protection::PROTECTION_PROTECTED);
+        }
+
+        $sheet->getProtection()
+            ->setSheet(true)
+            ->setPassword('notas')
+            ->setSelectLockedCells(false)
+            ->setSelectUnlockedCells(true);
 
         return [];
     }
