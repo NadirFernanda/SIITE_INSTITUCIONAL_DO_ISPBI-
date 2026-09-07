@@ -18,6 +18,7 @@ use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Conditional;
 
 class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, WithDrawings
 {
@@ -283,6 +284,14 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
             ]);
             $sheet->getRowDimension($r)->setRowHeight(22);
         }
+
+        $reprovado = new Conditional();
+        $reprovado->setConditionType(Conditional::CONDITION_CELLIS)
+            ->setOperatorType(Conditional::OPERATOR_EQUAL)
+            ->addCondition('"REPROVADO"');
+        $reprovado->getStyle()->getFont()->getColor()->setARGB('FFFF0000');
+        $sheet->getStyle("{$lastCol}" . ($tr + 1) . ":{$lastCol}{$dataEnd}")
+            ->setConditionalStyles([$reprovado]);
 
         // ── Congela o cabeçalho da tabela ao rolar no ecrã ──
         $sheet->freezePane('A' . ($tr + 1));
