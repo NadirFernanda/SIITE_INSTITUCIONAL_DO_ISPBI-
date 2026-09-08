@@ -1,7 +1,7 @@
 @php
     $efLabels = $efLabels ?? ['maximo'=>'Máximo','medio'=>'Médio','minimo'=>'Mínimo'];
 @endphp
-@if(request()->hasAny(['q','status','periodo','sexo','curso','estado_financeiro','trabalhador','naturalidade_provincia','data_inicio','data_fim','necessidade_especial']))
+@if(request()->hasAny(['q','status','periodo','sexo','curso','estado_financeiro','trabalhador','naturalidade_provincia','faixa_etaria','data_inicio','data_fim','necessidade_especial']))
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px;">
     <div style="background:#fff;border:2px solid #1565c0;border-radius:14px;padding:18px 22px;text-align:center;">
         <div style="font-size:1.8rem;font-weight:800;color:#1565c0;line-height:1;">{{ $candidaturas->total() }}</div>
@@ -23,6 +23,7 @@
                 <th style="padding:11px 14px;text-align:left;font-weight:700;color:#475569;">Ficha</th>
                 <th style="padding:11px 14px;text-align:left;font-weight:700;color:#475569;">Nome</th>
                 <th style="padding:11px 14px;text-align:left;font-weight:700;color:#475569;">Sexo</th>
+                <th style="padding:11px 14px;text-align:left;font-weight:700;color:#475569;">Faixa Etária</th>
                 <th style="padding:11px 14px;text-align:left;font-weight:700;color:#475569;">Curso</th>
                 <th style="padding:11px 14px;text-align:left;font-weight:700;color:#475569;">Período</th>
                 <th style="padding:11px 14px;text-align:left;font-weight:700;color:#475569;">Província</th>
@@ -44,6 +45,7 @@
                     <div style="font-size:0.75rem;color:#64748b;">{{ $c->email }}</div>
                 </td>
                 <td style="padding:10px 14px;color:#475569;">{{ $c->sexo ? ucfirst($c->sexo) : '—' }}</td>
+                <td style="padding:10px 14px;color:#475569;white-space:nowrap;">{{ $c->faixa_etaria ? (\App\Models\Candidatura::$faixasEtarias[$c->faixa_etaria] ?? '—') : '—' }}</td>
                 <td style="padding:10px 14px;color:#334155;max-width:160px;">{{ $c->curso }}</td>
                 <td style="padding:10px 14px;">
                     @php $pCor = $c->periodo==='regular' ? ['#dbeafe','#1d4ed8'] : ['#fef3c7','#92400e']; @endphp

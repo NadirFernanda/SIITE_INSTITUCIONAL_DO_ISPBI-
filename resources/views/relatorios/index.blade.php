@@ -51,7 +51,7 @@
                     style="background:#1565c0;color:#fff;border:none;border-radius:10px;padding:10px 22px;font-weight:700;cursor:pointer;font-size:0.9rem;white-space:nowrap;">
                 Filtrar
             </button>
-            @if(request()->hasAny(['q','status','periodo','sexo','curso','estado_financeiro','trabalhador','naturalidade_provincia','data_inicio','data_fim']))
+            @if(request()->hasAny(['q','status','periodo','sexo','curso','estado_financeiro','trabalhador','naturalidade_provincia','faixa_etaria','data_inicio','data_fim']))
             <a href="{{ route($routePrefix.'.relatorios') }}"
                style="background:#f1f5f9;color:#64748b;border-radius:10px;padding:10px 16px;font-weight:600;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;">
                 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -78,6 +78,16 @@
                     <option value="">Todos</option>
                     <option value="masculino" {{ request('sexo')==='masculino' ? 'selected':'' }}>Masculino</option>
                     <option value="feminino"  {{ request('sexo')==='feminino'  ? 'selected':'' }}>Feminino</option>
+                </select>
+            </div>
+            {{-- Faixa etária --}}
+            <div style="min-width:145px;">
+                <label style="display:block;font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Faixa Etária</label>
+                <select name="faixa_etaria" style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;font-size:0.87rem;background:#f8fafc;">
+                    <option value="">Todas</option>
+                    @foreach(\App\Models\Candidatura::$faixasEtarias as $val => $lbl)
+                        <option value="{{ $val }}" {{ request('faixa_etaria')===$val ? 'selected':'' }}>{{ $lbl }}</option>
+                    @endforeach
                 </select>
             </div>
             {{-- Curso --}}

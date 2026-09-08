@@ -29,6 +29,9 @@ class RelatorioController extends Controller
                 $query->where($filtro, $request->input($filtro));
             }
         }
+        if ($request->filled('faixa_etaria')) {
+            $query->faixaEtaria($request->input('faixa_etaria'));
+        }
 
         if ($request->filled('trabalhador')) {
             $query->where('trabalhador', $request->input('trabalhador') === 'sim');
@@ -77,6 +80,9 @@ class RelatorioController extends Controller
         foreach (['status','periodo','sexo','curso','estado_financeiro','naturalidade_provincia','necessidade_especial'] as $filtro) {
             if ($request->filled($filtro)) $query->where($filtro, $request->input($filtro));
         }
+        if ($request->filled('faixa_etaria')) {
+            $query->faixaEtaria($request->input('faixa_etaria'));
+        }
         if ($request->filled('trabalhador')) {
             $query->where('trabalhador', $request->input('trabalhador') === 'sim');
         }
@@ -86,7 +92,7 @@ class RelatorioController extends Controller
         $candidaturas = $query->get();
 
         $csv  = "\xEF\xBB\xBF";
-        $csv .= "Ficha,Nome,BI,Sexo,Data Nasc.,Naturalidade,Residência,Telefone,Email,Curso,Período,Habilitações,Escola,Ano Conc.,Est.Financeiro,Trabalhador,Status,Data Candidatura\n";
+        $csv .= "Ficha,Nome,BI,Sexo,Data Nasc.,Faixa Etária,Naturalidade,Residência,Telefone,Email,Curso,Período,Habilitações,Escola,Ano Conc.,Est.Financeiro,Trabalhador,Status,Data Candidatura\n";
 
         foreach ($candidaturas as $c) {
             $csv .= implode(',', [
@@ -95,6 +101,7 @@ class RelatorioController extends Controller
                 '"' . str_replace('"','""',CsvSanitizer::safe($c->bi ?? '')) . '"',
                 $c->sexo ? ucfirst($c->sexo) : '',
                 $c->data_nascimento ? $c->data_nascimento->format('d/m/Y') : '',
+                '"' . ($c->faixa_etaria ? Candidatura::$faixasEtarias[$c->faixa_etaria] : '') . '"',
                 '"' . str_replace('"','""',CsvSanitizer::safe(collect([$c->naturalidade_municipio,$c->naturalidade_provincia])->filter()->implode(', '))) . '"',
                 '"' . str_replace('"','""',CsvSanitizer::safe(collect([$c->residencia_bairro,$c->residencia_municipio])->filter()->implode(', '))) . '"',
                 '"' . str_replace('"','""',CsvSanitizer::safe($c->telefone ?? '')) . '"',

@@ -262,6 +262,59 @@ class Candidatura extends Model
         'concluida'  => '#7c3aed',
     ];
 
+    public static array $faixasEtarias = [
+        '17-20' => '17 a 20 anos',
+        '21-25' => '21 a 25 anos',
+        '26-30' => '26 a 30 anos',
+        '31-35' => '31 a 35 anos',
+        '36+'   => '36 anos ou mais',
+    ];
+
+    public function getIdadeAttribute(): ?int
+    {
+        return $this->data_nascimento?->age;
+    }
+
+    public function getFaixaEtariaAttribute(): ?string
+    {
+        $idade = $this->idade;
+
+        if ($idade === null) {
+            return null;
+        }
+
+        foreach (array_keys(static::$faixasEtarias) as $faixa) {
+            if ($faixa === '36+' && $idade >= 36) {
+                return $faixa;
+            }
+
+            [$minimo, $maximo] = array_map('intval', explode('-', $faixa));
+            if ($idade >= $minimo && $idade <= $maximo) {
+                return $faixa;
+            }
+        }
+
+        return null;
+    }
+
+    public function scopeFaixaEtaria($query, string $faixa)
+    {
+        if (! array_key_exists($faixa, static::$faixasEtarias)) {
+            return $query;
+        }
+
+        $hoje = now();
+        if ($faixa === '36+') {
+            return $query->whereDate('data_nascimento', '<=', $hoje->copy()->subYears(36));
+        }
+
+        [$minimo, $maximo] = array_map('intval', explode('-', $faixa));
+
+        return $query
+            ->whereDate('data_nascimento', '<=', $hoje->copy()->subYears($minimo))
+            ->whereDate('data_nascimento', '>', $hoje->copy()->subYears($maximo + 1));
+    }
+
     // Cursos que só decorrem num único período (ex.: Engenharia em Recursos
     // Hídricos só tem Regular, sem variante Pós-laboral) — usado para
     // restringir o período seleccionável na candidatura.
