@@ -603,6 +603,7 @@ Route::post('/revista/submeter', function (\Illuminate\Http\Request $request) {
     return redirect()->route('revista.submeter')->with('status', 'Submissão recebida e pendente para  avaliação.');
 })->name('revista.submeter.post')->middleware('throttle:3,1');
 Route::view('/biblioteca', 'pages.biblioteca')->name('biblioteca');
+Route::view('/research4life', 'pages.research4life')->name('research4life');
 Route::view('/repositorio', 'pages.repositorio')->name('repositorio');
 
 Route::view('/busca-pessoas', 'pages.pesquisa-pessoas')->name('busca-pessoas');

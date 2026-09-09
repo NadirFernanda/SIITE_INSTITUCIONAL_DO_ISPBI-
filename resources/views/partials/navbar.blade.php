@@ -60,6 +60,10 @@
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20l9-5-9-5-9 5 9 5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 12v8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Guia do Estudante
     </a>
+    <a href="{{ route('research4life') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+      Research4Life
+    </a>
     <a href="{{ route('resultados') }}" class="flex items-center gap-1 text-[#a8c4e0] hover:underline hover:text-[#F05A28] whitespace-nowrap">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 13v6M12 9v10M17 5v14" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Resultados de Exames
@@ -324,6 +328,14 @@
           <span>Guia do Estudante</span>
         </a>
 
+        <a href="{{ route('research4life') }}"
+           class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
+          <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+          </svg>
+          <span>Research4Life</span>
+        </a>
+
         <a href="{{ route('resultados') }}"
            class="mobile-nav-link group flex items-center gap-3 px-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors focus:outline-none focus:bg-orange-50">
           <svg class="w-4 h-4 flex-shrink-0 text-gray-400 group-hover:text-[#F05A28] transition-colors" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -425,7 +437,6 @@
     -webkit-backdrop-filter: blur(12px) !important;
   }
 </style>
-
 
 
 

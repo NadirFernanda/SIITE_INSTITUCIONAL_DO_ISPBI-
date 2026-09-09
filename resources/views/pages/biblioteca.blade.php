@@ -61,10 +61,12 @@
 
                                 <hr class="my-6">
 
-                                <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center">
-                                    <h2 class="text-3xl font-bold mb-4">Acesso Restrito</h2>
-                                    <p class="text-xl mb-8">Faça login com suas credenciais ISP-Bié para acessar todo o acervo</p>
-                                    <button class="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-teal-50 transition-colors">Fazer Login</button>
+                                <div class="bg-gradient-to-r from-[#0f1f3d] to-[#1d4ed8] rounded-xl p-8 text-white text-center">
+                                    <h2 class="text-3xl font-bold mb-4">Research4Life</h2>
+                                    <p class="text-xl mb-8">Aceda a recursos científicos através do acesso institucional do ISP-Bié.</p>
+                                    <a href="{{ route('research4life') }}" class="inline-flex bg-white text-[#1d4ed8] px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                                        Ver instruções de acesso
+                                    </a>
                                 </div>
 
                             </div>
@@ -76,4 +78,3 @@
 
 </div>
 @endsection
-
