@@ -39,10 +39,6 @@
             <div id="infra-dropdown" x-show="openInfra" x-cloak
               class="absolute right-0 mt-2 w-64 bg-[#1e3a5f] text-white rounded-lg shadow-lg border border-transparent z-50 p-2 text-sm">
         <a href="{{ route('sistemas') }}" class="block px-3 py-2 rounded hover:bg-[#2a4d78] hover:text-white font-semibold">Página de Sistemas</a>
-        <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer" aria-label="Abrir SGF (abre em nova aba)"
-          class="block px-3 py-2 rounded hover:bg-[#2a4d78] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F05A28]">
-          Sistema de Gestão de Facturas (SGF)
-        </a>
       </div>
     </div>
 
@@ -300,11 +296,6 @@
                x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0"
                class="bg-gray-50 border-y border-gray-100">
             <a href="{{ route('sistemas') }}" class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm font-medium text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Página de Sistemas</a>
-            <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener noreferrer"
-               class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">
-              SGF — Gestão de Facturas
-              <svg class="w-3 h-3 ml-auto flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
           </div>
         </div>
 
@@ -437,6 +428,5 @@
     -webkit-backdrop-filter: blur(12px) !important;
   }
 </style>
-
 
 

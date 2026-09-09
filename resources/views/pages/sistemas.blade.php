@@ -50,8 +50,7 @@
           </a>
         </div>
 
-        <!-- SGF (Portal Financeiro) -->
-        <div class="bg-white p-7 rounded-xl shadow-lg hover:shadow-xl transition-all border-t-4 border-[#3B82F6] interactive-card">
+        <div class="hidden">
           <div class="flex items-center justify-between mb-4">
             <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
               <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
@@ -60,11 +59,6 @@
               </svg>
             </div>
           </div>
-          <h3 class="font-bold text-gray-800 mb-2">SGF</h3>
-          <p class="text-sm text-gray-600 mb-4">Consulta de propinas e pagamentos</p>
-          <a href="https://sgf.isp-bie.ao/" target="_blank" rel="noopener" class="text-[#3B82F6] hover:text-[#2563eb] font-semibold text-sm">
-            Aceder
-          </a>
         </div>
 
         <!-- Sistema RH -->
@@ -140,4 +134,3 @@
 
 </div>
 @endsection
-
