@@ -240,7 +240,7 @@
                 Research4Life
               </h2>
               <p class="mt-2 text-sm leading-relaxed text-blue-100 sm:text-base">
-                Consulte artigos científicos, revistas e livros académicos através do acesso institucional do ISP-Bié.
+                O ISP-Bié é instituição membro e elegível do Research4Life. Consulte artigos científicos, revistas e livros académicos para fortalecer os seus estudos e a sua investigação.
               </p>
             </div>
           </div>

@@ -24,10 +24,16 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-[#0f1f3d]">Biblioteca científica internacional</h2>
+                        <h2 class="text-2xl font-bold text-[#0f1f3d]">O ISP-Bié é membro do Research4Life</h2>
                         <p class="mt-3 text-slate-600 leading-relaxed">
-                            O Research4Life disponibiliza conteúdos científicos e académicos para instituições elegíveis.
-                            Utilize este recurso para apoiar trabalhos de pesquisa, aulas, projetos e investigação.
+                            Na qualidade de instituição elegível e membro do Research4Life, o Instituto Superior
+                            Politécnico do Bié proporciona à sua comunidade académica uma porta de entrada para
+                            uma das mais importantes redes internacionais de informação científica.
+                        </p>
+                        <p class="mt-3 text-slate-600 leading-relaxed">
+                            Estudantes, docentes e investigadores podem utilizar este recurso para encontrar
+                            literatura científica de qualidade, reforçar trabalhos académicos, apoiar aulas e
+                            desenvolver investigação com maior profundidade e credibilidade.
                         </p>
                     </div>
                 </div>
