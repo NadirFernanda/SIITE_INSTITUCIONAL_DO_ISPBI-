@@ -216,6 +216,50 @@
   </section>
 
   {{-- ─────────────────────────────────────────────────────────────────
+       DESTAQUE ACADÉMICO — Research4Life
+  ───────────────────────────────────────────────────────────────────── --}}
+  <section class="py-8 sm:py-10 bg-slate-50" aria-labelledby="research4life-title">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative overflow-hidden rounded-2xl shadow-xl"
+           style="background:linear-gradient(115deg,#0f1f3d 0%,#163d70 58%,#1d4ed8 100%);">
+        <div class="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-white/[.06]" aria-hidden="true"></div>
+        <div class="absolute -bottom-28 right-1/3 h-72 w-72 rounded-full bg-[#F05A28]/[.12]" aria-hidden="true"></div>
+        <div class="relative flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:p-10">
+          <div class="flex items-start gap-4 sm:gap-6">
+            <div class="hidden sm:flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
+              <svg class="h-9 w-9 text-[#F6B38F]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+              </svg>
+            </div>
+            <div class="max-w-2xl">
+              <span class="inline-flex items-center gap-2 rounded-full bg-[#F05A28]/20 px-3 py-1 text-xs font-extrabold uppercase tracking-[.16em] text-[#ffd0bd] ring-1 ring-[#F05A28]/50">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#F6B38F]"></span>
+                Recurso académico
+              </span>
+              <h2 id="research4life-title" class="mt-3 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                Research4Life
+              </h2>
+              <p class="mt-2 text-sm leading-relaxed text-blue-100 sm:text-base">
+                Consulte artigos científicos, revistas e livros académicos através do acesso institucional do ISP-Bié.
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col items-stretch gap-3 sm:flex-row lg:flex-col lg:items-stretch lg:min-w-[210px]">
+            <a href="{{ route('research4life') }}"
+               class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F05A28] px-6 py-3 text-sm font-extrabold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#d04a1e] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white">
+              Aceder agora
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7 7-7"/></svg>
+            </a>
+            <a href="{{ route('research4life') }}" class="text-center text-sm font-semibold text-blue-100 underline-offset-4 hover:text-white hover:underline">
+              Ver instruções de acesso
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{-- ─────────────────────────────────────────────────────────────────
        NOTÍCIAS EM DESTAQUE
   ───────────────────────────────────────────────────────────────────── --}}
   <section class="py-8 sm:py-14 bg-white">
@@ -512,4 +556,3 @@
   </main>
 
 @endsection
-
