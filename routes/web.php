@@ -36,6 +36,7 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::resource('/admin/carrossel', App\Http\Controllers\Admin\CarrosselController::class)->names('admin.carrossel');
     Route::post('/admin/carrossel/{id}/toggle-publicar', [App\Http\Controllers\Admin\CarrosselController::class, 'togglePublicar'])->name('admin.carrossel.toggle-publicar');
     Route::get('/admin/alumni', [App\Http\Controllers\AdminAlumniController::class, 'index'])->name('admin.alumni');
+    Route::get('/admin/alumni/export', [App\Http\Controllers\AdminAlumniController::class, 'export'])->name('admin.alumni.export');
     Route::get('/admin/alumni/stats', [App\Http\Controllers\Admin\AlumniStatsController::class, 'edit'])->name('admin.alumni.stats');
     Route::post('/admin/alumni/stats', [App\Http\Controllers\Admin\AlumniStatsController::class, 'update'])->name('admin.alumni.stats.update');
     Route::post('/admin/alumni/{id}/toggle-publicar', [App\Http\Controllers\AdminAlumniController::class, 'togglePublicar'])->name('admin.alumni.toggle-publicar');

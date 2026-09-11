@@ -15,6 +15,11 @@
                     {{ $pendingCount }} pendente{{ $pendingCount !== 1 ? 's' : '' }} de aprovacao
                 </span>
             @endif
+            <a href="{{ route('admin.alumni.export', request()->query()) }}"
+               style="display:inline-flex;align-items:center;gap:8px;background:#F05A28;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
+               onmouseover="this.style.background='#d94b20'" onmouseout="this.style.background='#F05A28'">
+                Exportar Excel
+            </a>
             <a href="{{ route('admin.alumni.stats') }}"
                style="display:inline-flex;align-items:center;gap:8px;background:#1e3a5f;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
                onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">
@@ -37,6 +42,46 @@
             {{ session('success') }}
         </div>
     @endif
+
+    {{-- Filtros Alumni --}}
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 22px;margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+            <div>
+                <h2 style="font-size:1rem;font-weight:700;color:#1e3a5f;margin:0;">Filtrar Alumni</h2>
+                <p style="font-size:0.82rem;color:#64748b;margin:4px 0 0;">Os filtros aplicam-se à lista e ao ficheiro exportado.</p>
+            </div>
+            <a href="{{ route('admin.alumni') }}" style="font-size:0.82rem;color:#2563eb;font-weight:700;text-decoration:none;">Limpar filtros</a>
+        </div>
+        <form method="GET" action="{{ route('admin.alumni') }}" class="alumni-filter-form" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;">
+            <select name="estado" style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:9px 10px;color:#1e3a5f;background:#fff;">
+                <option value="todos" @selected(($filters['estado'] ?? 'todos') === 'todos')>Todas as situações</option>
+                <option value="trabalha" @selected(($filters['estado'] ?? '') === 'trabalha')>Trabalha</option>
+                <option value="nao_trabalha" @selected(($filters['estado'] ?? '') === 'nao_trabalha')>Não trabalha</option>
+            </select>
+            <select name="curso" style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:9px 10px;color:#1e3a5f;background:#fff;">
+                <option value="">Todos os cursos</option>
+                @foreach($filterOptions['cursos'] as $curso)<option value="{{ $curso }}" @selected(($filters['curso'] ?? '') === $curso)>{{ $curso }}</option>@endforeach
+            </select>
+            <select name="ano" style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:9px 10px;color:#1e3a5f;background:#fff;">
+                <option value="">Todos os anos</option>
+                @foreach($filterOptions['anos'] as $ano)<option value="{{ $ano }}" @selected((string) ($filters['ano'] ?? '') === (string) $ano)>{{ $ano }}</option>@endforeach
+            </select>
+            <select name="pais" style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:9px 10px;color:#1e3a5f;background:#fff;">
+                <option value="">Todos os países</option>
+                @foreach($filterOptions['paises'] as $pais)<option value="{{ $pais }}" @selected(($filters['pais'] ?? '') === $pais)>{{ $pais }}</option>@endforeach
+            </select>
+            <input type="search" name="pesquisa" value="{{ $filters['pesquisa'] ?? '' }}" placeholder="Nome, empresa ou cargo" style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:9px 10px;box-sizing:border-box;">
+            <button type="submit" style="background:#1e3a5f;color:#fff;border:0;border-radius:8px;padding:9px 18px;font-weight:700;cursor:pointer;grid-column:1/-1;width:max-content;" onmouseover="this.style.background='#0f1f3d'" onmouseout="this.style.background='#1e3a5f'">Aplicar filtros</button>
+        </form>
+    </div>
+    <style>
+        @media (max-width: 900px) {
+            .alumni-filter-form { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+        }
+        @media (max-width: 520px) {
+            .alumni-filter-form { grid-template-columns:1fr !important; }
+        }
+    </style>
     @if(session('error'))
         <div style="background:#fff3e0;border:1px solid #F05A28;color:#c2410c;padding:12px 18px;border-radius:10px;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
