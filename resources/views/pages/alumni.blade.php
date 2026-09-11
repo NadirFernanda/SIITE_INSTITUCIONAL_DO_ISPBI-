@@ -280,16 +280,16 @@
               <option value="psicologia">Psicologia</option>
             </select>
           </div>
-          <div class="flex flex-col sm:flex-row gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="flex-1">
               <label for="ano" class="block text-sm font-semibold text-gray-700 mb-1">Ano de conclusão <span class="text-red-500">*</span></label>
-              <p class="text-xs text-gray-500 mb-2">Informe o ano em que concluiu os estudos. Não é permitido indicar um ano futuro.</p>
               <input type="number" id="ano" name="ano" min="1950" max="{{ date('Y') }}" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="Ano">
             </div>
             <div class="flex-1">
               <label for="contacto" class="block text-sm font-semibold text-gray-700 mb-1">Contacto telefónico <span class="text-red-500">*</span></label>
               <input type="text" id="contacto" name="contacto" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="(+244) 9XX XXX XXX">
             </div>
+            <p class="sm:col-span-2 text-xs text-gray-500 -mt-1">Informe o ano em que concluiu os estudos. Não é permitido indicar um ano futuro.</p>
           </div>
           <div>
             <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Endereço de email <span class="text-red-500">*</span></label>
