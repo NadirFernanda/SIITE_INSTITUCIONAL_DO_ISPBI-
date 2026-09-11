@@ -6,6 +6,63 @@ use App\Models\Alumnus;
 
 class AlumniController extends Controller
 {
+    public function index(Request $request)
+    {
+        $filters = $request->validate([
+            'estado' => 'nullable|in:todos,trabalha,nao_trabalha',
+            'curso' => 'nullable|string|max:255',
+            'ano' => 'nullable|integer|min:1950|max:2100',
+            'pais' => 'nullable|string|max:100',
+            'pesquisa' => 'nullable|string|max:100',
+        ]);
+
+        $query = Alumnus::where('publicado', true);
+
+        if (($filters['estado'] ?? 'todos') === 'trabalha') {
+            $query->where('trabalha', true);
+        } elseif (($filters['estado'] ?? 'todos') === 'nao_trabalha') {
+            $query->where('trabalha', false);
+        }
+
+        $query
+            ->when($filters['curso'] ?? null, fn ($q, $curso) => $q->where('curso', $curso))
+            ->when($filters['ano'] ?? null, fn ($q, $ano) => $q->where('ano', $ano))
+            ->when($filters['pais'] ?? null, fn ($q, $pais) => $q->where('pais', $pais))
+            ->when($filters['pesquisa'] ?? null, function ($q, $pesquisa) {
+                $term = '%' . addcslashes($pesquisa, '%_') . '%';
+                $q->where(function ($inner) use ($term) {
+                    $inner->where('nome', 'like', $term)
+                        ->orWhere('curso', 'like', $term)
+                        ->orWhere('empresa', 'like', $term)
+                        ->orWhere('cargo', 'like', $term);
+                });
+            });
+
+        $alumni = $query->orderByDesc('created_at')->get();
+        $published = Alumnus::where('publicado', true)->get();
+        $working = $alumni->where('trabalha', true)->count();
+
+        return view('pages.alumni', [
+            'alumni' => $alumni,
+            'filters' => $filters,
+            'filterOptions' => [
+                'cursos' => $published->pluck('curso')->filter()->unique()->sort()->values(),
+                'anos' => $published->pluck('ano')->filter()->unique()->sortDesc()->values(),
+                'paises' => $published->pluck('pais')->filter()->unique()->sort()->values(),
+            ],
+            'stats' => [
+                'total' => $alumni->count(),
+                'working' => $working,
+                'notWorking' => $alumni->where('trabalha', false)->count(),
+                'employability' => $alumni->count() > 0 ? (int) round($working / $alumni->count() * 100) : 0,
+                'countries' => $alumni->where('trabalha', true)->pluck('pais')->filter()->unique()->count(),
+                'companies' => $alumni->where('trabalha', true)->pluck('empresa')->filter()->unique()->count(),
+                'byCourse' => $alumni->groupBy('curso')->map->count()->sortDesc(),
+                'byCountry' => $alumni->where('trabalha', true)->pluck('pais')->filter()->countBy()->sortDesc(),
+            ],
+        ]);
+    }
+
     public function show($id)
     {
         $alumnus = Alumnus::where('id', $id)

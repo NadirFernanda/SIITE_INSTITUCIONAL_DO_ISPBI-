@@ -535,10 +535,7 @@ Route::middleware(['auth', 'admin', 'throttle:1000,1'])->group(function () {
     Route::post('admin/salas/{sala}/disciplinas', [App\Http\Controllers\Admin\SalaDisciplineController::class, 'update'])->name('admin.salas.disciplines.update');
 });
 
-Route::get('/alumni', function () {
-    $alumni = App\Models\Alumnus::where('publicado', true)->orderByDesc('created_at')->get();
-    return view('pages.alumni', compact('alumni'));
-})->name('alumni');
+Route::get('/alumni', [App\Http\Controllers\AlumniController::class, 'index'])->name('alumni');
 Route::post('/alumni', [App\Http\Controllers\AlumniController::class, 'store'])->name('alumni.store')->middleware('throttle:3,1');
 
 // Rotas protegidas de Alumni - dados sensíveis apenas com autenticação

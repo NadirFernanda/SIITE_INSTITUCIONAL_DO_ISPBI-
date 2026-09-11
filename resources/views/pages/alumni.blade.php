@@ -20,6 +20,102 @@
     <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Comunidade Alumni</p>
 </div>
 
+{{-- Filtros e indicadores --}}
+<section class="mb-12">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6">
+        <div class="flex items-start justify-between gap-4 flex-wrap mb-5">
+            <div>
+                <h2 class="text-lg font-bold text-[#1e3a5f]">Consultar Alumni</h2>
+                <p class="text-sm text-gray-500 mt-1">Filtre os dados públicos por situação profissional, curso, ano ou país.</p>
+            </div>
+            <a href="{{ route('alumni') }}" class="text-sm font-semibold text-[#2563eb] hover:underline">Limpar filtros</a>
+        </div>
+        <form method="GET" action="{{ route('alumni') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div>
+                <label for="estado" class="block text-xs font-semibold text-gray-600 mb-1">Situação profissional</label>
+                <select id="estado" name="estado" class="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm">
+                    <option value="todos" @selected(($filters['estado'] ?? 'todos') === 'todos')>Todos</option>
+                    <option value="trabalha" @selected(($filters['estado'] ?? '') === 'trabalha')>Trabalha</option>
+                    <option value="nao_trabalha" @selected(($filters['estado'] ?? '') === 'nao_trabalha')>Não trabalha</option>
+                </select>
+            </div>
+            <div>
+                <label for="curso-filtro" class="block text-xs font-semibold text-gray-600 mb-1">Curso</label>
+                <select id="curso-filtro" name="curso" class="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm">
+                    <option value="">Todos os cursos</option>
+                    @foreach($filterOptions['cursos'] as $curso)
+                        <option value="{{ $curso }}" @selected(($filters['curso'] ?? '') === $curso)>{{ $curso }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="ano-filtro" class="block text-xs font-semibold text-gray-600 mb-1">Ano de conclusão</label>
+                <select id="ano-filtro" name="ano" class="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm">
+                    <option value="">Todos os anos</option>
+                    @foreach($filterOptions['anos'] as $ano)
+                        <option value="{{ $ano }}" @selected((string) ($filters['ano'] ?? '') === (string) $ano)>{{ $ano }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="pais-filtro" class="block text-xs font-semibold text-gray-600 mb-1">País de trabalho</label>
+                <select id="pais-filtro" name="pais" class="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm">
+                    <option value="">Todos os países</option>
+                    @foreach($filterOptions['paises'] as $pais)
+                        <option value="{{ $pais }}" @selected(($filters['pais'] ?? '') === $pais)>{{ $pais }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="pesquisa" class="block text-xs font-semibold text-gray-600 mb-1">Pesquisar</label>
+                <input id="pesquisa" name="pesquisa" value="{{ $filters['pesquisa'] ?? '' }}" class="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm" placeholder="Nome, empresa ou cargo">
+            </div>
+            <div class="sm:col-span-2 lg:col-span-5">
+                <button type="submit" class="bg-[#1e3a5f] hover:bg-[#2563eb] text-white font-bold rounded-xl px-6 py-2.5 text-sm transition-colors">Aplicar filtros</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mt-5">
+        @foreach([
+            ['label' => 'Resultados', 'value' => $stats['total'], 'color' => 'text-[#1e3a5f]'],
+            ['label' => 'Trabalham', 'value' => $stats['working'], 'color' => 'text-green-600'],
+            ['label' => 'Não trabalham', 'value' => $stats['notWorking'], 'color' => 'text-orange-600'],
+            ['label' => 'Empregabilidade', 'value' => $stats['employability'].'%', 'color' => 'text-blue-600'],
+            ['label' => 'Países', 'value' => $stats['countries'], 'color' => 'text-purple-600'],
+            ['label' => 'Empresas', 'value' => $stats['companies'], 'color' => 'text-indigo-600'],
+        ] as $stat)
+            <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
+                <div class="text-2xl font-bold {{ $stat['color'] }}">{{ $stat['value'] }}</div>
+                <div class="text-[10px] uppercase tracking-wide text-gray-400 mt-1">{{ $stat['label'] }}</div>
+            </div>
+        @endforeach
+    </div>
+
+    @if($stats['total'])
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+            <div class="bg-white rounded-xl border border-gray-100 p-5">
+                <h3 class="text-sm font-bold text-[#1e3a5f] mb-3">Alumni por curso</h3>
+                <div class="space-y-2">
+                    @foreach($stats['byCourse'] as $curso => $total)
+                        <div class="flex justify-between text-sm"><span class="text-gray-600">{{ $curso ?: 'Não informado' }}</span><strong class="text-[#1e3a5f]">{{ $total }}</strong></div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border border-gray-100 p-5">
+                <h3 class="text-sm font-bold text-[#1e3a5f] mb-3">Países de trabalho</h3>
+                <div class="space-y-2">
+                    @forelse($stats['byCountry'] as $pais => $total)
+                        <div class="flex justify-between text-sm"><span class="text-gray-600">{{ $pais }}</span><strong class="text-[#1e3a5f]">{{ $total }}</strong></div>
+                    @empty
+                        <p class="text-sm text-gray-400">Ainda não há países informados.</p>
+                    @endforelse
+                </div>
+            </div>
+        </div>
+    @endif
+</section>
+
 {{-- Histórico Alumni --}}
 <section class="mb-12">
     <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">
@@ -27,9 +123,6 @@
     </h2>
     <p class="text-sm text-gray-500 mb-6">Conheça as histórias de sucesso, conquistas e trajetórias inspiradoras dos ex-estudantes do ISP-Bié.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        @php
-          $alumni = \App\Models\Alumnus::where('publicado', 1)->orderByDesc('id')->get();
-        @endphp
         @forelse($alumni as $alumnus)
           <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow flex items-center gap-5">
             <div class="flex-shrink-0 w-14 h-14 rounded-full bg-[#1e3a5f] flex items-center justify-center text-white text-lg font-bold uppercase">
@@ -83,12 +176,10 @@
 
     {{-- Estatísticas Alumni --}}
     @php
-        $allAlumni     = \App\Models\Alumnus::query();
-        $alumni_count  = $allAlumni->count();
-        $working       = (clone $allAlumni)->where('trabalha', true)->count();
-        $employability = $alumni_count > 0 ? (int) round($working / $alumni_count * 100) : 0;
-        $countries     = (clone $allAlumni)->whereNotNull('pais')->where('pais','!=','')->distinct('pais')->count('pais');
-        $companies     = (clone $allAlumni)->whereNotNull('empresa')->where('empresa','!=','')->distinct('empresa')->count('empresa');
+        $alumni_count = $stats['total'];
+        $employability = $stats['employability'];
+        $countries = $stats['countries'];
+        $companies = $stats['companies'];
     @endphp
     <div class="rounded-2xl p-8 text-white" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">
         <h3 class="text-base font-bold mb-6 uppercase tracking-widest text-center opacity-90">Alumni em Números</h3>
