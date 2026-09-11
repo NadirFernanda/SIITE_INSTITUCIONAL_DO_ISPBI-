@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <h1 style="color:#fff;font-size:1.55rem;font-weight:700;margin:0;">Criar Conta</h1>
-                <p style="color:rgba(255,255,255,0.7);font-size:0.88rem;margin:6px 0 0;">Registe-se para aceder ao portal exclusivo de alumni.</p>
+                <p style="color:rgba(255,255,255,0.7);font-size:0.88rem;margin:6px 0 0;">Registe-se para aceder ao portal exclusivo de alumni. O registo é apenas para quem já concluiu os estudos.</p>
             </div>
 
             {{-- Body --}}
@@ -83,7 +83,8 @@
                     </div>
 
                     <div style="margin-bottom:18px;">
-                        <label for="ano" style="display:block;font-size:0.84rem;font-weight:600;color:#374151;margin-bottom:5px;">Ano de Conclusao</label>
+                        <label for="ano" style="display:block;font-size:0.84rem;font-weight:600;color:#374151;margin-bottom:5px;">Ano de Conclusão</label>
+                        <p style="font-size:0.76rem;color:#6b7280;margin:0 0 6px;">Indique o ano em que concluiu o curso. Não informe um ano futuro; estudantes ainda em formação não devem criar uma conta Alumni.</p>
                         <input type="number" id="ano" name="ano" value="{{ old('ano') }}" required min="1990" max="{{ date('Y') }}"
                             style="width:100%;padding:10px 13px;border:1px solid {{ $errors->has('ano') ? '#f87171' : '#d1d5db' }};border-radius:8px;font-size:0.9rem;outline:none;transition:border 0.15s;"
                             onfocus="this.style.borderColor='#1e3a5f'" onblur="this.style.borderColor='{{ $errors->has('ano') ? '#f87171' : '#d1d5db' }}'">

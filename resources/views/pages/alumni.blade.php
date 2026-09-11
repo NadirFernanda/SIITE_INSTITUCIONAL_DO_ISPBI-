@@ -258,7 +258,8 @@
         </ul>
       </div>
     @endif
-    <h3 class="text-base font-bold text-[#1e3a5f] mb-6">Formulário de Alumni</h3>
+    <h3 class="text-base font-bold text-[#1e3a5f] mb-2">Formulário de Alumni</h3>
+    <p class="text-sm text-gray-500 mb-6">Este formulário é exclusivo para ex-estudantes que já concluíram o curso. Se ainda está a estudar, aguarde até concluir os estudos para se cadastrar como Alumni.</p>
     <form method="POST" action="{{ route('alumni.store') }}" class="space-y-5">
       @csrf
       <div x-data="{ trabalha: '' }">
@@ -282,6 +283,7 @@
           <div class="flex flex-col sm:flex-row gap-4">
             <div class="flex-1">
               <label for="ano" class="block text-sm font-semibold text-gray-700 mb-1">Ano de conclusão <span class="text-red-500">*</span></label>
+              <p class="text-xs text-gray-500 mb-2">Informe o ano em que concluiu os estudos. Não é permitido indicar um ano futuro.</p>
               <input type="number" id="ano" name="ano" min="1950" max="{{ date('Y') }}" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="Ano">
             </div>
             <div class="flex-1">
