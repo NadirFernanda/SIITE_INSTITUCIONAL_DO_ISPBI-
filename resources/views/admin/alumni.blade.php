@@ -18,7 +18,7 @@
             <a href="{{ route('admin.alumni.export', request()->query()) }}"
                style="display:inline-flex;align-items:center;gap:8px;background:#F05A28;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"
                onmouseover="this.style.background='#d94b20'" onmouseout="this.style.background='#F05A28'">
-                Exportar Excel
+                Exportar PDF
             </a>
             <a href="{{ route('admin.alumni.stats') }}"
                style="display:inline-flex;align-items:center;gap:8px;background:#1e3a5f;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;text-decoration:none;"

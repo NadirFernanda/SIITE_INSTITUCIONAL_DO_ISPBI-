@@ -45,7 +45,7 @@
     <div class="header">
         @if($logoBase64)<img src="{{ $logoBase64 }}" alt="ISP-Bié">@endif
         <div class="institution">INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ</div>
-        <div class="department">ÁREA DE GESTÃO DE ALUMNI</div>
+        <div class="department">ÁREA DE GESTÃO DE ALUMNI — PAINEL ALUMNI DO SITE INSTITUCIONAL</div>
     </div>
 
     <div class="title">LISTA DE ALUMNI</div>
@@ -105,6 +105,6 @@
         </tbody>
     </table>
 
-    <div class="footer">ISP-Bié — Documento institucional de uso interno — Página gerada pelo painel Alumni</div>
+    <div class="footer">ISP-Bié — Documento institucional de uso interno — Gerado pelo Painel Alumni do Site Institucional do ISP-Bié</div>
 </body>
 </html>
