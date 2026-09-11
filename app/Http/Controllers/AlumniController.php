@@ -81,6 +81,7 @@ class AlumniController extends Controller
             'curso'     => 'required|string|max:255',
             'ano'       => 'required|integer|min:1950|max:2100',
             'contacto'  => 'required|string|max:255',
+            'email'     => 'required|email:rfc,dns|max:255',
             'trabalha'  => 'required|in:sim,nao',
             'empresa'   => 'nullable|string|max:255',
             'pais'      => 'nullable|string|max:100',
@@ -101,6 +102,7 @@ class AlumniController extends Controller
         $alumnus->curso     = $validated['curso'];
         $alumnus->ano       = $validated['ano'];
         $alumnus->contacto  = $validated['contacto'];
+        $alumnus->email     = $validated['email'];
         $alumnus->trabalha  = $trabalha;
         $alumnus->empresa   = $trabalha ? ($validated['empresa'] ?? null) : null;
         $alumnus->pais      = $trabalha ? ($validated['pais'] ?? null) : null;

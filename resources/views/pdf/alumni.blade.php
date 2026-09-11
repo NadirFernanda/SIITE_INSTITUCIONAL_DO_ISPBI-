@@ -86,7 +86,7 @@
         <tbody>
             @forelse($alumni as $alumnus)
                 @php
-                    $email = $alumnus->user?->email;
+                    $email = $alumnus->user?->email ?: $alumnus->email;
                     $empresa = trim((string) $alumnus->empresa);
                     $cargo = trim((string) $alumnus->cargo);
                     $pais = trim((string) $alumnus->pais);

@@ -15,6 +15,7 @@ class Alumnus extends Model
         'curso',
         'ano',
         'contacto',
+        'email',
         'trabalha',
         'empresa',
         'pais',

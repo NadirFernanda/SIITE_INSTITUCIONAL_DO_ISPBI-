@@ -290,6 +290,10 @@
             </div>
           </div>
           <div>
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Endereço de email <span class="text-red-500">*</span></label>
+            <input type="email" id="email" name="email" required value="{{ old('email') }}" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="seuemail@exemplo.com">
+          </div>
+          <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">Trabalha atualmente? <span class="text-red-500">*</span></label>
             <div class="flex gap-6">
               <label class="inline-flex items-center gap-2 text-sm cursor-pointer">
