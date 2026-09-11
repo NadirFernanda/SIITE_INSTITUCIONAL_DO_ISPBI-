@@ -85,15 +85,22 @@
         </thead>
         <tbody>
             @forelse($alumni as $alumnus)
+                @php
+                    $email = $alumnus->user?->email;
+                    $empresa = trim((string) $alumnus->empresa);
+                    $cargo = trim((string) $alumnus->cargo);
+                    $pais = trim((string) $alumnus->pais);
+                    $contacto = trim((string) $alumnus->contacto);
+                @endphp
                 <tr>
                     <td class="name">{{ $alumnus->nome }}</td>
-                    <td>{{ $alumnus->user?->email ?? '—' }}</td>
+                    <td>{{ $email ?: 'Não informado' }}</td>
                     <td>{{ $alumnus->curso }}</td>
                     <td>{{ $alumnus->ano }}</td>
                     <td class="{{ $alumnus->trabalha ? 'status-yes' : 'status-no' }}">{{ $alumnus->trabalha ? 'Trabalha' : 'Não trabalha' }}</td>
-                    <td>{{ $alumnus->empresa ?: '—' }}@if($alumnus->cargo)<br><small>{{ $alumnus->cargo }}</small>@endif</td>
-                    <td>{{ $alumnus->pais ?: '—' }}</td>
-                    <td>{{ $alumnus->contacto ?: '—' }}</td>
+                    <td>{{ $empresa ?: 'Não informado' }}@if($cargo)<br><small>{{ $cargo }}</small>@endif</td>
+                    <td>{{ $pais ?: 'Não informado' }}</td>
+                    <td>{{ $contacto ?: 'Não informado' }}</td>
                     <td>
                         {{ $alumnus->publicado ? 'Publicado' : 'Rascunho' }}<br>
                         {{ $alumnus->user?->aprovado ? 'Portal aprovado' : ($alumnus->user ? 'Aguarda portal' : 'Sem portal') }}
