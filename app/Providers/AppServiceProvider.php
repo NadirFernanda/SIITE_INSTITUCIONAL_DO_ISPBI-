@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('components.testemunhos-carousel', function ($view) {
             $view->with('testemunhos',
-                \App\Models\Alumnus::where('publicado', 1)->where('testemunho', true)->orderByDesc('id')->take(10)->get()
+                \App\Models\Alumnus::completed()->where('publicado', 1)->where('testemunho', true)->orderByDesc('id')->take(10)->get()
             );
         });
 

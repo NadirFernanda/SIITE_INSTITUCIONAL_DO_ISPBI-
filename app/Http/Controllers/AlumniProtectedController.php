@@ -25,11 +25,10 @@ class AlumniProtectedController extends Controller
      */
     public function show($id)
     {
-        $alumnus = Alumnus::where('id', $id)
+        $alumnus = Alumnus::completed()->where('id', $id)
             ->where('publicado', true)
             ->firstOrFail();
 
         return view('pages.alumni-protected-show', compact('alumnus'));
     }
 }
-

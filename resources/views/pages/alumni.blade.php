@@ -282,7 +282,7 @@
           <div class="flex flex-col sm:flex-row gap-4">
             <div class="flex-1">
               <label for="ano" class="block text-sm font-semibold text-gray-700 mb-1">Ano de conclusão <span class="text-red-500">*</span></label>
-              <input type="number" id="ano" name="ano" min="1950" max="2100" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="Ano">
+              <input type="number" id="ano" name="ano" min="1950" max="{{ date('Y') }}" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition" placeholder="Ano">
             </div>
             <div class="flex-1">
               <label for="contacto" class="block text-sm font-semibold text-gray-700 mb-1">Contacto telefónico <span class="text-red-500">*</span></label>

@@ -91,7 +91,7 @@ class AuthController extends Controller
             'email'    => 'required|email:rfc,dns|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
             'curso'    => 'required|string|in:' . implode(',', $cursosPermitidos),
-            'ano'      => 'required|integer|min:1990|max:2030',
+            'ano'      => 'required|integer|min:1990|max:' . now()->year,
         ], [
             'nome.required'       => 'O nome é obrigatório.',
             'nome.max'            => 'O nome não pode ter mais de 255 caracteres.',
@@ -106,7 +106,7 @@ class AuthController extends Controller
             'ano.required'        => 'O ano de conclusão é obrigatório.',
             'ano.integer'         => 'O ano de conclusão deve ser um número inteiro.',
             'ano.min'             => 'O ano de conclusão deve ser a partir de 1990.',
-            'ano.max'             => 'O ano de conclusão não pode ser superior a 2030.',
+            'ano.max'             => 'O ano de conclusão não pode ser superior ao ano actual.',
         ]);
 
         // Defesa em profundidade contra CVE-2026-48019 (bypass da validação

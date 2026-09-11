@@ -77,7 +77,7 @@ Route::get('/busca', function () {
 })->name('busca');
 
 Route::get('/', function () {
-    $testemunhos = Alumnus::where('publicado', true)
+    $testemunhos = Alumnus::completed()->where('publicado', true)
         ->where('testemunho', true)
         ->orderByDesc('created_at')
         ->take(6)
@@ -546,7 +546,7 @@ Route::middleware('auth')->group(function () {
 
 // Fallback: rota pública /alumni/{id} sem dados sensíveis (redirecionada ou minificada)
 Route::get('/alumni/{id}', function ($id) {
-    $alumnus = App\Models\Alumnus::where('id', $id)
+    $alumnus = App\Models\Alumnus::completed()->where('id', $id)
         ->where('publicado', true)
         ->where('testemunho', true)
         ->firstOrFail();

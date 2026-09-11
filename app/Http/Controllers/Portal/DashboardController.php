@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
         $alumnus = Alumnus::where('user_id', auth()->id())->first();
 
-        $totalAlumni     = Alumnus::where('publicado', true)->count();
+        $totalAlumni     = Alumnus::completed()->where('publicado', true)->count();
         $totalDocumentos = AlumniDocumento::count();
         $totalNoticias   = Noticia::where('publicada', true)->where('para_alumni', true)->count();
 

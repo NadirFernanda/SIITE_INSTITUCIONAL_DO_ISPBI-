@@ -12,12 +12,12 @@ class AlumniController extends Controller
         $filters = $request->validate([
             'estado' => 'nullable|in:todos,trabalha,nao_trabalha',
             'curso' => 'nullable|string|max:255',
-            'ano' => 'nullable|integer|min:1950|max:2100',
+            'ano' => 'nullable|integer|min:1950|max:' . now()->year,
             'pais' => 'nullable|string|max:100',
             'pesquisa' => 'nullable|string|max:100',
         ]);
 
-        $query = Alumnus::where('publicado', true);
+        $query = Alumnus::completed()->where('publicado', true);
 
         if (($filters['estado'] ?? 'todos') === 'trabalha') {
             $query->where('trabalha', true);
@@ -40,7 +40,7 @@ class AlumniController extends Controller
             });
 
         $alumni = $query->orderByDesc('created_at')->get();
-        $published = Alumnus::where('publicado', true)->get();
+        $published = Alumnus::completed()->where('publicado', true)->get();
         $working = $alumni->where('trabalha', true)->count();
 
         return view('pages.alumni', [
@@ -66,7 +66,7 @@ class AlumniController extends Controller
 
     public function show($id)
     {
-        $alumnus = Alumnus::where('id', $id)
+        $alumnus = Alumnus::completed()->where('id', $id)
             ->where('publicado', true)
             ->where('testemunho', true)
             ->firstOrFail();
@@ -79,7 +79,7 @@ class AlumniController extends Controller
         $validated = $request->validate([
             'nome'      => 'required|string|max:255',
             'curso'     => 'required|string|max:255',
-            'ano'       => 'required|integer|min:1950|max:2100',
+            'ano'       => 'required|integer|min:1950|max:' . now()->year,
             'contacto'  => 'required|string|max:255',
             'email'     => 'required|email:rfc,dns|max:255',
             'trabalha'  => 'required|in:sim,nao',

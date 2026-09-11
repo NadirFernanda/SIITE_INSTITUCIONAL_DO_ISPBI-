@@ -10,7 +10,7 @@ class DiretorioController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Alumnus::where('publicado', true);
+        $query = Alumnus::completed()->where('publicado', true);
 
         if ($request->filled('curso')) {
             $query->where('curso', $request->input('curso'));
@@ -23,7 +23,7 @@ class DiretorioController extends Controller
 
         $alumni = $query->orderBy('nome')->get();
 
-        $cursos = Alumnus::where('publicado', true)
+        $cursos = Alumnus::completed()->where('publicado', true)
             ->select('curso')
             ->distinct()
             ->orderBy('curso')

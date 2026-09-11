@@ -84,7 +84,7 @@
 
                     <div style="margin-bottom:18px;">
                         <label for="ano" style="display:block;font-size:0.84rem;font-weight:600;color:#374151;margin-bottom:5px;">Ano de Conclusao</label>
-                        <input type="number" id="ano" name="ano" value="{{ old('ano') }}" required min="1990" max="2030"
+                        <input type="number" id="ano" name="ano" value="{{ old('ano') }}" required min="1990" max="{{ date('Y') }}"
                             style="width:100%;padding:10px 13px;border:1px solid {{ $errors->has('ano') ? '#f87171' : '#d1d5db' }};border-radius:8px;font-size:0.9rem;outline:none;transition:border 0.15s;"
                             onfocus="this.style.borderColor='#1e3a5f'" onblur="this.style.borderColor='{{ $errors->has('ano') ? '#f87171' : '#d1d5db' }}'">
                     </div>

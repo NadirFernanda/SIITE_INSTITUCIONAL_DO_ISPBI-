@@ -33,6 +33,11 @@ class Alumnus extends Model
         'ano'       => 'integer',
     ];
 
+    public function scopeCompleted($query)
+    {
+        return $query->where('ano', '<=', now()->year);
+    }
+
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');

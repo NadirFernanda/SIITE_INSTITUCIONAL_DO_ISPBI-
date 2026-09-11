@@ -13,7 +13,7 @@ class AdminAlumniController extends Controller
     {
         $filters = $this->validatedFilters($request);
         $alumni = $this->filteredQuery($filters)->orderByDesc('created_at')->get();
-        $allAlumni = Alumnus::query()->get();
+        $allAlumni = Alumnus::completed()->get();
 
         $pendingCount = User::where('role', 'alumni')
             ->where('aprovado', false)
@@ -46,7 +46,7 @@ class AdminAlumniController extends Controller
         return $request->validate([
             'estado' => 'nullable|in:todos,trabalha,nao_trabalha',
             'curso' => 'nullable|string|max:255',
-            'ano' => 'nullable|integer|min:1950|max:2100',
+            'ano' => 'nullable|integer|min:1950|max:' . now()->year,
             'pais' => 'nullable|string|max:100',
             'pesquisa' => 'nullable|string|max:100',
         ]);
@@ -54,7 +54,7 @@ class AdminAlumniController extends Controller
 
     private function filteredQuery(array $filters)
     {
-        $query = Alumnus::with('user');
+        $query = Alumnus::completed()->with('user');
 
         if (($filters['estado'] ?? 'todos') === 'trabalha') {
             $query->where('trabalha', true);
