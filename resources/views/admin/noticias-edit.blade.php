@@ -188,7 +188,7 @@
                            onmouseover="this.style.borderColor='#1e3a5f';this.style.background='#eaeff5'"
                            onmouseout="this.style.borderColor='#d1d5db';this.style.background='#fafafa'">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                        <span id="docs-label" style="font-size:0.8rem;color:#64748b;text-align:center;">Clique para adicionar documentos<br><span style="color:#94a3b8;font-size:0.76rem;">PDF, DOC, DOCX — máx. 10 MB cada</span></span>
+                        <span id="docs-label" style="font-size:0.8rem;color:#64748b;text-align:center;">Clique para adicionar documentos<br><span style="color:#94a3b8;font-size:0.76rem;">PDF, DOC, DOCX — máx. 25 MB cada</span></span>
                         <input type="file" name="documentos[]" id="documentos" multiple
                                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                                style="display:none;" onchange="updateDocsLabel(this)">
@@ -217,7 +217,7 @@
                         + '</div>';
                 });
             } else {
-                label.innerHTML = 'Clique para adicionar documentos<br><span style="color:#94a3b8;font-size:0.76rem;">PDF, DOC, DOCX — máx. 10 MB cada</span>';
+                label.innerHTML = 'Clique para adicionar documentos<br><span style="color:#94a3b8;font-size:0.76rem;">PDF, DOC, DOCX — máx. 25 MB cada</span>';
             }
         }
         </script>
