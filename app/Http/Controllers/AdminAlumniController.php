@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Alumnus;
 use App\Models\User;
-use App\Exports\AlumniExport;
-use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminAlumniController extends Controller
 {
@@ -37,7 +36,9 @@ class AdminAlumniController extends Controller
         $filters = $this->validatedFilters($request);
         $alumni = $this->filteredQuery($filters)->orderByDesc('created_at')->get();
 
-        return Excel::download(new AlumniExport($alumni), 'alumni-' . now()->format('Y-m-d_H-i') . '.xlsx');
+        return Pdf::loadView('pdf.alumni', compact('alumni', 'filters'))
+            ->setPaper('a4', 'landscape')
+            ->download('alumni-' . now()->format('Y-m-d_H-i') . '.pdf');
     }
 
     private function validatedFilters(Request $request): array
