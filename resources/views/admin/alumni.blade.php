@@ -37,6 +37,12 @@
             {{ session('success') }}
         </div>
     @endif
+    @if(session('error'))
+        <div style="background:#fff3e0;border:1px solid #F05A28;color:#c2410c;padding:12px 18px;border-radius:10px;margin-bottom:20px;display:flex;align-items:center;gap:10px;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            {{ session('error') }}
+        </div>
+    @endif
 
     {{-- Empty state --}}
     @if($alumni->isEmpty())

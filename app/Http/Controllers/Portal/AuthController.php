@@ -7,7 +7,10 @@ use App\Models\Alumnus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use App\Services\AlumniIdentityService;
 
 class AuthController extends Controller
 {
@@ -116,25 +119,46 @@ class AuthController extends Controller
             return back()->withInput()->withErrors(['email' => 'O endereço de e-mail indicado não é válido.']);
         }
 
-        $user = new User();
-        $user->name     = $validated['nome'];
-        $user->email    = $emailLimpo;
-        $user->password = Hash::make($validated['password']);
-        $user->forceFill([
-            'role'     => 'alumni',
-            'aprovado' => false,
-        ]);
-        $user->save();
+        DB::transaction(function () use ($validated, $emailLimpo) {
+            $matches = AlumniIdentityService::matches(
+                $validated['nome'],
+                $validated['curso'],
+                (int) $validated['ano']
+            );
 
-        Alumnus::create([
-            'nome'      => $validated['nome'],
-            'curso'     => $validated['curso'],
-            'ano'       => $validated['ano'],
-            'user_id'   => $user->id,
-            'contacto'  => '',
-            'trabalha'  => false,
-            'publicado' => false,
-        ]);
+            if ($matches->count() > 1 || $matches->contains(fn (Alumnus $alumnus) => $alumnus->user_id)) {
+                throw ValidationException::withMessages([
+                    'nome' => 'Já existe um cadastro Alumni com estes dados. Contacte a administração para recuperar o seu acesso.',
+                ]);
+            }
+
+            $user = new User();
+            $user->name     = $validated['nome'];
+            $user->email    = $emailLimpo;
+            $user->password = Hash::make($validated['password']);
+            $user->forceFill([
+                'role'     => 'alumni',
+                'aprovado' => false,
+            ]);
+            $user->save();
+
+            $alumnus = $matches->first();
+            if ($alumnus) {
+                $alumnus->user_id = $user->id;
+                $alumnus->save();
+                return;
+            }
+
+            Alumnus::create([
+                'nome'      => $validated['nome'],
+                'curso'     => $validated['curso'],
+                'ano'       => $validated['ano'],
+                'user_id'   => $user->id,
+                'contacto'  => '',
+                'trabalha'  => false,
+                'publicado' => false,
+            ]);
+        });
 
         return redirect()->route('portal.pendente')
             ->with('success', 'A sua conta está a ser analisada pelo administrador. Receberá acesso em breve.');

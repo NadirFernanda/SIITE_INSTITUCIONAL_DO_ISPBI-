@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Alumnus;
+use App\Services\AlumniIdentityService;
 
 class AlumniController extends Controller
 {
@@ -88,6 +89,12 @@ class AlumniController extends Controller
         ]);
 
         $trabalha = $validated['trabalha'] === 'sim';
+
+        if (AlumniIdentityService::matches($validated['nome'], $validated['curso'], (int) $validated['ano'])->isNotEmpty()) {
+            return back()->withInput()->withErrors([
+                'nome' => 'Este alumni já está registado. Se já possui conta, utilize o Portal Alumni.',
+            ]);
+        }
 
         $alumnus = new Alumnus();
         $alumnus->nome      = $validated['nome'];

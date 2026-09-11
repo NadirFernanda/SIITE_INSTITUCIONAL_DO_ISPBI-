@@ -11,7 +11,11 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = User::orderBy('role')->orderBy('name')->get();
+        // Alumni have their own management area with profile and approval actions.
+        $usuarios = User::where('role', '!=', 'alumni')
+            ->orderBy('role')
+            ->orderBy('name')
+            ->get();
         return view('admin.usuarios', compact('usuarios'));
     }
 
@@ -21,6 +25,10 @@ class UsuarioController extends Controller
      */
     public function show(User $usuario)
     {
+        if ($usuario->hasRole('alumni')) {
+            return redirect()->route('admin.alumni');
+        }
+
         return view('admin.usuario', compact('usuario'));
     }
 
@@ -49,6 +57,10 @@ class UsuarioController extends Controller
 
     public function resetPassword(Request $request, User $usuario)
     {
+        if ($usuario->hasRole('alumni')) {
+            return redirect()->route('admin.alumni')->with('error', 'Alumni são geridos no painel Alumni.');
+        }
+
         // Nunca alterar a própria conta por aqui, e nunca alterar outro admin
         if ($usuario->id === Auth::id() || $usuario->hasRole('admin')) {
             return redirect()->route('admin.usuarios')->with('error', 'Operação não permitida.');
@@ -65,6 +77,10 @@ class UsuarioController extends Controller
 
     public function uploadSignature(Request $request, User $usuario)
     {
+        if ($usuario->hasRole('alumni')) {
+            return redirect()->route('admin.alumni')->with('error', 'Alumni são geridos no painel Alumni.');
+        }
+
         if (! $usuario->hasRole('daac')) {
             return redirect()->route('admin.usuarios')->with('error', 'Apenas utilizadores DAAC podem ter assinatura digitalizada.');
         }
@@ -90,12 +106,20 @@ class UsuarioController extends Controller
 
     public function removeSignature(User $usuario)
     {
+        if ($usuario->hasRole('alumni')) {
+            return redirect()->route('admin.alumni')->with('error', 'Alumni são geridos no painel Alumni.');
+        }
+
         $usuario->forceFill(['signature_image' => null])->save();
         return redirect()->route('admin.usuarios')->with('success', 'Assinatura de ' . $usuario->name . ' removida.');
     }
 
     public function destroy(User $usuario)
     {
+        if ($usuario->hasRole('alumni')) {
+            return redirect()->route('admin.alumni')->with('error', 'Alumni são geridos no painel Alumni.');
+        }
+
         // Proteger: não apagar a própria conta, não apagar outros admins
         if ($usuario->id === Auth::id() || $usuario->role === 'admin') {
             return redirect()->route('admin.usuarios')->with('error', 'Não é possível eliminar esta conta.');

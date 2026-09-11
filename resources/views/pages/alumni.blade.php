@@ -79,11 +79,11 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mt-5">
         @foreach([
             ['label' => 'Resultados', 'value' => $stats['total'], 'color' => 'text-[#1e3a5f]'],
-            ['label' => 'Trabalham', 'value' => $stats['working'], 'color' => 'text-green-600'],
-            ['label' => 'Não trabalham', 'value' => $stats['notWorking'], 'color' => 'text-orange-600'],
-            ['label' => 'Empregabilidade', 'value' => $stats['employability'].'%', 'color' => 'text-blue-600'],
-            ['label' => 'Países', 'value' => $stats['countries'], 'color' => 'text-purple-600'],
-            ['label' => 'Empresas', 'value' => $stats['companies'], 'color' => 'text-indigo-600'],
+            ['label' => 'Trabalham', 'value' => $stats['working'], 'color' => 'text-[#2563eb]'],
+            ['label' => 'Não trabalham', 'value' => $stats['notWorking'], 'color' => 'text-[#F05A28]'],
+            ['label' => 'Empregabilidade', 'value' => $stats['employability'].'%', 'color' => 'text-[#1e3a5f]'],
+            ['label' => 'Países', 'value' => $stats['countries'], 'color' => 'text-[#2563eb]'],
+            ['label' => 'Empresas', 'value' => $stats['companies'], 'color' => 'text-[#F05A28]'],
         ] as $stat)
             <div class="bg-white rounded-xl border border-gray-100 p-4 text-center shadow-sm">
                 <div class="text-2xl font-bold {{ $stat['color'] }}">{{ $stat['value'] }}</div>

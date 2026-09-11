@@ -5,7 +5,7 @@
 
     <div style="margin-bottom:28px;">
         <h1 style="font-size:1.6rem;font-weight:700;color:#1a2332;margin:0 0 4px;">Utilizadores</h1>
-        <p style="color:#64748b;font-size:0.95rem;margin:0;">Contas com acesso ao painel — técnicos e administradores</p>
+        <p style="color:#64748b;font-size:0.95rem;margin:0;">Contas internas com acesso ao painel — os alumni são geridos no painel Alumni.</p>
     </div>
 
     {{-- Flash --}}
