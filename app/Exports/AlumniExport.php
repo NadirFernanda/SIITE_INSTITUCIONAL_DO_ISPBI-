@@ -15,7 +15,6 @@ class AlumniExport implements FromCollection, WithHeadings
     public function collection(): Collection
     {
         return $this->alumni->map(fn ($alumnus) => [
-            'ID' => $alumnus->id,
             'Nome' => $alumnus->nome,
             'Email' => $alumnus->user?->email ?? '',
             'Curso' => $alumnus->curso,
@@ -35,7 +34,7 @@ class AlumniExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
-            'ID', 'Nome', 'Email', 'Curso', 'Ano de conclusão',
+            'Nome', 'Email', 'Curso', 'Ano de conclusão',
             'Situação profissional', 'Empresa', 'Cargo', 'País', 'Contacto',
             'Publicado', 'Testemunho', 'Portal aprovado', 'Data de registo',
         ];
