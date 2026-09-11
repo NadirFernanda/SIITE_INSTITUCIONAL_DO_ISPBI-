@@ -24,7 +24,7 @@
         .title { text-align: center; color: #1e3a5f; font-size: 15pt; font-weight: bold; margin: 3mm 0 1mm; }
         .subtitle { text-align: center; color: #64748b; font-size: 8.5pt; margin-bottom: 5mm; }
         .summary { width: 100%; border-collapse: separate; border-spacing: 3mm 0; margin-bottom: 5mm; }
-        .summary td { width: 25%; background: #eaeff5; border-top: 3px solid #2563eb; padding: 3mm; text-align: center; }
+        .summary td { width: 20%; background: #eaeff5; border-top: 3px solid #2563eb; padding: 3mm; text-align: center; }
         .summary strong { display: block; color: #1e3a5f; font-size: 13pt; }
         .summary span { color: #475569; font-size: 7.5pt; text-transform: uppercase; }
         .filters { color: #475569; border-left: 3px solid #F05A28; padding: 2mm 3mm; margin-bottom: 4mm; }
@@ -49,12 +49,13 @@
     </div>
 
     <div class="title">LISTA DE ALUMNI</div>
-    <div class="subtitle">Relatório institucional de alumni registados — gerado em {{ now()->format('d/m/Y H:i') }}</div>
+    <div class="subtitle">Relatório institucional de alumni registados — gerado em {{ now()->format('d/m/Y H:i') }} — o relatório administrativo inclui rascunhos</div>
 
     <table class="summary">
         <tr>
-            <td><strong>{{ $alumni->count() }}</strong><span>Alumni encontrados</span></td>
-            <td><strong>{{ $alumni->where('trabalha', true)->count() }}</strong><span>Trabalham</span></td>
+            <td><strong>{{ $alumni->count() }}</strong><span>Registados</span></td>
+            <td><strong>{{ $alumni->where('trabalha', true)->count() }}</strong><span>Trabalham — todos</span></td>
+            <td><strong>{{ $alumni->where('trabalha', true)->where('publicado', true)->count() }}</strong><span>Trabalham — publicados</span></td>
             <td><strong>{{ $alumni->where('trabalha', false)->count() }}</strong><span>Não trabalham</span></td>
             <td><strong>{{ $alumni->where('publicado', true)->count() }}</strong><span>Publicados</span></td>
         </tr>
