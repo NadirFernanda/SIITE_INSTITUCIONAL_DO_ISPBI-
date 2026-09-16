@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidatura;
+use App\Exports\CandidaturasEstatisticasExport;
+use App\Services\RelatorioCandidaturasService;
 use App\Support\CsvSanitizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RelatorioController extends Controller
 {
     /** Página de relatórios — filtros + tabela */
-    public function index(Request $request, string $layout = 'layouts.admin')
+    public function index(Request $request, string $layout = 'layouts.admin', ?RelatorioCandidaturasService $service = null)
     {
         $query = Candidatura::query()
             ->orderByDesc('created_at');
@@ -67,7 +70,17 @@ class RelatorioController extends Controller
 
         $stats = compact('total','masc','fem','regular','posLab');
 
-        return view('relatorios.index', compact('candidaturas','stats','provincias','layout'));
+        $estatisticas = ($service ?? app(RelatorioCandidaturasService::class))->estatisticas();
+
+        return view('relatorios.index', compact('candidaturas','stats','provincias','layout','estatisticas'));
+    }
+
+    public function exportExcel(RelatorioCandidaturasService $service)
+    {
+        return Excel::download(
+            new CandidaturasEstatisticasExport($service),
+            'relatorio_estatistico_candidaturas_' . date('Ymd_Hi') . '.xlsx'
+        );
     }
 
     /** Export CSV com os mesmos filtros */

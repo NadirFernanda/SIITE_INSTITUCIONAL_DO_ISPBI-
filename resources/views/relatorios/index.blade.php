@@ -12,11 +12,17 @@
             <h1 style="font-size:1.5rem;font-weight:700;color:#1a2332;margin:0 0 3px;">Relatórios de Candidaturas</h1>
             <p style="color:#64748b;font-size:0.92rem;margin:0;">Filtre e exporte dados de candidaturas</p>
         </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <a href="{{ route($routePrefix.'.relatorios.export.excel') }}"
+           style="display:inline-flex;align-items:center;gap:7px;background:#0e5c2f;color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+            Exportar Excel
+        </a>
         <a href="{{ route($routePrefix.'.relatorios.export') }}{{ request()->getQueryString() ? '?'.request()->getQueryString() : '' }}"
            style="display:inline-flex;align-items:center;gap:7px;background:#22c55e;color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:0.88rem;text-decoration:none;">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
             Exportar CSV
         </a>
+        </div>
     </div>
 
     {{-- KPIs --}}
@@ -33,6 +39,45 @@
             <div style="font-size:0.75rem;color:#64748b;margin-top:4px;font-weight:600;">{{ $lbl }}</div>
         </div>
         @endforeach
+    </div>
+
+    {{-- Relatório estatístico cruzado por período --}}
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 24px;margin-bottom:20px;">
+        <h2 style="font-size:1.15rem;color:#1a2332;margin:0 0 4px;">Relatório Estatístico de Candidaturas</h2>
+        <p style="color:#64748b;font-size:0.85rem;margin:0 0 18px;">Cada bloco compara Regular, Pós-Laboral e o total das candidaturas concluídas.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px;">
+        @foreach($estatisticas['blocos'] as $titulo => $linhas)
+            <div style="border:1px solid #d9e2ec;border-radius:10px;overflow:hidden;">
+                <div style="background:#e3f2fd;color:#1565c0;font-weight:800;padding:9px 12px;">{{ mb_strtoupper($titulo, 'UTF-8') }}</div>
+                <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+                    <thead>
+                        <tr style="background:#0e5c2f;color:#fff;">
+                            <th style="padding:7px 10px;text-align:left;">Categoria</th>
+                            <th style="padding:7px 10px;text-align:right;">Regular</th>
+                            <th style="padding:7px 10px;text-align:right;">Pós-Laboral</th>
+                            <th style="padding:7px 10px;text-align:right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($linhas as $linha)
+                        <tr style="border-bottom:1px solid #edf2f7;">
+                            <td style="padding:6px 10px;">{{ $linha['label'] }}</td>
+                            <td style="padding:6px 10px;text-align:right;">{{ number_format($linha['regular'], 0, ',', '.') }}</td>
+                            <td style="padding:6px 10px;text-align:right;">{{ number_format($linha['pos-laboral'], 0, ',', '.') }}</td>
+                            <td style="padding:6px 10px;text-align:right;font-weight:700;">{{ number_format($linha['total'], 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
+                    <tr style="background:#edf7f1;font-weight:800;">
+                        <td style="padding:7px 10px;">Total</td>
+                        <td style="padding:7px 10px;text-align:right;">{{ number_format(collect($linhas)->sum('regular'), 0, ',', '.') }}</td>
+                        <td style="padding:7px 10px;text-align:right;">{{ number_format(collect($linhas)->sum('pos-laboral'), 0, ',', '.') }}</td>
+                        <td style="padding:7px 10px;text-align:right;">{{ number_format(collect($linhas)->sum('total'), 0, ',', '.') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        @endforeach
+        </div>
     </div>
 
     {{-- Filtros --}}

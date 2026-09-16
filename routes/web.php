@@ -271,6 +271,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin', 'throttle:1
         return app(\App\Http\Controllers\RelatorioController::class)->index($r, 'layouts.admin');
     })->name('relatorios');
     Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
+    Route::get('relatorios/export/excel', [\App\Http\Controllers\RelatorioController::class, 'exportExcel'])->name('relatorios.export.excel');
 
     // Candidaturas admin
     Route::get('candidaturas/export', [App\Http\Controllers\Admin\CandidaturaController::class, 'export'])->name('candidaturas.export');
@@ -337,6 +338,7 @@ Route::prefix('daac')->name('daac.')->middleware(['auth', 'daac', 'throttle:1000
         return app(\App\Http\Controllers\RelatorioController::class)->index($r, 'layouts.daac');
     })->name('relatorios');
     Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
+    Route::get('relatorios/export/excel', [\App\Http\Controllers\RelatorioController::class, 'exportExcel'])->name('relatorios.export.excel');
 
     // Salas
     Route::get('salas', [App\Http\Controllers\Daac\SalaController::class, 'index'])->name('salas.index');
@@ -358,6 +360,7 @@ Route::prefix('tecnico')->name('tecnico.')->middleware(['auth', 'tecnico', 'thro
         return app(\App\Http\Controllers\RelatorioController::class)->index($r, 'layouts.tecnico');
     })->name('relatorios');
     Route::get('relatorios/export', [\App\Http\Controllers\RelatorioController::class, 'export'])->name('relatorios.export');
+    Route::get('relatorios/export/excel', [\App\Http\Controllers\RelatorioController::class, 'exportExcel'])->name('relatorios.export.excel');
 
     // Candidaturas
     Route::get('candidaturas/export', [App\Http\Controllers\Tecnico\CandidaturaController::class, 'export'])->name('candidaturas.export');
