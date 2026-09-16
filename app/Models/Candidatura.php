@@ -288,7 +288,12 @@ class Candidatura extends Model
                 return $faixa;
             }
 
-            [$minimo, $maximo] = array_map('intval', explode('-', $faixa));
+            $limites = explode('-', $faixa);
+            if (count($limites) !== 2) {
+                continue;
+            }
+
+            [$minimo, $maximo] = array_map('intval', $limites);
             if ($idade >= $minimo && $idade <= $maximo) {
                 return $faixa;
             }
