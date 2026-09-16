@@ -13,10 +13,13 @@ class RelatorioController extends Controller
     public function index(Request $request, string $layout = 'layouts.admin')
     {
         $query = Candidatura::query()
-            ->where('pagamento_confirmado', true)
             ->orderByDesc('created_at');
 
         // ── Filtros ──────────────────────────────────────────────────────────
+        if (! $request->filled('status')) {
+            $query->where('status', 'concluida');
+        }
+
         if ($request->filled('q')) {
             $query->buscaTexto($request->input('q'), [
                 'nome', 'bi', 'email', 'telefone', 'escola_origem',
@@ -71,8 +74,11 @@ class RelatorioController extends Controller
     public function export(Request $request)
     {
         $query = Candidatura::query()
-            ->where('pagamento_confirmado', true)
             ->orderByDesc('created_at');
+
+        if (! $request->filled('status')) {
+            $query->where('status', 'concluida');
+        }
 
         if ($request->filled('q')) {
             $query->buscaTexto($request->input('q'), ['nome', 'bi', 'email']);
