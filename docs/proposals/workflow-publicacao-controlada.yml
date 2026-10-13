@@ -1,0 +1,140 @@
+# PROPOSTA INERTE. Este ficheiro está fora de .github/workflows.
+# NÃO mover para .github/workflows antes de implementar/rever os scripts
+# scripts/release/build-artifact.sh e scripts/release/publish-artifact.sh,
+# substituir as referências a tags das actions por SHAs verificados,
+# configurar revisores obrigatórios no ambiente production e retirar
+# o gatilho push do workflow de deploy actual.
+# Não há qualquer passo de php artisan migrate neste modelo.
+name: Proposed controlled production release
+
+"on":
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Commit SHA completo aprovado e validado
+        required: true
+        type: string
+      change_id:
+        description: Identificador da aprovação operacional
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: isp_bie_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d isp_bie_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_sha }}
+          fetch-depth: 0
+      - name: Confirmar SHA e origem
+        shell: bash
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          git fetch --no-tags origin main
+          git merge-base --is-ancestor "$RELEASE_SHA" origin/main
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, bcmath, intl, xml, pdo_pgsql, gd, zip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Instalar e validar em PostgreSQL isolado
+        shell: bash
+        run: |
+          set -euo pipefail
+          composer install --no-interaction --prefer-dist --no-progress
+          npm ci
+          npm run build
+          psql -h 127.0.0.1 -p 55432 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'CREATE ROLE isp_bie_test LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE;'
+          psql -h 127.0.0.1 -p 55432 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'ALTER DATABASE isp_bie_test OWNER TO isp_bie_test;'
+          vendor/bin/pest --colors=always
+
+  package:
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_sha }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, bcmath, intl, xml, pdo_pgsql, gd, zip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.12.0'
+      - name: Construir artefacto imutável sem segredos
+        shell: bash
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          test -x scripts/release/build-artifact.sh
+          scripts/release/build-artifact.sh "$RELEASE_SHA"
+          cd dist
+          sha256sum -c release.tar.gz.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ inputs.release_sha }}
+          path: |
+            dist/release.tar.gz
+            dist/release.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    needs: package
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_sha }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-${{ inputs.release_sha }}
+          path: dist
+      - name: Verificar artefacto e invocar publicador aprovado
+        shell: bash
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+          CHANGE_ID: ${{ inputs.change_id }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          (cd dist && sha256sum -c release.tar.gz.sha256)
+          test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
+          test -n "$CHANGE_ID"
+          test -x scripts/release/publish-artifact.sh
+          scripts/release/publish-artifact.sh dist/release.tar.gz "$RELEASE_SHA" "$CHANGE_ID"

@@ -41,6 +41,8 @@ composer.lock
 *.sublime-project
 
 # Ignorar arquivos de deploy
+.test-runtime/
+.env.testing
 .env.backup
 .env.production
 .env.staging

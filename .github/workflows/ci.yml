@@ -10,6 +10,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: isp_bie_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d isp_bie_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
     steps:
       - uses: actions/checkout@v4
 
@@ -17,7 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: mbstring, bcmath, intl, xml
+          extensions: mbstring, bcmath, intl, xml, pdo_pgsql, gd, zip
 
       - name: Cache Composer
         uses: actions/cache@v4
@@ -31,7 +45,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22.12.0'
 
       - name: Install Node dependencies
         run: npm ci
@@ -39,18 +53,15 @@ jobs:
       - name: Build frontend assets
         run: npm run build --if-present
 
-      - name: Generate app key
-        run: php artisan key:generate --ansi || true
+      - name: Prepare isolated test database
+        run: |
+          psql -h 127.0.0.1 -p 55432 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'CREATE ROLE isp_bie_test LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE;'
+          psql -h 127.0.0.1 -p 55432 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'ALTER DATABASE isp_bie_test OWNER TO isp_bie_test;'
+          mkdir -p .test-runtime/views
 
       - name: Run tests
         run: |
-          if [ -x vendor/bin/pest ]; then
-            vendor/bin/pest --colors=always
-          elif [ -x vendor/bin/phpunit ]; then
-            vendor/bin/phpunit --colors=always
-          else
-            echo "No test runner found; skipping tests"
-          fi
+          vendor/bin/pest --colors=always
 
   lighthouse:
     name: Lighthouse (accessibility)

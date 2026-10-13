@@ -185,8 +185,8 @@ class CandidaturaController extends Controller
 
     public function downloadPdf(Request $request, Candidatura $candidatura)
     {
-        // Mesma protecção: apenas com assinatura válida ou utilizador autenticado (admin/técnico)
-        if (! $request->hasValidSignature() && ! auth()->check()) {
+        // A sessão por si só não autoriza acesso a documentos de terceiros.
+        if (! $request->hasValidSignature() && ! \Illuminate\Support\Facades\Gate::allows('downloadComprovativo', $candidatura)) {
             abort(403, 'Acesso não autorizado.');
         }
 

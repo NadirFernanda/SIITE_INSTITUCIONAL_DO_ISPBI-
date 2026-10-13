@@ -30,6 +30,14 @@ return [
 
     'disks' => [
 
+        'alumni_private' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/alumni'),
+            'visibility' => 'private',
+            'serve' => false,
+            'throw' => true,
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),

@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function __construct()
-    {
-        // Defence-in-depth: enforce both auth AND admin at controller level
-        // in addition to the route-group middleware.
-        $this->middleware(['auth', 'admin']);
-    }
-
     public function index()
     {
         $projects = Project::orderBy('created_at', 'desc')->paginate(20);
