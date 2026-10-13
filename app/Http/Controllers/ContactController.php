@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\MailAddressSanitizer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
 
 class ContactController extends Controller
 {
@@ -36,21 +39,21 @@ class ContactController extends Controller
         // Defesa em profundidade contra CVE-2026-48019 (bypass da validação
         // 'email' do Laravel que permite injecção de cabeçalhos) — revalida o
         // endereço antes de o usar no cabeçalho Reply-To.
-        $replyToEmail = \App\Support\MailAddressSanitizer::clean($data['email']);
+        $replyToEmail = MailAddressSanitizer::clean($data['email']);
+        if ($replyToEmail === null || $replyToEmail !== $data['email']) {
+            throw ValidationException::withMessages(['email' => 'Indique um endereço de email válido.']);
+        }
         $replyToNome  = preg_replace('/[\r\n\x00]+/', ' ', $data['nome']);
 
         try {
-            Mail::send([], [], function ($message) use ($to, $subject, $body, $replyToEmail, $replyToNome) {
+            Mail::html($body, function ($message) use ($to, $subject, $replyToEmail, $replyToNome) {
                 $message->to($to)
                     ->subject($subject)
                     ->from('noreply@isp-bie.ao', 'ISP-Bié Website')
-                    ->setBody($body, 'text/html');
-
-                if ($replyToEmail) {
-                    $message->replyTo($replyToEmail, $replyToNome);
-                }
+                    ->replyTo($replyToEmail, $replyToNome);
             });
         } catch (\Exception $e) {
+            Log::warning('Falha no envio do formulário de contacto.', ['tipo' => $e::class]);
             return back()->withInput()->with('error', 'Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.');
         }
 
