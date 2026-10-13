@@ -42,6 +42,7 @@ composer.lock
 
 # Ignorar arquivos de deploy
 .test-runtime/
+/dist/
 .env.testing
 .env.backup
 .env.production

@@ -1,6 +1,6 @@
 # PROPOSTA INERTE. Este ficheiro está fora de .github/workflows.
-# NÃO mover para .github/workflows antes de implementar/rever os scripts
-# scripts/release/build-artifact.sh e scripts/release/publish-artifact.sh,
+# NÃO mover para .github/workflows antes de testar em ambiente isolado os scripts
+# scripts/release/build-artifact.sh, publish-artifact.sh e rollback-release.sh,
 # substituir as referências a tags das actions por SHAs verificados,
 # configurar revisores obrigatórios no ambiente production e retirar
 # o gatilho push do workflow de deploy actual.
@@ -89,6 +89,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.12.0'
+      - name: Construir dependências de produção e assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+          npm ci
+          npm run build
       - name: Construir artefacto imutável sem segredos
         shell: bash
         env:
@@ -96,8 +103,8 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
-          test -x scripts/release/build-artifact.sh
-          scripts/release/build-artifact.sh "$RELEASE_SHA"
+          test -f scripts/release/build-artifact.sh
+          bash scripts/release/build-artifact.sh "$RELEASE_SHA"
           cd dist
           sha256sum -c release.tar.gz.sha256
       - uses: actions/upload-artifact@v4
@@ -131,10 +138,14 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
           DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          RELEASE_ROOT: ${{ vars.RELEASE_ROOT }}
+          SHARED_ROOT: ${{ vars.SHARED_ROOT }}
+          CURRENT_LINK: ${{ vars.CURRENT_LINK }}
+          HEALTH_URL: ${{ vars.HEALTH_URL }}
         run: |
           set -euo pipefail
           (cd dist && sha256sum -c release.tar.gz.sha256)
           test "$(git rev-parse HEAD)" = "$RELEASE_SHA"
           test -n "$CHANGE_ID"
-          test -x scripts/release/publish-artifact.sh
-          scripts/release/publish-artifact.sh dist/release.tar.gz "$RELEASE_SHA" "$CHANGE_ID"
+          test -f scripts/release/publish-artifact.sh
+          bash scripts/release/publish-artifact.sh dist/release.tar.gz "$RELEASE_SHA" "$CHANGE_ID"

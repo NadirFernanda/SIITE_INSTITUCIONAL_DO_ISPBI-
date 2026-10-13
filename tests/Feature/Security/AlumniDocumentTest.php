@@ -20,6 +20,11 @@ function securityDocument(string $disk = 'alumni_private'): AlumniDocumento
     return AlumniDocumento::create(['titulo' => 'Documento Teste', 'ficheiro' => $path]);
 }
 
+function confirmedAlumniCopy(): array
+{
+    return ['--copy' => true, '--change-id' => 'TEST-123', '--confirm' => 'COPIAR_DOCUMENTOS_ALUMNI'];
+}
+
 beforeEach(fn () => isolateAlumniStorage());
 
 test('new alumni documents are uploaded only to the private disk', function () {
@@ -59,10 +64,12 @@ test('missing or invalid document paths are not served', function () {
 
 test('document preparation is non destructive repeatable and supports dry run', function () {
     $document = securityDocument('public');
+    $this->artisan('alumni:preparar-documentos-privados')->assertSuccessful();
+    expect(Storage::disk('alumni_private')->exists($document->ficheiro))->toBeFalse();
     $this->artisan('alumni:preparar-documentos-privados', ['--dry-run' => true])->assertSuccessful();
     expect(Storage::disk('alumni_private')->exists($document->ficheiro))->toBeFalse();
-    $this->artisan('alumni:preparar-documentos-privados')->assertSuccessful();
-    $this->artisan('alumni:preparar-documentos-privados')->assertSuccessful();
+    $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertSuccessful();
+    $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertSuccessful();
     expect(Storage::disk('public')->get($document->ficheiro))->toBe('%PDF-private-test');
     expect(Storage::disk('alumni_private')->get($document->ficheiro))->toBe('%PDF-private-test');
     expect($document->fresh()->ficheiro)->toBe($document->ficheiro);
@@ -72,7 +79,7 @@ test('document preparation reports conflicts and missing files without overwriti
     $document = securityDocument('public');
     Storage::disk('alumni_private')->put($document->ficheiro, 'different content');
     AlumniDocumento::create(['titulo' => 'Ausente', 'ficheiro' => 'alumni-documentos/missing.pdf']);
-    $this->artisan('alumni:preparar-documentos-privados')->assertFailed();
+    $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertFailed();
     expect(Storage::disk('alumni_private')->get($document->ficheiro))->toBe('different content');
     expect(Storage::disk('public')->get($document->ficheiro))->toBe('%PDF-private-test');
 });
@@ -88,11 +95,11 @@ test('preparation can resume after an interrupted temporary copy without serving
     $partial = $document->ficheiro.'.interrupted.partial';
     Storage::disk('alumni_private')->put($partial, 'incomplete');
     $this->actingAs(securityUser('alumni'))->get(route('portal.documentos.download', $document))->assertOk();
-    $this->artisan('alumni:preparar-documentos-privados')->assertSuccessful();
+    $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertSuccessful();
     expect(Storage::disk('alumni_private')->get($document->ficheiro))->toBe('%PDF-private-test');
     expect(Storage::disk('alumni_private')->get($partial))->toBe('incomplete');
     expect(Storage::disk('public')->get($document->ficheiro))->toBe('%PDF-private-test');
-    $this->artisan('alumni:preparar-documentos-privados')->assertSuccessful();
+    $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertSuccessful();
 });
 
 test('preparation reports a read failure continues inventory and can be safely repeated', function () {
@@ -111,14 +118,14 @@ test('preparation reports a read failure continues inventory and can be safely r
     Storage::shouldReceive('disk')->with('public')->andReturn($failingPublic);
     Storage::shouldReceive('disk')->with('alumni_private')->andReturn($private);
     try {
-        $this->artisan('alumni:preparar-documentos-privados')->assertFailed();
+        $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertFailed();
         expect($private->exists($document->ficheiro))->toBeFalse();
         expect($private->get($otherPath))->toBe('other content');
         expect($public->get($document->ficheiro))->toBe('%PDF-private-test');
     } finally {
         Storage::swap($manager);
     }
-    $this->artisan('alumni:preparar-documentos-privados')->assertSuccessful();
+    $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertSuccessful();
     expect($private->get($document->ficheiro))->toBe('%PDF-private-test');
     expect($private->allFiles('alumni-documentos'))->toHaveCount(2);
 });
@@ -126,6 +133,15 @@ test('preparation reports a read failure continues inventory and can be safely r
 test('preparation rejects traversal paths without reading or copying files', function () {
     AlumniDocumento::create(['titulo' => 'Inválido', 'ficheiro' => 'alumni-documentos/../secret.pdf']);
     $this->artisan('alumni:preparar-documentos-privados', ['--dry-run' => true])->assertFailed();
-    $this->artisan('alumni:preparar-documentos-privados')->assertFailed();
-    expect(Storage::disk('alumni_private')->allFiles())->toBeEmpty();
+    $this->artisan('alumni:preparar-documentos-privados', confirmedAlumniCopy())->assertFailed();
+    expect(array_filter(Storage::disk('alumni_private')->allFiles(), fn ($path) => $path !== '.migration.lock'))->toBeEmpty();
+});
+
+test('document copy requires all explicit controls', function () {
+    $document = securityDocument('public');
+    $this->artisan('alumni:preparar-documentos-privados', ['--copy' => true])->assertFailed();
+    $this->artisan('alumni:preparar-documentos-privados', [
+        '--copy' => true, '--change-id' => 'TEST-123', '--confirm' => 'wrong',
+    ])->assertFailed();
+    expect(Storage::disk('alumni_private')->exists($document->ficheiro))->toBeFalse();
 });

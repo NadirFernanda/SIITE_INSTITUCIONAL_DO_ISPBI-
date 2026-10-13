@@ -1,5 +1,12 @@
 # Preparação local para publicação controlada e documentos alumni
 
+> Nota de implementação local (2026-10-13): a branch
+> `work/operational-safety-2026-10-13` retirou o deploy automático do workflow
+> local, criou os scripts de release/backup e tornou a cópia alumni opt-in.
+> O workflow manual permanece inerte em `docs/proposals`. As afirmações abaixo
+> sobre o estado anterior foram preservadas como contexto da proposta. O
+> procedimento actualizado está em `docs/operacoes/release-backup-alumni.md`.
+
 Estado: proposta técnica, sem activação. Destinatários: responsáveis pela aplicação, operações e aprovação de produção. A execução continua **NÃO APTA** até à verificação dos pontos abaixo no servidor e à autorização expressa. Este documento não aprova deploy, migrações de base de dados ou transferência de documentos.
 
 ## Evidência e riscos dos mecanismos actuais
