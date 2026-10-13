@@ -33,7 +33,8 @@ class SalasExameExportLote implements WithMultipleSheets
     public function sheets(): array
     {
         return $this->salas->flatMap(function (Sala $sala) {
-            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
+            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada']);
             if ($this->cursoFiltro !== null) {
                 $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($this->cursoFiltro)]);
             }

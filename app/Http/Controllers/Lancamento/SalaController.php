@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
 use App\Models\Sala;
+use App\Services\SalaAtribuicaoService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -40,10 +41,10 @@ class SalaController extends Controller
             ->ordenadaPorHorario();
 
         if ($cursoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('curso', $cursoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->where('curso', $cursoFiltro));
         }
         if ($periodoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('periodo', $periodoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->where('periodo', $periodoFiltro));
         }
         if ($horarioFiltro) {
             $salasQuery->where('horario', $horarioFiltro);
@@ -85,8 +86,8 @@ class SalaController extends Controller
             ->orderBy('salas.data_exame')->orderBy('salas.horario')->orderBy('candidaturas.curso')
             ->get();
 
-        $totalCandidatos = Candidatura::whereNotIn('status', ['rejeitada'])->count();
-        $atribuidos      = Candidatura::whereNotNull('sala_id')->count();
+        $totalCandidatos = Candidatura::where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->count();
+        $atribuidos      = Candidatura::where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->whereNotNull('sala_id')->count();
         $semSala         = $totalCandidatos - $atribuidos;
         $totalLugares    = $salas->sum('capacidade');
 
@@ -123,11 +124,9 @@ class SalaController extends Controller
         return redirect()->route('lancamento.salas.index')->with('success', 'Sala actualizada.');
     }
 
-    public function destroy(Sala $sala)
+    public function destroy(Sala $sala, SalaAtribuicaoService $atribuicoes)
     {
-        Candidatura::where('sala_id', $sala->id)
-                   ->update(['sala_id' => null, 'numero_lugar' => null]);
-        $sala->delete();
+        $atribuicoes->eliminarSala($sala);
 
         return redirect()->route('lancamento.salas.index')->with('success', 'Sala eliminada.');
     }
@@ -136,6 +135,7 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->orderByRaw('LOWER(nome) ASC')
             ->orderBy('id')
             ->get();
@@ -154,11 +154,9 @@ class SalaController extends Controller
         return redirect()->route('lancamento.salas.index')->with($resultado['tipo'], $resultado['mensagem']);
     }
 
-    public function limpar()
+    public function limpar(SalaAtribuicaoService $atribuicoes)
     {
-        $count = Candidatura::whereNotNull('sala_id')->count();
-        Candidatura::whereNotNull('sala_id')
-                   ->update(['sala_id' => null, 'numero_lugar' => null]);
+        $count = $atribuicoes->limparTodas();
 
         AuditLog::registar('limpou_salas', null, null,
             "Distribuição removida — {$count} candidatos retirados das salas");
@@ -171,6 +169,7 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->orderBy('numero_lugar')
             ->get();
 
@@ -188,6 +187,7 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->orderByRaw('LOWER(nome) ASC')
             ->orderBy('id')
             ->get();
@@ -234,7 +234,8 @@ class SalaController extends Controller
 
         $conteudo = '';
         foreach ($salas as $i => $sala) {
-            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
+            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada']);
             if ($cursoFiltro !== null) {
                 $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
             }
@@ -296,6 +297,7 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->whereNotNull('numero_lugar')
             ->whereNull('codigo_exame')
             ->get();

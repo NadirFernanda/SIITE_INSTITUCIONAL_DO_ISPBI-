@@ -13,9 +13,13 @@ class SalaController extends Controller
     public function index()
     {
         $salas = Sala::with(['candidaturas' => function ($query) {
-            $query->select('sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_em', 'id');
+            $query->select('sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_em', 'id')
+                ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada']);
         }])
-            ->whereHas('candidaturas')
+            ->whereHas('candidaturas', fn ($query) => $query
+                ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada']))
             ->ordenadaPorHorario()
             ->get()
             ->map(function ($sala) {
@@ -46,6 +50,8 @@ class SalaController extends Controller
 
         $query = $sala->candidaturas()
             ->select('id', 'sala_id', 'codigo_exame', 'nota_exame', 'nota_lancada_por', 'nota_lancada_em', 'necessidade_especial', 'curso')
+            ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->whereNotNull('codigo_exame');
 
         if ($categoriaFiltro) {
@@ -71,9 +77,11 @@ class SalaController extends Controller
                 return $c;
             });
 
-        $cursoSala = $sala->candidaturas()->whereNotNull('curso')->value('curso');
+        $cursoSala = $sala->candidaturas()->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])->whereNotNull('curso')->value('curso');
         $categoriasSala = collect(Candidatura::categoriasEspeciaisPermitidas($cursoSala))
-            ->filter(fn ($cat) => $sala->candidaturas()->whereNotNull('codigo_exame')->where('necessidade_especial', $cat)->exists())
+            ->filter(fn ($cat) => $sala->candidaturas()->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada'])->whereNotNull('codigo_exame')->where('necessidade_especial', $cat)->exists())
             ->values();
 
         return view('professor.salas.show', compact('sala', 'candidaturas', 'salaDiscs', 'categoriasSala', 'categoriaFiltro'));

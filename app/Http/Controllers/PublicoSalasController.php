@@ -23,12 +23,21 @@ class PublicoSalasController extends Controller
         // query por sala, igual ao padrão já usado noutros pontos do sistema
         // (ex.: DistribuicaoSalasService::sincronizarDisciplinas).
         $salas = Sala::whereNotNull('data_exame')
-            ->withCount('candidaturas')
+            ->withCount(['candidaturas' => fn ($query) => $query
+                ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada'])])
+            ->whereHas('candidaturas', fn ($query) => $query
+                ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada']))
             ->ordenadaPorHorario()
             ->get()
             ->filter(fn ($s) => $s->candidaturas_count > 0)
             ->map(function ($sala) {
-                $primeiro = $sala->candidaturas()->whereNotNull('curso')->first();
+                $primeiro = $sala->candidaturas()
+                    ->where('pagamento_confirmado', true)
+                    ->whereNotIn('status', ['rejeitada'])
+                    ->whereNotNull('curso')
+                    ->first();
                 $sala->curso_grupo = $primeiro ? trim($primeiro->curso) : 'Outro';
                 $sala->periodo_grupo = $primeiro->periodo ?? 'regular';
 
@@ -39,6 +48,7 @@ class PublicoSalasController extends Controller
                 $categoriasPermitidas = Candidatura::categoriasEspeciaisPermitidas($sala->curso_grupo);
                 $categoriasPresentes = $sala->candidaturas()
                     ->where('pagamento_confirmado', true)
+                    ->whereNotIn('status', ['rejeitada'])
                     ->whereIn('necessidade_especial', $categoriasPermitidas)
                     ->distinct()
                     ->pluck('necessidade_especial');
@@ -103,7 +113,8 @@ class PublicoSalasController extends Controller
 
         $necessidadeEspecial = $request->query('necessidade_especial');
 
-        $query = $sala->candidaturas()->where('pagamento_confirmado', true);
+        $query = $sala->candidaturas()->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada']);
         if ($necessidadeEspecial) {
             $query->where('necessidade_especial', $necessidadeEspecial);
         } else {

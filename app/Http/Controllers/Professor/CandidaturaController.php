@@ -7,6 +7,7 @@ use App\Models\AuditLog;
 use App\Models\Candidatura;
 use App\Models\CandidaturaNota;
 use App\Models\SalaDiscipline;
+use App\Services\NotaDisciplinaService;
 use App\Services\WhatsAppService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,99 +81,21 @@ class CandidaturaController extends Controller
         return view('professor.candidaturas.show', compact('candidatura', 'disciplines', 'notas'));
     }
 
-    public function updateNotasDisciplinas(Request $request, Candidatura $candidatura)
+    public function updateNotasDisciplinas(Request $request, Candidatura $candidatura, NotaDisciplinaService $notaDisciplinaService)
     {
-        // Cada disciplina tem uma pontuação máxima proporcional ao seu peso dentro dos
-        // 20 valores (ex.: peso 60% = até 12 pontos) — a nota final é a SOMA das notas
-        // de cada disciplina, não uma média. Por isso o limite máximo de cada campo
-        // depende do peso dessa disciplina, e não é sempre 20.
-        $salaDiscsForValidation = $candidatura->sala_id
-            ? SalaDiscipline::where('sala_id', $candidatura->sala_id)->get()->keyBy('discipline')
-            : collect();
+        $request->validate(['notas' => ['sometimes', 'array']]);
+        $final = $notaDisciplinaService->lancarNotas(
+            $candidatura,
+            $request->input('notas', []),
+            Auth::id()
+        );
 
-        $rules = ['notas' => 'array'];
-        $messages = [];
-        foreach ($request->input('notas', []) as $disciplina => $valor) {
-            $disc = trim($disciplina);
-            $sd = $salaDiscsForValidation[$disc] ?? null;
-            $max = $sd ? round(20 * ((int) $sd->weight_percent) / 100, 2) : 20;
-            $rules["notas.{$disciplina}"] = "nullable|numeric|min:0|max:{$max}";
-            $messages["notas.{$disciplina}.max"] = "A nota de \"{$disc}\" não pode exceder {$max} valores (peso desta disciplina).";
-        }
-
-        $request->validate($rules, $messages + [
-            'notas.*.numeric' => 'Cada nota deve ser numérica.',
-            'notas.*.min' => 'A nota mínima é 0.',
-        ]);
-
-        $dados = $request->input('notas', []);
-
-        foreach ($dados as $disciplina => $valor) {
-            // normalizar disciplina
-            $disc = trim($disciplina);
-            if ($valor === null || $valor === '') {
-                // remover nota existente se vazio
-                \App\Models\CandidaturaNota::where('candidatura_id', $candidatura->id)->where('discipline', $disc)->delete();
-                continue;
+        if ($final !== null) {
+            try {
+                app(WhatsAppService::class)->notificarNotaLancada($candidatura->fresh());
+            } catch (\Throwable $e) {
+                \Log::error('WhatsApp nota lançada (soma disciplinas): '.$e->getMessage());
             }
-
-            $nota = round((float) $valor, 2);
-
-            \App\Models\CandidaturaNota::updateOrCreate(
-                ['candidatura_id' => $candidatura->id, 'discipline' => $disc],
-                ['nota' => $nota, 'lancada_por' => Auth::id(), 'lancada_em' => now()]
-            );
-
-            \App\Models\AuditLog::registar('lancou_nota_disciplina', 'candidatura', $candidatura->id,
-                "Ficha #{$candidatura->id} — {$candidatura->nome} | Disciplina: {$disc} | Nota: {$nota}");
-        }
-
-        // Após atualizar notas individuais, verificar se existem disciplinas definidas para a sala
-        try {
-            $salaId = $candidatura->sala_id;
-            if ($salaId) {
-                $salaDiscs = SalaDiscipline::where('sala_id', $salaId)->get();
-                if ($salaDiscs->count() > 0) {
-                    $complete = true;
-                    $sum = 0.0;
-
-                    foreach ($salaDiscs as $sd) {
-                        $notaRow = CandidaturaNota::where('candidatura_id', $candidatura->id)
-                            ->where('discipline', $sd->discipline)
-                            ->first();
-                        if (! $notaRow || $notaRow->nota === null) {
-                            $complete = false;
-                            break;
-                        }
-                        $sum += (float) $notaRow->nota;
-                    }
-
-                    if ($complete) {
-                        // Nota final = SOMA das notas por disciplina (não uma média
-                        // ponderada) — o peso de cada disciplina já limita a pontuação
-                        // máxima que ela pode contribuir (ver validação acima), por
-                        // isso a soma das disciplinas já dá directamente a nota /20.
-                        $final = round($sum, 2);
-
-                        $candidatura->update([
-                            'nota_exame' => $final,
-                            'nota_lancada_por' => Auth::id(),
-                            'nota_lancada_em' => now(),
-                        ]);
-
-                        AuditLog::registar('calculou_soma_disciplinas', 'candidatura', $candidatura->id,
-                            "Ficha #{$candidatura->id} — soma das disciplinas calculada: {$final}");
-
-                        try {
-                            app(WhatsAppService::class)->notificarNotaLancada($candidatura);
-                        } catch (\Throwable $e) {
-                            \Log::error('WhatsApp nota lançada (soma disciplinas): ' . $e->getMessage());
-                        }
-                    }
-                }
-            }
-        } catch (\Throwable $e) {
-            \Log::error('Erro ao calcular soma ponderada: ' . $e->getMessage());
         }
 
         return redirect()->route('professor.candidaturas.show', $candidatura)->with('success', 'Notas por disciplina atualizadas.');

@@ -44,7 +44,8 @@ class SalaNotasExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         // Ordem alfabética por nome — ver App\Exports\SalaExameExport para a
         // explicação de por que a ordenação é feita em PHP, não via ORDER BY.
         $query = $sala->candidaturas()
-            ->where('pagamento_confirmado', true);
+            ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada']);
 
         if ($cursoFiltro !== null) {
             $query->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
