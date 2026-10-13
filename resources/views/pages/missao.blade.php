@@ -16,7 +16,7 @@
             <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Missão do ISP-Bié</h2>
             <div class="prose max-w-none text-gray-700 leading-relaxed space-y-4">
               <p class="text-xl text-black mb-6 leading-relaxed">
-                Desenvolver actividades de formação acadêmica e profissional de excelência, da investigação científica e da extensão universitária nas áreas de Engenharias, tecnologias, Ciências Sociais, Administração e Negócios.
+                Formar profissionais competentes, éticos e inovadores, promover a investigação aplicada e contribuir para o desenvolvimento sustentável da Província do Bié e de Angola, através de ensino de qualidade, modernização tecnológica com forte ligação à sociedade.
               </p>
               
               <div class="grid md:grid-cols-2 gap-6 mt-8">
@@ -28,7 +28,7 @@
                     Formação de Excelência
                   </h3>
                   <p class="text-gray-700">
-                    Proporcionar uma formação técnica, científica e humanística de qualidade superior, preparando profissionais competentes e éticos para os desafios do mercado de trabalho angolano e internacional.
+                    Formar profissionais competentes, éticos e inovadores através de um ensino de qualidade, preparado para responder aos desafios de Angola e do mundo.
                   </p>
                 </div>
 
@@ -41,7 +41,7 @@
                     Investigação Aplicada
                   </h3>
                   <p class="text-gray-700">
-                    Desenvolver pesquisas científicas e tecnológicas relevantes que contribuam para a resolução de problemas locais e nacionais, promovendo a inovação e o desenvolvimento sustentável da região do Bié.
+                    Promover investigação aplicada que gere conhecimento, inovação e soluções para os desafios da Província do Bié e de Angola.
                   </p>
                 </div>
 
@@ -53,7 +53,7 @@
                     Extensão Universitária
                   </h3>
                   <p class="text-gray-700">
-                    Promover ações de extensão universitária que aproximem a instituição da comunidade, difundindo conhecimento, cultura e arte, contribuindo para a transformação social e o desenvolvimento cultural da província.
+                    Modernizar tecnologicamente a instituição e aproximar o ensino da sociedade, respondendo às necessidades da comunidade.
                   </p>
                 </div>
 
@@ -65,7 +65,7 @@
                     Responsabilidade Social
                   </h3>
                   <p class="text-gray-700">
-                    Formar cidadãos conscientes, críticos e comprometidos com os valores éticos, a justiça social, a inclusão e o respeito à diversidade, capazes de contribuir ativamente para a construção de uma sociedade mais justa e equitativa.
+                    Contribuir para o desenvolvimento sustentável do Bié e de Angola, com responsabilidade ética, social e ambiental.
                   </p>
                 </div>
               </div>
@@ -87,4 +87,3 @@
 
 </div>
 @endsection
-
