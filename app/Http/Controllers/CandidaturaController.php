@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\NotificarCandidaturaRecebida;
 use App\Models\Candidatura;
+use App\Models\SiteSetting;
 use App\Services\WhatsAppService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ class CandidaturaController extends Controller
 {
     public function store(Request $request)
     {
+        abort_unless(SiteSetting::candidaturasAtivas(), 403, 'O formulário de candidaturas está encerrado.');
+
         $periodo      = $request->input('periodo');
         $periodoLabel = $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
 
