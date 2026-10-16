@@ -1,9 +1,15 @@
 
 @import "./responsive.css";
+@import "tailwindcss";
+@config "../../tailwind.config.mjs";
+@source "../../resources/views";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Preservar os valores predefinidos visuais usados pelos templates Tailwind 3. */
+@theme {
+  --default-ring-width: 3px;
+  --default-ring-color: var(--color-blue-500);
+}
 
 /* Alpine.js: esconder elementos com x-cloak antes da inicialização */
 [x-cloak] { display: none !important; }
@@ -12,6 +18,18 @@
    BASE
 ========================= */
 @layer base {
+  *, ::before, ::after, ::backdrop, ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -25,7 +43,7 @@
   }
 
   body {
-    font-family: theme('fontFamily.sans');
+    font-family: var(--font-sans);
     color: #111827;
     line-height: 1.5;
   }

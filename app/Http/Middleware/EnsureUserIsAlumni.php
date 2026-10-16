@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +22,12 @@ class EnsureUserIsAlumni
 
         $user = Auth::user();
 
-        if (! $user->hasRole('alumni')) {
+        if ($user->role_slug !== User::normalizeRole('alumni')) {
             // Não é alumni — deslogar e enviar para o login do portal
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
+
             return redirect()->route('portal.login');
         }
 

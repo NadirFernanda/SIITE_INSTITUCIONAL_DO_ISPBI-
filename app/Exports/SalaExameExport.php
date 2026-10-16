@@ -31,7 +31,8 @@ class SalaExameExport implements FromArray, WithTitle, WithStyles, WithColumnWid
         $this->necessidadeEspecial = $necessidadeEspecial;
 
         $query = $sala->candidaturas()
-            ->where('pagamento_confirmado', true);
+            ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada']);
 
         if ($cursoFiltro !== null) {
             // Usado nos downloads em lote por curso — uma sala pode ter

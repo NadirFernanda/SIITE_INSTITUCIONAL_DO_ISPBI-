@@ -23,17 +23,17 @@ class SalaController extends Controller
 
         $salasQuery = Sala::query()
             ->withCount(['candidaturas' => function ($query) {
-                $query->where('pagamento_confirmado', true);
+                $query->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada']);
             }])
             ->withCount(['candidaturas as candidaturas_impressas_count' => function ($query) {
-                $query->where('pagamento_confirmado', true)->whereNotNull('folha_impressa_em');
+                $query->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->whereNotNull('folha_impressa_em');
             }]);
 
         if ($cursoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('curso', $cursoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->where('curso', $cursoFiltro));
         }
         if ($periodoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('periodo', $periodoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->where('periodo', $periodoFiltro));
         }
         if ($horarioFiltro) {
             $salasQuery->where('horario', $horarioFiltro);
@@ -46,6 +46,7 @@ class SalaController extends Controller
             ->filter(fn($sala) => $sala->candidaturas_count > 0);
 
         $cursosDisponiveis = \App\Models\Candidatura::where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->whereNotNull('curso')
             ->distinct()
             ->orderBy('curso')
@@ -61,7 +62,8 @@ class SalaController extends Controller
         $resumoQuery = \DB::table('candidaturas')
             ->join('salas', 'salas.id', '=', 'candidaturas.sala_id')
             ->selectRaw("candidaturas.curso, candidaturas.periodo, salas.data_exame, salas.horario, COUNT(*) as total")
-            ->where('candidaturas.pagamento_confirmado', true);
+            ->where('candidaturas.pagamento_confirmado', true)
+            ->whereNotIn('candidaturas.status', ['rejeitada']);
         if ($cursoFiltro) {
             $resumoQuery->where('candidaturas.curso', $cursoFiltro);
         }
@@ -94,6 +96,7 @@ class SalaController extends Controller
         // individualmente.
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->orderBy('numero_lugar')
             ->get();
 
@@ -118,6 +121,7 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada'])
             ->orderBy('numero_lugar')
             ->get();
 
@@ -138,7 +142,8 @@ class SalaController extends Controller
     public function pdfExame(Request $request, Sala $sala)
     {
         $necessidadeEspecial = $request->query('necessidade_especial');
-        $query = $sala->candidaturas()->where('pagamento_confirmado', true);
+        $query = $sala->candidaturas()->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada']);
         if ($necessidadeEspecial) {
             $query->whereRaw('LOWER(TRIM(necessidade_especial)) = LOWER(?)', [trim($necessidadeEspecial)]);
         }
@@ -162,7 +167,7 @@ class SalaController extends Controller
         ]);
 
         return Sala::where('horario', $request->input('horario'))
-            ->whereHas('candidaturas', fn($q) => $q->where('pagamento_confirmado', true))
+            ->whereHas('candidaturas', fn($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada']))
             ->ordenadaPorHorario()
             ->get();
     }
@@ -186,6 +191,7 @@ class SalaController extends Controller
 
         return Sala::whereHas('candidaturas', function ($q) use ($curso, $periodo) {
                 $q->where('pagamento_confirmado', true)
+                    ->whereNotIn('status', ['rejeitada'])
                     ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [$curso]);
                 if ($periodo) {
                     $q->where('periodo', $periodo);
@@ -216,6 +222,7 @@ class SalaController extends Controller
         foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada'])
                 ->orderBy('numero_lugar')
                 ->get();
             $conteudo .= \View::make('pdf._sala-conteudo', [
@@ -273,7 +280,8 @@ class SalaController extends Controller
         $primeiro = true;
 
         foreach ($salas as $sala) {
-            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
+            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada']);
             if ($cursoFiltro !== null) {
                 $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
             }
@@ -336,6 +344,7 @@ class SalaController extends Controller
         foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada'])
                 ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($curso)])
                 ->when($periodo, fn ($q) => $q->where('periodo', $periodo))
                 ->orderBy('numero_lugar')

@@ -33,7 +33,7 @@ trait DownloadsSalasEmLote
         ]);
 
         return Sala::where('horario', $request->input('horario'))
-            ->whereHas('candidaturas', fn($q) => $q->where('pagamento_confirmado', true))
+            ->whereHas('candidaturas', fn($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada']))
             ->ordenadaPorHorario()
             ->get();
     }
@@ -58,6 +58,7 @@ trait DownloadsSalasEmLote
 
         return Sala::whereHas('candidaturas', function ($q) use ($curso, $periodo) {
                 $q->where('pagamento_confirmado', true)
+                    ->whereNotIn('status', ['rejeitada'])
                     ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [$curso]);
                 if ($periodo) {
                     $q->where('periodo', $periodo);
@@ -97,6 +98,7 @@ trait DownloadsSalasEmLote
         foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada'])
                 ->orderBy('numero_lugar')
                 ->get();
             $conteudo .= \View::make('pdf._sala-conteudo', [
@@ -149,6 +151,7 @@ trait DownloadsSalasEmLote
         foreach ($salas as $i => $sala) {
             $candidaturas = $sala->candidaturas()
                 ->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada'])
                 ->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($curso)])
                 ->when($periodo, fn ($q) => $q->where('periodo', $periodo))
                 ->orderBy('numero_lugar')
@@ -189,7 +192,8 @@ trait DownloadsSalasEmLote
         $primeiro = true;
 
         foreach ($salas as $sala) {
-            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true);
+            $candidaturasQuery = $sala->candidaturas()->where('pagamento_confirmado', true)
+                ->whereNotIn('status', ['rejeitada']);
             if ($cursoFiltro !== null) {
                 $candidaturasQuery->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);
             }

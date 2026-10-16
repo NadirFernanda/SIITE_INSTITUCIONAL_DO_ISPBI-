@@ -29,7 +29,8 @@ class SalaExameExportLancamento implements FromArray, WithTitle, WithStyles, Wit
     public function __construct(Sala $sala, ?string $cursoFiltro = null)
     {
         $this->sala         = $sala;
-        $query = $sala->candidaturas()->where('pagamento_confirmado', true);
+        $query = $sala->candidaturas()->where('pagamento_confirmado', true)
+            ->whereNotIn('status', ['rejeitada']);
 
         if ($cursoFiltro !== null) {
             $query->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($cursoFiltro)]);

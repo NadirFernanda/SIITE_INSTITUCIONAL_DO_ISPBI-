@@ -12,7 +12,7 @@ class SecureHeaders
      * Route prefixes that should receive no-store cache headers
      * to prevent sensitive data from being cached by browsers/proxies.
      */
-    private array $sensitivePrefixes = ['admin', 'tecnico', 'daac', 'lancamento', 'login', 'profile', 'password'];
+    private array $sensitivePrefixes = ['admin', 'tecnico', 'daac', 'lancamento', 'professor', 'presidencia', 'secretaria', 'portal', 'candidaturas/', 'login', 'profile', 'password'];
 
     public function handle(Request $request, Closure $next): Response
     {

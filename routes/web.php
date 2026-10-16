@@ -48,10 +48,8 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::post('/admin/usuarios/{usuario}/assinatura', [App\Http\Controllers\Admin\UsuarioController::class, 'uploadSignature'])->name('admin.usuarios.assinatura');
     Route::delete('/admin/usuarios/{usuario}/assinatura', [App\Http\Controllers\Admin\UsuarioController::class, 'removeSignature'])->name('admin.usuarios.assinatura.remove');
     Route::delete('/admin/usuarios/{usuario}', [App\Http\Controllers\Admin\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');
-    Route::get('/admin/configuracoes', function () {
-        $configuracoes = [];
-        return view('admin.configuracoes', compact('configuracoes'));
-    })->name('admin.configuracoes');
+    Route::get('/admin/configuracoes', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'index'])->name('admin.configuracoes');
+    Route::patch('/admin/configuracoes', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'update'])->name('admin.configuracoes.update');
 });
 
 
@@ -514,7 +512,10 @@ Route::view('/cursos-online', 'pages.cursos-online')->name('cursos-online');
 Route::view('/cultura', 'pages.cultura')->name('cultura');
 Route::view('/calendario-academico', 'pages.calendario-academico')->name('calendario-academico');
 
-Route::view('/candidaturas', 'pages.candidaturas')->name('candidaturas');
+Route::get('/candidaturas', function () {
+    $formularioAtivo = \App\Models\SiteSetting::candidaturasAtivas();
+    return view('pages.candidaturas', compact('formularioAtivo'));
+})->name('candidaturas');
 // Limite bem mais alto do que o costume: muitos candidatos partilham o mesmo IP
 // (redes de escola/universidade, Wi-Fi de campus, CGNAT de operadoras móveis),
 // e com 1000+ pessoas em simultâneo em horário de pico, um limite baixo por IP

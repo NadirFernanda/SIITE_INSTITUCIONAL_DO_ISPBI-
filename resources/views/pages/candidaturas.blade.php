@@ -14,14 +14,24 @@
                         <div class="bg-white border-l-4 border-[#2563eb] p-4 sm:p-8 shadow-lg rounded-lg">
                             <div class="prose max-w-none text-gray-700 leading-relaxed space-y-6">
                                 <div class="mb-6">
-                                    <div class="bg-red-50 border-l-4 border-red-500 p-4 sm:p-6 mb-8">
+                                    <div class="{{ $formularioAtivo ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500' }} border-l-4 p-4 sm:p-6 mb-8">
                                         <div class="flex items-start gap-3">
-                                            <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
+                                            <svg class="w-6 h-6 {{ $formularioAtivo ? 'text-green-600' : 'text-red-500' }} flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                @if($formularioAtivo)
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                                @else
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
+                                                @endif
                                             </svg>
                                             <div>
-                                                <h3 class="font-bold text-red-700">Inscrições Encerradas — Exames de Acesso 2026/2027</h3>
-                                                <p class="text-red-600">As inscrições para o ano lectivo 2026/2027 estão encerradas. Não é possível submeter novas candidaturas.</p>
+                                                <h3 class="font-bold {{ $formularioAtivo ? 'text-green-700' : 'text-red-700' }}">
+                                                    {{ $formularioAtivo ? 'Candidaturas Abertas' : 'Inscrições Encerradas — Exames de Acesso 2026/2027' }}
+                                                </h3>
+                                                <p class="{{ $formularioAtivo ? 'text-green-700' : 'text-red-600' }}">
+                                                    {{ $formularioAtivo
+                                                        ? 'O formulário de candidaturas está disponível para submissão.'
+                                                        : 'As inscrições para o ano lectivo 2026/2027 estão encerradas. Não é possível submeter novas candidaturas.' }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -184,8 +194,9 @@
                                 </div>
                                 @endif
 
-                                {{-- Inscrições encerradas --}}
-
+                                @if($formularioAtivo)
+                                    @include('pages.partials.form-candidatura')
+                                @else
                                 <div id="formulario-candidatura" class="rounded-2xl overflow-hidden shadow-xl border border-red-200">
                                     {{-- Cabeçalho vermelho --}}
                                     <div class="bg-red-600 px-6 py-8 sm:px-10 sm:py-12 text-center">
@@ -235,8 +246,7 @@
                                         </a>
                                     </div>
                                 </div>
-
-                                {{-- form removido: inscrições encerradas em Agosto 2026 --}}
+                                @endif
 
                             </div>
                         </div>
