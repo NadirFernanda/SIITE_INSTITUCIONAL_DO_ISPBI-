@@ -34,7 +34,7 @@ jobs:
           extensions: mbstring, bcmath, intl, xml, pdo_pgsql, gd, zip
 
       - name: Cache Composer
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.composer/cache
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
