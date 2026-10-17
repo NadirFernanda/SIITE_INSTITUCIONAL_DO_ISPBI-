@@ -50,6 +50,8 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::delete('/admin/usuarios/{usuario}', [App\Http\Controllers\Admin\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');
     Route::get('/admin/configuracoes', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'index'])->name('admin.configuracoes');
     Route::patch('/admin/configuracoes', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'update'])->name('admin.configuracoes.update');
+    Route::post('/admin/configuracoes/organigrama', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'uploadOrganigrama'])->name('admin.configuracoes.organigrama.upload');
+    Route::delete('/admin/configuracoes/organigrama', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'removeOrganigrama'])->name('admin.configuracoes.organigrama.remove');
 });
 
 
@@ -496,6 +498,25 @@ Route::get('/trabalhe-conosco', function () {
 Route::view('/sistemas', 'pages.sistemas')->name('sistemas');
 Route::view('/resultados', 'pages.resultados')->name('resultados');
 Route::view('/presidencia', 'pages.presidencia')->name('presidencia');
+Route::get('/presidencia/organigrama', function () {
+    $path = \App\Models\Midia::organigramaPath();
+    abort_unless(\App\Models\Midia::isManagedOrganigramaPath($path), 404);
+
+    $disk = \Illuminate\Support\Facades\Storage::disk('public');
+    abort_unless($disk->exists($path), 404);
+
+    $mime = match (strtolower(pathinfo($path, PATHINFO_EXTENSION))) {
+        'jpg', 'jpeg' => 'image/jpeg',
+        'png' => 'image/png',
+        'webp' => 'image/webp',
+    };
+
+    return response()->file($disk->path($path), [
+        'Content-Type' => $mime,
+        'Cache-Control' => 'no-store, private',
+        'X-Content-Type-Options' => 'nosniff',
+    ]);
+})->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('presidencia.organigrama');
 Route::view('/pilares', 'pages.pilares')->name('pilares');
 Route::view('/pesquisa', 'pages.pesquisa')->name('pesquisa');
 Route::view('/missao', 'pages.missao')->name('missao');
