@@ -8,6 +8,8 @@ class SiteSetting extends Model
 {
     public const CANDIDATURAS_ATIVAS = 'candidaturas_ativas';
 
+    public const PDI_PDF_PUBLICADO = 'pdi_pdf_publicado';
+
     protected $table = 'site_settings';
 
     protected $primaryKey = 'key';
@@ -29,6 +31,16 @@ class SiteSetting extends Model
     {
         $value = static::query()
             ->where('key', self::CANDIDATURAS_ATIVAS)
+            ->toBase()
+            ->value('value');
+
+        return in_array($value, [true, 1, '1', 't', 'true'], true);
+    }
+
+    public static function pdiPdfPublicado(): bool
+    {
+        $value = static::query()
+            ->where('key', self::PDI_PDF_PUBLICADO)
             ->toBase()
             ->value('value');
 

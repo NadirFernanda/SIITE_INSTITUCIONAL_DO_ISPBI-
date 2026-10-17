@@ -52,6 +52,13 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::patch('/admin/configuracoes', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'update'])->name('admin.configuracoes.update');
     Route::post('/admin/configuracoes/organigrama', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'uploadOrganigrama'])->name('admin.configuracoes.organigrama.upload');
     Route::delete('/admin/configuracoes/organigrama', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'removeOrganigrama'])->name('admin.configuracoes.organigrama.remove');
+    Route::get('/admin/pdi', [App\Http\Controllers\Admin\PdiController::class, 'index'])->name('admin.pdi');
+    Route::post('/admin/pdi/fotografia', [App\Http\Controllers\Admin\PdiController::class, 'uploadPhoto'])->name('admin.pdi.fotografia.upload');
+    Route::delete('/admin/pdi/fotografia', [App\Http\Controllers\Admin\PdiController::class, 'removePhoto'])->name('admin.pdi.fotografia.remove');
+    Route::post('/admin/pdi/documento', [App\Http\Controllers\Admin\PdiController::class, 'uploadPdf'])->name('admin.pdi.documento.upload');
+    Route::get('/admin/pdi/documento/preview', [App\Http\Controllers\Admin\PdiController::class, 'previewPdf'])->name('admin.pdi.documento.preview');
+    Route::patch('/admin/pdi/documento/publicacao', [App\Http\Controllers\Admin\PdiController::class, 'setPdfPublication'])->name('admin.pdi.documento.publicacao');
+    Route::delete('/admin/pdi/documento', [App\Http\Controllers\Admin\PdiController::class, 'removePdf'])->name('admin.pdi.documento.remove');
 });
 
 
@@ -498,6 +505,11 @@ Route::get('/trabalhe-conosco', function () {
 Route::view('/sistemas', 'pages.sistemas')->name('sistemas');
 Route::view('/resultados', 'pages.resultados')->name('resultados');
 Route::view('/presidencia', 'pages.presidencia')->name('presidencia');
+Route::get('/pdi-2026-2031', [App\Http\Controllers\PdiController::class, 'index'])->name('pdi');
+Route::get('/pdi-2026-2031/fotografia', [App\Http\Controllers\PdiController::class, 'photo'])
+    ->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('pdi.fotografia');
+Route::get('/pdi-2026-2031/documento', [App\Http\Controllers\PdiController::class, 'document'])
+    ->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('pdi.documento');
 Route::get('/presidencia/organigrama', function () {
     $path = \App\Models\Midia::organigramaPath();
     abort_unless(\App\Models\Midia::isManagedOrganigramaPath($path), 404);

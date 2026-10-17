@@ -133,6 +133,7 @@
                   <a href="{{ route('missao') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Missão</a>
                   <a href="{{ route('visao') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Visão</a>
                   <a href="{{ route('valores') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Valores</a>
+                  <a href="{{ route('pdi') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">PDI 2026–2031</a>
                   <a href="{{ route('presidencia') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Órgãos de gestão</a>
                   <a href="{{ route('noticias') }}" class="block px-0 py-1 rounded hover:bg-[#1e3a5f] hover:text-white">Notícias</a>
                 </div>
@@ -255,6 +256,7 @@
             <a href="{{ route('missao') }}"       class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Missão</a>
             <a href="{{ route('visao') }}"        class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Visão</a>
             <a href="{{ route('valores') }}"      class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Valores</a>
+            <a href="{{ route('pdi') }}"          class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">PDI 2026–2031</a>
             <a href="{{ route('presidencia') }}"  class="mobile-sub-link flex items-center gap-2 pl-12 pr-5 py-2.5 text-sm text-[#1e3a5f] hover:bg-orange-50 hover:text-[#F05A28] transition-colors">Órgãos de Gestão</a>
           </div>
         </div>

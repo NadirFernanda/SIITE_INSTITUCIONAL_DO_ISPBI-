@@ -9,7 +9,7 @@ class MidiaController extends Controller
 {
     public function index()
     {
-        $midias = Midia::where('nome', '!=', Midia::ORGANIGRAMA_NOME)->get();
+        $midias = Midia::whereNotIn('nome', Midia::systemNames())->get();
         return view('admin.midia', compact('midias'));
     }
 
@@ -20,8 +20,8 @@ class MidiaController extends Controller
         ]);
         $file = $request->file('arquivo');
         $nome = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        if ($nome === Midia::ORGANIGRAMA_NOME) {
-            return back()->withErrors(['arquivo' => 'Este nome está reservado para o organigrama institucional.']);
+        if (in_array($nome, Midia::systemNames(), true)) {
+            return back()->withErrors(['arquivo' => 'Este nome está reservado para um conteúdo institucional.']);
         }
         $path = $file->store('midias', 'public');
         Midia::create([
@@ -34,7 +34,7 @@ class MidiaController extends Controller
     public function destroy($id)
     {
         $midia = Midia::findOrFail($id);
-        abort_if($midia->nome === Midia::ORGANIGRAMA_NOME, 403);
+        abort_if(in_array($midia->nome, Midia::systemNames(), true), 403);
         \Storage::disk('public')->delete($midia->caminho);
         $midia->delete();
         return redirect('/admin/midia')->with('success', 'Arquivo excluído com sucesso!');

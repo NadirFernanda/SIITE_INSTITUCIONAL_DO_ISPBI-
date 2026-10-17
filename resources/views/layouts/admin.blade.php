@@ -218,6 +218,11 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="2" fill="none"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
                 </span>Configurações
             </a>
+            <a href="{{ route('admin.pdi') }}">
+                <span style="vertical-align:middle;margin-right:8px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 3h12l4 4v14H4V3Zm12 0v5h4M8 12h8M8 16h8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>PDI 2026–2031
+            </a>
         </div>
         <div style="flex-shrink:0;margin:12px 14px 16px;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px;">
             <form method="POST" action="{{ route('logout') }}">
