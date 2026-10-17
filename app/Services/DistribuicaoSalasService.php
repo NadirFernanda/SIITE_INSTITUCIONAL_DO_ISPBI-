@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\DB;
  * uma data e horário fixos, e cada sala nunca mistura candidatos de cursos
  * diferentes.
  *
- * As salas-modelo fornecem capacidades para criar novas instâncias. Uma nova
- * distribuição apenas atribui candidatos pagos ainda sem sala: não elimina
- * atribuições existentes nem instâncias que possam conter decisões manuais.
+ * As salas sem data/horário definidos ("modelos") são a lista de referência
+ * de capacidades — normalmente as 24 salas físicas geridas pelo admin. A cada
+ * distribuição, este serviço apaga as instâncias anteriores (salas já COM
+ * data/horário, criadas por uma corrida anterior) e cria novas instâncias
+ * clonando os modelos conforme necessário para cada bloco (data+horário) da
+ * agenda — por isso a mesma sala física ("Sala 1") pode aparecer em vários
+ * dias/horários diferentes, cada aparição com o seu próprio registo e
+ * candidatos, sem entrar em conflito com o nome único dos modelos.
  *
  * Usada pelos painéis Admin, Técnico e Lançamento — antes cada um tinha a sua
  * própria cópia deste algoritmo (sem calendário), o que os deixava
@@ -30,168 +35,151 @@ class DistribuicaoSalasService
      */
     public function distribuir(): array
     {
+        $modelos = Sala::whereNull('data_exame')->orderByDesc('capacidade')->get()->values();
+
+        if ($modelos->isEmpty()) {
+            return $this->resultado(false, 0, 0, 0,
+                'Não existem salas registadas. Crie salas antes de distribuir.', 'error');
+        }
+
         $agenda      = Sala::$agendaExames;
         $prioridades = Candidatura::$cursosPrioritarios;
-        $dados = DB::transaction(function () use ($agenda, $prioridades) {
-            $modelos = Sala::whereNull('data_exame')->orderBy('id')->lockForUpdate()->get()->values();
-            $salasExistentes = Sala::whereNotNull('data_exame')->orderBy('id')->lockForUpdate()->get();
 
-            if ($modelos->isEmpty() && $salasExistentes->isEmpty()) {
-                return ['sem_salas' => true];
-            }
+        // Ordenado por id (nº de ficha), não por nome — se a lista de
+        // candidatos a distribuir já vier ordenada alfabeticamente, as
+        // salas são preenchidas sequencialmente por essa ordem e cada uma
+        // acaba só com uma fatia estreita do alfabeto (ex.: Sala 1 só com
+        // "A"/"B", Sala 2 só com "C"/"D"...). A ordem alfabética deve
+        // aplicar-se só à lista impressa de cada sala (ver
+        // pdf/_sala-conteudo.blade.php), não a quem vai para qual sala.
+        $todos = Candidatura::whereNotIn('status', ['rejeitada'])->orderBy('id')->get();
 
-            $candidatos = Candidatura::where('pagamento_confirmado', true)
-                ->whereNotIn('status', ['rejeitada'])
-                ->whereNull('sala_id')
-                ->orderBy('id')
-                ->lockForUpdate()
-                ->get();
+        $comAgenda = $todos->filter(fn ($c) => isset($agenda[trim((string) $c->curso)]));
+        $semAgendaCount = $todos->count() - $comAgenda->count();
 
-            $comAgenda = $candidatos->filter(fn ($c) => isset($agenda[trim((string) $c->curso)][$c->periodo]));
-            $semAgendaCount = $candidatos->count() - $comAgenda->count();
-            $grupos = collect();
-
-            foreach ($prioridades as $curso) {
-                $grupos = $grupos->merge(
-                    $comAgenda->filter(fn ($c) => $c->curso === $curso)
-                        ->groupBy(fn ($c) => $c->curso.'|||'.$c->periodo)
-                        ->sortByDesc(fn ($grupo) => $grupo->count())
-                );
-            }
+        $grupos = collect();
+        foreach ($prioridades as $curso) {
             $grupos = $grupos->merge(
-                $comAgenda->reject(fn ($c) => in_array($c->curso, $prioridades, true))
-                    ->groupBy(fn ($c) => $c->curso.'|||'.$c->periodo)
-                    ->sortByDesc(fn ($grupo) => $grupo->count())
+                $comAgenda->filter(fn ($c) => $c->curso === $curso)
+                    ->groupBy(fn ($c) => $c->curso . '|||' . $c->periodo)
+                    ->sortByDesc(fn ($g) => $g->count())
             );
+        }
+        $grupos = $grupos->merge(
+            $comAgenda->reject(fn ($c) => in_array($c->curso, $prioridades, true))
+                ->groupBy(fn ($c) => $c->curso . '|||' . $c->periodo)
+                ->sortByDesc(fn ($g) => $g->count())
+        );
 
-            $ocupantes = Candidatura::whereIn('sala_id', $salasExistentes->modelKeys())
-                ->get(['id', 'sala_id', 'numero_lugar', 'curso'])
-                ->groupBy('sala_id');
-            $instanciasPorBloco = [];
-            $nomesUsadosPorBloco = [];
+        // Nota: não há verificação prévia de "capacidade total insuficiente" —
+        // as salas são reutilizadas em cada bloco (data+horário) da agenda, por
+        // isso a capacidade real ao longo dos vários dias é a soma de cada
+        // bloco, não a capacidade das salas vezes 1. Um eventual défice de
+        // capacidade é detectado por bloco durante a distribuição abaixo e
+        // reportado em "sem_sala"/$naoAtribuidos.
 
-            foreach ($salasExistentes as $sala) {
-                $bloco = $sala->data_exame->format('Y-m-d').'|'.$sala->horario;
-                $daSala = $ocupantes->get($sala->id, collect());
-                $cursosNaSala = $daSala->pluck('curso')->filter()->map(fn ($curso) => trim($curso))->unique()->values();
-                $cursoAtual = $cursosNaSala->count() > 1 ? '__misturada__' : $cursosNaSala->first();
+        $atribuidos    = 0;
+        $naoAtribuidos = [];
+        $instanciasCriadas = [];
 
-                $instanciasPorBloco[$bloco][] = [
-                    'sala' => $sala,
-                    'ocupado' => $daSala->count(),
-                    'lugares' => $daSala->pluck('numero_lugar')->filter()->map(fn ($lugar) => (int) $lugar)->flip()->all(),
-                    'curso_atual' => $cursoAtual,
-                ];
-                $nomesUsadosPorBloco[$bloco][] = $sala->nome;
-            }
+        DB::transaction(function () use (
+            $modelos, $agenda, $grupos, &$atribuidos, &$naoAtribuidos, &$instanciasCriadas
+        ) {
+            // Limpar distribuição anterior — liberta os candidatos e apaga as
+            // instâncias de sala da corrida anterior (a FK liberta os
+            // candidatos automaticamente e apaga as disciplinas em cascata).
+            Candidatura::whereNotIn('status', ['rejeitada'])
+                ->update(['sala_id' => null, 'numero_lugar' => null]);
+            Sala::whereNotNull('data_exame')->delete();
 
-            $instanciasCriadas = [];
-            $atribuidos = 0;
-            $naoAtribuidos = [];
+            $instanciasPorBloco = []; // 'data|horario' => [ ['sala'=>Sala,'ocupado'=>int,'curso_atual'=>?string], ... ]
+            $proximoModeloIdx   = []; // 'data|horario' => índice do próximo modelo a clonar
 
-            foreach ($grupos as $chave => $candidatosDoGrupo) {
-                [$curso, $periodo] = explode('|||', $chave, 2);
+            foreach ($grupos as $chave => $candidatos) {
+                [$curso, $periodo] = explode('|||', $chave);
                 $curso = trim($curso);
-                $slot = $agenda[$curso][$periodo] ?? null;
 
+                $slot = $agenda[$curso][$periodo] ?? null;
                 if (! $slot) {
                     $naoAtribuidos[] = $chave;
                     continue;
                 }
 
-                foreach ($candidatosDoGrupo as $candidato) {
-                    $atribuido = false;
+                // Um período pode ter vários turnos no mesmo dia (ex.: manhã
+                // cedo e depois manhã tarde), cada um com a sua própria
+                // capacidade cheia das 24 salas — candidatos diferentes em
+                // cada turno. Preenchemos o primeiro turno até à capacidade
+                // máxima antes de passar candidatos para o seguinte.
+                $horarios = $slot['horarios'];
+                $horIdx   = 0;
+                $instIdx  = 0;
 
-                    foreach ($slot['horarios'] as $horario) {
-                        $bloco = $slot['data'].'|'.$horario;
-                        $instanciasPorBloco[$bloco] ??= [];
-                        $nomesUsadosPorBloco[$bloco] ??= [];
-                        $indice = null;
-
-                        foreach ($instanciasPorBloco[$bloco] as $i => $instancia) {
-                            if ($instancia['ocupado'] < $instancia['sala']->capacidade
-                                && ($instancia['curso_atual'] === null || $instancia['curso_atual'] === $curso)) {
-                                $indice = $i;
-                                break;
-                            }
+                foreach ($candidatos as $candidato) {
+                    while (true) {
+                        if (! isset($horarios[$horIdx])) {
+                            // Esgotaram-se TODOS os turnos deste curso/período.
+                            break 2;
                         }
 
-                        if ($indice === null) {
-                            $modelo = $modelos->first(fn ($salaModelo) =>
-                                $salaModelo->capacidade > 0
-                                && ! in_array($salaModelo->nome, $nomesUsadosPorBloco[$bloco], true)
-                            );
-                            if (! $modelo) {
+                        $blocoChave = $slot['data'] . '|' . $horarios[$horIdx];
+                        $instanciasPorBloco[$blocoChave] ??= [];
+                        $proximoModeloIdx[$blocoChave]   ??= 0;
+
+                        if (! isset($instanciasPorBloco[$blocoChave][$instIdx])) {
+                            $mIdx = $proximoModeloIdx[$blocoChave];
+                            if (! isset($modelos[$mIdx])) {
+                                // Esgotaram-se as salas deste turno — passar
+                                // para o turno seguinte do mesmo dia, se houver.
+                                $horIdx++;
+                                $instIdx = 0;
                                 continue;
                             }
+                            $modelo = $modelos[$mIdx];
+                            $proximoModeloIdx[$blocoChave]++;
 
-                            $sala = Sala::create([
-                                'nome' => $modelo->nome,
+                            $instancia = Sala::create([
+                                'nome'       => $modelo->nome,
                                 'capacidade' => $modelo->capacidade,
                                 'data_exame' => $slot['data'],
-                                'horario' => $horario,
+                                'horario'    => $horarios[$horIdx],
                             ]);
-                            $indice = count($instanciasPorBloco[$bloco]);
-                            $instanciasPorBloco[$bloco][$indice] = [
-                                'sala' => $sala,
-                                'ocupado' => 0,
-                                'lugares' => [],
-                                'curso_atual' => null,
+                            $instanciasCriadas[] = $instancia;
+
+                            $instanciasPorBloco[$blocoChave][$instIdx] = [
+                                'sala' => $instancia, 'ocupado' => 0, 'curso_atual' => null,
                             ];
-                            $nomesUsadosPorBloco[$bloco][] = $modelo->nome;
-                            $instanciasCriadas[] = $sala;
                         }
 
-                        $instancia = &$instanciasPorBloco[$bloco][$indice];
-                        $numeroLugar = 1;
-                        while (isset($instancia['lugares'][$numeroLugar])) {
-                            $numeroLugar++;
+                        $inst = $instanciasPorBloco[$blocoChave][$instIdx];
+                        if ($inst['ocupado'] < $inst['sala']->capacidade
+                            && ($inst['curso_atual'] === null || $inst['curso_atual'] === $curso)) {
+                            break;
                         }
-
-                        $candidato->forceFill([
-                            'sala_id' => $instancia['sala']->id,
-                            'numero_lugar' => $numeroLugar,
-                        ])->save();
-
-                        $instancia['lugares'][$numeroLugar] = true;
-                        $instancia['ocupado']++;
-                        $instancia['curso_atual'] = $curso;
-                        unset($instancia);
-                        $atribuidos++;
-                        $atribuido = true;
-                        break;
+                        $instIdx++;
                     }
 
-                    if (! $atribuido) {
-                        $naoAtribuidos[] = $chave;
-                    }
+                    $blocoChave  = $slot['data'] . '|' . $horarios[$horIdx];
+                    $numeroLugar = $instanciasPorBloco[$blocoChave][$instIdx]['ocupado'] + 1;
+
+                    Candidatura::where('id', $candidato->id)->update([
+                        'sala_id'      => $instanciasPorBloco[$blocoChave][$instIdx]['sala']->id,
+                        'numero_lugar' => $numeroLugar,
+                    ]);
+
+                    $instanciasPorBloco[$blocoChave][$instIdx]['ocupado']++;
+                    $instanciasPorBloco[$blocoChave][$instIdx]['curso_atual'] = $curso;
+                    $atribuidos++;
                 }
             }
 
             $this->sincronizarDisciplinas($instanciasCriadas);
-
-            return [
-                'sem_salas' => false,
-                'atribuidos' => $atribuidos,
-                'nao_atribuidos' => $naoAtribuidos,
-                'sem_agenda' => $semAgendaCount,
-                'instancias_criadas' => count($instanciasCriadas),
-            ];
         });
 
-        if ($dados['sem_salas']) {
-            return $this->resultado(false, 0, 0, 0,
-                'Não existem salas registadas. Crie salas antes de distribuir.', 'error');
-        }
-
-        $atribuidos = $dados['atribuidos'];
-        $naoAtribuidos = $dados['nao_atribuidos'];
-        $semAgendaCount = $dados['sem_agenda'];
-        $totalSalasUsadas = $dados['instancias_criadas'];
-        $semSalaCount = count($naoAtribuidos);
+        $totalSalasUsadas = collect($instanciasCriadas)->unique('id')->count();
+        $semSalaCount = max(0, $comAgenda->count() - $atribuidos);
 
         AuditLog::registar('distribuiu_salas', null, null,
-            "{$atribuidos} candidatos pagos sem sala atribuídos a {$totalSalasUsadas} nova(s) sala(s), sem alterar atribuições existentes");
+            "{$atribuidos} candidatos distribuídos por {$totalSalasUsadas} sala(s), conforme calendário de exames");
 
         if (! empty($naoAtribuidos) || $semSalaCount > 0 || $semAgendaCount > 0) {
             $partes = [];
@@ -214,7 +202,7 @@ class DistribuicaoSalasService
         }
 
         return $this->resultado(true, $atribuidos, 0, 0,
-            "{$atribuidos} candidatos pagos sem sala atribuídos a {$totalSalasUsadas} nova(s) sala(s), de acordo com o calendário de exames. As atribuições existentes foram preservadas.",
+            "{$atribuidos} candidatos distribuídos por {$totalSalasUsadas} sala(s), de acordo com o calendário de exames.",
             'success');
     }
 
@@ -238,54 +226,30 @@ class DistribuicaoSalasService
 
         $slot = $agenda[$curso][$periodo] ?? null;
         if (! $slot) {
-            DB::transaction(function () use ($candidatura) {
-                Candidatura::whereKey($candidatura->id)->lockForUpdate()->firstOrFail()
-                    ->forceFill(['sala_id' => null, 'numero_lugar' => null])
-                    ->save();
-            });
+            $candidatura->forceFill(['sala_id' => null, 'numero_lugar' => null])->save();
             return ['ok' => false, 'mensagem' => "O curso '{$curso}' não tem data de exame definida na agenda — candidato ficou sem sala."];
         }
 
         return DB::transaction(function () use ($candidatura, $curso, $slot) {
-            $modelos = Sala::whereNull('data_exame')->orderBy('id')->lockForUpdate()->get();
-            $instanciasPorHorario = [];
-            foreach ($slot['horarios'] as $horario) {
-                $instanciasPorHorario[$horario] = Sala::where('data_exame', $slot['data'])
-                    ->where('horario', $horario)
-                    ->orderBy('id')
-                    ->lockForUpdate()
-                    ->get();
-            }
-
-            $candidatura = Candidatura::whereKey($candidatura->id)->lockForUpdate()->firstOrFail();
-            if (! $candidatura->pagamento_confirmado || $candidatura->status === 'rejeitada') {
-                $candidatura->forceFill(['sala_id' => null, 'numero_lugar' => null])->save();
-                return ['ok' => false, 'mensagem' => 'Atribuição removida: é necessário ter o pagamento confirmado e a candidatura não pode estar rejeitada.'];
-            }
-
             // Um período pode ter vários turnos no mesmo dia — procurar vaga
             // em cada um deles, pela ordem do calendário.
             foreach ($slot['horarios'] as $horario) {
-                $instancias = $instanciasPorHorario[$horario];
+                $instancias = Sala::where('data_exame', $slot['data'])
+                    ->where('horario', $horario)
+                    ->withCount('candidaturas')
+                    ->orderBy('id')
+                    ->get();
 
                 foreach ($instancias as $inst) {
                     if ($inst->id === $candidatura->sala_id) {
                         continue; // não conta a própria sala actual do candidato
                     }
-                    $ocupantes = $inst->candidaturas()->where('candidaturas.id', '!=', $candidatura->id)->get(['curso', 'numero_lugar']);
-                    $cursosNaSala = $ocupantes->pluck('curso')->filter()->map(fn ($nome) => trim($nome))->unique();
-                    $cursoDaSala = $cursosNaSala->count() > 1 ? '__misturada__' : $cursosNaSala->first();
-                    $lugares = $ocupantes->pluck('numero_lugar')->filter()->map(fn ($lugar) => (int) $lugar)->flip();
+                    $primeiro = $inst->candidaturas()->whereNotNull('curso')->first();
+                    $cursoDaSala = $primeiro ? trim($primeiro->curso) : null;
                     $compativel = $cursoDaSala === null || $cursoDaSala === $curso;
 
-                    if ($compativel && $ocupantes->count() < $inst->capacidade) {
-                        $numeroLugar = 1;
-                        while (isset($lugares[$numeroLugar]) && $numeroLugar <= $inst->capacidade) {
-                            $numeroLugar++;
-                        }
-                        if ($numeroLugar > $inst->capacidade) {
-                            continue;
-                        }
+                    if ($compativel && $inst->candidaturas_count < $inst->capacidade) {
+                        $numeroLugar = $inst->candidaturas_count + 1;
                         $candidatura->forceFill(['sala_id' => $inst->id, 'numero_lugar' => $numeroLugar])->save();
                         $this->sincronizarDisciplinas([$inst]);
                         return ['ok' => true, 'mensagem' => "Candidato realojado para {$inst->nome} ({$inst->data_exame->format('d/m/Y')}, {$inst->horario})."];
@@ -296,9 +260,9 @@ class DistribuicaoSalasService
                 // criar mais uma a partir de uma sala-modelo ainda não usada
                 // neste turno específico.
                 $nomesUsados = $instancias->pluck('nome')->all();
-                $modelo = $modelos
-                    ->reject(fn ($salaModelo) => in_array($salaModelo->nome, $nomesUsados, true))
-                    ->sortByDesc('capacidade')
+                $modelo = Sala::whereNull('data_exame')
+                    ->whereNotIn('nome', $nomesUsados)
+                    ->orderByDesc('capacidade')
                     ->first();
 
                 if ($modelo) {
@@ -369,10 +333,6 @@ class DistribuicaoSalasService
 
             if ($disciplinasCurso->isEmpty()) {
                 continue;
-            }
-
-            if ($disciplinasCurso->sum('weight_percent') !== 100) {
-                throw new \RuntimeException("Os pesos das disciplinas de {$cursoNome} não totalizam 100%; a distribuição foi cancelada.");
             }
 
             foreach ($disciplinasCurso as $cd) {

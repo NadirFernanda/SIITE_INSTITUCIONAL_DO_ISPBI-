@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__."/Support/SecurityFixtures.php";
-
 /*
 |--------------------------------------------------------------------------
 | Test Case

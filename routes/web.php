@@ -514,6 +514,7 @@ Route::view('/calendario-academico', 'pages.calendario-academico')->name('calend
 
 Route::get('/candidaturas', function () {
     $formularioAtivo = \App\Models\SiteSetting::candidaturasAtivas();
+
     return view('pages.candidaturas', compact('formularioAtivo'));
 })->name('candidaturas');
 // Limite bem mais alto do que o costume: muitos candidatos partilham o mesmo IP

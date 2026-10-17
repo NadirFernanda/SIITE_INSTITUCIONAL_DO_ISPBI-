@@ -80,7 +80,6 @@ class CandidaturaController extends Controller
 
     public function downloadComprovativo(Candidatura $candidatura)
     {
-        \Illuminate\Support\Facades\Gate::authorize('downloadComprovativo', $candidatura);
         if (! $candidatura->isAssinada()) {
             return back()->with('error', 'Esta candidatura ainda não foi assinada. Assine primeiro — o comprovativo não foi enviado ao candidato.');
         }
@@ -109,7 +108,6 @@ class CandidaturaController extends Controller
 
     public function imprimirPresencialComprovativo(Candidatura $candidatura)
     {
-        \Illuminate\Support\Facades\Gate::authorize('downloadComprovativo', $candidatura);
         if (! $candidatura->isAssinada()) {
             return back()->with('error', 'Esta candidatura ainda não foi assinada. Assine primeiro — o comprovativo não pode ser impresso.');
         }

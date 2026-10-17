@@ -30,8 +30,7 @@ class SalasNotasExportLote implements WithMultipleSheets, WithEvents
     public function sheets(): array
     {
         return $this->salas->flatMap(function (Sala $sala) {
-            $query = $sala->candidaturas()->where('pagamento_confirmado', true)
-                ->whereNotIn('status', ['rejeitada']);
+            $query = $sala->candidaturas()->where('pagamento_confirmado', true);
             if ($this->cursoFiltro !== null) {
                 $query->whereRaw('LOWER(TRIM(curso)) = LOWER(?)', [trim($this->cursoFiltro)]);
             }

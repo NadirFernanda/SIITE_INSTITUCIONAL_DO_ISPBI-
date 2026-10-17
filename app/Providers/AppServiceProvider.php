@@ -25,7 +25,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         // Authorization policies
-        Gate::policy(\App\Models\Candidatura::class, \App\Policies\CandidaturaPolicy::class);
         Gate::policy(\App\Models\Noticia::class, \App\Policies\NoticiaPolicy::class);
         Gate::policy(\App\Models\Concurso::class, \App\Policies\ConcursoPolicy::class);
 

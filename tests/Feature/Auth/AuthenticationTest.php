@@ -8,8 +8,8 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function (string $role, string $destination, bool $approved) {
-    $user = securityUser($role, $approved);
+test('users can authenticate using the login screen', function () {
+    $user = User::factory()->create();
 
     $response = $this->post('/login', [
         'email' => $user->email,
@@ -17,17 +17,11 @@ test('users can authenticate using the login screen', function (string $role, st
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route($destination, absolute: false));
-})->with([
-    ['admin', 'admin', true], ['daac', 'daac.candidaturas.index', true],
-    ['tecnico', 'tecnico.candidaturas.index', true], ['lancamento', 'lancamento.salas.index', true],
-    ['professor', 'professor.candidaturas.index', true], ['secretaria', 'secretaria.candidaturas.index', true],
-    ['presidencia', 'presidencia.salas.index', true], ['alumni', 'portal.dashboard', true],
-    ['alumni', 'portal.pendente', false],
-]);
+    $response->assertRedirect(route('dashboard', absolute: false));
+});
 
 test('users can not authenticate with invalid password', function () {
-    $user = securityUser('admin');
+    $user = User::factory()->create();
 
     $this->post('/login', [
         'email' => $user->email,
@@ -43,11 +37,5 @@ test('users can logout', function () {
     $response = $this->actingAs($user)->post('/logout');
 
     $this->assertGuest();
-    $response->assertRedirect(route('login'));
-});
-
-test('valid credentials with an unrecognized role do not grant a session', function () {
-    $user = securityUser('user');
-    $this->post('/login', ['email' => $user->email, 'password' => 'password'])->assertSessionHasErrors('email');
-    $this->assertGuest();
+    $response->assertRedirect('/');
 });

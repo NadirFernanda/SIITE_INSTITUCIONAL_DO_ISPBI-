@@ -42,29 +42,19 @@ class AdmissaoService
     public function calcular(string $curso, string $periodo): array
     {
         return DB::transaction(function () use ($curso, $periodo) {
-            Candidatura::where('curso', $curso)
-                ->where('periodo', $periodo)
-                ->orderBy('id')
-                ->lockForUpdate()
-                ->get(['id']);
-
-            $vagasTotal = (int) (CursoVaga::where('curso', $curso)
-                ->where('periodo', $periodo)
-                ->lockForUpdate()
-                ->value('vagas') ?? 0);
+            $vagasTotal = (int) (CursoVaga::where('curso', $curso)->where('periodo', $periodo)->value('vagas') ?? 0);
             $agora = now();
             $utilizadorId = Auth::id();
 
-            Candidatura::where('curso', $curso)->where('periodo', $periodo)->update([
+            $base = Candidatura::where('curso', $curso)
+                ->where('periodo', $periodo)
+                ->where('pagamento_confirmado', true);
+
+            (clone $base)->update([
                 'resultado_admissao' => null,
                 'resultado_calculado_em' => null,
                 'resultado_calculado_por' => null,
             ]);
-
-            $base = Candidatura::where('curso', $curso)
-                ->where('periodo', $periodo)
-                ->where('pagamento_confirmado', true)
-                ->whereNotIn('status', ['rejeitada']);
 
             // Nota lançada mas não positiva: reprovado de imediato, nunca compete.
             (clone $base)->whereNotNull('nota_exame')
@@ -75,15 +65,11 @@ class AdmissaoService
                     'resultado_calculado_por' => $utilizadorId,
                 ]);
 
-            $quotas = [];
-            foreach (Candidatura::categoriasEspeciaisPermitidas($curso) as $categoria) {
-                $quotas[$categoria] = (int) round($vagasTotal * self::QUOTA_CATEGORIA_ESPECIAL);
-            }
-            $vagasReservadas = min($vagasTotal, array_sum($quotas));
-            $vagasRestantesGerais = $vagasTotal - $vagasReservadas;
+            $vagasRestantesGerais = $vagasTotal;
             $resumo = ['vagas_total' => $vagasTotal, 'categorias' => []];
 
-            foreach ($quotas as $categoria => $quota) {
+            foreach (Candidatura::categoriasEspeciaisPermitidas($curso) as $categoria) {
+                $quota = (int) round($vagasTotal * self::QUOTA_CATEGORIA_ESPECIAL);
 
                 $elegiveis = (clone $base)
                     ->where('necessidade_especial', $categoria)
@@ -96,7 +82,7 @@ class AdmissaoService
 
                 $this->gravarResultados($elegiveis, $admitidos, $agora, $utilizadorId);
 
-                $vagasRestantesGerais += max(0, $quota - min($quota, $admitidos->count()));
+                $vagasRestantesGerais += max(0, $quota - $admitidos->count());
 
                 $resumo['categorias'][$categoria] = [
                     'quota' => $quota,

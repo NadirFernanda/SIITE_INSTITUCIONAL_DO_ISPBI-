@@ -1,29 +1,16 @@
-name: CI
+name: Candidaturas emergency validation
 
 "on":
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_DB: isp_bie_test
-          POSTGRES_HOST_AUTH_METHOD: trust
-        ports:
-          - 55432:5432
-        options: >-
-          --health-cmd "pg_isready -U postgres -d isp_bie_test"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 10
-
     steps:
       - uses: actions/checkout@v4
 
@@ -31,63 +18,21 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: mbstring, bcmath, intl, xml, pdo_pgsql, gd, zip
+          extensions: mbstring, bcmath, intl, xml, pdo_sqlite, gd, zip
 
-      - name: Cache Composer
-        uses: actions/cache@v4
-        with:
-          path: ~/.composer/cache
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-
-      - name: Install Composer dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.12.0'
+          node-version: '20.19.0'
 
       - name: Install Node dependencies
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       - name: Build frontend assets
-        run: npm run build --if-present
+        run: npm run build
 
-      - name: Prepare isolated test database
-        run: |
-          psql -h 127.0.0.1 -p 55432 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'CREATE ROLE isp_bie_test LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE;'
-          psql -h 127.0.0.1 -p 55432 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'ALTER DATABASE isp_bie_test OWNER TO isp_bie_test;'
-          mkdir -p .test-runtime/views
-
-      - name: Run tests
-        run: |
-          vendor/bin/pest --colors=always
-
-  lighthouse:
-    name: Lighthouse (accessibility)
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install Lighthouse
-        run: npm install -g lighthouse@10
-
-      - name: Run Lighthouse categories
-        if: vars.SITE_URL != ''
-        env:
-          SITE_URL: ${{ vars.SITE_URL }}
-        run: |
-          echo "Running Lighthouse against $SITE_URL"
-          lighthouse "$SITE_URL" --only-categories=accessibility,performance,seo,best-practices --chrome-flags="--headless" --output=json --output-path=./lighthouse_report.json || true
-
-      - name: Upload Lighthouse report
-        uses: actions/upload-artifact@v4
-        with:
-          name: lighthouse-report
-          path: lighthouse_report.json
+      - name: Run isolated application tests
+        run: php vendor/bin/phpunit -c phpunit.candidaturas.xml

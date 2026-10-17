@@ -1,12 +1,5 @@
 name: Scheduled Backup
 
-permissions:
-  contents: read
-
-concurrency:
-  group: production-backup
-  cancel-in-progress: false
-
 "on":
   schedule:
     - cron: '0 3 * * *' # Daily at 03:00 UTC (adjust as needed)
@@ -14,20 +7,13 @@ concurrency:
 
 jobs:
   backup:
-    runs-on: [self-hosted, production-backup]
-    environment: production-backup
-    timeout-minutes: 120
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
       - name: Run backup script
         run: bash ./scripts/backup.sh
         env:
-          APP_DIR: ${{ vars.PRODUCTION_APP_DIR }}
-          STORAGE_DIR: ${{ vars.PRODUCTION_STORAGE_DIR }}
-          BACKUP_DIR: ${{ vars.PRODUCTION_BACKUP_DIR }}
-          BACKUP_S3_PREFIX: ${{ vars.BACKUP_S3_PREFIX }}
-          REQUIRE_OFFSITE: '1'
           DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_PORT: ${{ secrets.DB_PORT }}
@@ -38,4 +24,3 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}

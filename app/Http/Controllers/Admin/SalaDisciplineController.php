@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Sala;
 use App\Models\SalaDiscipline;
 use App\Models\CourseDiscipline;
-use App\Services\NotaDisciplinaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalaDisciplineController extends Controller
 {
@@ -64,7 +64,7 @@ class SalaDisciplineController extends Controller
         return view('admin.salas.disciplines', compact('sala', 'disciplines', 'courseDisciplines'));
     }
 
-    public function update(Request $request, Sala $sala, NotaDisciplinaService $notaDisciplinaService)
+    public function update(Request $request, Sala $sala)
     {
         // Log payload for debugging when saves appear not to persist (also write raw payload to file)
         try {
@@ -154,7 +154,26 @@ class SalaDisciplineController extends Controller
             throw $e;
         }
 
-        $notaDisciplinaService->actualizarDisciplinas($sala, $data['disciplines']);
+        DB::transaction(function () use ($sala, $data) {
+            $incoming = collect($data['disciplines'])->map(fn($d) => trim($d['discipline']))->filter()->values();
+
+            foreach ($data['disciplines'] as $d) {
+                $name = trim($d['discipline']);
+                if ($name === '') continue;
+                SalaDiscipline::updateOrCreate(
+                    ['sala_id' => $sala->id, 'discipline' => $name],
+                    ['weight_percent' => (int) ($d['weight'] ?? 0)]
+                );
+            }
+
+            // Remove as disciplinas que já não vêm na lista submetida — incluindo
+            // apagar todas, se a lista vier vazia (o formulário já permite isso
+            // agora, ao contrário de antes, em que "disciplines" era obrigatório
+            // e não vazio, impedindo remover a última disciplina de uma sala).
+            SalaDiscipline::where('sala_id', $sala->id)
+                ->whereNotIn('discipline', $incoming)
+                ->delete();
+        });
 
         // Extra logging to help debug persistence issues: log how many rows exist after save
         try {

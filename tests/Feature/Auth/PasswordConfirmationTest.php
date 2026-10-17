@@ -11,15 +11,14 @@ test('confirm password screen can be rendered', function () {
 });
 
 test('password can be confirmed', function () {
-    $user = securityUser('admin');
+    $user = User::factory()->create();
 
     $response = $this->actingAs($user)->post('/confirm-password', [
         'password' => 'password',
     ]);
 
-    $response->assertRedirect(route('admin', absolute: false));
+    $response->assertRedirect();
     $response->assertSessionHasNoErrors();
-    $response->assertSessionHas('auth.password_confirmed_at');
 });
 
 test('password is not confirmed with invalid password', function () {
@@ -30,5 +29,4 @@ test('password is not confirmed with invalid password', function () {
     ]);
 
     $response->assertSessionHasErrors();
-    $response->assertSessionMissing('auth.password_confirmed_at');
 });

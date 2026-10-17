@@ -27,8 +27,11 @@ class SiteSetting extends Model
 
     public static function candidaturasAtivas(): bool
     {
-        return (bool) static::query()
+        $value = static::query()
             ->where('key', self::CANDIDATURAS_ATIVAS)
+            ->toBase()
             ->value('value');
+
+        return in_array($value, [true, 1, '1', 't', 'true'], true);
     }
 }

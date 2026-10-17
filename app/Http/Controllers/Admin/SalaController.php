@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Models\Candidatura;
 use App\Models\Sala;
-use App\Services\SalaAtribuicaoService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -40,10 +39,10 @@ class SalaController extends Controller
             ->ordenadaPorHorario();
 
         if ($cursoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->where('curso', $cursoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('curso', $cursoFiltro));
         }
         if ($periodoFiltro) {
-            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->where('periodo', $periodoFiltro));
+            $salasQuery->whereHas('candidaturas', fn ($q) => $q->where('pagamento_confirmado', true)->where('periodo', $periodoFiltro));
         }
         if ($horarioFiltro) {
             $salasQuery->where('horario', $horarioFiltro);
@@ -89,8 +88,8 @@ class SalaController extends Controller
             ->get();
 
         // Estatísticas para o painel
-        $totalCandidatos   = Candidatura::where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->count();
-        $atribuidos        = Candidatura::where('pagamento_confirmado', true)->whereNotIn('status', ['rejeitada'])->whereNotNull('sala_id')->count();
+        $totalCandidatos   = Candidatura::whereNotIn('status', ['rejeitada'])->count();
+        $atribuidos        = Candidatura::whereNotNull('sala_id')->count();
         $semSala           = $totalCandidatos - $atribuidos;
         $totalLugares      = $salas->sum('capacidade');
 
@@ -146,9 +145,13 @@ class SalaController extends Controller
         return redirect()->route('admin.salas.index')->with('success', 'Sala actualizada.');
     }
 
-    public function destroy(Sala $sala, SalaAtribuicaoService $atribuicoes)
+    public function destroy(Sala $sala)
     {
-        $atribuicoes->eliminarSala($sala);
+        // Libertar candidatos desta sala antes de apagar
+        Candidatura::where('sala_id', $sala->id)
+                   ->update(['sala_id' => null, 'numero_lugar' => null]);
+
+        $sala->delete();
 
         return redirect()->route('admin.salas.index')->with('success', 'Sala eliminada.');
     }
@@ -157,7 +160,6 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
-            ->whereNotIn('status', ['rejeitada'])
             ->orderBy('numero_lugar')
             ->get();
 
@@ -174,7 +176,6 @@ class SalaController extends Controller
     public function semSala()
     {
         $candidaturas = Candidatura::whereNull('sala_id')
-            ->where('pagamento_confirmado', true)
             ->whereNotIn('status', ['rejeitada'])
             ->orderBy('curso')->orderBy('periodo')->orderBy('nome')
             ->get();
@@ -193,12 +194,17 @@ class SalaController extends Controller
      * livremente a sala, mesmo que já tenha outro curso ou esteja cheia; é
      * uma decisão consciente para casos excepcionais, não a regra geral.
      */
-    public function atribuirManual(Request $request, Candidatura $candidatura, SalaAtribuicaoService $atribuicoes)
+    public function atribuirManual(Request $request, Candidatura $candidatura)
     {
         $request->validate(['sala_id' => 'required|exists:salas,id']);
 
         $sala = Sala::findOrFail($request->input('sala_id'));
-        $numeroLugar = $atribuicoes->atribuirManual($candidatura, $sala);
+        $numeroLugar = $sala->candidaturas()->count() + 1;
+
+        $candidatura->forceFill([
+            'sala_id'      => $sala->id,
+            'numero_lugar' => $numeroLugar,
+        ])->save();
 
         AuditLog::registar('atribuiu_sala_manual', 'candidatura', $candidatura->id,
             "Ficha #{$candidatura->id} — {$candidatura->nome} atribuída manualmente a {$sala->nome}"
@@ -220,9 +226,11 @@ class SalaController extends Controller
         return redirect()->route('admin.salas.index')->with($resultado['tipo'], $resultado['mensagem']);
     }
 
-    public function limpar(SalaAtribuicaoService $atribuicoes)
+    public function limpar()
     {
-        $count = $atribuicoes->limparTodas();
+        $count = Candidatura::whereNotNull('sala_id')->count();
+        Candidatura::whereNotNull('sala_id')
+                   ->update(['sala_id' => null, 'numero_lugar' => null]);
 
         AuditLog::registar('limpou_salas', null, null,
             "Distribuição removida — {$count} candidatos retirados das salas");
@@ -235,7 +243,6 @@ class SalaController extends Controller
     {
         $candidaturas = $sala->candidaturas()
             ->where('pagamento_confirmado', true)
-            ->whereNotIn('status', ['rejeitada'])
             ->orderBy('numero_lugar')
             ->get();
 
@@ -248,8 +255,7 @@ class SalaController extends Controller
     public function pdfExame(Request $request, Sala $sala)
     {
         $necessidadeEspecial = $request->query('necessidade_especial');
-        $query = $sala->candidaturas()->where('pagamento_confirmado', true)
-            ->whereNotIn('status', ['rejeitada']);
+        $query = $sala->candidaturas()->where('pagamento_confirmado', true);
         if ($necessidadeEspecial) {
             $query->whereRaw('LOWER(TRIM(necessidade_especial)) = LOWER(?)', [trim($necessidadeEspecial)]);
         }

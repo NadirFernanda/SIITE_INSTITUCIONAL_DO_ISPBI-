@@ -18,20 +18,14 @@
                                         <div class="flex items-start gap-3">
                                             <svg class="w-6 h-6 {{ $formularioAtivo ? 'text-green-600' : 'text-red-500' }} flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                                 @if($formularioAtivo)
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 001.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                                                 @else
-                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/>
                                                 @endif
                                             </svg>
                                             <div>
-                                                <h3 class="font-bold {{ $formularioAtivo ? 'text-green-700' : 'text-red-700' }}">
-                                                    {{ $formularioAtivo ? 'Candidaturas Abertas' : 'Inscrições Encerradas — Exames de Acesso 2026/2027' }}
-                                                </h3>
-                                                <p class="{{ $formularioAtivo ? 'text-green-700' : 'text-red-600' }}">
-                                                    {{ $formularioAtivo
-                                                        ? 'O formulário de candidaturas está disponível para submissão.'
-                                                        : 'As inscrições para o ano lectivo 2026/2027 estão encerradas. Não é possível submeter novas candidaturas.' }}
-                                                </p>
+                                                <h3 class="font-bold {{ $formularioAtivo ? 'text-green-700' : 'text-red-700' }}">{{ $formularioAtivo ? 'Candidaturas abertas' : 'Candidaturas encerradas' }}</h3>
+                                                <p class="{{ $formularioAtivo ? 'text-green-700' : 'text-red-600' }}">{{ $formularioAtivo ? 'O formulário de candidaturas está disponível para submissão.' : 'As candidaturas encontram-se encerradas. Aguarde pela abertura do próximo período de inscrições.' }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -207,17 +201,12 @@
                                                 </svg>
                                             </div>
                                         </div>
-                                        <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">Inscrições Encerradas</h2>
-                                        <p class="text-red-100 text-lg font-semibold">Exames de Acesso 2026/2027</p>
+                                        <h2 class="text-2xl sm:text-3xl font-black text-white mb-2">Candidaturas encerradas</h2>
                                     </div>
 
                                     {{-- Corpo informativo --}}
                                     <div class="bg-white px-6 py-8 sm:px-10 sm:py-10 text-center">
-                                        <p class="text-gray-700 text-base sm:text-lg leading-relaxed mb-6">
-                                            O período de inscrições para os <strong>Exames de Acesso ao ano lectivo 2026/2027</strong>
-                                            encontra-se <strong class="text-red-600">encerrado</strong>.
-                                            Não é possível submeter novas candidaturas através deste formulário.
-                                        </p>
+                                        <p class="text-gray-700 text-base sm:text-lg leading-relaxed mb-6">As candidaturas encontram-se encerradas. Aguarde pela abertura do próximo período de inscrições.</p>
 
                                         <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 sm:p-6 mb-6 text-left max-w-lg mx-auto">
                                             <h3 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
@@ -246,6 +235,7 @@
                                         </a>
                                     </div>
                                 </div>
+
                                 @endif
 
                             </div>

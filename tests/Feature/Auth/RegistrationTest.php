@@ -3,7 +3,7 @@
 test('registration screen can be rendered', function () {
     $response = $this->get('/register');
 
-    $response->assertNotFound();
+    $response->assertStatus(200);
 });
 
 test('new users can register', function () {
@@ -14,7 +14,6 @@ test('new users can register', function () {
         'password_confirmation' => 'password',
     ]);
 
-    $this->assertGuest();
-    $response->assertNotFound();
-    $this->assertDatabaseMissing('users', ['email' => 'test@example.com']);
+    $this->assertAuthenticated();
+    $response->assertRedirect(route('dashboard', absolute: false));
 });

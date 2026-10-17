@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
  */
 class AlumniProtectedController extends Controller
 {
+    public function __construct()
+    {
+        // Requer autenticação para todos os métodos
+        $this->middleware('auth');
+    }
+
     /**
      * Mostra dados completos do alumnus apenas para utilizadores autenticados
      * @param int $id

@@ -15,7 +15,7 @@ class CandidaturaController extends Controller
 {
     public function store(Request $request)
     {
-        abort_unless(SiteSetting::candidaturasAtivas(), 403, 'O formulário de candidaturas está encerrado.');
+        abort_unless(SiteSetting::candidaturasAtivas(), 403, 'As candidaturas encontram-se encerradas. Aguarde pela abertura do próximo período de inscrições.');
 
         $periodo      = $request->input('periodo');
         $periodoLabel = $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
@@ -188,8 +188,8 @@ class CandidaturaController extends Controller
 
     public function downloadPdf(Request $request, Candidatura $candidatura)
     {
-        // A sessão por si só não autoriza acesso a documentos de terceiros.
-        if (! $request->hasValidSignature() && ! \Illuminate\Support\Facades\Gate::allows('downloadComprovativo', $candidatura)) {
+        // Mesma protecção: apenas com assinatura válida ou utilizador autenticado (admin/técnico)
+        if (! $request->hasValidSignature() && ! auth()->check()) {
             abort(403, 'Acesso não autorizado.');
         }
 

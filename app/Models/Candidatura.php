@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Candidatura extends Model
@@ -13,71 +11,6 @@ class Candidatura extends Model
     use SoftDeletes;
 
     protected $table = 'candidaturas';
-
-    protected static function booted(): void
-    {
-        static::updating(function (Candidatura $candidatura) {
-            if ($candidatura->isDirty(['nota_exame', 'pagamento_confirmado', 'curso', 'periodo', 'necessidade_especial', 'status'])) {
-                $candidatura->resultado_admissao = null;
-                $candidatura->resultado_calculado_em = null;
-                $candidatura->resultado_calculado_por = null;
-            }
-
-            if (($candidatura->isDirty('pagamento_confirmado') && ! $candidatura->pagamento_confirmado)
-                || ($candidatura->isDirty('status') && $candidatura->status === 'rejeitada')) {
-                $candidatura->sala_id = null;
-                $candidatura->numero_lugar = null;
-            }
-        });
-
-        static::updated(function (Candidatura $candidatura) {
-            if ($candidatura->wasChanged(['nota_exame', 'pagamento_confirmado', 'curso', 'periodo', 'necessidade_especial', 'status'])) {
-                $grupos = [
-                    [$candidatura->getRawOriginal('curso'), $candidatura->getRawOriginal('periodo')],
-                    [$candidatura->curso, $candidatura->periodo],
-                ];
-
-                foreach (collect($grupos)->unique(fn ($grupo) => serialize($grupo)) as [$curso, $periodo]) {
-                    if ($curso === null || $periodo === null) {
-                        continue;
-                    }
-
-                    DB::table('candidaturas')
-                        ->where('curso', $curso)
-                        ->where('periodo', $periodo)
-                        ->whereNotNull('resultado_admissao')
-                        ->update([
-                            'resultado_admissao' => null,
-                            'resultado_calculado_em' => null,
-                            'resultado_calculado_por' => null,
-                            'updated_at' => now(),
-                        ]);
-                }
-            }
-
-            if (! $candidatura->wasChanged(['sala_id', 'numero_lugar'])) {
-                return;
-            }
-
-            DB::table('sala_atribuicoes_historico')->insert([
-                'candidatura_id' => $candidatura->id,
-                'sala_anterior_id' => $candidatura->getRawOriginal('sala_id'),
-                'lugar_anterior' => $candidatura->getRawOriginal('numero_lugar'),
-                'sala_nova_id' => $candidatura->sala_id,
-                'lugar_novo' => $candidatura->numero_lugar,
-                'evento' => $candidatura->sala_id === null ? 'desatribuicao' : ($candidatura->getRawOriginal('sala_id') === null ? 'atribuicao' : 'realocacao'),
-                'ator_id' => Auth::id(),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        });
-
-        static::deleting(function (Candidatura $candidatura) {
-            if ($candidatura->sala_id !== null) {
-                $candidatura->forceFill(['sala_id' => null, 'numero_lugar' => null])->save();
-            }
-        });
-    }
 
     protected $fillable = [
         'nome', 'filiacao_pai', 'filiacao_mae', 'data_nascimento',

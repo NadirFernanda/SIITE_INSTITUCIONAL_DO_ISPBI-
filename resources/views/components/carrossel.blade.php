@@ -9,7 +9,7 @@
         @foreach($carrosseis as $index => $carrossel)
             <div x-show="currentSlide === {{ $index }}" x-cloak class="absolute inset-0 transition-opacity duration-700 flex items-center justify-center">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('storage/' . $carrossel->imagem) }}');"></div>
-                <div class="absolute inset-0 bg-black/40"></div>
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
                 <div class="relative h-full flex items-center justify-center w-full">
                     <div class="text-center text-white px-2 sm:px-6 md:px-12 max-w-4xl mx-auto drop-shadow-lg">
                         <h2 class="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 leading-tight md:leading-tight">{{ $carrossel->titulo }}</h2>

@@ -110,7 +110,6 @@ class CandidaturaController extends Controller
 
     public function downloadComprovativo(Candidatura $candidatura)
     {
-        \Illuminate\Support\Facades\Gate::authorize('downloadComprovativo', $candidatura);
         if (! $candidatura->isAssinada()) {
             return back()->with('error', 'Esta candidatura ainda não foi assinada pelo DAAC. O comprovativo só pode ser gerado/enviado depois de assinada.');
         }

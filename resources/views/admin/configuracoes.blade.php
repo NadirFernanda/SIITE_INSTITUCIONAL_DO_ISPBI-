@@ -19,21 +19,20 @@
             : 'O formulário está desactivado; a página pública informa que as inscrições estão encerradas.' }}
     </p>
 
-    <form method="POST" action="{{ route('admin.configuracoes.update') }}" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+    <form method="POST" action="{{ route('admin.configuracoes.update') }}">
         @csrf
         @method('PATCH')
-        <input type="hidden" name="candidaturas_ativas" value="0">
-        <label for="candidaturas_ativas" style="display:flex;align-items:center;gap:10px;font-weight:600;color:#1e293b;cursor:pointer;">
-            <input
-                id="candidaturas_ativas"
-                type="checkbox"
-                name="candidaturas_ativas"
-                value="1"
-                @checked($formularioAtivo)
-                style="width:18px;height:18px;accent-color:#2563eb;"
-            >
-            Activar formulário de candidaturas
-        </label>
+        <fieldset style="border:0;padding:0;margin:0 0 20px;display:grid;gap:12px;">
+            <legend style="font-weight:600;color:#1e293b;margin-bottom:12px;">Estado das candidaturas</legend>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                <input type="radio" name="candidaturas_ativas" value="1" @checked(old('candidaturas_ativas', (int) $formularioAtivo) == 1)>
+                Candidaturas abertas
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                <input type="radio" name="candidaturas_ativas" value="0" @checked(old('candidaturas_ativas', (int) $formularioAtivo) == 0)>
+                Candidaturas encerradas
+            </label>
+        </fieldset>
         <button type="submit" style="background:#1e3a5f;color:#fff;font-weight:700;padding:10px 18px;border:0;border-radius:8px;cursor:pointer;">
             Guardar
         </button>
@@ -41,5 +40,5 @@
     @error('candidaturas_ativas')
         <p role="alert" style="color:#b91c1c;margin:12px 0 0;">{{ $message }}</p>
     @enderror
-</div>
+</section>
 @endsection

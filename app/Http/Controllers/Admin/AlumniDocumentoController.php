@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AlumniDocumento;
-use App\Services\AlumniDocumentStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,7 +31,7 @@ class AlumniDocumentoController extends Controller
         ]);
 
         $file    = $request->file('ficheiro');
-        $path    = $file->store('alumni-documentos', 'alumni_private');
+        $path    = $file->store('alumni-documentos', 'public');
         $tamanho = $this->formatBytes($file->getSize());
 
         AlumniDocumento::create([
@@ -48,13 +47,8 @@ class AlumniDocumentoController extends Controller
 
     public function destroy(AlumniDocumento $documento)
     {
-        $storage = app(AlumniDocumentStorage::class);
-        if ($storage->validPath($documento->ficheiro)) {
-            foreach (['alumni_private', 'public'] as $disk) {
-                if (Storage::disk($disk)->exists($documento->ficheiro)) {
-                    Storage::disk($disk)->delete($documento->ficheiro);
-                }
-            }
+        if (Storage::disk('public')->exists($documento->ficheiro)) {
+            Storage::disk('public')->delete($documento->ficheiro);
         }
 
         $documento->delete();
