@@ -150,12 +150,9 @@
               Educação
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-educacao">
-              <li><a href="/cursos"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Cursos de Graduação</a></li>
-              <li><a href="/pos-graduacao"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Pós-Graduação</a></li>
-              <li><a href="/candidaturas"     class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Como Ingressar</a></li>
-              <li><a href="/cursos-online"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Cursos Online</a></li>
-              <li><a href="/bolsas"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Bolsas de Estudo</a></li>
-              <li><a href="/concursos"        class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Concursos Públicos</a></li>
+              <li><a href="{{ route('cursos') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Cursos de Graduação</a></li>
+              <li><a href="{{ route('candidaturas') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Como Ingressar</a></li>
+              <li><a href="{{ route('trabalhe-conosco') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Concursos Públicos</a></li>
             </ul>
           </div>
 
@@ -167,12 +164,11 @@
               Pesquisa
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-pesquisa">
-              <li><a href="/investigacao"     class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Investigação</a></li>
-              <li><a href="/biblioteca"       class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Biblioteca Digital</a></li>
-              <li><a href="/repositorio"      class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Repositório Académico</a></li>
-              <li><a href="/revista"          class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Revista Científica</a></li>
-              <li><a href="/projetos"         class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Projectos de I&amp;D</a></li>
-              <li><a href="/busca-biblioteca" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Catálogo da Biblioteca</a></li>
+              <li><a href="{{ route('investigacao') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Investigação</a></li>
+              <li><a href="{{ route('biblioteca') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Biblioteca Digital</a></li>
+              <li><a href="{{ route('research4life') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Research4Life</a></li>
+              <li><a href="{{ route('revista') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Revista Científica</a></li>
+              <li><a href="{{ route('investigacao') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Projectos de I&amp;D</a></li>
             </ul>
           </div>
 
@@ -184,12 +180,11 @@
               Institucional
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-institucional">
-              <li><a href="/sobre-ispbie"     class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Sobre o ISP-Bié</a></li>
-              <li><a href="/missao"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Missão, Visão e Valores</a></li>
-              <li><a href="/gestao"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Gestão e Governança</a></li>
-              <li><a href="/transparencia"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Transparência</a></li>
-              <li><a href="/noticias"         class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Notícias e Eventos</a></li>
-              <li><a href="/#estatisticas"    class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">ISP-Bié em Números</a></li>
+              <li><a href="{{ route('institucional') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Sobre o ISP-Bié</a></li>
+              <li><a href="{{ route('missao') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Missão</a></li>
+              <li><a href="{{ route('gestao') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Gestão e Governança</a></li>
+              <li><a href="{{ route('noticias') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Notícias</a></li>
+              <li><a href="{{ route('welcome') }}#estatisticas" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">ISP-Bié em Números</a></li>
             </ul>
           </div>
 
@@ -201,16 +196,15 @@
               Serviços
             </h3>
             <ul class="space-y-2.5" aria-labelledby="footer-servicos">
-              <li><a href="/resultados"       class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Portal do Estudante</a></li>
-              <li><a href="http://mx100.angoweb.net/webmail" target="_blank" rel="noopener noreferrer"
+              <li><a href="{{ route('resultados') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Resultados de Exames</a></li>
+              <li><a href="https://mx100.angoweb.net/webmail" target="_blank" rel="noopener noreferrer"
                                               class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed flex items-center gap-1">
                 Webmail Institucional
                 <svg class="w-2.5 h-2.5 opacity-40 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
               </a></li>
-              <li><a href="/alumni"           class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Alumni</a></li>
-              <li><a href="/servicos"         class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Carta de Serviços</a></li>
-              <li><a href="/ouvidoria"        class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Ouvidoria</a></li>
-              <li><a href="/contactos"        class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Contactos</a></li>
+              <li><a href="{{ route('alumni') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Alumni</a></li>
+              <li><a href="{{ route('servicos') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Carta de Serviços</a></li>
+              <li><a href="{{ route('contactos') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Contactos</a></li>
             </ul>
           </div>
 
@@ -222,15 +216,14 @@
               Parceiros
             </h3>
             <ul class="space-y-2" aria-labelledby="footer-parceiros">
-              <li class="text-xs text-gray-400 leading-snug">Gabinete Prov. da Educação</li>
               <li class="text-xs text-gray-400 leading-snug">Fundo de Apoio Social (FAS)</li>
-              <li class="text-xs text-gray-400 leading-snug">Standard Bank de Angola</li>
-              <li class="text-xs text-gray-400 leading-snug">Unitel</li>
-              <li class="text-xs text-gray-400 leading-snug">ISP Ndunduma · ISP da Caála</li>
+              <li class="text-xs text-gray-400 leading-snug">Standard Bank de Angola, S.A.</li>
+              <li class="text-xs text-gray-400 leading-snug">Instituto Superior Politécnico Ndunduma</li>
+              <li class="text-xs text-gray-400 leading-snug">Instituto Superior Politécnico da Caála</li>
               <li class="text-xs text-gray-400 leading-snug">Hospital Mártires do Cuito</li>
+              <li class="text-xs text-gray-400 leading-snug">Hospital Municipal do Cunje</li>
               <li class="text-xs text-gray-400 leading-snug">Centro Materno Infantil do Bié</li>
-              <li class="text-xs text-gray-400 leading-snug">Cefejor</li>
-              <li><a href="/parcerias" class="text-xs transition-colors duration-150 text-[#F05A28]/65 hover:text-[#F05A28]">+ Ver todas as parcerias →</a></li>
+              <li><a href="{{ route('parcerias') }}" class="text-xs transition-colors duration-150 text-[#F05A28]/65 hover:text-[#F05A28]">+ Ver todas as parcerias →</a></li>
             </ul>
           </div>
 
@@ -250,11 +243,7 @@
             &copy; 2020&ndash;{{ date('Y') }} Instituto Superior Politécnico do Bié &mdash; Todos os direitos reservados.
           </p>
           <p class="text-xs">
-            <a href="/politica-privacidade" class="text-gray-400 hover:text-[#F05A28] transition-colors">Política de Privacidade</a>
-            <span class="mx-2 text-gray-500" aria-hidden="true">·</span>
-            <a href="/termos"               class="text-gray-400 hover:text-[#F05A28] transition-colors">Termos de Uso</a>
-            <span class="mx-2 text-gray-500" aria-hidden="true">·</span>
-            <a href="/acessibilidade"       class="text-gray-400 hover:text-[#F05A28] transition-colors">Acessibilidade</a>
+            <a href="{{ route('inclusao') }}#acessibilidade" class="text-gray-400 hover:text-[#F05A28] transition-colors">Inclusão e acessibilidade</a>
           </p>
           <p class="text-xs text-gray-400">
             Desenvolvido por <span class="text-gray-200">Fernanda Gonçalves</span>
@@ -266,15 +255,6 @@
         {{-- Right: social icons with brand colours --}}
         <div class="flex items-center gap-1.5" aria-label="Redes sociais do ISP-Bié">
 
-          <a href="https://www.facebook.com/search/top?q=instituto%20superior%20polit%C3%A9cnico%20do%20bi%C3%A9"
-             target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center w-9 h-9 rounded-xl text-gray-500 bg-white/5 border border-white/[0.08] hover:text-white hover:bg-[#1877F2] hover:border-[#1877F2] hover:-translate-y-[3px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#1877F2]"
-             aria-label="Facebook do ISP-Bié">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-            </svg>
-          </a>
-
           <a href="https://www.instagram.com/ispbie"
              target="_blank" rel="noopener noreferrer"
              class="flex items-center justify-center w-9 h-9 rounded-xl text-gray-500 bg-white/5 border border-white/[0.08] hover:text-white hover:bg-[#e1306c] hover:border-[#e1306c] hover:-translate-y-[3px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
@@ -284,21 +264,12 @@
             </svg>
           </a>
 
-          <a href="https://www.linkedin.com/company/instituto-superior-polit%C3%A9cnico-do-bi%C3%A9"
+          <a href="https://www.linkedin.com/company/instituto-superior-politecnico-do-bie"
              target="_blank" rel="noopener noreferrer"
              class="flex items-center justify-center w-9 h-9 rounded-xl text-gray-500 bg-white/5 border border-white/[0.08] hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] hover:-translate-y-[3px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#0077b5]"
              aria-label="LinkedIn do ISP-Bié">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-          </a>
-
-          <a href="https://www.youtube.com/@ispbie"
-             target="_blank" rel="noopener noreferrer"
-             class="flex items-center justify-center w-9 h-9 rounded-xl text-gray-500 bg-white/5 border border-white/[0.08] hover:text-white hover:bg-[#FF0000] hover:border-[#FF0000] hover:-translate-y-[3px] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500"
-             aria-label="YouTube do ISP-Bié">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M21.543 6.498C22 8.28 22 12 22 12s0 3.72-.457 5.502c-.254.985-.997 1.76-1.938 2.022C17.896 20 12 20 12 20s-5.893 0-7.605-.476c-.941-.262-1.684-1.037-1.938-2.022C2 15.72 2 12 2 12s0-3.72.457-5.502c.254-.985.997-1.76 1.938-2.022C6.107 4 12 4 12 4s5.896 0 7.605.476c.941.262 1.684 1.037 1.938 2.022zM10 15.5l6-3.5-6-3.5v7z"/>
             </svg>
           </a>
 
