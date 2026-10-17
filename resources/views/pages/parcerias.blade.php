@@ -8,8 +8,9 @@
 @endpush
 
 @php
-    // Fonte: quadro de acordos e protocolos do Departamento Jurídico e de Intercâmbio.
+    // Fonte dos instrumentos: quadro de acordos e protocolos do Departamento Jurídico e de Intercâmbio.
     // Não publicar datas ou prazos até à validação das inconsistências do quadro.
+    // Os parceiros nacionais anteriores foram confirmados pelo ISP-Bié, sem tipo de acordo documentado neste quadro.
     $nacionais = [
         ['nome' => 'Instituto Superior Politécnico Ndunduma', 'local' => 'Bié, Angola', 'acordo' => 'Convénio de Colaboração Académica', 'sigla' => 'ISPN', 'logo' => 'images/parcerias/ispndunduma.png', 'url' => 'https://www.ispndunduma.co.ao/'],
         ['nome' => 'Instituto Superior Politécnico da Caála', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'ISP-C', 'logo' => 'images/parcerias/ispcaala.png', 'url' => 'https://www.ispcaala.com/inicio'],
@@ -33,7 +34,7 @@
         ['nome' => 'Universidad Nacional del Litoral', 'local' => 'Argentina', 'acordo' => 'Convénio de Assistência Técnica', 'sigla' => 'UNL', 'logo' => 'images/parcerias/unl.svg', 'logo_escuro' => true, 'url' => 'https://www.unl.edu.ar/'],
     ];
 
-    $referenciasPendentes = [
+    $nacionaisAnteriores = [
         'Gabinete Provincial da Educação do Bié',
         'Unitel',
         'Centro de Emprego e Formação Profissional de Jovens do Bié (Cefejor)',
@@ -55,14 +56,14 @@
                 <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28] mb-3">Rede de cooperação</p>
                 <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#1e3a5f]">Conhecimento que cria pontes</h2>
                 <p class="mt-4 max-w-3xl text-slate-600 leading-relaxed">
-                    O ISP-Bié reúne nesta página as instituições identificadas no quadro de acordos e protocolos
-                    do Departamento Jurídico e de Intercâmbio. Cada cartão apresenta a natureza do instrumento
-                    indicada nesse quadro, sem atribuir actividades ou resultados que não estejam documentados.
+                    O quadro de acordos e protocolos do Departamento Jurídico e de Intercâmbio identifica
+                    13 parceiros nacionais e 5 internacionais. Apresentamos também três parceiros nacionais
+                    já publicados anteriormente. Os instrumentos são indicados apenas quando constam do quadro.
                 </p>
             </div>
-            <div class="flex gap-3 sm:gap-4" aria-label="Instituições no quadro">
+            <div class="flex gap-3 sm:gap-4" aria-label="Instituições apresentadas">
                 <div class="rounded-2xl bg-blue-50 px-5 py-4 min-w-24 text-center">
-                    <span class="block text-3xl font-black text-[#1e3a8a]">{{ count($nacionais) }}</span>
+                    <span class="block text-3xl font-black text-[#1e3a8a]">{{ count($nacionais) + count($nacionaisAnteriores) }}</span>
                     <span class="block mt-1 text-xs font-semibold text-slate-600">Nacionais</span>
                 </div>
                 <div class="rounded-2xl bg-orange-50 px-5 py-4 min-w-24 text-center">
@@ -91,7 +92,7 @@
                 <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Em Angola</p>
                 <h2 id="titulo-nacionais" class="mt-2 text-2xl sm:text-3xl font-extrabold text-[#1e3a5f]">Parceiros Nacionais</h2>
             </div>
-            <span class="text-sm font-medium text-slate-500">{{ count($nacionais) }} instituições distintas</span>
+            <span class="text-sm font-medium text-slate-500">{{ count($nacionais) }} no quadro · {{ count($nacionaisAnteriores) }} já publicadas</span>
         </div>
         <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             @foreach($nacionais as $parceiro)
@@ -121,6 +122,24 @@
                     @endif
                 </article>
             @endforeach
+        </div>
+
+        <div class="mt-9 rounded-3xl border border-blue-100 bg-blue-50/60 p-6 sm:p-8">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Parcerias nacionais anteriores</p>
+            <h3 class="mt-2 text-xl sm:text-2xl font-extrabold text-[#1e3a5f]">Parceiros já publicados</h3>
+            <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">
+                Estas três entidades já constavam da página de parcerias e foram confirmadas como parceiros nacionais.
+                O quadro recebido não indica o tipo de acordo de cada uma, pelo que não lhes atribuímos um instrumento ou uma data.
+            </p>
+            <div class="mt-6 grid gap-4 md:grid-cols-3">
+                @foreach($nacionaisAnteriores as $nome)
+                    <article class="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
+                        <span class="inline-flex rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-blue-800">Nacional</span>
+                        <h4 class="mt-4 text-base font-bold leading-snug text-[#1e3a5f]">{{ $nome }}</h4>
+                        <p class="mt-3 text-sm leading-relaxed text-slate-600">Tipo de acordo não indicado no quadro recebido.</p>
+                    </article>
+                @endforeach
+            </div>
         </div>
     </section>
 
@@ -187,22 +206,6 @@
                 </article>
             @endforeach
         </div>
-    </section>
-
-    <section aria-labelledby="titulo-pendentes" class="mb-12 rounded-3xl border border-amber-200 bg-amber-50/70 p-6 sm:p-8" x-show="filtro !== 'internacionais'">
-        <div class="max-w-3xl">
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-amber-800">Referências da página anterior</p>
-            <h2 id="titulo-pendentes" class="mt-2 text-xl sm:text-2xl font-extrabold text-[#1e3a5f]">Pendentes de validação institucional</h2>
-            <p class="mt-3 text-sm leading-relaxed text-slate-700">
-                Estas entidades já constavam da página de parcerias, mas não figuram no quadro de acordos e protocolos recebido.
-                A natureza de qualquer acordo com o ISP-Bié carece de confirmação pelo Departamento Jurídico e de Intercâmbio.
-            </p>
-        </div>
-        <ul class="mt-6 grid gap-3 md:grid-cols-3">
-            @foreach($referenciasPendentes as $nome)
-                <li class="rounded-xl border border-amber-200 bg-white px-5 py-4 text-sm font-semibold leading-relaxed text-[#1e3a5f]">{{ $nome }}</li>
-            @endforeach
-        </ul>
     </section>
 
     <section aria-labelledby="titulo-contacto" class="rounded-3xl p-7 sm:p-10 text-center" style="background:linear-gradient(135deg,#1e3a8a 0%,#F05A28 100%);">
