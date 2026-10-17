@@ -223,6 +223,11 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 3h12l4 4v14H4V3Zm12 0v5h4M8 12h8M8 16h8" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>PDI 2026–2031
             </a>
+            <a href="{{ route('admin.calendario-academico') }}">
+                <span style="vertical-align:middle;margin-right:8px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#fff" stroke-width="2"/><path d="M7 3v4M17 3v4M3 10h18M8 14h3M13 14h3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>Calendário Académico
+            </a>
         </div>
         <div style="flex-shrink:0;margin:12px 14px 16px;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px;">
             <form method="POST" action="{{ route('logout') }}">

@@ -11,6 +11,10 @@ class Midia extends Model
 
     public const PDI_DOCUMENTO_NOME = '__ispbie_system_pdi_documento_v1__';
 
+    public const CALENDARIO_RASCUNHO_NOME = '__ispbie_system_calendario_rascunho_v1__';
+
+    public const CALENDARIO_PUBLICADO_NOME = '__ispbie_system_calendario_publicado_v1__';
+
     protected $fillable = ['nome', 'caminho'];
 
     // null: use the original image; empty string: explicitly unpublished.
@@ -30,7 +34,13 @@ class Midia extends Model
 
     public static function systemNames(): array
     {
-        return [self::ORGANIGRAMA_NOME, self::PDI_FOTOGRAFIA_NOME, self::PDI_DOCUMENTO_NOME];
+        return [
+            self::ORGANIGRAMA_NOME,
+            self::PDI_FOTOGRAFIA_NOME,
+            self::PDI_DOCUMENTO_NOME,
+            self::CALENDARIO_RASCUNHO_NOME,
+            self::CALENDARIO_PUBLICADO_NOME,
+        ];
     }
 
     public static function pdiPath(string $name): ?string
