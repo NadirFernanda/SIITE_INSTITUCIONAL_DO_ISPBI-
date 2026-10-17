@@ -1,186 +1,203 @@
 @extends('layouts.site')
 
-@section('title', 'Estágios — ISP-Bié')
+@section('title', 'Gestão de Estágios')
+@section('meta_description', 'Informações sobre a organização dos estágios do ISP-Bié em Angola e as instituições nacionais com protocolos de cooperação.')
+
+@php
+    // Fonte dos instrumentos: quadro nacional do Departamento Jurídico e de Intercâmbio.
+    // A apresentação dos nomes e logótipos segue a página institucional de Parcerias.
+    // Apenas os três instrumentos com estágios expressamente indicados recebem essa identificação.
+    $parceirosNacionais = [
+        ['nome' => 'Instituto Superior Politécnico Ndunduma', 'local' => 'Bié, Angola', 'acordo' => 'Convénio de Colaboração Académica', 'sigla' => 'ISPN', 'logo' => 'images/parcerias/ispndunduma.png'],
+        ['nome' => 'Instituto Superior Politécnico da Caála', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'ISP-C', 'logo' => 'images/parcerias/ispcaala.png'],
+        ['nome' => 'Universidade Internacional do Cuanza', 'local' => 'Bié, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'UNIC', 'logo' => 'images/parcerias/unic.svg'],
+        ['nome' => 'Centro de Formação de Jornalistas', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'CFJ'],
+        ['nome' => 'Empresa de Águas e Saneamento do Bié', 'local' => 'Bié, Angola', 'acordo' => 'Convénio de Cooperação', 'sigla' => 'EASB'],
+        ['nome' => 'Hospital Dr. Walter Strangway', 'local' => 'Bié, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'HWS'],
+        ['nome' => 'Hospital Mártires do Cuito', 'local' => 'Cuito, Bié, Angola', 'acordo' => 'Convénio para Estágios Supervisionados de Estudantes', 'sigla' => 'HMC', 'estagios' => true],
+        ['nome' => 'Hospital Municipal do Cunje', 'local' => 'Cuito, Bié, Angola', 'acordo' => 'Convénio para Estágios Supervisionados de Estudantes', 'sigla' => 'HCU', 'estagios' => true],
+        ['nome' => 'Fundo de Apoio Social (FAS)', 'local' => 'Bié, Angola', 'acordo' => 'Memorando de Cooperação', 'sigla' => 'FAS'],
+        ['nome' => 'Standard Bank de Angola, S.A.', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo Bancário', 'sigla' => 'SBA'],
+        ['nome' => 'Universidade de Luanda', 'local' => 'Luanda, Angola', 'acordo' => 'Memorando de Cooperação', 'sigla' => 'UL', 'logo' => 'images/parcerias/uniluanda.png', 'logo_escuro' => true],
+        ['nome' => 'Centro Materno Infantil do Bié', 'local' => 'Bié, Angola', 'acordo' => 'Convénio para Estágios', 'sigla' => 'CMI', 'estagios' => true],
+        ['nome' => 'Instituto Superior de Administração e Finanças (ISAF)', 'local' => 'Luanda, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'ISAF'],
+    ];
+    $comEstagios = array_values(array_filter($parceirosNacionais, fn ($parceiro) => !empty($parceiro['estagios'])));
+    $outraCooperacao = array_values(array_filter($parceirosNacionais, fn ($parceiro) => empty($parceiro['estagios'])));
+    $etapas = [
+        ['titulo' => 'Organização', 'texto' => 'Consulte o curso para conhecer as orientações aplicáveis e a forma de preparação do estágio.'],
+        ['titulo' => 'Colocação', 'texto' => 'Confirme com o ISP-Bié a instituição de acolhimento e as condições definidas para o seu caso.'],
+        ['titulo' => 'Supervisão', 'texto' => 'O acompanhamento segue as orientações do curso e as condições acordadas com a instituição de acolhimento.'],
+        ['titulo' => 'Avaliação', 'texto' => 'Os critérios e elementos de avaliação são comunicados pelo curso responsável.'],
+        ['titulo' => 'Conclusão', 'texto' => 'Confirme junto do curso os passos necessários para encerrar e registar o estágio.'],
+    ];
+@endphp
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16">
+<div class="mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
+    @include('partials.page-hero', [
+        'title' => 'Gestão de Estágios',
+        'subtitle' => 'Formação prática e ligação a instituições em Angola.',
+        'breadcrumb' => 'Estágios',
+    ])
 
-@include('partials.page-hero', [
-    'title'      => 'Centro de Gestão de Estágios',
-    'subtitle'   => 'Conectamos estudantes ao mercado de trabalho angolano e internacional.',
-    'breadcrumb' => 'Estágios',
-    'gradient'   => 'from-[#1e3a8a] to-[#2563eb]',
-    'ctaUrl'     => 'mailto:estagios@ispbie.ao',
-    'ctaLabel'   => 'Contactar o CGE',
-])
-
-{{-- Intro strip --}}
-<div class="mb-8 flex items-center gap-3">
-    <span class="inline-block w-8 h-0.5 bg-[#F05A28]"></span>
-    <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Centro de Gestão de Estágios</p>
-</div>
-
-{{-- Sobre o CGE + Números --}}
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-    <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
-        <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-4 flex items-center gap-2">
-            <span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Sobre o CGE
-        </h2>
-        <p class="text-gray-600 leading-relaxed mb-4">
-            O Centro de Gestão de Estágios (CGE) do ISP-Bié é responsável por estabelecer parcerias
-            com empresas e instituições, facilitar a colocação de estudantes em estágios curriculares
-            e extracurriculares, e acompanhar o desenvolvimento profissional dos nossos alunos.
-        </p>
-        <p class="text-gray-600 leading-relaxed">
-            Trabalhamos para garantir que cada estudante tenha oportunidades de aplicar conhecimentos
-            teóricos em ambientes profissionais reais, desenvolvendo competências práticas essenciais
-            para o mercado de trabalho.
-        </p>
+    <section aria-labelledby="titulo-apresentacao" class="relative mb-12 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <div class="absolute inset-y-0 left-0 w-1.5 bg-[#F05A28]" aria-hidden="true"></div>
+        <div class="grid gap-7 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:p-10">
+            <div>
+                <p class="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Formação em contexto real</p>
+                <h2 id="titulo-apresentacao" class="text-2xl font-extrabold tracking-tight text-[#1e3a5f] sm:text-3xl">Apresentação da Gestão de Estágios</h2>
+                <p class="mt-4 max-w-3xl leading-relaxed text-slate-600">
+                    Os estágios aproximam a formação académica da prática profissional e das necessidades das comunidades.
+                    Esta página reúne orientações gerais para estudantes do ISP-Bié e identifica, entre os parceiros nacionais,
+                    as instituições cujos instrumentos de cooperação mencionam expressamente estágios.
+                </p>
+            </div>
+            <div class="rounded-2xl bg-[#142d4f] px-6 py-5 text-white lg:max-w-56">
+                <span class="block text-xl font-extrabold">Em Angola</span>
+                <span class="mt-2 block text-sm leading-relaxed text-blue-100">Informação sobre estágios e cooperação institucional nacional.</span>
+            </div>
+        </div>
     </section>
 
-    <div class="rounded-2xl p-6 sm:p-8 text-white flex flex-col justify-between" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);">
-        <h3 class="text-lg font-bold mb-6 uppercase tracking-widest opacity-90">CGE em Números</h3>
-        <dl class="space-y-4">
-            <div class="flex items-center justify-between border-b border-white/20 pb-3">
-                <dt class="text-white/80 text-sm">Empresas Parceiras</dt>
-                <dd class="text-3xl font-bold">45+</dd>
-            </div>
-            <div class="flex items-center justify-between border-b border-white/20 pb-3">
-                <dt class="text-white/80 text-sm">Estudantes em Estágio</dt>
-                <dd class="text-3xl font-bold">180</dd>
-            </div>
-            <div class="flex items-center justify-between border-b border-white/20 pb-3">
-                <dt class="text-white/80 text-sm">Taxa de Colocação</dt>
-                <dd class="text-3xl font-bold">92%</dd>
-            </div>
-            <div class="flex items-center justify-between">
-                <dt class="text-white/80 text-sm">Horas de Estágio / Ano</dt>
-                <dd class="text-3xl font-bold">50k+</dd>
-            </div>
-        </dl>
-    </div>
-</div>
+    <section aria-labelledby="titulo-objectivos" class="mb-12">
+        <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Formação académica e profissional</p>
+            <h2 id="titulo-objectivos" class="mt-2 text-2xl font-extrabold text-[#1e3a5f] sm:text-3xl">Objectivos e importância</h2>
+            <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">O estágio cria condições para relacionar conhecimentos do curso com situações de trabalho e serviço à comunidade.</p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 font-black text-[#1e3a5f]">01</div>
+                <h3 class="text-lg font-bold text-[#1e3a5f]">Aplicar conhecimentos</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Relacionar a aprendizagem académica com experiências práticas adequadas à área de formação.</p>
+            </article>
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 font-black text-[#1e3a5f]">02</div>
+                <h3 class="text-lg font-bold text-[#1e3a5f]">Desenvolver competências</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Conhecer práticas profissionais, responsabilidades e formas de colaboração no local de estágio.</p>
+            </article>
+            <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 font-black text-[#1e3a5f]">03</div>
+                <h3 class="text-lg font-bold text-[#1e3a5f]">Servir a comunidade</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">Aproximar estudantes e instituições nacionais em actividades compatíveis com o percurso académico.</p>
+            </article>
+        </div>
+    </section>
 
-{{-- Modalidades --}}
-<section class="mb-12">
-    <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">
-        <span class="inline-block w-6 h-0.5 bg-[#F05A28]"></span> Modalidades de Estágio
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 border-t-4 border-t-[#2563eb]">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="w-12 h-12 rounded-xl bg-[#2563eb]/10 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-6 h-6 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
-                    </svg>
-                </div>
-                <h3 class="text-base font-bold text-[#1e3a5f]">Estágio Curricular Obrigatório</h3>
-            </div>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
-                Parte integrante do currículo académico, necessário para a conclusão do curso.
-                Duração mínima de 400 horas, realizado no último ano de formação.
-            </p>
-            <ul class="space-y-2">
-                @foreach(['Requisito obrigatório para graduação', 'Supervisão de docente orientador', 'Relatório final e apresentação'] as $item)
-                <li class="flex items-start gap-2 text-sm text-gray-600">
-                    <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-[#F05A28]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                    {{ $item }}
+    <section aria-labelledby="titulo-modalidades" class="mb-12">
+        <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Percursos de formação prática</p>
+            <h2 id="titulo-modalidades" class="mt-2 text-2xl font-extrabold text-[#1e3a5f] sm:text-3xl">Modalidades de estágio</h2>
+        </div>
+        <div class="grid gap-5 md:grid-cols-2">
+            <article class="rounded-2xl border border-slate-200 border-t-4 border-t-[#1e3a8a] bg-white p-6 shadow-sm sm:p-7">
+                <h3 class="text-lg font-bold text-[#1e3a5f]">Estágios curriculares</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600">Integram o percurso de formação quando previstos pelo plano de estudos do curso. A organização e os requisitos concretos são confirmados pelo curso responsável.</p>
+            </article>
+            <article class="rounded-2xl border border-slate-200 border-t-4 border-t-[#F05A28] bg-white p-6 shadow-sm sm:p-7">
+                <h3 class="text-lg font-bold text-[#1e3a5f]">Estágios extracurriculares</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-600">A sua eventual realização depende de confirmação institucional e das condições acordadas com a entidade de acolhimento. Consulte o ISP-Bié antes de planear esta modalidade.</p>
+            </article>
+        </div>
+    </section>
+
+    <section aria-labelledby="titulo-procedimentos" class="mb-12">
+        <div class="mb-6">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Percurso de referência</p>
+            <h2 id="titulo-procedimentos" class="mt-2 text-2xl font-extrabold text-[#1e3a5f] sm:text-3xl">Como se organiza um estágio</h2>
+            <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">As etapas abaixo ajudam a orientar o percurso. Requisitos e procedimentos específicos são confirmados pelo curso e pela instituição de acolhimento.</p>
+        </div>
+        <ol class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            @foreach($etapas as $indice => $etapa)
+                <li class="relative rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <span class="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#1e3a5f] text-sm font-black text-white">{{ str_pad($indice + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                    <h3 class="font-bold text-[#1e3a5f]">{{ $etapa['titulo'] }}</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">{{ $etapa['texto'] }}</p>
                 </li>
-                @endforeach
-            </ul>
+            @endforeach
+        </ol>
+    </section>
+
+    <section aria-labelledby="titulo-parceiros" class="mb-12">
+        <div class="mb-7">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Cooperação em Angola</p>
+            <h2 id="titulo-parceiros" class="mt-2 text-2xl font-extrabold text-[#1e3a5f] sm:text-3xl">Instituições parceiras nacionais</h2>
+            <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">O quadro jurídico distingue os instrumentos que mencionam estágios dos demais acordos de cooperação. A existência de um protocolo não representa, por si só, uma vaga disponível.</p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 border-t-4 border-t-[#F05A28]">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="w-12 h-12 rounded-xl bg-[#F05A28]/10 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-6 h-6 text-[#F05A28]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
-                    </svg>
-                </div>
-                <h3 class="text-base font-bold text-[#1e3a5f]">Estágio Extracurricular</h3>
-            </div>
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
-                Opcional, permite ao estudante adquirir experiência profissional complementar durante
-                o curso, sem carácter obrigatório.
-            </p>
-            <ul class="space-y-2">
-                @foreach(['Flexibilidade de horários', 'Possibilidade de bolsa-auxílio', 'Certificado de participação'] as $item)
-                <li class="flex items-start gap-2 text-sm text-gray-600">
-                    <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-[#F05A28]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                    {{ $item }}
-                </li>
-                @endforeach
-            </ul>
+        <div class="mb-7 rounded-3xl bg-[#142d4f] p-6 text-white sm:p-8">
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-orange-200">Estágios expressamente previstos</p>
+            <h3 id="titulo-acordos-estagios" class="mt-2 text-xl font-extrabold sm:text-2xl">Unidades de saúde com convénios para estágios</h3>
+            <p class="mt-2 max-w-3xl text-sm leading-relaxed text-blue-100">Os instrumentos destas três instituições mencionam estágios de estudantes. A colocação concreta depende de confirmação institucional.</p>
         </div>
-    </div>
-</section>
-
-{{-- Empresas Parceiras --}}
-<section class="mb-12">
-    <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">
-        <span class="inline-block w-6 h-0.5 bg-[#F05A28]"></span> Empresas e Instituições Parceiras
-    </h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        @foreach([
-            ['icon'=>'🏛️', 'name'=>'Governo Provincial do Bié'],
-            ['icon'=>'🏥', 'name'=>'Hospital Provincial do Bié'],
-            ['icon'=>'🏗️', 'name'=>'Empresas de Construção Civil'],
-            ['icon'=>'💼', 'name'=>'Bancos e Seguradoras'],
-            ['icon'=>'📡', 'name'=>'Empresas de Telecomunicações'],
-            ['icon'=>'💧', 'name'=>'MINEA — Recursos Hídricos'],
-            ['icon'=>'📰', 'name'=>'Órgãos de Comunicação Social'],
-            ['icon'=>'🤝', 'name'=>'ONGs e Organizações Sociais'],
-        ] as $parceiro)
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-            <div class="text-3xl mb-2">{{ $parceiro['icon'] }}</div>
-            <p class="text-xs font-semibold text-[#1e3a5f] leading-snug">{{ $parceiro['name'] }}</p>
+        <div class="mb-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" aria-labelledby="titulo-acordos-estagios">
+            @foreach($comEstagios as $parceiro)
+                <article class="flex h-full min-w-0 flex-col rounded-2xl border border-blue-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-lg sm:p-6">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-xl border border-slate-100 bg-slate-50 p-3">
+                            <span aria-hidden="true" class="text-xl font-black tracking-tight text-[#1e3a5f]">{{ $parceiro['sigla'] }}</span>
+                        </div>
+                        <span class="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-blue-800">Nacional</span>
+                    </div>
+                    <h4 class="mt-5 text-lg font-bold leading-snug text-[#1e3a5f]">{{ $parceiro['nome'] }}</h4>
+                    <p class="mt-2 text-sm text-slate-500">{{ $parceiro['local'] }}</p>
+                    <div class="mt-auto border-t border-slate-100 pt-4">
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-slate-400">Natureza do acordo</p>
+                        <p class="mt-1.5 text-sm font-medium leading-relaxed text-slate-700">{{ $parceiro['acordo'] }}</p>
+                    </div>
+                </article>
+            @endforeach
         </div>
-        @endforeach
-    </div>
-</section>
 
-{{-- Processo de Candidatura --}}
-<section class="mb-12">
-    <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2">
-        <span class="inline-block w-6 h-0.5 bg-[#F05A28]"></span> Como Candidatar-se a Estágio
-    </h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        @foreach([
-            ['n'=>'1','title'=>'Consulta de Vagas',  'desc'=>'Verifique as vagas disponíveis no portal do CGE ou no mural da instituição.'],
-            ['n'=>'2','title'=>'Submissão de CV',    'desc'=>'Envie o seu CV e carta de motivação ao Centro de Gestão de Estágios.'],
-            ['n'=>'3','title'=>'Entrevista',          'desc'=>'Participe da entrevista com a empresa ou instituição parceira.'],
-            ['n'=>'4','title'=>'Início do Estágio',  'desc'=>'Assine o termo de compromisso e inicie as suas atividades.'],
-        ] as $step)
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 rounded-full bg-[#1e3a5f] flex items-center justify-center text-white text-lg font-bold mx-auto mb-4">
-                {{ $step['n'] }}
-            </div>
-            <h4 class="font-bold text-[#1e3a5f] text-sm mb-2">{{ $step['title'] }}</h4>
-            <p class="text-xs text-gray-500 leading-relaxed">{{ $step['desc'] }}</p>
+        <div class="mb-5">
+            <h3 id="titulo-outra-cooperacao" class="text-xl font-extrabold text-[#1e3a5f] sm:text-2xl">Outras instituições em cooperação</h3>
+            <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">Estes acordos constam do quadro nacional, mas o seu objecto apresentado não confirma acolhimento de estagiários.</p>
         </div>
-        @endforeach
-    </div>
-</section>
-
-{{-- CTA --}}
-<div class="rounded-2xl p-8 text-white text-center" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);">
-    <h2 class="text-xl font-bold mb-2">Procura uma Oportunidade de Estágio?</h2>
-    <p class="text-blue-100 text-sm mb-6 max-w-lg mx-auto">
-        Entre em contacto com o Centro de Gestão de Estágios do ISP-Bié. Estamos disponíveis de segunda a sexta, das 08h00 às 17h00.
-    </p>
-    <div class="flex flex-col sm:flex-row justify-center gap-3">
-        <a href="mailto:estagios@ispbie.ao"
-           class="inline-flex items-center justify-center gap-2 bg-[#F05A28] hover:bg-[#d04a1e] text-white font-semibold px-6 py-3 rounded-xl shadow transition-colors duration-200">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-            estagios@ispbie.ao
+        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3" aria-labelledby="titulo-outra-cooperacao">
+            @foreach($outraCooperacao as $parceiro)
+                <article class="flex h-full min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-lg sm:p-6">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-xl border border-slate-100 p-3 {{ !empty($parceiro['logo_escuro']) ? 'bg-[#142d4f]' : 'bg-slate-50' }}">
+                            @if(!empty($parceiro['logo']))
+                                <img src="{{ asset($parceiro['logo']) }}" alt="Logótipo de {{ $parceiro['nome'] }}" loading="lazy" class="max-h-full max-w-full object-contain">
+                            @else
+                                <span aria-hidden="true" class="text-xl font-black tracking-tight text-[#1e3a5f]">{{ $parceiro['sigla'] }}</span>
+                            @endif
+                        </div>
+                        <span class="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-blue-800">Nacional</span>
+                    </div>
+                    <h4 class="mt-5 text-lg font-bold leading-snug text-[#1e3a5f]">{{ $parceiro['nome'] }}</h4>
+                    <p class="mt-2 text-sm text-slate-500">{{ $parceiro['local'] }}</p>
+                    <div class="mt-auto border-t border-slate-100 pt-4">
+                        <p class="text-[11px] font-bold uppercase tracking-widest text-slate-400">Natureza do acordo</p>
+                        <p class="mt-1.5 text-sm font-medium leading-relaxed text-slate-700">{{ $parceiro['acordo'] }}</p>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+        <a href="{{ route('parcerias') }}" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1d4ed8] hover:text-[#1e3a5f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
+            Ver todas as Parcerias Institucionais <span aria-hidden="true">→</span>
         </a>
-        <a href="tel:+244922408061"
-           class="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white font-semibold px-6 py-3 rounded-xl transition-colors duration-200">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-            (+244) 922 408 061
-        </a>
-    </div>
-</div>
+    </section>
 
+    <section aria-labelledby="titulo-orientacoes" class="mb-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#F05A28]">Antes de iniciar</p>
+        <h2 id="titulo-orientacoes" class="mt-2 text-2xl font-extrabold text-[#1e3a5f] sm:text-3xl">Orientações aos estudantes</h2>
+        <ul class="mt-6 grid gap-4 md:grid-cols-3">
+            <li class="rounded-xl bg-slate-50 p-5 text-sm leading-relaxed text-slate-700"><strong class="mb-2 block text-[#1e3a5f]">Consulte o seu curso</strong>Verifique se o estágio integra o seu plano de estudos e quais são os requisitos aplicáveis.</li>
+            <li class="rounded-xl bg-slate-50 p-5 text-sm leading-relaxed text-slate-700"><strong class="mb-2 block text-[#1e3a5f]">Confirme a colocação</strong>A presença de uma instituição nesta página não garante uma vaga ou um período de estágio.</li>
+            <li class="rounded-xl bg-slate-50 p-5 text-sm leading-relaxed text-slate-700"><strong class="mb-2 block text-[#1e3a5f]">Siga as orientações oficiais</strong>Peça ao ISP-Bié informação actualizada sobre supervisão, avaliação e conclusão.</li>
+        </ul>
+    </section>
+
+    <section aria-labelledby="titulo-contactos" class="rounded-3xl p-7 text-center sm:p-10" style="background:linear-gradient(135deg,#1e3a8a 0%,#F05A28 100%);">
+        <h2 id="titulo-contactos" class="text-xl font-bold text-white sm:text-2xl">Contactos e informação institucional</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base">Para conhecer as orientações do seu curso ou esclarecer questões sobre estágios em Angola, utilize os contactos institucionais do ISP-Bié.</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <a href="{{ route('contactos') }}" class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-[#1e3a8a] shadow-lg transition-colors hover:bg-orange-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Contactar o ISP-Bié</a>
+            <a href="mailto:geral@isp-bie.ao" class="inline-flex items-center justify-center rounded-xl border border-white/60 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">geral@isp-bie.ao</a>
+        </div>
+    </section>
 </div>
 @endsection
