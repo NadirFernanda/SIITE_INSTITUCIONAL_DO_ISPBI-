@@ -76,20 +76,11 @@
 
   <!-- CTA -->
   <section class="py-12 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h3 class="text-2xl font-bold text-gray-900 mb-4">Precisa de Ajuda?</h3>
-      <p class="text-lg text-gray-600 mb-6">
-        Entre em contacto com os Serviços Académicos para esclarecimento de dúvidas.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contactos" class="inline-block bg-[#2563eb] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#1f3342] transition-colors">
-          Contactar Serviços Académicos
-        </a>
-        <a href="/guia-estudante" class="inline-block bg-white text-[#2563eb] border-2 border-[#2563eb] px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
-          Ver Guia do Estudante
-        </a>
-      </div>
-    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <x-institutional-cta title="Precisa de Ajuda?"
+          description="Entre em contacto com os Serviços Académicos para esclarecimento de dúvidas."
+          button-text="Contactar Serviços Académicos" href="/contactos"
+          secondary-text="Ver Guia do Estudante" secondary-href="/guia-estudante" />
   </section>
 
 </div>

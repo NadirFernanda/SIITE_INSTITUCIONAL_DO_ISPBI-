@@ -306,21 +306,10 @@
       </div>
 
       <!-- Call to Action -->
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white p-8 rounded-lg text-center">
-        <h3 class="text-2xl font-bold mb-4">Seja Parte da Nossa Comunidade de Investigação</h3>
-        <p class="mb-6 text-lg opacity-90">
-          O ISP-Bié convida docentes, estudantes e parceiros a colaborar em projetos de investigação 
-          que contribuam para o desenvolvimento da província do Bié e de Angola.
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a href="/contactos" class="bg-[#3B82F6] text-[#2563eb] px-8 py-3 rounded-full font-semibold hover:bg-white transition-colors">
-            Entre em Contacto
-          </a>
-          <a href="/revista" class="bg-white text-[#2563eb] px-8 py-3 rounded-full font-semibold hover:bg-[#3B82F6] transition-colors">
-            Revista Científica
-          </a>
-        </div>
-      </div>
+      <x-institutional-cta title="Seja Parte da Nossa Comunidade de Investigação"
+          description="O ISP-Bié convida docentes, estudantes e parceiros a colaborar em projetos de investigação que contribuam para o desenvolvimento da província do Bié e de Angola."
+          button-text="Entre em Contacto" href="/contactos"
+          secondary-text="Revista Científica" secondary-href="/revista" />
 
     </div>
   </section>

@@ -190,14 +190,9 @@
         </div>
     </section>
 
-    <section aria-labelledby="titulo-contacto" class="rounded-3xl p-7 sm:p-10 text-center" style="background:linear-gradient(135deg,#1e3a8a 0%,#F05A28 100%);">
-        <h2 id="titulo-contacto" class="text-white text-xl sm:text-2xl font-bold">Propor uma nova cooperação</h2>
-        <p class="mx-auto mt-3 mb-6 max-w-2xl text-sm sm:text-base leading-relaxed text-white/90">
-            Instituições interessadas em estabelecer uma parceria com o ISP-Bié podem apresentar a sua proposta através dos nossos contactos institucionais.
-        </p>
-        <a href="{{ route('contactos') }}" class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-[#1e3a8a] shadow-lg transition-colors hover:bg-orange-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-            Contactar o ISP-Bié
-        </a>
-    </section>
+    <x-institutional-cta title-id="titulo-contacto"
+        title="Propor uma nova cooperação"
+        description="Instituições interessadas em estabelecer uma parceria com o ISP-Bié podem apresentar a sua proposta através dos nossos contactos institucionais."
+        button-text="Contactar o ISP-Bié" :href="route('contactos')" />
 </div>
 @endsection

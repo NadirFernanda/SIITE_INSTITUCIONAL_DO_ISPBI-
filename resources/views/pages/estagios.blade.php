@@ -191,13 +191,10 @@
         </ul>
     </section>
 
-    <section aria-labelledby="titulo-contactos" class="rounded-3xl p-7 text-center sm:p-10" style="background:linear-gradient(135deg,#1e3a8a 0%,#F05A28 100%);">
-        <h2 id="titulo-contactos" class="text-xl font-bold text-white sm:text-2xl">Contactos e informação institucional</h2>
-        <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base">Para conhecer as orientações do seu curso ou esclarecer questões sobre estágios em Angola, utilize os contactos institucionais do ISP-Bié.</p>
-        <div class="mt-6 flex flex-wrap justify-center gap-3">
-            <a href="{{ route('contactos') }}" class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-[#1e3a8a] shadow-lg transition-colors hover:bg-orange-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Contactar o ISP-Bié</a>
-            <a href="mailto:geral@isp-bie.ao" class="inline-flex items-center justify-center rounded-xl border border-white/60 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">geral@isp-bie.ao</a>
-        </div>
-    </section>
+    <x-institutional-cta title-id="titulo-contactos"
+        title="Contactos e informação institucional"
+        description="Para conhecer as orientações do seu curso ou esclarecer questões sobre estágios em Angola, utilize os contactos institucionais do ISP-Bié."
+        button-text="Contactar o ISP-Bié" :href="route('contactos')"
+        secondary-text="geral@isp-bie.ao" secondary-href="mailto:geral@isp-bie.ao" />
 </div>
 @endsection

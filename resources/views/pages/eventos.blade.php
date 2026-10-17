@@ -274,15 +274,9 @@
       </div>
 
       <!-- CTA -->
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-lg p-8 text-white text-center">
-        <h3 class="text-2xl font-bold mb-4">Quer propor um evento?</h3>
-        <p class="mb-6 text-lg opacity-90">
-          Estudantes, docentes e organizações podem submeter propostas de eventos académicos, culturais ou científicos.
-        </p>
-        <a href="/contactos" class="inline-block bg-white text-[#2563eb] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-          Contactar-nos
-        </a>
-      </div>
+      <x-institutional-cta title="Quer propor um evento?"
+          description="Estudantes, docentes e organizações podem submeter propostas de eventos académicos, culturais ou científicos."
+          button-text="Contactar-nos" href="/contactos" />
     </div>
   </section>
 @endsection

@@ -382,18 +382,9 @@
       </div>
 
       <!-- Call to Action -->
-      <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] text-white p-8 rounded-lg text-center">
-        <h3 class="text-2xl font-bold mb-4">Juntos Construímos um Campus Mais Inclusivo</h3>
-        <p class="mb-6 text-lg opacity-90">
-          O ISP-Bié valoriza cada membro da sua comunidade. Se necessitar de apoio ou tiver sugestões 
-          para melhorar a inclusão no campus, entre em contacto connosco.
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a href="/contactos" class="bg-white text-[#3B82F6] px-8 py-3 rounded-full font-semibold hover:bg-[#3B82F6] hover:text-[#2563eb] transition-colors">
-            Entre em Contacto
-          </a>
-        </div>
-      </div>
+      <x-institutional-cta title="Juntos Construímos um Campus Mais Inclusivo"
+          description="O ISP-Bié valoriza cada membro da sua comunidade. Se necessitar de apoio ou tiver sugestões para melhorar a inclusão no campus, entre em contacto connosco."
+          button-text="Entre em Contacto" href="/contactos" />
 
     </div>
   </section>

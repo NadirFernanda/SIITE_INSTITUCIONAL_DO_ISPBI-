@@ -12,6 +12,11 @@
    BASE
 ========================= */
 @layer base {
+  :root {
+    --ispbie-cta-start: #1e3a8a;
+    --ispbie-cta-end: #F05A28;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -53,6 +58,10 @@
    COMPONENTES
 ========================= */
 @layer components {
+
+  .institutional-cta {
+    background: linear-gradient(135deg, var(--ispbie-cta-start) 0%, var(--ispbie-cta-end) 100%);
+  }
 
   .btn-ispbie {
     @apply text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors duration-200;
@@ -120,3 +129,23 @@
 
 /* Allow specific large SVGs when explicitly sized via attributes or utility classes */
 .logo-svg, .hero-svg { width: auto !important; height: auto !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-card,
+  .stat-card,
+  .scroll-reveal,
+  .link-underline-soft::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .interactive-card:hover,
+  .stat-card:hover {
+    transform: none;
+  }
+
+  .scroll-reveal {
+    transform: none;
+    opacity: 1;
+  }
+}

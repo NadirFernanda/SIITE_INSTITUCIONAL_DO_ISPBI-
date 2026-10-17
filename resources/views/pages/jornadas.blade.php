@@ -326,20 +326,10 @@
       </div>
 
       <!-- CTA -->
-      <div class="bg-gray-50 rounded-lg p-8 text-center">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4">Tem alguma dúvida sobre as Jornadas?</h3>
-        <p class="mb-6 text-lg text-gray-600">
-          Entre em contacto com a Coordenação de Pesquisa e Inovação do ISP-Bié.
-        </p>
-        <div class="flex justify-center space-x-4">
-          <a href="/contactos" class="inline-block bg-purple-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-800 transition-colors">
-            Contactar-nos
-          </a>
-          <a href="/investigacao" class="inline-block bg-white border-2 border-purple-700 text-purple-700 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors">
-            Pesquisa no ISP-Bié
-          </a>
-        </div>
-      </div>
+      <x-institutional-cta title="Tem alguma dúvida sobre as Jornadas?"
+          description="Entre em contacto com a Coordenação de Pesquisa e Inovação do ISP-Bié."
+          button-text="Contactar-nos" href="/contactos"
+          secondary-text="Pesquisa no ISP-Bié" secondary-href="/investigacao" />
     </div>
   </section>
 @endsection

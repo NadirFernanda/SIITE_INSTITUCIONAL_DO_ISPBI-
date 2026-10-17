@@ -444,21 +444,10 @@
       </div>
 
       <!-- Call to Action -->
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white p-8 rounded-lg text-center interactive-card">
-        <h3 class="text-2xl font-bold mb-4">Conheça Mais Sobre Nossa Gestão</h3>
-        <p class="mb-6 text-lg opacity-90">
-          Para mais informações sobre a estrutura de governança, documentos institucionais ou 
-          para contactar os órgãos de gestão, utilize os nossos canais oficiais.
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a href="/contactos" class="bg-white text-[#2563eb] px-8 py-3 rounded-full font-semibold hover:bg-[#3B82F6] transition-colors">
-            Entre em Contacto
-          </a>
-          <a href="/transparencia" class="bg-[#3B82F6] text-[#2563eb] px-8 py-3 rounded-full font-semibold hover:bg-white transition-colors">
-            Transparência
-          </a>
-        </div>
-      </div>
+      <x-institutional-cta title="Conheça Mais Sobre Nossa Gestão"
+          description="Para mais informações sobre a estrutura de governança, documentos institucionais ou para contactar os órgãos de gestão, utilize os nossos canais oficiais."
+          button-text="Entre em Contacto" href="/contactos"
+          secondary-text="Transparência" secondary-href="/transparencia" />
 
     </div>
   </section>
