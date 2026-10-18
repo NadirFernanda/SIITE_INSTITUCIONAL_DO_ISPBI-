@@ -182,7 +182,7 @@
             <ul class="space-y-2.5" aria-labelledby="footer-institucional">
               <li><a href="{{ route('institucional') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Sobre o ISP-Bié</a></li>
               <li><a href="{{ route('missao') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Missão</a></li>
-              <li><a href="{{ route('gestao') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Gestão e Governança</a></li>
+              <li><a href="{{ route('presidencia') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Gestão e Governança</a></li>
               <li><a href="{{ route('noticias') }}" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">Notícias</a></li>
               <li><a href="{{ route('welcome') }}#estatisticas" class="text-xs text-gray-300 hover:text-[#F05A28] transition-colors duration-150 leading-relaxed block">ISP-Bié em Números</a></li>
             </ul>

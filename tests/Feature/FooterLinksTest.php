@@ -133,6 +133,8 @@ class FooterLinksTest extends TestCase
 
         $this->assertStringContainsString('href="'.route('investigacao').'"', $footer);
         $this->assertStringContainsString('href="'.route('trabalhe-conosco').'"', $footer);
+        $this->assertSame(1, preg_match('/<a href="([^"]+)"[^>]*>Gestão e Governança<\/a>/', $footer, $managementLink));
+        $this->assertSame(route('presidencia'), $managementLink[1]);
         $this->assertStringContainsString('href="'.route('inclusao').'#acessibilidade"', $footer);
         $this->assertStringContainsString('Resultados de Exames', $footer);
         $this->assertStringContainsString('Missão</a>', $footer);
@@ -153,5 +155,6 @@ class FooterLinksTest extends TestCase
         $this->get(route('parcerias'))->assertOk();
         $this->get(route('pdi'))->assertOk();
         $this->get(route('calendario-academico'))->assertOk();
+        $this->get('/gestao')->assertStatus(301)->assertRedirect(route('presidencia'));
     }
 }
