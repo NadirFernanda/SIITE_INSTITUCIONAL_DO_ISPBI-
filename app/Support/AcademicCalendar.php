@@ -13,7 +13,7 @@ class AcademicCalendar
 {
     private const VERSION_DIRECTORY = 'calendarios-academicos/versoes';
 
-    private const IMAGE_DIRECTORY = 'calendarios-academicos/imagens';
+    private const PDF_DIRECTORY = 'calendarios-academicos/documentos';
 
     public static function published(): ?array
     {
@@ -37,29 +37,29 @@ class AcademicCalendar
 
         if (! is_array($snapshot)
             || ! self::validYear($snapshot['ano'] ?? null)
-            || ! self::isImagePath($snapshot['imagem'] ?? null)
-            || ! $disk->exists($snapshot['imagem'])) {
+            || ! self::isPdfPath($snapshot['pdf'] ?? null)
+            || ! $disk->exists($snapshot['pdf'])) {
             return null;
         }
 
-        return ['ano' => $snapshot['ano'], 'imagem' => $snapshot['imagem']];
+        return ['ano' => $snapshot['ano'], 'pdf' => $snapshot['pdf']];
     }
 
-    public static function isImagePath(mixed $path): bool
+    public static function isPdfPath(mixed $path): bool
     {
         return is_string($path)
-            && (bool) preg_match('~\A'.self::IMAGE_DIRECTORY.'/[A-Za-z0-9_-]+\.(?:jpg|jpeg|png|webp)\z~', $path);
+            && (bool) preg_match('~\A'.self::PDF_DIRECTORY.'/[A-Za-z0-9_-]+\.pdf\z~', $path);
     }
 
-    public static function publish(string $year, string $imagePath): void
+    public static function publish(string $year, string $pdfPath): void
     {
         $disk = Storage::disk('local');
-        if (! self::validYear($year) || ! self::isImagePath($imagePath) || ! $disk->exists($imagePath)) {
-            throw new RuntimeException('O ano ou a imagem do calendário são inválidos.');
+        if (! self::validYear($year) || ! self::isPdfPath($pdfPath) || ! $disk->exists($pdfPath)) {
+            throw new RuntimeException('O ano ou o PDF do calendário são inválidos.');
         }
 
         $versionPath = self::VERSION_DIRECTORY.'/'.Str::uuid().'.json';
-        $content = json_encode(['ano' => $year, 'imagem' => $imagePath], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $content = json_encode(['ano' => $year, 'pdf' => $pdfPath], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         if (! $disk->put($versionPath, $content) || ! $disk->exists($versionPath)) {
             throw new RuntimeException('Não foi possível guardar a versão do calendário.');
         }

@@ -547,8 +547,10 @@ Route::view('/estagios', 'pages.estagios')->name('estagios');
 Route::view('/cursos-online', 'pages.cursos-online')->name('cursos-online');
 Route::view('/cultura', 'pages.cultura')->name('cultura');
 Route::get('/calendario-academico', [App\Http\Controllers\AcademicCalendarController::class, 'index'])->name('calendario-academico');
-Route::get('/calendario-academico/imagem', [App\Http\Controllers\AcademicCalendarController::class, 'image'])
-    ->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('calendario-academico.imagem');
+Route::get('/calendario-academico/documento', [App\Http\Controllers\AcademicCalendarController::class, 'document'])
+    ->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('calendario-academico.documento');
+Route::get('/calendario-academico/documento/visualizar', [App\Http\Controllers\AcademicCalendarController::class, 'viewDocument'])
+    ->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('calendario-academico.visualizar');
 
 Route::get('/candidaturas', function () {
     $formularioAtivo = \App\Models\SiteSetting::candidaturasAtivas();

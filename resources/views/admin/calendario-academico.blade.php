@@ -18,9 +18,9 @@
     .cal-check{display:flex;align-items:flex-start;gap:9px;line-height:1.4}
     .cal-check input{margin-top:3px}
     .cal-status{display:inline-block;border-radius:999px;background:#eff6ff;color:#1e3a5f;font-size:.88rem;font-weight:700;padding:6px 12px}
-    .cal-image-frame{margin:18px 0;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;padding:12px;text-align:center}
-    .main-content img.cal-image{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:560px!important;object-fit:contain;margin:auto}
-    .main-content img.cal-image[hidden]{display:none!important}
+    .cal-document-frame{margin:18px 0;overflow:hidden;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;padding:12px}
+    .cal-document{display:block;width:100%;height:min(70vh,620px);min-height:420px;border:0;background:#fff}
+    .cal-document[hidden]{display:none}
     @media(max-width:900px){
         .sidebar[style]{height:auto!important;min-height:64px;flex-direction:row!important;align-items:center;overflow:hidden}
         .sidebar>div:first-of-type{flex:1 1 auto!important;min-width:0;flex-direction:row!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap}
@@ -34,7 +34,7 @@
     <header class="cal-head">
         <div>
             <h1>Calendário Académico</h1>
-            <p>Indique o ano académico e publique a imagem oficial do calendário.</p>
+            <p>Indique o ano académico e publique o PDF oficial do calendário.</p>
         </div>
         <a class="cal-link" href="{{ route('calendario-academico') }}" target="_blank" rel="noopener">Ver página pública</a>
     </header>
@@ -49,41 +49,41 @@
     @endif
 
     <section class="cal-card" aria-labelledby="cal-publicado">
-        <h2 id="cal-publicado">Imagem publicada</h2>
+        <h2 id="cal-publicado">PDF publicado</h2>
         @if($published)
             <p class="cal-status">Ano académico {{ $published['ano'] }}</p>
-            <div class="cal-image-frame">
-                <img class="cal-image" src="{{ route('calendario-academico.imagem') }}"
-                    alt="Calendário Académico {{ $published['ano'] }} actualmente publicado">
+            <div class="cal-document-frame">
+                <iframe class="cal-document" src="{{ route('calendario-academico.visualizar') }}"
+                    title="Calendário Académico {{ $published['ano'] }} actualmente publicado em PDF" loading="lazy"></iframe>
             </div>
-            <p><a class="cal-link" href="{{ route('calendario-academico.imagem') }}" target="_blank" rel="noopener">Ampliar imagem publicada</a></p>
+            <p><a class="cal-link" href="{{ route('calendario-academico.visualizar') }}" target="_blank" rel="noopener noreferrer">Consultar PDF publicado</a></p>
             <form method="POST" action="{{ route('admin.calendario-academico.despublicar') }}" class="cal-form" style="border-top:1px solid #e2e8f0;padding-top:16px;">
                 @csrf
-                <label class="cal-check"><input type="checkbox" name="confirmar_retirada" value="1" required> Confirmo que quero retirar esta imagem da página pública. O ficheiro permanecerá guardado.</label>
+                <label class="cal-check"><input type="checkbox" name="confirmar_retirada" value="1" required> Confirmo que quero retirar este PDF da página pública. O ficheiro permanecerá guardado.</label>
                 <button class="cal-button cal-button-danger" type="submit">Retirar de publicação</button>
             </form>
         @else
-            <p class="cal-muted">Ainda não há uma imagem do calendário académico publicada.</p>
+            <p class="cal-muted">Ainda não há um PDF do calendário académico publicado.</p>
         @endif
     </section>
 
     <section class="cal-card" aria-labelledby="cal-publicar">
-        <h2 id="cal-publicar">{{ $published ? 'Substituir imagem' : 'Publicar calendário' }}</h2>
-        <p class="cal-muted">A imagem anterior mantém-se publicada se o carregamento falhar. JPG, PNG ou WebP, até 10 MB.</p>
+        <h2 id="cal-publicar">{{ $published ? 'Substituir PDF' : 'Publicar calendário' }}</h2>
+        <p class="cal-muted">O documento anterior mantém-se publicado se o carregamento falhar. PDF, até 25 MB.</p>
         <form method="POST" action="{{ route('admin.calendario-academico.publicar') }}" enctype="multipart/form-data" class="cal-form">
             @csrf
             <label class="cal-field" for="cal-ano">Ano académico
                 <input id="cal-ano" name="ano" type="text" inputmode="numeric" pattern="20[0-9]{2}/20[0-9]{2}"
                     placeholder="2026/2027" maxlength="9" required value="{{ old('ano', $published['ano'] ?? '') }}">
             </label>
-            <label class="cal-field" for="cal-imagem">Imagem oficial do calendário
-                <input id="cal-imagem" type="file" name="imagem" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
+            <label class="cal-field" for="cal-documento">PDF oficial do calendário
+                <input id="cal-documento" type="file" name="documento" accept=".pdf,application/pdf" required>
             </label>
-            <div id="cal-preview" class="cal-image-frame" hidden>
-                <p class="cal-muted">Pré-visualização local da imagem seleccionada</p>
-                <img id="cal-preview-image" class="cal-image" alt="Pré-visualização da nova imagem do calendário" hidden>
+            <div id="cal-preview" class="cal-document-frame" hidden>
+                <p class="cal-muted">Pré-visualização local do PDF seleccionado</p>
+                <iframe id="cal-preview-document" class="cal-document" title="Pré-visualização do novo PDF do calendário" hidden></iframe>
             </div>
-            <button class="cal-button" type="submit">{{ $published ? 'Substituir imagem publicada' : 'Publicar imagem' }}</button>
+            <button class="cal-button" type="submit">{{ $published ? 'Substituir PDF publicado' : 'Publicar PDF' }}</button>
         </form>
     </section>
 </div>
@@ -92,22 +92,22 @@
 @push('scripts')
 <script>
 (() => {
-    const input = document.getElementById('cal-imagem');
+    const input = document.getElementById('cal-documento');
     const frame = document.getElementById('cal-preview');
-    const image = document.getElementById('cal-preview-image');
-    if (!input || !frame || !image) return;
+    const documentFrame = document.getElementById('cal-preview-document');
+    if (!input || !frame || !documentFrame) return;
     let url;
     input.addEventListener('change', () => {
         if (url) URL.revokeObjectURL(url);
         const file = input.files[0];
-        if (!file || !['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-            image.removeAttribute('src');
-            image.hidden = frame.hidden = true;
+        if (!file || file.type !== 'application/pdf') {
+            documentFrame.removeAttribute('src');
+            documentFrame.hidden = frame.hidden = true;
             return;
         }
         url = URL.createObjectURL(file);
-        image.src = url;
-        image.hidden = frame.hidden = false;
+        documentFrame.src = url;
+        documentFrame.hidden = frame.hidden = false;
     });
 })();
 </script>

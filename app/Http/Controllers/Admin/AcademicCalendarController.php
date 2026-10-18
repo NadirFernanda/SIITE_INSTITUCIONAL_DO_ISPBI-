@@ -22,33 +22,37 @@ class AcademicCalendarController extends Controller
     {
         $data = $request->validate([
             'ano' => ['required', 'regex:/\A20\d{2}\/20\d{2}\z/'],
-            'imagem' => ['required', 'image', 'mimetypes:image/jpeg,image/png,image/webp',
-                'extensions:jpg,jpeg,png,webp', 'dimensions:max_width=8000,max_height=8000', 'max:10240'],
+            'documento' => ['required', 'file', 'mimetypes:application/pdf', 'extensions:pdf', 'max:25600'],
         ]);
         [$first, $second] = array_map('intval', explode('/', $data['ano']));
         if ($second !== $first + 1) {
             throw ValidationException::withMessages(['ano' => 'Indique dois anos consecutivos, por exemplo 2026/2027.']);
         }
 
-        $file = $request->file('imagem');
-        if (getimagesize($file->getRealPath()) === false) {
-            throw ValidationException::withMessages(['imagem' => 'Seleccione uma imagem JPG, PNG ou WebP válida.']);
+        $file = $request->file('documento');
+        $handle = fopen($file->getRealPath(), 'rb');
+        $header = $handle ? fread($handle, 5) : false;
+        if ($handle) {
+            fclose($handle);
+        }
+        if ($header !== '%PDF-') {
+            throw ValidationException::withMessages(['documento' => 'Seleccione um PDF válido.']);
         }
 
         $disk = Storage::disk('local');
         try {
-            $path = $file->store('calendarios-academicos/imagens', 'local');
-            if (! AcademicCalendar::isImagePath($path) || ! $disk->exists($path)) {
-                throw new \RuntimeException('A imagem não foi guardada correctamente.');
+            $path = $file->store('calendarios-academicos/documentos', 'local');
+            if (! AcademicCalendar::isPdfPath($path) || ! $disk->exists($path)) {
+                throw new \RuntimeException('O PDF não foi guardado correctamente.');
             }
             AcademicCalendar::publish($data['ano'], $path);
         } catch (Throwable $exception) {
-            if (isset($path) && AcademicCalendar::isImagePath($path)) {
+            if (isset($path) && AcademicCalendar::isPdfPath($path)) {
                 $disk->delete($path);
             }
             report($exception);
 
-            return back()->withErrors(['imagem' => 'Não foi possível publicar a imagem. A versão anterior mantém-se.']);
+            return back()->withErrors(['documento' => 'Não foi possível publicar o PDF. A versão anterior mantém-se.']);
         }
 
         return redirect()->route('admin.calendario-academico')
