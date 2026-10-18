@@ -1,76 +1,37 @@
 @extends('layouts.site')
 
-
 @section('content')
 <div class="institutional-page">
-@include('partials.page-hero', [
-    'title'      => 'Biblioteca Digital',
-    'subtitle'   => 'Acervo digital e recursos bibliográficos do ISP-Bié.',
-    'breadcrumb' => 'Biblioteca Digital',
-])
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    @include('partials.page-hero', [
+        'title' => 'Biblioteca Digital',
+        'subtitle' => 'Recursos bibliográficos e informação científica para a comunidade do ISP-Bié.',
+        'breadcrumb' => 'Biblioteca Digital',
+    ])
 
-                    <div class="lg:col-span-3">
-                        <div class="bg-white border-l-4 border-[#2563eb] p-8 shadow-lg rounded-lg">
-                            <div class="prose max-w-none text-gray-700 leading-relaxed space-y-6">
-                                <div class="mb-6">
-                                    <div class="max-w-2xl mx-auto">
-                                        <div class="relative">
-                                            <input type="text" placeholder="Buscar livros, artigos, periódicos..." class="w-full px-6 py-4 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                                            <svg class="absolute right-4 top-4 w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
+    <section class="institutional-card" aria-labelledby="biblioteca-recursos">
+        <h2 id="biblioteca-recursos" class="institutional-heading">Acesso a recursos científicos</h2>
+        <p class="mt-4 max-w-3xl leading-relaxed text-slate-700">
+            O ISP-Bié disponibiliza à sua comunidade académica acesso institucional ao Research4Life.
+            Consulte a página dedicada para conhecer os recursos e as instruções de acesso.
+        </p>
+        <a href="{{ route('research4life') }}"
+            class="institutional-button mt-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
+            Conhecer o Research4Life
+        </a>
+    </section>
 
-                                <h2 class="text-3xl font-bold text-gray-900 mb-4">Coleções</h2>
-                                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                                    <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
-                                        <div class="w-16 h-16 bg-teal-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                                            <svg class="w-8 h-8 text-teal-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
-                                        </div>
-                                        <h3 class="font-semibold text-gray-900 mb-2">Livros</h3>
-                                        <p class="text-2xl font-bold text-teal-600">2.500+</p>
-                                    </div>
+    <section class="institutional-card mt-8" aria-labelledby="biblioteca-acervo">
+        <h2 id="biblioteca-acervo" class="institutional-heading">Acervo e serviços da Biblioteca</h2>
+        <p class="mt-4 max-w-3xl leading-relaxed text-slate-700">
+            Para confirmar a disponibilidade de obras ou obter informações sobre os serviços da Biblioteca,
+            utilize os contactos institucionais do ISP-Bié.
+        </p>
+    </section>
 
-                                    <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
-                                        <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                                            <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/></svg>
-                                        </div>
-                                        <h3 class="font-semibold text-gray-900 mb-2">Artigos</h3>
-                                        <p class="text-2xl font-bold text-green-600">1.200+</p>
-                                    </div>
-
-                                    <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
-                                        <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                                            <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
-                                        </div>
-                                        <h3 class="font-semibold text-gray-900 mb-2">Periódicos</h3>
-                                        <p class="text-2xl font-bold text-blue-600">150+</p>
-                                    </div>
-
-                                    <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow interactive-card">
-                                        <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                                            <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/></svg>
-                                        </div>
-                                        <h3 class="font-semibold text-gray-900 mb-2">Multimídia</h3>
-                                        <p class="text-2xl font-bold text-orange-600">800+</p>
-                                    </div>
-                                </div>
-
-                                <hr class="my-6">
-
-                                <x-institutional-cta title="Research4Life"
-                                    description="Aceda a recursos científicos através do acesso institucional do ISP-Bié."
-                                    button-text="Ver instruções de acesso" :href="route('research4life')" />
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
+    <x-institutional-cta class="mt-10"
+        title="Precisa de informações sobre a Biblioteca?"
+        description="A equipa do ISP-Bié pode orientar o seu pedido pelos canais institucionais de atendimento."
+        button-text="Contactar o ISP-Bié"
+        :href="route('contactos')" />
 </div>
 @endsection
