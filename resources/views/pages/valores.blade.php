@@ -105,12 +105,11 @@
                 </div>
               </div>
 
-              <div class="mt-8 p-6 bg-[#1e3a5f] text-white rounded-lg">
-                <h3 class="font-bold text-2xl mb-4">Código de Conduta</h3>
+              <x-institutional-statement title="Código de Conduta">
                 <p class="leading-relaxed">
                   Estes valores orientam o comportamento de estudantes, docentes, funcionários e gestores, e fundamentam o compromisso do ISP-Bié com uma educação de qualidade e o desenvolvimento da sociedade angolana.
                 </p>
-              </div>
+              </x-institutional-statement>
             </div>
           </div>
         </div>

@@ -70,14 +70,13 @@
                 </div>
               </div>
 
-              <div class="mt-8 p-6 bg-[#2563eb] text-white rounded-lg">
-                <h3 class="font-bold text-2xl mb-4">Compromisso Institucional</h3>
+              <x-institutional-statement title="Compromisso Institucional">
                 <p class="leading-relaxed">
                   O Instituto Superior Politécnico do Bié compromete-se a cumprir sua missão através de práticas pedagógicas inovadoras, 
                   investimento contínuo na qualificação do corpo docente, infraestrutura adequada, parcerias estratégicas nacionais e 
                   internacionais, e uma gestão transparente e participativa que coloca o estudante no centro do processo educativo.
                 </p>
-              </div>
+              </x-institutional-statement>
             </div>
           </div>
         </div>

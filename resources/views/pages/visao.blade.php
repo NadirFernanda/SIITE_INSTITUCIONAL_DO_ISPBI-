@@ -94,12 +94,11 @@
                 </div>
               </div>
 
-              <div class="mt-8 p-6 bg-[#1e3a5f] text-white rounded-lg">
-                <h3 class="font-bold text-xl mb-4">Horizonte 2031</h3>
+              <x-institutional-statement title="Horizonte 2031">
                 <p class="leading-relaxed">
                   Até 2031, o ISP-Bié aspira ser uma instituição de referência nacional em inovação STEAM, ensino híbrido, investigação aplicada e empreendedorismo, reconhecida pela qualidade académica, impacto regional e compromisso com a inclusão social.
                 </p>
-              </div>
+              </x-institutional-statement>
             </div>
           </div>
         </div>
