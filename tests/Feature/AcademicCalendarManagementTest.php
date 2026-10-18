@@ -46,202 +46,216 @@ class AcademicCalendarManagementTest extends TestCase
         $this->withHeader('User-Agent', 'AcademicCalendarTestBot');
     }
 
-    public function test_public_page_does_not_repeat_unverified_old_calendar(): void
+    public function test_public_page_without_published_pdf_has_no_year_viewer_or_inactive_buttons(): void
     {
         $this->get(route('calendario-academico'))->assertOk()
             ->assertSee('Calendário académico ainda não publicado')
             ->assertDontSee('2026/2027')
-            ->assertDontSee('03 - 14 Fev 2025')
-            ->assertDontSee('25% de faltas')
-            ->assertDontSee(route('calendario-academico.documento'));
+            ->assertDontSee('<iframe', false)
+            ->assertDontSee('Consultar PDF')
+            ->assertDontSee('Descarregar PDF')
+            ->assertDontSee('Primeiro Semestre');
+        $this->get(route('calendario-academico.visualizar'))->assertNotFound();
         $this->get(route('calendario-academico.documento'))->assertNotFound();
     }
 
-    public function test_admin_can_prepare_preview_and_edit_semester_activities_without_publishing(): void
+    public function test_draft_preview_is_private_and_public_page_remains_unpublished(): void
     {
         $this->actingAs($this->user('admin'));
-        $this->startDraft('2026/2027');
-        $this->addActivity('1', 'Início de actividades confirmado', '2026-10-05', '2026-10-06');
-        $this->addActivity('2', 'Conclusão confirmada', '2027-06-15', '2027-06-15');
-
-        $draft = AcademicCalendar::draft();
-        $this->assertSame('2026/2027', $draft['ano']);
-        $this->assertCount(2, $draft['atividades']);
-        $this->assertNull(AcademicCalendar::published());
-        $this->get(route('admin.calendario-academico.preview'))->assertOk()
-            ->assertSee('Pré-visualização do rascunho')
-            ->assertSee('Início de actividades confirmado')
-            ->assertSee('Conclusão confirmada');
-        $this->get(route('calendario-academico'))->assertOk()
-            ->assertDontSee('Início de actividades confirmado');
-
-        $firstId = $draft['atividades'][0]['id'];
-        $this->patch(route('admin.calendario-academico.actividades.update', $firstId), [
-            'semestre' => '2', 'titulo' => 'Actividade revista',
-            'inicio' => '2027-02-01', 'fim' => '2027-02-03', 'descricao' => 'Texto confirmado.',
-        ])->assertRedirect(route('admin.calendario-academico'));
-        $this->assertSame(2, AcademicCalendar::draft()['atividades'][0]['semestre']);
-        $this->delete(route('admin.calendario-academico.actividades.destroy', $firstId))
-            ->assertSessionHasErrors('confirmar_remocao');
-        $this->delete(route('admin.calendario-academico.actividades.destroy', $firstId), [
-            'confirmar_remocao' => '1',
-        ])->assertRedirect(route('admin.calendario-academico'));
-        $this->assertCount(1, AcademicCalendar::draft()['atividades']);
-    }
-
-    public function test_year_and_activity_dates_must_belong_to_same_academic_calendar(): void
-    {
-        $this->actingAs($this->user('admin'));
-        $this->post(route('admin.calendario-academico.rascunho'), ['ano' => '2026/2028'])
-            ->assertSessionHasErrors('ano');
-        $this->startDraft('2026/2027');
-        $this->post(route('admin.calendario-academico.actividades.store'), [
-            'semestre' => '1', 'titulo' => 'Data de outro ano',
-            'inicio' => '2025-03-01', 'fim' => '2025-03-02',
-        ])->assertSessionHasErrors('inicio');
-        $this->post(route('admin.calendario-academico.actividades.store'), [
-            'semestre' => '1', 'titulo' => 'Datas inversas',
-            'inicio' => '2026-03-02', 'fim' => '2026-03-01',
-        ])->assertSessionHasErrors('fim');
-        $this->assertSame([], AcademicCalendar::draft()['atividades']);
+        $this->startDraft();
+        $this->get(route('admin.calendario-academico'))->assertOk()
+            ->assertSee('PDF oficial do rascunho')
+            ->assertDontSee('Actividades por semestre')
+            ->assertDontSee('name="semestre"', false);
+        $preview = $this->get(route('admin.calendario-academico.preview'))->assertOk()
+            ->assertSee('Pré-visualização privada')
+            ->assertSee('PDF ainda não carregado no rascunho');
+        $this->assertStringContainsString("frame-src 'self'", $preview->headers->get('Content-Security-Policy'));
+        $this->post('/admin/calendario-academico/actividades', [])->assertNotFound();
         $this->post(route('admin.calendario-academico.publicar'), [
             'confirmar_publicacao' => '1', 'revisao' => AcademicCalendar::draftRevision(),
         ])->assertSessionHasErrors('publicacao');
-        $this->assertNull(AcademicCalendar::published());
+
+        $this->uploadPdf();
+        $this->get(route('admin.calendario-academico.preview'))->assertOk()
+            ->assertSee(route('admin.calendario-academico.documento.preview'))
+            ->assertDontSee(route('calendario-academico.visualizar'));
+        $privatePdf = $this->get(route('admin.calendario-academico.documento.preview'))->assertOk()
+            ->assertHeader('Content-Type', 'application/pdf')
+            ->assertHeader('Content-Disposition', 'inline; filename="Calendario-Academico-Previsualizacao.pdf"');
+        $this->assertStringContainsString('no-store', $privatePdf->headers->get('Cache-Control'));
+        $this->assertStringContainsString('private', $privatePdf->headers->get('Cache-Control'));
+        $this->get(route('calendario-academico'))->assertOk()->assertDontSee('2026/2027');
+        $this->get(route('calendario-academico.visualizar'))->assertNotFound();
+        $this->get(route('calendario-academico.documento'))->assertNotFound();
     }
 
-    public function test_published_calendar_and_pdf_remain_unchanged_until_new_draft_is_approved(): void
+    public function test_published_pdf_can_be_viewed_inline_and_downloaded(): void
     {
         $this->actingAs($this->user('admin'));
-        $this->startDraft('2026/2027');
-        $this->addActivity('1', 'Actividade publicada original', '2026-11-01', '2026-11-02');
+        $this->startDraft();
         $this->uploadPdf();
-        $oldPdf = AcademicCalendar::draft()['pdf'];
-        $this->get(route('calendario-academico.documento'))->assertNotFound();
-        $this->get(route('admin.calendario-academico.documento.preview'))
-            ->assertOk()->assertHeader('Content-Type', 'application/pdf');
-        $this->post(route('admin.calendario-academico.publicar'))
-            ->assertSessionHasErrors('confirmar_publicacao');
         $this->publish();
 
-        $this->get(route('calendario-academico'))->assertOk()
+        $response = $this->get(route('calendario-academico'))->assertOk()
             ->assertSee('Calendário Académico 2026/2027')
-            ->assertSee('Actividade publicada original')
-            ->assertSee(route('calendario-academico.documento'));
-        $this->get(route('calendario-academico.documento'))
-            ->assertOk()->assertHeader('Content-Type', 'application/pdf');
+            ->assertSee('<iframe', false)
+            ->assertSee(route('calendario-academico.visualizar'))
+            ->assertSee(route('calendario-academico.documento'))
+            ->assertSee('Consultar PDF')
+            ->assertSee('Descarregar PDF')
+            ->assertDontSee('Primeiro Semestre')
+            ->assertDontSee('name="semestre"', false);
+        $this->assertStringContainsString("frame-src 'self'", $response->headers->get('Content-Security-Policy'));
+        $this->get(route('calendario-academico.visualizar'))->assertOk()
+            ->assertHeader('Content-Disposition', 'inline; filename="Calendario-Academico-ISP-Bie.pdf"')
+            ->assertHeader('Cache-Control', 'no-store, private');
+        $this->get(route('calendario-academico.documento'))->assertOk()
+            ->assertHeader('Content-Disposition', 'attachment; filename="Calendario-Academico-ISP-Bie.pdf"');
+    }
+
+    public function test_new_draft_and_failed_upload_preserve_published_document(): void
+    {
+        $this->actingAs($this->user('admin'));
+        $this->startDraft();
+        $this->uploadPdf();
+        $this->publish();
+        $old = AcademicCalendar::published();
 
         $this->post(route('admin.calendario-academico.rascunho'), ['ano' => '2027/2028'])
             ->assertSessionHasErrors('confirmar_substituicao');
         $this->post(route('admin.calendario-academico.rascunho'), [
             'ano' => '2027/2028', 'confirmar_substituicao' => '1',
-        ])->assertRedirect(route('admin.calendario-academico'));
-        $this->addActivity('2', 'Actividade da nova versão', '2028-02-03', '2028-02-04');
-        $this->assertSame('2026/2027', AcademicCalendar::published()['ano']);
-        $this->assertSame($oldPdf, AcademicCalendar::published()['pdf']);
-        Storage::disk('local')->assertExists($oldPdf);
+        ])->assertSessionHas('success');
+        $this->post(route('admin.calendario-academico.documento.upload'), [
+            'documento' => UploadedFile::fake()->createWithContent('falso.pdf', 'não é um PDF'),
+        ])->assertSessionHasErrors('documento');
+        $this->assertSame($old, AcademicCalendar::published());
         $this->get(route('calendario-academico'))->assertOk()
-            ->assertSee('Actividade publicada original')
-            ->assertDontSee('Actividade da nova versão')
-            ->assertDontSee('2027/2028');
+            ->assertSee('2026/2027')->assertDontSee('2027/2028');
+        $this->get(route('calendario-academico.visualizar'))->assertOk();
+    }
 
+    public function test_year_must_be_consecutive_and_pdf_extension_must_match_content(): void
+    {
+        $this->actingAs($this->user('admin'));
+        $this->post(route('admin.calendario-academico.rascunho'), ['ano' => '2026/2028'])
+            ->assertSessionHasErrors('ano');
+        $this->assertNull(AcademicCalendar::draft());
+
+        $this->startDraft();
+        $this->post(route('admin.calendario-academico.documento.upload'), [
+            'documento' => UploadedFile::fake()->createWithContent('documento.txt', "%PDF-1.4\n%%EOF\n"),
+        ])->assertSessionHasErrors('documento');
+        $this->assertNull(AcademicCalendar::draft()['pdf']);
+    }
+
+    public function test_failed_draft_update_keeps_published_document_and_removes_new_upload(): void
+    {
+        $this->actingAs($this->user('admin'));
+        $this->startDraft();
+        $this->uploadPdf();
         $this->publish();
-        $this->get(route('calendario-academico'))->assertOk()
-            ->assertSee('Calendário Académico 2027/2028')
-            ->assertSee('Actividade da nova versão')
-            ->assertDontSee('Actividade publicada original')
-            ->assertDontSee(route('calendario-academico.documento'));
+        $old = AcademicCalendar::published();
+        $this->post(route('admin.calendario-academico.rascunho'), [
+            'ano' => '2027/2028', 'confirmar_substituicao' => '1',
+        ])->assertSessionHas('success');
+
+        DB::statement("CREATE TRIGGER block_calendar_draft BEFORE UPDATE ON midias WHEN NEW.nome = '__ispbie_system_calendario_rascunho_v1__' BEGIN SELECT RAISE(ABORT, 'write blocked'); END");
+        $this->post(route('admin.calendario-academico.documento.upload'), [
+            'documento' => UploadedFile::fake()->createWithContent(
+                'novo.pdf', "%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\n%%EOF\n"
+            ),
+        ])->assertSessionHasErrors('documento');
+
+        $this->assertSame($old, AcademicCalendar::published());
+        $this->assertNull(AcademicCalendar::draft()['pdf']);
+        $this->assertCount(1, Storage::disk('local')->files('calendarios-academicos/documentos'));
+    }
+
+    public function test_replacement_requires_review_and_unpublication_hides_both_public_pdf_routes(): void
+    {
+        $this->actingAs($this->user('admin'));
+        $this->startDraft();
+        $this->uploadPdf();
+        $this->publish();
+        $oldPath = AcademicCalendar::published()['pdf'];
+
+        $this->post(route('admin.calendario-academico.rascunho'), [
+            'ano' => '2027/2028', 'confirmar_substituicao' => '1',
+        ])->assertSessionHas('success');
+        $this->uploadPdf();
+        $newPath = AcademicCalendar::draft()['pdf'];
+        $this->assertNotSame($oldPath, $newPath);
+        $this->assertSame($oldPath, AcademicCalendar::published()['pdf']);
+        $this->post(route('admin.calendario-academico.publicar'), [
+            'confirmar_publicacao' => '1', 'revisao' => str_repeat('a', 64),
+        ])->assertSessionHasErrors('publicacao');
+        $this->assertSame($oldPath, AcademicCalendar::published()['pdf']);
+        $this->publish();
+        $this->assertSame($newPath, AcademicCalendar::published()['pdf']);
+        Storage::disk('local')->assertExists($oldPath);
+
+        $this->post(route('admin.calendario-academico.despublicar'))
+            ->assertSessionHasErrors('confirmar_retirada');
+        $this->post(route('admin.calendario-academico.despublicar'), [
+            'confirmar_retirada' => '1',
+        ])->assertSessionHas('success');
+        $this->assertNull(AcademicCalendar::published());
+        $this->assertNotNull(AcademicCalendar::draft());
+        $this->get(route('calendario-academico.visualizar'))->assertNotFound();
         $this->get(route('calendario-academico.documento'))->assertNotFound();
     }
 
-    public function test_invalid_pdf_and_failed_draft_save_preserve_published_version(): void
+    public function test_legacy_calendar_without_pdf_does_not_publish_manual_activities(): void
+    {
+        AcademicCalendar::saveDraft([
+            'ano' => '2026/2027',
+            'pdf' => null,
+            'atividades' => [[
+                'id' => '11111111-1111-1111-1111-111111111111',
+                'semestre' => 1,
+                'titulo' => 'Actividade antiga sem PDF',
+                'inicio' => '2026-10-05',
+                'fim' => '2026-10-05',
+                'descricao' => '',
+            ]],
+        ]);
+        $path = Midia::where('nome', Midia::CALENDARIO_RASCUNHO_NOME)->value('caminho');
+        Midia::create(['nome' => Midia::CALENDARIO_PUBLICADO_NOME, 'caminho' => $path]);
+
+        $this->get(route('calendario-academico'))->assertOk()
+            ->assertSee('Calendário académico ainda não publicado')
+            ->assertDontSee('Actividade antiga sem PDF')
+            ->assertDontSee('2026/2027');
+        $this->get(route('calendario-academico.visualizar'))->assertNotFound();
+        $this->actingAs($this->user('admin'));
+        $this->post(route('admin.calendario-academico.publicar'), [
+            'confirmar_publicacao' => '1', 'revisao' => AcademicCalendar::draftRevision(),
+        ])->assertSessionHasErrors('publicacao');
+    }
+
+    public function test_failed_publication_keeps_previous_pdf(): void
     {
         $this->actingAs($this->user('admin'));
-        $this->startDraft('2026/2027');
-        $this->addActivity('1', 'Versão segura', '2026-09-01', '2026-09-01');
+        $this->startDraft();
+        $this->uploadPdf();
         $this->publish();
         $old = AcademicCalendar::published();
-        $this->post(route('admin.calendario-academico.documento.upload'), [
-            'documento' => UploadedFile::fake()->createWithContent('falso.pdf', '<html>ficheiro falso</html>'),
-        ])->assertSessionHasErrors('documento');
-
-        DB::statement("CREATE TRIGGER block_calendar_draft BEFORE UPDATE ON midias BEGIN SELECT RAISE(ABORT, 'write blocked'); END");
-        $this->post(route('admin.calendario-academico.documento.upload'), [
-            'documento' => $this->fakePdf(),
-        ])->assertSessionHasErrors('documento');
-        $this->assertSame($old, AcademicCalendar::published());
-        $this->assertNull(AcademicCalendar::draft()['pdf']);
-        $this->assertSame([], Storage::disk('local')->files('calendarios-academicos/documentos'));
-        $this->get(route('calendario-academico'))->assertOk()->assertSee('Versão segura');
-    }
-
-    public function test_replacing_draft_pdf_keeps_the_published_pdf_until_approval(): void
-    {
-        $this->actingAs($this->user('admin'));
-        $this->startDraft('2026/2027');
+        $this->post(route('admin.calendario-academico.rascunho'), [
+            'ano' => '2027/2028', 'confirmar_substituicao' => '1',
+        ])->assertSessionHas('success');
         $this->uploadPdf();
-        $oldPdf = AcademicCalendar::draft()['pdf'];
-        $this->publish();
-
-        $this->uploadPdf();
-        $newPdf = AcademicCalendar::draft()['pdf'];
-        $this->assertNotSame($oldPdf, $newPdf);
-        $this->assertSame($oldPdf, AcademicCalendar::published()['pdf']);
-        Storage::disk('local')->assertExists($oldPdf);
-        Storage::disk('local')->assertExists($newPdf);
-        $this->get(route('calendario-academico.documento'))->assertOk();
-
-        $this->delete(route('admin.calendario-academico.documento.remove'), [
-            'confirmar_remocao' => '1',
-        ])->assertRedirect(route('admin.calendario-academico'));
-        $this->assertNull(AcademicCalendar::draft()['pdf']);
-        $this->assertSame($oldPdf, AcademicCalendar::published()['pdf']);
-        $this->get(route('calendario-academico.documento'))->assertOk();
-    }
-
-    public function test_stale_review_and_failed_publication_cannot_replace_published_version(): void
-    {
-        $this->actingAs($this->user('admin'));
-        $this->startDraft('2026/2027');
-        $this->addActivity('1', 'Versão aprovada', '2026-09-01', '2026-09-01');
-        $this->publish();
-        $approved = AcademicCalendar::published();
-        $reviewedRevision = AcademicCalendar::draftRevision();
-
-        $this->addActivity('2', 'Alteração posterior à revisão', '2027-02-01', '2027-02-01');
-        $this->post(route('admin.calendario-academico.publicar'), [
-            'confirmar_publicacao' => '1', 'revisao' => $reviewedRevision,
-        ])->assertSessionHasErrors('publicacao');
-        $this->assertSame($approved, AcademicCalendar::published());
 
         DB::statement("CREATE TRIGGER block_calendar_publication BEFORE UPDATE ON midias WHEN NEW.nome = '__ispbie_system_calendario_publicado_v1__' BEGIN SELECT RAISE(ABORT, 'write blocked'); END");
         $this->post(route('admin.calendario-academico.publicar'), [
             'confirmar_publicacao' => '1', 'revisao' => AcademicCalendar::draftRevision(),
         ])->assertSessionHasErrors('publicacao');
-        $this->assertSame($approved, AcademicCalendar::published());
-        $this->get(route('calendario-academico'))->assertOk()
-            ->assertSee('Versão aprovada')->assertDontSee('Alteração posterior à revisão');
+        $this->assertSame($old, AcademicCalendar::published());
+        $this->get(route('calendario-academico'))->assertOk()->assertSee('2026/2027');
     }
 
-    public function test_unpublish_hides_calendar_and_pdf_but_keeps_draft(): void
-    {
-        $this->actingAs($this->user('admin'));
-        $this->startDraft('2026/2027');
-        $this->uploadPdf();
-        $this->publish();
-        $this->post(route('admin.calendario-academico.despublicar'))
-            ->assertSessionHasErrors('confirmar_retirada');
-        $this->post(route('admin.calendario-academico.despublicar'), [
-            'confirmar_retirada' => '1',
-        ])->assertRedirect(route('admin.calendario-academico'));
-        $this->assertNull(AcademicCalendar::published());
-        $this->assertNotNull(AcademicCalendar::draft());
-        $this->get(route('calendario-academico'))->assertOk()
-            ->assertSee('Calendário académico ainda não publicado');
-        $this->get(route('calendario-academico.documento'))->assertNotFound();
-    }
-
-    public function test_guests_and_other_roles_cannot_manage_or_preview_drafts(): void
+    public function test_preview_and_management_require_administrator_permission(): void
     {
         $this->post(route('admin.calendario-academico.rascunho'), ['ano' => '2026/2027'])
             ->assertRedirect(route('login'));
@@ -255,34 +269,28 @@ class AcademicCalendarManagementTest extends TestCase
         $this->assertDatabaseCount('midias', 0);
     }
 
-    public function test_calendar_references_are_reserved_in_generic_media_manager(): void
+    public function test_calendar_references_remain_reserved_in_generic_media_manager(): void
     {
         $this->actingAs($this->user('admin'));
-        $this->startDraft('2026/2027');
+        $this->startDraft();
         $record = Midia::where('nome', Midia::CALENDARIO_RASCUNHO_NOME)->firstOrFail();
         $this->get(route('admin.midia'))->assertOk()->assertDontSee(Midia::CALENDARIO_RASCUNHO_NOME);
         $this->delete(route('admin.midia.destroy', $record->id))->assertForbidden();
         $this->assertDatabaseHas('midias', ['id' => $record->id, 'caminho' => $record->caminho]);
     }
 
-    private function startDraft(string $year): void
+    private function startDraft(): void
     {
-        $this->post(route('admin.calendario-academico.rascunho'), ['ano' => $year])
+        $this->post(route('admin.calendario-academico.rascunho'), ['ano' => '2026/2027'])
             ->assertRedirect(route('admin.calendario-academico'))->assertSessionHas('success');
-    }
-
-    private function addActivity(string $semester, string $title, string $start, string $end): void
-    {
-        $this->post(route('admin.calendario-academico.actividades.store'), [
-            'semestre' => $semester, 'titulo' => $title,
-            'inicio' => $start, 'fim' => $end, 'descricao' => 'Descrição validada.',
-        ])->assertRedirect(route('admin.calendario-academico'))->assertSessionHas('success');
     }
 
     private function uploadPdf(): void
     {
         $this->post(route('admin.calendario-academico.documento.upload'), [
-            'documento' => $this->fakePdf(),
+            'documento' => UploadedFile::fake()->createWithContent(
+                'calendario.pdf', "%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\n%%EOF\n"
+            ),
         ])->assertRedirect(route('admin.calendario-academico'))->assertSessionHas('success');
     }
 
@@ -291,11 +299,6 @@ class AcademicCalendarManagementTest extends TestCase
         $this->post(route('admin.calendario-academico.publicar'), [
             'confirmar_publicacao' => '1', 'revisao' => AcademicCalendar::draftRevision(),
         ])->assertRedirect(route('admin.calendario-academico'))->assertSessionHas('success');
-    }
-
-    private function fakePdf(): UploadedFile
-    {
-        return UploadedFile::fake()->createWithContent('calendario.pdf', "%PDF-1.4\n1 0 obj<</Type/Catalog>>endobj\n%%EOF\n");
     }
 
     private function user(string $role): User

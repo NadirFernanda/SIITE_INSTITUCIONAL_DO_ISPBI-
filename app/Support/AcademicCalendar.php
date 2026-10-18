@@ -77,10 +77,7 @@ class AcademicCalendar
             }
 
             $calendar = self::readPath($path);
-            if (! $calendar || (empty($calendar['atividades']) && ! self::hasPdf($calendar))) {
-                throw new RuntimeException('O rascunho precisa de actividades ou de um PDF válido antes da publicação.');
-            }
-            if ($calendar['pdf'] !== null && ! self::hasPdf($calendar)) {
+            if (! $calendar || ! self::hasPdf($calendar)) {
                 throw new RuntimeException('O PDF do rascunho não está disponível. Carregue-o novamente.');
             }
 

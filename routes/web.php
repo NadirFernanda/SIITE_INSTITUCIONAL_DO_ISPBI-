@@ -63,9 +63,6 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::get('/admin/calendario-academico/preview', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'preview'])->name('admin.calendario-academico.preview');
     Route::get('/admin/calendario-academico/documento/preview', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'previewPdf'])->name('admin.calendario-academico.documento.preview');
     Route::post('/admin/calendario-academico/rascunho', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'startDraft'])->name('admin.calendario-academico.rascunho');
-    Route::post('/admin/calendario-academico/actividades', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'storeActivity'])->name('admin.calendario-academico.actividades.store');
-    Route::patch('/admin/calendario-academico/actividades/{id}', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'updateActivity'])->name('admin.calendario-academico.actividades.update');
-    Route::delete('/admin/calendario-academico/actividades/{id}', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'destroyActivity'])->name('admin.calendario-academico.actividades.destroy');
     Route::post('/admin/calendario-academico/documento', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'uploadPdf'])->name('admin.calendario-academico.documento.upload');
     Route::delete('/admin/calendario-academico/documento', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'removeDraftPdf'])->name('admin.calendario-academico.documento.remove');
     Route::post('/admin/calendario-academico/publicar', [App\Http\Controllers\Admin\AcademicCalendarController::class, 'publish'])->name('admin.calendario-academico.publicar');
@@ -557,6 +554,8 @@ Route::view('/cultura', 'pages.cultura')->name('cultura');
 Route::get('/calendario-academico', [App\Http\Controllers\AcademicCalendarController::class, 'index'])->name('calendario-academico');
 Route::get('/calendario-academico/documento', [App\Http\Controllers\AcademicCalendarController::class, 'document'])
     ->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('calendario-academico.documento');
+Route::get('/calendario-academico/documento/visualizar', [App\Http\Controllers\AcademicCalendarController::class, 'viewDocument'])
+    ->withoutMiddleware(\App\Http\Middleware\TrackVisit::class)->name('calendario-academico.visualizar');
 
 Route::get('/candidaturas', function () {
     $formularioAtivo = \App\Models\SiteSetting::candidaturasAtivas();

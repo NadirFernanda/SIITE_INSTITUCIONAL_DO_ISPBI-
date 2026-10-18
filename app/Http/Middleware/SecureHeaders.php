@@ -63,6 +63,13 @@ class SecureHeaders
         $scriptSrc = $isAdmin
             ? "script-src 'self' 'unsafe-inline' 'unsafe-eval';"
             : "script-src 'self' 'unsafe-eval';";
+        $calendarPdfPage = in_array($path, [
+            'calendario-academico',
+            'admin/calendario-academico/preview',
+        ], true);
+        $frameSrc = $calendarPdfPage
+            ? "frame-src 'self' https://www.google.com https://www.youtube.com;"
+            : "frame-src https://www.google.com https://www.youtube.com;";
 
         $response->headers->set(
             'Content-Security-Policy',
@@ -72,7 +79,7 @@ class SecureHeaders
                 "style-src 'self' 'unsafe-inline' https://fonts.bunny.net;",
                 "img-src 'self' data: https:;",
                 "font-src 'self' data: https://fonts.bunny.net;",
-                "frame-src https://www.google.com https://www.youtube.com;",
+                $frameSrc,
                 "frame-ancestors 'self';",
                 "connect-src 'self';",
                 "object-src 'none';",
