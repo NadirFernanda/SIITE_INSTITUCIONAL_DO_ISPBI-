@@ -9,6 +9,7 @@
       <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-4 flex items-center gap-2"><span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Sobre o Curso</h2>
       <p class="text-gray-600 leading-relaxed">O licenciado em Comunicação Social é um profissional capacitado para gerir, planear e produzir comunicação pública. Actua em jornalismo, publicidade, assessoria, mediação social, investigação e docência, desenvolvendo estratégias e conteúdos em diferentes linguagens e meios, promovendo participação e desenvolvimento social responsável.</p>
     </section>
+    <x-course-entry-profiles course="Comunicação Social" />
     <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
       <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2"><span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Perfil de Saída</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

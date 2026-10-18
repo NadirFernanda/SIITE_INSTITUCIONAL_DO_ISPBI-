@@ -30,6 +30,8 @@
         </p>
       </div>
 
+      <x-course-entry-profiles course="Engenharia Informática" />
+
       <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
         <h2 class="flex items-center gap-2 text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-5">
           <span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Perfil de Saída

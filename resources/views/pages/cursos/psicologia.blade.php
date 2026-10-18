@@ -9,6 +9,7 @@
       <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-4 flex items-center gap-2"><span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Sobre o Curso</h2>
       <p class="text-gray-600 leading-relaxed">O licenciado em Psicologia é um profissional que avalia, diagnostica e intervém no desenvolvimento psicológico, promovendo o bem-estar individual e colectivo. Actua na prevenção, orientação e resolução de problemas em contextos educativos, clínicos, organizacionais e comunitários, desenvolvendo programas, investigações e estratégias de formação, com ética e trabalho multidisciplinar.</p>
     </section>
+    <x-course-entry-profiles course="Psicologia" />
     <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
       <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2"><span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Perfil de Saída</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

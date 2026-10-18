@@ -17,6 +17,7 @@
       <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-4 flex items-center gap-2"><span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Sobre o Curso</h2>
       <p class="text-gray-600 leading-relaxed">O licenciado em Enfermagem é um profissional qualificado para cuidar, prevenir e promover a saúde de indivíduos, famílias e comunidades. Actua no diagnóstico, tratamento, educação, investigação e gestão em serviços de saúde, com autonomia, ética e trabalho em equipa, aplicando conhecimentos científicos, técnicos e práticos em diferentes níveis de atendimento assistencial.</p>
     </section>
+    <x-course-entry-profiles course="Enfermagem" label="Enfermagem Geral" />
     <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
       <h2 class="text-lg font-bold text-[#1e3a5f] uppercase tracking-widest mb-6 flex items-center gap-2"><span class="inline-block w-5 h-0.5 bg-[#F05A28]"></span> Perfil de Saída</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
