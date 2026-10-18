@@ -15,21 +15,21 @@
 
     {{-- Áreas de Conhecimento --}}
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-        <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-5">
-            <div class="w-10 h-10 bg-[#2563eb] rounded-lg flex items-center justify-center mb-3">
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <div class="w-10 h-10 bg-[#1e3a5f] rounded-lg flex items-center justify-center mb-3">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
             </div>
             <h3 class="font-bold text-gray-900 mb-1">Engenharias e Tecnologia</h3>
             <p class="text-xs text-gray-600">Informática, Recursos Hídricos, Engenharia Civil e áreas correlatas.</p>
         </div>
-        <div class="bg-gradient-to-br from-teal-50 to-teal-100 border border-teal-200 rounded-xl p-5">
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
             <div class="w-10 h-10 bg-[#0E8F81] rounded-lg flex items-center justify-center mb-3">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
             </div>
             <h3 class="font-bold text-gray-900 mb-1">Ciências da Saúde</h3>
             <p class="text-xs text-gray-600">Psicologia, saúde pública, interação bio-social e bem-estar.</p>
         </div>
-        <div class="bg-gradient-to-br from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-5">
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
             <div class="w-10 h-10 bg-[#F05A28] rounded-lg flex items-center justify-center mb-3">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
             </div>
@@ -79,14 +79,14 @@
     <section class="mb-12">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
             <h2 class="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
-                <svg class="w-5 h-5 text-[#2563eb]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+                <svg class="w-5 h-5 text-[#1e3a5f]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
                 Artigos Publicados
             </h2>
             <form method="GET" action="{{ route('revista') }}" class="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto">
                 <input type="text" name="q" value="{{ request('q') }}" placeholder="Pesquisar por título, autor…"
-                       class="w-full sm:w-56 px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]" />
+                       class="w-full sm:w-56 px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F05A28]" />
                 <select name="category" aria-label="Filtrar por área"
-                        class="w-full sm:w-auto px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]">
+                        class="w-full sm:w-auto px-3 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F05A28]">
                     <option value="">Todas as áreas</option>
                     <option value="Engenharias e Tecnologia" {{ request('category')=='Engenharias e Tecnologia' ? 'selected' : '' }}>Engenharias e Tecnologia</option>
                     <option value="Ciências da Saúde" {{ request('category')=='Ciências da Saúde' ? 'selected' : '' }}>Ciências da Saúde</option>
@@ -113,7 +113,7 @@
                             <div>
                                 <div class="flex items-center gap-3 mb-5">
                                     <span class="text-base font-bold text-gray-900">{{ $area }}</span>
-                                    <span class="bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">{{ $group->count() }} artigo(s)</span>
+                                    <span class="bg-blue-50 text-[#1e3a5f] text-xs font-semibold px-2.5 py-0.5 rounded-full">{{ $group->count() }} artigo(s)</span>
                                 </div>
                                 <div class="grid gap-4">
                                     @foreach($group as $a)
@@ -122,10 +122,10 @@
                                             $external = (bool) $a->link;
                                         @endphp
                                         <a href="{{ $cardUrl }}" @if($external) target="_blank" rel="noopener noreferrer" @endif
-                                           class="block group rounded-xl border border-gray-200 hover:border-[#2563eb] hover:shadow-md transition-all duration-200 bg-white no-underline text-current">
+                                           class="block group rounded-xl border border-gray-200 hover:border-[#F05A28] hover:shadow-md transition-all duration-200 bg-white no-underline text-current">
                                             <article class="p-5 sm:p-6">
                                                 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
-                                                    <h3 class="text-base sm:text-lg font-semibold text-gray-900 group-hover:text-[#2563eb] transition-colors leading-snug">{{ $a->title }}</h3>
+                                                    <h3 class="text-base sm:text-lg font-semibold text-gray-900 group-hover:text-[#a43a15] transition-colors leading-snug">{{ $a->title }}</h3>
                                                     <time class="text-xs text-gray-400 whitespace-nowrap flex-shrink-0">{{ $a->published_at ? $a->published_at->format('d/m/Y') : $a->created_at->format('d/m/Y') }}</time>
                                                 </div>
                                                 <p class="mt-1 text-sm text-gray-500">
@@ -135,7 +135,7 @@
                                                 @if($a->description)
                                                     <p class="mt-3 text-sm text-gray-600 leading-relaxed">{{ Str::limit(strip_tags($a->description), 220) }}</p>
                                                 @endif
-                                                <div class="mt-4 flex items-center gap-1.5 text-sm text-[#2563eb] font-medium">
+                                                <div class="mt-4 flex items-center gap-1.5 text-sm text-[#1e3a5f] font-medium group-hover:text-[#a43a15]">
                                                     @if($external)
                                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                                         Abrir artigo (link externo)
