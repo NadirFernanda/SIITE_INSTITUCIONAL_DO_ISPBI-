@@ -70,6 +70,50 @@
     @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8;
   }
 
+  .institutional-feature-card {
+    @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm;
+  }
+
+  .institutional-feature-card--separate-icon {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    column-gap: .5rem;
+    align-content: start;
+  }
+
+  .institutional-feature-card--separate-icon > div:first-child {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .institutional-feature-card--separate-icon > div:first-child svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #2563eb;
+  }
+
+  .institutional-feature-card--separate-icon > h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 0 .75rem;
+    text-align: left;
+  }
+
+  .institutional-feature-card--separate-icon > p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    text-align: left;
+  }
+
   .institutional-heading {
     @apply text-2xl font-extrabold tracking-tight text-[#1e3a5f] sm:text-3xl;
   }
