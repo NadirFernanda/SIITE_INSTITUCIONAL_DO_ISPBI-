@@ -29,7 +29,7 @@
   <section class="py-12 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-8 text-center">
-        <h3 class="text-3xl font-bold text-[#2563eb]">Concursos Abertos</h3>
+        <h3 class="text-3xl font-bold text-[#1e3a5f]">Concursos Abertos</h3>
       </div>
 
       @if($concursos->isEmpty())
@@ -83,45 +83,45 @@
   <!-- Como Candidatar-se -->
   <section class="py-16 bg-white scroll-reveal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-[#2563eb] mb-12 text-center">Processo de Concurso Público</h2>
+      <h2 class="text-3xl font-bold text-[#1e3a5f] mb-12 text-center">Processo de Concurso Público</h2>
       
       <div class="grid md:grid-cols-4 gap-8 mb-12">
         
         <div class="text-center interactive-card">
-          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="w-16 h-16 bg-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">1</span>
           </div>
-          <h3 class="text-xl font-bold text-[#2563eb] mb-3">Publicação do Edital</h3>
+          <h3 class="text-xl font-bold text-[#1e3a5f] mb-3">Publicação do Edital</h3>
           <p class="text-gray-600">
             O concurso é divulgado publicamente em Diário da República, imprensa e no site do ISP-Bié.
           </p>
         </div>
 
         <div class="text-center interactive-card">
-          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="w-16 h-16 bg-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">2</span>
           </div>
-          <h3 class="text-xl font-bold text-[#2563eb] mb-3">Candidatura</h3>
+          <h3 class="text-xl font-bold text-[#1e3a5f] mb-3">Candidatura</h3>
           <p class="text-gray-600">
             Submeta a documentação exigida dentro do prazo estipulado no edital.
           </p>
         </div>
 
         <div class="text-center interactive-card">
-          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="w-16 h-16 bg-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">3</span>
           </div>
-          <h3 class="text-xl font-bold text-[#2563eb] mb-3">Provas e Avaliação</h3>
+          <h3 class="text-xl font-bold text-[#1e3a5f] mb-3">Provas e Avaliação</h3>
           <p class="text-gray-600">
             Realize as provas escritas, práticas e/ou entrevistas conforme o edital.
           </p>
         </div>
 
         <div class="text-center interactive-card">
-          <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="w-16 h-16 bg-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">4</span>
           </div>
-          <h3 class="text-xl font-bold text-[#2563eb] mb-3">Resultado Final</h3>
+          <h3 class="text-xl font-bold text-[#1e3a5f] mb-3">Resultado Final</h3>
           <p class="text-gray-600">
             A lista de aprovados é publicada e os selecionados são convocados para posse.
           </p>
@@ -191,7 +191,7 @@
   <section id="alertas" class="py-16 bg-gray-50 scroll-reveal">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white rounded-lg shadow-lg p-8 interactive-card">
-        <h2 class="text-3xl font-bold text-[#2563eb] mb-6">Receber Alertas de Concursos</h2>
+        <h2 class="text-3xl font-bold text-[#1e3a5f] mb-6">Receber Alertas de Concursos</h2>
         <p class="text-gray-600 mb-8">
           Cadastre-se para receber notificações por email quando novos concursos públicos forem abertos no ISP-Bié.
         </p>
@@ -204,36 +204,36 @@
           <div class="grid md:grid-cols-2 gap-6">
             <div>
               <label for="alert_name" class="block text-sm font-semibold text-gray-700 mb-2">Nome Completo *</label>
-              <input id="alert_name" name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+              <input id="alert_name" name="name" type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#F05A28] focus:border-transparent">
             </div>
             <div>
               <label for="alert_email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-              <input id="alert_email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+              <input id="alert_email" name="email" type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#F05A28] focus:border-transparent">
             </div>
           </div>
 
           <div>
             <label for="alert_phone" class="block text-sm font-semibold text-gray-700 mb-2">Telefone</label>
-            <input id="alert_phone" name="phone" type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2563eb] focus:border-transparent">
+            <input id="alert_phone" name="phone" type="tel" placeholder="(244) 900 000 000" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#F05A28] focus:border-transparent">
           </div>
 
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">Áreas de Interesse (selecione todas que se aplicam) *</label>
             <div class="space-y-2">
               <label class="flex items-center">
-                <input name="interests[]" value="Docente" id="interesse_docente" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Docente" id="interesse_docente" type="checkbox" class="mr-2 rounded border-gray-300 text-[#F05A28] focus:ring-[#F05A28]">
                 <span class="text-gray-700">Docente</span>
               </label>
               <label class="flex items-center">
-                <input name="interests[]" value="Técnico Administrativo" id="interesse_tecnico" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Técnico Administrativo" id="interesse_tecnico" type="checkbox" class="mr-2 rounded border-gray-300 text-[#F05A28] focus:ring-[#F05A28]">
                 <span class="text-gray-700">Técnico Administrativo</span>
               </label>
               <label class="flex items-center">
-                <input name="interests[]" value="Técnico Especializado" id="interesse_tecnico_esp" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Técnico Especializado" id="interesse_tecnico_esp" type="checkbox" class="mr-2 rounded border-gray-300 text-[#F05A28] focus:ring-[#F05A28]">
                 <span class="text-gray-700">Técnico Especializado (TI, Laboratórios, etc.)</span>
               </label>
               <label class="flex items-center">
-                <input name="interests[]" value="Investigação Científica" id="interesse_pesquisa" type="checkbox" class="mr-2 rounded border-gray-300 text-[#2563eb] focus:ring-[#2563eb]">
+                <input name="interests[]" value="Investigação Científica" id="interesse_pesquisa" type="checkbox" class="mr-2 rounded border-gray-300 text-[#F05A28] focus:ring-[#F05A28]">
                 <span class="text-gray-700">Investigação Científica</span>
               </label>
             </div>
@@ -301,13 +301,13 @@
             <h3 class="text-2xl font-bold mb-4">O Que Oferecemos</h3>
             <ul class="space-y-3">
               <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-6 h-6 text-[#F05A28] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 Ambiente de trabalho estimulante e colaborativo
               </li>
               <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-6 h-6 text-[#F05A28] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 Oportunidades de formação contínua
@@ -315,13 +315,13 @@
               <li class="flex items-start">
               
               <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-6 h-6 text-[#F05A28] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 Desenvolvimento de carreira profissional
               </li>
               <li class="flex items-start">
-                <svg class="w-6 h-6 text-[#3B82F6] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-6 h-6 text-[#F05A28] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
                 Contribuição para o desenvolvimento da província
