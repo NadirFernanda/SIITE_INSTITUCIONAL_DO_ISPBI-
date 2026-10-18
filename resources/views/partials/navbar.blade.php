@@ -23,7 +23,6 @@
     </a>
   </div>
   <div class="flex flex-wrap items-center gap-2">
-    <!-- <a href="/presidencia" class="flex items-center gap-1 hover:underline hover:text-[#F05A28]"><span>🏛️</span> Órgãos de gestão</a> -->
 
     <!-- Dropdown Infraestrutura Digital - Barra cinza (Desktop) -->
     <div data-dd class="relative">

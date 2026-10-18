@@ -56,15 +56,15 @@
             </div>
             <button type="submit" formaction="{{ route('lancamento.salas.pdf-lote') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF
             </button>
             <button type="submit" formaction="{{ route('lancamento.salas.pdf-exame-lote') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF Exame
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF Exame
             </button>
             <button type="submit" formaction="{{ route('lancamento.salas.excel-exame-lote') }}"
                     style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📊 Excel Exame
+                <x-ui-icon name="chart-bar" size="sm" class="mr-1 align-middle" /> Excel Exame
             </button>
         </form>
     </div>
@@ -94,15 +94,15 @@
             </div>
             <button type="submit" formaction="{{ route('lancamento.salas.pdf-lote-curso') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF
             </button>
             <button type="submit" formaction="{{ route('lancamento.salas.pdf-exame-lote-curso') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF Exame
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF Exame
             </button>
             <button type="submit" formaction="{{ route('lancamento.salas.excel-exame-lote-curso') }}"
                     style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📊 Excel Exame
+                <x-ui-icon name="chart-bar" size="sm" class="mr-1 align-middle" /> Excel Exame
             </button>
         </form>
     </div>

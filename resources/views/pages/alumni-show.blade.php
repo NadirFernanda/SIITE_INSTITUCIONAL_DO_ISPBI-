@@ -18,7 +18,7 @@
       <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border border-gray-100 interactive-card">
         <div class="flex items-center gap-6 mb-6">
           <div class="w-20 h-20 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-3xl font-bold">
-            ✓
+            <x-ui-icon name="check-circle" size="lg" />
           </div>
           <div>
             <h2 class="text-2xl font-bold text-gray-900 mb-1">Alumni</h2>

@@ -160,13 +160,13 @@
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
         @foreach([
-            ['icon'=>'🤝', 'title'=>'Networking',        'desc'=>'Conecte-se com ex-estudantes e amplie a sua rede profissional em Angola e no mundo.'],
-            ['icon'=>'💼', 'title'=>'Oportunidades',     'desc'=>'Acesse vagas exclusivas de emprego e estágio divulgadas na rede alumni.'],
-            ['icon'=>'🎓', 'title'=>'Eventos',           'desc'=>'Participe de eventos, reencontros e conferências exclusivas para alumni.'],
-            ['icon'=>'📚', 'title'=>'Formação Contínua', 'desc'=>'Descontos em cursos de pós-graduação e formações especializadas.'],
+            ['icon'=>'users', 'title'=>'Networking',        'desc'=>'Conecte-se com ex-estudantes e amplie a sua rede profissional em Angola e no mundo.'],
+            ['icon'=>'briefcase', 'title'=>'Oportunidades',     'desc'=>'Acesse vagas exclusivas de emprego e estágio divulgadas na rede alumni.'],
+            ['icon'=>'academic-cap', 'title'=>'Eventos',           'desc'=>'Participe de eventos, reencontros e conferências exclusivas para alumni.'],
+            ['icon'=>'book-open', 'title'=>'Formação Contínua', 'desc'=>'Descontos em cursos de pós-graduação e formações especializadas.'],
         ] as $benefit)
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-            <div class="text-4xl mb-3">{{ $benefit['icon'] }}</div>
+            <div class="mb-3 flex justify-center text-[#1e3a5f]"><x-ui-icon :name="$benefit['icon']" size="lg" /></div>
             <h3 class="font-bold text-[#1e3a5f] text-sm mb-2">{{ $benefit['title'] }}</h3>
             <p class="text-xs text-gray-500 leading-relaxed">{{ $benefit['desc'] }}</p>
         </div>

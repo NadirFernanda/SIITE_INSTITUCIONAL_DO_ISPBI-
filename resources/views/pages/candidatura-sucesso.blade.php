@@ -50,10 +50,10 @@
 
     {{-- Estado actual --}}
     <div class="bg-amber-50 border border-amber-100 rounded-2xl p-5 mb-6 flex items-start gap-3">
-        <div class="text-amber-500 mt-0.5 text-lg flex-shrink-0">⏳</div>
+        <div class="mt-0.5 flex-shrink-0 text-amber-600"><x-ui-icon name="hourglass" /></div>
         <div>
             <p class="font-bold text-gray-800 mb-1">Estado Actual da Candidatura</p>
-            <p class="text-sm text-gray-700 mb-1">Status: <span class="bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full text-xs">PENDENTE ⏳</span></p>
+            <p class="text-sm text-gray-700 mb-1">Status: <span class="inline-flex items-center gap-1 bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full text-xs">PENDENTE <x-ui-icon name="hourglass" size="sm" /></span></p>
             <p class="text-sm text-amber-700 mt-2">A candidatura apenas será considerada concluída após a validação documental e assinatura digital do DAAC.</p>
         </div>
     </div>

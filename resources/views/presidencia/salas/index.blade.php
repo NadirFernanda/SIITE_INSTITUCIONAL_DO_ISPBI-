@@ -38,19 +38,19 @@
             </div>
             <button type="submit" formaction="{{ route('presidencia.salas.pdf-lote') }}"
                     style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF
             </button>
             <button type="submit" formaction="{{ route('presidencia.salas.pdf-exame-lote') }}"
                     style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF Exame
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF Exame
             </button>
             <button type="submit" formaction="{{ route('presidencia.salas.excel-exame-lote') }}"
                     style="background:#059669;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📊 Excel Exame
+                <x-ui-icon name="chart-bar" size="sm" class="mr-1 align-middle" /> Excel Exame
             </button>
             <button type="submit" formaction="{{ route('presidencia.salas.excel-notas-lote') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📋 Excel Notas
+                <x-ui-icon name="clipboard" size="sm" class="mr-1 align-middle" /> Excel Notas
             </button>
         </form>
     </div>
@@ -80,19 +80,19 @@
             </div>
             <button type="submit" formaction="{{ route('presidencia.salas.pdf-lote-curso') }}"
                     style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF
             </button>
             <button type="submit" formaction="{{ route('presidencia.salas.pdf-exame-lote-curso') }}"
                     style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📄 PDF Exame
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF Exame
             </button>
             <button type="submit" formaction="{{ route('presidencia.salas.excel-exame-lote-curso') }}"
                     style="background:#059669;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📊 Excel Exame
+                <x-ui-icon name="chart-bar" size="sm" class="mr-1 align-middle" /> Excel Exame
             </button>
             <button type="submit" formaction="{{ route('presidencia.salas.excel-notas-lote-curso') }}"
                     style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:0.85rem;white-space:nowrap;">
-                📋 Excel Notas
+                <x-ui-icon name="clipboard" size="sm" class="mr-1 align-middle" /> Excel Notas
             </button>
         </form>
     </div>
@@ -254,15 +254,15 @@
                             </a>
                             <a href="{{ route('presidencia.salas.pdf', $sala) }}" title="Pauta geral PDF"
                                style="display:inline-flex;align-items:center;gap:4px;background:#dc2626;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
-                                📄 PDF
+                                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> PDF
                             </a>
                             <a href="{{ route('presidencia.salas.excel-exame', $sala) }}" title="Lista de exame Excel"
                                style="display:inline-flex;align-items:center;gap:4px;background:#059669;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
-                                📊 Exame
+                                <x-ui-icon name="chart-bar" size="sm" class="mr-1 align-middle" /> Exame
                             </a>
                             <a href="{{ route('presidencia.salas.excel-notas', $sala) }}" title="Pauta de notas Excel"
                                style="display:inline-flex;align-items:center;gap:4px;background:#1e3a5f;color:#fff;padding:5px 10px;border-radius:6px;font-size:0.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
-                                📋 Notas
+                                <x-ui-icon name="clipboard" size="sm" class="mr-1 align-middle" /> Notas
                             </a>
                         </div>
                     </td>

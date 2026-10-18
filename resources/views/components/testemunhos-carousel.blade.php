@@ -6,7 +6,7 @@
                                 <div class="min-w-full flex flex-col justify-between p-6 hover:shadow-xl transition-shadow">
                                         <div class="flex items-center mb-4">
                                                 <div class="w-16 h-16 bg-gradient-to-br from-[#2563eb] to-[#3B82F6] rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                                                        ✓
+                                                        <x-ui-icon name="check-circle" size="lg" />
                                                 </div>
                                                 <div class="ml-4">
                                                         <h4 class="font-bold text-gray-900">Alumni</h4>
@@ -20,7 +20,7 @@
                                                                                 </div>
                                         <div class="flex text-[#3B82F6]">
                                                 @for($i = 0; $i < ($t->satisfacao ?? 5); $i++)
-                                                        <span>★</span>
+                                                        <x-ui-icon name="star" size="sm" />
                                                 @endfor
                                         </div>
                                 </div>

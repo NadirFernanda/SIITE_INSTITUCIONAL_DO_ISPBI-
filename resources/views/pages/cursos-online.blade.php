@@ -47,10 +47,10 @@
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">Fase Atual</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Desenvolvimento da Plataforma</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>✔ Estudo de viabilidade concluído</li>
-            <li>✔ Aquisição de infraestrutura tecnológica</li>
-            <li>⏳ Desenvolvimento da plataforma LMS</li>
-            <li>⏳ Formação de tutores online</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="check-circle" class="mt-0.5 text-[#1e3a5f]" /> Estudo de viabilidade concluído</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="check-circle" class="mt-0.5 text-[#1e3a5f]" /> Aquisição de infraestrutura tecnológica</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="hourglass" class="mt-0.5 text-[#1e3a5f]" /> Desenvolvimento da plataforma LMS</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="hourglass" class="mt-0.5 text-[#1e3a5f]" /> Formação de tutores online</li>
           </ul>
         </div>
 
@@ -61,10 +61,10 @@
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">A Anunciar</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Criação de Conteúdos</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>📚 Produção de videoaulas</li>
-            <li>📚 Materiais didáticos digitais</li>
-            <li>📚 Atividades interativas</li>
-            <li>📚 Sistema de avaliação online</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="book-open" class="mt-0.5 text-[#1e3a5f]" /> Produção de videoaulas</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="book-open" class="mt-0.5 text-[#1e3a5f]" /> Materiais didáticos digitais</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="book-open" class="mt-0.5 text-[#1e3a5f]" /> Atividades interativas</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="book-open" class="mt-0.5 text-[#1e3a5f]" /> Sistema de avaliação online</li>
           </ul>
         </div>
 
@@ -75,10 +75,10 @@
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">A Anunciar</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Testes Piloto</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>🔍 Testes com grupo reduzido</li>
-            <li>🔍 Avaliação de usabilidade</li>
-            <li>🔍 Ajustes e melhorias</li>
-            <li>🔍 Validação pedagógica</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="search" class="mt-0.5 text-[#1e3a5f]" /> Testes com grupo reduzido</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="search" class="mt-0.5 text-[#1e3a5f]" /> Avaliação de usabilidade</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="search" class="mt-0.5 text-[#1e3a5f]" /> Ajustes e melhorias</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="search" class="mt-0.5 text-[#1e3a5f]" /> Validação pedagógica</li>
           </ul>
         </div>
 
@@ -89,10 +89,10 @@
           <h3 class="text-xl font-bold text-[#2563eb] mb-3 text-center">A Anunciar</h3>
           <h4 class="font-semibold text-center mb-3 text-gray-700">Lançamento Oficial</h4>
           <ul class="space-y-2 text-sm text-gray-600">
-            <li>🚀 Abertura de matrículas</li>
-            <li>🚀 Primeiras turmas online</li>
-            <li>🚀 Suporte técnico dedicado</li>
-            <li>🚀 Monitoramento contínuo</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="rocket" class="mt-0.5 text-[#1e3a5f]" /> Abertura de matrículas</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="rocket" class="mt-0.5 text-[#1e3a5f]" /> Primeiras turmas online</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="rocket" class="mt-0.5 text-[#1e3a5f]" /> Suporte técnico dedicado</li>
+            <li class="flex items-start gap-2"><x-ui-icon name="rocket" class="mt-0.5 text-[#1e3a5f]" /> Monitoramento contínuo</li>
           </ul>
         </div>
 

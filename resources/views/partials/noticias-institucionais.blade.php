@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
             <img src="{{ asset('storage/' . $noticia->imagem) }}" alt="{{ $noticia->titulo }}" class="h-64 w-full object-cover">
           @else
             <div class="h-64 bg-gradient-to-br from-[#3B82F6] to-[#FFA500] flex items-center justify-center">
-              <span class="text-5xl text-white font-bold">📰</span>
+              <x-ui-icon name="newspaper" size="xl" class="text-white" />
             </div>
           @endif
           <div class="p-6">

@@ -108,7 +108,7 @@
             província do Bié e de Angola.
           </p>
           <div class="mt-6 rounded-2xl border border-slate-200 border-l-4 border-l-[#F05A28] bg-blue-50 p-6 text-[#1e3a5f]">
-            <p class="font-semibold mb-2">📋 NIF: 5000308765</p>
+            <p class="mb-2 flex items-center gap-2 font-semibold"><x-ui-icon name="clipboard" /> NIF: 5000308765</p>
             <p class="text-sm text-slate-700">Instituição de Ensino Superior regulamentada pelo MESCTI</p>
           </div>
         </div>

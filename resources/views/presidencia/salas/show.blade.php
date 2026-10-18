@@ -58,29 +58,29 @@
             <a href="{{ route('presidencia.salas.pdf', $sala) }}"
                class="print-hidden"
                style="display:inline-flex;align-items:center;gap:6px;background:#dc2626;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
-                📄 Baixar PDF
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> Baixar PDF
             </a>
             <a href="{{ route('presidencia.salas.excel-exame', $sala) }}"
                class="print-hidden"
                style="display:inline-flex;align-items:center;gap:6px;background:#059669;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
-                📊 Excel — Lista Geral
+                <x-ui-icon name="chart-bar" size="sm" class="mr-1 align-middle" /> Excel — Lista Geral
             </a>
             @foreach($categoriasSala as $categoria)
             <a href="{{ route('presidencia.salas.excel-exame', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
                class="print-hidden"
                title="Lista de presença só com candidatos desta categoria"
                style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#059669;border:1px solid #059669;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
-                📊 Excel — {{ $categoria }}
+                <x-ui-icon name="chart-bar" size="sm" class="mr-1 align-middle" /> Excel — {{ $categoria }}
             </a>
             @endforeach
             <a href="{{ route('presidencia.salas.excel-notas', $sala) }}"
                class="print-hidden"
                style="display:inline-flex;align-items:center;gap:6px;background:#1e3a5f;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;text-decoration:none;">
-                📋 Excel — Notas
+                <x-ui-icon name="clipboard" size="sm" class="mr-1 align-middle" /> Excel — Notas
             </a>
             <button type="button" class="print-hidden" onclick="window.print()"
                     style="display:inline-flex;align-items:center;gap:6px;background:#f59e0b;color:#fff;padding:9px 16px;border-radius:10px;font-weight:700;font-size:0.85rem;border:none;cursor:pointer;">
-                🖨️ Imprimir
+                <x-ui-icon name="printer" size="sm" class="mr-1 align-middle" /> Imprimir
             </button>
         </div>
     </div>

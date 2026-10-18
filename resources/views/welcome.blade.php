@@ -466,7 +466,11 @@
                     <h4 class="font-bold text-gray-900 text-lg md:text-xl text-center" x-text="item.nome"></h4>
                     <p class="text-sm md:text-base text-gray-500 text-center mt-1" x-text="(item.curso ? item.curso.replace(/\b\w/g, l => l.toUpperCase()) : 'Ex-Estudante')"></p>
                     <div class="flex items-center justify-center mt-3">
-                      <div class="flex text-[#2563eb] text-base md:text-lg">★★★★★</div>
+                      <div class="flex gap-0.5 text-[#2563eb]" aria-label="5 estrelas">
+                        @for($star = 0; $star < 5; $star++)
+                          <x-ui-icon name="star" size="sm" />
+                        @endfor
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -14,7 +14,7 @@
         <div>
             <h1 style="font-size:1.6rem;font-weight:700;color:#1a2332;margin:0 0 6px;">{{ $sala->nome }}</h1>
             <p style="color:#64748b;font-size:0.92rem;margin:0;">
-                📅 {{ $sala->data_exame?->format('d/m/Y') }} • ⏰ {{ $sala->horario }} 
+                <x-ui-icon name="calendar" size="sm" class="mr-1 align-middle" /> {{ $sala->data_exame?->format('d/m/Y') }} • <x-ui-icon name="clock" size="sm" class="mr-1 align-middle" /> {{ $sala->horario }}
                 • <strong>{{ $candidaturas->count() }}</strong> candidatos
             </p>
         </div>
@@ -44,7 +44,7 @@
 
     {{-- Informativo de anonimato --}}
     <div style="margin-bottom:20px;padding:14px 16px;background:#eaeff5;border:1px solid #a8c4e0;border-radius:12px;color:#0f1f3d;font-size:0.88rem;line-height:1.6;">
-        <strong style="display:block;margin-bottom:4px;">🔒 Garantia de Anonimato:</strong>
+        <strong style="display:block;margin-bottom:4px;"><x-ui-icon name="lock" size="sm" class="mr-1 align-middle" /> Garantia de Anonimato:</strong>
         Apenas o código de exame é exibido. Nenhum dado pessoal do candidato (nome, BI, etc.) aparece nesta interface. Valide os códigos com o código que consta na folha de prova física.
     </div>
 

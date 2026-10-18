@@ -109,7 +109,7 @@
                 </select>
             </div>
             <button type="submit" style="background:#dc2626;color:#fff;border:none;border-radius:8px;padding:8px 20px;font-weight:700;cursor:pointer;font-size:0.88rem;white-space:nowrap;" onmouseover="this.style.background='#b91c1c'" onmouseout="this.style.background='#dc2626'">
-                📄 Gerar PDF
+                <x-ui-icon name="document" size="sm" class="mr-1 align-middle" /> Gerar PDF
             </button>
         </form>
     </div>
