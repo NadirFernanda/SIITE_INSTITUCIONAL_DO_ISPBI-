@@ -68,7 +68,7 @@
                                 <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] rounded-xl p-8 text-white text-center">
                                     <h2 class="text-3xl font-bold mb-4">Depositar Trabalho</h2>
                                     <p class="text-xl mb-8">Contribua para o repositório institucional</p>
-                                    <button class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors">Fazer Depósito</button>
+                                    <button class="institutional-button-inverse px-8 py-3 rounded-lg font-semibold">Fazer Depósito</button>
                                 </div>
 
                             </div>

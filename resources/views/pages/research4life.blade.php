@@ -83,7 +83,7 @@
                 <a href="https://login.research4life.org/tacgw/login.cshtml"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#F05A28] px-5 py-3 text-center font-bold text-white transition hover:bg-[#d04a1e] focus:outline-none focus:ring-2 focus:ring-white"
+                   class="institutional-button mt-6 w-full gap-2 px-5 py-3 text-center focus:outline-none focus:ring-2 focus:ring-white"
                    aria-label="Abrir o Research4Life numa nova aba">
                     Abrir acesso oficial
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">

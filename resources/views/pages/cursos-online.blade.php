@@ -289,7 +289,7 @@
             </label>
           </div>
 
-          <button type="submit" class="w-full bg-white text-[#2563eb] py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all">
+          <button type="submit" class="institutional-button-inverse w-full py-4 rounded-lg text-lg">
             Cadastrar Interesse
           </button>
         </form>

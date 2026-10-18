@@ -16,7 +16,7 @@
                                                                                 <p class="text-gray-700 italic mb-4">"{{ $t->testemunho }}"</p>
                                                                                 <!-- Botão Ver mais testemunhos -->
                                                                                 <div class="mt-4 text-right">
-                                                                                        <button class="bg-[#2563eb] text-white px-4 py-2 rounded shadow hover:bg-[#1d4ed8] transition">Ver mais testemunhos</button>
+                                                                                        <button class="institutional-button px-4 py-2 rounded shadow">Ver mais testemunhos</button>
                                                                                 </div>
                                         <div class="flex text-[#3B82F6]">
                                                 @for($i = 0; $i < ($t->satisfacao ?? 5); $i++)
@@ -32,7 +32,7 @@
         <!-- Indicadores abaixo do card -->
         <div class="flex justify-center mt-6 mb-4 space-x-2">
                 <template x-for="i in total" :key="i">
-                        <span @click="current = i - 1" :class="{'bg-[#2563eb]': current === (i-1), 'bg-gray-300': current !== (i-1)}" class="w-3 h-3 rounded-full inline-block cursor-pointer transition-colors"></span>
+                        <span @click="current = i - 1" :class="{'bg-[#c84a20]': current === (i-1), 'bg-gray-300': current !== (i-1)}" class="w-3 h-3 rounded-full inline-block cursor-pointer transition-colors"></span>
                 </template>
         </div>
 </div>

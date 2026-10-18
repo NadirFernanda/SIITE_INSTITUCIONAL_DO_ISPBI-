@@ -18,11 +18,11 @@
                         @endif
                         @php $safeLink = ($carrossel->link && filter_var($carrossel->link, FILTER_VALIDATE_URL) && preg_match('/^https?:\/\//i', $carrossel->link)) ? $carrossel->link : null; @endphp
                         @if($safeLink && $carrossel->texto_botao)
-                        <a href="{{ $safeLink }}" rel="noopener noreferrer" class="inline-block bg-[#2563eb] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-[#d94b1f] transition-colors text-sm sm:text-base">
+                        <a href="{{ $safeLink }}" rel="noopener noreferrer" class="institutional-button px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base">
                             {{ $carrossel->texto_botao }}
                         </a>
                         @elseif($safeLink)
-                        <a href="{{ $safeLink }}" rel="noopener noreferrer" class="inline-block bg-[#2563eb] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-[#d94b1f] transition-colors text-sm sm:text-base">
+                        <a href="{{ $safeLink }}" rel="noopener noreferrer" class="institutional-button px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold text-sm sm:text-base">
                             CONHEÇA MAIS
                         </a>
                         @endif

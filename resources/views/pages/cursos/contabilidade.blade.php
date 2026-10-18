@@ -101,7 +101,7 @@
       <div class="rounded-2xl p-5 text-white" style="background:#92680A;">
         <p class="text-sm font-semibold mb-1">Pronto para se candidatar?</p>
         <p class="text-xs opacity-80 mb-4">Candidaturas abertas para o ano lectivo 2025/26.</p>
-        <a href="/candidaturas" class="block w-full text-center bg-white font-bold text-sm py-2.5 rounded-xl hover:bg-gray-100 transition-colors" style="color:#92680A;">
+        <a href="/candidaturas" class="institutional-button-inverse w-full text-center text-sm py-2.5 rounded-xl">
           Candidatar-me agora
         </a>
       </div>

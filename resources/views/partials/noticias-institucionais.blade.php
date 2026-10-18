@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
             <div class="text-sm text-gray-500 mb-2">{{ \Carbon\Carbon::parse($noticia->data)->format('d/m/Y') }}</div>
             <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $noticia->titulo }}</h3>
             <p class="text-gray-600 mb-4">{{ Str::limit(strip_tags($noticia->texto), 120) }}</p>
-            <a href="{{ route('noticias') }}" class="text-[#2563eb] font-semibold hover:underline">Ler mais →</a>
+            <a href="{{ route('noticias') }}" class="text-[#1e3a5f] font-semibold hover:text-[#a43a15] hover:underline">Ler mais →</a>
           </div>
         </div>
       @empty

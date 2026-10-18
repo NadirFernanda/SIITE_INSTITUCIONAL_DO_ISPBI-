@@ -60,7 +60,7 @@ if (!function_exists('heroicon')) {
     <p class="text-white/90 text-sm leading-relaxed mb-5">{{ $slot }}</p>
     <!-- Botão Saiba Mais -->
     @if($link)
-        <a href="{{ $link }}" class="inline-block mt-2 px-5 py-2 rounded-full bg-white/90 text-gray-800 font-bold shadow hover:bg-white hover:scale-105 transition-all">Saiba mais</a>
+        <a href="{{ $link }}" class="institutional-button-inverse mt-2 px-5 py-2 rounded-full shadow hover:scale-105 transition-all">Saiba mais</a>
     @endif
     <!-- Efeito visual decorativo -->
     <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl opacity-60 group-hover:opacity-80 transition-all"></div>

@@ -52,7 +52,7 @@
       </div>
 
       <div class="mt-8">
-        <a href="{{ route('alumni') }}" class="inline-flex items-center px-4 py-2 bg-[#2563eb] text-white rounded-xl hover:bg-[#1d4ed8] transition">Voltar para Alumni</a>
+        <a href="{{ route('alumni') }}" class="institutional-button px-4 py-2">Voltar para Alumni</a>
       </div>
     </div>
   </div>

@@ -27,7 +27,7 @@
             >
         </div>
         <div class="mt-4 text-center">
-            <a href="{{ $organigramaUrl }}" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full bg-[#1e3a5f] px-5 py-2.5 font-semibold text-white transition-colors hover:bg-[#2563eb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a5f]">
+            <a href="{{ $organigramaUrl }}" target="_blank" rel="noopener" class="institutional-button rounded-full px-5 py-2.5 font-semibold">
                 Ampliar organigrama <span class="sr-only">(abre numa nova janela)</span>
             </a>
         </div>

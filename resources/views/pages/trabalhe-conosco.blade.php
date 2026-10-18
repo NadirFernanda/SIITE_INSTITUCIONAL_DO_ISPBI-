@@ -67,7 +67,7 @@
                           $href = '/storage/' . ltrim($publicPath, '/');
                       }
                     @endphp
-                    <a href="{{ $href }}" class="inline-block text-sm text-[#2563eb] hover:underline" target="_blank" rel="noopener noreferrer">{{ $att->original_name }}</a>
+                    <a href="{{ $href }}" class="inline-block text-sm text-[#1e3a5f] hover:text-[#a43a15] hover:underline" target="_blank" rel="noopener noreferrer">{{ $att->original_name }}</a>
                   @endforeach
                 </div>
               @endif
@@ -247,7 +247,7 @@
             </label>
           </div>
 
-          <button id="alerts-submit" type="submit" class="w-full bg-[#1e3a5f] text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
+          <button id="alerts-submit" type="submit" class="institutional-button w-full py-4 rounded-lg text-lg hover:shadow-lg transition-all">
             Cadastrar para Receber Alertas
           </button>
         </form>

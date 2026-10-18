@@ -50,7 +50,7 @@
     <div class="rounded-2xl p-6 text-white" style="background:#16A34A;">
       <h3 class="font-bold text-lg mb-2">Interessado?</h3>
       <p class="text-sm text-white/80 mb-4">Inicie o processo de candidatura ao curso de Enfermagem Geral.</p>
-      <a href="/candidaturas" class="inline-block w-full text-center bg-white font-semibold text-sm py-2.5 rounded-xl transition hover:bg-gray-50" style="color:#16A34A;">Candidatar-me agora</a>
+      <a href="/candidaturas" class="institutional-button-inverse w-full text-center font-semibold text-sm py-2.5 rounded-xl">Candidatar-me agora</a>
     </div>
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
       <h3 class="text-sm font-bold text-[#1e3a5f] uppercase tracking-widest mb-3">Outros Cursos</h3>

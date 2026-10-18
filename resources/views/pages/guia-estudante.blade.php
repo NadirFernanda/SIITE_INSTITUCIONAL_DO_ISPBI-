@@ -31,22 +31,22 @@
       <div class="bg-white rounded-lg shadow-md p-5 mb-10 interactive-card">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Índice</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          <a href="#matricula" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
+          <a href="#matricula" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-orange-50 hover:text-[#a43a15] transition-colors">
             <span class="font-semibold">1. Matrícula e Inscrição</span>
           </a>
-          <a href="#servicos" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
+          <a href="#servicos" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-orange-50 hover:text-[#a43a15] transition-colors">
             <span class="font-semibold">2. Serviços Académicos</span>
           </a>
-          <a href="#avaliacao" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
+          <a href="#avaliacao" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-orange-50 hover:text-[#a43a15] transition-colors">
             <span class="font-semibold">3. Avaliação e Exames</span>
           </a>
-          <a href="#biblioteca" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
+          <a href="#biblioteca" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-orange-50 hover:text-[#a43a15] transition-colors">
             <span class="font-semibold">4. Biblioteca</span>
           </a>
-          <a href="#estagio" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
+          <a href="#estagio" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-orange-50 hover:text-[#a43a15] transition-colors">
             <span class="font-semibold">5. Estágios</span>
           </a>
-          <a href="#direitos" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-[#2563eb] hover:text-white transition-colors">
+          <a href="#direitos" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-orange-50 hover:text-[#a43a15] transition-colors">
             <span class="font-semibold">6. Direitos e Deveres</span>
           </a>
         </div>
@@ -122,7 +122,7 @@
           <div class="border-l-4 border-[#2563eb] pl-4">
             <h4 class="font-bold text-gray-900 mb-2">Portal do Estudante</h4>
             <p class="text-gray-600 mb-2">Acesse notas, horários, documentos e serviços online.</p>
-            <a href="https://portal.ispbie.ao" class="text-[#2563eb] hover:underline font-semibold" target="_blank" rel="noopener">portal.ispbie.ao &rarr;</a>
+            <a href="https://portal.ispbie.ao" class="text-[#1e3a5f] hover:text-[#a43a15] hover:underline font-semibold" target="_blank" rel="noopener">portal.ispbie.ao &rarr;</a>
           </div>
           <div class="border-l-4 border-[#3B82F6] pl-4">
             <h4 class="font-bold text-gray-900 mb-2">Emissão de Documentos</h4>

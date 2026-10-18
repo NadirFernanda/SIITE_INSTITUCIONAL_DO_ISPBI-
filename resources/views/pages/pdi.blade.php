@@ -33,7 +33,7 @@
                 </p>
             </div>
             @if($pdfUrl)
-                <a href="{{ $pdfUrl }}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1e3a5f] px-6 py-3 font-bold text-white transition-colors hover:bg-[#2563eb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a5f]">
+                <a href="{{ $pdfUrl }}" target="_blank" rel="noopener" class="institutional-button gap-2">
                     Consultar o PDI 2026–2031
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/></svg>
                 </a>

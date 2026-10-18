@@ -54,7 +54,7 @@
                 <span>Presencial</span>
               </div>
             </div>
-            <a href="/candidaturas" class="inline-block bg-white text-[#2563eb] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            <a href="/candidaturas" class="institutional-button-inverse px-6 py-3 rounded-lg font-semibold">
               Inscrever-se
             </a>
           </div>

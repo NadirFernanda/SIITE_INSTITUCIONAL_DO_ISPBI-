@@ -80,7 +80,7 @@
                      required autocomplete="email"
                      class="flex-1 min-w-0 text-white text-xs rounded-lg px-3.5 py-2.5 focus:outline-none placeholder-gray-600 transition-all duration-200 bg-white/[0.07] border border-white/[0.13] focus:bg-white/[0.11] focus:border-[#F05A28]">
               <button type="submit"
-                      class="flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 text-white text-xs font-bold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-1 bg-[#F05A28] hover:bg-[#d44d20] hover:-translate-y-[1px]">
+                      class="institutional-button flex-shrink-0 gap-1.5 px-4 py-2.5 text-xs rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:ring-offset-1 hover:-translate-y-[1px]">
                 <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                 </svg>

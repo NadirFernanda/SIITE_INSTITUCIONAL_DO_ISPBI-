@@ -27,7 +27,7 @@
                 <h2 class="text-lg font-bold text-[#1e3a5f]">Consultar Alumni</h2>
                 <p class="text-sm text-gray-500 mt-1">Filtre os dados públicos por situação profissional, curso, ano ou país.</p>
             </div>
-            <a href="{{ route('alumni') }}" class="text-sm font-semibold text-[#2563eb] hover:underline">Limpar filtros</a>
+            <a href="{{ route('alumni') }}" class="text-sm font-semibold text-[#1e3a5f] hover:text-[#a43a15] hover:underline">Limpar filtros</a>
         </div>
         <form method="GET" action="{{ route('alumni') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <div>
@@ -70,7 +70,7 @@
                 <input id="pesquisa" name="pesquisa" value="{{ $filters['pesquisa'] ?? '' }}" class="w-full border border-gray-200 rounded-xl px-3 py-2.5 text-sm" placeholder="Nome, empresa ou cargo">
             </div>
             <div class="sm:col-span-2 lg:col-span-5">
-                <button type="submit" class="bg-[#1e3a5f] hover:bg-[#2563eb] text-white font-bold rounded-xl px-6 py-2.5 text-sm transition-colors">Aplicar filtros</button>
+                <button type="submit" class="institutional-button px-6 py-2.5 text-sm">Aplicar filtros</button>
             </div>
         </form>
     </div>
@@ -140,7 +140,7 @@
               @if($hasDepoimento)
                 <p class="text-sm text-gray-600 italic">"{{ Str::limit($satisfacao, 200) }}"
                   @if(Str::length($satisfacao) > 200)
-                    <a href="{{ route('alumni.show', $alumnus->id) }}" class="ml-1 text-[#2563eb] font-semibold hover:text-[#1d4ed8] text-xs">Ler mais</a>
+                    <a href="{{ route('alumni.show', $alumnus->id) }}" class="ml-1 text-[#1e3a5f] font-semibold hover:text-[#a43a15] text-xs">Ler mais</a>
                   @endif
                 </p>
               @endif
@@ -330,7 +330,7 @@
             </div>
           </template>
           <div class="pt-2">
-            <button type="submit" class="w-full bg-[#1e3a5f] hover:bg-[#2563eb] text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200 text-sm">
+            <button type="submit" class="institutional-button w-full py-3 px-6 text-sm">
               Cadastrar-me na Rede Alumni
             </button>
           </div>

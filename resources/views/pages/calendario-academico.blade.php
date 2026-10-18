@@ -26,7 +26,7 @@
                 <a href="{{ route('calendario-academico.visualizar') }}" target="_blank" rel="noopener noreferrer" class="institutional-button">
                     Consultar PDF <span class="sr-only">(abre numa nova janela)</span>
                 </a>
-                <a href="{{ route('calendario-academico.documento') }}" class="inline-flex items-center justify-center rounded-xl border border-[#1e3a5f] px-6 py-3 font-bold text-[#1e3a5f] transition-colors hover:bg-blue-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
+                <a href="{{ route('calendario-academico.documento') }}" class="institutional-button-outline">
                     Descarregar PDF
                 </a>
             </div>

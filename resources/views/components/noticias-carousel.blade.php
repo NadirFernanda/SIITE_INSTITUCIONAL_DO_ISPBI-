@@ -47,7 +47,7 @@
         <template x-for="i in total" :key="i">
             <button
                 @click="goTo(i - 1)"
-                :class="{'bg-[#2563eb]': current === (i-1), 'bg-gray-300': current !== (i-1)}"
+                :class="{'bg-[#c84a20]': current === (i-1), 'bg-gray-300': current !== (i-1)}"
                 class="w-3 h-3 rounded-full focus:outline-none"
             ></button>
         </template>
@@ -56,7 +56,7 @@
     <!-- Botão fora do carrossel, abaixo das bolinhas -->
     <div class="flex flex-col items-center gap-3 mt-5">
         <a href="/noticias"
-           class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg bg-[#F05A28] hover:bg-[#d44d20] hover:-translate-y-[1px]">
+           class="institutional-button gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-[1px]">
             Ler mais notícias
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>

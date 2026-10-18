@@ -240,10 +240,10 @@
           Junte-se à comunidade ISP-Bié e contribua para o desenvolvimento social e cultural da província do Bié.
         </p>
         <div class="flex flex-wrap gap-4 justify-center">
-          <a href="/contactos" class="bg-white text-[#2563eb] px-8 py-3 rounded-full font-semibold hover:bg-[#2563eb] hover:text-white transition-colors">
+          <a href="/contactos" class="institutional-button-inverse px-8 py-3 rounded-full font-semibold">
             Entre em Contacto
           </a>
-          <a href="/eventos" class="bg-[#F05A28] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#d44d20] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
+          <a href="/eventos" class="institutional-button px-8 py-3 rounded-full font-semibold">
             Próximos Eventos
           </a>
         </div>

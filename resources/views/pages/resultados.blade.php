@@ -48,7 +48,7 @@
           href="https://app.multiplo.io/isp-bie/"
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full bg-[#2563eb] text-white py-3 rounded-lg font-semibold hover:bg-[#1f3342] transition-colors flex items-center justify-center"
+          class="institutional-button w-full py-3 rounded-lg font-semibold"
         >
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -58,11 +58,11 @@
 
         <!-- Links -->
         <div class="mt-6 pt-6 border-t border-gray-200 text-center">
-          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener noreferrer" class="text-[#2563eb] hover:underline text-sm font-semibold">
+          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener noreferrer" class="text-[#1e3a5f] hover:text-[#a43a15] hover:underline text-sm font-semibold">
             Esqueceu a senha?
           </a>
           <span class="text-gray-400 mx-3">|</span>
-          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener noreferrer" class="text-[#2563eb] hover:underline text-sm font-semibold">
+          <a href="https://portal.ispbie.ao" target="_blank" rel="noopener noreferrer" class="text-[#1e3a5f] hover:text-[#a43a15] hover:underline text-sm font-semibold">
             Primeiro acesso? Criar conta
           </a>
         </div>

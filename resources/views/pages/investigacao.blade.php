@@ -169,11 +169,11 @@
         <div class="mb-9 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6" x-cloak>
             <div class="flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Filtrar por estado">
                 <button type="button" @click="estado = 'todos'" :aria-pressed="estado === 'todos'"
-                    :class="estado === 'todos' ? 'bg-[#1e3a5f] text-white shadow-sm' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'"
+                    :class="estado === 'todos' ? 'bg-[#c84a20] text-white shadow-sm' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'"
                     class="shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">Todos <span class="ml-1 opacity-75">{{ count($projectos) }}</span></button>
                 @foreach($estados as $chave => $estadoInfo)
                     <button type="button" @click="estado = '{{ $chave }}'" :aria-pressed="estado === '{{ $chave }}'"
-                        :class="estado === '{{ $chave }}' ? 'bg-[#1e3a5f] text-white shadow-sm' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'"
+                        :class="estado === '{{ $chave }}' ? 'bg-[#c84a20] text-white shadow-sm' : 'bg-slate-50 text-slate-700 hover:bg-slate-100'"
                         class="shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
                         {{ $estadoInfo['rotulo'] }} <span class="ml-1 opacity-75">{{ count($porEstado[$chave]) }}</span>
                     </button>

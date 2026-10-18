@@ -337,7 +337,7 @@
 
                                         <div class="pt-2">
                                             <button type="submit"
-                                                    class="w-full sm:w-auto bg-[#2563eb] hover:bg-[#174ea6] text-white font-bold px-10 py-3 rounded-xl transition-colors text-sm">
+                                                    class="institutional-button w-full sm:w-auto px-10 py-3 text-sm">
                                                 Submeter Candidatura
                                             </button>
                                         </div>

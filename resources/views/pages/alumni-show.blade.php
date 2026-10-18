@@ -47,7 +47,7 @@
         </div>
 
         <div class="mt-8 flex items-center justify-between text-sm text-gray-500">
-          <a href="{{ route('alumni') }}" class="inline-flex items-center text-[#2563eb] hover:text-[#1d4ed8] font-semibold">
+          <a href="{{ route('alumni') }}" class="inline-flex items-center text-[#1e3a5f] hover:text-[#a43a15] font-semibold">
             ← Voltar para Alumni
           </a>
           <a href="/" class="hover:underline">Ir para a página inicial</a>

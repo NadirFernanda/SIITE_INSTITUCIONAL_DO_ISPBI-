@@ -81,7 +81,7 @@
 
           <div class="mt-8 text-center">
             <p class="text-gray-600 mb-4">Para mais informações sobre o desenvolvimento deste programa:</p>
-            <a href="/contactos" class="inline-block bg-[#1e3a5f] text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+            <a href="/contactos" class="institutional-button px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all">
               Entre em Contacto
             </a>
           </div>

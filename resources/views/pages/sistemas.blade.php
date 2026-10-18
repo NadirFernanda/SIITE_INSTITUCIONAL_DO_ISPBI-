@@ -25,7 +25,7 @@
                 <h3 class="text-xl font-bold text-[#1e3a5f]">Webmail Institucional</h3>
                 <p class="mt-2 flex-1 leading-relaxed text-slate-600">E-mail institucional @ispbie.ao para estudantes e funcionários</p>
                 <a href="http://mx100.angoweb.net/webmail" target="_blank" rel="noopener noreferrer"
-                    class="mt-6 inline-flex self-start rounded-lg font-semibold text-[#1e3a5f] underline decoration-[#F05A28] underline-offset-4 hover:text-[#2563eb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F05A28]">
+                    class="mt-6 inline-flex self-start rounded-lg font-semibold text-[#1e3a5f] underline decoration-[#F05A28] underline-offset-4 hover:text-[#a43a15] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F05A28]">
                     Aceder ao Webmail <span class="sr-only">(abre numa nova janela)</span>
                 </a>
             </article>

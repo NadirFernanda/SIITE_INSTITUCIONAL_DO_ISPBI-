@@ -15,6 +15,8 @@
   :root {
     --ispbie-cta-start: #1e3a8a;
     --ispbie-cta-end: #F05A28;
+    --ispbie-button: #c84a20;
+    --ispbie-button-hover: #a43a15;
     --ispbie-heading: #1e3a5f;
     --ispbie-text: #334155;
     --ispbie-muted: #475569;
@@ -122,7 +124,20 @@
   }
 
   .institutional-button {
-    @apply inline-flex items-center justify-center rounded-xl bg-[#1e3a5f] px-6 py-3 font-bold text-white transition-colors hover:bg-[#2563eb];
+    @apply inline-flex items-center justify-center rounded-xl px-6 py-3 font-bold text-white transition-colors;
+    background-color: var(--ispbie-button);
+  }
+
+  .institutional-button:hover {
+    background-color: var(--ispbie-button-hover);
+  }
+
+  .institutional-button-inverse {
+    @apply inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-bold text-[#1e3a5f] transition-colors hover:bg-orange-50;
+  }
+
+  .institutional-button-outline {
+    @apply inline-flex items-center justify-center rounded-xl border border-[#1e3a5f] bg-white px-6 py-3 font-bold text-[#1e3a5f] transition-colors hover:bg-orange-50;
   }
 
   .institutional-cta {
@@ -148,7 +163,11 @@
 
   .btn-ispbie {
     @apply text-white font-bold py-3 px-8 rounded-xl shadow-md transition-colors duration-200;
-    @apply bg-ispbie-orange hover:bg-ispbie-blue;
+    background-color: var(--ispbie-button);
+  }
+
+  .btn-ispbie:hover {
+    background-color: var(--ispbie-button-hover);
   }
 
   .interactive-card {

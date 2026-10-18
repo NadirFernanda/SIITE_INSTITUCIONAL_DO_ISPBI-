@@ -176,7 +176,7 @@
                 </article>
             @endforeach
         </div>
-        <a href="{{ route('parcerias') }}" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1d4ed8] hover:text-[#1e3a5f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
+        <a href="{{ route('parcerias') }}" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#1e3a5f] hover:text-[#a43a15] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
             Ver todas as Parcerias Institucionais <span aria-hidden="true">→</span>
         </a>
     </section>

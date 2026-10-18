@@ -95,7 +95,7 @@
                 <p class="text-gray-600 mb-6">
                     N�o h� concursos p�blicos em andamento no momento. Cadastre-se para receber alertas quando novos concursos forem publicados.
                 </p>
-                <a href="/trabalhe-conosco#alertas" class="inline-block bg-[#2563eb] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#1f3342] transition-colors">
+                <a href="/trabalhe-conosco#alertas" class="institutional-button px-6 py-3 rounded-lg font-semibold">
                     Receber Alertas
                 </a>
             </div>
@@ -110,7 +110,7 @@
                             <span class="inline-block bg-gray-300 text-gray-700 text-xs px-3 py-1 rounded-full mb-2">ENCERRADO</span>
                             <h3 class="text-lg font-semibold text-gray-700">Docentes - Psicologia</h3>
                         </div>
-                        <button class="text-teal-600 hover:text-teal-700">Ver Resultado</button>
+                        <button class="font-semibold text-[#a43a15] hover:underline">Ver Resultado</button>
                     </div>
                 </div>
 
@@ -120,7 +120,7 @@
                             <span class="inline-block bg-gray-300 text-gray-700 text-xs px-3 py-1 rounded-full mb-2">ENCERRADO</span>
                             <h3 class="text-lg font-semibold text-gray-700">Bibliotec�rio</h3>
                         </div>
-                        <button class="text-teal-600 hover:text-teal-700">Ver Resultado</button>
+                        <button class="font-semibold text-[#a43a15] hover:underline">Ver Resultado</button>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
         <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center scroll-reveal">
             <h2 class="text-3xl font-bold mb-4">Receber Alertas de Concursos P�blicos</h2>
             <p class="text-xl mb-8">Cadastre-se para receber notifica��es sobre novos concursos</p>
-            <a href="/trabalhe-conosco#alertas" class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-colors inline-block">
+            <a href="/trabalhe-conosco#alertas" class="institutional-button-inverse px-8 py-3 rounded-lg font-semibold">
                 Cadastrar-se
             </a>
         </div>

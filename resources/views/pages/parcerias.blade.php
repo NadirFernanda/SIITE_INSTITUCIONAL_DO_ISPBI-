@@ -86,7 +86,7 @@
             <button type="button"
                 @click="filtro = '{{ $valor }}'"
                 :aria-pressed="filtro === '{{ $valor }}'"
-                :class="filtro === '{{ $valor }}' ? 'bg-[#1e3a5f] text-white shadow-md' : 'bg-white text-slate-700 border border-slate-200 hover:border-[#1e3a5f] hover:text-[#1e3a5f]'"
+                :class="filtro === '{{ $valor }}' ? 'bg-[#c84a20] text-white shadow-md' : 'bg-white text-slate-700 border border-slate-200 hover:border-[#c84a20] hover:text-[#c84a20]'"
                 class="rounded-full px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]">
                 {{ $rotulo }}
             </button>
@@ -130,7 +130,7 @@
                     @endif
                     @if(!empty($parceiro['url']))
                         <a href="{{ $parceiro['url'] }}" target="_blank" rel="noopener noreferrer"
-                            class="mt-auto pt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-[#1d4ed8] hover:text-[#1e3a5f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]"
+                            class="mt-auto pt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-[#1e3a5f] hover:text-[#a43a15] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]"
                             aria-label="Visitar o site de {{ $parceiro['nome'] }} (abre numa nova janela)">
                             Visitar instituição <span aria-hidden="true">↗</span>
                         </a>
@@ -199,7 +199,7 @@
                         <p class="mt-1.5 text-sm font-medium leading-relaxed text-slate-700">{{ $parceiro['acordo'] }}</p>
                     </div>
                     <a href="{{ $parceiro['url'] }}" target="_blank" rel="noopener noreferrer"
-                        class="mt-auto pt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-[#1d4ed8] hover:text-[#1e3a5f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]"
+                        class="mt-auto pt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-[#1e3a5f] hover:text-[#a43a15] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F05A28]"
                         aria-label="Visitar o site de {{ $parceiro['nome'] }} (abre numa nova janela)">
                         Visitar instituição <span aria-hidden="true">↗</span>
                     </a>

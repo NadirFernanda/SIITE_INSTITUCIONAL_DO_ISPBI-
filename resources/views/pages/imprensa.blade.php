@@ -21,7 +21,7 @@
             <p class="text-gray-600 mb-4">
               Processo de candidatura está aberto com 240 vagas distribuídas pelos 6 cursos de graduação.
             </p>
-            <a href="#" class="text-[#2563eb] font-semibold hover:underline">Ler mais →</a>
+            <a href="#" class="text-[#1e3a5f] font-semibold hover:text-[#a43a15] hover:underline">Ler mais →</a>
           </div>
         </article>
 
@@ -34,7 +34,7 @@
             <p class="text-gray-600 mb-4">
               ISP-Bié assina protocolo de cooperação para intercâmbio acadêmico e científico.
             </p>
-            <a href="#" class="text-[#2563eb] font-semibold hover:underline">Ler mais â†’</a>
+            <a href="#" class="text-[#1e3a5f] font-semibold hover:text-[#a43a15] hover:underline">Ler mais â†’</a>
           </div>
         </article>
 
@@ -47,7 +47,7 @@
             <p class="text-gray-600 mb-4">
               Modernização das instalações reforça qualidade do ensino em Enfermagem e Engenharia.
             </p>
-            <a href="#" class="text-[#2563eb] font-semibold hover:underline">Ler mais â†’</a>
+            <a href="#" class="text-[#1e3a5f] font-semibold hover:text-[#a43a15] hover:underline">Ler mais â†’</a>
           </div>
         </article>
 
@@ -76,7 +76,7 @@
                 Os Órgãos de gestão do ISP-Bié informam sobre alteração nas datas de início do ano letivo 2026.
               </p>
             </div>
-            <a href="#" class="ml-4 bg-[#2563eb] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1a2f3d] transition-colors whitespace-nowrap">
+            <a href="#" class="institutional-button ml-4 px-4 py-2 rounded-lg font-semibold whitespace-nowrap">
               Ver Comunicado
             </a>
           </div>
@@ -96,7 +96,7 @@
                 Abertura da segunda fase de matrículas para o ano letivo 2026. Consulte os prazos e procedimentos.
               </p>
             </div>
-            <a href="#" class="ml-4 bg-[#2563eb] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1a2f3d] transition-colors whitespace-nowrap">
+            <a href="#" class="institutional-button ml-4 px-4 py-2 rounded-lg font-semibold whitespace-nowrap">
               Ver Comunicado
             </a>
           </div>
@@ -116,7 +116,7 @@
                 Lista de candidatos aprovados no concurso de admissão está disponível para consulta.
               </p>
             </div>
-            <a href="#" class="ml-4 bg-[#2563eb] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#1a2f3d] transition-colors whitespace-nowrap">
+            <a href="#" class="institutional-button ml-4 px-4 py-2 rounded-lg font-semibold whitespace-nowrap">
               Ver Comunicado
             </a>
           </div>
@@ -233,7 +233,7 @@
               <div>
                 <textarea rows="4" placeholder="Assunto da entrevista / solicitação" required class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/60 text-white focus:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50"></textarea>
               </div>
-              <button type="submit" class="w-full bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-3 rounded-lg font-bold hover:shadow-lg transition-all">
+              <button type="submit" class="institutional-button w-full py-3 rounded-lg hover:shadow-lg transition-all">
                 Enviar Solicitação
               </button>
             </form>

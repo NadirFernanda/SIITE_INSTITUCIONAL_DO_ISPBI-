@@ -37,7 +37,7 @@
                             <option>Administrativo</option>
                         </select>
                     </div>
-                    <button class="w-full bg-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-teal-700 transition-colors">
+                    <button class="institutional-button w-full px-8 py-4 rounded-lg font-semibold">
                         Buscar
                     </button>
                 </div>
@@ -54,7 +54,7 @@
                         <li>• Eng. Recursos Hídricos</li>
                         <li>• Eng. Civil</li>
                     </ul>
-                    <button class="mt-4 text-teal-600 hover:text-teal-700 font-medium">Ver todos →</button>
+                    <button class="mt-4 font-medium text-[#a43a15] hover:underline">Ver todos →</button>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
@@ -63,7 +63,7 @@
                         <li>• Comunicação Social</li>
                         <li>• Psicologia</li>
                     </ul>
-                    <button class="mt-4 text-teal-600 hover:text-teal-700 font-medium">Ver todos →</button>
+                    <button class="mt-4 font-medium text-[#a43a15] hover:underline">Ver todos →</button>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card">
@@ -72,7 +72,7 @@
                         <li>• Contabilidade</li>
                         <li>• Administração</li>
                     </ul>
-                    <button class="mt-4 text-teal-600 hover:text-teal-700 font-medium">Ver todos →</button>
+                    <button class="mt-4 font-medium text-[#a43a15] hover:underline">Ver todos →</button>
                 </div>
             </div>
         </section>

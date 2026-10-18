@@ -54,7 +54,7 @@
               </div>
             </div>
             <div class="flex space-x-4">
-              <a href="/contactos" class="inline-block bg-white text-purple-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+              <a href="/contactos" class="institutional-button-inverse px-6 py-3 rounded-lg font-semibold">
                 Submeter Trabalho
               </a>
               <a href="/candidaturas" class="inline-block bg-white/10 border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/20 transition-colors">
@@ -160,7 +160,7 @@
                 <span>6 palestras magistrais</span>
               </div>
             </div>
-            <a href="#" class="text-indigo-600 hover:underline font-semibold text-sm">Ver anais â†’</a>
+            <a href="#" class="text-[#1e3a5f] hover:text-[#a43a15] hover:underline font-semibold text-sm">Ver anais â†’</a>
           </div>
 
           <!-- Edição 2023 -->

@@ -31,7 +31,7 @@
         <input type="text" name="ficha" value="{{ $pesquisado }}" placeholder="Ex: 01839" inputmode="numeric"
                class="min-w-0 flex-1 border border-gray-300 rounded-lg px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#F05A28] focus:border-transparent">
         <button type="submit"
-                class="w-full sm:w-auto bg-[#F05A28] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#d44d20] transition-colors flex-shrink-0">
+                class="institutional-button w-full sm:w-auto px-6 py-3 rounded-lg flex-shrink-0">
           Pesquisar
         </button>
       </form>
@@ -81,7 +81,7 @@
                 $linkPdf = route('distribuicao-salas.pdf', $sala) . ($temCategoria ? '?necessidade_especial=' . urlencode($c->necessidade_especial) : '');
             @endphp
             <a href="{{ $linkPdf }}"
-               class="mt-4 w-full inline-flex items-center justify-center gap-2 bg-[#1e3a5f] text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#0f1f3d] transition-colors">
+               class="institutional-button mt-4 w-full gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
               </svg>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="flex flex-wrap gap-2">
                   <a href="{{ route('distribuicao-salas.pdf', $sala) }}"
-                     class="inline-flex items-center gap-2 bg-[#1e3a5f] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#0f1f3d] transition-colors">
+                     class="institutional-button gap-2 px-4 py-2 rounded-lg text-sm font-semibold">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                     </svg>
@@ -136,7 +136,7 @@
                   @foreach($sala->categorias_disponiveis as $categoria)
                   <a href="{{ route('distribuicao-salas.pdf', $sala) }}?necessidade_especial={{ urlencode($categoria) }}"
                      title="Lista de presença só com candidatos desta categoria"
-                     class="inline-flex items-center gap-2 bg-white text-[#1e3a5f] border border-[#1e3a5f] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors">
+                     class="institutional-button-outline gap-2 px-4 py-2 rounded-lg text-sm font-semibold">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                     </svg>

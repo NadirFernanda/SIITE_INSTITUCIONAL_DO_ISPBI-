@@ -229,7 +229,7 @@
                                             </ul>
                                         </div>
 
-                                        <a href="{{ route('contactos') }}" class="inline-flex items-center gap-2 bg-[#2563eb] hover:bg-[#174ea6] text-white font-bold px-8 py-3 rounded-xl transition-colors text-sm">
+                                        <a href="{{ route('contactos') }}" class="institutional-button gap-2 px-8 py-3 text-sm">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                                             Contactar a Instituição
                                         </a>

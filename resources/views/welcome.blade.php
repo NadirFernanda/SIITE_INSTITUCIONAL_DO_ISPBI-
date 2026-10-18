@@ -90,7 +90,7 @@
           <div class="flex flex-wrap gap-2 sm:gap-3">
             <template x-if="slides[current] && slides[current].link">
               <a :href="slides[current].link"
-                 class="inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg font-semibold text-white text-sm shadow-xl transition-all duration-200 bg-[#F05A28] hover:bg-[#d44d20] hover:-translate-y-0.5">
+                 class="institutional-button gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg font-semibold text-sm shadow-xl transition-all duration-200 hover:-translate-y-0.5">
                 <span x-text="slides[current].texto_botao || 'Conheça Mais'"></span>
                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
               </a>
@@ -105,7 +105,7 @@
         @else
         <div class="max-w-2xl">
           <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4" style="text-shadow:0 2px 20px rgba(0,0,0,0.5);">Instituto Superior Politécnico do Bié</h1>
-          <a href="/cursos" class="inline-flex items-center gap-2 px-7 py-3 rounded-lg font-semibold text-white text-sm" style="background:#F05A28;">Conhecer os Cursos</a>
+          <a href="/cursos" class="institutional-button gap-2 px-7 py-3 rounded-lg font-semibold text-sm">Conhecer os Cursos</a>
         </div>
         @endif
 
@@ -180,7 +180,7 @@
             <svg class="w-3.5 h-3.5 ml-3 flex-shrink-0" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24" style="opacity:0.7;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" name="q" placeholder="Pesquisar..." aria-label="Pesquisar"
                    class="bg-transparent text-white text-xs px-2 py-2 focus:outline-none w-24 sm:w-36" style="color:white;" autocomplete="off">
-            <button type="submit" aria-label="Buscar" class="flex items-center justify-center h-full px-2.5 text-white transition-colors flex-shrink-0 bg-[#F05A28] hover:bg-[#d44d20]">
+            <button type="submit" aria-label="Buscar" class="institutional-button h-full px-2.5 rounded-none flex-shrink-0">
               <svg class="w-3 h-3" fill="none" stroke="white" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
             </button>
           </form>
@@ -246,7 +246,7 @@
           </div>
           <div class="flex flex-col items-stretch gap-3 sm:flex-row lg:flex-col lg:items-stretch lg:min-w-[210px]">
             <a href="{{ route('research4life') }}"
-               class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#F05A28] px-6 py-3 text-sm font-extrabold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#d04a1e] hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white">
+               class="institutional-button gap-2 px-6 py-3 text-sm font-extrabold shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white">
               Aceder agora
               <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7 7-7"/></svg>
             </a>
@@ -269,7 +269,7 @@
           <p class="text-xs font-bold tracking-widest uppercase mb-1" style="color:#F05A28;">Actualidade</p>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">Notícias Institucionais</h2>
         </div>
-        <a href="/noticias" class="hidden sm:inline-flex items-center gap-1 text-sm font-semibold transition-colors text-[#2563eb] hover:text-[#1e4db7]">
+        <a href="/noticias" class="hidden sm:inline-flex items-center gap-1 text-sm font-semibold transition-colors text-[#1e3a5f] hover:text-[#a43a15]">
           Ver todas
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
         </a>
@@ -485,7 +485,7 @@
             <button
               @click="current = idx"
               class="w-4 h-4 rounded-full border-2 border-[#3B82F6] transition duration-300 focus:outline-none"
-              :class="current === idx ? 'bg-[#3B82F6] shadow-lg scale-110' : 'bg-gray-200 hover:bg-[#2563eb]/30'"
+              :class="current === idx ? 'bg-[#c84a20] shadow-lg scale-110' : 'bg-gray-200 hover:bg-orange-200'"
               :aria-label="'Ir para testemunho ' + (idx + 1)"
             ></button>
           </template>
@@ -495,7 +495,7 @@
         <div class="flex flex-col items-center gap-3 mt-5">
           <p class="text-sm text-gray-400" x-text="(current + 1) + ' de ' + total + ' testemunhos'"></p>
           <a href="/alumni"
-             class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 shadow-md hover:shadow-lg bg-[#F05A28] hover:bg-[#d44d20] hover:-translate-y-px">
+             class="institutional-button gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-px">
             Ver todos os testemunhos
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
           </a>
