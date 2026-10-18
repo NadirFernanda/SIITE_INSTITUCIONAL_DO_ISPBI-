@@ -11,7 +11,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
                     <div class="lg:col-span-3">
-                        <div class="bg-white border-l-4 border-[#2563eb] p-4 sm:p-8 shadow-lg rounded-lg">
+                        <div class="bg-white border-l-4 border-[#1e3a5f] p-4 sm:p-8 shadow-lg rounded-lg">
                             <div class="prose max-w-none text-gray-700 leading-relaxed space-y-6">
                                 <div class="mb-6">
                                     <div class="{{ $formularioAtivo ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500' }} border-l-4 p-4 sm:p-6 mb-8">
@@ -30,59 +30,59 @@
                                         </div>
                                     </div>
 
-                                    <h2 class="text-2xl sm:text-3xl font-bold text-[#2563eb] mb-6 sm:mb-8">Processo de Candidatura</h2>
+                                    <h2 class="text-2xl sm:text-3xl font-bold text-[#1e3a5f] mb-6 sm:mb-8">Processo de Candidatura</h2>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
-                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
-                                                <span class="text-2xl font-bold text-[#2563eb]">1</span>
+                                            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#1e3a5f]">1</span>
                                             </div>
-                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Documentação</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#1e3a5f] mb-2 whitespace-normal break-words">Documentação</h3>
                                             <p class="text-sm text-gray-600">Prepare os documentos necessários</p>
                                         </div>
 
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
-                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
-                                                <span class="text-2xl font-bold text-[#2563eb]">2</span>
+                                            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#1e3a5f]">2</span>
                                             </div>
-                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Candidatura (Online/Presencial)</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#1e3a5f] mb-2 whitespace-normal break-words">Candidatura (Online/Presencial)</h3>
                                             <p class="text-sm text-gray-600">Preencha o formulário online</p>
                                         </div>
 
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
-                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
-                                                <span class="text-2xl font-bold text-[#2563eb]">3</span>
+                                            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#1e3a5f]">3</span>
                                             </div>
-                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Pagamento</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#1e3a5f] mb-2 whitespace-normal break-words">Pagamento</h3>
                                             <p class="text-sm text-gray-600">Efetue o pagamento da taxa</p>
                                         </div>
 
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
-                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
-                                                <span class="text-2xl font-bold text-[#2563eb]">4</span>
+                                            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#1e3a5f]">4</span>
                                             </div>
-                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Impressão do comprovativo de inscrição</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#1e3a5f] mb-2 whitespace-normal break-words">Impressão do comprovativo de inscrição</h3>
                                             <p class="text-sm text-gray-600">Guarde o comprovativo para apresentação no dia do exame</p>
                                         </div>
 
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
-                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
-                                                <span class="text-2xl font-bold text-[#2563eb]">5</span>
+                                            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#1e3a5f]">5</span>
                                             </div>
-                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Exame de Acesso</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#1e3a5f] mb-2 whitespace-normal break-words">Exame de Acesso</h3>
                                             <p class="text-sm text-gray-600">Realize o exame conforme o calendário definido</p>
                                         </div>
 
                                         <div class="bg-white p-6 rounded-lg shadow-md text-center interactive-card min-h-[160px]">
-                                            <div class="w-16 h-16 bg-[#e0e7ff] rounded-full flex items-center justify-center mb-4 mx-auto">
-                                                <span class="text-2xl font-bold text-[#2563eb]">6</span>
+                                            <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                                                <span class="text-2xl font-bold text-[#1e3a5f]">6</span>
                                             </div>
-                                            <h3 class="text-base sm:text-lg font-semibold text-[#2563eb] mb-2 whitespace-normal break-words">Resultado</h3>
+                                            <h3 class="text-base sm:text-lg font-semibold text-[#1e3a5f] mb-2 whitespace-normal break-words">Resultado</h3>
                                             <p class="text-sm text-gray-600">Aguarde a divulgação dos resultados</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <h2 class="text-2xl sm:text-3xl font-bold text-[#2563eb] mb-6 sm:mb-8">Documentos Necessários</h2>
+                                <h2 class="text-2xl sm:text-3xl font-bold text-[#1e3a5f] mb-6 sm:mb-8">Documentos Necessários</h2>
                                 <div class="bg-white p-4 sm:p-8 rounded-lg shadow-md">
                                     <ul class="space-y-4">
                                         <li class="flex items-start">
@@ -163,7 +163,7 @@
                                     </ul>
                                 </div>
 
-                                <h2 class="text-2xl sm:text-3xl font-bold text-[#2563eb] mb-6 sm:mb-8 text-center">Cursos Disponíveis</h2>
+                                <h2 class="text-2xl sm:text-3xl font-bold text-[#1e3a5f] mb-6 sm:mb-8 text-center">Cursos Disponíveis</h2>
                                 <div class="flex flex-wrap justify-center gap-8">
                                     <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow interactive-card w-full max-w-sm md:max-w-xs">
                                         <h3 class="text-xl font-semibold text-gray-900 mb-2">Cursos de Graduação</h3>
@@ -210,20 +210,20 @@
 
                                         <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 sm:p-6 mb-6 text-left max-w-lg mx-auto">
                                             <h3 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                                                <svg class="w-5 h-5 text-[#2563eb]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/></svg>
+                                                <svg class="w-5 h-5 text-[#1e3a5f]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/></svg>
                                                 Informações úteis
                                             </h3>
                                             <ul class="space-y-2 text-sm text-gray-600">
                                                 <li class="flex items-start gap-2">
-                                                    <span class="text-[#2563eb] font-bold mt-0.5">›</span>
+                                                    <span class="text-[#1e3a5f] font-bold mt-0.5">›</span>
                                                     Os resultados dos exames serão publicados no portal institucional.
                                                 </li>
                                                 <li class="flex items-start gap-2">
-                                                    <span class="text-[#2563eb] font-bold mt-0.5">›</span>
+                                                    <span class="text-[#1e3a5f] font-bold mt-0.5">›</span>
                                                     Para consultar o estado da sua candidatura, contacte a secretaria da instituição.
                                                 </li>
                                                 <li class="flex items-start gap-2">
-                                                    <span class="text-[#2563eb] font-bold mt-0.5">›</span>
+                                                    <span class="text-[#1e3a5f] font-bold mt-0.5">›</span>
                                                     As inscrições para o próximo ano lectivo serão anunciadas oportunamente.
                                                 </li>
                                             </ul>

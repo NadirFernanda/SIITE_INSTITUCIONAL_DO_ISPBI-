@@ -1,6 +1,6 @@
-                                <div id="formulario-candidatura" class="bg-white border border-[#2563eb]/20 rounded-2xl shadow-lg p-4 sm:p-8">
+                                <div id="formulario-candidatura" class="bg-white border border-[#1e3a5f]/20 rounded-2xl shadow-lg p-4 sm:p-8">
 
-                                    <h2 class="text-xl sm:text-2xl font-bold text-[#2563eb] mb-1 leading-tight">Ficha de Inscrição — Exame de Acesso 2026/2027</h2>
+                                    <h2 class="text-xl sm:text-2xl font-bold text-[#1e3a5f] mb-1 leading-tight">Ficha de Inscrição — Exame de Acesso 2026/2027</h2>
                                     <p class="text-gray-500 text-sm mb-6">Todos os campos são obrigatórios, excepto o Telefone 2 e a Instituição Laboral (apenas se não trabalhar).</p>
 
                                     {{-- Banner de erros de validação --}}
@@ -20,7 +20,7 @@
                                     </div>
                                     @endif
 
-                                    @php $inp = 'w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#2563eb] focus:border-transparent focus:outline-none transition'; @endphp
+                                    @php $inp = 'w-full border border-gray-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#F05A28] focus:border-transparent focus:outline-none transition'; @endphp
 
                                     <form method="POST" action="{{ route('candidaturas.store') }}" class="space-y-6" novalidate>
                                         @csrf
@@ -114,10 +114,10 @@
                                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Sexo <span class="text-red-500">*</span></label>
                                                 <div class="flex flex-col sm:flex-row gap-4">
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                        <input type="radio" name="sexo" value="masculino" {{ old('sexo') === 'masculino' ? 'checked' : '' }} required class="accent-[#2563eb]"> Masculino
+                                                        <input type="radio" name="sexo" value="masculino" {{ old('sexo') === 'masculino' ? 'checked' : '' }} required class="accent-[#F05A28]"> Masculino
                                                     </label>
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                        <input type="radio" name="sexo" value="feminino" {{ old('sexo') === 'feminino' ? 'checked' : '' }} class="accent-[#2563eb]"> Feminino
+                                                        <input type="radio" name="sexo" value="feminino" {{ old('sexo') === 'feminino' ? 'checked' : '' }} class="accent-[#F05A28]"> Feminino
                                                     </label>
                                                 </div>
                                                 @error('sexo')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
@@ -237,7 +237,7 @@
                                             <div class="flex flex-wrap gap-4 gap-y-2">
                                                 @foreach(['maximo' => 'Máximo', 'medio' => 'Médio', 'minimo' => 'Mínimo'] as $val => $label)
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                    <input type="radio" name="estado_financeiro" value="{{ $val }}" {{ old('estado_financeiro') === $val ? 'checked' : '' }} required class="accent-[#2563eb]"> {{ $label }}
+                                                    <input type="radio" name="estado_financeiro" value="{{ $val }}" {{ old('estado_financeiro') === $val ? 'checked' : '' }} required class="accent-[#F05A28]"> {{ $label }}
                                                 </label>
                                                 @endforeach
                                             </div>
@@ -249,11 +249,11 @@
                                             <label class="block text-sm font-semibold text-gray-700 mb-2">Trabalhador <span class="text-red-500">*</span></label>
                                             <div class="flex flex-col sm:flex-row gap-4 items-start">
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                    <input type="radio" name="trabalhador" value="sim" {{ old('trabalhador') === 'sim' ? 'checked' : '' }} required class="accent-[#2563eb]"
+                                                    <input type="radio" name="trabalhador" value="sim" {{ old('trabalhador') === 'sim' ? 'checked' : '' }} required class="accent-[#F05A28]"
                                                            onchange="document.getElementById('inst-laboral').classList.remove('hidden')"> Sim
                                                 </label>
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                    <input type="radio" name="trabalhador" value="nao" {{ old('trabalhador') === 'nao' ? 'checked' : '' }} class="accent-[#2563eb]"
+                                                    <input type="radio" name="trabalhador" value="nao" {{ old('trabalhador') === 'nao' ? 'checked' : '' }} class="accent-[#F05A28]"
                                                            onchange="document.getElementById('inst-laboral').classList.add('hidden')"> Não
                                                 </label>
                                                 <div id="inst-laboral" class="{{ old('trabalhador') === 'sim' ? '' : 'hidden' }} flex-1 min-w-[220px]">
@@ -296,10 +296,10 @@
                                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Período <span class="text-red-500">*</span></label>
                                                 <div class="flex gap-6 mt-1">
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                        <input type="radio" name="periodo" value="regular" {{ old('periodo') === 'regular' ? 'checked' : '' }} required class="accent-[#2563eb]"> Regular
+                                                        <input type="radio" name="periodo" value="regular" {{ old('periodo') === 'regular' ? 'checked' : '' }} required class="accent-[#F05A28]"> Regular
                                                     </label>
                                                     <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-                                                        <input type="radio" name="periodo" value="pos-laboral" {{ old('periodo') === 'pos-laboral' ? 'checked' : '' }} class="accent-[#2563eb]"> Pós-laboral
+                                                        <input type="radio" name="periodo" value="pos-laboral" {{ old('periodo') === 'pos-laboral' ? 'checked' : '' }} class="accent-[#F05A28]"> Pós-laboral
                                                     </label>
                                                 </div>
                                                 @error('periodo')<p style="font-size:0.78rem;color:#dc2626;margin-top:5px;font-weight:400;">{{ $message }}</p>@enderror
@@ -314,7 +314,7 @@
                                                 <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
                                                     <input type="radio" name="local_inscricao" value="{{ $val }}"
                                                            {{ old('local_inscricao') === $val ? 'checked' : '' }}
-                                                           required class="accent-[#2563eb]"> {{ $label }}
+                                                           required class="accent-[#F05A28]"> {{ $label }}
                                                 </label>
                                                 @endforeach
                                             </div>
@@ -326,7 +326,7 @@
                                             <label class="flex items-start gap-3 text-sm text-gray-700 cursor-pointer">
                                                 <input type="checkbox" name="autorizacao_assinatura" value="1"
                                                        {{ old('autorizacao_assinatura') ? 'checked' : '' }}
-                                                       required class="mt-1 accent-[#2563eb]">
+                                                       required class="mt-1 accent-[#F05A28]">
                                                 <span>
                                                     Autorizo o Instituto Superior Politécnico do Bié a gerar uma assinatura digital
                                                     com o meu nome, a usar no comprovativo desta candidatura. <span class="text-red-500">*</span>
