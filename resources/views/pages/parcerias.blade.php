@@ -11,23 +11,33 @@
     // Fonte dos instrumentos: quadro de acordos e protocolos do Departamento Jurídico e de Intercâmbio.
     // Não atribuir instrumentos, datas ou prazos às entidades sem esses dados confirmados.
     $nacionais = [
-        ['nome' => 'Instituto Superior Politécnico Ndunduma', 'local' => 'Bié, Angola', 'acordo' => 'Convénio de Colaboração Académica', 'sigla' => 'ISPN', 'logo' => 'images/parcerias/ispndunduma.png', 'url' => 'https://www.ispndunduma.co.ao/'],
-        ['nome' => 'Instituto Superior Politécnico da Caála', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'ISP-C', 'logo' => 'images/parcerias/ispcaala.png', 'url' => 'https://www.ispcaala.com/inicio'],
-        ['nome' => 'Universidade Internacional do Cuanza', 'local' => 'Bié, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'UNIC', 'logo' => 'images/parcerias/unic.svg', 'url' => 'https://www.unic.co.ao/'],
-        ['nome' => 'Centro de Formação de Jornalistas', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'CFJ'],
-        ['nome' => 'Empresa de Águas e Saneamento do Bié', 'local' => 'Bié, Angola', 'acordo' => 'Convénio de Cooperação', 'sigla' => 'EASB'],
-        ['nome' => 'Hospital Dr. Walter Strangway', 'local' => 'Bié, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'HWS'],
-        ['nome' => 'Hospital Mártires do Cuito', 'local' => 'Cuito, Bié, Angola', 'acordo' => 'Convénio para Estágios Supervisionados de Estudantes', 'sigla' => 'HMC'],
-        ['nome' => 'Hospital Municipal do Cunje', 'local' => 'Cuito, Bié, Angola', 'acordo' => 'Convénio para Estágios Supervisionados de Estudantes', 'sigla' => 'HCU'],
-        ['nome' => 'Fundo de Apoio Social (FAS)', 'local' => 'Bié, Angola', 'acordo' => 'Memorando de Cooperação', 'sigla' => 'FAS'],
-        ['nome' => 'Standard Bank de Angola, S.A.', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo Bancário', 'sigla' => 'SBA', 'url' => 'https://www.standardbank.co.ao/'],
-        ['nome' => 'Universidade de Luanda', 'local' => 'Luanda, Angola', 'acordo' => 'Memorando de Cooperação', 'sigla' => 'UL', 'logo' => 'images/parcerias/uniluanda.png', 'logo_escuro' => true, 'url' => 'https://uniluanda.ao/'],
-        ['nome' => 'Centro Materno Infantil do Bié', 'local' => 'Bié, Angola', 'acordo' => 'Convénio para Estágios', 'sigla' => 'CMI'],
-        ['nome' => 'Instituto Superior de Administração e Finanças (ISAF)', 'local' => 'Luanda, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'ISAF', 'url' => 'https://isaf.co.ao/'],
-        ['nome' => 'Gabinete Provincial da Educação do Bié', 'local' => 'Bié, Angola', 'sigla' => 'G'],
-        ['nome' => 'Unitel', 'local' => 'Angola', 'sigla' => 'U'],
-        ['nome' => 'Centro de Emprego e Formação Profissional de Jovens do Bié (Cefejor)', 'local' => 'Bié, Angola', 'sigla' => 'C'],
+        ['nome' => 'Instituto Superior Politécnico Ndunduma', 'categoria' => 'ies', 'local' => 'Bié, Angola', 'acordo' => 'Convénio de Colaboração Académica', 'sigla' => 'ISPN', 'logo' => 'images/parcerias/ispndunduma.png', 'url' => 'https://www.ispndunduma.co.ao/'],
+        ['nome' => 'Instituto Superior Politécnico da Caála', 'categoria' => 'ies', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'ISP-C', 'logo' => 'images/parcerias/ispcaala.png', 'url' => 'https://www.ispcaala.com/inicio'],
+        ['nome' => 'Universidade Internacional do Cuanza', 'categoria' => 'ies', 'local' => 'Bié, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'UNIC', 'logo' => 'images/parcerias/unic.svg', 'url' => 'https://www.unic.co.ao/'],
+        ['nome' => 'Centro de Formação de Jornalistas', 'categoria' => 'outras', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'CFJ'],
+        ['nome' => 'Empresa de Águas e Saneamento do Bié', 'categoria' => 'empresas', 'local' => 'Bié, Angola', 'acordo' => 'Convénio de Cooperação', 'sigla' => 'EASB'],
+        ['nome' => 'Hospital Dr. Walter Strangway', 'categoria' => 'saude', 'local' => 'Bié, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'HWS'],
+        ['nome' => 'Hospital Mártires do Cuito', 'categoria' => 'saude', 'local' => 'Cuito, Bié, Angola', 'acordo' => 'Convénio para Estágios Supervisionados de Estudantes', 'sigla' => 'HMC'],
+        ['nome' => 'Hospital Municipal do Cunje', 'categoria' => 'saude', 'local' => 'Cuito, Bié, Angola', 'acordo' => 'Convénio para Estágios Supervisionados de Estudantes', 'sigla' => 'HCU'],
+        ['nome' => 'Fundo de Apoio Social (FAS)', 'categoria' => 'outras', 'local' => 'Bié, Angola', 'acordo' => 'Memorando de Cooperação', 'sigla' => 'FAS'],
+        ['nome' => 'Standard Bank de Angola, S.A.', 'categoria' => 'empresas', 'local' => 'Huambo, Angola', 'acordo' => 'Protocolo Bancário', 'sigla' => 'SBA', 'url' => 'https://www.standardbank.co.ao/'],
+        ['nome' => 'Universidade de Luanda', 'categoria' => 'ies', 'local' => 'Luanda, Angola', 'acordo' => 'Memorando de Cooperação', 'sigla' => 'UL', 'logo' => 'images/parcerias/uniluanda.png', 'logo_escuro' => true, 'url' => 'https://uniluanda.ao/'],
+        ['nome' => 'Centro Materno Infantil do Bié', 'categoria' => 'saude', 'local' => 'Bié, Angola', 'acordo' => 'Convénio para Estágios', 'sigla' => 'CMI'],
+        ['nome' => 'Instituto Superior de Administração e Finanças (ISAF)', 'categoria' => 'ies', 'local' => 'Luanda, Angola', 'acordo' => 'Protocolo de Cooperação', 'sigla' => 'ISAF', 'url' => 'https://isaf.co.ao/'],
+        ['nome' => 'Gabinete Provincial da Educação do Bié', 'categoria' => 'outras', 'local' => 'Bié, Angola', 'sigla' => 'G'],
+        ['nome' => 'Unitel', 'categoria' => 'empresas', 'local' => 'Angola', 'sigla' => 'U'],
+        ['nome' => 'Centro de Emprego e Formação Profissional de Jovens do Bié (Cefejor)', 'categoria' => 'outras', 'local' => 'Bié, Angola', 'sigla' => 'C'],
     ];
+
+    $gruposNacionais = [
+        'ies' => ['titulo' => 'Instituições de Ensino Superior', 'parceiros' => []],
+        'empresas' => ['titulo' => 'Empresas e banca', 'parceiros' => []],
+        'saude' => ['titulo' => 'Instituições de saúde', 'parceiros' => []],
+        'outras' => ['titulo' => 'Outras instituições', 'parceiros' => []],
+    ];
+    foreach ($nacionais as $parceiro) {
+        $gruposNacionais[$parceiro['categoria']]['parceiros'][] = $parceiro;
+    }
 
     $internacionais = [
         ['nome' => 'Morgan State University', 'local' => 'Estados Unidos da América', 'acordo' => 'Memorando de Cooperação', 'sigla' => 'MSU', 'logo' => 'images/parcerias/morgan.png', 'logo_escuro' => true, 'url' => 'https://www.morgan.edu/'],
@@ -91,8 +101,14 @@
             </div>
             <span class="text-sm font-medium text-slate-500">{{ count($nacionais) }} instituições distintas</span>
         </div>
-        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            @foreach($nacionais as $parceiro)
+        @foreach($gruposNacionais as $chave => $grupo)
+        <section class="mb-9 last:mb-0" aria-labelledby="grupo-nacional-{{ $chave }}">
+            <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2 border-b border-slate-200 pb-3">
+                <h3 id="grupo-nacional-{{ $chave }}" class="text-xl font-bold text-[#1e3a5f]">{{ $grupo['titulo'] }}</h3>
+                <span class="text-sm text-slate-500">{{ count($grupo['parceiros']) }} instituições</span>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            @foreach($grupo['parceiros'] as $parceiro)
                 <article class="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg">
                     <div class="flex items-start justify-between gap-3">
                         <div class="flex h-20 w-28 shrink-0 items-center justify-center rounded-xl border border-slate-100 p-3 {{ !empty($parceiro['logo_escuro']) ? 'bg-[#142d4f]' : 'bg-slate-50' }}">
@@ -121,7 +137,9 @@
                     @endif
                 </article>
             @endforeach
-        </div>
+            </div>
+        </section>
+        @endforeach
 
     </section>
 
