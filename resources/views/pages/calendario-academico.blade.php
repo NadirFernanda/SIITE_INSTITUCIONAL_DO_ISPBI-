@@ -4,7 +4,7 @@
 @section('meta_description', 'Consulte o calendário académico oficialmente publicado pelo Instituto Superior Politécnico do Bié.')
 
 @section('content')
-<div class="mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8">
+<div class="institutional-page">
     @include('partials.page-hero', [
         'title' => 'Calendário Académico',
         'subtitle' => $calendar ? 'Ano académico '.$calendar['ano'] : 'Informação académica oficial do ISP-Bié',

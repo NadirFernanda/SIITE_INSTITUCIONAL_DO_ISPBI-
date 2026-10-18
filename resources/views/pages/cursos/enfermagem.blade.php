@@ -1,13 +1,12 @@
 @extends('layouts.site')
 @section('title', 'Enfermagem Geral — ISP-Bié')
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+<div class="institutional-page">
 
 @include('partials.page-hero', [
     'title'      => 'Enfermagem Geral',
     'subtitle'   => 'Cuidado humanizado, promoção e reabilitação da saúde em Angola.',
     'breadcrumb' => 'Enfermagem Geral',
-    'gradient'   => 'from-[#064e3b] to-[#16A34A]',
     'ctaUrl'     => '/candidaturas',
     'ctaLabel'   => 'Candidatar-me',
 ])

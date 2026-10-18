@@ -3,13 +3,12 @@
 @section('title', 'Alumni — ISP-Bié')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16">
+<div class="institutional-page">
 
 @include('partials.page-hero', [
     'title'      => 'Alumni ISP-Bié',
     'subtitle'   => 'Rede de ex-estudantes, histórias de sucesso e oportunidades.',
     'breadcrumb' => 'Alumni',
-    'gradient'   => 'from-[#1e3a5f] to-[#2563eb]',
     'ctaUrl'     => '#formulario',
     'ctaLabel'   => 'Juntar-me à Rede',
 ])

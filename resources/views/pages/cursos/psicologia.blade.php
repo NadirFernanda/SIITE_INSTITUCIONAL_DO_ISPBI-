@@ -1,8 +1,8 @@
 @extends('layouts.site')
 @section('title', 'Psicologia — ISP-Bié')
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
-@include('partials.page-hero', ['title'=>'Psicologia','subtitle'=>'Avaliação, diagnóstico e intervenção para o bem-estar humano.','breadcrumb'=>'Psicologia','gradient'=>'from-[#7f1d1d] via-[#C62828] to-[#F05A28]','ctaUrl'=>'/candidaturas','ctaLabel'=>'Candidatar-me'])
+<div class="institutional-page">
+@include('partials.page-hero', ['title'=>'Psicologia','subtitle'=>'Avaliação, diagnóstico e intervenção para o bem-estar humano.','breadcrumb'=>'Psicologia','ctaUrl'=>'/candidaturas','ctaLabel'=>'Candidatar-me'])
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
   <div class="lg:col-span-2 space-y-8">
     <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">

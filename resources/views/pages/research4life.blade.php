@@ -5,7 +5,7 @@
 @section('meta_keywords', 'Research4Life, biblioteca digital, bases de dados científicas, ISP-Bié, investigação')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+<div class="institutional-page">
     @include('partials.page-hero', [
         'title'      => 'Research4Life',
         'subtitle'   => 'Acesso a informação científica e recursos académicos para a comunidade do ISP-Bié.',

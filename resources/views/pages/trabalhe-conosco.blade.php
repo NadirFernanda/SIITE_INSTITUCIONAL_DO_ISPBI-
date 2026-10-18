@@ -1,7 +1,7 @@
 ﻿@extends('layouts.site')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+<div class="institutional-page">
 
 @include('partials.page-hero', [
     'title'      => 'Trabalhe Connosco',
@@ -130,7 +130,7 @@
       </div>
 
       <!-- Documentação Necessária -->
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-lg p-8 text-white interactive-card">
+      <div class="bg-[#1e3a5f] rounded-lg p-8 text-white interactive-card">
         <h3 class="text-2xl font-bold mb-6 text-center">Documentação Geralmente Exigida</h3>
         <div class="grid md:grid-cols-2 gap-6">
           <ul class="space-y-3">
@@ -247,7 +247,7 @@
             </label>
           </div>
 
-          <button id="alerts-submit" type="submit" class="w-full bg-gradient-to-r from-[#2563eb] to-[#3B82F6] text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
+          <button id="alerts-submit" type="submit" class="w-full bg-[#1e3a5f] text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
             Cadastrar para Receber Alertas
           </button>
         </form>
@@ -263,7 +263,7 @@
   <!-- Informações Adicionais -->
   <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-2xl p-12 text-white">
+      <div class="bg-[#1e3a5f] rounded-2xl p-12 text-white">
         <div class="grid md:grid-cols-2 gap-8">
           
           <div>

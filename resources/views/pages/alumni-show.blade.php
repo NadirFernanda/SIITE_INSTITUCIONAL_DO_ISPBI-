@@ -2,26 +2,15 @@
 
 @section('content')
   <!-- Banner -->
-  <section class="relative bg-gradient-to-r from-[#3B82F6] to-[#FFA500] text-white py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center space-x-4 mb-4">
-        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
-        </svg>
-        <div>
-          <h1 class="text-3xl md:text-4xl font-bold">Testemunho Alumni</h1>
-          <p class="text-lg mt-1 opacity-90">História de um(a) ex-estudante do ISP-Bié</p>
-        </div>
-      </div>
-      <nav class="text-sm">
-        <a href="/" class="hover:underline">Início</a>
-        <span class="mx-2">/</span>
-        <a href="{{ route('alumni') }}" class="hover:underline">Alumni</a>
-        <span class="mx-2">/</span>
-        <span>Testemunho</span>
-      </nav>
-    </div>
-  </section>
+  <div class="institutional-page">
+    @include('partials.page-hero', [
+        'title' => 'Testemunho Alumni',
+        'subtitle' => 'História de um(a) ex-estudante do ISP-Bié',
+        'breadcrumb' => 'Testemunho',
+        'parentUrl' => route('alumni'),
+        'parentLabel' => 'Alumni',
+    ])
+</div>
 
   <!-- Conteúdo do Testemunho -->
   <section class="py-16 bg-gray-50 scroll-reveal">

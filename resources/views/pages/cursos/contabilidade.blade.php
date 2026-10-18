@@ -1,12 +1,11 @@
 @extends('layouts.site')
 @section('title', 'Contabilidade e Administração — ISP-Bié')
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+<div class="institutional-page">
   @include('partials.page-hero', [
     'title'     => 'Contabilidade e Administração',
     'subtitle'  => 'Gestão de recursos, finanças e apoio à decisão económica.',
     'breadcrumb'=> 'Cursos / Contabilidade e Administração',
-    'gradient'  => 'from-[#451a03] via-[#92680A] to-[#FFD700]',
     'ctaUrl'    => '/candidaturas',
     'ctaLabel'  => 'Candidatar-me',
   ])

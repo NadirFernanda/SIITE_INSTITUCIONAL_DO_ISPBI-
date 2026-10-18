@@ -4,6 +4,7 @@
       $title      (string, obrigatório) – Título da página (H1)
       $subtitle   (string, opcional)   – Frase descritiva abaixo do título
       $breadcrumb (string, obrigatório) – Texto do último item do breadcrumb
+      $parentUrl / $parentLabel (opcionais) – Nível intermédio do breadcrumb
       $gradient   (string, opcional)   – Classes Tailwind do gradiente (default: from-[#0f1f3d] via-[#1e3a5f] to-[#1d4ed8])
       $ctaUrl     (string, opcional)   – URL do botão de ação (CTA)
       $ctaLabel   (string, opcional)   – Texto do CTA (default: 'Saiba Mais')
@@ -25,6 +26,10 @@
                     <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                     Início
                 </a>
+                @if(!empty($parentUrl) && !empty($parentLabel))
+                    <svg class="w-3 h-3 opacity-40" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    <a href="{{ $parentUrl }}" class="hover:text-white transition-colors duration-150">{{ $parentLabel }}</a>
+                @endif
                 <svg class="w-3 h-3 opacity-40" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                 <span class="text-white font-medium">{{ $breadcrumb }}</span>
             </nav>
@@ -35,7 +40,7 @@
         </div>
         @if(!empty($ctaUrl))
             <a href="{{ $ctaUrl }}"
-               class="group inline-flex items-center gap-2 bg-[#F05A28] hover:bg-[#d04a1e] text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 whitespace-nowrap self-start md:self-auto">
+               class="group inline-flex items-center gap-2 bg-[#c84a20] hover:bg-[#a43a15] text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all duration-200 hover:shadow-2xl hover:-translate-y-1 whitespace-nowrap self-start md:self-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                 {{ $ctaLabel ?? 'Saiba Mais' }}
                 <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
             </a>

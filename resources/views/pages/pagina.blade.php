@@ -3,9 +3,9 @@
 @section('title', $pagina->titulo)
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-reveal">
-        <h1 class="text-3xl md:text-4xl font-extrabold text-[#F05A28] mb-6 tracking-tight border-b-2 border-[#F05A28] pb-2">{{ $pagina->titulo }}</h1>
-        <div class="prose max-w-none text-lg text-gray-800 leading-relaxed">
+    <div class="institutional-page scroll-reveal">
+        <h1 class="institutional-heading mb-6 border-b-2 border-[#F05A28] pb-4">{{ $pagina->titulo }}</h1>
+        <div class="institutional-card prose max-w-none text-lg leading-relaxed text-gray-800">
             {!! nl2br(e($pagina->conteudo)) !!}
         </div>
     </div>

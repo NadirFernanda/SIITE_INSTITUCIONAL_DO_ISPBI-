@@ -1,12 +1,11 @@
 @extends('layouts.site')
 @section('title', 'Engenharia Informática — ISP-Bié')
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+<div class="institutional-page">
   @include('partials.page-hero', [
     'title'     => 'Engenharia Informática',
     'subtitle'  => 'Software, redes e soluções tecnológicas para a transformação digital.',
     'breadcrumb'=> 'Cursos / Engenharia Informática',
-    'gradient'  => 'from-[#1e1b4b] via-[#1D4ED8] to-[#60A5FA]',
     'ctaUrl'    => '/candidaturas',
     'ctaLabel'  => 'Candidatar-me',
   ])

@@ -2,30 +2,16 @@
 
 
 @section('content')
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <nav class="text-sm text-gray-500 mb-6">
-            <a href="/" class="hover:underline">Início</a>
-            <span class="mx-2">/</span>
-            <a href="{{ route('revista') }}" class="hover:underline">Revista Científica</a>
-            <span class="mx-2">/</span>
-            <span class="font-medium text-gray-700">Submeter Artigo</span>
-        </nav>
+    <div class="institutional-page">
+        @include('partials.page-hero', [
+            'title' => 'Submeter Artigo',
+            'subtitle' => 'Preencha o formulário, submeta os dados correctos e aguarde aprovação do administrador do site.',
+            'breadcrumb' => 'Submeter Artigo',
+            'parentUrl' => route('revista'),
+            'parentLabel' => 'Revista Científica',
+        ])
 
-        <header class="bg-white rounded-lg p-6 mb-8 shadow transition-transform duration-300 hover:scale-105 hover:shadow-lg border border-gray-200 group interactive-card">
-                <div class="flex items-center gap-4">
-                <div class="w-12 h-12 flex items-center justify-center bg-blue-600 text-white rounded-md shadow">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2v4h6v-4c0-1.105-1.343-2-3-2z" />
-                    </svg>
-                </div>
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Submeter Artigo</h1>
-                    <p class="text-gray-600 mt-1">Preencha o formulário, submeta os dados correctos e aguarde aprovação do administrador do site.</p>
-                </div>
-            </div>
-        </header>
-
-        <main class="max-w-4xl mx-auto">
+        <section class="max-w-4xl mx-auto">
             @if(session('status'))
                 <div class="mb-4 p-4 bg-green-50 border border-green-200 text-green-800 rounded">{{ session('status') }}</div>
             @endif
@@ -43,7 +29,7 @@
 
             <div id="client-errors" class="mb-4 hidden p-4 bg-red-50 text-red-800 rounded"></div>
 
-            <form id="revista-form" action="{{ route('revista.submeter.post') }}" method="POST" enctype="multipart/form-data" novalidate class="bg-white shadow-lg rounded-xl p-8 ring-1 ring-gray-100">
+            <form id="revista-form" action="{{ route('revista.submeter.post') }}" method="POST" enctype="multipart/form-data" novalidate class="institutional-card">
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
                     <div>
@@ -91,12 +77,12 @@
                     {{-- file upload removed: articles already include a PDF link, so file input is unnecessary --}}
 
                     <div class="flex justify-end items-center gap-3 mt-4">
-                        <a href="{{ route('revista') }}" class="inline-flex items-center px-4 py-2 border border-gray-200 rounded-md text-sm text-gray-700 hover:bg-gray-50">Cancelar</a>
-                        <button type="submit" class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-md shadow hover:from-blue-700 hover:to-indigo-700 transition">Enviar Submissão</button>
+                        <a href="{{ route('revista') }}" class="inline-flex items-center rounded-xl border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Cancelar</a>
+                        <button type="submit" class="institutional-button">Enviar Submissão</button>
                     </div>
                 </div>
             </form>
-        </main>
+        </section>
     </div>
 
         <script src="{{ asset('js/locale-revista.js') }}"></script>

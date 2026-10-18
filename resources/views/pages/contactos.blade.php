@@ -3,14 +3,14 @@
 
 @section('content')
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
+<div class="institutional-page">
 @include('partials.page-hero', [
     'title'      => 'Contactos',
     'subtitle'   => 'Fale connosco — canais oficiais de atendimento do ISP-Bié.',
     'breadcrumb' => 'Contactos',
 ])
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            <div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="institutional-card">
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Informações de Contacto</h2>
                 <p class="text-gray-600 mb-8 max-w-xl">Canais oficiais para atendimento ao público, esclarecimento de dúvidas, envio de documentos e contacto institucional com o INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ.</p>
                 <div class="space-y-6">
@@ -79,7 +79,8 @@
                     </div>
                 </div>
 
-            <div>
+            </div>
+            <div class="institutional-card">
                 <h2 class="text-3xl font-bold text-[#2563eb] mb-4">Envie uma Mensagem</h2>
                 <p class="text-gray-600 mb-4 max-w-xl">Utilize o formulário para pedidos gerais de informação, dúvidas sobre cursos, serviços institucionais ou para estabelecer contacto formal com o ISP-Bié.</p>
                 @if(session('success'))
@@ -105,14 +106,14 @@
                         <label for="contact-message" class="block text-gray-700 font-semibold mb-2">Mensagem</label>
                         <textarea id="contact-message" name="mensagem" rows="6" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2563eb]" aria-required="true"></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-[#2563eb] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#1d4ed8] transition-colors">
+                    <button type="submit" class="institutional-button w-full">
                         Enviar Mensagem
                     </button>
                 </form>
             </div>
         </div>
 
-        <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
+        <div class="bg-gray-200 rounded-2xl overflow-hidden h-96">
             <iframe
                 title="Mapa de localização do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ"
                 src="https://www.google.com/maps?q=Rua+Padre+Fidalgo,+Cuito,+Bi%C3%A9,+Angola&output=embed"
@@ -121,6 +122,5 @@
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <p class="text-xs text-gray-600 mt-2">Localização aproximada do campus do INSTITUTO SUPERIOR POLITÉCNICO DO BIÉ na cidade do Cuito, província do Bié.</p>
-        </div>
 </div>
 @endsection

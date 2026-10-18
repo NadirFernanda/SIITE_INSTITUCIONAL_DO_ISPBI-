@@ -104,7 +104,7 @@
     </style>
 </head>
 
-<body class="bg-white text-gray-900 overflow-x-hidden">
+<body class="bg-white text-gray-900">
     <!-- Navbar institucional principal -->
     @include('partials.navbar')
 

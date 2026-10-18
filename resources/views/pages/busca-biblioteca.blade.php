@@ -116,7 +116,7 @@
             </div>
         </section>
 
-        <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] rounded-xl p-8 text-white text-center scroll-reveal">
+        <div class="bg-[#1e3a5f] rounded-xl p-8 text-white text-center scroll-reveal">
             <h2 class="text-3xl font-bold mb-4">N�o encontrou o que procura?</h2>
             <p class="text-xl mb-8">Solicite ao bibliotec�rio</p>
             <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">

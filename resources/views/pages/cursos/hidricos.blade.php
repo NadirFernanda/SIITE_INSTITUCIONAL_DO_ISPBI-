@@ -1,12 +1,11 @@
 @extends('layouts.site')
 @section('title', 'Eng. em Recursos Hídricos — ISP-Bié')
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+<div class="institutional-page">
   @include('partials.page-hero', [
     'title'     => 'Eng. em Recursos Hídricos',
     'subtitle'  => 'Gestão sustentável da água e infraestruturas hidráulicas de Angola.',
     'breadcrumb'=> 'Cursos / Engenharia em Recursos Hídricos',
-    'gradient'  => 'from-[#0c4a6e] via-[#0284C7] to-[#38BDF8]',
     'ctaUrl'    => '/candidaturas',
     'ctaLabel'  => 'Candidatar-me',
   ])

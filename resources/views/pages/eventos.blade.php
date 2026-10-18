@@ -2,24 +2,13 @@
 
 @section('content')
   <!-- Banner -->
-  <section class="relative bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-20 scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center space-x-4 mb-6">
-        <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
-        </svg>
-        <div>
-          <h1 class="text-4xl md:text-5xl font-bold">Eventos</h1>
-          <p class="text-xl mt-2 opacity-90">Agenda Académica do ISP-Bié</p>
-        </div>
-      </div>
-      <nav class="text-sm">
-        <a href="/" class="hover:underline">Início</a>
-        <span class="mx-2">/</span>
-        <span>Eventos</span>
-      </nav>
-    </div>
-  </section>
+  <div class="institutional-page">
+    @include('partials.page-hero', [
+        'title' => 'Eventos',
+        'subtitle' => 'Agenda Académica do ISP-Bié',
+        'breadcrumb' => 'Eventos',
+    ])
+</div>
 
   <!-- Eventos em Destaque -->
   <section class="py-16 bg-white scroll-reveal">

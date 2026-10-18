@@ -3,36 +3,15 @@
 @section('title', 'Artigos Científicos - ISP-Bié')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
+<div class="institutional-page">
 
-    {{-- Hero Banner --}}
-    <div class="relative bg-gradient-to-br from-[#0f1f3d] via-[#1e3a5f] to-[#1d4ed8] rounded-2xl overflow-hidden mb-10 shadow-xl">
-        <div class="absolute inset-0 pointer-events-none overflow-hidden">
-            <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full opacity-10" style="background:radial-gradient(circle,#ffffff,transparent 70%)"></div>
-            <div class="absolute -bottom-12 -left-10 w-56 h-56 rounded-full opacity-10" style="background:radial-gradient(circle,#ffffff,transparent 70%)"></div>
-            <div class="absolute top-1/2 left-1/3 w-96 h-24 opacity-5" style="background:linear-gradient(90deg,#F05A28,transparent);transform:rotate(-15deg);"></div>
-        </div>
-        <div class="relative z-10 px-6 py-10 sm:px-10 sm:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div>
-                <nav class="text-sm text-blue-200 mb-3">
-                    <a href="/" class="hover:text-white transition-colors">Início</a>
-                    <span class="mx-2 opacity-50">/</span>
-                    <span class="text-white">Artigos Científicos</span>
-                </nav>
-                <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight">Artigos Científicos</h1>
-                <p class="mt-2 text-blue-100 text-base sm:text-lg max-w-xl">
-                    Portal de publicações científicas, académicas e de investigação do ISP-Bié
-                </p>
-            </div>
-            <a href="{{ route('revista.submeter') }}"
-               class="inline-flex items-center gap-2 bg-[#F05A28] hover:bg-[#d04a1e] text-white font-semibold px-6 py-3 rounded-xl shadow transition-colors duration-200 whitespace-nowrap self-start md:self-auto">
-                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-                </svg>
-                Submeter Artigo
-            </a>
-        </div>
-    </div>
+    @include('partials.page-hero', [
+        'title' => 'Artigos Científicos',
+        'subtitle' => 'Portal de publicações científicas, académicas e de investigação do ISP-Bié',
+        'breadcrumb' => 'Artigos Científicos',
+        'ctaUrl' => route('revista.submeter'),
+        'ctaLabel' => 'Submeter Artigo',
+    ])
 
     {{-- Áreas de Conhecimento --}}
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">

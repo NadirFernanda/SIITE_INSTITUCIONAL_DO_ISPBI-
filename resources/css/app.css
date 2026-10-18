@@ -15,6 +15,11 @@
   :root {
     --ispbie-cta-start: #1e3a8a;
     --ispbie-cta-end: #F05A28;
+    --ispbie-heading: #1e3a5f;
+    --ispbie-text: #334155;
+    --ispbie-muted: #475569;
+    --ispbie-border: #e2e8f0;
+    --ispbie-surface: #ffffff;
   }
 
   *, *::before, *::after {
@@ -24,8 +29,6 @@
   html, body {
     margin: 0;
     min-width: 320px;
-    overflow-x: hidden;
-    max-width: 100vw;
     background-color: #fff;
   }
 
@@ -59,8 +62,41 @@
 ========================= */
 @layer components {
 
+  .institutional-page {
+    @apply mx-auto max-w-7xl px-4 pb-16 pt-4 sm:px-6 lg:px-8;
+  }
+
+  .institutional-card {
+    @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8;
+  }
+
+  .institutional-heading {
+    @apply text-2xl font-extrabold tracking-tight text-[#1e3a5f] sm:text-3xl;
+  }
+
+  .institutional-button {
+    @apply inline-flex items-center justify-center rounded-xl bg-[#1e3a5f] px-6 py-3 font-bold text-white transition-colors hover:bg-[#2563eb];
+  }
+
   .institutional-cta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--ispbie-cta-start) 0%, var(--ispbie-cta-end) 100%);
+  }
+
+  .institutional-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, transparent 40%, rgba(15, 31, 61, 0.28) 100%);
+  }
+
+  .institutional-cta > * {
+    position: relative;
+    z-index: 1;
   }
 
   .btn-ispbie {
@@ -72,8 +108,8 @@
     @apply transition-transform transition-shadow duration-200 ease-out;
   }
   .interactive-card:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(15, 31, 61, 0.10);
   }
 
   .link-underline-soft {
@@ -108,11 +144,27 @@
 @layer utilities {
 
   .scroll-reveal {
-    @apply translate-y-2 opacity-0 transition-all duration-300;
+    @apply transition-opacity duration-300;
   }
   .scroll-reveal.is-visible {
-    @apply translate-y-0 opacity-100;
+    @apply opacity-100;
   }
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid #F05A28;
+  outline-offset: 3px;
+}
+
+main :is(h2, h3, h4)[class*="text-[#2563eb]"] {
+  color: var(--ispbie-heading);
+}
+
+main :is(section, article, div).bg-white.rounded-lg.shadow-md,
+main :is(section, article, div).bg-white.rounded-lg.shadow-lg {
+  border: 1px solid var(--ispbie-border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(15, 31, 61, 0.08);
 }
 
 /* Prevent oversized decorative SVGs inside main areas */
@@ -131,6 +183,11 @@
 .logo-svg, .hero-svg { width: auto !important; height: auto !important; }
 
 @media (prefers-reduced-motion: reduce) {
+  :where(a, button) {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .interactive-card,
   .stat-card,
   .scroll-reveal,

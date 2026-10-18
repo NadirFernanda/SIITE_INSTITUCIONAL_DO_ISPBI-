@@ -2,7 +2,7 @@
 
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10">
+<div class="institutional-page">
 @include('partials.page-hero', [
     'title'      => 'Inclusão e Pertencimento',
     'subtitle'   => 'Compromisso com a diversidade, inclusão e acolhimento no ISP-Bié.',
@@ -33,7 +33,7 @@
           
           <!-- Acessibilidade -->
           <div id="acessibilidade" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"/>
@@ -67,7 +67,7 @@
 
           <!-- Equidade de Género -->
           <div id="genero" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
@@ -101,7 +101,7 @@
 
           <!-- Apoio Estudantil -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
@@ -135,7 +135,7 @@
 
           <!-- Diversidade Cultural -->
           <div id="diversidade" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
@@ -169,7 +169,7 @@
 
           <!-- Inclusão Socioeconómica -->
           <div id="bolsas" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
@@ -204,7 +204,7 @@
 
           <!-- Saúde Mental -->
           <div id="apoio" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>

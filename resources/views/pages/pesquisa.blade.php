@@ -2,25 +2,13 @@
 
 @section('content')
   <!-- Banner Institucional -->
-  <section class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] text-white py-16 scroll-reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center space-x-4 mb-4">
-        <!-- Ícone de lupa (search) outline, sem fundo, harmônico com os demais -->
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-        <div>
-          <h1 class="text-4xl font-bold">Pesquisa e Inovação</h1>
-          <p class="text-lg opacity-90">Instituto Superior Politécnico do Bié</p>
-        </div>
-      </div>
-      
-      <nav class="text-sm opacity-75">
-        <a href="/" class="hover:underline">Início</a> \ Pesquisa e Inovação
-      </nav>
-    </div>
-  </section>
+  <div class="institutional-page">
+    @include('partials.page-hero', [
+        'title' => 'Pesquisa e Inovação',
+        'subtitle' => 'Instituto Superior Politécnico do Bié',
+        'breadcrumb' => 'Pesquisa e Inovação',
+    ])
+</div>
 
   <!-- Conteúdo Principal -->
   <section class="py-16 bg-gray-50 scroll-reveal">
@@ -38,7 +26,7 @@
           Através de parcerias estratégicas, infraestrutura adequada e apoio aos investigadores, o ISP-Bié 
           estimula a inovação tecnológica e a transferência de conhecimento para a sociedade.
         </p>
-        <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-6 rounded-lg mt-6 interactive-card">
+        <div class="bg-[#1e3a5f] p-6 rounded-lg mt-6 interactive-card">
           <h3 class="text-xl font-bold text-white mb-3 flex items-center">
             <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
@@ -62,7 +50,7 @@
           
           <!-- Engenharias -->
           <div id="software" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
@@ -96,7 +84,7 @@
 
           <!-- Recursos Hídricos -->
           <div id="hidricos" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M5.5 3A2.5 2.5 0 003 5.5v2.879a2.5 2.5 0 00.732 1.767l6.5 6.5a2.5 2.5 0 003.536 0l2.878-2.878a2.5 2.5 0 000-3.536l-6.5-6.5A2.5 2.5 0 008.38 3H5.5zM6 7a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
@@ -130,7 +118,7 @@
 
           <!-- Ciências Sociais -->
           <div id="comunicacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#2563eb] to-[#3B82F6] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
@@ -164,7 +152,7 @@
 
           <!-- Administração e Negócios -->
           <div id="inovacao" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
@@ -199,7 +187,7 @@
 
           <!-- Saúde Mental -->
           <div id="saude" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#3B82F6] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
@@ -233,7 +221,7 @@
 
           <!-- Inovação Educacional -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow interactive-card">
-            <div class="bg-gradient-to-r from-[#2563eb] to-[#2563eb] p-4">
+            <div class="bg-[#1e3a5f] p-4">
               <div class="flex items-center text-white">
                 <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
