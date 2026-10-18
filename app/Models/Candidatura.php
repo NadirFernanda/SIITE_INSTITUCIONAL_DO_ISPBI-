@@ -411,10 +411,24 @@ class Candidatura extends Model
     ];
 
     // Retorna todos os perfis únicos ordenados alfabeticamente
+    public static function perfisParaCurso(?string $curso): array
+    {
+        if ($curso === null) {
+            return [];
+        }
+
+        return app(\App\Support\CourseEntryProfiles::class)->forCourse($curso);
+    }
+
+    public static function mapaPerfisCurso(): array
+    {
+        return app(\App\Support\CourseEntryProfiles::class)->all();
+    }
+
     public static function todosOsPerfis(): array
     {
         $all = [];
-        foreach (static::$perfisCurso as $perfis) {
+        foreach (static::mapaPerfisCurso() as $perfis) {
             foreach ($perfis as $p) {
                 $all[$p] = true;
             }

@@ -209,7 +209,7 @@
                                         <div>
                                             <label class="block text-sm font-semibold text-gray-700 mb-1">Perfil do Curso de Proveniência <span class="text-red-500">*</span></label>
                                             <select name="perfil" id="perfil-select"
-                                                    data-perfis-curso="{{ json_encode(\App\Models\Candidatura::$perfisCurso, JSON_UNESCAPED_UNICODE) }}"
+                                                    data-perfis-curso="{{ json_encode(\App\Models\Candidatura::mapaPerfisCurso(), JSON_UNESCAPED_UNICODE) }}"
                                                     data-todos-cursos="{{ json_encode(\App\Models\Candidatura::$cursos, JSON_UNESCAPED_UNICODE) }}"
                                                     class="{{ $inp }} @error('perfil') border-red-400 @enderror">
                                                 <option value="">— Seleccione o perfil do seu curso de origem —</option>
@@ -280,7 +280,7 @@
                                                     @if($oldPerfilV)
                                                         @foreach(\App\Models\Candidatura::$cursos as $c)
                                                             @php
-                                                            $perfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
+                                                            $perfisC = \App\Models\Candidatura::perfisParaCurso($c);
                                                             $elegivel = empty($perfisC) || in_array($oldPerfilV, $perfisC);
                                                             @endphp
                                                             @if($elegivel)

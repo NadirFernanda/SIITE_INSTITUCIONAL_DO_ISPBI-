@@ -206,7 +206,7 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
             <div style="margin-bottom:14px;">
                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#475569;margin-bottom:5px;">Perfil do Curso de Proveniência <span style="color:#ef4444">*</span></label>
                 <select name="perfil" id="edit-perfil"
-                        data-perfis-curso="{{ json_encode(\App\Models\Candidatura::$perfisCurso, JSON_UNESCAPED_UNICODE) }}"
+                        data-perfis-curso="{{ json_encode(\App\Models\Candidatura::mapaPerfisCurso(), JSON_UNESCAPED_UNICODE) }}"
                         data-todos-cursos="{{ json_encode(\App\Models\Candidatura::$cursos, JSON_UNESCAPED_UNICODE) }}"
                         style="{{ $inp }}@error('perfil')border-color:#f87171;@enderror">
                     <option value="">— Seleccione o perfil do curso de origem —</option>
@@ -282,7 +282,7 @@ $trabAtual  = old('trabalhador', $candidatura->trabalhador ? 'sim' : 'nao');
                         <option value="">— Seleccione o curso —</option>
                         @foreach(\App\Models\Candidatura::$cursos as $c)
                             @php
-                            $editPerfisC = \App\Models\Candidatura::$perfisCurso[$c] ?? [];
+                            $editPerfisC = \App\Models\Candidatura::perfisParaCurso($c);
                             $editElegivel = empty($editPerfisC) || !$editOldPerfilV || in_array($editOldPerfilV, $editPerfisC);
                             @endphp
                             @if($editElegivel)

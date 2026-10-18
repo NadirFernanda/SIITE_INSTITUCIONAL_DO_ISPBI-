@@ -24,7 +24,7 @@ class CandidaturaController extends Controller
         $request->merge(['bi' => strtoupper(trim($request->input('bi', '')))]);
 
         $curso = $request->input('curso');
-        $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
+        $perfisPermitidos = Candidatura::perfisParaCurso($curso);
         // Permitir submissão com opção 'Outro' quando o curso não estiver listado
         $allowedCursos = array_merge(Candidatura::$cursos, ['Outro']);
         // Permitir que o perfil seja 'Outro'

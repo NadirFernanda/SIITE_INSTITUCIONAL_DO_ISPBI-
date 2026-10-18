@@ -310,7 +310,7 @@ class CandidaturaController extends Controller
         $periodo      = $request->input('periodo');
         $periodoLabel = $periodo === 'pos-laboral' ? 'Pós-Laboral' : 'Regular';
         $curso        = $request->input('curso');
-        $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
+        $perfisPermitidos = Candidatura::perfisParaCurso($curso);
         $perfilRules  = empty($perfisPermitidos)
             ? ['nullable', 'string', 'max:150']
             : ['required', 'string', 'max:150', \Illuminate\Validation\Rule::in($perfisPermitidos)];
@@ -408,7 +408,7 @@ class CandidaturaController extends Controller
         $request->merge(['bi' => strtoupper(trim($request->input('bi', '')))]);
 
         $curso = $request->input('curso');
-        $perfisPermitidos = Candidatura::$perfisCurso[$curso] ?? [];
+        $perfisPermitidos = Candidatura::perfisParaCurso($curso);
         $perfisValidos = array_merge($perfisPermitidos, ['Outro']);
         $perfilRules = empty($perfisPermitidos)
             ? ['nullable', 'string', 'max:150']

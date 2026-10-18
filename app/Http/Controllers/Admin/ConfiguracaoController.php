@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Midia;
 use App\Models\SiteSetting;
+use App\Models\Candidatura;
+use App\Support\CourseEntryProfiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -13,9 +15,11 @@ use Throwable;
 
 class ConfiguracaoController extends Controller
 {
-    public function index()
+    public function index(CourseEntryProfiles $profiles)
     {
         $formularioAtivo = SiteSetting::candidaturasAtivas();
+        $cursos = Candidatura::$cursos;
+        $perfisAdicionados = $profiles->additions();
 
         $organigramaPath = Midia::organigramaPath();
         $organigramaUrl = $organigramaPath === null
@@ -24,7 +28,7 @@ class ConfiguracaoController extends Controller
                 ? route('presidencia.organigrama')
                 : null);
 
-        return view('admin.configuracoes', compact('formularioAtivo', 'organigramaUrl'));
+        return view('admin.configuracoes', compact('formularioAtivo', 'organigramaUrl', 'cursos', 'perfisAdicionados'));
     }
 
     public function update(Request $request)

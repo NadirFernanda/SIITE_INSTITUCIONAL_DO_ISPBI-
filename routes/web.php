@@ -50,6 +50,8 @@ Route::middleware(['auth', 'admin', 'throttle:30,1'])->group(function () {
     Route::delete('/admin/usuarios/{usuario}', [App\Http\Controllers\Admin\UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');
     Route::get('/admin/configuracoes', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'index'])->name('admin.configuracoes');
     Route::patch('/admin/configuracoes', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'update'])->name('admin.configuracoes.update');
+    Route::post('/admin/configuracoes/perfis-precedencia', [App\Http\Controllers\Admin\CourseEntryProfileController::class, 'store'])->name('admin.configuracoes.perfis.store');
+    Route::delete('/admin/configuracoes/perfis-precedencia', [App\Http\Controllers\Admin\CourseEntryProfileController::class, 'destroy'])->name('admin.configuracoes.perfis.destroy');
     Route::post('/admin/configuracoes/organigrama', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'uploadOrganigrama'])->name('admin.configuracoes.organigrama.upload');
     Route::delete('/admin/configuracoes/organigrama', [App\Http\Controllers\Admin\ConfiguracaoController::class, 'removeOrganigrama'])->name('admin.configuracoes.organigrama.remove');
     Route::get('/admin/pdi', [App\Http\Controllers\Admin\PdiController::class, 'index'])->name('admin.pdi');

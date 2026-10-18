@@ -1,7 +1,7 @@
 @props(['course', 'label' => null])
 
 @php
-    $profiles = \App\Models\Candidatura::$perfisCurso[$course] ?? [];
+    $profiles = \App\Models\Candidatura::perfisParaCurso($course);
 @endphp
 
 @if($profiles)
