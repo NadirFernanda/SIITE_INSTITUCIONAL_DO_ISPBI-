@@ -9,7 +9,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "laravel/breeze": "^2.3",
-        "laravel/framework": "^11.31",
+        "laravel/framework": "^12.69",
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^3.1"
     },
